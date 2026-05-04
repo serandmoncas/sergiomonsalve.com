@@ -1,0 +1,1933 @@
+# sergiomonsalve.com v1 Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Build and deploy a bilingual (ES/EN) personal portfolio with Hero, About/CV, and Contact form pages.
+
+**Architecture:** Next.js 15 App Router with path-based i18n via `next-intl` (`/es`, `/en`). Supabase stores contact submissions; Resend delivers email notifications. Dark terminal aesthetic with `#0f0f0f` background and `#00ff88` neon green accent.
+
+**Tech Stack:** Next.js 15, TypeScript, Tailwind CSS v4, next-intl, Supabase (@supabase/ssr), Resend, Zod, Vitest, React Testing Library, Vercel
+
+---
+
+## File Map
+
+```
+# Config
+next.config.ts                                    next-intl plugin wrapper
+postcss.config.mjs                                Tailwind v4 PostCSS plugin
+.env.example                                      env var template
+src/middleware.ts                                 next-intl locale routing
+
+# i18n
+src/i18n/routing.ts                               locales + defaultLocale
+src/i18n/navigation.ts                            type-safe Link/useRouter/usePathname
+src/i18n/request.ts                               getRequestConfig for server
+src/messages/es.json                              all Spanish copy
+src/messages/en.json                              all English copy
+
+# App layouts
+src/app/layout.tsx                                root layout (pass-through, fonts in locale layout)
+src/app/[locale]/layout.tsx                       html/body, NextIntlClientProvider, Nav, Footer
+
+# Pages
+src/app/[locale]/page.tsx                         Hero page
+src/app/[locale]/about/page.tsx                   About/CV page
+src/app/[locale]/contact/page.tsx                 Contact page
+
+# API
+src/app/api/contact/route.ts                      POST /api/contact
+
+# Components
+src/components/Nav.tsx                            top nav: logo, links, locale switcher
+src/components/LocaleSwitcher.tsx                 'use client' locale toggle button
+src/components/Footer.tsx                         social links footer
+src/components/SkillTag.tsx                       monospace skill badge
+src/components/Hero.tsx                           centered hero section
+src/components/AboutBio.tsx                       bio paragraph + skills grid
+src/components/AboutTimeline.tsx                  experience + education timeline
+src/components/ContactForm.tsx                    'use client' form with toggle buttons
+
+# Lib
+src/lib/supabase/server.ts                        createClient() for server components + API routes
+src/lib/supabase/client.ts                        createClient() for browser (future use)
+src/lib/resend.ts                                 sendContactNotification()
+src/lib/contact-schema.ts                         Zod schema + ContactFormData type
+
+# Database
+supabase/migrations/001_contact_submissions.sql   single table, RLS enabled
+
+# Tests
+src/lib/__tests__/contact-schema.test.ts
+src/app/api/contact/__tests__/route.test.ts
+src/components/__tests__/ContactForm.test.tsx
+
+# Test infra
+vitest.config.ts
+src/test/setup.ts
+```
+
+---
+
+## Task 1: Scaffold Next.js project
+
+**Files:**
+- Create: all root project files via `create-next-app`
+
+- [ ] **Step 1: Run create-next-app in the existing repo directory**
+
+```bash
+npx create-next-app@latest . \
+  --typescript \
+  --tailwind \
+  --eslint \
+  --app \
+  --src-dir \
+  --import-alias "@/*" \
+  --no-turbopack \
+  --yes
+```
+
+When prompted about overwriting `README.md`, accept. The existing `CLAUDE.md`, `.gitignore`, and `docs/` are unaffected.
+
+- [ ] **Step 2: Verify the scaffold**
+
+```bash
+npm run dev
+```
+
+Expected: server starts on `http://localhost:3000`, default Next.js page loads.
+
+- [ ] **Step 3: Remove default boilerplate content**
+
+Delete the contents of `src/app/page.tsx` (keep the file — replace content in Task 8).
+Delete `src/app/favicon.ico` and `public/` SVGs if present — we'll add proper assets later.
+
+Clear `src/app/globals.css` down to just the Tailwind import (keep the file — replace in Task 2).
+
+- [ ] **Step 4: Install additional dependencies**
+
+```bash
+npm install next-intl @supabase/supabase-js @supabase/ssr resend zod
+npm install -D vitest @vitejs/plugin-react @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom
+```
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add -A
+git commit -m "feat: scaffold Next.js 15 project with dependencies"
+```
+
+---
+
+## Task 2: Design system — Tailwind v4 tokens + fonts
+
+**Files:**
+- Modify: `src/app/globals.css`
+- Modify: `postcss.config.mjs`
+- Modify: `src/app/layout.tsx` (root layout — minimal)
+
+- [ ] **Step 1: Ensure Tailwind v4 PostCSS config**
+
+Overwrite `postcss.config.mjs`:
+
+```js
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {}
+  }
+}
+```
+
+If `tailwind.config.ts` was generated by create-next-app, delete it — Tailwind v4 is configured via CSS, not JS.
+
+- [ ] **Step 2: Write design tokens into globals.css**
+
+```css
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-background: #0f0f0f;
+  --color-surface: #1a1a1a;
+  --color-border: #222222;
+  --color-border-active: #1e3a2f;
+  --color-accent: #00ff88;
+  --color-text: #ffffff;
+  --color-text-secondary: #888888;
+  --color-text-muted: #555555;
+
+  /* Fonts */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+```
+
+- [ ] **Step 3: Write root layout with font variables**
+
+`src/app/layout.tsx`:
+
+```tsx
+import type { Metadata } from 'next'
+import { Inter, JetBrains_Mono } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains'
+})
+
+export const metadata: Metadata = {
+  title: 'Sergio Monsalve — AI Software Engineer',
+  description:
+    'Systems engineer with 13+ years building software solutions powered by Python, AI, and data science.',
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html>
+      <body className={`${inter.variable} ${jetbrainsMono.variable}`}>
+        {children}
+      </body>
+    </html>
+  )
+}
+```
+
+Note: The locale layout (`[locale]/layout.tsx`) will replace `<html lang>` and `<body>` properly — this root layout is a placeholder that Next.js requires.
+
+- [ ] **Step 4: Verify fonts load**
+
+```bash
+npm run dev
+```
+
+Open http://localhost:3000. Check DevTools → Network → Fonts. Expect `Inter` and `JetBrains_Mono` to appear.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add src/app/globals.css postcss.config.mjs src/app/layout.tsx
+git commit -m "feat: configure Tailwind v4 design tokens and fonts"
+```
+
+---
+
+## Task 3: next-intl — routing, middleware, messages
+
+**Files:**
+- Create: `src/i18n/routing.ts`
+- Create: `src/i18n/navigation.ts`
+- Create: `src/i18n/request.ts`
+- Create: `src/middleware.ts`
+- Create: `src/messages/es.json`
+- Create: `src/messages/en.json`
+- Modify: `next.config.ts`
+
+- [ ] **Step 1: Create i18n routing config**
+
+`src/i18n/routing.ts`:
+
+```ts
+import { defineRouting } from 'next-intl/routing'
+
+export const routing = defineRouting({
+  locales: ['es', 'en'],
+  defaultLocale: 'es'
+})
+```
+
+- [ ] **Step 2: Create navigation helpers**
+
+`src/i18n/navigation.ts`:
+
+```ts
+import { createNavigation } from 'next-intl/navigation'
+import { routing } from './routing'
+
+export const { Link, redirect, usePathname, useRouter, getPathname } =
+  createNavigation(routing)
+```
+
+- [ ] **Step 3: Create server request config**
+
+`src/i18n/request.ts`:
+
+```ts
+import { getRequestConfig } from 'next-intl/server'
+import { routing } from './routing'
+
+export default getRequestConfig(async ({ requestLocale }) => {
+  let locale = await requestLocale
+  if (!locale || !routing.locales.includes(locale as (typeof routing.locales)[number])) {
+    locale = routing.defaultLocale
+  }
+  return {
+    locale,
+    messages: (await import(`../messages/${locale}.json`)).default
+  }
+})
+```
+
+- [ ] **Step 4: Create middleware**
+
+`src/middleware.ts`:
+
+```ts
+import createMiddleware from 'next-intl/middleware'
+import { routing } from './i18n/routing'
+
+export default createMiddleware(routing)
+
+export const config = {
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+}
+```
+
+- [ ] **Step 5: Wrap next.config.ts with next-intl plugin**
+
+`next.config.ts`:
+
+```ts
+import type { NextConfig } from 'next'
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
+
+const nextConfig: NextConfig = {}
+
+export default withNextIntl(nextConfig)
+```
+
+- [ ] **Step 6: Create Spanish messages**
+
+`src/messages/es.json`:
+
+```json
+{
+  "nav": {
+    "about": "About",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "comment": "// AI Software Engineer",
+    "tagline": "Ingeniero de sistemas con más de 13 años de experiencia construyendo soluciones de software con Python, IA y ciencias de datos. Apasionado por convertir datos en decisiones y problemas complejos en código elegante.",
+    "cta": {
+      "contact": "Contactar",
+      "cv": "Ver CV"
+    },
+    "skills": ["Python", "AI / LLMs", "AWS", "FastAPI", "Django", "LangChain", "Dagster", "ETL"]
+  },
+  "about": {
+    "bio": "Ingeniero de sistemas con más de 13 años de experiencia construyendo soluciones de software con Python, IA y ciencias de datos. Apasionado por convertir datos en decisiones y problemas complejos en código elegante. Emprendedor, cocinero curioso y explorador de los hongos.",
+    "skillsTitle": "// stack principal",
+    "skillGroups": [
+      "Python · FastAPI · Django",
+      "AI / LLMs · LangChain",
+      "AWS · GCP · Dagster",
+      "Data Science · ETL"
+    ],
+    "personalLabel": "// más allá del código",
+    "songosorhongoLabel": "Songosorhongo — cocina basada en hongos",
+    "location": "📍 Santa Elena, Antioquia",
+    "downloadCv": "⬇ Descargar CV",
+    "experienceTitle": "// experiencia",
+    "educationTitle": "// educación"
+  },
+  "contact": {
+    "comment": "// nuevo mensaje",
+    "title": "¿Hablamos?",
+    "projectTypeLabel": "// tipo de proyecto",
+    "projectTypes": {
+      "freelance": "Freelance",
+      "fulltime": "Full-time",
+      "collaboration": "Colaboración"
+    },
+    "nameLabel": "nombre",
+    "namePlaceholder": "Tu nombre",
+    "emailLabel": "email",
+    "emailPlaceholder": "tu@email.com",
+    "messageLabel": "mensaje",
+    "messagePlaceholder": "Cuéntame sobre tu proyecto...",
+    "submit": "Enviar →",
+    "whatsapp": "💬 WhatsApp directo",
+    "success": "¡Mensaje enviado! Te respondo pronto.",
+    "error": "Algo salió mal. Intenta de nuevo."
+  }
+}
+```
+
+- [ ] **Step 7: Create English messages**
+
+`src/messages/en.json`:
+
+```json
+{
+  "nav": {
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "comment": "// AI Software Engineer",
+    "tagline": "Systems engineer with 13+ years building software solutions powered by Python, AI, and data science. I turn data into decisions and complex problems into clean code.",
+    "cta": {
+      "contact": "Get in touch",
+      "cv": "View CV"
+    },
+    "skills": ["Python", "AI / LLMs", "AWS", "FastAPI", "Django", "LangChain", "Dagster", "ETL"]
+  },
+  "about": {
+    "bio": "Systems engineer with 13+ years building software solutions powered by Python, AI, and data science. I turn data into decisions and complex problems into clean code. Entrepreneur, curious cook, and mushroom explorer.",
+    "skillsTitle": "// core stack",
+    "skillGroups": [
+      "Python · FastAPI · Django",
+      "AI / LLMs · LangChain",
+      "AWS · GCP · Dagster",
+      "Data Science · ETL"
+    ],
+    "personalLabel": "// beyond the code",
+    "songosorhongoLabel": "Songosorhongo — mushroom-based cuisine",
+    "location": "📍 Santa Elena, Antioquia",
+    "downloadCv": "⬇ Download CV",
+    "experienceTitle": "// experience",
+    "educationTitle": "// education"
+  },
+  "contact": {
+    "comment": "// new message",
+    "title": "Let's talk",
+    "projectTypeLabel": "// project type",
+    "projectTypes": {
+      "freelance": "Freelance",
+      "fulltime": "Full-time",
+      "collaboration": "Collaboration"
+    },
+    "nameLabel": "name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "email",
+    "emailPlaceholder": "your@email.com",
+    "messageLabel": "message",
+    "messagePlaceholder": "Tell me about your project...",
+    "submit": "Send →",
+    "whatsapp": "💬 WhatsApp direct",
+    "success": "Message sent! I'll get back to you soon.",
+    "error": "Something went wrong. Please try again."
+  }
+}
+```
+
+- [ ] **Step 8: Verify routing works**
+
+```bash
+npm run dev
+```
+
+Navigate to `http://localhost:3000/es` — should load (even if page is blank). Navigate to `http://localhost:3000/en` — same. Navigate to `http://localhost:3000` — should redirect to `/es`.
+
+Expected: no 404, no middleware errors in terminal.
+
+- [ ] **Step 9: Commit**
+
+```bash
+git add src/i18n src/middleware.ts src/messages next.config.ts
+git commit -m "feat: configure next-intl with ES/EN path-based routing"
+```
+
+---
+
+## Task 4: Supabase setup + database migration
+
+**Files:**
+- Create: `src/lib/supabase/server.ts`
+- Create: `src/lib/supabase/client.ts`
+- Create: `supabase/migrations/001_contact_submissions.sql`
+- Create: `.env.example`
+- Create: `.env.local` (developer creates manually — not committed)
+
+- [ ] **Step 1: Create .env.example**
+
+`.env.example`:
+
+```
+# Supabase — get from https://supabase.com/dashboard > Project Settings > API
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+
+# Resend — get from https://resend.com/api-keys
+RESEND_API_KEY=re_your_key
+
+# App
+NEXT_PUBLIC_SITE_URL=https://sergiomonsalve.com
+CONTACT_EMAIL=serandmoncas@gmail.com
+```
+
+Copy to `.env.local` and fill in real values before running the app.
+
+- [ ] **Step 2: Create server Supabase client**
+
+`src/lib/supabase/server.ts`:
+
+```ts
+import { createServerClient } from '@supabase/ssr'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+import { cookies } from 'next/headers'
+
+export async function createClient() {
+  const cookieStore = await cookies()
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll()
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            )
+          } catch {
+            // setAll called from Server Component — safe to ignore
+          }
+        }
+      }
+    }
+  )
+}
+
+// Uses service role key — bypasses RLS. Only call from API routes, never client-side.
+export function createAdminClient() {
+  return createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
+```
+
+- [ ] **Step 3: Create browser Supabase client (for future auth use)**
+
+`src/lib/supabase/client.ts`:
+
+```ts
+import { createBrowserClient } from '@supabase/ssr'
+
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+}
+```
+
+- [ ] **Step 4: Write database migration**
+
+`supabase/migrations/001_contact_submissions.sql`:
+
+```sql
+create table contact_submissions (
+  id           uuid primary key default gen_random_uuid(),
+  name         text not null,
+  email        text not null,
+  project_type text not null check (project_type in ('freelance', 'fulltime', 'collaboration')),
+  message      text not null,
+  created_at   timestamptz not null default now(),
+  read         boolean not null default false
+);
+
+alter table contact_submissions enable row level security;
+-- No public policies: only service role key (used in /api/contact) can insert/read
+```
+
+- [ ] **Step 5: Run migration in Supabase dashboard**
+
+Go to https://supabase.com/dashboard → your project → SQL Editor.
+Paste and run the contents of `supabase/migrations/001_contact_submissions.sql`.
+
+Verify: Table Editor shows `contact_submissions` with correct columns.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add src/lib/supabase .env.example supabase/
+git commit -m "feat: add Supabase client helpers and initial migration"
+```
+
+---
+
+## Task 5: Vitest testing setup
+
+**Files:**
+- Create: `vitest.config.ts`
+- Create: `src/test/setup.ts`
+- Modify: `package.json` (add test script)
+
+- [ ] **Step 1: Write vitest config**
+
+`vitest.config.ts`:
+
+```ts
+import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.ts'],
+    globals: true
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  }
+})
+```
+
+- [ ] **Step 2: Write test setup file**
+
+`src/test/setup.ts`:
+
+```ts
+import '@testing-library/jest-dom'
+```
+
+- [ ] **Step 3: Add test script to package.json**
+
+Find the `"scripts"` section in `package.json` and add:
+
+```json
+"test": "vitest",
+"test:run": "vitest run"
+```
+
+- [ ] **Step 4: Verify setup with a smoke test**
+
+Create `src/test/smoke.test.ts`:
+
+```ts
+import { describe, it, expect } from 'vitest'
+
+describe('test setup', () => {
+  it('works', () => {
+    expect(1 + 1).toBe(2)
+  })
+})
+```
+
+Run:
+
+```bash
+npm test
+```
+
+Expected output: `1 passed`.
+
+Delete `src/test/smoke.test.ts` after verifying.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add vitest.config.ts src/test/setup.ts package.json
+git commit -m "feat: configure Vitest + React Testing Library"
+```
+
+---
+
+## Task 6: Nav + Footer + locale layout
+
+**Files:**
+- Create: `src/components/LocaleSwitcher.tsx`
+- Create: `src/components/Nav.tsx`
+- Create: `src/components/Footer.tsx`
+- Create: `src/app/[locale]/layout.tsx`
+- Create: `src/components/__tests__/Nav.test.tsx`
+
+- [ ] **Step 1: Write failing test for Nav**
+
+`src/components/__tests__/Nav.test.tsx`:
+
+```tsx
+import { describe, it, expect, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import Nav from '../Nav'
+
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+  useLocale: () => 'es'
+}))
+vi.mock('@/i18n/navigation', () => ({
+  Link: ({ href, children }: { href: string; children: React.ReactNode }) => (
+    <a href={href}>{children}</a>
+  ),
+  usePathname: () => '/',
+  useRouter: () => ({ replace: vi.fn() })
+}))
+
+describe('Nav', () => {
+  it('renders SM logo', () => {
+    render(<Nav />)
+    expect(screen.getByText('SM')).toBeInTheDocument()
+  })
+
+  it('renders About and Contact links', () => {
+    render(<Nav />)
+    expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument()
+  })
+})
+```
+
+- [ ] **Step 2: Run test — verify it fails**
+
+```bash
+npm test -- Nav
+```
+
+Expected: FAIL — `Cannot find module '../Nav'`
+
+- [ ] **Step 3: Create LocaleSwitcher**
+
+`src/components/LocaleSwitcher.tsx`:
+
+```tsx
+'use client'
+
+import { useLocale } from 'next-intl'
+import { useRouter, usePathname } from '@/i18n/navigation'
+
+export default function LocaleSwitcher() {
+  const locale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
+  const otherLocale = locale === 'es' ? 'en' : 'es'
+
+  function handleSwitch() {
+    router.replace(pathname, { locale: otherLocale })
+  }
+
+  return (
+    <button
+      onClick={handleSwitch}
+      className="font-mono text-xs text-text-muted hover:text-accent transition-colors"
+    >
+      {otherLocale.toUpperCase()}
+    </button>
+  )
+}
+```
+
+- [ ] **Step 4: Create Nav**
+
+`src/components/Nav.tsx`:
+
+```tsx
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
+import LocaleSwitcher from './LocaleSwitcher'
+
+export default function Nav() {
+  const t = useTranslations('nav')
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 border-b border-border bg-background/90 backdrop-blur-sm">
+      <Link href="/" className="font-mono text-sm font-bold text-accent">
+        SM
+      </Link>
+      <div className="flex items-center gap-6">
+        <Link
+          href="/about"
+          className="text-xs text-text-secondary hover:text-text transition-colors"
+        >
+          {t('about')}
+        </Link>
+        <Link
+          href="/contact"
+          className="text-xs text-text-secondary hover:text-text transition-colors"
+        >
+          {t('contact')}
+        </Link>
+        <LocaleSwitcher />
+      </div>
+    </nav>
+  )
+}
+```
+
+- [ ] **Step 5: Create Footer**
+
+`src/components/Footer.tsx`:
+
+```tsx
+export default function Footer() {
+  return (
+    <footer className="border-t border-border py-8 px-6">
+      <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-4">
+        <span className="font-mono text-xs text-text-muted">
+          © {new Date().getFullYear()} Sergio Monsalve
+        </span>
+        <div className="flex items-center gap-6">
+          <a
+            href="https://github.com/smonsalve"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs text-text-muted hover:text-accent transition-colors"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://www.instagram.com/samonsalvec/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs text-text-muted hover:text-accent transition-colors"
+          >
+            Instagram
+          </a>
+          <a
+            href="https://wa.me/573508025988"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs text-text-muted hover:text-accent transition-colors"
+          >
+            WhatsApp
+          </a>
+          <a
+            href="http://songosorhongo.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs text-text-muted hover:text-accent transition-colors"
+          >
+            Songosorhongo
+          </a>
+        </div>
+      </div>
+    </footer>
+  )
+}
+```
+
+- [ ] **Step 6: Run Nav tests — verify they pass**
+
+```bash
+npm test -- Nav
+```
+
+Expected: 2 passed.
+
+- [ ] **Step 7: Create locale layout**
+
+`src/app/[locale]/layout.tsx`:
+
+```tsx
+import type { Metadata } from 'next'
+import { Inter, JetBrains_Mono } from 'next/font/google'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { routing } from '@/i18n/routing'
+import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
+import '../globals.css'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains'
+})
+
+export const metadata: Metadata = {
+  title: 'Sergio Monsalve — AI Software Engineer',
+  description:
+    'Systems engineer with 13+ years building software solutions powered by Python, AI, and data science.',
+  openGraph: {
+    title: 'Sergio Monsalve — AI Software Engineer',
+    description:
+      'Systems engineer with 13+ years building software solutions powered by Python, AI, and data science.',
+    url: 'https://sergiomonsalve.com',
+    siteName: 'Sergio Monsalve'
+  }
+}
+
+export function generateStaticParams() {
+  return routing.locales.map(locale => ({ locale }))
+}
+
+export default async function LocaleLayout({
+  children,
+  params
+}: {
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
+    notFound()
+  }
+  const messages = await getMessages()
+
+  return (
+    <html lang={locale}>
+      <body
+        className={`${inter.variable} ${jetbrainsMono.variable} bg-background text-text font-sans`}
+      >
+        <NextIntlClientProvider messages={messages}>
+          <Nav />
+          <main className="pt-16">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+- [ ] **Step 8: Remove html/body from root layout**
+
+Update `src/app/layout.tsx` to not duplicate html/body (the locale layout owns those now):
+
+```tsx
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return children
+}
+```
+
+- [ ] **Step 9: Verify in browser**
+
+```bash
+npm run dev
+```
+
+Navigate to `http://localhost:3000/es`. Expect: dark background, Nav at top with `SM` logo + About/Contact links + locale switcher, Footer at bottom.
+
+- [ ] **Step 10: Commit**
+
+```bash
+git add src/components/Nav.tsx src/components/LocaleSwitcher.tsx src/components/Footer.tsx \
+  src/app/[locale]/layout.tsx src/app/layout.tsx \
+  src/components/__tests__/Nav.test.tsx
+git commit -m "feat: add Nav, Footer, and locale layout"
+```
+
+---
+
+## Task 7: Hero page
+
+**Files:**
+- Create: `src/components/SkillTag.tsx`
+- Create: `src/components/Hero.tsx`
+- Modify: `src/app/[locale]/page.tsx`
+
+- [ ] **Step 1: Create SkillTag component**
+
+`src/components/SkillTag.tsx`:
+
+```tsx
+export default function SkillTag({ label }: { label: string }) {
+  return (
+    <span className="font-mono text-xs text-accent bg-surface border border-border-active px-2 py-0.5 rounded-sm">
+      {label}
+    </span>
+  )
+}
+```
+
+- [ ] **Step 2: Create Hero component**
+
+`src/components/Hero.tsx`:
+
+```tsx
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
+import SkillTag from './SkillTag'
+
+export default function Hero() {
+  const t = useTranslations('hero')
+  const skills: string[] = t.raw('skills')
+
+  return (
+    <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
+      <p className="font-mono text-xs text-text-muted mb-4">{t('comment')}</p>
+
+      <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight leading-none text-text mb-6">
+        Sergio<br />Monsalve
+      </h1>
+
+      <p className="max-w-xl text-sm text-text-secondary leading-relaxed mb-8">
+        {t('tagline')}
+      </p>
+
+      <div className="flex items-center gap-4 mb-10">
+        <Link
+          href="/contact"
+          className="bg-accent text-background text-xs font-bold px-5 py-2.5 rounded-sm hover:opacity-90 transition-opacity"
+        >
+          {t('cta.contact')}
+        </Link>
+        <a
+          href="#cv"
+          className="border border-border text-text-secondary text-xs px-5 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors"
+        >
+          {t('cta.cv')}
+        </a>
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-2 max-w-lg">
+        {skills.map(skill => (
+          <SkillTag key={skill} label={skill} />
+        ))}
+      </div>
+    </section>
+  )
+}
+```
+
+- [ ] **Step 3: Write Hero page**
+
+`src/app/[locale]/page.tsx`:
+
+```tsx
+import Hero from '@/components/Hero'
+
+export default function HomePage() {
+  return <Hero />
+}
+```
+
+- [ ] **Step 4: Verify in browser**
+
+```bash
+npm run dev
+```
+
+Navigate to `http://localhost:3000/es`. Expect: dark full-screen page with "Sergio Monsalve" large heading, tagline, two CTA buttons, skill tags in neon green. Navigate to `/en` — text switches to English.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add src/components/SkillTag.tsx src/components/Hero.tsx src/app/\[locale\]/page.tsx
+git commit -m "feat: build Hero page with bilingual content and skill tags"
+```
+
+---
+
+## Task 8: About page
+
+**Files:**
+- Create: `src/components/AboutBio.tsx`
+- Create: `src/components/AboutTimeline.tsx`
+- Create: `src/app/[locale]/about/page.tsx`
+
+Experience data is defined directly in the components. Update with accurate dates/details once confirmed.
+
+- [ ] **Step 1: Create AboutBio**
+
+`src/components/AboutBio.tsx`:
+
+```tsx
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
+
+export default function AboutBio() {
+  const t = useTranslations('about')
+  const skillGroups: string[] = t.raw('skillGroups')
+
+  return (
+    <div className="mb-16">
+      <p className="text-sm text-text-secondary leading-relaxed mb-8 max-w-2xl">
+        {t('bio')}
+      </p>
+
+      <p className="font-mono text-xs text-text-muted mb-4">{t('skillsTitle')}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8 max-w-lg">
+        {skillGroups.map(group => (
+          <p key={group} className="text-sm text-text-secondary">
+            <span className="text-accent mr-2">▸</span>
+            {group}
+          </p>
+        ))}
+      </div>
+
+      <p className="font-mono text-xs text-text-muted mb-3">{t('personalLabel')}</p>
+      <div className="text-sm text-text-secondary space-y-1 mb-8">
+        <p>
+          🍄{' '}
+          <a
+            href="http://songosorhongo.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline"
+          >
+            {t('songosorhongoLabel')}
+          </a>
+        </p>
+        <p>{t('location')}</p>
+      </div>
+
+      <a
+        href="#"
+        className="inline-block bg-accent text-background font-mono text-xs font-bold px-5 py-2.5 rounded-sm hover:opacity-90 transition-opacity"
+      >
+        {t('downloadCv')}
+      </a>
+    </div>
+  )
+}
+```
+
+- [ ] **Step 2: Create AboutTimeline**
+
+`src/components/AboutTimeline.tsx`:
+
+```tsx
+import { useTranslations } from 'next-intl'
+import SkillTag from './SkillTag'
+
+const experience = [
+  {
+    period: '2019 → presente',
+    company: 'Globant',
+    role: 'AI Engineer',
+    current: true,
+    tech: ['Python', 'LangChain', 'AWS', 'LLMs']
+  },
+  {
+    period: '2016 → 2019',
+    company: 'Human Living Data',
+    role: 'Data Engineer',
+    current: false,
+    tech: ['Python', 'Dagster', 'ETL', 'GCP']
+  }
+]
+
+const education = [
+  {
+    period: '2008 → 2013',
+    institution: 'Universidad de Antioquia',
+    degree: 'Ingeniería de Sistemas'
+  }
+]
+
+export default function AboutTimeline() {
+  const t = useTranslations('about')
+
+  return (
+    <div>
+      <p className="font-mono text-xs text-text-muted mb-6">{t('experienceTitle')}</p>
+      <div className="space-y-6 mb-12">
+        {experience.map(job => (
+          <div
+            key={job.company}
+            className={`border-l-2 pl-4 ${
+              job.current ? 'border-accent' : 'border-border'
+            }`}
+          >
+            <p
+              className={`font-mono text-xs mb-1 ${
+                job.current ? 'text-accent' : 'text-text-muted'
+              }`}
+            >
+              {job.period}
+            </p>
+            <p
+              className={`font-semibold text-sm mb-0.5 ${
+                job.current ? 'text-text' : 'text-text-secondary'
+              }`}
+            >
+              {job.role} · {job.company}
+            </p>
+            <div className="flex flex-wrap gap-1.5 mt-2">
+              {job.tech.map(t => (
+                <SkillTag key={t} label={t} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p className="font-mono text-xs text-text-muted mb-6">{t('educationTitle')}</p>
+      <div className="space-y-4">
+        {education.map(edu => (
+          <div key={edu.institution} className="border-l-2 border-border pl-4">
+            <p className="font-mono text-xs text-text-muted mb-1">{edu.period}</p>
+            <p className="text-sm font-semibold text-text-secondary">{edu.degree}</p>
+            <p className="text-xs text-text-muted">{edu.institution}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+```
+
+- [ ] **Step 3: Write About page**
+
+`src/app/[locale]/about/page.tsx`:
+
+```tsx
+import { useTranslations } from 'next-intl'
+import AboutBio from '@/components/AboutBio'
+import AboutTimeline from '@/components/AboutTimeline'
+
+export default function AboutPage() {
+  return (
+    <div className="max-w-2xl mx-auto px-6 py-16">
+      <AboutBio />
+      <AboutTimeline />
+    </div>
+  )
+}
+```
+
+- [ ] **Step 4: Verify in browser**
+
+```bash
+npm run dev
+```
+
+Navigate to `http://localhost:3000/es/about`. Expect: bio paragraph, skills grid with `▸` bullets, Songosorhongo link, download button, experience timeline (Globant in neon green border, Human Living Data muted), education section.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add src/components/AboutBio.tsx src/components/AboutTimeline.tsx src/app/\[locale\]/about/page.tsx
+git commit -m "feat: build About page with bio and experience timeline"
+```
+
+---
+
+## Task 9: Contact schema (Zod) with tests
+
+**Files:**
+- Create: `src/lib/contact-schema.ts`
+- Create: `src/lib/__tests__/contact-schema.test.ts`
+
+- [ ] **Step 1: Write failing tests**
+
+`src/lib/__tests__/contact-schema.test.ts`:
+
+```ts
+import { describe, it, expect } from 'vitest'
+import { contactSchema } from '../contact-schema'
+
+describe('contactSchema', () => {
+  const valid = {
+    name: 'Ana García',
+    email: 'ana@example.com',
+    projectType: 'freelance' as const,
+    message: 'Hola, me gustaría trabajar contigo.'
+  }
+
+  it('accepts a valid submission', () => {
+    const result = contactSchema.safeParse(valid)
+    expect(result.success).toBe(true)
+  })
+
+  it('rejects missing name', () => {
+    const result = contactSchema.safeParse({ ...valid, name: '' })
+    expect(result.success).toBe(false)
+    expect(result.error?.issues[0].path).toContain('name')
+  })
+
+  it('rejects invalid email', () => {
+    const result = contactSchema.safeParse({ ...valid, email: 'not-an-email' })
+    expect(result.success).toBe(false)
+    expect(result.error?.issues[0].path).toContain('email')
+  })
+
+  it('rejects unknown projectType', () => {
+    const result = contactSchema.safeParse({ ...valid, projectType: 'consulting' })
+    expect(result.success).toBe(false)
+    expect(result.error?.issues[0].path).toContain('projectType')
+  })
+
+  it('rejects message shorter than 10 characters', () => {
+    const result = contactSchema.safeParse({ ...valid, message: 'Hi' })
+    expect(result.success).toBe(false)
+    expect(result.error?.issues[0].path).toContain('message')
+  })
+
+  it('accepts all three project types', () => {
+    for (const type of ['freelance', 'fulltime', 'collaboration'] as const) {
+      const result = contactSchema.safeParse({ ...valid, projectType: type })
+      expect(result.success).toBe(true)
+    }
+  })
+})
+```
+
+- [ ] **Step 2: Run tests — verify they fail**
+
+```bash
+npm test -- contact-schema
+```
+
+Expected: FAIL — `Cannot find module '../contact-schema'`
+
+- [ ] **Step 3: Implement schema**
+
+`src/lib/contact-schema.ts`:
+
+```ts
+import { z } from 'zod'
+
+export const contactSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Invalid email address'),
+  projectType: z.enum(['freelance', 'fulltime', 'collaboration']),
+  message: z.string().min(10, 'Message must be at least 10 characters')
+})
+
+export type ContactFormData = z.infer<typeof contactSchema>
+```
+
+- [ ] **Step 4: Run tests — verify they pass**
+
+```bash
+npm test -- contact-schema
+```
+
+Expected: 6 passed.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add src/lib/contact-schema.ts src/lib/__tests__/contact-schema.test.ts
+git commit -m "feat: add Zod contact form validation schema"
+```
+
+---
+
+## Task 10: /api/contact route with tests
+
+**Files:**
+- Create: `src/lib/resend.ts`
+- Create: `src/app/api/contact/route.ts`
+- Create: `src/app/api/contact/__tests__/route.test.ts`
+
+- [ ] **Step 1: Write failing tests**
+
+`src/app/api/contact/__tests__/route.test.ts`:
+
+```ts
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { POST } from '../route'
+
+const mockInsert = vi.fn()
+const mockSendEmail = vi.fn()
+
+vi.mock('@/lib/supabase/server', () => ({
+  createAdminClient: () => ({
+    from: () => ({ insert: mockInsert })
+  })
+}))
+
+vi.mock('@/lib/resend', () => ({
+  sendContactNotification: mockSendEmail
+}))
+
+function makeRequest(body: object) {
+  return new Request('http://localhost/api/contact', {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' }
+  })
+}
+
+describe('POST /api/contact', () => {
+  beforeEach(() => {
+    mockInsert.mockReset()
+    mockSendEmail.mockReset()
+    mockInsert.mockResolvedValue({ error: null })
+    mockSendEmail.mockResolvedValue(undefined)
+  })
+
+  const validBody = {
+    name: 'Ana García',
+    email: 'ana@example.com',
+    projectType: 'freelance',
+    message: 'Hola, me gustaría trabajar contigo en este proyecto.'
+  }
+
+  it('returns 200 and success:true for valid submission', async () => {
+    const res = await POST(makeRequest(validBody))
+    const json = await res.json()
+    expect(res.status).toBe(200)
+    expect(json.success).toBe(true)
+  })
+
+  it('inserts into Supabase with snake_case project_type', async () => {
+    await POST(makeRequest(validBody))
+    expect(mockInsert).toHaveBeenCalledWith(
+      expect.objectContaining({ project_type: 'freelance' })
+    )
+  })
+
+  it('calls sendContactNotification', async () => {
+    await POST(makeRequest(validBody))
+    expect(mockSendEmail).toHaveBeenCalledOnce()
+  })
+
+  it('returns 400 when name is missing', async () => {
+    const res = await POST(makeRequest({ ...validBody, name: '' }))
+    expect(res.status).toBe(400)
+    expect(mockInsert).not.toHaveBeenCalled()
+  })
+
+  it('returns 400 for invalid email', async () => {
+    const res = await POST(makeRequest({ ...validBody, email: 'bad' }))
+    expect(res.status).toBe(400)
+  })
+
+  it('returns 500 when Supabase insert fails', async () => {
+    mockInsert.mockResolvedValue({ error: { message: 'DB error' } })
+    const res = await POST(makeRequest(validBody))
+    expect(res.status).toBe(500)
+  })
+})
+```
+
+- [ ] **Step 2: Run tests — verify they fail**
+
+```bash
+npm test -- route.test
+```
+
+Expected: FAIL — `Cannot find module '../route'`
+
+- [ ] **Step 3: Create Resend helper**
+
+`src/lib/resend.ts`:
+
+```ts
+import { Resend } from 'resend'
+import type { ContactFormData } from './contact-schema'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+export async function sendContactNotification(data: ContactFormData) {
+  await resend.emails.send({
+    from: 'sergiomonsalve.com <noreply@sergiomonsalve.com>',
+    to: process.env.CONTACT_EMAIL!,
+    subject: `Nuevo mensaje de ${data.name} (${data.projectType})`,
+    text: [
+      `De: ${data.name} <${data.email}>`,
+      `Tipo: ${data.projectType}`,
+      '',
+      data.message
+    ].join('\n')
+  })
+}
+```
+
+Note: For Resend to send from `noreply@sergiomonsalve.com`, the domain must be verified in the Resend dashboard. During development, use `onboarding@resend.dev` as the from address.
+
+- [ ] **Step 4: Create API route**
+
+`src/app/api/contact/route.ts`:
+
+```ts
+import { NextResponse } from 'next/server'
+import { contactSchema } from '@/lib/contact-schema'
+import { createAdminClient } from '@/lib/supabase/server'
+import { sendContactNotification } from '@/lib/resend'
+
+export async function POST(request: Request) {
+  const body = await request.json()
+  const parsed = contactSchema.safeParse(body)
+
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: parsed.error.issues[0].message },
+      { status: 400 }
+    )
+  }
+
+  const { name, email, projectType, message } = parsed.data
+  const supabase = createAdminClient()
+
+  const { error: dbError } = await supabase
+    .from('contact_submissions')
+    .insert({ name, email, project_type: projectType, message })
+
+  if (dbError) {
+    console.error('Supabase insert error:', dbError)
+    return NextResponse.json({ error: 'Failed to save message' }, { status: 500 })
+  }
+
+  try {
+    await sendContactNotification(parsed.data)
+  } catch (emailError) {
+    console.error('Resend error:', emailError)
+    // Don't fail the request — submission was saved, email is best-effort
+  }
+
+  return NextResponse.json({ success: true })
+}
+```
+
+- [ ] **Step 5: Run tests — verify they pass**
+
+```bash
+npm test -- route.test
+```
+
+Expected: 6 passed.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add src/lib/resend.ts src/app/api/contact/route.ts src/app/api/contact/__tests__/route.test.ts
+git commit -m "feat: implement POST /api/contact with Supabase + Resend"
+```
+
+---
+
+## Task 11: ContactForm component with tests
+
+**Files:**
+- Create: `src/components/ContactForm.tsx`
+- Create: `src/components/__tests__/ContactForm.test.tsx`
+
+- [ ] **Step 1: Write failing tests**
+
+`src/components/__tests__/ContactForm.test.tsx`:
+
+```tsx
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import ContactForm from '../ContactForm'
+
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => {
+    const map: Record<string, string> = {
+      'projectTypeLabel': '// tipo de proyecto',
+      'projectTypes.freelance': 'Freelance',
+      'projectTypes.fulltime': 'Full-time',
+      'projectTypes.collaboration': 'Colaboración',
+      'nameLabel': 'nombre',
+      'namePlaceholder': 'Tu nombre',
+      'emailLabel': 'email',
+      'emailPlaceholder': 'tu@email.com',
+      'messageLabel': 'mensaje',
+      'messagePlaceholder': 'Cuéntame...',
+      'submit': 'Enviar →',
+      'whatsapp': '💬 WhatsApp directo',
+      'success': '¡Mensaje enviado!',
+      'error': 'Algo salió mal.'
+    }
+    return map[key] ?? key
+  }
+}))
+
+global.fetch = vi.fn()
+
+describe('ContactForm', () => {
+  beforeEach(() => {
+    vi.mocked(fetch).mockReset()
+  })
+
+  it('renders all three project type buttons', () => {
+    render(<ContactForm />)
+    expect(screen.getByRole('button', { name: 'Freelance' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Full-time' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Colaboración' })).toBeInTheDocument()
+  })
+
+  it('renders name, email, and message fields', () => {
+    render(<ContactForm />)
+    expect(screen.getByLabelText('nombre')).toBeInTheDocument()
+    expect(screen.getByLabelText('email')).toBeInTheDocument()
+    expect(screen.getByLabelText('mensaje')).toBeInTheDocument()
+  })
+
+  it('activates the clicked project type button', async () => {
+    const user = userEvent.setup()
+    render(<ContactForm />)
+    await user.click(screen.getByRole('button', { name: 'Full-time' }))
+    expect(screen.getByRole('button', { name: 'Full-time' })).toHaveAttribute(
+      'data-active',
+      'true'
+    )
+  })
+
+  it('shows success message after successful submit', async () => {
+    vi.mocked(fetch).mockResolvedValue(
+      new Response(JSON.stringify({ success: true }), { status: 200 })
+    )
+    const user = userEvent.setup()
+    render(<ContactForm />)
+    await user.click(screen.getByRole('button', { name: 'Freelance' }))
+    await user.type(screen.getByLabelText('nombre'), 'Ana')
+    await user.type(screen.getByLabelText('email'), 'ana@example.com')
+    await user.type(screen.getByLabelText('mensaje'), 'Hola me gustaría trabajar contigo.')
+    await user.click(screen.getByRole('button', { name: 'Enviar →' }))
+    await waitFor(() => {
+      expect(screen.getByText('¡Mensaje enviado!')).toBeInTheDocument()
+    })
+  })
+
+  it('shows error message on API failure', async () => {
+    vi.mocked(fetch).mockResolvedValue(
+      new Response(JSON.stringify({ error: 'Server error' }), { status: 500 })
+    )
+    const user = userEvent.setup()
+    render(<ContactForm />)
+    await user.click(screen.getByRole('button', { name: 'Freelance' }))
+    await user.type(screen.getByLabelText('nombre'), 'Ana')
+    await user.type(screen.getByLabelText('email'), 'ana@example.com')
+    await user.type(screen.getByLabelText('mensaje'), 'Hola me gustaría trabajar contigo.')
+    await user.click(screen.getByRole('button', { name: 'Enviar →' }))
+    await waitFor(() => {
+      expect(screen.getByText('Algo salió mal.')).toBeInTheDocument()
+    })
+  })
+})
+```
+
+- [ ] **Step 2: Run tests — verify they fail**
+
+```bash
+npm test -- ContactForm
+```
+
+Expected: FAIL — `Cannot find module '../ContactForm'`
+
+- [ ] **Step 3: Implement ContactForm**
+
+`src/components/ContactForm.tsx`:
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+
+type ProjectType = 'freelance' | 'fulltime' | 'collaboration'
+
+const PROJECT_TYPES: ProjectType[] = ['freelance', 'fulltime', 'collaboration']
+
+export default function ContactForm() {
+  const t = useTranslations('contact')
+  const [projectType, setProjectType] = useState<ProjectType | null>(null)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!projectType) return
+    setStatus('loading')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, projectType, message })
+      })
+      setStatus(res.ok ? 'success' : 'error')
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <p className="font-mono text-sm text-accent">{t('success')}</p>
+    )
+  }
+
+  const inputClass =
+    'w-full bg-surface border border-border focus:border-border-active outline-none text-text text-sm px-3 py-2.5 rounded-sm font-mono placeholder:text-text-muted transition-colors'
+  const labelClass = 'block font-mono text-xs text-text-muted mb-1.5'
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <div>
+        <p className="font-mono text-xs text-text-muted mb-3">{t('projectTypeLabel')}</p>
+        <div className="flex gap-2 flex-wrap">
+          {PROJECT_TYPES.map(type => (
+            <button
+              key={type}
+              type="button"
+              data-active={projectType === type}
+              onClick={() => setProjectType(type)}
+              className={`font-mono text-xs px-4 py-2 rounded-sm border transition-colors ${
+                projectType === type
+                  ? 'bg-accent text-background border-accent font-bold'
+                  : 'bg-surface border-border text-text-secondary hover:border-accent hover:text-accent'
+              }`}
+            >
+              {t(`projectTypes.${type}`)}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="name" className={labelClass}>
+          {t('nameLabel')}
+        </label>
+        <input
+          id="name"
+          type="text"
+          required
+          value={name}
+          onChange={e => setName(e.target.value)}
+          placeholder={t('namePlaceholder')}
+          className={inputClass}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="email" className={labelClass}>
+          {t('emailLabel')}
+        </label>
+        <input
+          id="email"
+          type="email"
+          required
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder={t('emailPlaceholder')}
+          className={inputClass}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="message" className={labelClass}>
+          {t('messageLabel')}
+        </label>
+        <textarea
+          id="message"
+          required
+          rows={5}
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          placeholder={t('messagePlaceholder')}
+          className={`${inputClass} resize-none`}
+        />
+      </div>
+
+      {status === 'error' && (
+        <p className="font-mono text-xs text-red-400">{t('error')}</p>
+      )}
+
+      <div className="flex items-center gap-3 flex-wrap">
+        <button
+          type="submit"
+          disabled={!projectType || status === 'loading'}
+          className="bg-accent text-background font-mono text-xs font-bold px-5 py-2.5 rounded-sm hover:opacity-90 transition-opacity disabled:opacity-40"
+        >
+          {status === 'loading' ? '...' : t('submit')}
+        </button>
+        <a
+          href="https://wa.me/573508025988"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border border-border-active text-accent font-mono text-xs px-4 py-2.5 rounded-sm hover:bg-surface transition-colors"
+        >
+          {t('whatsapp')}
+        </a>
+      </div>
+    </form>
+  )
+}
+```
+
+- [ ] **Step 4: Run tests — verify they pass**
+
+```bash
+npm test -- ContactForm
+```
+
+Expected: 5 passed.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add src/components/ContactForm.tsx src/components/__tests__/ContactForm.test.tsx
+git commit -m "feat: build ContactForm client component with toggle buttons and form state"
+```
+
+---
+
+## Task 12: Contact page
+
+**Files:**
+- Create: `src/app/[locale]/contact/page.tsx`
+
+- [ ] **Step 1: Write Contact page**
+
+`src/app/[locale]/contact/page.tsx`:
+
+```tsx
+import { useTranslations } from 'next-intl'
+import ContactForm from '@/components/ContactForm'
+
+export default function ContactPage() {
+  const t = useTranslations('contact')
+  return (
+    <div className="max-w-lg mx-auto px-6 py-16">
+      <p className="font-mono text-xs text-text-muted mb-3">{t('comment')}</p>
+      <h1 className="text-3xl font-extrabold tracking-tight text-text mb-10">
+        {t('title')}
+      </h1>
+      <ContactForm />
+    </div>
+  )
+}
+```
+
+- [ ] **Step 2: Verify end-to-end in browser**
+
+```bash
+npm run dev
+```
+
+Navigate to `http://localhost:3000/es/contact`. Expect:
+
+1. `// nuevo mensaje` muted label
+2. `¿Hablamos?` heading
+3. Three project type toggle buttons
+4. Name, email, message fields
+5. `Enviar →` + `💬 WhatsApp directo` buttons
+
+Click `Freelance`, fill all fields, submit. With real `.env.local` values: check Supabase Table Editor for the inserted row and email inbox for the notification.
+
+- [ ] **Step 3: Run full test suite**
+
+```bash
+npm test -- --run
+```
+
+Expected: all tests pass.
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add src/app/\[locale\]/contact/page.tsx
+git commit -m "feat: build Contact page with form"
+```
+
+---
+
+## Task 13: Update CLAUDE.md
+
+**Files:**
+- Modify: `CLAUDE.md`
+
+- [ ] **Step 1: Update CLAUDE.md with actual commands and architecture**
+
+Replace the contents of `CLAUDE.md` with:
+
+```markdown
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Commands
+
+```bash
+npm run dev          # start dev server at http://localhost:3000
+npm run build        # production build
+npm run lint         # ESLint
+npm test             # run tests in watch mode (Vitest)
+npm run test:run     # run tests once (CI mode)
+```
+
+## Architecture
+
+Next.js 15 App Router with `src/` directory layout. All routes are nested under `src/app/[locale]/` for path-based i18n (`/es`, `/en`). The root `src/app/layout.tsx` is a pass-through; `src/app/[locale]/layout.tsx` renders the full `<html>/<body>` structure with `NextIntlClientProvider`, `Nav`, and `Footer`.
+
+**i18n:** `next-intl` via `src/i18n/routing.ts` (locales: `['es', 'en']`, default: `es`). All copy lives in `src/messages/es.json` and `src/messages/en.json`. Use `useTranslations()` in components; use `t.raw()` for array values. Type-safe navigation via `src/i18n/navigation.ts` — import `Link`, `useRouter`, `usePathname` from there, not from `next/navigation`.
+
+**Database:** Supabase. Server-side queries use `createAdminClient()` from `src/lib/supabase/server.ts` (service role key, bypasses RLS). Browser client in `src/lib/supabase/client.ts` is wired for future auth use.
+
+**API:** `src/app/api/contact/route.ts` is the only API route in v1. Input validated with Zod schema from `src/lib/contact-schema.ts` before touching the DB.
+
+**Testing:** Vitest + React Testing Library. Tests co-located in `__tests__/` folders next to the files they test. Mock `next-intl` with `vi.mock('next-intl', () => ({ useTranslations: () => (key) => key }))` in component tests.
+
+**Design system:** Tailwind CSS v4 with tokens defined in `src/app/globals.css` under `@theme`. Key tokens: `bg-background` (#0f0f0f), `text-accent` (#00ff88), `bg-surface` (#1a1a1a), `text-text-secondary` (#888), `font-mono` (JetBrains Mono).
+```
+
+- [ ] **Step 2: Commit**
+
+```bash
+git add CLAUDE.md
+git commit -m "docs: update CLAUDE.md with actual stack and architecture"
+```
+
+---
+
+## Task 14: Deploy to Vercel
+
+- [ ] **Step 1: Push to GitHub**
+
+Create a repository at https://github.com/new named `sergiomonsalve.com`.
+
+```bash
+git remote add origin https://github.com/smonsalve/sergiomonsalve.com.git
+git push -u origin main
+```
+
+- [ ] **Step 2: Import project in Vercel**
+
+Go to https://vercel.com/new → Import Git Repository → select `sergiomonsalve.com`.
+
+Framework preset: **Next.js** (auto-detected). Leave build settings as defaults.
+
+- [ ] **Step 3: Add environment variables in Vercel**
+
+In the Vercel project → Settings → Environment Variables, add all variables from `.env.example`:
+
+```
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY
+RESEND_API_KEY
+NEXT_PUBLIC_SITE_URL        → https://sergiomonsalve.com
+CONTACT_EMAIL               → serandmoncas@gmail.com
+```
+
+- [ ] **Step 4: Verify Resend domain**
+
+In Resend dashboard → Domains → Add `sergiomonsalve.com` and follow DNS verification steps. Until verified, change the `from` address in `src/lib/resend.ts` to `onboarding@resend.dev` for testing.
+
+- [ ] **Step 5: Deploy**
+
+```bash
+npx vercel --prod
+```
+
+Or trigger via Vercel dashboard. Expected: deployment completes, site live at `https://sergiomonsalve.com` (after DNS propagation).
+
+- [ ] **Step 6: Smoke test production**
+
+1. Visit `https://sergiomonsalve.com` — redirects to `/es`, Hero page loads
+2. Visit `/es/about` — bio + timeline render
+3. Visit `/es/contact` — submit a test message, verify row appears in Supabase and email arrives
+4. Switch to English via locale button — all pages switch correctly
+
+- [ ] **Step 7: Final commit**
+
+```bash
+git add .
+git commit -m "chore: production deployment verified"
+git push
+```
