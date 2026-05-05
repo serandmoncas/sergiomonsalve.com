@@ -24,6 +24,14 @@ function makeRequest(body: object) {
   })
 }
 
+function makeRawRequest(body: string) {
+  return new Request('http://localhost/api/contact', {
+    method: 'POST',
+    body,
+    headers: { 'Content-Type': 'application/json' }
+  })
+}
+
 describe('POST /api/contact', () => {
   beforeEach(() => {
     mockInsert.mockReset()
@@ -73,5 +81,18 @@ describe('POST /api/contact', () => {
     mockInsert.mockResolvedValue({ error: { message: 'DB error' } })
     const res = await POST(makeRequest(validBody))
     expect(res.status).toBe(500)
+  })
+
+  it('returns 200 even when sendContactNotification throws', async () => {
+    mockSendEmail.mockRejectedValue(new Error('Resend unavailable'))
+    const res = await POST(makeRequest(validBody))
+    const json = await res.json()
+    expect(res.status).toBe(200)
+    expect(json.success).toBe(true)
+  })
+
+  it('returns 400 for malformed JSON body', async () => {
+    const res = await POST(makeRawRequest('not valid json {'))
+    expect(res.status).toBe(400)
   })
 })
