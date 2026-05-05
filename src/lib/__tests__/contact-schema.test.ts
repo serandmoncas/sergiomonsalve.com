@@ -17,25 +17,29 @@ describe('contactSchema', () => {
   it('rejects missing name', () => {
     const result = contactSchema.safeParse({ ...valid, name: '' })
     expect(result.success).toBe(false)
-    expect(result.error?.issues[0].path).toContain('name')
+    expect(result.error).toBeDefined()
+    expect(result.error!.issues[0].path).toContain('name')
   })
 
   it('rejects invalid email', () => {
     const result = contactSchema.safeParse({ ...valid, email: 'not-an-email' })
     expect(result.success).toBe(false)
-    expect(result.error?.issues[0].path).toContain('email')
+    expect(result.error).toBeDefined()
+    expect(result.error!.issues[0].path).toContain('email')
   })
 
   it('rejects unknown projectType', () => {
     const result = contactSchema.safeParse({ ...valid, projectType: 'consulting' })
     expect(result.success).toBe(false)
-    expect(result.error?.issues[0].path).toContain('projectType')
+    expect(result.error).toBeDefined()
+    expect(result.error!.issues[0].path).toContain('projectType')
   })
 
   it('rejects message shorter than 10 characters', () => {
     const result = contactSchema.safeParse({ ...valid, message: 'Hi' })
     expect(result.success).toBe(false)
-    expect(result.error?.issues[0].path).toContain('message')
+    expect(result.error).toBeDefined()
+    expect(result.error!.issues[0].path).toContain('message')
   })
 
   it('accepts all three project types', () => {
