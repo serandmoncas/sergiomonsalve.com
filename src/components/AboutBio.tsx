@@ -37,7 +37,10 @@ export default function AboutBio() {
       </div>
 
       <a
-        href="#"
+        href="https://orlniujfwolyinsuezcu.supabase.co/storage/v1/object/public/assets/cv-sergio-monsalve.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        download
         className="inline-block bg-accent text-background font-mono text-xs font-bold px-5 py-2.5 rounded-sm hover:opacity-90 transition-opacity"
       >
         {t('downloadCv')}
