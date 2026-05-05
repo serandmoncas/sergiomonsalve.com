@@ -17,7 +17,7 @@ export default function ContactForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!projectType) return
+    if (!projectType || status === 'loading') return
     setStatus('loading')
     try {
       const res = await fetch('/api/contact', {
@@ -43,13 +43,16 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div>
-        <p className="font-mono text-xs text-text-muted mb-3">{t('projectTypeLabel')}</p>
+      <fieldset>
+        <legend className="font-mono text-xs text-text-muted mb-3">
+          {t('projectTypeLabel')}
+        </legend>
         <div className="flex gap-2 flex-wrap">
           {PROJECT_TYPES.map(type => (
             <button
               key={type}
               type="button"
+              aria-pressed={projectType === type}
               data-active={projectType === type}
               onClick={() => setProjectType(type)}
               className={`font-mono text-xs px-4 py-2 rounded-sm border transition-colors ${
@@ -62,7 +65,7 @@ export default function ContactForm() {
             </button>
           ))}
         </div>
-      </div>
+      </fieldset>
 
       <div>
         <label htmlFor="name" className={labelClass}>
@@ -110,13 +113,14 @@ export default function ContactForm() {
       </div>
 
       {status === 'error' && (
-        <p className="font-mono text-xs text-red-400">{t('error')}</p>
+        <p role="alert" className="font-mono text-xs text-red-400">{t('error')}</p>
       )}
 
       <div className="flex items-center gap-3 flex-wrap">
         <button
           type="submit"
           disabled={!projectType || status === 'loading'}
+          aria-busy={status === 'loading'}
           className="bg-accent text-background font-mono text-xs font-bold px-5 py-2.5 rounded-sm hover:opacity-90 transition-opacity disabled:opacity-40"
         >
           {status === 'loading' ? '...' : t('submit')}

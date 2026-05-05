@@ -87,4 +87,18 @@ describe('ContactForm', () => {
       expect(screen.getByText('Algo salió mal.')).toBeInTheDocument()
     })
   })
+
+  it('shows error message on network failure', async () => {
+    vi.mocked(fetch).mockRejectedValue(new Error('Network error'))
+    const user = userEvent.setup()
+    render(<ContactForm />)
+    await user.click(screen.getByRole('button', { name: 'Freelance' }))
+    await user.type(screen.getByLabelText('nombre'), 'Ana')
+    await user.type(screen.getByLabelText('email'), 'ana@example.com')
+    await user.type(screen.getByLabelText('mensaje'), 'Hola me gustaría trabajar contigo.')
+    await user.click(screen.getByRole('button', { name: 'Enviar →' }))
+    await waitFor(() => {
+      expect(screen.getByText('Algo salió mal.')).toBeInTheDocument()
+    })
+  })
 })
