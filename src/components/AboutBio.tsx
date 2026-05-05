@@ -23,7 +23,7 @@ export default function AboutBio() {
       <p className="font-mono text-xs text-text-muted mb-3">{t('personalLabel')}</p>
       <div className="text-sm text-text-secondary space-y-1 mb-8">
         <p>
-          🍄{' '}
+          <span aria-hidden="true">🍄</span>{' '}
           <a
             href="https://songosorhongo.com"
             target="_blank"

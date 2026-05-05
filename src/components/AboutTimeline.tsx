@@ -3,7 +3,7 @@ import SkillTag from './SkillTag'
 
 const experience = [
   {
-    period: '2019 → presente',
+    period: '2019 → present',
     company: 'Globant',
     role: 'AI Engineer',
     current: true,
@@ -55,8 +55,8 @@ export default function AboutTimeline() {
               {job.role} · {job.company}
             </p>
             <div className="flex flex-wrap gap-1.5 mt-2">
-              {job.tech.map((techItem, index) => (
-                <SkillTag key={index} label={techItem} />
+              {job.tech.map(techItem => (
+                <SkillTag key={techItem} label={techItem} />
               ))}
             </div>
           </div>
