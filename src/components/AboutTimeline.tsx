@@ -5,7 +5,7 @@ const experience = [
   {
     period: 'Nov 2022 → Apr 2025',
     company: 'Globant',
-    role: 'Python Developer',
+    role: 'Senior Python Developer',
     current: false,
     tech: ['Python', 'LangChain', 'OpenAI', 'Dagster', 'FastAPI', 'Golang']
   },
