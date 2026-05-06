@@ -5,6 +5,19 @@
     "allTags": "all",
     "empty": "no posts yet"
   },
+  "comments": {
+    "title": "Leave a comment",
+    "listTitle": "comments",
+    "nameLabel": "name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "email",
+    "emailPlaceholder": "your@email.com",
+    "bodyLabel": "comment",
+    "bodyPlaceholder": "What do you think?",
+    "submit": "Submit →",
+    "success": "Comment submitted — it will appear after review",
+    "error": "Something went wrong. Please try again."
+  },
   "recipes": {
     "comment": "// recipes",
     "title": "Recipes",

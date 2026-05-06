@@ -4,6 +4,8 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { getPost, getPostSlugs } from '@/lib/posts'
 import MDXContent from '@/components/MDXContent'
+import CommentForm from '@/components/CommentForm'
+import CommentList from '@/components/CommentList'
 
 export function generateStaticParams({ params: { locale } }: { params: { locale: string } }) {
   return getPostSlugs(locale).map(slug => ({ slug }))
@@ -56,6 +58,8 @@ export default async function PostPage({
         ))}
       </div>
       <MDXContent source={post.content} />
+      <CommentList postSlug={post.slug} locale={locale} />
+      <CommentForm postSlug={post.slug} />
     </div>
   )
 }
