@@ -20,9 +20,12 @@ describe('Nav', () => {
     expect(screen.getByText('SM')).toBeInTheDocument()
   })
 
-  it('renders About and Contact links', () => {
+  it('renders all nav links', () => {
     render(<Nav />)
     expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /blog/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /portfolio/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /recipes/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument()
   })
 

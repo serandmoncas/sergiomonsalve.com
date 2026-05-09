@@ -11,28 +11,19 @@ export default function Nav() {
         SM
       </Link>
       <div className="flex items-center gap-6">
-        <Link
-          href="/about"
-          className="text-xs text-text-secondary hover:text-text transition-colors"
-        >
+        <Link href="/about" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('about')}
         </Link>
-        <Link
-          href="/blog"
-          className="text-xs text-text-secondary hover:text-text transition-colors"
-        >
+        <Link href="/blog" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('blog')}
         </Link>
-        <Link
-          href="/recipes"
-          className="text-xs text-text-secondary hover:text-text transition-colors"
-        >
+        <Link href="/portfolio" className="text-xs text-text-secondary hover:text-text transition-colors">
+          {t('portfolio')}
+        </Link>
+        <Link href="/recipes" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('recipes')}
         </Link>
-        <Link
-          href="/contact"
-          className="text-xs text-text-secondary hover:text-text transition-colors"
-        >
+        <Link href="/contact" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('contact')}
         </Link>
         <LocaleSwitcher />
