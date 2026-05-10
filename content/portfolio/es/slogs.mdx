@@ -1,7 +1,7 @@
 ---
 title: slogs
-description: Plataforma logística full-stack con dashboard en tiempo real, gestión de rutas y seguimiento de envíos.
-date: 2026-05-08
+description: Sistema full-stack de gestión logística con módulos de envíos terrestres y marítimos, dashboard en tiempo real y API REST documentada. Desarrollado como prueba técnica Senior para SIATA.
+date: "2026-05-08"
 role: Full Stack Developer
 stack: [TypeScript, Python, FastAPI, Next.js, PostgreSQL]
 github: https://github.com/serandmoncas/slogs
@@ -13,16 +13,38 @@ image: /portfolio/slogs.png
 
 ## El problema
 
-[Describe el problema de negocio que resuelve slogs — qué proceso logístico estaba roto o era ineficiente.]
+SIATA (Sistema de Alerta Temprana Metropolitana) necesitaba una plataforma para gestionar la logística de envíos **terrestres y marítimos** a nivel nacional e internacional. El sistema debía cubrir el ciclo completo: registro de clientes, catálogo de productos, gestión de bodegas y puertos, creación de guías de envío con validación de datos, y seguimiento del estado de cada despacho.
+
+El reto era doble: cumplir los requerimientos funcionales con reglas de negocio precisas (descuentos por volumen, validación de placas y números de flota, unicidad de guías), y demostrar criterio de diseño en la arquitectura, la calidad del código y las decisiones técnicas — los factores que diferencian un perfil Senior de uno Junior en la evaluación.
 
 ## La solución
 
-[Describe la solución: qué construiste, cómo funciona el dashboard, qué flujos cubre.]
+**slogs** (Siata Logistics System) es una aplicación full-stack con backend y frontend completamente separados, desplegados de forma independiente en producción.
+
+El dashboard centraliza los KPIs del negocio en tiempo real: total de envíos activos, desglose terrestre/marítimo, ingresos del mes y un mapa interactivo de rutas activas con los nodos logísticos de Colombia (Bogotá, Medellín, Cali, Cartagena, Buenaventura, entre otros). La actividad reciente muestra el estado de cada guía con su cliente asociado.
+
+Los módulos implementados cubren la totalidad del enunciado:
+
+- **Terrestres** — plan de entrega con tipo de producto, cantidad, fechas, bodega de destino, precio, placa del vehículo (formato `AAA123`) y número de guía (10 dígitos alfanuméricos)
+- **Marítimos** — plan de entrega con puerto de destino, número de flota (formato `AAA1234A`) y las mismas validaciones de unicidad y cantidad
+- **Clientes, Productos, Bodegas, Puertos** — CRUD completo para cada entidad
+
+Las reglas de negocio están encapsuladas en la capa de servicio del backend: descuento automático del 5% en envíos terrestres con más de 10 unidades, 3% para marítimos, y validaciones exhaustivas antes de persistir cada registro.
+
+Los **bonus** implementados incluyen autenticación con JWT bearer tokens, documentación completa de la API REST, manejo de errores con códigos HTTP apropiados (400, 401, 422, 500), y navegación SPA en el frontend.
 
 ## Decisiones técnicas
 
-[Explica por qué elegiste este stack — FastAPI para el backend, Next.js para el frontend, PostgreSQL para la base de datos. Qué trade-offs consideraste.]
+**Python + FastAPI** para el backend — la especificación lo exigía, y FastAPI es la opción natural para APIs REST modernas en Python: tipado con Pydantic, documentación automática con OpenAPI/Swagger, rendimiento asíncrono y validación declarativa de payloads. Las reglas de negocio complejas (descuentos, formato de placas con regex) viven en la capa de servicio, separadas de los controladores.
+
+**PostgreSQL** como motor de base de datos — la más sólida de las opciones propuestas para modelar las relaciones entre clientes, envíos, productos, bodegas y puertos. El modelo E-R fue diseñado antes de escribir código, con claves foráneas y constraints que hacen imposible crear un envío sin cliente asociado a nivel de base de datos, no solo a nivel de aplicación.
+
+**Next.js + TypeScript** para el frontend — separación real de capas, tipado end-to-end, y una SPA con navegación fluida que evita recargas. La decisión de usar Next.js sobre una SPA pura con CRA o Vite fue intencional: demuestra criterio para elegir herramientas con roadmap largo y ecosistema maduro.
+
+**Despliegue separado** — frontend en Vercel, backend en un servicio independiente. Esta arquitectura es más compleja de configurar pero refleja cómo se despliegan sistemas reales de producción.
 
 ## Resultados
 
-[Métricas, aprendizajes, o lo que lograste con este proyecto.]
+El sistema cubre el 100% de los requerimientos obligatorios y 7 de los 8 bonus opcionales — un resultado que la prueba define como criterio de evaluación de nivel Senior.
+
+Lo más interesante del ejercicio no fue la implementación en sí, sino las decisiones de diseño que la diferencian de una solución Junior: separación de capas (router / service / repository), validaciones a nivel de base de datos además de aplicación, manejo de errores consistente a través de toda la API, y un frontend que consume la API de forma tipada sin duplicar lógica de negocio en el cliente.

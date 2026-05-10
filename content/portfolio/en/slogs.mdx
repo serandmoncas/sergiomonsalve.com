@@ -1,7 +1,7 @@
 ---
 title: slogs
-description: Full-stack logistics platform with real-time dashboard, route management, and shipment tracking.
-date: 2026-05-08
+description: Full-stack logistics management system with terrestrial and maritime shipment modules, real-time dashboard, and documented REST API. Developed as a Senior technical assessment for SIATA.
+date: "2026-05-08"
 role: Full Stack Developer
 stack: [TypeScript, Python, FastAPI, Next.js, PostgreSQL]
 github: https://github.com/serandmoncas/slogs
@@ -13,16 +13,38 @@ image: /portfolio/slogs.png
 
 ## The problem
 
-[Describe the business problem slogs solves — what logistics process was broken or inefficient.]
+SIATA (Metropolitan Early Warning System) needed a platform to manage **terrestrial and maritime** logistics shipments at a national and international scale. The system had to cover the full cycle: client registration, product catalog, warehouse and port management, shipment guide creation with data validation, and status tracking for each dispatch.
+
+The challenge was twofold: meet the functional requirements with precise business rules (volume discounts, vehicle plate and fleet number validation, unique tracking numbers), and demonstrate design judgment in the architecture, code quality, and technical decisions — the factors that differentiate a Senior profile from a Junior one in the evaluation.
 
 ## The solution
 
-[Describe the solution: what you built, how the dashboard works, what flows it covers.]
+**slogs** (Siata Logistics System) is a full-stack application with a fully separated backend and frontend, independently deployed to production.
+
+The dashboard centralizes real-time business KPIs: total active shipments, terrestrial/maritime breakdown, monthly revenue, and an interactive map of active routes with Colombia's logistics nodes (Bogotá, Medellín, Cali, Cartagena, Buenaventura, and more). The recent activity feed shows each tracking number's status with its associated client.
+
+The implemented modules cover the full spec:
+
+- **Terrestrial** — delivery plan with product type, quantity, dates, destination warehouse, price, vehicle plate (format `AAA123`), and tracking number (10 alphanumeric characters)
+- **Maritime** — delivery plan with destination port, fleet number (format `AAA1234A`), and the same uniqueness and quantity validations
+- **Clients, Products, Warehouses, Ports** — full CRUD for each entity
+
+Business rules are encapsulated in the backend service layer: automatic 5% discount on terrestrial shipments with more than 10 units, 3% for maritime, and exhaustive validations before persisting each record.
+
+**Bonus features** implemented include JWT bearer token authentication, full REST API documentation, error handling with appropriate HTTP codes (400, 401, 422, 500), and SPA navigation on the frontend.
 
 ## Technical decisions
 
-[Explain why you chose this stack — FastAPI for the backend, Next.js for the frontend, PostgreSQL for the database. What trade-offs did you consider.]
+**Python + FastAPI** for the backend — the spec required it, and FastAPI is the natural choice for modern REST APIs in Python: Pydantic typing, automatic OpenAPI/Swagger documentation, async performance, and declarative payload validation. Complex business rules (discounts, plate format with regex) live in the service layer, separated from controllers.
+
+**PostgreSQL** as the database engine — the most solid of the proposed options for modeling the relationships between clients, shipments, products, warehouses, and ports. The ER model was designed before writing any code, with foreign keys and constraints that make it impossible to create a shipment without an associated client at the database level, not just at the application level.
+
+**Next.js + TypeScript** for the frontend — real layer separation, end-to-end typing, and an SPA with smooth navigation that avoids page reloads. Choosing Next.js over a plain SPA (CRA or Vite) was intentional: it demonstrates judgment for picking tools with a long roadmap and mature ecosystem.
+
+**Separate deployment** — frontend on Vercel, backend on an independent service. This architecture is more complex to configure but reflects how real production systems are deployed.
 
 ## Results
 
-[Metrics, learnings, or what you achieved with this project.]
+The system covers 100% of mandatory requirements and 7 of the 8 optional bonus features — a result the assessment defines as a Senior-level evaluation criterion.
+
+The most interesting part of the exercise wasn't the implementation itself, but the design decisions that differentiate it from a Junior solution: layer separation (router / service / repository), database-level validations in addition to application-level ones, consistent error handling throughout the API, and a frontend that consumes the API in a typed way without duplicating business logic on the client.
