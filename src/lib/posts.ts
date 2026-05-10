@@ -26,7 +26,7 @@ export function getAllPosts(locale: string): PostMeta[] {
       return {
         slug,
         title: data.title as string,
-        date: data.date as string,
+        date: String(data.date),
         description: data.description as string,
         tags: (data.tags as string[]) ?? []
       }
@@ -42,7 +42,7 @@ export function getPost(slug: string, locale: string): Post | null {
   return {
     slug,
     title: data.title as string,
-    date: data.date as string,
+    date: String(data.date),
     description: data.description as string,
     tags: (data.tags as string[]) ?? [],
     content

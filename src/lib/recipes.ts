@@ -29,7 +29,7 @@ export function getAllRecipes(locale: string): RecipeMeta[] {
       return {
         slug,
         title: data.title as string,
-        date: data.date as string,
+        date: String(data.date),
         description: data.description as string,
         tags: (data.tags as string[]) ?? [],
         servings: (data.servings as number) ?? 2,
@@ -48,7 +48,7 @@ export function getRecipe(slug: string, locale: string): Recipe | null {
   return {
     slug,
     title: data.title as string,
-    date: data.date as string,
+    date: String(data.date),
     description: data.description as string,
     tags: (data.tags as string[]) ?? [],
     servings: (data.servings as number) ?? 2,
