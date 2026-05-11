@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import Hero from '@/components/Hero'
+import AboutPageContent from '@/components/about/AboutPageContent'
 
 export async function generateMetadata({
   params
@@ -11,14 +11,14 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'meta' })
   return {
     title: { absolute: t('heroTitle') },
-    description: t('heroDescription'),
+    description: t('aboutDescription'),
     alternates: {
       canonical: `/${locale}`,
       languages: { es: '/es', en: '/en' }
     },
     openGraph: {
       title: t('heroTitle'),
-      description: t('heroDescription'),
+      description: t('aboutDescription'),
       url: `/${locale}`
     }
   }
@@ -39,7 +39,14 @@ const jsonLd = {
 // Safe: jsonLd is a hardcoded compile-time constant, not user input
 const jsonLdString = JSON.stringify(jsonLd)
 
-export default function HomePage() {
+export default async function HomePage({
+  params
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'about' })
+
   return (
     <>
       <script
@@ -47,7 +54,12 @@ export default function HomePage() {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: jsonLdString }}
       />
-      <Hero />
+      <AboutPageContent
+        locale={locale}
+        downloadCvLabel={t('downloadCv')}
+        portfolioLabel={locale === 'es' ? 'Ver portfolio →' : 'View portfolio →'}
+        eduTitle={t('educationTitle')}
+      />
     </>
   )
 }

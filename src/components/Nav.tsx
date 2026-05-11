@@ -11,9 +11,6 @@ export default function Nav() {
         SM
       </Link>
       <div className="flex items-center gap-6">
-        <Link href="/about" className="text-xs text-text-secondary hover:text-text transition-colors">
-          {t('about')}
-        </Link>
         <Link href="/blog" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('blog')}
         </Link>

@@ -1,28 +1,4 @@
-import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
-import AboutPageContent from '@/components/about/AboutPageContent'
-
-export async function generateMetadata({
-  params
-}: {
-  params: Promise<{ locale: string }>
-}): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'meta' })
-  return {
-    title: t('aboutTitle'),
-    description: t('aboutDescription'),
-    alternates: {
-      canonical: `/${locale}/about`,
-      languages: { es: '/es/about', en: '/en/about' }
-    },
-    openGraph: {
-      title: `${t('aboutTitle')} — Sergio Monsalve`,
-      description: t('aboutDescription'),
-      url: `/${locale}/about`
-    }
-  }
-}
+import { redirect } from 'next/navigation'
 
 export default async function AboutPage({
   params
@@ -30,14 +6,5 @@ export default async function AboutPage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'about' })
-
-  return (
-    <AboutPageContent
-      locale={locale}
-      downloadCvLabel={t('downloadCv')}
-      portfolioLabel={locale === 'es' ? 'Ver portfolio →' : 'View portfolio →'}
-      eduTitle={t('educationTitle')}
-    />
-  )
+  redirect(`/${locale}`)
 }
