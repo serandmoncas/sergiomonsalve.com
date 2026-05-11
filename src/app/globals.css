@@ -16,6 +16,75 @@
   --font-mono: var(--font-jetbrains), 'Courier New', monospace;
 }
 
+/* ─── About page skin system ─── */
+
+/* Default (terminal) beyond-section variables */
+:root {
+  --about-beyond-bg: #06080c;
+  --about-beyond-fg: #e6edf3;
+  --about-beyond-fg-soft: rgba(230, 237, 243, 0.72);
+  --about-beyond-accent: #ffa657;
+  --about-beyond-border: rgba(230, 237, 243, 0.12);
+  --about-beyond-card-bg: rgba(230, 237, 243, 0.025);
+  --about-beyond-card-hover: rgba(126, 231, 135, 0.06);
+}
+
+[data-about-skin="crema"] {
+  --color-background: #f4f1ea;
+  --color-surface: #efeae0;
+  --color-border: #d9d2c4;
+  --color-accent: #b4501a;
+  --color-text: #1a1814;
+  --color-text-secondary: #4a443c;
+  --color-text-muted: #837b6d;
+  --about-beyond-bg: #1a1814;
+  --about-beyond-fg: #f4f1ea;
+  --about-beyond-fg-soft: rgba(244, 241, 234, 0.72);
+  --about-beyond-accent: #e8a877;
+  --about-beyond-border: rgba(244, 241, 234, 0.16);
+  --about-beyond-card-bg: rgba(244, 241, 234, 0.03);
+  --about-beyond-card-hover: rgba(244, 241, 234, 0.06);
+}
+
+[data-about-skin="bosque"] {
+  --color-background: #ecebe0;
+  --color-surface: #e3e2d4;
+  --color-border: #cdd0c0;
+  --color-accent: #3d6b3a;
+  --color-text: #1a1f17;
+  --color-text-secondary: #3f4a3a;
+  --color-text-muted: #7a8473;
+  --about-beyond-bg: #14201a;
+  --about-beyond-fg: #ecebe0;
+  --about-beyond-fg-soft: rgba(236, 235, 224, 0.72);
+  --about-beyond-accent: #a8c79c;
+  --about-beyond-border: rgba(236, 235, 224, 0.16);
+  --about-beyond-card-bg: rgba(236, 235, 224, 0.03);
+  --about-beyond-card-hover: rgba(236, 235, 224, 0.06);
+}
+
+[data-about-skin="terminal"] {
+  /* main tokens match site defaults; only beyond vars differ */
+  --about-beyond-bg: #06080c;
+  --about-beyond-fg: #e6edf3;
+  --about-beyond-fg-soft: rgba(230, 237, 243, 0.72);
+  --about-beyond-accent: #ffa657;
+  --about-beyond-border: rgba(230, 237, 243, 0.12);
+  --about-beyond-card-bg: rgba(230, 237, 243, 0.025);
+  --about-beyond-card-hover: rgba(126, 231, 135, 0.06);
+}
+
+.about-beyond-card {
+  background: var(--about-beyond-card-bg);
+  border: 1px solid var(--about-beyond-border);
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.about-beyond-card:hover {
+  background: var(--about-beyond-card-hover);
+  border-color: var(--about-beyond-accent);
+}
+
 * {
   box-sizing: border-box;
 }

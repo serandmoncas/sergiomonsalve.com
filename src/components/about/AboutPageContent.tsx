@@ -206,27 +206,67 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
         </div>
       </section>
 
-      {/* BEYOND THE CODE */}
-      <section className="py-20 bg-surface border-y border-border relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 80% 20%, rgba(0,255,136,0.06), transparent 60%), radial-gradient(ellipse at 10% 80%, rgba(0,255,136,0.03), transparent 50%)' }}
+      {/* BEYOND THE CODE — always dark regardless of active skin */}
+      <section
+        className="py-20 border-y border-border relative overflow-hidden"
+        style={{ background: 'var(--about-beyond-bg)' }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse at 80% 20%, color-mix(in srgb, var(--about-beyond-accent) 18%, transparent), transparent 60%), radial-gradient(ellipse at 10% 80%, color-mix(in srgb, var(--about-beyond-accent) 8%, transparent), transparent 50%)',
+          }}
         />
         <div className="max-w-5xl mx-auto px-6 relative">
-          <p className="font-mono text-xs text-text-muted uppercase tracking-widest mb-4">{c.beyondLabel}</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-10 text-text">
+          <p
+            className="font-mono text-xs uppercase tracking-widest mb-4"
+            style={{ color: 'var(--about-beyond-fg-soft)' }}
+          >
+            {c.beyondLabel}
+          </p>
+          <h2
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-10"
+            style={{ color: 'var(--about-beyond-fg)' }}
+          >
             {c.beyondTitle[0]}
-            <em className="not-italic text-accent">{c.beyondTitle[1]}</em>
+            <em className="not-italic" style={{ color: 'var(--about-beyond-accent)' }}>
+              {c.beyondTitle[1]}
+            </em>
             {c.beyondTitle[2]}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {c.beyondCards.map((card, i) => (
-              <article key={i} className="border border-border/50 p-6 rounded-sm hover:border-accent/50 transition-colors group">
-                <p className="font-mono text-xs text-accent uppercase tracking-widest mb-3">{card.glyph}</p>
-                <h3 className="text-base font-bold text-text mb-2">{card.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-4">{card.text}</p>
+              <article key={i} className="about-beyond-card p-6 rounded-sm">
+                <p
+                  className="font-mono text-xs uppercase tracking-widest mb-3"
+                  style={{ color: 'var(--about-beyond-accent)' }}
+                >
+                  {card.glyph}
+                </p>
+                <h3
+                  className="text-base font-bold mb-2"
+                  style={{ color: 'var(--about-beyond-fg)' }}
+                >
+                  {card.title}
+                </h3>
+                <p
+                  className="text-sm leading-relaxed mb-4"
+                  style={{ color: 'var(--about-beyond-fg-soft)' }}
+                >
+                  {card.text}
+                </p>
                 {card.link && (
-                  <a href={card.link.href} target="_blank" rel="noopener noreferrer"
-                    className="font-mono text-xs text-accent border-b border-accent/40 pb-px hover:border-accent transition-colors">
+                  <a
+                    href={card.link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-xs pb-px transition-opacity hover:opacity-100 opacity-90"
+                    style={{
+                      color: 'var(--about-beyond-accent)',
+                      borderBottom: '1px solid var(--about-beyond-accent)',
+                    }}
+                  >
                     {card.link.label}
                   </a>
                 )}
