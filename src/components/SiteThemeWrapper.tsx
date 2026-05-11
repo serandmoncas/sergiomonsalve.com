@@ -27,7 +27,7 @@ export default function SiteThemeWrapper({ children }: { children: React.ReactNo
   return (
     <div
       data-skin={skin}
-      className="bg-background text-text min-h-screen"
+      className="bg-background text-text min-h-screen flex flex-col"
       style={{ transition: 'background-color 240ms ease, color 240ms ease' }}
     >
       {children}

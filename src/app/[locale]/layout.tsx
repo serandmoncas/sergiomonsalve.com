@@ -52,7 +52,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <SiteThemeWrapper>
             <Nav />
-            <main className="pt-16">{children}</main>
+            <main className="pt-16 flex-1">{children}</main>
             <Footer />
           </SiteThemeWrapper>
         </NextIntlClientProvider>
