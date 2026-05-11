@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { useRouter } from '@/i18n/navigation'
 
 type Comment = {
@@ -44,59 +43,30 @@ export default function AdminCommentsPage() {
     setComments(cs => cs.filter(c => c.id !== id))
   }
 
-  async function signOut() {
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    router.push('/admin/login')
-  }
 
   const pending = comments.filter(c => !c.approved)
   const approved = comments.filter(c => c.approved)
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
-      <div className="flex items-center justify-between mb-10">
-        <div>
-          <p className="font-mono text-xs text-accent mb-1">// admin</p>
-          <h1 className="text-2xl font-extrabold text-text">Comments</h1>
-        </div>
-        <button
-          onClick={signOut}
-          className="font-mono text-xs text-text-muted hover:text-text transition-colors"
-        >
-          sign out →
-        </button>
-      </div>
+    <div>
+      <h1 className="text-xl font-bold text-text mb-1">Comentarios</h1>
+      <p className="font-mono text-xs text-text-muted mb-8">// entradas de blog</p>
 
       {loading ? (
-        <p className="font-mono text-xs text-text-muted">// loading...</p>
+        <p className="font-mono text-xs text-text-muted">// cargando...</p>
       ) : (
         <>
-          <section className="mb-12">
-            <p className="font-mono text-xs text-accent mb-4">
-              // pending ({pending.length})
-            </p>
-            {pending.length === 0 ? (
-              <p className="font-mono text-xs text-text-muted">// all clear</p>
-            ) : (
-              <div className="space-y-4">
-                {pending.map(c => (
-                  <CommentRow key={c.id} comment={c} onApprove={approve} onDelete={remove} />
-                ))}
-              </div>
-            )}
+          <section className="mb-10">
+            <p className="font-mono text-xs text-accent mb-4">// pendientes ({pending.length})</p>
+            {pending.length === 0
+              ? <p className="font-mono text-xs text-text-muted">// sin pendientes</p>
+              : <div className="space-y-3">{pending.map(c => <CommentRow key={c.id} comment={c} onApprove={approve} onDelete={remove} />)}</div>
+            }
           </section>
-
           <section>
-            <p className="font-mono text-xs text-text-muted mb-4">
-              // approved ({approved.length})
-            </p>
+            <p className="font-mono text-xs text-text-muted mb-4">// aprobados ({approved.length})</p>
             {approved.length > 0 && (
-              <div className="space-y-4">
-                {approved.map(c => (
-                  <CommentRow key={c.id} comment={c} onDelete={remove} />
-                ))}
-              </div>
+              <div className="space-y-3">{approved.map(c => <CommentRow key={c.id} comment={c} onDelete={remove} />)}</div>
             )}
           </section>
         </>

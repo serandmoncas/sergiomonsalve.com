@@ -39,12 +39,12 @@ export default function AdminGuestbookPage() {
     setEntries(prev => prev.filter(e => e.id !== id))
   }
 
-  if (loading) return <p className="p-8 font-mono text-xs text-text-muted">Cargando...</p>
+  if (loading) return <p className="font-mono text-xs text-text-muted">// cargando...</p>
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12">
-      <p className="font-mono text-xs text-accent mb-1">// admin</p>
-      <h1 className="text-2xl font-bold text-text mb-8">Libro de firmas</h1>
+    <div>
+      <h1 className="text-xl font-bold text-text mb-1">Firmas</h1>
+      <p className="font-mono text-xs text-text-muted mb-8">// libro de firmas</p>
 
       {entries.length === 0 && (
         <p className="font-mono text-xs text-text-muted">No hay entradas.</p>
