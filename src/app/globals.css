@@ -29,7 +29,7 @@
   --about-beyond-card-hover: rgba(126, 231, 135, 0.06);
 }
 
-[data-about-skin="crema"] {
+[data-skin="crema"] {
   --color-background: #f4f1ea;
   --color-surface: #efeae0;
   --color-border: #d9d2c4;
@@ -46,7 +46,7 @@
   --about-beyond-card-hover: rgba(244, 241, 234, 0.06);
 }
 
-[data-about-skin="bosque"] {
+[data-skin="bosque"] {
   --color-background: #ecebe0;
   --color-surface: #e3e2d4;
   --color-border: #cdd0c0;
@@ -63,7 +63,7 @@
   --about-beyond-card-hover: rgba(236, 235, 224, 0.06);
 }
 
-[data-about-skin="terminal"] {
+[data-skin="terminal"] {
   /* main tokens match site defaults; only beyond vars differ */
   --about-beyond-bg: #06080c;
   --about-beyond-fg: #e6edf3;

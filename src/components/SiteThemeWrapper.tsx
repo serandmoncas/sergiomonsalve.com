@@ -1,13 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import SkinSwitcher, { type SkinId } from './SkinSwitcher'
+import SkinSwitcher, { type SkinId } from './about/SkinSwitcher'
 
-const STORAGE_KEY = 'sm-about-skin'
+const STORAGE_KEY = 'sm-skin'
 const VALID_SKINS: SkinId[] = ['crema', 'bosque', 'terminal']
 const DEFAULT_SKIN: SkinId = 'crema'
 
-export default function AboutSkinWrapper({ children }: { children: React.ReactNode }) {
+export default function SiteThemeWrapper({ children }: { children: React.ReactNode }) {
   const [skin, setSkin] = useState<SkinId>(DEFAULT_SKIN)
 
   useEffect(() => {
@@ -26,8 +26,8 @@ export default function AboutSkinWrapper({ children }: { children: React.ReactNo
 
   return (
     <div
-      data-about-skin={skin}
-      className="bg-background text-text min-h-[calc(100vh-4rem)]"
+      data-skin={skin}
+      className="bg-background text-text min-h-screen"
       style={{ transition: 'background-color 240ms ease, color 240ms ease' }}
     >
       {children}
