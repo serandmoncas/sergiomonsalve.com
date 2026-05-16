@@ -29,8 +29,6 @@ export default function AdminBibliotecaPage() {
   const [saved, setSaved] = useState<string | null>(null)
   const [search, setSearch] = useState('')
 
-  useEffect(() => { fetchBooks() }, [])
-
   async function fetchBooks() {
     const res = await fetch('/api/admin/biblioteca')
     if (res.status === 401) { router.push('/admin/login'); return }
@@ -39,15 +37,22 @@ export default function AdminBibliotecaPage() {
     setLoading(false)
   }
 
+  useEffect(() => { fetchBooks() }, [])
+
   async function update(asin: string, patch: { visible?: boolean; status?: BookStatus }) {
+    const prev = books.find(b => b.asin === asin)
     setSaving(asin)
     setBooks(bs => bs.map(b => b.asin === asin ? { ...b, ...patch } : b))
-    await fetch(`/api/admin/biblioteca/${asin}`, {
+    const res = await fetch(`/api/admin/biblioteca/${asin}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(patch),
     })
     setSaving(null)
+    if (!res.ok) {
+      if (prev) setBooks(bs => bs.map(b => b.asin === asin ? prev : b))
+      return
+    }
     setSaved(asin)
     setTimeout(() => setSaved(s => s === asin ? null : s), 1500)
   }
