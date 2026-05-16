@@ -35,7 +35,7 @@ function toStringArray(val: unknown): string[] {
 function toDateString(val: unknown): string {
   if (!val) return ''
   const d = new Date(String(val))
-  return isNaN(d.getTime()) ? String(val) : d.toISOString().split('T')[0]
+  return isNaN(d.getTime()) ? '' : d.toISOString().split('T')[0]
 }
 
 function normalize(book: RawBook): NormalizedBook | null {
@@ -47,9 +47,9 @@ function normalize(book: RawBook): NormalizedBook | null {
     authors: toStringArray(book.authors),
     narrators: toStringArray(book.narrators),
     cover_url: String(book.cover_url ?? images?.['500'] ?? ''),
-    runtime_length_min: Number(book.runtime_length_min ?? 0),
+    runtime_length_min: Number(book.runtime_length_min ?? 0) || 0,
     purchase_date: toDateString(book.purchase_date),
-    percent_complete: Number(book.percent_complete ?? (book.is_finished ? 100 : 0)),
+    percent_complete: Math.min(100, Math.max(0, Number(book.percent_complete ?? (book.is_finished ? 100 : 0)) || 0)),
     publisher_summary: String(book.publisher_summary ?? ''),
   }
 }
@@ -60,10 +60,15 @@ if (!inputPath) {
   process.exit(1)
 }
 
-const raw: unknown = JSON.parse(fs.readFileSync(inputPath, 'utf-8'))
-const items = (Array.isArray(raw) ? raw : (raw as Record<string, unknown>).items ?? []) as RawBook[]
-const normalized = items.map(normalize).filter((b): b is NormalizedBook => b !== null)
+try {
+  const raw: unknown = JSON.parse(fs.readFileSync(inputPath, 'utf-8'))
+  const items = (Array.isArray(raw) ? raw : (raw as Record<string, unknown>).items ?? []) as RawBook[]
+  const normalized = items.map(normalize).filter((b): b is NormalizedBook => b !== null)
 
-const outputPath = path.join(process.cwd(), 'data/library.json')
-fs.writeFileSync(outputPath, JSON.stringify(normalized, null, 2))
-console.log(`✓ Imported ${normalized.length} books to data/library.json`)
+  const outputPath = path.join(process.cwd(), 'data/library.json')
+  fs.writeFileSync(outputPath, JSON.stringify(normalized, null, 2))
+  console.log(`✓ Imported ${normalized.length} books to data/library.json`)
+} catch (err) {
+  console.error(`Error reading or parsing: ${inputPath}`)
+  process.exit(1)
+}
