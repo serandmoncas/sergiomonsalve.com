@@ -1,10 +1,11 @@
 import type { MetadataRoute } from 'next'
 import { getPostSlugs } from '@/lib/posts'
 import { getRecipeSlugs } from '@/lib/recipes'
+import { getBookAsins } from '@/lib/library'
 
 const base = 'https://sergiomonsalve.com'
 const locales = ['es', 'en']
-const staticRoutes = ['', '/about', '/contact', '/blog', '/recipes']
+const staticRoutes = ['', '/about', '/contact', '/blog', '/recipes', '/biblioteca']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries = locales.flatMap(locale =>
@@ -34,5 +35,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   )
 
-  return [...staticEntries, ...postEntries, ...recipeEntries]
+  const bookEntries = locales.flatMap(locale =>
+    getBookAsins().map(asin => ({
+      url: `${base}/${locale}/biblioteca/${asin}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6
+    }))
+  )
+
+  return [...staticEntries, ...postEntries, ...recipeEntries, ...bookEntries]
 }
