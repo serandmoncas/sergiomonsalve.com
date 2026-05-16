@@ -3,13 +3,16 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
-import { getBook, getBookAsins } from '@/lib/library'
-import MDXContent from '@/components/MDXContent'
+import ReactMarkdown from 'react-markdown'
+import { getBookAsins } from '@/lib/library'
+import { getUnifiedBook } from '@/lib/unified-library'
 import StarRating from '@/components/StarRating'
 
 export function generateStaticParams() {
   return getBookAsins().map(asin => ({ asin }))
 }
+
+export const dynamicParams = true
 
 export async function generateMetadata({
   params,
@@ -17,11 +20,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string; asin: string }>
 }): Promise<Metadata> {
   const { locale, asin } = await params
-  const book = getBook(asin, locale)
+  const book = await getUnifiedBook(asin, locale)
   if (!book) return {}
   return {
     title: book.title,
-    description: book.publisher_summary.slice(0, 160),
+    description: book.description.slice(0, 160),
     alternates: { canonical: `/${locale}/biblioteca/${asin}` },
   }
 }
@@ -32,7 +35,7 @@ export default async function BookPage({
   params: Promise<{ locale: string; asin: string }>
 }) {
   const { locale, asin } = await params
-  const book = getBook(asin, locale)
+  const book = await getUnifiedBook(asin, locale)
   if (!book) notFound()
 
   const t = await getTranslations({ locale, namespace: 'biblioteca' })
@@ -81,9 +84,9 @@ export default async function BookPage({
         </div>
       </div>
 
-      <p className="text-xs text-text-secondary leading-relaxed mb-8">
-        {book.publisher_summary}
-      </p>
+      {book.description && (
+        <p className="text-xs text-text-secondary leading-relaxed mb-8">{book.description}</p>
+      )}
 
       {book.highlights.length > 0 && (
         <div className="mb-8">
@@ -101,16 +104,22 @@ export default async function BookPage({
         </div>
       )}
 
-      {book.content && <MDXContent source={book.content} />}
+      {book.review_md && (
+        <div className="mdx-prose mb-8">
+          <ReactMarkdown>{book.review_md}</ReactMarkdown>
+        </div>
+      )}
 
-      <a
-        href={`https://www.audible.com/pd/${book.asin}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-mono text-xs text-accent hover:underline mt-8 block"
-      >
-        {t('listenOnAudible')}
-      </a>
+      {book.source === 'audible' && (
+        <a
+          href={`https://www.audible.com/pd/${book.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-xs text-accent hover:underline mt-8 block"
+        >
+          {t('listenOnAudible')}
+        </a>
+      )}
     </div>
   )
 }
