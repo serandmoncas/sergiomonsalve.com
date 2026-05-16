@@ -3,11 +3,12 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import BookCard from './BookCard'
-import type { BookMeta, BookStatus } from '@/lib/library'
+import type { BookStatus } from '@/lib/library'
+import type { UnifiedBook } from '@/lib/unified-library'
 
 const ALL_STATUSES: BookStatus[] = ['listening', 'completed', 'queued', 'abandoned']
 
-export default function BookList({ books, locale }: { books: BookMeta[]; locale: string }) {
+export default function BookList({ books, locale }: { books: UnifiedBook[]; locale: string }) {
   const t = useTranslations('biblioteca')
   const [activeStatus, setActiveStatus] = useState<BookStatus | null>(null)
 
@@ -54,7 +55,7 @@ export default function BookList({ books, locale }: { books: BookMeta[]; locale:
         <div className="space-y-3">
           {filtered.map(book => (
             <BookCard
-              key={book.asin}
+              key={book.id}
               book={book}
               locale={locale}
               statusLabel={statusLabel[book.status]}

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import type { BookMeta, BookStatus } from '@/lib/library'
+import type { BookStatus } from '@/lib/library'
+import type { UnifiedBook } from '@/lib/unified-library'
 import StarRating from './StarRating'
 
 const statusClass: Record<BookStatus, string> = {
@@ -10,12 +11,18 @@ const statusClass: Record<BookStatus, string> = {
   abandoned: 'text-text-muted line-through',
 }
 
+const SOURCE_TYPE_LABEL: Record<string, string> = {
+  physical: 'físico',
+  ebook: 'ebook',
+  other: 'otro',
+}
+
 export default function BookCard({
   book,
   locale,
   statusLabel,
 }: {
-  book: BookMeta
+  book: UnifiedBook
   locale: string
   statusLabel: string
 }) {
@@ -24,7 +31,7 @@ export default function BookCard({
 
   return (
     <Link
-      href={`/biblioteca/${book.asin}`}
+      href={`/biblioteca/${book.id}`}
       locale={locale as 'es' | 'en'}
       className="block border border-border hover:border-accent transition-colors p-4 rounded-sm group"
     >
@@ -46,6 +53,11 @@ export default function BookCard({
               {statusLabel}
             </span>
             {book.rating !== null && <StarRating rating={book.rating} />}
+            {book.source === 'manual' && book.source_type && (
+              <span className="font-mono text-[9px] text-text-muted border border-border px-1 rounded-sm">
+                {SOURCE_TYPE_LABEL[book.source_type] ?? book.source_type}
+              </span>
+            )}
           </div>
           <h2 className="text-sm font-semibold text-text group-hover:text-accent transition-colors mb-1 truncate">
             {book.title}
