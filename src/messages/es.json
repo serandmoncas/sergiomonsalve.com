@@ -26,6 +26,20 @@
     "servings": "porciones",
     "ingredients": "ingredientes"
   },
+  "biblioteca": {
+    "comment": "// biblioteca",
+    "title": "Biblioteca",
+    "allStatuses": "todos",
+    "statusListening": "leyendo",
+    "statusCompleted": "completado",
+    "statusQueued": "en lista",
+    "statusAbandoned": "abandonado",
+    "highlights": "highlights",
+    "listenOnAudible": "Escuchar en Audible →",
+    "empty": "no hay libros aún",
+    "narrators": "narrado por",
+    "duration": "duración"
+  },
   "meta": {
     "heroTitle": "Sergio Monsalve — AI Software Engineer",
     "heroDescription": "Ingeniero de sistemas con más de 13 años de experiencia construyendo soluciones con Python, IA y ciencias de datos. Disponible para freelance y posiciones full-time.",
@@ -38,13 +52,16 @@
     "portfolioTitle": "Portfolio",
     "portfolioDescription": "Proyectos y casos de estudio de Sergio Monsalve — desarrollo full stack, Python, IA y datos.",
     "recipesTitle": "Recetas",
-    "recipesDescription": "Recetas de cocina de Sergio Monsalve — vegetarianas, con hongos y de temporada."
+    "recipesDescription": "Recetas de cocina de Sergio Monsalve — vegetarianas, con hongos y de temporada.",
+    "bibliotecaTitle": "Biblioteca",
+    "bibliotecaDescription": "Los libros y audiolibros que Sergio Monsalve está leyendo y estudiando."
   },
   "nav": {
     "about": "Sobre mí",
     "blog": "Blog",
     "portfolio": "Portfolio",
     "recipes": "Recetas",
+    "biblioteca": "Biblioteca",
     "guestbook": "Firmas",
     "contact": "Contacto"
   },

@@ -26,6 +26,20 @@
     "servings": "servings",
     "ingredients": "ingredients"
   },
+  "biblioteca": {
+    "comment": "// library",
+    "title": "Library",
+    "allStatuses": "all",
+    "statusListening": "listening",
+    "statusCompleted": "completed",
+    "statusQueued": "in queue",
+    "statusAbandoned": "abandoned",
+    "highlights": "highlights",
+    "listenOnAudible": "Listen on Audible →",
+    "empty": "no books yet",
+    "narrators": "narrated by",
+    "duration": "duration"
+  },
   "meta": {
     "heroTitle": "Sergio Monsalve — AI Software Engineer",
     "heroDescription": "Systems engineer with 13+ years building solutions with Python, AI, and data science. Available for freelance and full-time positions.",
@@ -38,13 +52,16 @@
     "portfolioTitle": "Portfolio",
     "portfolioDescription": "Projects and case studies by Sergio Monsalve — full stack development, Python, AI, and data systems.",
     "recipesTitle": "Recipes",
-    "recipesDescription": "Recipes by Sergio Monsalve — vegetarian, mushroom-forward, and seasonal."
+    "recipesDescription": "Recipes by Sergio Monsalve — vegetarian, mushroom-forward, and seasonal.",
+    "bibliotecaTitle": "Library",
+    "bibliotecaDescription": "Books and audiobooks Sergio Monsalve is reading and studying."
   },
   "nav": {
     "about": "About",
     "blog": "Blog",
     "portfolio": "Portfolio",
     "recipes": "Recipes",
+    "biblioteca": "Library",
     "guestbook": "Guestbook",
     "contact": "Contact"
   },
