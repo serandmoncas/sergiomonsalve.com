@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import fs from 'fs'
 import { getAllBooks, getBook, getBookAsins } from '../library'

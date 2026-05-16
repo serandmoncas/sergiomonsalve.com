@@ -48,7 +48,7 @@ function mergeWithMdx(book: AudibleBook, locale: string): BookMeta {
   return {
     ...book,
     status: VALID_STATUSES.includes(data.status as BookStatus) ? (data.status as BookStatus) : 'queued',
-    rating: typeof data.rating === 'number' ? data.rating : null,
+    rating: typeof data.rating === 'number' && data.rating >= 1 && data.rating <= 5 ? data.rating : null,
   }
 }
 
@@ -70,7 +70,7 @@ export function getBook(asin: string, locale: string): Book | null {
   return {
     ...book,
     status: VALID_STATUSES.includes(data.status as BookStatus) ? (data.status as BookStatus) : 'queued',
-    rating: typeof data.rating === 'number' ? data.rating : null,
+    rating: typeof data.rating === 'number' && data.rating >= 1 && data.rating <= 5 ? data.rating : null,
     highlights: Array.isArray(data.highlights) ? (data.highlights as string[]) : [],
     content,
   }

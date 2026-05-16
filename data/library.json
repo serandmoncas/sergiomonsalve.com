@@ -1,1 +1,1802 @@
-[]
+[
+  {
+    "asin": "0062945149",
+    "title": "Ultralearning: Master Hard Skills, Outsmart the Competition, and Accelerate Your Career",
+    "authors": [
+      "Scott H. Young"
+    ],
+    "narrators": [
+      "Scott H. Young"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51D5dwBcSFL._SL500_.jpg",
+    "runtime_length_min": 466,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07K8X8P3F",
+    "title": "The Leader's Guide",
+    "authors": [
+      "Eric Ries"
+    ],
+    "narrators": [
+      "Eric Ries"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51SfoIw1zPL._SL500_.jpg",
+    "runtime_length_min": 378,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00TJJNSQG",
+    "title": "Nonviolent Communication: Create Your Life, Your Relationships, and Your World in Harmony with Your Values",
+    "authors": [
+      "Marshall Rosenberg PhD"
+    ],
+    "narrators": [
+      "Marshall Rosenberg PhD"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41iSvvwsRyL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0BS9XXKHX",
+    "title": "Scattered Minds: The Origins and Healing of Attention Deficit Disorder",
+    "authors": [
+      "Gabor Maté MD"
+    ],
+    "narrators": [
+      "Daniel Maté"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41kGBk2eM-L._SL500_.jpg",
+    "runtime_length_min": 659,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B005LXV0HI",
+    "title": "The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses",
+    "authors": [
+      "Eric Ries"
+    ],
+    "narrators": [
+      "Eric Ries"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41jkBZCMt3L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B006IE4OY0",
+    "title": "The Untethered Soul: The Journey Beyond Yourself",
+    "authors": [
+      "Michael A. Singer"
+    ],
+    "narrators": [
+      "Peter Berkrot"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41llAXFfgRL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "1250852013",
+    "title": "Endure: How to Work Hard, Outlast, and Keep Hammering",
+    "authors": [
+      "Cameron Hanes"
+    ],
+    "narrators": [
+      "Cameron Hanes",
+      "David Goggins",
+      "Joe Rogan"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51BvZPKBcCL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "9500764466",
+    "title": "En el limbo [In Limbo]: Aprendé a diseñar tus emociones para convertirte en quien siempre quisiste ser [Learn to Design Your Emotions to Become Who You Always Wanted to Be]",
+    "authors": [
+      "Estanislao Bachrach"
+    ],
+    "narrators": [
+      "Pedro Ruiz",
+      "Estanislao Bachrach"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51opZyzstIL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "8425441838",
+    "title": "El Hombre en Busca de Sentido",
+    "authors": [
+      "Viktor E. Frankl"
+    ],
+    "narrators": [
+      "Rafael Cruz Motta"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51Tcd2inwEL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B002VA9U0S",
+    "title": "Emotional Intelligence: Why It Can Matter More Than IQ",
+    "authors": [
+      "Daniel Goleman Ph.D. Ph.D."
+    ],
+    "narrators": [
+      "Barrett Whitener"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51eYN7dRy2L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07QFSLT6L",
+    "title": "Starting a Business QuickStart Guide: The Simplified Beginner’s Guide to Launching a Successful Small Business, Turning Your Vision into Reality, and Achieving Your Entrepreneurial Dream",
+    "authors": [
+      "Ken Colwell PhD MBA"
+    ],
+    "narrators": [
+      "Ken Colwell PhD MBA"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51DQE+8VR2L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0BXBC7JK8",
+    "title": "Entrepreneurship for Dummies (2nd Edition)",
+    "authors": [
+      "Kathleen Allen PhD"
+    ],
+    "narrators": [
+      "Emily Sutton-Smith"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51gBQEhf9eL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "846705591X",
+    "title": "Cómo hacer que te pasen cosas buenas: Entiende tu cerebro, gestiona tus emociones, mejora tu vida",
+    "authors": [
+      "Marian Rojas Estapé"
+    ],
+    "narrators": [
+      "Valeria Arribas"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51TvouH9D7L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0CZXWGF2H",
+    "title": "Recupera tu mente, reconquista tu vida",
+    "authors": [
+      "Marian Rojas Estapé"
+    ],
+    "narrators": [
+      "Teresa Fernández"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41KXhbU5zpL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0CPJR6MZK",
+    "title": "El nervio vago y la teoría polivagal [The Vagus Nerve and the Polyvagal Theory]: Explora los fundamentos neurofisiológicos de la curación, la comunicación y la autorregulación para superar la ansiedad, ... estrés mental y mucho más [Explore the Neurophysiological Foundations of Healing, Communication and Self-Regulation to Overcome Anxiety,...Mental Stress and Much More]",
+    "authors": [
+      "Yumi Park"
+    ],
+    "narrators": [
+      "Yumi Park"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51QX+4i3GRL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0BPMVB2DW",
+    "title": "Scattered Minds: The Origins and Healing of Attention Deficit Disorder",
+    "authors": [
+      "Gabor Maté MD"
+    ],
+    "narrators": [
+      "Daniel Maté"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41YFUXZUo7L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B076PSG3MV",
+    "title": "The Ultimate Jim Rohn Library",
+    "authors": [
+      "Jim Rohn"
+    ],
+    "narrators": [
+      "Jim Rohn"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51K2AcjLPML._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B002VACF28",
+    "title": "Many Lives, Many Masters: The True Story of a Psychiatrist, His Young Patient, and Past-Life Therapy",
+    "authors": [
+      "Brian L. Weiss M.D."
+    ],
+    "narrators": [
+      "Brian L. Weiss M.D."
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/519T4r8E9AL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0BJ34FWZ3",
+    "title": "Never Finished: Unshackle Your Mind and Win the War Within",
+    "authors": [
+      "David Goggins"
+    ],
+    "narrators": [
+      "David Goggins",
+      "Adam Skolnick",
+      "Jacqueline Gardner"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51SBIsrDnCL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0868ZFF7X",
+    "title": "Breaking the Habit of Being Yourself",
+    "authors": [
+      "Joe Dispenza"
+    ],
+    "narrators": [
+      "Adam Boyce"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51RRcIBg93L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0CHNXN1QP",
+    "title": "Deja de ser tú - Joe Dispenza",
+    "authors": [
+      "Manuel alejandro GONZALEZ REYNAGA"
+    ],
+    "narrators": [],
+    "cover_url": "https://m.media-amazon.com/images/I/41h4MjZOpqL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "1401956734",
+    "title": "Grow a New Body: How Spirit and Power Plant Nutrients Can Transform Your Health",
+    "authors": [
+      "Alberto Villoldo"
+    ],
+    "narrators": [
+      "Alberto Villoldo"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51WY6gWhoyL._SL500_.jpg",
+    "runtime_length_min": 703,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07KRKJ8W8",
+    "title": "The 5AM Club: Own Your Morning. Elevate Your Life.",
+    "authors": [
+      "Robin Sharma"
+    ],
+    "narrators": [
+      "Adam Verner"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/519azHGsnGL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B072HHGC3H",
+    "title": "How to Be a Stoic: Using Ancient Philosophy to Live a Modern Life",
+    "authors": [
+      "Massimo Pigliucci"
+    ],
+    "narrators": [
+      "Peter Coleman",
+      "Massimo Pigliucci"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51kvZIJnx0L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B005TKKCWC",
+    "title": "Thinking, Fast and Slow",
+    "authors": [
+      "Daniel Kahneman"
+    ],
+    "narrators": [
+      "Patrick Egan"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41JgsMOR9wL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01GSIZ5AC",
+    "title": "Ego Is the Enemy",
+    "authors": [
+      "Ryan Holiday"
+    ],
+    "narrators": [
+      "Ryan Holiday"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41Q8lxKA2OL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "8466354247",
+    "title": "Encantado de conocerme (edición ampliada) [Pleased to Meet Me (Extended Edition)]: Comprende tu personalidad a través del Eneagrama [Understand Your Personality Through the Enneagram]",
+    "authors": [
+      "Borja Vilaseca"
+    ],
+    "narrators": [
+      "Borja Vilaseca",
+      "Jordi Llovet"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41gC0m0z8QL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07F8YSP9R",
+    "title": "Alimenta tu cerebro [Brain Maker]: El poder de la flora intestinal para curar y proteger tu cerebro... de por vida [The Power of Gut Microbes to Heal and Protect Your Brain... for Life]",
+    "authors": [
+      "Dr. David Perlmutter",
+      "Kristin Loberg"
+    ],
+    "narrators": [
+      "Edson Matus"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/61ucqDKdu0L._SL500_.jpg",
+    "runtime_length_min": 590,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B08DG81TFJ",
+    "title": "Zen and the Art of Happiness",
+    "authors": [
+      "Chris Prentiss"
+    ],
+    "narrators": [
+      "Chris Prentiss"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41TTz8lBPwL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01K5UCNFO",
+    "title": "Designing Your Life: How to Build a Well-Lived, Joyful Life",
+    "authors": [
+      "Bill Burnett",
+      "Dave Evans"
+    ],
+    "narrators": [
+      "Bill Burnett",
+      "Dave Evans"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/31bol99ePHL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "8413440971",
+    "title": "¡Es la microbiota, idiota!: Descubre cómo tu salud depende de los billones de microorganismos que habitan en tu cuerpo",
+    "authors": [
+      "Sari Arponen"
+    ],
+    "narrators": [
+      "Lola Sans"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51lokSP+T1S._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07LCQGCWM",
+    "title": "The Practicing Stoic",
+    "authors": [
+      "Ward Farnsworth"
+    ],
+    "narrators": [
+      "John Lescault"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51YCyPlGalL._SL500_.jpg",
+    "runtime_length_min": 540,
+    "purchase_date": "2018-12-25",
+    "percent_complete": 4,
+    "publisher_summary": "<p>The great insights of the Stoics are spread over a wide range of ancient sources. This book brings them all together for the first time. It systematically presents what the various Stoic philosophers said on every important topic, accompanied by an eloquent commentary that is clear and concise. The result is a set of philosophy lessons for everyone - the most valuable wisdom of ages past made available for our times, and for all time.</p>"
+  },
+  {
+    "asin": "B0B4X9FJ1X",
+    "title": "The Good Life: Lessons from the World's Longest Scientific Study of Happiness",
+    "authors": [
+      "Robert Waldinger M.D.",
+      "Marc Schulz Ph.D"
+    ],
+    "narrators": [
+      "Robert Waldinger M.D.",
+      "Marc Schulz Ph.D"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41F977ZCG9L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01H0MKG5Y",
+    "title": "A View from the Top",
+    "authors": [
+      "Zig Ziglar"
+    ],
+    "narrators": [
+      "Zig Ziglar"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51zrYv4EauL._SL500_.jpg",
+    "runtime_length_min": 410,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07DX9W2CG",
+    "title": "Daring Greatly: How the Courage to Be Vulnerable Transforms the Way We Live, Love, Parent, and Lead",
+    "authors": [
+      "Brené Brown"
+    ],
+    "narrators": [
+      "Brené Brown"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51Jh8M7YUjL._SL500_.jpg",
+    "runtime_length_min": 390,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01NA0TG25",
+    "title": "How Emotions Are Made: The Secret Life of the Brain",
+    "authors": [
+      "Lisa Feldman Barrett"
+    ],
+    "narrators": [
+      "Cassandra Campbell"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/516v4sNFINL._SL500_.jpg",
+    "runtime_length_min": 872,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "0593409469",
+    "title": "Unwinding Anxiety: New Science Shows How to Break the Cycles of Worry and Fear to Heal Your Mind",
+    "authors": [
+      "Judson Brewer MD PhD"
+    ],
+    "narrators": [
+      "Judson Brewer MD PhD"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/417wGJ00RTL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "0593452127",
+    "title": "The Daily Laws: 366 Meditations on Power, Seduction, Mastery, Strategy, and Human Nature",
+    "authors": [
+      "Robert Greene"
+    ],
+    "narrators": [
+      "Fred Sanders",
+      "Robert Greene"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41xuuwXqs+L._SL500_.jpg",
+    "runtime_length_min": 778,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "0063005409",
+    "title": "Making Sense: Conversations on Consciousness, Morality, and the Future of Humanity",
+    "authors": [
+      "Sam Harris"
+    ],
+    "narrators": [
+      "Sam Harris",
+      "David Chalmers",
+      "David Deutsch",
+      "Anil Seth",
+      "Thomas Metzinger",
+      "Timothy Snyder",
+      "Glenn C. Loury",
+      "Robert Sapolsky",
+      "Daniel Kahneman",
+      "Nick Bostrom",
+      "David Krakauer",
+      "Max Tegmark"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/518w-JY37ML._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01DFKNHI8",
+    "title": "The Code of the Extraordinary Mind: 10 Unconventional Laws to Redefine Your Life and Succeed on Your Own Terms",
+    "authors": [
+      "Vishen Lakhiani"
+    ],
+    "narrators": [
+      "Vishen Lakhiani"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51zHlLj0EXL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00K252ET8",
+    "title": "The Obstacle Is the Way: The Timeless Art of Turning Trials into Triumph",
+    "authors": [
+      "Ryan Holiday"
+    ],
+    "narrators": [
+      "Ryan Holiday"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41LyQkMMRNL._SL500_.jpg",
+    "runtime_length_min": 367,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "1524779261",
+    "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+    "authors": [
+      "James Clear"
+    ],
+    "narrators": [
+      "James Clear"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/513Y5o-DYtL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "1401958257",
+    "title": "Limitless: Upgrade Your Brain, Learn Anything Faster, and Unlock Your Exceptional Life",
+    "authors": [
+      "Jim Kwik"
+    ],
+    "narrators": [
+      "Jim Kwik"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51Qdq+MmeeL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0752ZQR33",
+    "title": "Why We Sleep: Unlocking the Power of Sleep and Dreams",
+    "authors": [
+      "Matthew Walker PhD"
+    ],
+    "narrators": [
+      "Steve West"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51-zooqOoeL._SL500_.jpg",
+    "runtime_length_min": 832,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0041NZRDC",
+    "title": "The Happiness Advantage: The Seven Principles of Positive Psychology That Fuel Success and Performance at Work",
+    "authors": [
+      "Shawn Achor"
+    ],
+    "narrators": [
+      "Shawn Achor"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41jmEtzjjmL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01ENX1J9A",
+    "title": "Make Yourself Unforgettable",
+    "authors": [
+      "Dale Carnegie"
+    ],
+    "narrators": [
+      "Dale Carnegie"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51WL2cPXh5L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B002VAEKLW",
+    "title": "Nudge (Revised Edition): Improving Decisions About Health, Wealth, and Happiness [Expanded Edition]",
+    "authors": [
+      "Richard H. Thaler",
+      "Cass R. Sunstein"
+    ],
+    "narrators": [
+      "Sean Pratt"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51sxiYFLQwL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "0593172272",
+    "title": "Get Out of Your Head: Stopping the Spiral of Toxic Thoughts",
+    "authors": [
+      "Jennie Allen"
+    ],
+    "narrators": [
+      "Jennie Allen"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41hBWSZ1oHL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B08KJPYV6W",
+    "title": "Dark Psychology: 7 in 1: The Art of Persuasion, How to Influence people, Hypnosis Techniques, NLP Secrets, Analyze Body language, Gaslighting, Manipulation Subliminal, and Emotional Intelligence 2.0",
+    "authors": [
+      "Robert Dale Goleman",
+      "Daniel Brandon Bradberry",
+      "Travis Greene Carnegie",
+      "Katerina Griffith",
+      "Joseph Griffith",
+      "Caroline Empath",
+      "Laws Power",
+      "Jack Mind"
+    ],
+    "narrators": [
+      "Courtney Encheff"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/518L0kbqGeS._SL500_.jpg",
+    "runtime_length_min": 1412,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00WYDJ2YQ",
+    "title": "48 Laws of Power",
+    "authors": [
+      "Robert Greene"
+    ],
+    "narrators": [
+      "Richard Poe"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41dTDMW9IhL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "1663710732",
+    "title": "Invent and Wander: The Collected Writings of Jeff Bezos, With an Introduction by Walter Isaacson",
+    "authors": [
+      "Jeff Bezos",
+      "Walter Isaacson - introduction"
+    ],
+    "narrators": [
+      "L. J. Ganser"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51prfFQwWlL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B002V5HAL4",
+    "title": "The 7 Habits of Highly Effective People: Powerful Lessons in Personal Change",
+    "authors": [
+      "Stephen R. Covey"
+    ],
+    "narrators": [
+      "Stephen R. Covey"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51OuvCFwyZL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07HMF5DPQ",
+    "title": "Emotional Intelligence, 10th Edition",
+    "authors": [
+      "Daniel Goleman"
+    ],
+    "narrators": [
+      "Daniel Goleman",
+      "Barrett Whitener"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51iPOMveepL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "0525633723",
+    "title": "A Promised Land",
+    "authors": [
+      "Barack Obama"
+    ],
+    "narrators": [
+      "Barack Obama"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41CMMz4RC8L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B077H1PRL8",
+    "title": "Girl, Wash Your Face: Stop Believing the Lies About Who You Are So You Can Become Who You Were Meant to Be",
+    "authors": [
+      "Rachel Hollis"
+    ],
+    "narrators": [
+      "Rachel Hollis"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/510C7s1cuTL._SL500_.jpg",
+    "runtime_length_min": 424,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00BL429NU",
+    "title": "Carry On, Warrior: Thoughts on Life Unarmed",
+    "authors": [
+      "Glennon Doyle Melton"
+    ],
+    "narrators": [
+      "Glennon Doyle Melton"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/512NCf5Jn4L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "1400207959",
+    "title": "The Greatest You: Face Reality, Release Negativity, and Live Your Purpose",
+    "authors": [
+      "Trent Shelton",
+      "Lou Aronica"
+    ],
+    "narrators": [
+      "Trent Shelton"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51zDh8qynqL._SL500_.jpg",
+    "runtime_length_min": 317,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00UKG1SCI",
+    "title": "Triggers: Creating Behavior That Lasts - Becoming the Person You Want to Be",
+    "authors": [
+      "Marshall Goldsmith",
+      "Mark Reiter"
+    ],
+    "narrators": [
+      "Marshall Goldsmith"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41kbfPgafZL._SL500_.jpg",
+    "runtime_length_min": 396,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00EOXNKRY",
+    "title": "Focus: The Hidden Driver of Excellence",
+    "authors": [
+      "Daniel Goleman"
+    ],
+    "narrators": [
+      "Daniel Goleman"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51xVy+mluQL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "1549150340",
+    "title": "Talking to Strangers: What We Should Know about the People We Don't Know",
+    "authors": [
+      "Malcolm Gladwell"
+    ],
+    "narrators": [
+      "Malcolm Gladwell"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41iIiO5YqRL._SL500_.jpg",
+    "runtime_length_min": 537,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B076BXLDVP",
+    "title": "High Performance Habits: How Extraordinary People Become That Way",
+    "authors": [
+      "Brendon Burchard"
+    ],
+    "narrators": [
+      "Brendon Burchard"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41xArfhy1DL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00EPNBMBO",
+    "title": "Grain Brain: The Surprising Truth About Wheat, Carbs, and Sugar - Your Brain's Silent Killers",
+    "authors": [
+      "David Perlmutter MD"
+    ],
+    "narrators": [
+      "Peter Ganim"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/511WVUEpF2L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B084YVRDJX",
+    "title": "The Autobiography of Malcolm X: As Told to Alex Haley",
+    "authors": [
+      "Malcolm X",
+      "Alex Haley"
+    ],
+    "narrators": [
+      "Laurence Fishburne"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51OgbwpJPlL._SL500_.jpg",
+    "runtime_length_min": 1012,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07DKVMMRZ",
+    "title": "The Laws of Human Nature",
+    "authors": [
+      "Robert Greene"
+    ],
+    "narrators": [
+      "Paul Michael",
+      "Robert Greene"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41Hy7Gn-2IL._SL500_.jpg",
+    "runtime_length_min": 1706,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00WYDHIFG",
+    "title": "Art of Seduction: An Indispensible Primer on the Ultimate Form of Power",
+    "authors": [
+      "Robert Greene"
+    ],
+    "narrators": [
+      "Joseph Powers"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41+FfYVLnEL._SL500_.jpg",
+    "runtime_length_min": 1371,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0821Q4QLV",
+    "title": "Lucid Dreaming & Astral Projection Collection: 2 Books to Master Lucid Dreaming and Astral Projection for Beginners and Intermediates",
+    "authors": [
+      "James P. Lowry"
+    ],
+    "narrators": [
+      "Matt Hicks"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51B7ru2GAHL._SL500_.jpg",
+    "runtime_length_min": 334,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07JZN6JVM",
+    "title": "Kundalini Awakening: 5 in 1 Bundle: Expand Mind Power Through Chakra Meditation, Psychic Awareness, Enhance Psychic Abilities, Intuition, and Astral Travel",
+    "authors": [
+      "Jenifer Williams"
+    ],
+    "narrators": [
+      "Leslie Howard",
+      "Diane Lehman",
+      "Amy Lee",
+      "Gina Rogers"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51bNJKGe1SL._SL500_.jpg",
+    "runtime_length_min": 1073,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "0062980629",
+    "title": "The Secret Life of Plants: A Fascinating Account of the Physical, Emotional, and Spiritual Relations Between Plants and Man",
+    "authors": [
+      "Peter Tompkins",
+      "Christopher Bird"
+    ],
+    "narrators": [
+      "D. Michael Hope"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/615GaFe4tBL._SL500_.jpg",
+    "runtime_length_min": 988,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07Z5DLDK3",
+    "title": "Pile of Bones",
+    "authors": [
+      "Michael J. Sullivan"
+    ],
+    "narrators": [
+      "Tim Gerard Reynolds"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51PeSdAY3xL._SL500_.jpg",
+    "runtime_length_min": 105,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B083MVZ91Y",
+    "title": "Caffeine: How Caffeine Created the Modern World",
+    "authors": [
+      "Michael Pollan"
+    ],
+    "narrators": [
+      "Michael Pollan"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41QNn+uS3mL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B083MTL2CC",
+    "title": "Malcolm and Me",
+    "authors": [
+      "Ishmael Reed"
+    ],
+    "narrators": [
+      "Ishmael Reed"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51zwGSr89bL._SL500_.jpg",
+    "runtime_length_min": 98,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B06XV1PVF5",
+    "title": "Cosmos: A Personal Voyage",
+    "authors": [
+      "Carl Sagan"
+    ],
+    "narrators": [
+      "LeVar Burton",
+      "Seth MacFarlane",
+      "Neil deGrasse Tyson",
+      "Ann Druyan"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51e91glnHUL._SL500_.jpg",
+    "runtime_length_min": 871,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B005EHN61O",
+    "title": "Moneyball: The Art of Winning an Unfair Game",
+    "authors": [
+      "Michael Lewis"
+    ],
+    "narrators": [
+      "Scott Brick"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51yiyM7fexL._SL500_.jpg",
+    "runtime_length_min": 626,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07H38ZV58",
+    "title": "Sleep Better",
+    "authors": [
+      "Aaptiv"
+    ],
+    "narrators": [
+      "Jade Alexis"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51XpdrVGDSL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0058JWVKU",
+    "title": "First They Killed My Father: A Daughter of Cambodia Remembers",
+    "authors": [
+      "Loung Ung"
+    ],
+    "narrators": [
+      "Tavia Gilbert"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51O6Y5uG7YL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07YXCPNX4",
+    "title": "Climbing with Mollie",
+    "authors": [
+      "William Finnegan"
+    ],
+    "narrators": [
+      "William Finnegan"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51yBGlRfa3L._SL500_.jpg",
+    "runtime_length_min": 136,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07XQLXGJW",
+    "title": "Midnight Son",
+    "authors": [
+      "James Dommek Jr.",
+      "Josephine Holtzman",
+      "Isaac Kestenbaum"
+    ],
+    "narrators": [
+      "James Dommek Jr."
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51ENsWEmRWL._SL500_.jpg",
+    "runtime_length_min": 203,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07NLL95S4",
+    "title": "Maybe You Should Talk to Someone: A Therapist, HER Therapist, and Our Lives Revealed",
+    "authors": [
+      "Lori Gottlieb"
+    ],
+    "narrators": [
+      "Brittany Pressley"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51KrBjE9ajL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00UX8ODPM",
+    "title": "Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future",
+    "authors": [
+      "Ashlee Vance"
+    ],
+    "narrators": [
+      "Fred Sanders"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51J7VM7yelL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00VQTE4OC",
+    "title": "Misbehaving: The Making of Behavioral Economics",
+    "authors": [
+      "Richard H. Thaler"
+    ],
+    "narrators": [
+      "L. J. Ganser"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51LsfuzFU7L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B005DF6XHQ",
+    "title": "The TenX Rule: The Only Difference Between Success and Failure",
+    "authors": [
+      "Grant Cardone"
+    ],
+    "narrators": [
+      "Grant Cardone"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51txCrB2JqL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "1629976083",
+    "title": "The Theory of Everything: The Quest to Explain All Reality",
+    "authors": [
+      "Don Lincoln",
+      "The Great Courses"
+    ],
+    "narrators": [
+      "Don Lincoln"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51T-GTbvapL._SL500_.jpg",
+    "runtime_length_min": 741,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01D24NLWO",
+    "title": "Algorithms to Live By: The Computer Science of Human Decisions",
+    "authors": [
+      "Brian Christian",
+      "Tom Griffiths"
+    ],
+    "narrators": [
+      "Brian Christian"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51HiU+5mTwL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00M9KA2ZM",
+    "title": "The Innovators: How a Group of Hackers, Geniuses, and Geeks Created the Digital Revolution",
+    "authors": [
+      "Walter Isaacson",
+      "Walter Isaacson - introduction"
+    ],
+    "narrators": [
+      "Dennis Boutsikaris"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51cqafqROkL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "2291046225",
+    "title": "10 Masterpieces You Have to Listen to Before You Die 1",
+    "authors": [
+      "Lewis Carroll",
+      "Joseph Conrad",
+      "Miguel de Cervantes",
+      "F. Scott Fitzgerald",
+      "Edgar Allan Poe",
+      "Franz Kafka"
+    ],
+    "narrators": [
+      "Michael Scott"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51lvKRCz94L._SL500_.jpg",
+    "runtime_length_min": 1458,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00IGBVFL8",
+    "title": "A More Beautiful Question: The Power of Inquiry to Spark Breakthrough Ideas",
+    "authors": [
+      "Warren Berger"
+    ],
+    "narrators": [
+      "Michael Quinlan"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/514J5gQJpmL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B009DQN090",
+    "title": "The Signal and the Noise: Why So Many Predictions Fail - but Some Don't",
+    "authors": [
+      "Nate Silver"
+    ],
+    "narrators": [
+      "Mike Chamberlain"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/518h8ORGM8L._SL500_.jpg",
+    "runtime_length_min": 981,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07KWF6W4M",
+    "title": "The Diary of a Hounslow Girl: An Audible Original",
+    "authors": [
+      "Ambreen Razia"
+    ],
+    "narrators": [
+      "Ambreen Razia"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/519jwZEh0QL._SL500_.jpg",
+    "runtime_length_min": 96,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07J1G9NY9",
+    "title": "Out of My Mind",
+    "authors": [
+      "Alan Arkin"
+    ],
+    "narrators": [
+      "Alan Arkin"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51NuPvULtZL._SL500_.jpg",
+    "runtime_length_min": 137,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07L5WYT38",
+    "title": "The Christmas Hirelings",
+    "authors": [
+      "Mary Elizabeth Braddon"
+    ],
+    "narrators": [
+      "Richard Armitage"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/5181yv5E95L._SL500_.jpg",
+    "runtime_length_min": 233,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07KKMNZCH",
+    "title": "Can't Hurt Me: Master Your Mind and Defy the Odds",
+    "authors": [
+      "David Goggins"
+    ],
+    "narrators": [
+      "David Goggins",
+      "Adam Skolnick"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51TNypSYkoL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07DJYBXNC",
+    "title": "Dare to Lead: Brave Work. Tough Conversations. Whole Hearts.",
+    "authors": [
+      "Brené Brown"
+    ],
+    "narrators": [
+      "Brené Brown"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41jpUR12hQL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0799SY5F9",
+    "title": "The Radical King",
+    "authors": [
+      "Cornel West - editor",
+      "Dr. Martin Luther King Jr."
+    ],
+    "narrators": [
+      "LeVar Burton",
+      "Gabourey Sidibe",
+      "Cornel West",
+      "Mike Colter",
+      "Danny Glover",
+      "Wanda Sykes",
+      "Leslie Odom Jr.",
+      "Michael K. Williams"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51OtldpfIJL._SL500_.jpg",
+    "runtime_length_min": 668,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B002UZDRK8",
+    "title": "Outliers: The Story of Success",
+    "authors": [
+      "Malcolm Gladwell"
+    ],
+    "narrators": [
+      "Malcolm Gladwell"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41567aH9X7L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B00EKQO0AG",
+    "title": "David and Goliath: Underdogs, Misfits, and the Art of Battling Giants",
+    "authors": [
+      "Malcolm Gladwell"
+    ],
+    "narrators": [
+      "Malcolm Gladwell"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41tvQq5948L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07HGK2BFD",
+    "title": "The Queen: Aretha Franklin",
+    "authors": [
+      "Mikal Gilmore"
+    ],
+    "narrators": [
+      "Adenrele Ojo"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51QbphkZi5L._SL500_.jpg",
+    "runtime_length_min": 228,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B06XKDL7VB",
+    "title": "Hacking Growth: How Today's Fastest-Growing Companies Drive Breakout Success",
+    "authors": [
+      "Sean Ellis",
+      "Morgan Brown"
+    ],
+    "narrators": [
+      "Sean Ellis",
+      "Morgan Brown"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41p5b1S3boL._SL500_.jpg",
+    "runtime_length_min": 643,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07DL1VSHB",
+    "title": "Girls & Boys",
+    "authors": [
+      "Dennis Kelly"
+    ],
+    "narrators": [
+      "Carey Mulligan"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51re9EmkkiL._SL500_.jpg",
+    "runtime_length_min": 106,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0779KZ615",
+    "title": "Hold On with Eugene Mirman, Season 3",
+    "authors": [
+      "Eugene Mirman"
+    ],
+    "narrators": [],
+    "cover_url": "https://m.media-amazon.com/images/I/41MSBKplpRL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01ERWOYXU",
+    "title": "How to Be Amazing - Channels",
+    "authors": [
+      "Michael Ian Black"
+    ],
+    "narrators": [],
+    "cover_url": "https://m.media-amazon.com/images/I/61yQ8MxdLmL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01AYL2H5K",
+    "title": "The Great Courses (Teaching Company)",
+    "authors": [
+      "The Great Courses"
+    ],
+    "narrators": [],
+    "cover_url": "https://m.media-amazon.com/images/I/4150WjcZkZL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B015GM15GO",
+    "title": "HBR Ideacast",
+    "authors": [
+      "Sarah Green Carmichael"
+    ],
+    "narrators": [],
+    "cover_url": "https://m.media-amazon.com/images/I/41TD29zaP7L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07DHS7PP5",
+    "title": "21 Lessons for the 21st Century",
+    "authors": [
+      "Yuval Noah Harari"
+    ],
+    "narrators": [
+      "Derek Perkins"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/31Dp7Y5crzL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01N7RT1ZG",
+    "title": "Welcome to the Universe: An Astrophysical Tour",
+    "authors": [
+      "Michael A. Strauss",
+      "J. Richard Gott",
+      "Neil deGrasse Tyson"
+    ],
+    "narrators": [
+      "Michael Butler Murray"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51G9pDUq6IL._SL500_.jpg",
+    "runtime_length_min": 1073,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01N47VG5F",
+    "title": "Yuval Noah Harari: Audible Sessions: FREE Exclusive Interview",
+    "authors": [
+      "Robin Morgan"
+    ],
+    "narrators": [
+      "Yuval Noah Harari"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51t2sePTMtL._SL500_.jpg",
+    "runtime_length_min": 19,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07G8GN5HH",
+    "title": "5K Training",
+    "authors": [
+      "Aaptiv"
+    ],
+    "narrators": [
+      "Rochelle Moncourtois-Baxter"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51AjF+50xrL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07G8GS8WF",
+    "title": "Walk to Run One Mile",
+    "authors": [
+      "Aaptiv"
+    ],
+    "narrators": [
+      "Jaime McFaden"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41KQ8AuIoEL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07G8DJNFV",
+    "title": "Everyday Meditation",
+    "authors": [
+      "Aaptiv"
+    ],
+    "narrators": [
+      "Ceasar F. Barajas"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41e-dUPR3iL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0197175YQ",
+    "title": "Mind Hacking: How to Change Your Mind for Good in 21 Days",
+    "authors": [
+      "John Hargrave"
+    ],
+    "narrators": [
+      "John Hargrave"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51NYdD2J3AL._SL500_.jpg",
+    "runtime_length_min": 773,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B07B1J873J",
+    "title": "How to Change Your Mind: What the New Science of Psychedelics Teaches Us About Consciousness, Dying, Addiction, Depression, and Transcendence",
+    "authors": [
+      "Michael Pollan"
+    ],
+    "narrators": [
+      "Michael Pollan"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/41A3VFWntmL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B01I28NFEE",
+    "title": "The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach to Living a Good Life",
+    "authors": [
+      "Mark Manson"
+    ],
+    "narrators": [
+      "Roger Wayne"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51MT0MbpD7L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B007C64916",
+    "title": "The Power of Habit: Why We Do What We Do in Life and Business",
+    "authors": [
+      "Charles Duhigg"
+    ],
+    "narrators": [
+      "Mike Chamberlain"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/419JOHNFGdL._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B0797YBP7N",
+    "title": "12 Rules for Life: An Antidote to Chaos",
+    "authors": [
+      "Jordan B. Peterson",
+      "Norman Doidge - introduction M.D.",
+      "Ethan Van Sciver"
+    ],
+    "narrators": [
+      "Jordan B. Peterson"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/412oEiiCeML._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B074VDVHZ5",
+    "title": "Start with Why: How Great Leaders Inspire Everyone to Take Action",
+    "authors": [
+      "Simon Sinek"
+    ],
+    "narrators": [
+      "Simon Sinek"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51Zuy0g7l+L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B075RDW7JZ",
+    "title": "Pequeño Cerdo Capitalista: Gastos hormiga [Small Capitalist Pig: Ant Expenses]",
+    "authors": [
+      "Sofía Macías"
+    ],
+    "narrators": [
+      "Sofía Macías"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/51tbSGF7MGL._SL500_.jpg",
+    "runtime_length_min": 14,
+    "purchase_date": "",
+    "percent_complete": 0,
+    "publisher_summary": ""
+  },
+  {
+    "asin": "B06XRG5FWW",
+    "title": "La ninfa de porcelana [The Porcelain Nymph]",
+    "authors": [
+      "Isabel Allende"
+    ],
+    "narrators": [
+      "Isabel Allende"
+    ],
+    "cover_url": "https://m.media-amazon.com/images/I/61QgzGAV49L._SL500_.jpg",
+    "runtime_length_min": 0,
+    "purchase_date": "",
+    "percent_complete": 100,
+    "publisher_summary": ""
+  }
+]
