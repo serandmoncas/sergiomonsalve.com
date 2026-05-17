@@ -8,7 +8,7 @@ import type { UnifiedBook } from '@/lib/unified-library'
 
 const ALL_STATUSES: BookStatus[] = ['listening', 'completed', 'queued', 'abandoned']
 
-export default function BookList({ books, locale }: { books: UnifiedBook[]; locale: string }) {
+export default function BookList({ books, locale, isOwner }: { books: UnifiedBook[]; locale: string; isOwner?: boolean }) {
   const t = useTranslations('biblioteca')
   const [activeStatus, setActiveStatus] = useState<BookStatus | null>(null)
   const [search, setSearch] = useState('')
@@ -74,6 +74,7 @@ export default function BookList({ books, locale }: { books: UnifiedBook[]; loca
               book={book}
               locale={locale}
               statusLabel={statusLabel[book.status]}
+              isOwner={isOwner}
             />
           ))}
         </div>
