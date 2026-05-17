@@ -11,6 +11,7 @@ const ALL_STATUSES: BookStatus[] = ['listening', 'completed', 'queued', 'abandon
 export default function BookList({ books, locale }: { books: UnifiedBook[]; locale: string }) {
   const t = useTranslations('biblioteca')
   const [activeStatus, setActiveStatus] = useState<BookStatus | null>(null)
+  const [search, setSearch] = useState('')
 
   const statusLabel: Record<BookStatus, string> = {
     listening: t('statusListening'),
@@ -19,10 +20,24 @@ export default function BookList({ books, locale }: { books: UnifiedBook[]; loca
     abandoned: t('statusAbandoned'),
   }
 
-  const filtered = activeStatus ? books.filter(b => b.status === activeStatus) : books
+  const query = search.toLowerCase()
+  const filtered = books.filter(b => {
+    const matchesStatus = !activeStatus || b.status === activeStatus
+    const matchesSearch = !query ||
+      b.title.toLowerCase().includes(query) ||
+      b.authors.some(a => a.toLowerCase().includes(query))
+    return matchesStatus && matchesSearch
+  })
 
   return (
     <div>
+      <input
+        type="text"
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        placeholder={t('searchPlaceholder')}
+        className="w-full font-mono text-xs bg-surface border border-border rounded-sm px-3 py-2 text-text placeholder:text-text-muted focus:outline-none focus:border-accent mb-6"
+      />
       <div className="flex flex-wrap gap-2 mb-8">
         <button
           onClick={() => setActiveStatus(null)}

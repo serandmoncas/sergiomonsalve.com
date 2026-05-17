@@ -36,6 +36,7 @@
     "statusAbandoned": "abandonado",
     "highlights": "highlights",
     "listenOnAudible": "Escuchar en Audible →",
+    "searchPlaceholder": "buscar título o autor...",
     "empty": "no hay libros aún",
     "narrators": "narrado por",
     "duration": "duración"
