@@ -23,7 +23,7 @@ export async function GET() {
   const admin = createAdminClient()
   const [overridesResult, manualResult] = await Promise.all([
     admin.from('library_books').select('asin, visible, status'),
-    admin.from('manual_books').select('id, title, authors, cover_url, runtime_length_min, visible, status, source_type'),
+    admin.from('manual_books').select('id, title, authors, cover_url, visible, status, source_type'),
   ])
 
   if (overridesResult.error || manualResult.error) return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 })
