@@ -1,0 +1,58 @@
+---
+title: InteliFin
+description: SaaS multi-tenant para coaches financieros — diagnósticos digitales, seguimiento de las 4 cuentas y dashboards para clientes. Next.js 15, Supabase, Wompi.
+date: "2026-05-22"
+role: Founder & Full-Stack Developer
+stack: [Next.js 15, TypeScript, Supabase, shadcn/ui, Tailwind CSS, Wompi, Resend]
+github: https://github.com/serandmoncas/InteFin
+demo: https://intefin.vercel.app
+links:
+  - label: "Demo"
+    url: "https://intefin.vercel.app"
+status: active
+featured: true
+image: /portfolio/intefin.png
+---
+
+## El problema
+
+Los coaches financieros son expertos en dinero pero no en herramientas digitales. La práctica típica vive en hojas de cálculo: un Excel por cliente, columnas para cada cuenta, fórmulas que se rompen, archivos que se pierden. El cliente, por su parte, recibe un reporte mensual por WhatsApp que no entiende del todo — y entre sesiones, no tiene forma de ver su progreso.
+
+El problema tiene dos caras: el coach no puede escalar (cada cliente nuevo es más complejidad manual), y el cliente no tiene visibilidad real de su avance. El dinero se convierte en una obligación mensual en lugar de un proyecto con progresión visible.
+
+## La solución
+
+**InteliFin** es una plataforma SaaS multi-tenant que digitaliza la práctica del coaching financiero sin reemplazar al coach — lo potencia.
+
+El corazón del sistema es el método de las **4 cuentas**:
+
+- **Imprevisto** — fondo de emergencia con meta de 1× el ingreso mensual
+- **Oxígeno** — colchón de seguridad con meta de 6× el ingreso mensual
+- **Retiro** — protección a largo plazo, se activa como meta independiente
+- **Inversiones** — se desbloquea solo cuando Imprevisto y Oxígeno superan el 50% de su meta
+
+Esta progresión gamificada transforma el ahorro en un juego con niveles claros: el cliente sabe exactamente en qué etapa está y qué tiene que hacer para avanzar.
+
+**Para el coach:** un panel con todos sus clientes, estado de cada cuenta, net worth agregado y un diagnóstico digital que reemplaza el formulario de primera sesión en papel. El onboarding de cada cliente es una invitación por correo — el cliente llena el diagnóstico, el coach llega a la sesión con los datos ya cargados.
+
+**Para el cliente:** un dashboard personal con health score financiero (0–100), progresión de cada una de las 4 cuentas y evolución mensual del patrimonio neto.
+
+El modelo de negocio es freemium: plan gratuito con hasta 3 clientes activos, plan Pro a $50.000 COP/mes con clientes ilimitados.
+
+## Decisiones técnicas
+
+**Multi-tenancy real con Supabase RLS** — cada coach es un tenant independiente. Todas las tablas incluyen `organization_id` como columna obligatoria, y las políticas de Row-Level Security de PostgreSQL garantizan que ningún coach puede ver datos de otro, incluso si hay un bug en la aplicación. La seguridad está a nivel de base de datos, no solo de API.
+
+**Next.js 15 App Router** — la plataforma tiene tres contextos de navegación distintos: la landing pública, el dashboard del coach (`/coach/*`) y el dashboard del cliente (`/app/*`). El App Router permite server components por defecto en cada contexto, con layouts distintos y autenticación diferenciada. La sesión se resuelve en el servidor y el routing automático (coaches a `/coach/overview`, clientes a `/app/dashboard`) ocurre antes de que el cliente vea la primera pantalla.
+
+**Wompi para pagos en Colombia** — Stripe no es viable para la mayoría de coaches colombianos: requiere cuenta bancaria en USD o EUR y un proceso de verificación complejo. Wompi es la pasarela nativa del mercado colombiano, acepta PSE y tarjetas locales, y la integración ocurre directamente desde Next.js sin servidor intermedio.
+
+**shadcn/ui como sistema de diseño** — velocidad de desarrollo sin sacrificar calidad. Los componentes de shadcn son copiados directamente al repositorio (no instalados como dependencia opaca), lo que significa que se pueden modificar libremente. El tema oscuro definido en CSS variables es coherente en toda la aplicación.
+
+**Resend + React Email** — las invitaciones de onboarding, los magic links de autenticación y las notificaciones de pago son correos transaccionales construidos como componentes React y enviados via Resend. El mismo sistema de componentes del frontend define el diseño de los emails.
+
+## Resultados
+
+MVP lanzado en producción en `intefin.vercel.app`. El sistema cubre el flujo completo: registro del coach, invitación de clientes, diagnóstico financiero digital, actualización mensual de cuentas y cobro del plan Pro.
+
+Lo más interesante del ejercicio fue construir un producto real con un usuario real — no una prueba técnica ni un side project abandonado. Cada decisión de arquitectura (el modelo multi-tenant, la progresión de las 4 cuentas, el modelo freemium) nació de entender el problema de un coach financiero concreto, no de aplicar patrones por defecto.

@@ -1,0 +1,58 @@
+---
+title: InteliFin
+description: Multi-tenant SaaS for financial coaches — digital diagnostics, 4-account tracking, and client dashboards. Next.js 15, Supabase, Wompi.
+date: "2026-05-22"
+role: Founder & Full-Stack Developer
+stack: [Next.js 15, TypeScript, Supabase, shadcn/ui, Tailwind CSS, Wompi, Resend]
+github: https://github.com/serandmoncas/InteFin
+demo: https://intefin.vercel.app
+links:
+  - label: "Demo"
+    url: "https://intefin.vercel.app"
+status: active
+featured: true
+image: /portfolio/intefin.png
+---
+
+## The problem
+
+Financial coaches are experts in money, not in digital tools. A typical practice lives in spreadsheets: one Excel file per client, columns for each account, formulas that break, files that get lost. The client, in turn, receives a monthly report via WhatsApp they don't fully understand — and between sessions, they have no way to see their own progress.
+
+The problem has two sides: the coach can't scale (each new client adds more manual complexity), and the client has no real visibility into their progress. Money becomes a monthly obligation instead of a project with visible milestones.
+
+## The solution
+
+**InteliFin** is a multi-tenant SaaS platform that digitalizes financial coaching without replacing the coach — it amplifies them.
+
+The heart of the system is the **4-account method**:
+
+- **Imprevisto** (emergency fund) — target of 1× monthly income
+- **Oxígeno** (safety net) — target of 6× monthly income
+- **Retiro** (retirement/protection) — activated as an independent goal
+- **Inversiones** (investments) — unlocked only once Imprevisto and Oxígeno exceed 50% of their targets
+
+This gamified progression transforms saving into a game with clear levels: the client knows exactly what stage they're at and what they need to do to advance.
+
+**For the coach:** a dashboard with all clients, account status, aggregated net worth, and a digital diagnostic that replaces the paper questionnaire from the first session. Onboarding each client is an email invitation — the client fills out the diagnostic, and the coach arrives to the session with the data already loaded.
+
+**For the client:** a personal dashboard with a financial health score (0–100), progress on each of the 4 accounts, and monthly net worth evolution.
+
+The business model is freemium: a free plan for up to 3 active clients, and a Pro plan at $50,000 COP/month with unlimited clients.
+
+## Technical decisions
+
+**True multi-tenancy with Supabase RLS** — each coach is an independent tenant. Every table includes `organization_id` as a mandatory column, and PostgreSQL's Row-Level Security policies guarantee that no coach can access another's data, even if there's a bug in the application. Security lives at the database layer, not just the API layer.
+
+**Next.js 15 App Router** — the platform has three distinct navigation contexts: the public landing page, the coach dashboard (`/coach/*`), and the client dashboard (`/app/*`). The App Router provides server components by default in each context, with separate layouts and differentiated authentication. The session is resolved on the server, and automatic routing (coaches to `/coach/overview`, clients to `/app/dashboard`) happens before the client sees the first screen.
+
+**Wompi for Colombian payments** — Stripe isn't viable for most Colombian coaches: it requires a USD or EUR bank account and a complex verification process. Wompi is the native payment gateway for the Colombian market, accepts PSE and local cards, and integrates directly from Next.js without a middleware server.
+
+**shadcn/ui as design system** — development speed without sacrificing quality. shadcn components are copied directly into the repository (not installed as an opaque dependency), which means they can be freely modified. The dark theme defined in CSS variables is consistent throughout the application.
+
+**Resend + React Email** — onboarding invitations, magic link authentication, and payment notifications are transactional emails built as React components and sent via Resend. The same component system as the frontend defines the email design.
+
+## Results
+
+MVP launched in production at `intefin.vercel.app`. The system covers the complete flow: coach registration, client invitation, digital financial diagnostic, monthly account updates, and Pro plan billing.
+
+The most interesting part of building this was working with a real user on a real problem — not a technical assessment or an abandoned side project. Every architecture decision (the multi-tenant model, the 4-account progression, the freemium model) came from understanding a specific financial coach's problem, not from applying default patterns.
