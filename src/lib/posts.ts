@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { readingTime } from '@/lib/reading-time'
 
 const contentRoot = path.join(process.cwd(), 'content/blog')
 
@@ -10,6 +11,7 @@ export type PostMeta = {
   date: string
   description: string
   tags: string[]
+  readingTime: string
 }
 
 export type Post = PostMeta & { content: string }
@@ -22,13 +24,14 @@ export function getAllPosts(locale: string): PostMeta[] {
     .filter(f => f.endsWith('.mdx'))
     .map(filename => {
       const slug = filename.replace('.mdx', '')
-      const { data } = matter(fs.readFileSync(path.join(dir, filename), 'utf-8'))
+      const { data, content } = matter(fs.readFileSync(path.join(dir, filename), 'utf-8'))
       return {
         slug,
         title: data.title as string,
         date: String(data.date),
         description: data.description as string,
-        tags: (data.tags as string[]) ?? []
+        tags: (data.tags as string[]) ?? [],
+        readingTime: readingTime(content),
       }
     })
     .filter(p => p.title)
@@ -45,7 +48,8 @@ export function getPost(slug: string, locale: string): Post | null {
     date: String(data.date),
     description: data.description as string,
     tags: (data.tags as string[]) ?? [],
-    content
+    readingTime: readingTime(content),
+    content,
   }
 }
 

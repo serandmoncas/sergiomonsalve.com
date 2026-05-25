@@ -8,7 +8,9 @@ export default function PostCard({ post, locale }: { post: PostMeta; locale: str
       locale={locale as 'es' | 'en'}
       className="block border border-border hover:border-accent transition-colors p-5 rounded-sm group"
     >
-      <p className="font-mono text-xs text-text-muted mb-2">{post.date}</p>
+      <p className="font-mono text-xs text-text-muted mb-2">
+        {post.date} · {post.readingTime}
+      </p>
       <h2 className="text-sm font-semibold text-text group-hover:text-accent transition-colors mb-2">
         {post.title}
       </h2>

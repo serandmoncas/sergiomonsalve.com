@@ -45,7 +45,9 @@ export default async function PostPage({
       >
         ← {t('title')}
       </Link>
-      <p className="font-mono text-xs text-text-muted mb-2">{post.date}</p>
+      <p className="font-mono text-xs text-text-muted mb-2">
+        {post.date} · {post.readingTime}
+      </p>
       <h1 className="text-3xl font-extrabold tracking-tight text-text mb-4">{post.title}</h1>
       <div className="flex flex-wrap gap-1.5 mb-10">
         {post.tags.map(tag => (
