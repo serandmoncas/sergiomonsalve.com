@@ -28,8 +28,9 @@ export default function AdminSidebar() {
         // admin panel
       </p>
       {NAV.map(({ href, label, icon }) => {
-        const active = pathname.endsWith(href) ||
-          (href === '/admin' && (pathname.endsWith('/admin') || pathname.endsWith('/admin/')))
+        const active = href === '/admin'
+          ? (pathname.endsWith('/admin') || pathname.endsWith('/admin/'))
+          : pathname.includes(href)
         return (
           <Link
             key={href}
