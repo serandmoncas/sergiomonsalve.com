@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { getRecipe, getRecipeSlugs } from '@/lib/recipes'
 import MDXContent from '@/components/MDXContent'
+import RecipeScaler from '@/components/RecipeScaler'
 
 export function generateStaticParams({ params: { locale } }: { params: { locale: string } }) {
   return getRecipeSlugs(locale).map(slug => ({ slug }))
@@ -49,7 +50,6 @@ export default async function RecipePage({
 
       <div className="flex items-center gap-4 font-mono text-xs text-text-muted mb-4">
         {recipe.time && <span>⏱ {recipe.time}</span>}
-        {recipe.servings && <span>◎ {recipe.servings} {t('servings')}</span>}
       </div>
 
       <div className="flex flex-wrap gap-1.5 mb-8">
@@ -63,19 +63,12 @@ export default async function RecipePage({
         ))}
       </div>
 
-      {recipe.ingredients.length > 0 && (
-        <div className="border border-border rounded-sm p-5 mb-10 bg-surface">
-          <p className="font-mono text-xs text-accent mb-3">// {t('ingredients')}</p>
-          <ul className="space-y-1.5">
-            {recipe.ingredients.map((item, i) => (
-              <li key={i} className="text-xs text-text-secondary flex gap-2">
-                <span className="text-accent shrink-0">–</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <RecipeScaler
+        ingredients={recipe.ingredients}
+        baseServings={recipe.servings}
+        servingsLabel={t('servings')}
+        ingredientsLabel={t('ingredients')}
+      />
 
       <MDXContent source={recipe.content} />
     </div>
