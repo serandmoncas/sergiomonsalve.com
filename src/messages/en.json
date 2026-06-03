@@ -62,6 +62,7 @@
     "blog": "Blog",
     "portfolio": "Portfolio",
     "recipes": "Recipes",
+    "cursos": "Courses",
     "biblioteca": "Library",
     "guestbook": "Guestbook",
     "contact": "Contact"
@@ -141,5 +142,30 @@
       "active": "active",
       "archived": "archived"
     }
+  },
+  "cursos": {
+    "comment": "// courses",
+    "title": "Courses",
+    "enroll": "Enroll for free",
+    "continuar": "Continue course",
+    "pendiente": "Enrollment pending",
+    "marcar_completada": "Mark as complete",
+    "completada": "Completed",
+    "progreso": "{completed} of {total} lessons completed",
+    "registro": "Create account",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "mi_acceso": "My courses",
+    "email": "email",
+    "password": "password",
+    "name": "name",
+    "submit_registro": "Create account →",
+    "submit_login": "Sign in →",
+    "error_auth": "Something went wrong. Please check your details.",
+    "modules": "modules",
+    "lessons": "lessons",
+    "free": "Free",
+    "no_courses": "No courses available yet.",
+    "no_enrollments": "You're not enrolled in any courses yet."
   }
 }

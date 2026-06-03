@@ -62,6 +62,7 @@
     "blog": "Blog",
     "portfolio": "Portfolio",
     "recipes": "Recetas",
+    "cursos": "Cursos",
     "biblioteca": "Biblioteca",
     "guestbook": "Firmas",
     "contact": "Contacto"
@@ -141,5 +142,30 @@
       "active": "activo",
       "archived": "archivado"
     }
+  },
+  "cursos": {
+    "comment": "// cursos",
+    "title": "Cursos",
+    "enroll": "Inscribirme gratis",
+    "continuar": "Continuar curso",
+    "pendiente": "Inscripción pendiente",
+    "marcar_completada": "Marcar como completada",
+    "completada": "Completada",
+    "progreso": "{completed} de {total} lecciones completadas",
+    "registro": "Crear cuenta",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "mi_acceso": "Mis cursos",
+    "email": "email",
+    "password": "contraseña",
+    "name": "nombre",
+    "submit_registro": "Crear cuenta →",
+    "submit_login": "Entrar →",
+    "error_auth": "Algo salió mal. Verifica tus datos.",
+    "modules": "módulos",
+    "lessons": "lecciones",
+    "free": "Gratis",
+    "no_courses": "No hay cursos disponibles aún.",
+    "no_enrollments": "Aún no estás inscrito en ningún curso."
   }
 }
