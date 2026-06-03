@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 import type { ContactFormData } from './contact-schema'
 
-const FROM = 'Sergio Monsalve <onboarding@resend.dev>'
+const FROM = 'Sergio Monsalve <noreply@sergiomonsalve.com>'
 
 export async function sendContactNotification(data: ContactFormData) {
   const resend = new Resend(process.env.RESEND_API_KEY!)
