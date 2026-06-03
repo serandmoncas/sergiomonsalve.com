@@ -1,0 +1,278 @@
+# Sesión 6 — Diseño con IA: que se vea tuyo
+
+## Resumen
+
+Hoy tu sitio deja de verse como un template y empieza a verse como tuyo. Aprendes a usar Tailwind CSS para describir estilos en lenguaje humano, a cambiar toda la paleta de colores desde un solo archivo, y a trabajar con IA en ciclos cortos de prompt → código → preview → ajuste. Al terminar tienes un sitio con identidad visual propia en producción.
+
+---
+
+## Conceptos clave
+
+### Tailwind CSS: clases que describen lo que hacen
+
+Tailwind es una librería de CSS donde en lugar de escribir reglas CSS, usas clases HTML que describen directamente el estilo.
+
+**CSS tradicional:**
+```css
+/* En un archivo .css separado */
+.mi-titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #16a34a;
+  margin-bottom: 1rem;
+}
+```
+```html
+<h1 class="mi-titulo">Hola</h1>
+```
+
+**Tailwind:**
+```html
+<h1 class="text-3xl font-bold text-green-600 mb-4">Hola</h1>
+```
+
+Las clases se leen casi como inglés: `text-3xl` es texto grande, `font-bold` es negrita, `text-green-600` es verde medio, `mb-4` es margen inferior. No hay un archivo CSS separado que mantener.
+
+### El sistema de clases más útil de Tailwind
+
+| Categoría | Ejemplo de clase | Qué hace |
+|---|---|---|
+| **Tamaño de texto** | `text-sm`, `text-lg`, `text-3xl` | Tamaño de fuente |
+| **Peso** | `font-normal`, `font-semibold`, `font-bold` | Negrita |
+| **Color de texto** | `text-gray-600`, `text-blue-500`, `text-white` | Color del texto |
+| **Color de fondo** | `bg-white`, `bg-gray-900`, `bg-blue-600` | Color de fondo |
+| **Márgenes** | `mt-4`, `mb-8`, `mx-auto` | Separación exterior |
+| **Padding** | `pt-2`, `px-6`, `py-4` | Separación interior |
+| **Flex/Grid** | `flex`, `grid`, `items-center`, `gap-4` | Disposición de elementos |
+| **Bordes** | `border`, `rounded`, `rounded-full` | Bordes y esquinas |
+
+Los números siguen una escala: `4` = 16px, `8` = 32px, `2` = 8px. Cuanto mayor el número, mayor el espacio.
+
+### Diseño responsive: mobile-first sin misterio
+
+Tailwind aplica clases por defecto al móvil. Los prefijos `sm:`, `md:`, `lg:`, `xl:` añaden reglas para pantallas más grandes.
+
+```html
+<!-- Mobile: texto normal. En pantallas md+ (≥768px): texto grande -->
+<h1 class="text-lg md:text-3xl">Mi nombre</h1>
+
+<!-- Mobile: una columna. En pantallas lg+ (≥1024px): tres columnas -->
+<div class="grid grid-cols-1 lg:grid-cols-3">
+```
+
+Lo que no tenga prefijo aplica siempre (desde móvil hacia arriba). Esto es "mobile-first": diseñas primero para el teléfono, luego añades variantes para pantallas grandes.
+
+### El sistema de colores de PersonalPage
+
+PersonalPage no hardcodea colores directamente en los componentes — los centraliza en variables CSS dentro de `app/globals.css`. Esto significa que **cambiar toda la paleta requiere editar un solo archivo**.
+
+En `app/globals.css` encontrarás algo así:
+
+```css
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --surface: #f9fafb;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --muted: #9ca3af;
+  --border: #27272a;
+  --surface: #18181b;
+}
+```
+
+Tailwind v4 (que usa PersonalPage) puede leer estas variables directamente como tokens de diseño. Los componentes usan clases como `bg-background`, `text-foreground`, `text-accent`, y heredan el tema sin saber si están en modo claro u oscuro.
+
+### Dark/light mode: sin flash al cargar
+
+El sistema de PersonalPage detecta la preferencia del sistema operativo y aplica el tema correcto antes de que el HTML se pinte en pantalla. El truco está en un pequeño script inline en `app/layout.tsx` que lee `localStorage` o `prefers-color-scheme` antes que React hidrate el componente. Resultado: no hay ese destello blanco cuando cargas la página en modo oscuro.
+
+Para cambiar el comportamiento del tema, el archivo a tocar es `app/layout.tsx` (la lógica del script) y `app/globals.css` (los valores de color).
+
+---
+
+## Cómo pedirle cambios de diseño a la IA
+
+### El principio: contexto visual + restricciones
+
+La IA no puede ver tu pantalla. Necesita el código real, no una descripción vaga.
+
+**Prompt débil:**
+> "Cambia los colores de mi sitio web"
+
+**Prompt efectivo:**
+```
+"Tengo este archivo globals.css de un proyecto Next.js con Tailwind v4: [pega el contenido].
+Quiero cambiar la paleta de colores para que refleje tonos verdes oscuros, minimalista,
+inspirado en terminales vintage.
+Modifica solo las variables CSS de colores. Mantén la estructura exacta del archivo."
+```
+
+La diferencia: pegas el contenido real, describes la intención en términos visuales concretos, y delimitas el alcance ("solo las variables CSS de colores").
+
+### Plantilla de prompt para cambios de paleta
+
+Guarda este prompt — lo usarás en el ejercicio y en la tarea:
+
+```
+"Tengo este archivo globals.css de un proyecto Next.js con Tailwind v4: [pega el contenido].
+Quiero cambiar la paleta de colores para que refleje [descripción: ej. 'tonos verdes oscuros,
+minimalista, inspirado en terminales vintage'].
+Modifica solo las variables CSS de colores. Mantén la estructura exacta del archivo."
+```
+
+### Prompt para cambios de tipografía
+
+```
+"En mi proyecto Next.js uso las fuentes cargadas en app/layout.tsx: [pega el archivo].
+Quiero cambiar la fuente principal a [nombre de fuente de Google Fonts].
+¿Qué modifico en layout.tsx y globals.css? Dame los cambios exactos."
+```
+
+### Prompt para ajustes específicos de componente
+
+```
+"Tengo este componente: [pega el archivo].
+Quiero que [descripción del cambio visual].
+Modifica solo las clases Tailwind necesarias. No cambies la lógica del componente."
+```
+
+### El ciclo correcto con IA
+
+```
+1. Describir con contexto real (pegar el archivo)
+      ↓
+2. Recibir el código propuesto
+      ↓
+3. Aplicarlo y ver en http://localhost:3000
+      ↓
+4. Ajustar: "está bien pero [qué falta/sobra]"
+      ↓
+5. Repetir hasta que quede como quieres
+      ↓
+6. git add → git commit → git push → producción
+```
+
+No esperes el resultado perfecto en la primera iteración. 2-3 ciclos son normales.
+
+---
+
+## Ejercicio en sesión
+
+El objetivo es que cada participante salga con su identidad visual aplicada al sitio.
+
+### Paso 1: Definir la identidad visual (5 minutos)
+
+Antes de tocar código, responde estas preguntas. Escríbelas, no las pienses solo:
+
+1. **Color dominante:** ¿qué color te representa o representaría tu trabajo? (un color concreto o una familia: azules, verdes, tierras...)
+2. **Tono:** ¿minimalista o con personalidad marcada? ¿serio o con humor?
+3. **Referencias:** ¿hay algún sitio web, marca o herramienta cuyo diseño te gusta? ¿Por qué?
+
+Ejemplo de respuesta: *"Azules oscuros con acentos en cyan. Minimalista, inspirado en dashboards de data. Me gusta el look de Linear y Vercel."*
+
+### Paso 2: Abrir el servidor local
+
+```bash
+cd TU-REPO
+npm run dev
+# Abre http://localhost:3000 en el navegador
+```
+
+Deja el navegador y VS Code abiertos lado a lado.
+
+### Paso 3: Cambiar la paleta de colores
+
+1. Abre `app/globals.css` en VS Code
+2. Copia todo el contenido
+3. Pega en Claude con la plantilla de prompt de arriba, usando tu descripción de identidad visual
+4. Copia el código propuesto
+5. Reemplaza el contenido de `app/globals.css`
+6. Guarda el archivo — el navegador debe actualizar automáticamente
+
+¿No te convence el primer resultado? Refina:
+```
+"Está bien pero el acento se ve demasiado brillante. Oscurécelo un poco.
+Mantén el resto de variables igual."
+```
+
+### Paso 4: Ajustar la tipografía (opcional, 10 minutos)
+
+Si quieres cambiar la fuente, busca en [fonts.google.com](https://fonts.google.com) una que te guste. Luego:
+
+```
+"En mi proyecto Next.js, el archivo app/layout.tsx importa las fuentes así: [pega el fragmento].
+Quiero cambiar la fuente principal a Inter (o el nombre que elegiste).
+Dame los cambios exactos para layout.tsx."
+```
+
+### Paso 5: Commit y deploy
+
+```bash
+git add app/globals.css app/layout.tsx
+git commit -m "design: apply personal color palette and typography"
+git push origin main
+```
+
+Espera ~45 segundos y verifica que el cambio está en tu URL de Vercel.
+
+---
+
+## Tarea entre sesiones
+
+### Ruta estándar
+
+Tu sitio debe quedar con diseño personalizado y en producción. Checklist mínimo:
+
+- [ ] Paleta de colores que no sea la del template por defecto
+- [ ] Al menos un commit con el mensaje `design:` describiendo el cambio
+- [ ] El sitio accesible en tu URL de Vercel
+
+Itera hasta que estés satisfecho. No tiene que ser perfecto — tiene que ser tuyo.
+
+### Ruta acelerada
+
+Añade una sección animada. Dos opciones según tu nivel de comodidad con el código:
+
+**Opción A: CSS transitions (sin dependencias)**
+
+Prompt para Claude:
+```
+"Tengo este componente card en Next.js con Tailwind: [pega el componente].
+Quiero que al hacer hover, la card se levante ligeramente (efecto de elevación) 
+y el borde cambie de color. Usa solo clases Tailwind y CSS transitions nativas.
+Dame el componente modificado."
+```
+
+**Opción B: Framer Motion (más expresivo)**
+
+```bash
+npm install framer-motion
+```
+
+Prompt para Claude:
+```
+"Tengo este componente en Next.js: [pega el componente].
+Quiero que al hacer scroll y entrar en el viewport, aparezca con una animación
+de fade-in + slide-up usando Framer Motion.
+Dame el componente modificado con los imports necesarios."
+```
+
+Haz push de la animación y comparte la URL con el grupo.
+
+---
+
+## Recursos
+
+- [Tailwind CSS Docs](https://tailwindcss.com/docs) — referencia completa de clases (usa el buscador)
+- [Google Fonts](https://fonts.google.com) — fuentes gratuitas con preview en tiempo real
+- [Framer Motion Docs](https://www.framer.com/motion/) — animaciones para React
