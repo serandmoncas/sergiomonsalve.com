@@ -1,12 +1,27 @@
-// Run: npx dotenv -e .env.local -- npx tsx scripts/seed-cursos.ts
+// Run: npx tsx scripts/seed-cursos.ts
 import { createClient } from '@supabase/supabase-js'
+import { readFileSync } from 'fs'
+import { resolve } from 'path'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+// Load .env.local manually (ESM hoisting prevents dotenv from running before createClient)
+const envPath = resolve(process.cwd(), '.env.local')
+const envVars = Object.fromEntries(
+  readFileSync(envPath, 'utf-8')
+    .split('\n')
+    .filter(l => l.includes('=') && !l.startsWith('#'))
+    .map(l => {
+      const idx = l.indexOf('=')
+      return [l.slice(0, idx).trim(), l.slice(idx + 1).trim().replace(/^["']|["']$/g, '')]
+    })
 )
+Object.assign(process.env, envVars)
 
 async function seed() {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+
   console.log('Seeding Personal Page Recipe course...')
 
   const { data: course, error: courseErr } = await supabase

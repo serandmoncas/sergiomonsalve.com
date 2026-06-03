@@ -1,10 +1,15 @@
-// Run: npx dotenv -e .env.local -- npx tsx scripts/seed-curso-ia.ts
+// Run: npx tsx scripts/seed-curso-ia.ts
 import { createClient } from '@supabase/supabase-js'
+import { readFileSync } from 'fs'
+import { resolve } from 'path'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+const envVars = Object.fromEntries(
+  readFileSync(resolve(process.cwd(), '.env.local'), 'utf-8')
+    .split('\n')
+    .filter(l => l.includes('=') && !l.startsWith('#'))
+    .map(l => { const idx = l.indexOf('='); return [l.slice(0, idx).trim(), l.slice(idx + 1).trim().replace(/^["']|["']$/g, '')] })
 )
+Object.assign(process.env, envVars)
 
 const COURSE_SLUG = 'ia-de-cero-a-produccion'
 
@@ -62,6 +67,11 @@ const modules = [
 ]
 
 async function seed() {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+
   console.log('🌱 Seeding curso:', COURSE_SLUG)
 
   const { data: course, error: courseError } = await supabase
@@ -89,7 +99,7 @@ async function seed() {
 
     const { data: module, error: modError } = await supabase
       .from('modules')
-      .upsert({ ...modData, course_id: course.id }, { onConflict: 'course_id,order' })
+      .insert({ ...modData, course_id: course.id })
       .select('id')
       .single()
 
@@ -103,7 +113,7 @@ async function seed() {
     for (const lesson of lessonDefs) {
       const { error: lessonError } = await supabase
         .from('lessons')
-        .upsert({ ...lesson, module_id: module.id }, { onConflict: 'module_id,order' })
+        .insert({ ...lesson, module_id: module.id })
 
       if (lessonError) {
         console.error('Error creating lesson:', lesson.title, lessonError)
