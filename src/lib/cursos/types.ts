@@ -9,6 +9,7 @@ export interface CourseListItem {
   is_free: boolean
   module_count: number
   lesson_count: number
+  coming_soon?: boolean
 }
 
 export interface LessonPublic {

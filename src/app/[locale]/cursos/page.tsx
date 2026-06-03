@@ -46,6 +46,7 @@ export default async function CursosPage({
       is_free: c.is_free,
       module_count: modules.length,
       lesson_count: lessonCount,
+      coming_soon: c.slug === 'personal-page-recipe',
     }
   })
 

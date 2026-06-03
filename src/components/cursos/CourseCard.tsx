@@ -22,7 +22,12 @@ export default function CourseCard({ course, locale }: { course: CourseListItem;
       <div className="p-5">
         <div className="flex items-center gap-2 mb-2">
           <h2 className="font-mono text-sm font-bold text-text flex-1">{course.title}</h2>
-          {course.is_free && (
+          {course.coming_soon && (
+            <span className="font-mono text-xs text-text-muted border border-border px-2 py-0.5 rounded-sm shrink-0">
+              En construcción
+            </span>
+          )}
+          {course.is_free && !course.coming_soon && (
             <span className="font-mono text-xs text-accent border border-accent px-2 py-0.5 rounded-sm shrink-0">
               Gratis
             </span>
