@@ -43,11 +43,13 @@ export async function POST(
   const { data: created, error } = await admin
     .from('enrollments')
     .insert([newEnrollment])
+    .select('id, status, expires_at')
+    .single()
 
   if (error) {
     console.error('Enrollment insert error:', error)
     return NextResponse.json({ error: 'Failed to create enrollment' }, { status: 500 })
   }
 
-  return NextResponse.json({ enrollment: created?.[0] })
+  return NextResponse.json({ enrollment: created })
 }

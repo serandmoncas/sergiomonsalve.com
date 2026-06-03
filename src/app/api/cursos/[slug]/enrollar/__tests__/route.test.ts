@@ -19,7 +19,11 @@ vi.mock('@/lib/supabase/server', () => ({
         select: vi.fn().mockReturnThis(),
         eq: vi.fn().mockReturnThis(),
         single: mockEnrollmentQuery,
-        insert: mockEnrollmentInsert,
+        insert: vi.fn().mockReturnValue({
+          select: vi.fn().mockReturnValue({
+            single: mockEnrollmentInsert,
+          }),
+        }),
       }
       return {}
     })
@@ -39,7 +43,7 @@ describe('POST /api/cursos/[slug]/enrollar', () => {
     mockEnrollmentQuery.mockReset()
     mockEnrollmentInsert.mockReset()
     mockCourseQuery.mockResolvedValue({ data: freeCourse, error: null })
-    mockEnrollmentInsert.mockResolvedValue({ data: [{ id: 'enroll-1' }], error: null })
+    mockEnrollmentInsert.mockResolvedValue({ data: { id: 'enroll-1', status: 'approved', expires_at: null }, error: null })
   })
 
   it('returns 401 when not authenticated', async () => {
@@ -58,12 +62,11 @@ describe('POST /api/cursos/[slug]/enrollar', () => {
   it('auto-approves enrollment for free course', async () => {
     mockGetUser.mockResolvedValue({ data: { user: { id: 'user-1' } } })
     mockEnrollmentQuery.mockResolvedValue({ data: null, error: { code: 'PGRST116' } })
-    mockEnrollmentInsert.mockResolvedValue({ data: [{ id: 'enroll-1', status: 'approved' }], error: null })
+    mockEnrollmentInsert.mockResolvedValue({ data: { id: 'enroll-1', status: 'approved', expires_at: null }, error: null })
     const res = await POST(makeRequest(), { params: Promise.resolve({ slug: 'personal-page-recipe' }) })
     expect(res.status).toBe(200)
-    expect(mockEnrollmentInsert).toHaveBeenCalledWith(
-      expect.arrayContaining([expect.objectContaining({ status: 'approved' })])
-    )
+    const body = await res.json()
+    expect(body.enrollment.status).toBe('approved')
   })
 
   it('returns existing enrollment if already active', async () => {
