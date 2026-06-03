@@ -1,0 +1,153 @@
+# Sesión 3 — Primer Deploy
+
+## Resumen
+
+Hoy tu página personal queda en línea. Al terminar tienes una URL pública que puedes compartir. No es perfecta todavía — pero es tuya y es real.
+
+---
+
+## Conceptos clave
+
+### ¿Qué es un repositorio?
+
+Un **repositorio** (repo) es una carpeta con tu código que GitHub gestiona y versiona. Es como Google Drive para código, pero con historial completo de cada cambio y la posibilidad de colaborar.
+
+- **Fork:** crear tu propia copia de un repositorio existente. Tus cambios no afectan al original.
+- **Clone:** descargar el repositorio a tu computadora.
+
+### ¿Qué es un deploy?
+
+**Deploy** es el proceso de llevar tu código al servidor donde vive para que el mundo lo vea.
+
+Vercel detecta automáticamente cada `git push` → reconstruye el sitio → lo publica. Todo en menos de 60 segundos.
+
+---
+
+## El template: Personal Page Recipe
+
+El template del curso está en [github.com/serandmoncas/PersonalPage](https://github.com/serandmoncas/PersonalPage). Incluye:
+
+- 5 páginas: Home, About, Blog, Projects, Contact
+- Blog con MDX — posts como archivos `.mdx`, sin CMS ni base de datos
+- SEO completo: sitemap, RSS, Open Graph
+- CI/CD con GitHub Actions
+- Deploy gratis en Vercel
+
+**Un solo archivo para personalizar:** `lib/site.config.ts`
+
+---
+
+## Pasos del primer deploy
+
+### 1. Fork del template
+
+1. Ir a [github.com/serandmoncas/PersonalPage](https://github.com/serandmoncas/PersonalPage)
+2. Click en **Fork** (arriba a la derecha)
+3. Nombrar el repositorio: `tu-nombre.com` o `mi-sitio-personal`
+4. Click en **Create fork**
+
+### 2. Personalizar con IA
+
+El archivo clave es `lib/site.config.ts`. En GitHub, puedes editarlo directamente:
+
+1. Abrir `lib/site.config.ts` en tu fork
+2. Click en el ícono de lápiz (Edit this file)
+3. Editar los campos con tu información
+
+O usa este prompt en Claude:
+
+> "Tengo este archivo TypeScript:
+>
+> ```typescript
+> export const site = {
+>   name: "Tu Nombre",
+>   bio: "Developer · Builder · Lifelong learner",
+>   url: "https://tunombre.com",
+>   github: "tu-usuario",
+>   twitter: "tu-handle",
+>   linkedin: "tu-perfil",
+>   email: "tu@email.com",
+>   skills: ["TypeScript", "React", "Next.js", "Python", "PostgreSQL"],
+> } as const;
+> ```
+>
+> Mi nombre es [nombre]. Soy [rol] en [empresa/proyecto]. Mis skills principales son [lista]. Mi GitHub es [usuario]. Reemplaza los valores con mi información real. Mantén exactamente la misma estructura TypeScript."
+
+Copia el resultado, pégalo en el editor de GitHub y haz commit.
+
+### 3. Conectar a Vercel
+
+1. Ir a [vercel.com/new](https://vercel.com/new)
+2. Login con tu cuenta de GitHub
+3. Click en **Import** junto a tu repositorio
+4. Dejar todas las opciones por defecto — Vercel detecta Next.js automáticamente
+5. Click en **Deploy**
+
+En ~60 segundos aparece tu URL pública (`tu-proyecto.vercel.app`).
+
+---
+
+## Lo que tiene el template
+
+```
+lib/site.config.ts    ← edita esto primero (nombre, bio, links, skills)
+content/blog/         ← tus posts (.mdx)
+content/projects/     ← tus proyectos (.mdx)
+app/                  ← páginas Next.js
+components/           ← componentes UI
+```
+
+### Agregar un post de blog
+
+Crea un archivo en `content/blog/mi-primer-post.mdx`:
+
+```mdx
+---
+title: "Mi primer post"
+date: "2026-06-01"
+description: "De qué va este post."
+tags: [aprendizaje, ia]
+---
+
+Contenido del post en Markdown.
+```
+
+### Variantes de stack para más adelante
+
+La rama `main` es estática (sin base de datos). Cuando quieras features dinámicas:
+
+| Rama | Stack adicional | Cuándo |
+|---|---|---|
+| `stack/nextjs-supabase` | Supabase (BD + Auth) | Newsletter, comments, auth |
+| `stack/nextjs-fastapi-railway` | FastAPI + PostgreSQL | Backend propio |
+| `stack/astro-vercel` | Astro | Máximo performance |
+
+```bash
+# Ejemplo: clonar la variante Supabase
+git clone -b stack/nextjs-supabase https://github.com/serandmoncas/PersonalPage
+```
+
+---
+
+## Ejercicio en sesión
+
+1. Hacer fork de `serandmoncas/PersonalPage`
+2. Editar `lib/site.config.ts` con tu información (con ayuda de IA)
+3. Conectar a Vercel y hacer deploy
+4. Compartir la URL en el grupo
+
+---
+
+## Tarea entre sesiones
+
+**Ruta estándar:** El sitio está en línea. Compártelo con alguien de tu círculo y observa su reacción.
+
+**Ruta acelerada:** Agrega un post real a `content/blog/` sobre algo que hayas aprendido esta semana. Usa Claude para ayudarte a escribirlo.
+
+---
+
+## Recursos
+
+- [Documentación de Vercel para Next.js](https://vercel.com/docs/frameworks/nextjs)
+- [GitHub Docs — Fork a repo](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)
+- [Personal Page Recipe — README](https://github.com/serandmoncas/PersonalPage#readme)

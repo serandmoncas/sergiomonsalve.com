@@ -1,0 +1,77 @@
+# Sesión 1 — El mapa de la IA
+
+## Resumen
+
+Hoy mapeas el paisaje completo de la inteligencia artificial. Al terminar entiendes qué son los modelos, cómo funcionan, y cómo elegir la herramienta correcta para cada tarea.
+
+---
+
+## Conceptos clave
+
+### ¿Qué es un LLM?
+
+Un **Large Language Model** es un sistema entrenado con enormes cantidades de texto para predecir qué palabra viene después. No "piensa" — calcula probabilidades. Pero lo hace tan bien que el resultado parece razonamiento.
+
+| Término | Significado |
+|---|---|
+| **Token** | Unidad mínima de texto. ~0.75 palabras en español |
+| **Contexto (ventana)** | Todo el texto que el modelo puede "ver" en una conversación |
+| **Temperatura** | Qué tan predecible (0) o creativo (1) es el modelo |
+| **Alucinación** | Cuando inventa hechos con total confianza — no miente, no sabe que se equivoca |
+| **Embedding** | Representación numérica del significado de un texto |
+| **RAG** | Retrieval Augmented Generation — buscar documentos y usarlos como contexto |
+| **Agente** | Un modelo que puede usar herramientas y tomar decisiones en múltiples pasos |
+
+### El paisaje de modelos
+
+| Modelo | Empresa | Mejor para |
+|---|---|---|
+| Claude (Sonnet, Opus) | Anthropic | Razonamiento largo, código, análisis de documentos |
+| GPT-4o | OpenAI | Uso general, multimodal (imágenes, audio) |
+| Gemini | Google | Integración con Google Workspace |
+| Llama | Meta | Correr localmente, proyectos open source |
+
+### Herramientas vs. modelos vs. plataformas
+
+- **Modelo:** el cerebro (ej: Claude Sonnet 4.6)
+- **Plataforma:** la interfaz para usarlo (ej: claude.ai, chatgpt.com)
+- **API:** la forma de llamar al modelo desde código
+- **Herramienta construida sobre la API:** Cursor, GitHub Copilot, Claude Code
+
+---
+
+## Cuentas a crear hoy
+
+Antes de terminar esta sesión:
+
+1. [claude.ai](https://claude.ai) — plan gratuito suficiente para empezar
+2. [chatgpt.com](https://chatgpt.com) — plan gratuito
+3. [github.com](https://github.com) — siempre gratuito
+4. [vercel.com](https://vercel.com) — plan gratuito suficiente para el curso
+
+---
+
+## Ejercicio en sesión
+
+Escribe tu bio profesional con IA. Usa este prompt en Claude:
+
+> "Soy [nombre], [cargo/rol] en [empresa/proyecto]. Mi experiencia incluye [áreas]. Escribe una bio profesional de 2-3 oraciones para la sección 'sobre mí' de mi página web personal. Tono [formal/casual/técnico]. No uses frases como 'apasionado por', 'proactivo' ni 'orientado a resultados'."
+
+Luego ejecuta el mismo prompt en ChatGPT y compara. ¿Qué diferencias notan?
+
+---
+
+## Tarea entre sesiones
+
+Escribe en un documento (papel o digital) **3 situaciones de tu trabajo** donde la IA podría ayudarte. Para cada una:
+- Describe el problema
+- Qué output esperarías de la IA
+- Por qué no lo estás haciendo con IA todavía
+
+---
+
+## Recursos
+
+- [Tokenizer de OpenAI](https://platform.openai.com/tokenizer) — visualiza cómo se tokeniza texto en tiempo real
+- [LMSYS Chatbot Arena](https://lmarena.ai) — compara modelos con tus propios prompts
+- [Cursos gratuitos de Anthropic](https://www.anthropic.com/learn) — certificados de LinkedIn incluidos

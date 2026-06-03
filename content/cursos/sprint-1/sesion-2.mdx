@@ -1,0 +1,121 @@
+# Sesión 2 — Prompting que funciona
+
+## Resumen
+
+La diferencia entre un resultado mediocre y uno excelente casi siempre está en el prompt. Hoy aprendes a construir prompts efectivos, a iterar cuando el resultado no es el esperado, y a entender cuándo la IA no es la herramienta correcta.
+
+---
+
+## La anatomía de un buen prompt
+
+Un prompt efectivo tiene 5 componentes. No todos son necesarios siempre:
+
+```
+[ROL] Eres un copywriter experto en tecnología B2B.
+
+[CONTEXTO] Estoy construyendo mi página personal para mostrar mis proyectos.
+Mi audiencia son recruiters técnicos y CTOs de startups colombianas.
+
+[TAREA] Escribe la sección "Sobre mí" de mi página.
+
+[FORMATO] Máximo 3 párrafos. Sin listas. Sin bullets.
+El primero: quién soy. El segundo: áreas de expertise. El tercero: qué busco.
+
+[RESTRICCIONES] No uses "apasionado", "proactivo" ni "orientado a resultados".
+Tono profesional pero cercano. Sin frases en inglés.
+```
+
+## Prompting iterativo
+
+No esperes el prompt perfecto a la primera. El proceso real es:
+
+1. **Primer intento** — describe lo que necesitas en lenguaje natural
+2. **Evalúa** — ¿qué está bien? ¿qué falta o sobra?
+3. **Refina** — corrige solo lo que está mal, no empieces de cero
+4. **Repite** — 2-3 iteraciones suelen ser suficientes
+
+### Ejemplo de refinamiento
+
+**Prompt 1 (vago):**
+> "Escribe la descripción de mi proyecto de análisis de datos"
+
+**Problema:** El modelo no sabe qué proyecto, para quién, ni en qué formato.
+
+**Prompt 2 (específico):**
+> "Escribe una descripción de 2 oraciones de mi proyecto de búsqueda semántica sobre nuestro data warehouse usando Snowflake Cortex. Para el portafolio de mi página personal. Audiencia: recruiters técnicos."
+
+**Si aún no convence, continúa en la misma conversación:**
+> "Está bien pero suena muy técnico. Hazlo más accesible para alguien que no conoce Snowflake."
+
+---
+
+## Cuándo la IA falla (y por qué)
+
+| Situación | Por qué falla |
+|---|---|
+| Información reciente | Su entrenamiento tiene fecha de corte |
+| Datos privados | No conoce tu empresa, tu código, tus documentos |
+| Matemáticas precisas | Puede equivocarse en cálculos — siempre verifica |
+| Referencias externas | Puede inventar links, papers o libros que no existen |
+| Criterio bajo presión | Si tú insistes, el modelo tiende a ceder y validarte |
+
+**Regla:** si el resultado es importante y verificable, verifícalo.
+
+---
+
+## El sesgo de confirmación en IA
+
+Un patrón importante que señaló el grupo: los modelos tienden a validar lo que el usuario dice. Si tú afirmas algo incorrecto con convicción, el modelo probablemente te dará la razón o suavizará la corrección.
+
+Esto es especialmente relevante cuando se usa IA para autoconocimiento, análisis de decisiones o revisión de criterios propios.
+
+**Cómo evitarlo:** pide explícitamente al modelo que tome una posición contraria a la tuya, o que identifique los puntos débiles de tu argumento.
+
+---
+
+## Instalación del editor
+
+### Opción A: VS Code
+
+1. Descargar: [code.visualstudio.com](https://code.visualstudio.com)
+2. Extensión **GitHub Copilot** (gratuita con cuenta GitHub)
+3. Extensión **Prettier** — formateo automático
+
+### Opción B: Cursor (recomendado para ruta acelerada)
+
+1. Descargar: [cursor.com](https://cursor.com)
+2. IA integrada sin extensiones adicionales
+3. Atajos idénticos a VS Code
+
+---
+
+## Ejercicio en sesión
+
+Construye el contenido de tu página personal usando IA. Necesitas texto para:
+
+1. **Bio** — 2-3 párrafos sobre quién eres
+2. **Skills** — lista de 5-8 tecnologías o áreas de expertise
+3. **1-2 proyectos** — título + descripción de 2 oraciones cada uno
+
+Usa el framework de 5 componentes. Itera al menos 2 veces por sección.
+
+Este contenido lo usarás directamente en la próxima sesión.
+
+---
+
+## Tarea entre sesiones
+
+Ten listo un documento con:
+- Tu bio final (la que vas a publicar)
+- Tu lista de skills
+- Descripción de 1-2 proyectos
+- Tu email de contacto
+
+**Ruta acelerada:** Instala Cursor y explora el modo Composer (Cmd+I). Describe un cambio en lenguaje natural y observa cómo lo propone.
+
+---
+
+## Recursos
+
+- [Guía de prompting de Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)
+- [Biblioteca de prompts de ejemplo](https://docs.anthropic.com/en/prompt-library/library)
