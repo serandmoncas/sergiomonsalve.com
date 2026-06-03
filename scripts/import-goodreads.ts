@@ -16,9 +16,13 @@ import { createClient } from '@supabase/supabase-js'
 
 const envPath = path.join(process.cwd(), '.env.local')
 if (fs.existsSync(envPath)) {
-  for (const line of fs.readFileSync(envPath, 'utf-8').split('\n')) {
-    const match = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/)
-    if (match) process.env[match[1]] ??= match[2].replace(/^"|"$/g, '')
+  for (const line of fs.readFileSync(envPath, 'utf-8').split(/\r?\n/)) {
+    const eq = line.indexOf('=')
+    if (eq === -1 || line.startsWith('#')) continue
+    const key = line.slice(0, eq).trim()
+    const raw = line.slice(eq + 1).trim()
+    const val = raw.startsWith('"') && raw.endsWith('"') ? raw.slice(1, -1) : raw
+    if (key && !process.env[key]) process.env[key] = val
   }
 }
 
@@ -26,7 +30,15 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
 const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
 
 if (!SUPABASE_URL || !SERVICE_ROLE_KEY) {
-  console.error('Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local')
+  console.error(`
+Missing Supabase credentials. Two ways to provide them:
+
+Option 1 — env vars:
+  NEXT_PUBLIC_SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... npx tsx scripts/import-goodreads.ts file.csv
+
+Option 2 — get them from Supabase dashboard:
+  Project Settings → API → "Project URL" and "service_role" key
+`.trim())
   process.exit(1)
 }
 

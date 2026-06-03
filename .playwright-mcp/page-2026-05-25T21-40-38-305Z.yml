@@ -1,0 +1,156 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - generic [ref=e6]: IF
+          - generic [ref=e7]: InteliFin
+        - generic [ref=e8]:
+          - link "Precios" [ref=e9] [cursor=pointer]:
+            - /url: /pricing
+          - link "Iniciar sesión" [ref=e10] [cursor=pointer]:
+            - /url: /auth/login
+          - link "Empezar gratis" [ref=e11] [cursor=pointer]:
+            - /url: /auth/login
+    - generic [ref=e15]:
+      - generic [ref=e18]: Para coaches financieros y sus clientes
+      - heading "Convierte tus Excel financieros en una experiencia que tus clientes aman." [level=1] [ref=e19]
+      - paragraph [ref=e20]: InteliFin es la plataforma que organiza tu práctica de coaching financiero. Diagnósticos, dashboards y seguimiento mensual — todo en un solo lugar.
+      - generic [ref=e21]:
+        - link "Empezar gratis →" [ref=e22] [cursor=pointer]:
+          - /url: /auth/login
+        - link "Cómo funciona" [ref=e23] [cursor=pointer]:
+          - /url: "#metodo"
+      - generic [ref=e27]:
+        - generic [ref=e32]: intelifin.online/app/dashboard
+        - generic [ref=e33]:
+          - generic [ref=e35]:
+            - generic [ref=e36]:
+              - paragraph [ref=e37]: Patrimonio Neto
+              - paragraph [ref=e38]: $48.250.000
+              - paragraph [ref=e39]: ↑ +12% este trimestre
+            - generic [ref=e40]:
+              - generic [ref=e41]: "68"
+              - generic [ref=e42]: /100
+          - generic [ref=e43]:
+            - generic [ref=e45]:
+              - generic [ref=e46]: Imprevisto
+              - generic [ref=e47]: 100%
+            - generic [ref=e51]:
+              - generic [ref=e52]: Oxígeno
+              - generic [ref=e53]: 67%
+            - generic [ref=e57]:
+              - generic [ref=e58]: Retiro
+              - generic [ref=e59]: 100%
+            - generic [ref=e63]:
+              - generic [ref=e64]: Inversiones
+              - generic [ref=e65]: 22%
+    - generic [ref=e69]:
+      - paragraph [ref=e70]: El problema
+      - heading "Tu cliente sigue mirando un Excel aburrido cuando debería ver su evolución" [level=2] [ref=e71]:
+        - text: Tu cliente sigue mirando un Excel aburrido
+        - text: cuando debería ver su evolución
+      - paragraph [ref=e72]: Como coach, tu método transforma vidas. Pero los Excel sueltos rompen la experiencia, te hacen perder horas entre sesiones y dejan al cliente sin claridad de su progreso.
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - paragraph [ref=e76]: El método
+        - heading "Las 4 cuentas para una vida financiera sana" [level=2] [ref=e77]
+        - paragraph [ref=e78]: Una metodología clara que tus clientes entienden a la primera.
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - generic [ref=e82]: 🛡
+            - generic [ref=e83]: Imprevisto
+          - paragraph [ref=e84]: Fondo de emergencia
+          - paragraph [ref=e85]: 1× tu salario mensual
+          - generic [ref=e86]: Prioridad 1
+        - generic [ref=e87]:
+          - generic [ref=e88]:
+            - generic [ref=e89]: 💨
+            - generic [ref=e90]: Oxígeno
+          - paragraph [ref=e91]: Sustento sin trabajo
+          - paragraph [ref=e92]: 6× tu salario mensual
+          - generic [ref=e93]: Prioridad 2
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - generic [ref=e96]: 🏦
+            - generic [ref=e97]: Retiro
+          - paragraph [ref=e98]: Protección a largo plazo
+          - paragraph [ref=e99]: Seguro de vida activo
+          - generic [ref=e100]: Activa siempre
+        - generic [ref=e101]:
+          - generic [ref=e102]:
+            - generic [ref=e103]: 📈
+            - generic [ref=e104]: Inversiones
+          - paragraph [ref=e105]: Crecimiento de capital
+          - paragraph [ref=e106]: Definido contigo
+          - generic [ref=e107]: Cuando tengas base
+    - generic [ref=e109]:
+      - generic [ref=e110]:
+        - paragraph [ref=e111]: Diseñado para ambos lados
+        - heading "Una plataforma, dos experiencias" [level=2] [ref=e112]
+      - generic [ref=e113]:
+        - generic [ref=e114]:
+          - generic [ref=e115]: Para coaches
+          - heading "Tu práctica, organizada" [level=3] [ref=e116]
+          - list [ref=e117]:
+            - listitem [ref=e118]:
+              - generic [ref=e119]: ✓
+              - generic [ref=e120]: Diagnóstico digital antes de cada sesión
+            - listitem [ref=e121]:
+              - generic [ref=e122]: ✓
+              - generic [ref=e123]: Vista unificada de todos tus clientes
+            - listitem [ref=e124]:
+              - generic [ref=e125]: ✓
+              - generic [ref=e126]: Invitación por email en 30 segundos
+            - listitem [ref=e127]:
+              - generic [ref=e128]: ✓
+              - generic [ref=e129]: Progreso mensual sin spreadsheets
+          - paragraph [ref=e130]: Empezar como coach
+        - generic [ref=e131]:
+          - generic [ref=e132]: Para clientes
+          - heading "Tu evolución, visible" [level=3] [ref=e133]
+          - list [ref=e134]:
+            - listitem [ref=e135]:
+              - generic [ref=e136]: ✓
+              - generic [ref=e137]: Dashboard con tus 4 cuentas siempre a mano
+            - listitem [ref=e138]:
+              - generic [ref=e139]: ✓
+              - generic [ref=e140]: Score de salud financiera (0–100)
+            - listitem [ref=e141]:
+              - generic [ref=e142]: ✓
+              - generic [ref=e143]: Patrimonio neto en tiempo real
+            - listitem [ref=e144]:
+              - generic [ref=e145]: ✓
+              - generic [ref=e146]: Próximos hitos y metas claras
+          - paragraph [ref=e147]: Pide a tu coach que te invite
+    - generic [ref=e149]:
+      - generic [ref=e150]:
+        - paragraph [ref=e151]: En 3 pasos
+        - heading "Tu primera sesión, sin fricción" [level=2] [ref=e152]
+      - generic [ref=e153]:
+        - generic [ref=e154]:
+          - generic [ref=e155]: "1"
+          - heading "Invita a tu cliente" [level=3] [ref=e156]
+          - paragraph [ref=e157]: Mandas un email desde InteliFin. Tu cliente recibe un link mágico, sin contraseñas.
+        - generic [ref=e158]:
+          - generic [ref=e159]: "2"
+          - heading "Completa el diagnóstico" [level=3] [ref=e160]
+          - paragraph [ref=e161]: Tu cliente responde un cuestionario guiado de 4 secciones — antes de la sesión.
+        - generic [ref=e162]:
+          - generic [ref=e163]: "3"
+          - heading "Lleguen a la sesión con datos" [level=3] [ref=e164]
+          - paragraph [ref=e165]: Tú ya tienes su radiografía financiera. Él ya tiene su dashboard listo.
+    - generic [ref=e167]:
+      - heading "Empieza con tu próximo cliente" [level=2] [ref=e168]
+      - paragraph [ref=e169]: Crea tu organización en 1 minuto. Sin tarjeta de crédito. Sin compromisos.
+      - link "Crear mi cuenta gratis →" [ref=e170] [cursor=pointer]:
+        - /url: /auth/login
+    - contentinfo [ref=e171]:
+      - generic [ref=e172]:
+        - generic [ref=e173]:
+          - generic [ref=e174]: IF
+          - generic [ref=e175]: InteliFin · Inteligencia Financiera
+        - paragraph [ref=e176]: © 2026 · Hecho con propósito
+  - region "Notifications alt+T"
+  - alert [ref=e177]

@@ -2,17 +2,19 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { POST as postCompletar } from '../completar/route'
 import { GET as getContenido } from '../contenido/route'
 
-const { mockGetUser, mockCheckEnrollment, mockProgressUpsert, mockLessonQuery } = vi.hoisted(() => ({
+const { mockGetUser, mockCheckEnrollment, mockProgressUpsert, mockLessonQuery, mockCourseQuery } = vi.hoisted(() => ({
   mockGetUser: vi.fn(),
   mockCheckEnrollment: vi.fn(),
   mockProgressUpsert: vi.fn(),
   mockLessonQuery: vi.fn(),
+  mockCourseQuery: vi.fn(),
 }))
 
 vi.mock('@/lib/supabase/server', () => ({
   createClient: () => ({ auth: { getUser: mockGetUser } }),
   createAdminClient: () => ({
     from: vi.fn((table: string) => {
+      if (table === 'courses') return { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: mockCourseQuery }
       if (table === 'lesson_progress') return { upsert: mockProgressUpsert }
       if (table === 'lessons') return { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: mockLessonQuery }
       return { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn() }
@@ -31,6 +33,10 @@ describe('POST /completar', () => {
     mockGetUser.mockReset()
     mockCheckEnrollment.mockReset()
     mockProgressUpsert.mockReset()
+    mockCourseQuery.mockReset()
+    mockLessonQuery.mockReset()
+    mockCourseQuery.mockResolvedValue({ data: { id: 'course-1' }, error: null })
+    mockLessonQuery.mockResolvedValue({ data: { id: 'lesson-1', modules: [{ course_id: 'course-1' }] }, error: null })
   })
 
   it('returns 401 when not authenticated', async () => {
@@ -57,6 +63,15 @@ describe('POST /completar', () => {
       { onConflict: 'student_id,lesson_id' }
     )
   })
+
+  it('returns 404 when lesson does not belong to the course', async () => {
+    mockGetUser.mockResolvedValue({ data: { user: { id: 'u1' } } })
+    mockCheckEnrollment.mockResolvedValue(true)
+    mockLessonQuery.mockResolvedValue({ data: null, error: { code: 'PGRST116' } })
+    const res = await postCompletar(new Request('http://localhost'), routeParams)
+    expect(res.status).toBe(404)
+    expect(mockProgressUpsert).not.toHaveBeenCalled()
+  })
 })
 
 describe('GET /contenido', () => {
@@ -64,6 +79,8 @@ describe('GET /contenido', () => {
     mockGetUser.mockReset()
     mockCheckEnrollment.mockReset()
     mockLessonQuery.mockReset()
+    mockCourseQuery.mockReset()
+    mockCourseQuery.mockResolvedValue({ data: { id: 'course-1' }, error: null })
   })
 
   it('returns 401 when not authenticated', async () => {
@@ -79,16 +96,24 @@ describe('GET /contenido', () => {
     expect(res.status).toBe(403)
   })
 
-  it('returns lesson content when enrolled', async () => {
+  it('returns lesson content when enrolled and lesson belongs to course', async () => {
     mockGetUser.mockResolvedValue({ data: { user: { id: 'u1' } } })
     mockCheckEnrollment.mockResolvedValue(true)
     mockLessonQuery.mockResolvedValue({
-      data: { content_mdx: '# Hello', youtube_video_id: null, template_ref: 'main#setup' },
+      data: { content_mdx: '# Hello', youtube_video_id: null, template_ref: 'main#setup', modules: [{ course_id: 'course-1' }] },
       error: null
     })
     const res = await getContenido(new Request('http://localhost'), routeParams)
     const json = await res.json()
     expect(res.status).toBe(200)
     expect(json.content_mdx).toBe('# Hello')
+  })
+
+  it('returns 404 when lesson does not belong to the course', async () => {
+    mockGetUser.mockResolvedValue({ data: { user: { id: 'u1' } } })
+    mockCheckEnrollment.mockResolvedValue(true)
+    mockLessonQuery.mockResolvedValue({ data: null, error: { code: 'PGRST116' } })
+    const res = await getContenido(new Request('http://localhost'), routeParams)
+    expect(res.status).toBe(404)
   })
 })

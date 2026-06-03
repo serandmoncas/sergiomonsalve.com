@@ -1,0 +1,40 @@
+- generic [ref=e6]:
+  - link "Google Docs" [ref=e7] [cursor=pointer]:
+    - /url: https://docs.google.com
+    - generic [ref=e8]:
+      - img [ref=e9]
+      - generic [ref=e15]:
+        - img [ref=e17]
+        - generic [ref=e19]: Docs
+  - generic [ref=e20]:
+    - generic [ref=e21]:
+      - heading "You need access" [level=1] [ref=e22]
+      - generic [ref=e23]:
+        - text: Request access, or switch to an account with access.
+        - link "Learn more" [ref=e24] [cursor=pointer]:
+          - /url: https://support.google.com/drive?p=requesting_access
+      - radiogroup [ref=e25]:
+        - generic [ref=e26] [cursor=pointer]:
+          - radio "Viewer" [ref=e28]
+          - generic [ref=e29]: Viewer
+        - generic [ref=e30] [cursor=pointer]:
+          - radio "Commenter" [ref=e32]
+          - generic [ref=e33]: Commenter
+        - generic [ref=e34] [cursor=pointer]:
+          - radio "Editor" [checked] [ref=e36]
+          - generic [ref=e37]: Editor
+      - generic [ref=e39]:
+        - generic:
+          - generic:
+            - generic:
+              - generic: Message (optional)
+              - generic: Message (optional)
+              - generic: Message (optional)
+        - textbox "Message (optional)" [ref=e40]
+      - button "Request access" [ref=e44] [cursor=pointer]:
+        - generic [ref=e46]: Request access
+    - generic "You're signed in as serandmoncas@gmail.com" [ref=e47]: You're signed in as
+    - link "Switch accounts" [ref=e48] [cursor=pointer]:
+      - /url: https://accounts.google.com/AccountChooser?continue=https://docs.google.com/document/d/1H8NwjAkH8SUoUy0C-W1OmrRO1ZaDGTMk67KVaycvLf0/edit?tab%3Dt.0%26pli%3D1%26authuser%3D0&faa=1
+      - img [ref=e50]
+      - generic [ref=e54]: serandmoncas@gmail.com

@@ -1,0 +1,294 @@
+- generic:
+  - generic:
+    - generic:
+      - navigation:
+        - complementary:
+          - generic:
+            - button:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img
+                      - text: s
+                  - generic:
+                    - generic: serandmoncas
+              - generic:
+                - img
+          - navigation:
+            - list:
+              - listitem:
+                - link:
+                  - /url: /emails
+                  - generic:
+                    - img
+                  - text: Emails
+              - listitem:
+                - link:
+                  - /url: /broadcasts
+                  - generic:
+                    - img
+                  - text: Broadcasts
+              - listitem:
+                - link:
+                  - /url: /automations
+                  - generic:
+                    - img
+                  - text: Automations
+              - listitem:
+                - link:
+                  - /url: /templates
+                  - generic:
+                    - img
+                  - text: Templates
+              - listitem:
+                - link:
+                  - /url: /audience
+                  - generic:
+                    - img
+                  - text: Audience
+              - listitem:
+                - link:
+                  - /url: /metrics
+                  - generic:
+                    - img
+                  - text: Metrics
+              - listitem:
+                - link:
+                  - /url: /domains
+                  - generic:
+                    - img
+                  - text: Domains
+              - listitem:
+                - link:
+                  - /url: /logs
+                  - generic:
+                    - img
+                  - text: Logs
+              - listitem:
+                - link:
+                  - /url: /api-keys
+                  - generic:
+                    - img
+                  - text: API keys
+              - listitem:
+                - link:
+                  - /url: /webhooks
+                  - generic:
+                    - img
+                  - text: Webhooks
+              - listitem:
+                - link:
+                  - /url: /settings
+                  - generic:
+                    - img
+                  - text: Settings
+          - button:
+            - generic:
+              - generic:
+                - generic:
+                  - generic: s
+                - generic: serandmoncas@gmail.com
+            - generic:
+              - img
+      - generic:
+        - generic:
+          - generic:
+            - link:
+              - /url: https://resend.com/docs/dashboard/domains/introduction
+              - text: Docs
+          - button:
+            - generic:
+              - generic: Need help?
+            - generic:
+              - generic: H
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - img
+                  - img
+                - generic:
+                  - text: Domain
+                  - heading [level=1]: sergiomonsalve.com
+                - generic:
+                  - button [active]:
+                    - generic:
+                      - img
+                  - button:
+                    - img
+              - generic:
+                - generic:
+                  - generic: Created
+                  - generic:
+                    - generic:
+                      - time: 29 days ago
+                - generic:
+                  - generic: Status
+                  - generic:
+                    - generic: verified
+                - generic:
+                  - generic: Provider
+                  - generic:
+                    - img
+                    - link:
+                      - /url: https://ap.www.namecheap.com/Domains/DomainControlPanel/sergiomonsalve.com/advancedns
+                      - text: Namecheap
+                - generic:
+                  - generic: Region
+                  - generic:
+                    - img
+                    - generic:
+                      - text: North Virginia
+                      - generic: (us-east-1)
+              - generic:
+                - generic: Domain Events
+                - alert:
+                  - generic:
+                    - img
+                  - paragraph: "Domain verified: Your domain is ready to send emails."
+                - generic:
+                  - generic:
+                    - generic:
+                      - button:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic: Domain added
+                      - generic: May 05, 8:08 AM
+                    - generic:
+                      - button:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic: DNS verified
+                      - generic: Jun 02, 9:43 PM
+                    - generic:
+                      - button:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic: Domain verified
+                      - generic: Jun 02, 9:44 PM
+            - generic:
+              - generic:
+                - tablist:
+                  - tab: Records
+                  - tab [selected]: Configuration
+                - tabpanel:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Configuration
+                    - generic:
+                      - generic:
+                        - heading [level=2]: Enable tracking metrics
+                        - text: To track clicks and email opens, configure a custom tracking subdomain to let those links match your sending domain and improve deliverability.
+                        - generic:
+                          - link:
+                            - /url: /domains/6655a81d-c5b2-48c2-aa31-fccffb0c1e75/tracking
+                            - text: Configure
+                      - generic:
+                        - heading [level=2]: TLS (Transport Layer Security)
+                        - text: "\"Opportunistic TLS\" means that it always attempts to make a secure connection to the receiving mail server. If it can't establish a secure connection, it sends the message unencrypted. \"Enforced TLS\" on the other hand, requires that the email communication must use TLS no matter what."
+                        - generic:
+                          - combobox:
+                            - generic: Opportunistic
+                            - img
+  - region "Notifications alt+T"
+  - alert
+  - dialog "Domains API" [ref=e333]:
+    - generic [ref=e334]:
+      - heading "Domains API" [level=1] [ref=e336]
+      - generic [ref=e338]:
+        - tablist [ref=e339]:
+          - generic [ref=e341]:
+            - tab "Node.js" [selected] [ref=e342] [cursor=pointer]
+            - tab "Ruby" [ref=e343] [cursor=pointer]
+            - tab "PHP" [ref=e344] [cursor=pointer]
+            - tab "Python" [ref=e345] [cursor=pointer]
+            - tab "Go" [ref=e346] [cursor=pointer]
+            - tab "Rust" [ref=e347] [cursor=pointer]
+            - tab "Java" [ref=e348] [cursor=pointer]
+            - tab ".NET" [ref=e349] [cursor=pointer]
+            - tab "cURL" [ref=e350] [cursor=pointer]
+            - tab "CLI" [ref=e351] [cursor=pointer]
+        - heading "Add domain" [level=1] [ref=e354]:
+          - link "Add domain" [ref=e355] [cursor=pointer]:
+            - /url: https://resend.com/docs/api-reference/domains/create-domain
+            - text: Add domain
+            - img [ref=e356]
+        - tabpanel "Node.js" [ref=e360]:
+          - generic [ref=e363]:
+            - generic [ref=e364]: "import { Resend } from 'resend';"
+            - generic [ref=e366]: const resend = new Resend('re_xxxxxxxxx');
+            - generic [ref=e368]: "resend.domains.create({ name: 'sergiomonsalve.com' });"
+          - button "Copy to clipboard" [ref=e369] [cursor=pointer]:
+            - img [ref=e371]
+        - heading "Retrieve Domain" [level=1] [ref=e374]:
+          - link "Retrieve Domain" [ref=e375] [cursor=pointer]:
+            - /url: https://resend.com/docs/api-reference/domains/get-domain
+            - text: Retrieve Domain
+            - img [ref=e376]
+        - tabpanel "Node.js" [ref=e380]:
+          - generic [ref=e383]:
+            - generic [ref=e384]: "import { Resend } from 'resend';"
+            - generic [ref=e386]: const resend = new Resend('re_xxxxxxxxx');
+            - generic [ref=e388]: resend.domains.get('6655a81d-c5b2-48c2-aa31-fccffb0c1e75');
+          - button "Copy to clipboard" [ref=e389] [cursor=pointer]:
+            - img [ref=e391]
+        - heading "Verify Domain" [level=1] [ref=e394]:
+          - link "Verify Domain" [ref=e395] [cursor=pointer]:
+            - /url: https://resend.com/docs/api-reference/domains/verify-domain
+            - text: Verify Domain
+            - img [ref=e396]
+        - tabpanel "Node.js" [ref=e400]:
+          - generic [ref=e403]:
+            - generic [ref=e404]: "import { Resend } from 'resend';"
+            - generic [ref=e406]: const resend = new Resend('re_xxxxxxxxx');
+            - generic [ref=e408]: resend.domains.verify('6655a81d-c5b2-48c2-aa31-fccffb0c1e75');
+          - button "Copy to clipboard" [ref=e409] [cursor=pointer]:
+            - img [ref=e411]
+        - heading "Update Domain" [level=1] [ref=e414]:
+          - link "Update Domain" [ref=e415] [cursor=pointer]:
+            - /url: https://resend.com/docs/api-reference/domains/update-domain
+            - text: Update Domain
+            - img [ref=e416]
+        - tabpanel "Node.js" [ref=e420]:
+          - generic [ref=e423]:
+            - generic [ref=e424]: "import { Resend } from 'resend';"
+            - generic [ref=e426]: const resend = new Resend('re_xxxxxxxxx');
+            - generic [ref=e428]: "resend.domains.update({"
+            - generic [ref=e429]: "id: '6655a81d-c5b2-48c2-aa31-fccffb0c1e75',"
+            - generic [ref=e430]: "openTracking: false,"
+            - generic [ref=e431]: "clickTracking: true,"
+            - generic [ref=e432]: "});"
+          - button "Copy to clipboard" [ref=e433] [cursor=pointer]:
+            - img [ref=e435]
+        - heading "List Domains" [level=1] [ref=e438]:
+          - link "List Domains" [ref=e439] [cursor=pointer]:
+            - /url: https://resend.com/docs/api-reference/domains/list-domains
+            - text: List Domains
+            - img [ref=e440]
+        - tabpanel "Node.js" [ref=e444]:
+          - generic [ref=e447]:
+            - generic [ref=e448]: "import { Resend } from 'resend';"
+            - generic [ref=e450]: const resend = new Resend('re_xxxxxxxxx');
+            - generic [ref=e452]: resend.domains.list();
+          - button "Copy to clipboard" [ref=e453] [cursor=pointer]:
+            - img [ref=e455]
+        - heading "Delete Domain" [level=1] [ref=e458]:
+          - link "Delete Domain" [ref=e459] [cursor=pointer]:
+            - /url: https://resend.com/docs/api-reference/domains/delete-domain
+            - text: Delete Domain
+            - img [ref=e460]
+        - tabpanel "Node.js" [ref=e464]:
+          - generic [ref=e467]:
+            - generic [ref=e468]: "import { Resend } from 'resend';"
+            - generic [ref=e470]: const resend = new Resend('re_xxxxxxxxx');
+            - generic [ref=e472]: resend.domains.remove('6655a81d-c5b2-48c2-aa31-fccffb0c1e75');
+          - button "Copy to clipboard" [ref=e473] [cursor=pointer]:
+            - img [ref=e475]

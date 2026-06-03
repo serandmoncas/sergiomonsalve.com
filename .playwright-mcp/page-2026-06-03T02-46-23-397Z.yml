@@ -1,0 +1,156 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - complementary [ref=e4]:
+        - button "s serandmoncas" [ref=e6] [cursor=pointer]:
+          - generic [ref=e8]:
+            - generic [ref=e10]:
+              - img [ref=e11]
+              - text: s
+            - generic [ref=e26]: serandmoncas
+          - img [ref=e28]
+        - navigation [ref=e31]:
+          - list [ref=e32]:
+            - listitem [ref=e33]:
+              - link "Emails" [ref=e34] [cursor=pointer]:
+                - /url: /emails
+                - img [ref=e36]
+                - text: Emails
+            - listitem [ref=e42]:
+              - link "Broadcasts" [ref=e43] [cursor=pointer]:
+                - /url: /broadcasts
+                - img [ref=e45]
+                - text: Broadcasts
+            - listitem [ref=e51]:
+              - link "Automations" [ref=e52] [cursor=pointer]:
+                - /url: /automations
+                - img [ref=e54]
+                - text: Automations
+            - listitem [ref=e66]:
+              - link "Templates" [ref=e67] [cursor=pointer]:
+                - /url: /templates
+                - img [ref=e69]
+                - text: Templates
+            - listitem [ref=e75]:
+              - link "Audience" [ref=e76] [cursor=pointer]:
+                - /url: /audience
+                - img [ref=e78]
+                - text: Audience
+            - listitem [ref=e94]:
+              - link "Metrics" [ref=e95] [cursor=pointer]:
+                - /url: /metrics
+                - img [ref=e97]
+                - text: Metrics
+            - listitem [ref=e107]:
+              - link "Domains" [ref=e108] [cursor=pointer]:
+                - /url: /domains
+                - img [ref=e110]
+                - text: Domains
+            - listitem [ref=e116]:
+              - link "Logs" [ref=e117] [cursor=pointer]:
+                - /url: /logs
+                - img [ref=e119]
+                - text: Logs
+            - listitem [ref=e129]:
+              - link "API keys" [ref=e130] [cursor=pointer]:
+                - /url: /api-keys
+                - img [ref=e132]
+                - text: API keys
+            - listitem [ref=e140]:
+              - link "Webhooks" [ref=e141] [cursor=pointer]:
+                - /url: /webhooks
+                - img [ref=e143]
+                - text: Webhooks
+            - listitem [ref=e152]:
+              - link "Settings" [ref=e153] [cursor=pointer]:
+                - /url: /settings
+                - img [ref=e155]
+                - text: Settings
+        - button "s serandmoncas@gmail.com" [ref=e165] [cursor=pointer]:
+          - generic [ref=e167]:
+            - generic [ref=e169]: s
+            - generic [ref=e170]: serandmoncas@gmail.com
+          - img [ref=e172]
+    - generic [ref=e176]:
+      - generic [ref=e177]:
+        - link "Docs" [ref=e179] [cursor=pointer]:
+          - /url: https://resend.com/docs/dashboard/domains/introduction
+        - button "Need help? H" [ref=e180] [cursor=pointer]:
+          - generic [ref=e182]: Need help?
+          - generic [ref=e184]: H
+      - generic [ref=e186]:
+        - generic [ref=e187]:
+          - generic [ref=e188]:
+            - generic [ref=e189]:
+              - img [ref=e190]
+              - img [ref=e218]
+            - generic [ref=e220]:
+              - text: Domain
+              - heading "sergiomonsalve.com" [level=1] [ref=e221]
+            - generic [ref=e222]:
+              - button "Open API drawer" [ref=e223] [cursor=pointer]:
+                - img [ref=e225]
+              - button "More actions" [ref=e235] [cursor=pointer]:
+                - img [ref=e236]
+          - generic [ref=e240]:
+            - generic [ref=e241]:
+              - generic [ref=e242]: Created
+              - time [ref=e245]: 29 days ago
+            - generic [ref=e246]:
+              - generic [ref=e247]: Status
+              - generic [ref=e249]: verified
+            - generic [ref=e250]:
+              - generic [ref=e251]: Provider
+              - generic [ref=e252]:
+                - img "Namecheap" [ref=e253]
+                - link "Namecheap" [ref=e260] [cursor=pointer]:
+                  - /url: https://ap.www.namecheap.com/Domains/DomainControlPanel/sergiomonsalve.com/advancedns
+            - generic [ref=e261]:
+              - generic [ref=e262]: Region
+              - generic [ref=e263]:
+                - img "us-east-1" [ref=e264]
+                - generic [ref=e265]:
+                  - text: North Virginia
+                  - generic [ref=e266]: (us-east-1)
+          - generic [ref=e267]:
+            - generic [ref=e268]: Domain Events
+            - alert [ref=e269]:
+              - img [ref=e271]
+              - paragraph [ref=e277]: "Domain verified: Your domain is ready to send emails."
+            - generic [ref=e279]:
+              - generic [ref=e280]:
+                - button "Domain added" [ref=e281]:
+                  - img [ref=e284]
+                  - generic [ref=e288]: Domain added
+                - generic [ref=e289]: May 05, 8:08 AM
+              - generic [ref=e290]:
+                - button "DNS verified" [ref=e291]:
+                  - img [ref=e294]
+                  - generic [ref=e298]: DNS verified
+                - generic [ref=e299]: Jun 02, 9:43 PM
+              - generic [ref=e300]:
+                - button "Domain verified" [ref=e301]:
+                  - img [ref=e304]
+                  - generic [ref=e308]: Domain verified
+                - generic [ref=e309]: Jun 02, 9:44 PM
+        - generic [ref=e311]:
+          - tablist [ref=e312]:
+            - tab "Records" [ref=e313] [cursor=pointer]
+            - tab "Configuration" [selected] [ref=e314] [cursor=pointer]
+          - tabpanel "Configuration" [ref=e315]:
+            - generic [ref=e316]:
+              - heading "Configuration" [level=3] [ref=e319]
+              - generic [ref=e320]:
+                - generic [ref=e321]:
+                  - heading "Enable tracking metrics" [level=2] [ref=e322]
+                  - text: To track clicks and email opens, configure a custom tracking subdomain to let those links match your sending domain and improve deliverability.
+                  - link "Configure" [ref=e324] [cursor=pointer]:
+                    - /url: /domains/6655a81d-c5b2-48c2-aa31-fccffb0c1e75/tracking
+                - generic [ref=e325]:
+                  - heading "TLS (Transport Layer Security)" [level=2] [ref=e326]
+                  - text: "\"Opportunistic TLS\" means that it always attempts to make a secure connection to the receiving mail server. If it can't establish a secure connection, it sends the message unencrypted. \"Enforced TLS\" on the other hand, requires that the email communication must use TLS no matter what."
+                  - combobox [ref=e328] [cursor=pointer]:
+                    - generic: Opportunistic
+                    - img [ref=e329]
+  - region "Notifications alt+T"
+  - alert [ref=e331]

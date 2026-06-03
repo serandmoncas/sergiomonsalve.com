@@ -1,0 +1,236 @@
+- generic [active]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - complementary [ref=e4]:
+        - button "s serandmoncas" [ref=e6] [cursor=pointer]:
+          - generic [ref=e8]:
+            - generic [ref=e10]:
+              - img [ref=e11]
+              - text: s
+            - generic [ref=e26]: serandmoncas
+          - img [ref=e28]
+        - navigation [ref=e31]:
+          - list [ref=e32]:
+            - listitem [ref=e33]:
+              - link "Emails" [ref=e34] [cursor=pointer]:
+                - /url: /emails
+                - img [ref=e36]
+                - text: Emails
+            - listitem [ref=e42]:
+              - link "Broadcasts" [ref=e43] [cursor=pointer]:
+                - /url: /broadcasts
+                - img [ref=e45]
+                - text: Broadcasts
+            - listitem [ref=e51]:
+              - link "Automations" [ref=e52] [cursor=pointer]:
+                - /url: /automations
+                - img [ref=e54]
+                - text: Automations
+            - listitem [ref=e66]:
+              - link "Templates" [ref=e67] [cursor=pointer]:
+                - /url: /templates
+                - img [ref=e69]
+                - text: Templates
+            - listitem [ref=e75]:
+              - link "Audience" [ref=e76] [cursor=pointer]:
+                - /url: /audience
+                - img [ref=e78]
+                - text: Audience
+            - listitem [ref=e94]:
+              - link "Metrics" [ref=e95] [cursor=pointer]:
+                - /url: /metrics
+                - img [ref=e97]
+                - text: Metrics
+            - listitem [ref=e107]:
+              - link "Domains" [ref=e108] [cursor=pointer]:
+                - /url: /domains
+                - img [ref=e110]
+                - text: Domains
+            - listitem [ref=e116]:
+              - link "Logs" [ref=e117] [cursor=pointer]:
+                - /url: /logs
+                - img [ref=e119]
+                - text: Logs
+            - listitem [ref=e129]:
+              - link "API keys" [ref=e130] [cursor=pointer]:
+                - /url: /api-keys
+                - img [ref=e132]
+                - text: API keys
+            - listitem [ref=e140]:
+              - link "Webhooks" [ref=e141] [cursor=pointer]:
+                - /url: /webhooks
+                - img [ref=e143]
+                - text: Webhooks
+            - listitem [ref=e152]:
+              - link "Settings" [ref=e153] [cursor=pointer]:
+                - /url: /settings
+                - img [ref=e155]
+                - text: Settings
+        - button "s serandmoncas@gmail.com" [ref=e165] [cursor=pointer]:
+          - generic [ref=e167]:
+            - generic [ref=e169]: s
+            - generic [ref=e170]: serandmoncas@gmail.com
+          - img [ref=e172]
+    - generic [ref=e176]:
+      - generic [ref=e177]:
+        - link "Docs" [ref=e179] [cursor=pointer]:
+          - /url: https://resend.com/docs/dashboard/domains/introduction
+        - button "Need help? H" [ref=e180] [cursor=pointer]:
+          - generic [ref=e182]: Need help?
+          - generic [ref=e184]: H
+      - generic [ref=e186]:
+        - generic [ref=e187]:
+          - generic [ref=e188]:
+            - generic [ref=e189]:
+              - img [ref=e190]
+              - img [ref=e218]
+            - generic [ref=e220]:
+              - text: Domain
+              - heading "sergiomonsalve.com" [level=1] [ref=e221]
+            - generic [ref=e222]:
+              - button "Restart" [ref=e224] [cursor=pointer]:
+                - img [ref=e226]
+                - generic [ref=e231]: Restart
+              - button "Open API drawer" [ref=e232] [cursor=pointer]:
+                - img [ref=e234]
+              - button "More actions" [ref=e244] [cursor=pointer]:
+                - img [ref=e245]
+          - generic [ref=e249]:
+            - generic [ref=e250]:
+              - generic [ref=e251]: Created
+              - time [ref=e254]: 29 days ago
+            - generic [ref=e255]:
+              - generic [ref=e256]: Status
+              - generic [ref=e258]: failed
+            - generic [ref=e259]:
+              - generic [ref=e260]: Provider
+              - generic [ref=e261]:
+                - img "Namecheap" [ref=e262]
+                - link "Namecheap" [ref=e269] [cursor=pointer]:
+                  - /url: https://ap.www.namecheap.com/Domains/DomainControlPanel/sergiomonsalve.com/advancedns
+            - generic [ref=e270]:
+              - generic [ref=e271]: Region
+              - generic [ref=e272]:
+                - img "us-east-1" [ref=e273]
+                - generic [ref=e274]:
+                  - text: North Virginia
+                  - generic [ref=e275]: (us-east-1)
+          - generic [ref=e276]:
+            - generic [ref=e277]: Domain Events
+            - generic [ref=e279]:
+              - generic [ref=e280]:
+                - button "Domain added" [ref=e281]:
+                  - img [ref=e284]
+                  - generic [ref=e288]: Domain added
+                - generic [ref=e289]: May 05, 8:08 AM
+              - generic [ref=e290]:
+                - button "Missing records" [ref=e291]:
+                  - img [ref=e294]
+                  - generic [ref=e297]: Missing records
+                - generic [ref=e298]: May 05, 12:44 PM
+        - generic [ref=e300]:
+          - tablist [ref=e301]:
+            - tab "Records" [selected] [ref=e302] [cursor=pointer]
+            - tab "Configuration" [ref=e303] [cursor=pointer]
+          - tabpanel "Records" [ref=e304]:
+            - generic [ref=e305]:
+              - generic [ref=e307]:
+                - heading "DNS Records" [level=3] [ref=e308]
+                - generic [ref=e309]:
+                  - button "Tutorial" [ref=e310] [cursor=pointer]:
+                    - img [ref=e313]
+                    - generic [ref=e319]: Tutorial
+                  - button "Forward instructions" [ref=e320] [cursor=pointer]:
+                    - img [ref=e322]
+              - heading "Domain Verification" [level=2] [ref=e328]
+              - heading "DKIM" [level=3] [ref=e329]:
+                - link "DKIM" [ref=e330] [cursor=pointer]:
+                  - /url: https://resend.com/docs/dashboard/domains/introduction#what-are-dkim-records
+                  - text: DKIM
+                  - img [ref=e331]
+              - table [ref=e338]:
+                - rowgroup [ref=e339]:
+                  - row "Type Host Value TTL Priority Status" [ref=e340]:
+                    - columnheader "Type" [ref=e341]
+                    - columnheader "Host" [ref=e342]
+                    - columnheader "Value" [ref=e343]
+                    - columnheader "TTL" [ref=e344]
+                    - columnheader "Priority" [ref=e345]
+                    - columnheader "Status" [ref=e346]
+                - rowgroup [ref=e347]:
+                  - row "TXT Copy resend._domainkey Copy p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlRms1RDmRsodfl9bBeJZIxj3dZgI2jZCmK5NWc4KifNd+laqVLjbvKR0fU9Ws1owiXt4yM5xfcMGHAspglGYrJLBnGv9nXiZ8I7CumDVSwJf9/AvjyDocJspSK7GofV2ssA9vKVZcT8p6hnxk2ddZwekadP4HM2H2Tnog6vFuywIDAQAB Auto verified" [ref=e348]:
+                    - cell "TXT" [ref=e349]
+                    - cell "Copy resend._domainkey" [ref=e350]:
+                      - button "Copy resend._domainkey" [ref=e351] [cursor=pointer]:
+                        - generic [ref=e352]: resend._domainkey
+                    - cell "Copy p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlRms1RDmRsodfl9bBeJZIxj3dZgI2jZCmK5NWc4KifNd+laqVLjbvKR0fU9Ws1owiXt4yM5xfcMGHAspglGYrJLBnGv9nXiZ8I7CumDVSwJf9/AvjyDocJspSK7GofV2ssA9vKVZcT8p6hnxk2ddZwekadP4HM2H2Tnog6vFuywIDAQAB" [ref=e353]:
+                      - button "Copy p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlRms1RDmRsodfl9bBeJZIxj3dZgI2jZCmK5NWc4KifNd+laqVLjbvKR0fU9Ws1owiXt4yM5xfcMGHAspglGYrJLBnGv9nXiZ8I7CumDVSwJf9/AvjyDocJspSK7GofV2ssA9vKVZcT8p6hnxk2ddZwekadP4HM2H2Tnog6vFuywIDAQAB" [ref=e354] [cursor=pointer]:
+                        - generic [ref=e355]:
+                          - text: p=MIGfMA0GCSqG[…]
+                          - generic [ref=e356]: SIb3DQEBAQUAA4GNADCBiQKBgQDlRms1RDmRsodfl9bBeJZIxj3dZgI2jZCmK5NWc4KifNd+laqVLjbvKR0fU9Ws1owiXt4yM5xfcMGHAspglGYrJLBnGv9nXiZ8I7CumDVSwJf9/AvjyDocJspSK7GofV2ssA9vKVZcT8p6hnxk2ddZwekadP4HM2H2Tno
+                          - text: g6vFuywIDAQAB
+                    - cell "Auto" [ref=e357]
+                    - cell [ref=e358]
+                    - cell "verified" [ref=e359]:
+                      - generic [ref=e360]: verified
+              - generic [ref=e362]:
+                - heading "Enable Sending" [level=2] [ref=e363]
+                - switch [checked] [ref=e364] [cursor=pointer]
+                - checkbox [checked] [ref=e366]
+              - generic [ref=e367]:
+                - alert [ref=e369]:
+                  - img [ref=e371]
+                  - generic [ref=e373]:
+                    - text: "Missing MX record:"
+                    - generic [ref=e374]: This record wasn't found. Add it to enable sending. Once fixed, restart verification.
+                - heading "SPF" [level=3] [ref=e375]:
+                  - link "SPF" [ref=e376] [cursor=pointer]:
+                    - /url: https://resend.com/docs/dashboard/domains/introduction#what-are-spf-records
+                    - text: SPF
+                    - img [ref=e377]
+                - table [ref=e384]:
+                  - rowgroup [ref=e385]:
+                    - row "Type Host Value TTL Priority Status" [ref=e386]:
+                      - columnheader "Type" [ref=e387]
+                      - columnheader "Host" [ref=e388]
+                      - columnheader "Value" [ref=e389]
+                      - columnheader "TTL" [ref=e390]
+                      - columnheader "Priority" [ref=e391]
+                      - columnheader "Status" [ref=e392]
+                  - rowgroup [ref=e393]:
+                    - row "MX Copy send Copy feedback-smtp.us-east-1.amazonses.com Auto 10 failed" [ref=e394]:
+                      - cell "MX" [ref=e395]
+                      - cell "Copy send" [ref=e396]:
+                        - button "Copy send" [ref=e397] [cursor=pointer]:
+                          - generic [ref=e398]: send
+                      - cell "Copy feedback-smtp.us-east-1.amazonses.com" [ref=e399]:
+                        - button "Copy feedback-smtp.us-east-1.amazonses.com" [ref=e400] [cursor=pointer]:
+                          - generic [ref=e401]:
+                            - text: feedback-smtp.[…]
+                            - generic [ref=e402]: us-east-1.
+                            - text: amazonses.com
+                      - cell "Auto" [ref=e403]
+                      - cell "10" [ref=e404]
+                      - cell "failed" [ref=e405]:
+                        - generic [ref=e406]: failed
+                    - row "TXT Copy send Copy v=spf1 include:amazonses.com ~all Auto failed" [ref=e407]:
+                      - cell "TXT" [ref=e408]
+                      - cell "Copy send" [ref=e409]:
+                        - button "Copy send" [ref=e410] [cursor=pointer]:
+                          - generic [ref=e411]: send
+                      - cell "Copy v=spf1 include:amazonses.com ~all" [ref=e412]:
+                        - button "Copy v=spf1 include:amazonses.com ~all" [ref=e413] [cursor=pointer]:
+                          - generic [ref=e414]:
+                            - text: v=spf1 include[…]
+                            - generic [ref=e415]: :amazo
+                            - text: nses.com ~all
+                      - cell "Auto" [ref=e416]
+                      - cell [ref=e417]
+                      - cell "failed" [ref=e418]:
+                        - generic [ref=e419]: failed
+              - generic [ref=e421]:
+                - heading "Enable Receiving" [level=2] [ref=e422]
+                - switch [ref=e423] [cursor=pointer]
+                - checkbox [ref=e425]
+  - region "Notifications alt+T"
+  - alert [ref=e426]

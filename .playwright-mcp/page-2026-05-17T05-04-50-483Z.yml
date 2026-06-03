@@ -1,0 +1,148 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "Songo Sorhongo" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - link "Nosotros" [ref=e6] [cursor=pointer]:
+          - /url: /nosotros
+        - link "Catálogo" [ref=e7] [cursor=pointer]:
+          - /url: /catalogo
+        - link "Servicios" [ref=e8] [cursor=pointer]:
+          - /url: /servicios
+        - link "Contacto" [ref=e9] [cursor=pointer]:
+          - /url: /contacto
+      - link "Cotizar →" [ref=e10] [cursor=pointer]:
+        - /url: /contacto
+  - main [ref=e11]:
+    - generic [ref=e12]:
+      - link "Escuela Aprendé micología Talleres, cursos y rutas de aprendizaje guiados por María Isabel. Ver servicios → 🍄" [ref=e13] [cursor=pointer]:
+        - /url: /servicios
+        - generic [ref=e14]: Escuela
+        - generic [ref=e15]:
+          - heading "Aprendé micología" [level=2] [ref=e16]
+          - paragraph [ref=e17]: Talleres, cursos y rutas de aprendizaje guiados por María Isabel.
+          - generic [ref=e18]: Ver servicios →
+        - generic [ref=e19]: 🍄
+      - link "Cultivo Hongos que nutren Variedades frescas, deshidratadas y funcionales. Del micelio propio a tu mesa. Ver catálogo →" [ref=e20] [cursor=pointer]:
+        - /url: /catalogo
+        - generic [ref=e21]: Cultivo
+        - generic [ref=e22]:
+          - heading "Hongos que nutren" [level=2] [ref=e23]
+          - paragraph [ref=e24]: Variedades frescas, deshidratadas y funcionales. Del micelio propio a tu mesa.
+          - generic [ref=e25]: Ver catálogo →
+      - link "Experiencias Talleres y catas Encuentros sensoriales y experiencias gastronómicas en el suroeste antioqueño. Contactar →" [ref=e26] [cursor=pointer]:
+        - /url: /contacto
+        - generic [ref=e27]: Experiencias
+        - generic [ref=e28]:
+          - heading "Talleres y catas" [level=2] [ref=e29]
+          - paragraph [ref=e30]: Encuentros sensoriales y experiencias gastronómicas en el suroeste antioqueño.
+          - generic [ref=e31]: Contactar →
+    - list [ref=e33]:
+      - listitem [ref=e34]:
+        - text: +6 variedades
+        - generic [ref=e35]: ·
+      - listitem [ref=e36]:
+        - text: Suroeste Antioqueño
+        - generic [ref=e37]: ·
+      - listitem [ref=e38]:
+        - text: Micelio propio
+        - generic [ref=e39]: ·
+      - listitem [ref=e40]: Talleres con experta
+    - generic [ref=e42]:
+      - heading "Productos Destacados" [level=2] [ref=e43]
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e47]: 🍄
+          - generic [ref=e48]:
+            - text: Fresco
+            - heading "Orellana" [level=3] [ref=e49]
+            - paragraph [ref=e50]: Pleurotus ostreatus
+            - link "Cotizar →" [ref=e51] [cursor=pointer]:
+              - /url: /catalogo/orellana
+        - generic [ref=e52]:
+          - generic [ref=e54]: 🍄
+          - generic [ref=e55]:
+            - text: Funcional
+            - heading "Melena de León" [level=3] [ref=e56]
+            - paragraph [ref=e57]: Hericium erinaceus
+            - link "Cotizar →" [ref=e58] [cursor=pointer]:
+              - /url: /catalogo/melena-de-leon
+        - generic [ref=e59]:
+          - generic [ref=e61]: 🍄
+          - generic [ref=e62]:
+            - text: Fresco
+            - heading "Shiitake" [level=3] [ref=e63]
+            - paragraph [ref=e64]: Lentinula edodes
+            - link "Cotizar →" [ref=e65] [cursor=pointer]:
+              - /url: /catalogo/shiitake
+        - generic [ref=e66]:
+          - generic [ref=e68]: 🍄
+          - generic [ref=e69]:
+            - text: Funcional
+            - heading "Reishi" [level=3] [ref=e70]
+            - paragraph [ref=e71]: Ganoderma lucidum
+            - link "Cotizar →" [ref=e72] [cursor=pointer]:
+              - /url: /catalogo/reishi
+        - generic [ref=e73]:
+          - generic [ref=e75]: 🍄
+          - generic [ref=e76]:
+            - text: Transformado
+            - heading "Umami en Polvo" [level=3] [ref=e77]
+            - link "Cotizar →" [ref=e78] [cursor=pointer]:
+              - /url: /catalogo/umami-polvo
+        - generic [ref=e79]:
+          - generic [ref=e81]: 🍄
+          - generic [ref=e82]:
+            - text: Deshidratado
+            - heading "Sazonador Umami" [level=3] [ref=e83]
+            - link "Cotizar →" [ref=e84] [cursor=pointer]:
+              - /url: /catalogo/sazonador-umami
+      - link "Ver Catálogo Completo" [ref=e86] [cursor=pointer]:
+        - /url: /catalogo
+    - generic [ref=e88]:
+      - generic [ref=e89]:
+        - text: Quiénes Somos
+        - heading "La red que todo lo sostiene" [level=2] [ref=e90]
+        - paragraph [ref=e91]: "El micelio conecta lo que parece separado. Así trabajamos: tejiendo comunidad, conocimiento y cultivo en el suroeste antioqueño."
+        - link "Conocé nuestra historia →" [ref=e92] [cursor=pointer]:
+          - /url: /nosotros
+      - generic [ref=e93]: 🍄
+    - generic [ref=e95]:
+      - heading "¿Listo para empezar?" [level=2] [ref=e96]
+      - paragraph [ref=e97]: Escribinos por WhatsApp o solicitá una cotización directa.
+      - generic [ref=e98]:
+        - link "WhatsApp" [ref=e99] [cursor=pointer]:
+          - /url: https://wa.me/573502440674
+        - link "Solicitar cotización" [ref=e100] [cursor=pointer]:
+          - /url: /contacto
+  - contentinfo [ref=e101]:
+    - generic [ref=e102]:
+      - generic [ref=e103]:
+        - heading "Songo Sorhongo" [level=3] [ref=e104]
+        - paragraph [ref=e105]: Hongos comestibles, funcionales y transformados. Cultivados con ciencia y amor en el suroeste antioqueño.
+      - generic [ref=e106]:
+        - heading "Navegación" [level=4] [ref=e107]
+        - list [ref=e108]:
+          - listitem [ref=e109]:
+            - link "nosotros" [ref=e110] [cursor=pointer]:
+              - /url: /nosotros
+          - listitem [ref=e111]:
+            - link "catalogo" [ref=e112] [cursor=pointer]:
+              - /url: /catalogo
+          - listitem [ref=e113]:
+            - link "servicios" [ref=e114] [cursor=pointer]:
+              - /url: /servicios
+          - listitem [ref=e115]:
+            - link "contacto" [ref=e116] [cursor=pointer]:
+              - /url: /contacto
+      - generic [ref=e117]:
+        - heading "Contacto" [level=4] [ref=e118]
+        - list [ref=e119]:
+          - listitem [ref=e120]: songosorhongo781@gmail.com
+          - listitem [ref=e121]:
+            - 'link "WhatsApp: +57 350 2440674 →" [ref=e122] [cursor=pointer]':
+              - /url: https://wa.me/573502440674
+          - listitem [ref=e123]: Suroeste Antioqueño, Colombia
+    - generic [ref=e124]: © 2026 Songo Sorhongo. Todos los derechos reservados.
+  - alert [ref=e125]

@@ -16,6 +16,25 @@ export async function POST(
   const hasEnrollment = await checkActiveEnrollment(admin, user.id, slug)
   if (!hasEnrollment) return NextResponse.json({ error: 'Not enrolled' }, { status: 403 })
 
+  // Resolve course.id from slug so we can scope the lesson lookup to this course
+  const { data: course } = await admin
+    .from('courses')
+    .select('id')
+    .eq('slug', slug)
+    .single()
+
+  if (!course) return NextResponse.json({ error: 'Course not found' }, { status: 404 })
+
+  // Verify the lesson belongs to this course before recording progress (prevents IDOR)
+  const { data: lesson } = await admin
+    .from('lessons')
+    .select('id, modules!inner(course_id)')
+    .eq('id', lessonId)
+    .eq('modules.course_id', course.id)
+    .single()
+
+  if (!lesson) return NextResponse.json({ error: 'Lesson not found' }, { status: 404 })
+
   const now = new Date().toISOString()
   const { error } = await admin
     .from('lesson_progress')

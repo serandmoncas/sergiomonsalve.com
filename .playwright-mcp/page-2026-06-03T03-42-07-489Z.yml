@@ -1,0 +1,128 @@
+- application [ref=e1]:
+  - banner "Menu bar" [ref=e2]:
+    - generic [ref=e5]:
+      - link "Docs home" [ref=e7] [cursor=pointer]:
+        - /url: https://docs.google.com/document/u/0/?authuser=0&usp=docs_web
+      - generic [ref=e14]:
+        - generic "Notas de Experiencias IA" [ref=e16]:
+          - generic [ref=e17]:
+            - generic: Notas de Experiencias IA
+            - textbox "Rename" [ref=e19]: Notas de Experiencias IA
+          - generic [ref=e20]:
+            - checkbox "Star" [ref=e22] [cursor=pointer]
+            - 'button "Document status: Saved to Drive." [ref=e26]':
+              - generic [ref=e31] [cursor=pointer]: Saved to Drive
+        - generic [ref=e34]:
+          - button "Show all comments 0 new comments" [ref=e36] [cursor=pointer]
+          - button [ref=e40]
+          - generic [ref=e45]:
+            - button "Share" [disabled] [ref=e46]: Share
+            - button "Quick sharing actions" [ref=e48]
+          - 'button "Google Account: Sergio Monsalve (serandmoncas@gmail.com)" [ref=e52] [cursor=pointer]':
+            - img [ref=e53]
+    - generic [ref=e54]:
+      - menubar [ref=e56]:
+        - menuitem "File" [ref=e57] [cursor=pointer]
+        - menuitem "Edit" [ref=e58] [cursor=pointer]
+        - menuitem "View" [ref=e59] [cursor=pointer]
+        - menuitem "Insert" [ref=e60] [cursor=pointer]
+        - menuitem "Format" [ref=e61] [cursor=pointer]
+        - menuitem "Tools" [ref=e62] [cursor=pointer]
+        - menuitem "Extensions" [ref=e63] [cursor=pointer]
+        - menuitem "Help" [ref=e64] [cursor=pointer]
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - toolbar "Search the menus (Option+/)" [ref=e67]:
+            - combobox "Menus" [ref=e69]
+          - toolbar "Main" [ref=e70]:
+            - button "Undo (⌘Z)" [ref=e71] [cursor=pointer]
+            - button "Redo (⌘Y)" [ref=e76] [cursor=pointer]
+            - button "Print (⌘P)" [disabled] [ref=e81]
+            - button "Spelling and grammar check (⌘+Option+X)" [disabled] [ref=e86]
+            - button "Paint format" [ref=e91] [cursor=pointer]
+            - combobox "Zoom" [ref=e96] [cursor=pointer]:
+              - option "Zoom list. 100% selected." [selected] [ref=e99]:
+                - textbox "Zoom" [ref=e100]: 100%
+            - separator [disabled] [ref=e104]
+            - listbox "Styles" [disabled] [ref=e105]:
+              - option "Styles" [disabled] [selected] [ref=e108]: Heading 2
+            - separator [disabled] [ref=e112]
+            - listbox "Font" [ref=e113] [cursor=pointer]:
+              - option "Arial" [selected] [ref=e116]
+            - separator [disabled] [ref=e120]
+            - button "Decrease font size (⌘+Shift+comma)" [ref=e121] [cursor=pointer]
+            - combobox "Font size" [ref=e126] [cursor=pointer]:
+              - option "Font size list. 16 selected." [selected] [ref=e129]:
+                - textbox "Font size" [ref=e130]: "16"
+            - button "Increase font size (⌘+Shift+full stop)" [ref=e131] [cursor=pointer]
+            - separator [disabled] [ref=e136]
+            - button "Bold (⌘B)" [ref=e137] [cursor=pointer]
+            - button "Italic (⌘I)" [ref=e142] [cursor=pointer]
+            - button "Underline (⌘U)" [ref=e147] [cursor=pointer]
+            - button "Text colour" [ref=e152] [cursor=pointer]
+            - button "Highlight colour" [ref=e159] [cursor=pointer]
+            - separator [disabled] [ref=e166]
+            - button "Insert link (⌘K)" [ref=e167] [cursor=pointer]
+            - button "Add comment (⌘+Option+M)" [ref=e172] [cursor=pointer]
+            - separator [disabled] [ref=e177]
+            - button "More" [disabled] [ref=e178] [cursor=pointer]
+        - toolbar "Mode and view" [ref=e185]:
+          - button [disabled] [ref=e186]
+          - separator [disabled] [ref=e190]
+          - button "Hide the menus (Ctrl+Shift+F)" [ref=e191] [cursor=pointer]
+  - generic [ref=e198]:
+    - generic [ref=e203]:
+      - generic [ref=e204]: "22"
+      - generic [ref=e209]: "21"
+      - generic [ref=e214]: "20"
+      - generic [ref=e219]: "19"
+      - generic [ref=e224]: "18"
+      - generic [ref=e229]: "17"
+      - generic [ref=e234]: "16"
+      - generic [ref=e239]: "15"
+      - generic [ref=e244]: "14"
+      - generic [ref=e249]: "13"
+      - generic [ref=e254]: "12"
+      - generic [ref=e259]: "11"
+      - generic [ref=e264]: "10"
+      - generic [ref=e269]: "9"
+      - generic [ref=e274]: "8"
+      - generic [ref=e279]: "7"
+      - generic [ref=e284]: "6"
+      - generic [ref=e289]: "5"
+      - generic [ref=e294]: "4"
+      - generic [ref=e299]: "3"
+      - generic [ref=e304]: "2"
+      - generic [ref=e309]: "1"
+      - generic [ref=e318]: "1"
+      - generic [ref=e323]: "2"
+      - generic [ref=e328]: "3"
+      - generic [ref=e333]: "4"
+      - generic [ref=e338]: "5"
+      - generic [ref=e343]: "6"
+      - generic [ref=e348]: "7"
+      - generic [ref=e353]: "8"
+      - generic [ref=e358]: "9"
+      - generic [ref=e363]: "10"
+      - generic [ref=e368]: "11"
+      - generic [ref=e373]: "12"
+      - generic [ref=e378]: "13"
+      - generic [ref=e383]: "14"
+      - generic [ref=e388]: "15"
+      - generic [ref=e393]: "16"
+      - generic [ref=e398]: "17"
+      - generic [ref=e403]: "18"
+      - generic [ref=e408]: "19"
+      - generic [ref=e413]: "20"
+      - generic [ref=e418]: "21"
+    - generic [ref=e433]:
+      - generic:
+        - generic:
+          - list
+    - img [ref=e440]
+  - iframe [active] [ref=e441]:
+    - textbox "Document content" [active] [ref=f11e1]
+    - group
+  - link "Turn on screen reader support" [ref=e442] [cursor=pointer]:
+    - /url: "#"
+  - region [ref=e443]: To enable screen reader support, press ⌘+Option+Z To learn about keyboard shortcuts, press ⌘slash
