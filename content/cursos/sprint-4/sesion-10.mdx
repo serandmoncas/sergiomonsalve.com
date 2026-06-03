@@ -1,0 +1,167 @@
+# Sesión 10 — CI/CD: el deploy que se cuida solo
+
+## Resumen
+
+Hoy entiendes por qué los equipos profesionales nunca hacen `git push` directo a producción. Recorres el pipeline completo que PersonalPage ya tiene configurado: cada cambio pasa por revisión automática antes de llegar a los usuarios, y Vercel genera un enlace de vista previa por cada Pull Request para que el equipo apruebe antes de publicar.
+
+---
+
+## Conceptos clave
+
+### ¿Qué es CI/CD?
+
+**CI (Continuous Integration):** cada vez que alguien sube código, el sistema lo valida automáticamente — tipos, linting, tests. Si algo falla, el merge queda bloqueado.
+
+**CD (Continuous Delivery / Deployment):** si el código pasa las validaciones, el sistema lo despliega automáticamente — sin intervención manual.
+
+El resultado: un `git push` puede llegar a producción en minutos, sin que nadie tenga que hacer nada a mano, y con garantía de que el código funciona.
+
+> "El pipeline de CI/CD es el control de calidad que corre más rápido que cualquier persona. Y a diferencia de las revisiones manuales, nunca se olvida de revisar."
+
+### Los 3 ambientes y por qué importan
+
+| Ambiente | Cuándo existe | URL de ejemplo | Variables |
+|---|---|---|---|
+| **development** | Solo en tu laptop | `localhost:3000` | `.env.local` |
+| **preview** | Por cada Pull Request | `mi-fix-typo.vercel.app` | Variables de preview en Vercel |
+| **production** | Cuando mergeas a `main` | `tu-dominio.com` | Variables de producción en Vercel |
+
+El mismo código corre en los tres ambientes. Lo que cambia son las variables de entorno — la URL de la base de datos, las API keys, los flags de features.
+
+Esto significa que puedes probar con una base de datos de prueba en preview, y solo afectar la base de datos real cuando llegas a producción.
+
+### Vercel y los Preview Deployments
+
+Cada PR que abres en GitHub genera automáticamente una URL única en Vercel:
+
+```
+https://mi-sitio-abc123-usuario.vercel.app
+```
+
+Esa URL:
+- Es pública (puedes compartirla con quien quieras para revisión)
+- Tiene sus propias variables de entorno configuradas en Vercel
+- Se destruye cuando cierras el PR
+- Aparece como comentario automático de Vercel en el PR de GitHub
+
+Esto es exactamente lo que usan los equipos de producto para que diseñadores, PMs o clientes revisen cambios antes de que sean públicos.
+
+### El pipeline de GitHub Actions en PersonalPage
+
+El workflow vive en `.github/workflows/` y corre en cada PR y cada push a `main`. Tiene 5 pasos en secuencia:
+
+```
+typecheck → lint → tests → build → E2E
+```
+
+| Paso | Qué verifica | Qué atrapa |
+|---|---|---|
+| **typecheck** | `tsc --noEmit` | Errores de tipos TypeScript — el código que la IA generó con tipos incorrectos |
+| **lint** | ESLint | Variables no usadas, imports rotos, patrones problemáticos |
+| **tests** | Jest (21 tests unitarios) | Lógica de componentes, funciones de utilidad, transformaciones de datos |
+| **build** | `next build` | Que el sitio compile completamente sin errores de producción |
+| **E2E** | Playwright (11 tests) | Que las páginas carguen y los flujos principales funcionen en un browser real |
+
+Si cualquier paso falla, GitHub bloquea el merge con una X roja. No hay forma de fusionar código roto.
+
+### Por qué esto importa para código generado con IA
+
+El grupo lo nombró bien: el código generado con IA puede ser "macabro" en calidad. Compila, parece que funciona — y luego falla en producción porque el tipo estaba mal, o porque el componente asume un prop que no existe.
+
+El pipeline atrapa exactamente eso:
+- **typecheck** atrapa los tipos inventados
+- **lint** atrapa los patrones que no siguen las reglas del proyecto
+- **tests** atrapa la lógica incorrecta
+- **E2E** atrapa que la página no revienta en el browser
+
+### Variables de entorno por ambiente
+
+En Vercel Dashboard → Settings → Environment Variables puedes configurar cada variable por ambiente:
+
+```
+NEXT_PUBLIC_SUPABASE_URL       → las 3 ambientes (mismo proyecto Supabase)
+NEXT_PUBLIC_SUPABASE_ANON_KEY  → las 3 ambientes (misma key)
+RESEND_API_KEY                 → solo production y preview
+```
+
+En local, el mismo `.env.local` que ya tienes funciona. Nunca subas ese archivo a GitHub — ya está en `.gitignore`.
+
+### Leer los logs de Vercel
+
+Cuando algo falla en producción después de un deploy:
+
+1. Ir a [vercel.com/dashboard](https://vercel.com/dashboard)
+2. Seleccionar el proyecto → **Deployments**
+3. Click en el deploy con error → pestaña **Build Logs**
+4. Para errores en runtime (no en build): pestaña **Functions** → seleccionar la función → **Logs**
+
+El tab **Functions** muestra cada invocación de las rutas API (`/api/contact`, `/api/comments`), los errores 500, y el tiempo de respuesta.
+
+---
+
+## Ejercicio en sesión
+
+### 1. Crear una rama y hacer un cambio
+
+```bash
+# En tu repositorio local de PersonalPage
+git checkout -b mejora/actualizar-bio
+```
+
+Edita `lib/site.config.ts` y cambia cualquier campo — tu bio, un skill, la descripción.
+
+```bash
+git add lib/site.config.ts
+git commit -m "chore: actualizar bio y skills"
+git push origin mejora/actualizar-bio
+```
+
+### 2. Abrir un Pull Request
+
+1. Ir a tu repositorio en GitHub
+2. GitHub muestra un banner amarillo: **"Compare & pull request"** — click ahí
+3. Poner un título descriptivo: `"Actualizar bio y skills en site.config"`
+4. Click en **Create pull request**
+
+### 3. Observar el pipeline
+
+En el PR verás checks corriendo en tiempo real:
+- Primero aparecen en amarillo (en progreso)
+- Se vuelven verdes ✓ si pasan, rojos ✗ si fallan
+
+En paralelo, Vercel publica un comentario con la URL de preview. Ábrela — es tu sitio con el cambio aplicado.
+
+### 4. Configurar variables de entorno en Vercel
+
+Para que el formulario de contacto funcione en preview:
+
+1. Ir a Vercel Dashboard → tu proyecto → **Settings** → **Environment Variables**
+2. Agregar:
+   - `NEXT_PUBLIC_SUPABASE_URL` → el valor de tu `.env.local`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` → el valor de tu `.env.local`
+3. Seleccionar los ambientes: **Preview** y **Production**
+4. Hacer **Redeploy** del PR desde Vercel para que las nuevas variables surtan efecto
+
+### 5. Mergear y ver el deploy de producción
+
+Una vez que todos los checks sean verdes:
+1. Click en **Merge pull request** en GitHub
+2. Ir a Vercel Dashboard → **Deployments**
+3. Observar el deploy de producción corriendo en tiempo real
+4. Cuando termine, abre tu URL de producción — el cambio está publicado
+
+---
+
+## Tarea entre sesiones
+
+**Ruta estándar:** Haz un cambio real en tu sitio usando el flujo completo: crea una rama → edita → commit → PR → revisa el preview → merge → producción. Al menos una actualización de contenido real (bio, proyecto, post).
+
+**Ruta acelerada:** Agrega un test unitario al test suite de PersonalPage (Jest) para un componente que hayas modificado. El test debe verificar que el componente renderiza el contenido correcto con las props que le pasas.
+
+---
+
+## Recursos
+
+- [GitHub Actions — documentación oficial](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
+- [Vercel Preview Deployments](https://vercel.com/docs/deployments/preview-deployments)
+- [Vercel Environment Variables](https://vercel.com/docs/projects/environment-variables)

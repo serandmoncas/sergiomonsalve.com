@@ -1,0 +1,222 @@
+# Sesión 13 — APIs de IA: hablar con los modelos desde código
+
+## Resumen
+
+Hoy dejas de usar la IA desde una interfaz y empiezas a hablar con los modelos directamente desde tu código. Al terminar tienes una ruta `/api/chat` que acepta mensajes y devuelve respuestas en streaming — la misma mecánica que usa Claude, ChatGPT y cualquier chatbot moderno.
+
+---
+
+## Conceptos clave
+
+### API keys: qué son y por qué NUNCA van en el frontend
+
+Una **API key** es una contraseña que identifica tu cuenta ante el proveedor del modelo. Cada llamada que haces con esa key se cobra a tu tarjeta.
+
+El error más común es poner la API key en código de frontend (React, JavaScript del navegador). El problema: todo lo que corre en el browser es visible. Cualquiera puede abrir DevTools → Network → ver tus llamadas → robar tu key → gastar tu crédito.
+
+La regla es absoluta:
+
+```
+❌ NUNCA en el frontend   →  src/app/chat/page.tsx
+✓  SIEMPRE en el backend  →  src/app/api/chat/route.ts
+```
+
+Las variables de entorno (`ANTHROPIC_API_KEY`) solo están disponibles en el servidor cuando tienen el prefijo correcto. En Next.js, una variable sin `NEXT_PUBLIC_` solo existe en el servidor — nunca llega al bundle del browser.
+
+### El ecosistema de proveedores
+
+Los proveedores principales exponen la misma idea con APIs levemente distintas:
+
+| Proveedor | Modelo insignia | Fortaleza |
+|---|---|---|
+| Anthropic | Claude Sonnet 4.6 | Razonamiento largo, código, documentos |
+| OpenAI | GPT-4o | Uso general, multimodal |
+| Google | Gemini 2.0 Flash | Integración con Workspace, contexto largo |
+| Meta | Llama 3.3 | Open source, correr localmente |
+
+Sin Vercel AI SDK tendrías que aprender la API de cada uno. Con él, cambiar de proveedor es cambiar una línea.
+
+### Vercel AI SDK: una interfaz para todos los modelos
+
+El paquete `ai` unifica streaming, tool use, agentes y embeddings con la misma API, sin importar el proveedor. Lo mantiene Vercel y es el estándar de facto en Next.js.
+
+Ventajas concretas para el proyecto:
+- **Streaming incorporado:** una línea en lugar de parsear SSE manualmente
+- **Hook `useChat`:** manejo completo del estado de conversación en el cliente
+- **Portabilidad:** cambiar `anthropic(...)` por `openai(...)` requiere cambiar una sola línea
+- **Tool use y agentes:** la misma API funciona para chat simple y para agentes complejos
+
+### Streaming: por qué las respuestas aparecen palabra por palabra
+
+Sin streaming, el modelo genera todo el texto, lo guarda en memoria, y solo entonces te lo manda. Con una respuesta larga eso puede ser 10-15 segundos de pantalla en blanco.
+
+Con streaming, el modelo envía cada token (trozo de palabra) en cuanto lo genera. El usuario ve movimiento desde el primer segundo. La implementación técnica usa **Server-Sent Events (SSE)** — Vercel AI SDK lo gestiona automáticamente con `streamText` y `toDataStreamResponse()`.
+
+### Tokens y estimación de costos
+
+Entender el costo evita sorpresas. Los precios de Claude Sonnet 4.6 a junio 2026:
+
+| Tipo | Precio |
+|---|---|
+| Input (lo que mandas) | ~$3 / millón de tokens |
+| Output (lo que responde) | ~$15 / millón de tokens |
+
+Referencia rápida para estimar:
+- 1 token ≈ 0.75 palabras en español
+- Una respuesta de chat típica: ~300-500 tokens de output = **$0.005–$0.0075**
+- 1.000 conversaciones de chat: ~$5-7.50 USD
+
+Para monitorear el uso real: [console.anthropic.com](https://console.anthropic.com) → Workbench → Usage. Puedes ver gasto por API key y configurar límites de gasto.
+
+---
+
+## Setup
+
+### Instalación
+
+```bash
+npm install ai @ai-sdk/anthropic
+```
+
+### Variable de entorno
+
+En Vercel dashboard → Settings → Environment Variables:
+
+```
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+Para desarrollo local, agregar al archivo `.env.local`:
+
+```
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+`.env.local` está en `.gitignore` por defecto — nunca se sube a GitHub.
+
+### La ruta `/api/chat`
+
+```typescript
+// src/app/api/chat/route.ts
+import { anthropic } from '@ai-sdk/anthropic'
+import { streamText } from 'ai'
+
+export async function POST(req: Request) {
+  const { messages } = await req.json()
+
+  const result = streamText({
+    model: anthropic('claude-sonnet-4-6'),
+    messages,
+  })
+
+  return result.toDataStreamResponse()
+}
+```
+
+Eso es todo. `streamText` llama al modelo, `toDataStreamResponse()` convierte el stream al formato que el hook `useChat` del cliente espera.
+
+---
+
+## Ejercicio en sesión
+
+### 1. Obtener API key
+
+1. Ir a [console.anthropic.com](https://console.anthropic.com)
+2. Settings → API Keys → Create Key
+3. Copiar la key (solo se muestra una vez)
+
+### 2. Agregar al proyecto
+
+```bash
+# En la raíz del proyecto
+echo "ANTHROPIC_API_KEY=sk-ant-TU_KEY_AQUI" >> .env.local
+```
+
+Verificar que `.env.local` está en `.gitignore`:
+
+```bash
+grep ".env.local" .gitignore
+# debe mostrar: .env.local
+```
+
+### 3. Instalar dependencias y crear la ruta
+
+```bash
+npm install ai @ai-sdk/anthropic
+```
+
+Crear `src/app/api/chat/route.ts` con el código de arriba.
+
+### 4. Probar desde la consola del browser
+
+Con el servidor corriendo (`npm run dev`), abrir DevTools → Console y ejecutar:
+
+```javascript
+const res = await fetch('/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    messages: [{ role: 'user', content: '¿Cuál es la capital de Colombia?' }]
+  })
+})
+const text = await res.text()
+console.log(text)
+```
+
+Deberías ver la respuesta en formato de stream. No es JSON limpio todavía — el hook `useChat` de la sesión siguiente lo parsea automáticamente.
+
+### 5. Bonus: cambiar de proveedor en una línea
+
+Para ver la portabilidad del SDK, instalar el adaptador de OpenAI:
+
+```bash
+npm install @ai-sdk/openai
+```
+
+Y en `route.ts` cambiar dos líneas:
+
+```typescript
+// Antes
+import { anthropic } from '@ai-sdk/anthropic'
+model: anthropic('claude-sonnet-4-6'),
+
+// Después
+import { openai } from '@ai-sdk/openai'
+model: openai('gpt-4o'),
+```
+
+El resto del código no cambia.
+
+---
+
+## Tarea entre sesiones
+
+**Ruta estándar:** Ruta `/api/chat` funcionando con Claude Sonnet 4.6, devolviendo respuestas en streaming. Verificado desde DevTools o un cliente REST como Bruno/Insomnia.
+
+**Ruta acelerada:** Agregar tool use a la ruta — una herramienta `getCurrentDateTime` que devuelve la fecha y hora actuales. Documentación: [sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling](https://sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling).
+
+```typescript
+// Hint para la ruta acelerada
+import { streamText, tool } from 'ai'
+import { z } from 'zod'
+
+const result = streamText({
+  model: anthropic('claude-sonnet-4-6'),
+  messages,
+  tools: {
+    getCurrentDateTime: tool({
+      description: 'Obtiene la fecha y hora actuales',
+      parameters: z.object({}),
+      execute: async () => new Date().toISOString(),
+    }),
+  },
+})
+```
+
+---
+
+## Recursos
+
+- [Vercel AI SDK — Getting Started](https://sdk.vercel.ai/docs/getting-started/nextjs-app-router)
+- [Anthropic Console — monitoreo de uso](https://console.anthropic.com)
+- [Precios de Claude](https://www.anthropic.com/pricing)

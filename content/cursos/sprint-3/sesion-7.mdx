@@ -1,0 +1,196 @@
+# Sesión 7 — Bases de datos: el cerebro del sitio
+
+## Resumen
+
+Hoy entiendes qué es una base de datos y por qué tu sitio la necesita para cobrar vida. Al terminar tienes un proyecto Supabase funcionando, una tabla creada visualmente, y sabes leer y escribir datos con SQL. Diego ya conoce esto — hoy se convierte en el experto del grupo.
+
+---
+
+## Conceptos clave
+
+### La hoja de cálculo con superpoderes
+
+Imagina una hoja de cálculo de Excel. Tiene **columnas** (Nombre, Email, Mensaje), **filas** (cada registro), y puedes filtrar, ordenar y hacer fórmulas. Una base de datos es exactamente eso — pero con tres superpoderes que Excel no tiene:
+
+1. **Múltiples tablas relacionadas.** Tu sitio tiene `usuarios`, `posts` y `comentarios`. Cada tabla sabe quién es dueño de qué.
+2. **Miles de usuarios simultáneos.** Excel con 50 personas editando a la vez colapsa. Una base de datos lo maneja sin sudar.
+3. **Seguridad granular.** Puedes decir: "solo el dueño puede editar su perfil, pero todos pueden leer los posts".
+
+| Concepto | Analogía Excel | En bases de datos |
+|---|---|---|
+| **Tabla** | Hoja (pestaña) | Entidad: `posts`, `usuarios`, `mensajes` |
+| **Fila** | Fila numerada | Un registro individual |
+| **Columna** | Columna A, B, C | Campo: `nombre`, `email`, `fecha` |
+| **Relación** | VLOOKUP entre hojas | `FK`: una tabla apunta a otra por ID |
+| **Índice** | Autofiltro | Búsqueda rápida en millones de filas |
+| **Transacción** | No existe | Garantía de que todo se guarda o nada |
+
+### SQL en 10 minutos
+
+SQL (Structured Query Language) es el idioma universal de las bases de datos. Lee como inglés. Lleva 50 años siendo el estándar y no va a desaparecer.
+
+**Las 4 operaciones fundamentales (CRUD):**
+
+```sql
+-- SELECT: leer datos
+SELECT title, date, description
+FROM posts
+ORDER BY date DESC;
+
+-- INSERT: crear un registro nuevo
+INSERT INTO contact_messages (name, email, message)
+VALUES ('Tu Nombre', 'tu@email.com', 'Hola desde el curso');
+
+-- UPDATE: modificar un registro existente
+UPDATE contact_messages
+SET message = 'Mensaje actualizado'
+WHERE id = 1;
+
+-- DELETE: eliminar un registro
+DELETE FROM contact_messages
+WHERE id = 1;
+```
+
+**Consultas útiles para analizar datos (esto lo sabe Diego de memoria):**
+
+```sql
+-- Ver todos los mensajes de contacto ordenados por fecha
+SELECT * FROM contact_messages ORDER BY created_at DESC;
+
+-- Contar mensajes por día
+SELECT DATE(created_at), COUNT(*)
+FROM contact_messages
+GROUP BY DATE(created_at)
+ORDER BY DATE(created_at) DESC;
+
+-- Buscar mensajes que contienen una palabra
+SELECT * FROM contact_messages
+WHERE message ILIKE '%precio%';
+
+-- Los últimos 5 registros
+SELECT * FROM contact_messages
+ORDER BY created_at DESC
+LIMIT 5;
+```
+
+La sintaxis es casi inglés: "SELECT estas columnas FROM esta tabla WHERE esta condición". Juan Pablo: esto es exactamente cómo procesas estados de cuenta con SQL.
+
+### ¿Qué es Supabase?
+
+Supabase es PostgreSQL (la base de datos más popular del mundo) + una capa de servicios encima:
+
+| Servicio | ¿Qué hace? | Sin Supabase |
+|---|---|---|
+| **PostgreSQL** | Base de datos relacional | Necesitarías configurar un servidor |
+| **API REST automática** | Cada tabla tiene endpoints generados | Semanas de desarrollo de backend |
+| **Auth** | Login, registro, magic links | Librería + servidor + seguridad = días |
+| **Storage** | Subir imágenes y archivos | S3 + configuración + costos |
+| **Realtime** | Suscripciones a cambios en vivo | WebSockets propios = semanas |
+| **Dashboard** | Editor visual de tablas y SQL | Tu propio admin = más semanas |
+
+En el mundo real, construir todo esto desde cero toma semanas de ingeniería. Supabase lo da gratis para proyectos pequeños.
+
+El proyecto de `sergiomonsalve.com` usa Supabase (`orlniujfwolyinsuezcu`, us-west-2). Cuando llegues a producción, crearás el tuyo propio.
+
+### Variables de entorno: el concepto de seguridad más importante
+
+Nunca escribas credenciales directamente en el código:
+
+```typescript
+// MAL — NUNCA hagas esto
+const supabase = createClient(
+  'https://abcxyz.supabase.co',    // ← visible en GitHub
+  'eyJhbGciOiJIUzI1NiIsInR5...'   // ← cualquiera puede robar tu BD
+)
+
+// BIEN — así se hace
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+```
+
+Las **variables de entorno** permiten que el mismo código tenga comportamiento diferente según el ambiente:
+
+| Archivo / Lugar | Para qué | Se sube a GitHub |
+|---|---|---|
+| `.env.local` | Desarrollo local | **NO** — está en `.gitignore` |
+| Vercel Dashboard | Producción | **NO** — está en el servidor |
+| `.env.example` | Documentar qué variables existen | Sí, sin valores reales |
+
+Regla de oro: **si tiene contraseña, clave, o token — va en variables de entorno**.
+
+### Row Level Security (RLS)
+
+Supabase activa RLS por defecto en todas las tablas. Significa que aunque expongas la URL de tu base de datos, nadie puede leer ni escribir datos sin permiso explícito.
+
+Sin RLS: cualquiera con la URL puede hacer `SELECT * FROM contact_messages` y ver todos los mensajes de tus usuarios. Con RLS: necesitan cumplir las políticas que tú defines. Para empezar, la ruta más sencilla es usar la `SERVICE_ROLE_KEY` desde el servidor (API Routes) — esa llave bypasea RLS y solo existe en el backend, nunca expuesta al navegador.
+
+---
+
+## Ejercicio en sesión
+
+### 1. Crear el proyecto en Supabase
+
+1. Ir a [supabase.com](https://supabase.com) y crear cuenta (gratis)
+2. Click en **New project**
+3. Nombre: `mi-sitio-personal` — región: `South America (São Paulo)` para menor latencia
+4. Guardar la contraseña de la base de datos (no la usarás seguido, pero guárdala)
+5. Esperar ~2 minutos mientras Supabase provisiona el servidor
+
+### 2. Crear la tabla `contact_messages` visualmente
+
+1. En el dashboard, ir a **Table Editor** → **New table**
+2. Nombre: `contact_messages`
+3. Activar **Enable Row Level Security (RLS)** — siempre
+4. Agregar columnas:
+
+| Nombre | Tipo | Default | Notas |
+|---|---|---|---|
+| `id` | `int8` | auto | Llave primaria — Supabase la crea sola |
+| `created_at` | `timestamptz` | `now()` | Fecha automática |
+| `name` | `text` | — | Requerido |
+| `email` | `text` | — | Requerido |
+| `message` | `text` | — | Requerido |
+
+5. Click en **Save**
+
+### 3. Correr consultas en el SQL Editor
+
+Ir a **SQL Editor** en el dashboard y ejecutar estas consultas:
+
+```sql
+-- Insertar un mensaje de prueba
+INSERT INTO contact_messages (name, email, message)
+VALUES ('Tu Nombre', 'tu@email.com', 'Hola desde el curso');
+
+-- Ver todos los mensajes
+SELECT title, date, description FROM posts ORDER BY date DESC;
+
+-- Contar mensajes por día
+SELECT DATE(created_at), COUNT(*) FROM contact_messages GROUP BY DATE(created_at);
+```
+
+### 4. Usar Claude para escribir consultas
+
+Abre Claude y usa este prompt:
+
+> "Tengo una tabla en PostgreSQL llamada `contact_messages` con columnas: `id` (int), `created_at` (timestamp), `name` (text), `email` (text), `message` (text). Escríbeme 3 consultas SQL útiles para analizar los mensajes que recibo. Quiero saber: quiénes me escriben más seguido, en qué horarios llegan más mensajes, y encontrar mensajes que mencionen una palabra específica."
+
+Corre las consultas resultantes en el SQL Editor de Supabase.
+
+---
+
+## Tarea entre sesiones
+
+**Ruta estándar:** Diseña en papel o con ayuda de IA el esquema de datos de tu sitio. ¿Qué información quieres guardar? ¿Solo mensajes de contacto, o también suscriptores, comentarios, entradas del blog? Dibuja las tablas con sus columnas y cómo se relacionan entre sí.
+
+**Ruta acelerada:** Explora la API REST que Supabase genera automáticamente. En tu dashboard ve a **API** → copia la URL de tu tabla. Prueba hacer un `GET` request desde el navegador o desde Thunder Client (extensión de VS Code). La URL tiene esta forma: `https://tu-proyecto.supabase.co/rest/v1/contact_messages` — necesitarás el `anon key` en el header `apikey`. ¿Qué retorna con RLS activado y sin políticas configuradas?
+
+---
+
+## Recursos
+
+- [Supabase Quickstart para Next.js](https://supabase.com/docs/guides/getting-started/quickstarts/nextjs) — setup oficial paso a paso
+- [PostgreSQL Tutorial en español](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/) — referencia completa de SQL
+- [Supabase Table Editor — documentación](https://supabase.com/docs/guides/database/tables) — crear y gestionar tablas visualmente

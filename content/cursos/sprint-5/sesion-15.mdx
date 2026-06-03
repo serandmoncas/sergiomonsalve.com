@@ -1,0 +1,271 @@
+# Sesión 15 — Embeddings, RAG y qué sigue
+
+## Resumen
+
+En la sesión final del curso mapeamos la frontera: qué son los embeddings, cómo RAG permite que los modelos trabajen con *tu* información, y dónde seguir creciendo desde aquí. Terminamos con la graduación — cada participante presenta su sitio en vivo y hacemos un cierre colectivo del sprint.
+
+---
+
+## Conceptos clave
+
+### ¿Qué es un embedding?
+
+Un **embedding** es una representación numérica del significado de un texto — un vector de cientos o miles de números decimales. El modelo convierte texto a esos números de tal forma que textos con significados similares producen vectores cercanos en ese espacio.
+
+Sin necesidad de álgebra lineal, la intuición es esta:
+
+- "perro" y "canino" → vectores muy cercanos (mismo significado)
+- "banco financiero" y "banco del parque" → vectores alejados (significados distintos)
+- "machine learning engineer" y "ML developer" → vectores cercanos
+
+Esto es exactamente lo que hace posible la búsqueda semántica: encontrar contenido por *significado*, no por palabras exactas.
+
+| Búsqueda por keyword | Búsqueda semántica (embeddings) |
+|---|---|
+| Busca "machine learning" | Encuentra "aprendizaje automático", "ML", "modelos de IA" |
+| Requiere que el usuario use las palabras exactas | Entiende la intención |
+| Rápida y determinista | Levemente más costosa, mucho más flexible |
+
+Para Diego: los embeddings son vectores en un espacio de alta dimensión (1.536 dimensiones para `text-embedding-3-small`). La distancia coseno entre dos vectores mide su similitud semántica. pgvector implementa índices HNSW e IVFFlat para búsqueda aproximada eficiente sobre esos vectores.
+
+### RAG: el patrón detrás de "ChatGPT con documentos"
+
+**RAG (Retrieval Augmented Generation)** es la técnica que permite a un modelo responder preguntas sobre *tu* información sin necesidad de reentrenarlo.
+
+El flujo completo:
+
+```
+1. INDEXACIÓN (offline, una vez)
+   Tu contenido → embed → guardar vectores en base de datos
+
+2. QUERY (online, cada pregunta)
+   Pregunta del usuario → embed → buscar vectores similares → traer texto original
+
+3. GENERACIÓN
+   Texto relevante + pregunta → contexto del LLM → respuesta fundamentada
+```
+
+El LLM nunca "aprende" tu contenido — simplemente lo recibe como contexto en cada llamada. Por eso RAG es barato comparado con fine-tuning, y por eso puedes actualizar el contenido sin volver a entrenar nada.
+
+Casos de uso directos para este grupo:
+- Jorge: documentación semántica de su lenguaje de programación
+- Juan Pablo: búsqueda sobre documentos financieros procesados
+- Diego: consultas semánticas sobre metadatos de un data catalog
+- Daniel: base de conocimiento interna de Sabio accesible por lenguaje natural
+
+### pgvector en Supabase: el vector store que ya tienen
+
+pgvector es una extensión de PostgreSQL que agrega un tipo de dato `vector` y operadores de similitud. Supabase lo soporta nativamente — no hay que configurar un servicio externo.
+
+**Habilitar pgvector:**
+
+```sql
+-- Ejecutar en Supabase SQL Editor
+CREATE EXTENSION IF NOT EXISTS vector;
+```
+
+**Agregar columna de embedding a una tabla existente:**
+
+```sql
+-- Para posts del blog
+ALTER TABLE posts ADD COLUMN embedding vector(1536);
+
+-- Índice para búsqueda rápida por similitud coseno
+CREATE INDEX ON posts USING ivfflat (embedding vector_cosine_ops)
+  WITH (lists = 100);
+```
+
+El número `1536` corresponde a las dimensiones del modelo `text-embedding-3-small` de OpenAI. Si usas `text-embedding-3-large`, cambia a `3072`.
+
+**Generar un embedding con Vercel AI SDK:**
+
+```typescript
+import { embed } from 'ai'
+import { openai } from '@ai-sdk/openai'
+
+const { embedding } = await embed({
+  model: openai.embedding('text-embedding-3-small'),
+  value: 'tu texto aquí',
+})
+// embedding es un array de 1536 números
+```
+
+**Buscar contenido similar en Supabase:**
+
+```typescript
+const { data } = await supabase.rpc('match_posts', {
+  query_embedding: embedding,
+  match_threshold: 0.78,
+  match_count: 5,
+})
+```
+
+**Función SQL de búsqueda semántica:**
+
+```sql
+CREATE OR REPLACE FUNCTION match_posts(
+  query_embedding vector(1536),
+  match_threshold float,
+  match_count int
+)
+RETURNS TABLE(id uuid, title text, similarity float)
+LANGUAGE plpgsql AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    posts.id,
+    posts.title,
+    1 - (posts.embedding <=> query_embedding) AS similarity
+  FROM posts
+  WHERE 1 - (posts.embedding <=> query_embedding) > match_threshold
+  ORDER BY similarity DESC
+  LIMIT match_count;
+END;
+$$;
+```
+
+El operador `<=>` calcula la distancia coseno. `1 - distancia = similitud`, donde 1.0 es idéntico y 0.0 es completamente distinto. Un umbral de 0.78 es un buen punto de partida.
+
+---
+
+## El mapa de lo que sigue
+
+El curso cubrió la base que hace posible todo lo demás. Este mapa es para orientar qué explorar según el próximo problema que enfrenten:
+
+| Tema | Qué es | Cuándo explorarlo |
+|---|---|---|
+| **Agentes** | Modelos que usan herramientas y toman decisiones en múltiples pasos | Cuando el chatbot necesita "hacer cosas": buscar en la web, ejecutar código, actualizar bases de datos |
+| **MCP (Model Context Protocol)** | Estándar abierto de Anthropic para conectar modelos a herramientas externas | Al construir herramientas para desarrolladores o integrar Claude Code en flujos propios |
+| **Fine-tuning** | Entrenar el modelo con tus datos para que adopte un estilo o vocabulario específico | Cuando necesitas voz de marca consistente o conocimiento muy especializado que no cabe en el contexto |
+| **Modelos locales (Ollama)** | Correr Llama, Mistral o Gemma en tu propia máquina | Cuando necesitas privacidad de datos, operación offline, o costo cero por llamada |
+| **Vercel AI Gateway** | API unificada con observabilidad, fallbacks y caché entre proveedores | Al ir a producción con múltiples proveedores o necesitar logs detallados de uso |
+| **Batch API** | Procesar miles de requests a mitad de precio con latencia diferida | Para indexar embeddings de contenido masivo o tareas que no son tiempo real |
+
+---
+
+## Ejercicio en sesión
+
+### Implementar búsqueda semántica de posts (demo)
+
+Este ejercicio es una demo guiada — el objetivo es ver el flujo completo, no tenerlo productivo al final de la sesión.
+
+**Paso 1: Habilitar pgvector en Supabase**
+
+En Supabase SQL Editor:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS vector;
+```
+
+**Paso 2: Instalar dependencia de embeddings**
+
+```bash
+npm install @ai-sdk/openai
+```
+
+(También necesita `OPENAI_API_KEY` en las variables de entorno.)
+
+**Paso 3: Script para indexar posts**
+
+```typescript
+// scripts/index-posts.ts
+import { embed } from 'ai'
+import { openai } from '@ai-sdk/openai'
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+
+const { data: posts } = await supabase
+  .from('posts')
+  .select('id, title, description, content')
+  .is('embedding', null)
+
+for (const post of posts ?? []) {
+  const text = `${post.title}\n${post.description}\n${post.content}`
+
+  const { embedding } = await embed({
+    model: openai.embedding('text-embedding-3-small'),
+    value: text,
+  })
+
+  await supabase
+    .from('posts')
+    .update({ embedding })
+    .eq('id', post.id)
+
+  console.log(`Indexed: ${post.title}`)
+}
+```
+
+**Paso 4: Ruta de búsqueda semántica**
+
+```typescript
+// src/app/api/search/route.ts
+import { embed } from 'ai'
+import { openai } from '@ai-sdk/openai'
+import { createAdminClient } from '@/lib/supabase/server'
+
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url)
+  const query = searchParams.get('q') ?? ''
+
+  const { embedding } = await embed({
+    model: openai.embedding('text-embedding-3-small'),
+    value: query,
+  })
+
+  const supabase = createAdminClient()
+  const { data } = await supabase.rpc('match_posts', {
+    query_embedding: embedding,
+    match_threshold: 0.78,
+    match_count: 5,
+  })
+
+  return Response.json(data)
+}
+```
+
+Probar en el browser: `/api/search?q=automatización+agrícola`
+
+---
+
+## Graduación
+
+### Presentación de sitios (20 min)
+
+Cada participante comparte pantalla y presenta:
+
+1. **URL del sitio en producción** — el dominio propio
+2. **Tres features implementadas** — qué sí quedó funcionando
+3. **La parte más difícil** — qué requirió más iteraciones o ayuda
+4. **La sorpresa más grande** — qué resultó más fácil o más poderoso de lo esperado
+
+No hay criterios de perfección. El criterio único es: *está en producción y es tuyo*.
+
+### Retrospectiva colectiva (10 min)
+
+- ¿Cambió algo en cómo piensan en IA como herramienta vs. como magia?
+- ¿Qué proyecto real les gustaría construir ahora que tienen el stack?
+- ¿Qué habrían hecho diferente en el Sprint 1?
+
+### Rutas para continuar según perfil
+
+| Perfil | Próximo paso recomendado |
+|---|---|
+| Quieres construir herramientas para devs | MCP + Vercel AI SDK tools |
+| Quieres procesar documentos a escala | RAG + Batch API de Anthropic |
+| Quieres entender los datos detrás | pgvector + análisis de embeddings con Python |
+| Quieres un producto SaaS | Vercel AI Gateway + metering de uso por usuario |
+| Quieres privacidad total | Ollama + modelos locales |
+
+---
+
+## Recursos
+
+- [Vercel AI SDK docs](https://sdk.vercel.ai/docs)
+- [Supabase Vector & AI](https://supabase.com/docs/guides/ai)
+- [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
+- [Prompt Engineering Guide](https://www.promptingguide.ai/es)

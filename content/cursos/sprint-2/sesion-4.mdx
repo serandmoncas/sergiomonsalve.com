@@ -1,0 +1,312 @@
+# Sesión 4 — Git: el historial que salva vidas
+
+## Resumen
+
+Git resuelve el problema del `final_v2_DEFINITIVO_corregido.docx`. Hoy aprendes cómo funciona el control de versiones, conectas GitHub con Vercel para que cada cambio que haces en tu laptop aparezca automáticamente en tu URL pública, y ejecutas el ciclo completo de trabajo que usarás el resto del curso.
+
+---
+
+## Conceptos clave
+
+### El problema que Git resuelve
+
+¿Te ha pasado esto?
+
+```
+presentacion.pptx
+presentacion_v2.pptx
+presentacion_v2_FINAL.pptx
+presentacion_v2_FINAL_corregido.pptx
+presentacion_v2_FINAL_corregido_sergio.pptx
+```
+
+Git elimina este problema registrando cada cambio con autor, fecha y mensaje. En lugar de duplicar archivos, tienes una línea del tiempo completa donde puedes ver qué cambió, cuándo, y por qué.
+
+### Los 5 conceptos fundamentales
+
+| Concepto | Qué es | Analogía |
+|---|---|---|
+| **Repositorio** | Carpeta con historial completo de cambios | Carpeta + máquina del tiempo |
+| **Commit** | Snapshot del estado del proyecto en un momento | Foto con fecha y descripción |
+| **Branch** | Línea paralela de trabajo que no afecta la principal | Borrador en papel antes de publicar |
+| **Merge** | Incorporar los cambios de una branch a otra | Pasar el borrador al documento oficial |
+| **Pull Request** | Propuesta formal de merge, con revisión | Pedir aprobación antes de publicar |
+
+### El flujo completo
+
+```
+Repositorio remoto (GitHub)
+        ↑  git push
+        │
+Tu computadora (clon local)
+        │
+git add         ← seleccionar qué cambios incluir
+git commit      ← crear el snapshot con mensaje
+git push        ← enviar a GitHub
+        │
+        ↓
+Vercel detecta el push → reconstruye → despliega en ~45 segundos
+```
+
+### GitHub como red social del código
+
+GitHub no es solo almacenamiento — es donde vive la colaboración:
+
+- **Fork:** copiar un repositorio ajeno a tu cuenta para modificarlo libremente
+- **Star:** marcar un proyecto que te gusta (también sirve como señal de popularidad)
+- **Issue:** reportar un problema o proponer una mejora
+- **Pull Request (PR):** proponer que tus cambios se incorporen al proyecto original
+- **Commit history:** el historial público de quién cambió qué y cuándo
+
+Cuando hiciste fork de `serandmoncas/PersonalPage` en la sesión 3, usaste este mecanismo. Tus cambios van a tu copia sin afectar el template original.
+
+### Vercel y GitHub: el CD automático
+
+Una vez que conectas tu repositorio a Vercel (lo hiciste en la sesión 3), el pipeline es automático:
+
+1. Haces cambios en tu computadora
+2. `git push` envía los cambios a GitHub
+3. Vercel recibe una notificación de GitHub en milisegundos
+4. Vercel descarga tu código, lo compila, lo despliega
+5. Tu URL pública muestra los cambios en ~45 segundos
+
+Si usas **feature branches**, Vercel además genera una URL de preview única para cada PR — puedes compartir esa URL antes de publicar a producción.
+
+---
+
+## Instalación y configuración de Git
+
+### Verificar si ya tienes Git
+
+```bash
+git --version
+# Si aparece algo como: git version 2.45.0
+# Ya tienes Git instalado. Puedes saltar al paso de configuración.
+```
+
+### Instalar Git
+
+**macOS:**
+```bash
+# Opción A: instala con las Xcode Command Line Tools (recomendado)
+xcode-select --install
+
+# Opción B: instala con Homebrew (si ya tienes Homebrew)
+brew install git
+```
+
+**Windows:** Descargar desde [git-scm.com/download/win](https://git-scm.com/download/win). Instalador incluye Git Bash.
+
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt update && sudo apt install git
+```
+
+### Configurar nombre y email (solo una vez)
+
+Git necesita saber quién eres para firmar cada commit:
+
+```bash
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu@email.com"
+```
+
+Usa el mismo email de tu cuenta de GitHub.
+
+### Verificar la configuración
+
+```bash
+git config --list
+# Debe mostrar user.name y user.email entre otras cosas
+```
+
+---
+
+## El ciclo completo: de tu laptop a producción
+
+### 1. Clonar tu repositorio
+
+Si aún no tienes el código en tu computadora:
+
+```bash
+# Reemplaza TU-USUARIO con tu usuario de GitHub y TU-REPO con el nombre de tu fork
+git clone https://github.com/TU-USUARIO/TU-REPO.git
+cd TU-REPO
+```
+
+### 2. Ver el estado actual
+
+Antes de cambiar cualquier cosa, revisa qué está pasando:
+
+```bash
+git status
+# Muestra qué archivos cambiaron, cuáles están listos para commit, cuáles no
+```
+
+### 3. Hacer un cambio
+
+Abre `lib/site.config.ts` en tu editor y modifica algo — por ejemplo, tu bio.
+
+### 4. Ver qué cambió exactamente
+
+```bash
+git diff
+# Muestra línea por línea qué añadiste (+) y qué eliminaste (-)
+```
+
+### 5. Preparar el commit
+
+```bash
+git add lib/site.config.ts
+# O para incluir todos los archivos modificados:
+git add .
+```
+
+`git add` no guarda nada todavía — solo dice "quiero incluir estos cambios en el próximo commit".
+
+### 6. Crear el commit
+
+```bash
+git commit -m "update: change bio to reflect current role"
+```
+
+El mensaje debe describir **qué** cambiaste y **por qué**, no cómo. Ejemplos de mensajes útiles:
+
+```bash
+git commit -m "add: Python and SQL to skills section"
+git commit -m "update: improve project description for Sabio"
+git commit -m "fix: correct email address in contact section"
+```
+
+### 7. Enviar a GitHub
+
+```bash
+git push origin main
+```
+
+### 8. Observar el deploy en Vercel
+
+Ve a tu dashboard de Vercel ([vercel.com/dashboard](https://vercel.com/dashboard)). Debes ver un nuevo deployment en progreso. En menos de un minuto tu sitio actualizado estará en vivo.
+
+### Ver el historial de commits
+
+```bash
+# En la terminal
+git log --oneline
+# Muestra algo como:
+# a3f5e12 update: change bio to reflect current role
+# 9b2d871 add: Python and SQL to skills section
+# 3c1f0a8 feat: initial personalización from session 3
+```
+
+En GitHub, el historial también está visible en la pestaña **Commits** de tu repositorio.
+
+---
+
+## Ejercicio en sesión
+
+Vas a hacer **3 commits** a tu fork de PersonalPage, cada uno con un cambio significativo. El objetivo es observar cómo crece el historial y cómo cada push desencadena un deploy en Vercel.
+
+### Setup previo (5 minutos)
+
+```bash
+# Clonar si no lo has hecho
+git clone https://github.com/TU-USUARIO/TU-REPO.git
+cd TU-REPO
+
+# Confirmar que todo está conectado
+git remote -v
+# Debe mostrar: origin  https://github.com/TU-USUARIO/TU-REPO.git
+```
+
+### Commit 1: Actualizar la bio
+
+Edita `lib/site.config.ts`. Cambia el campo `bio` para que refleje tu rol actual y área de expertise.
+
+```bash
+git add lib/site.config.ts
+git commit -m "update: refine bio with current role and expertise"
+git push origin main
+```
+
+Observa el deploy en Vercel mientras esperan el Commit 2.
+
+### Commit 2: Añadir o actualizar skills
+
+En el mismo `lib/site.config.ts`, actualiza el array de `skills` con las tecnologías que realmente usas.
+
+```bash
+git add lib/site.config.ts
+git commit -m "add: update skills with tools used in current role"
+git push origin main
+```
+
+### Commit 3: Añadir un proyecto
+
+Crea un archivo en `content/projects/`. El nombre del archivo define la URL:
+
+```bash
+# Crear el archivo (el nombre es la URL: /projects/nombre-del-proyecto)
+```
+
+Contenido del archivo `content/projects/mi-proyecto.mdx`:
+
+```mdx
+---
+title: "Nombre de tu proyecto"
+description: "Una frase que describe qué hace."
+date: "2026-06-10"
+tags: [python, automatización]
+url: "https://github.com/TU-USUARIO/tu-proyecto"
+---
+
+Descripción más larga. Qué problema resuelve, qué stack usaste, qué aprendiste.
+```
+
+```bash
+git add content/projects/mi-proyecto.mdx
+git commit -m "add: project page for [nombre del proyecto]"
+git push origin main
+```
+
+### Verificar el historial
+
+```bash
+git log --oneline
+```
+
+Confirma que ves los 3 commits. Ve también a GitHub → tu repositorio → pestaña **Commits** para verlo en la interfaz web.
+
+---
+
+## Tarea entre sesiones
+
+### Ruta estándar
+
+Usando el flujo completo desde tu laptop (`clone → edit → add → commit → push`), haz un cambio real a tu sitio: actualiza la sección que más te importe (proyectos, bio, agregar un post de blog). El commit debe quedar con un mensaje que explique qué cambiaste.
+
+### Ruta acelerada
+
+Trabaja con **feature branches**:
+
+```bash
+# Crear y cambiar a una nueva branch
+git checkout -b feature/nueva-seccion
+
+# Hacer cambios, commits...
+git add .
+git commit -m "add: nueva sección de experiencia"
+
+# Enviar la branch a GitHub
+git push origin feature/nueva-seccion
+```
+
+En GitHub, abre un **Pull Request** desde `feature/nueva-seccion` hacia `main`. Observa cómo Vercel genera automáticamente una URL de preview para ese PR (aparece como comentario automático en el PR). Una vez satisfecho, haz merge.
+
+---
+
+## Recursos
+
+- [Pro Git Book (español)](https://git-scm.com/book/es/v2) — la referencia completa, gratuita
+- [GitHub Skills](https://skills.github.com) — ejercicios interactivos oficiales de GitHub
+- [Vercel Git Integration](https://vercel.com/docs/deployments/git) — cómo funciona el CD automático con GitHub

@@ -1,0 +1,200 @@
+# Sesión 12 — SEO, performance y lanzamiento oficial
+
+## Resumen
+
+Hoy tu sitio deja de ser un proyecto y se convierte en presencia profesional pública. Aprendes los fundamentos de SEO que realmente importan, mides el performance con Lighthouse, y completas el checklist de lanzamiento. Al final de la sesión, cada participante comparte su URL — el sitio está en línea y es compartible.
+
+---
+
+## Conceptos clave
+
+### SEO: lo que importa de verdad
+
+SEO (Search Engine Optimization) es hacer que Google entienda de qué trata tu sitio y lo muestre cuando alguien busca algo relevante.
+
+Los elementos que controla PersonalPage:
+
+| Elemento | Qué hace | Dónde está en PersonalPage |
+|---|---|---|
+| `<title>` | El título que aparece en la pestaña del browser y en Google | `lib/site.config.ts` → `seo.title` |
+| `<meta description>` | El texto bajo el título en los resultados de Google | `lib/site.config.ts` → `seo.description` |
+| Open Graph | La tarjeta que aparece al compartir en WhatsApp, LinkedIn, Twitter | `lib/site.config.ts` → `seo.ogImage` |
+| Sitemap | Lista de todas tus URLs para que Google las indexe | Generado automáticamente en `/sitemap.xml` |
+| `robots.txt` | Instrucciones para los bots de Google sobre qué indexar | Disponible en `/robots.txt` |
+
+### Open Graph: la tarjeta de presentación al compartir
+
+Cuando compartes un enlace en WhatsApp o LinkedIn, ves una tarjeta con imagen, título y descripción. Eso es Open Graph — un conjunto de metadatos en el `<head>` de tu página.
+
+```html
+<!-- Lo que PersonalPage genera automáticamente -->
+<meta property="og:title" content="Tu Nombre — Developer & Builder" />
+<meta property="og:description" content="Tu descripción de 150-160 caracteres." />
+<meta property="og:image" content="https://tu-nombre.com/og-image.jpg" />
+<meta property="og:url" content="https://tu-nombre.com" />
+```
+
+Para verificar cómo se ve tu tarjeta antes de compartir: [opengraph.xyz](https://www.opengraph.xyz) — pega tu URL y ves la preview exacta.
+
+### Un archivo controla todo el SEO en PersonalPage
+
+```typescript
+// lib/site.config.ts — completa estos campos antes de lanzar
+export const site = {
+  name: "Tu Nombre",
+  bio: "Developer · Builder · Lo que te define profesionalmente",
+  url: "https://tu-nombre.com",
+  github: "tu-usuario-github",
+  twitter: "tu-handle-twitter",       // sin el @
+  linkedin: "tu-perfil-linkedin",     // solo el slug final de la URL
+  email: "tu@email.com",
+  skills: ["TypeScript", "React", "Next.js", "Python", "PostgreSQL"],
+  seo: {
+    title: "Tu Nombre — Developer & Builder",
+    description: "Descripción de 150-160 caracteres para Google. Explica qué haces y para quién. No uses palabras clave artificiales.",
+    ogImage: "/og-image.jpg",         // imagen 1200×630px en /public/
+  },
+} as const
+```
+
+Prompt para generar el SEO con IA:
+
+```
+"Soy [nombre], [cargo] en [empresa/sector]. Mi experiencia principal es [áreas].
+Escríbeme:
+1. Un title de máximo 60 caracteres para SEO (formato: 'Nombre — Rol')
+2. Una meta description de 150-160 caracteres que explique qué hago y qué valor ofrezco
+3. Una bio de una línea para el subtítulo de la homepage
+
+No uses: 'apasionado', 'proactivo', 'orientado a resultados', 'sinergia'."
+```
+
+### Core Web Vitals: las 3 métricas que Google mide
+
+Google usa estas 3 métricas para rankear sitios. También son indicadores de experiencia real del usuario.
+
+| Métrica | Qué mide | Meta |
+|---|---|---|
+| **LCP** (Largest Contentful Paint) | Cuánto tarda en cargar el contenido principal visible | < 2.5 segundos |
+| **CLS** (Cumulative Layout Shift) | Cuánto salta el contenido mientras carga | < 0.1 (idealmente 0) |
+| **INP** (Interaction to Next Paint) | Cuánto tarda la página en responder a un click o tecla | < 200ms |
+
+Un sitio Next.js bien construido llega a Lighthouse > 90 sin optimizaciones manuales. El trabajo real es no romperlo.
+
+### `<Image>` de Next.js: por qué usarlo siempre
+
+Si usas un `<img>` normal de HTML en Next.js, pierdes 3 optimizaciones automáticas:
+
+```tsx
+// ❌ HTML normal — descarga la imagen en su tamaño original, puede causar CLS
+<img src="/mi-foto.jpg" alt="Mi foto" width={400} height={400} />
+
+// ✅ Next.js Image — convierte a WebP, lazy loading, reserva espacio (previene CLS)
+import Image from 'next/image'
+<Image src="/mi-foto.jpg" alt="Mi foto" width={400} height={400} />
+```
+
+Lo que hace `<Image>` automáticamente:
+- Convierte a WebP (30-50% más liviano que JPG)
+- Solo carga la imagen cuando está próxima al viewport (lazy loading)
+- Reserva el espacio antes de cargar → CLS = 0
+- Sirve el tamaño correcto según el dispositivo
+
+### Lighthouse: cómo leer los resultados con IA
+
+Lighthouse está en Chrome DevTools → pestaña **Lighthouse**. Corre el análisis en modo incógnito para resultados más limpios (sin extensiones).
+
+Interpreta los resultados con IA:
+
+```
+"Tengo estos resultados de Lighthouse para mi sitio web:
+[pega el JSON o screenshot de resultados]
+
+¿Cuáles son los 3 problemas más importantes que debo resolver primero?
+Explícame qué causa cada problema y cómo arreglarlo en Next.js 15."
+```
+
+Los scores de Lighthouse se dividen en 4 categorías:
+
+| Categoría | Qué mide |
+|---|---|
+| **Performance** | Velocidad de carga (LCP, CLS, INP) |
+| **Accessibility** | Qué tan usable es para personas con discapacidades |
+| **Best Practices** | HTTPS, imágenes con dimensiones, sin errores de consola |
+| **SEO** | Metadatos, robots.txt, links rastreables |
+
+Para un sitio personal, apunta a > 90 en todas las categorías. PersonalPage está construido para llegar ahí sin esfuerzo extra.
+
+### Google Search Console: monitoreo gratuito de por vida
+
+Una vez que el sitio esté en producción:
+
+1. Ir a [search.google.com/search-console](https://search.google.com/search-console)
+2. Agregar tu propiedad (dominio)
+3. Verificar la propiedad (Vercel genera el archivo de verificación automáticamente)
+4. Enviar el sitemap: `https://tu-nombre.com/sitemap.xml`
+
+Google tarda 1-2 semanas en indexar el sitio. Search Console te muestra qué páginas indexó, qué errores encontró, y eventualmente qué búsquedas generan impresiones.
+
+---
+
+## Checklist de lanzamiento
+
+Completa esta lista antes de compartir la URL públicamente:
+
+- [ ] Dominio propio conectado con HTTPS (no `.vercel.app`)
+- [ ] `lib/site.config.ts` completamente llenado — ningún campo con el valor por defecto
+- [ ] Al menos un post publicado en `content/blog/`
+- [ ] Al menos un proyecto en `content/projects/`
+- [ ] Formulario de contacto probado — envíate un mensaje y verifica que llega
+- [ ] El sitio abre correctamente en el celular (prueba en el tuyo)
+- [ ] Lighthouse score > 90 en Performance
+- [ ] La tarjeta Open Graph aparece al compartir la URL (verifica en [opengraph.xyz](https://www.opengraph.xyz))
+- [ ] No hay links rotos ni imágenes que no cargan
+- [ ] El nombre en el tab del browser es tu nombre, no "My App" o "Personal Page"
+
+---
+
+## Ejercicio en sesión
+
+### 1. Completar lib/site.config.ts
+
+Usa el prompt de la sección de conceptos clave para generar el SEO con IA. Llena todos los campos del archivo. Haz commit y push — el deploy de producción toma ~60 segundos.
+
+### 2. Correr Lighthouse
+
+1. Abrir tu sitio en Chrome
+2. `F12` → pestaña **Lighthouse**
+3. Seleccionar: Mobile, Performance + SEO + Accessibility + Best Practices
+4. Click en **Analyze page load**
+5. Capturar screenshot del resultado
+
+### 3. Interpretar con IA
+
+Pega el screenshot o los resultados en Claude con el prompt de la sección de conceptos. Identifica los 2-3 cambios de más impacto.
+
+### 4. Verificar el Open Graph
+
+1. Ir a [opengraph.xyz](https://www.opengraph.xyz)
+2. Pegar tu URL de producción
+3. Verificar que la imagen, título y descripción se ven correctamente
+
+### 5. Compartir la URL
+
+Cada participante comparte su URL en el grupo. El sitio está público.
+
+---
+
+## Tarea entre sesiones
+
+**Ruta estándar:** Sitio en producción con dominio propio, HTTPS, SEO configurado, y formulario de contacto funcionando. Lighthouse > 90 en Performance. Compartir la URL en el grupo de WhatsApp.
+
+**Ruta acelerada:** Configurar [Google Search Console](https://search.google.com/search-console) y enviar el sitemap. Agregar un segundo post de blog sobre algo técnico de tu área — el contenido real es lo que eventualmente genera tráfico orgánico.
+
+---
+
+## Recursos
+
+- [OpenGraph.xyz](https://www.opengraph.xyz) — preview de cómo se ve tu URL al compartir
+- [Google Search Console](https://search.google.com/search-console) — indexación y monitoreo SEO gratuito
+- [web.dev/vitals](https://web.dev/vitals/) — guía oficial de Google sobre Core Web Vitals

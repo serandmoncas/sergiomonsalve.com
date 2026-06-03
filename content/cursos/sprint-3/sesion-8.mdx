@@ -1,0 +1,253 @@
+# Sesión 8 — Conectar la base de datos al sitio
+
+## Resumen
+
+Hoy el sitio deja de ser estático. Al terminar tienes una API Route en Next.js que recibe datos del navegador y los guarda en Supabase. Es el puente entre lo que el usuario ve y lo que tu base de datos almacena — el patrón que repites en casi todo proyecto web.
+
+---
+
+## Conceptos clave
+
+### Cómo Next.js habla con Supabase
+
+El navegador no puede conectarse directamente a Supabase con permisos de escritura. Si lo hiciera, la `SERVICE_ROLE_KEY` quedaría expuesta en el código del frontend — cualquiera que abriera las DevTools la vería.
+
+La arquitectura correcta tiene tres capas:
+
+```
+Navegador (cliente)
+    │
+    │  fetch('/api/contacto', { method: 'POST', body: datos })
+    │
+    ▼
+Next.js API Route  ← solo existe en el servidor, nunca en el navegador
+    │
+    │  supabase.from('contact_messages').insert(datos)
+    │
+    ▼
+Supabase (base de datos)
+```
+
+El **API Route** es el guardaespaldas. Valida los datos, usa la llave secreta del servidor, y decide si la operación procede.
+
+### Por qué no llamar a Supabase desde el cliente
+
+```typescript
+// INSEGURO — nunca hagas esto en un componente React
+'use client'
+import { createClient } from '@supabase/supabase-js'
+
+// Esta llave queda visible en el JavaScript que el navegador descarga
+const supabase = createClient(url, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+```
+
+La `SERVICE_ROLE_KEY` bypasea todas las políticas de seguridad de Supabase. Con esa llave, cualquiera puede leer, modificar o borrar toda tu base de datos. Va en el servidor y solo en el servidor.
+
+Lo que sí puede ir en el cliente es el `NEXT_PUBLIC_SUPABASE_ANON_KEY` — tiene permisos mínimos y está diseñada para ser pública.
+
+### Server Components vs Client Components para datos
+
+| | Server Component | Client Component |
+|---|---|---|
+| **Prefijo** | Sin `'use client'` (default) | `'use client'` al inicio del archivo |
+| **Ejecuta en** | Servidor — el usuario nunca ve este código | Navegador del usuario |
+| **Puede llamar a Supabase** | Sí, directamente con SERVICE_ROLE_KEY | Solo con ANON_KEY o a través de API Route |
+| **Ideal para** | Renderizar listas, páginas, contenido inicial | Formularios, interacciones, estado |
+| **Ejemplo** | Página que lista posts del blog | Formulario de contacto |
+
+Carlos: el ciclo es — Server Component carga la página con datos iniciales, Client Component maneja la interacción del usuario.
+
+### La rama del template con Supabase
+
+Para esta sesión clona la rama `stack/nextjs-supabase` del template:
+
+```bash
+git clone -b stack/nextjs-supabase https://github.com/serandmoncas/PersonalPage
+cd PersonalPage
+npm install
+```
+
+Esta rama ya tiene:
+- `@supabase/supabase-js` instalado
+- Estructura de carpetas para las API Routes
+- El cliente de Supabase configurado en `lib/supabase/`
+- Ejemplo de `.env.local` en `.env.example`
+
+### Instalar y configurar Supabase
+
+Si partes desde cero en tu propio fork:
+
+```bash
+npm install @supabase/supabase-js
+```
+
+Crear `.env.local` en la raíz del proyecto (este archivo nunca se sube a GitHub):
+
+```bash
+# .env.local
+NEXT_PUBLIC_SUPABASE_URL=https://tu-proyecto.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+Los valores los encuentras en tu dashboard de Supabase → **Project Settings** → **API**.
+
+Crear el cliente de Supabase para uso en el servidor:
+
+```typescript
+// lib/supabase/server.ts
+import { createClient } from '@supabase/supabase-js'
+
+export function createAdminClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
+```
+
+### El API Route completo
+
+```typescript
+// app/api/contacto/route.ts
+import { createAdminClient } from '@/lib/supabase/server'
+import { NextResponse } from 'next/server'
+
+export async function POST(request: Request) {
+  const { name, email, message } = await request.json()
+
+  // Validación mínima antes de tocar la base de datos
+  if (!name || !email || !message) {
+    return NextResponse.json(
+      { error: 'Todos los campos son requeridos' },
+      { status: 400 }
+    )
+  }
+
+  const supabase = createAdminClient()
+
+  const { error } = await supabase
+    .from('contact_messages')
+    .insert({ name, email, message })
+
+  if (error) {
+    console.error('Error de Supabase:', error)
+    return NextResponse.json(
+      { error: 'Error al guardar el mensaje' },
+      { status: 500 }
+    )
+  }
+
+  return NextResponse.json({ success: true })
+}
+```
+
+La función exportada se llama `POST` — Next.js la invoca automáticamente cuando llega una petición `POST` a `/api/contacto`. Si quisieras manejar `GET`, exportas `GET`.
+
+### Probar el API Route sin un formulario
+
+Antes de construir el formulario (eso es la sesión 9), prueba el Route directamente con **Thunder Client** (extensión gratuita de VS Code):
+
+1. Instalar Thunder Client desde el marketplace de VS Code
+2. New Request → método `POST`
+3. URL: `http://localhost:3000/api/contacto`
+4. Body → JSON:
+
+```json
+{
+  "name": "Diego Vargas",
+  "email": "diego@ejemplo.com",
+  "message": "Probando la API desde Thunder Client"
+}
+```
+
+5. Send → deberías recibir `{ "success": true }`
+6. Verificar en Supabase Table Editor que el registro apareció
+
+Daniel: este patrón de probar la API antes de conectarla al frontend es exactamente la práctica que Sabio debería tener para no depender de que el formulario funcione para saber si el backend está bien.
+
+### Leer datos desde un Server Component
+
+Una vez que tienes datos en Supabase, mostrarlos en una página es directo:
+
+```typescript
+// app/admin/mensajes/page.tsx
+// Sin 'use client' — este componente corre en el servidor
+import { createAdminClient } from '@/lib/supabase/server'
+
+export default async function MensajesPage() {
+  const supabase = createAdminClient()
+  
+  const { data: messages, error } = await supabase
+    .from('contact_messages')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  if (error) return <p>Error cargando mensajes.</p>
+
+  return (
+    <ul>
+      {messages.map((msg) => (
+        <li key={msg.id}>
+          <strong>{msg.name}</strong> — {msg.email}
+          <p>{msg.message}</p>
+        </li>
+      ))}
+    </ul>
+  )
+}
+```
+
+No hay `useEffect`, no hay `fetch`, no hay loading state. El servidor consulta Supabase, construye el HTML, y lo envía al navegador ya con los datos. Juan Pablo: esto es lo mismo que harías para mostrar un estado de cuenta procesado.
+
+---
+
+## Ejercicio en sesión
+
+### 1. Clonar la rama con Supabase
+
+```bash
+git clone -b stack/nextjs-supabase https://github.com/serandmoncas/PersonalPage
+cd PersonalPage
+npm install
+```
+
+### 2. Configurar las variables de entorno
+
+1. Copiar `.env.example` como `.env.local`
+2. Ir a tu proyecto de Supabase → **Project Settings** → **API**
+3. Copiar **Project URL** → pegar en `NEXT_PUBLIC_SUPABASE_URL`
+4. Copiar **anon public key** → pegar en `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+5. Copiar **service_role secret** → pegar en `SUPABASE_SERVICE_ROLE_KEY`
+
+### 3. Crear el API Route
+
+Crear el archivo `app/api/contacto/route.ts` con el código de arriba. Si usas el template, ya existe como referencia — revísalo y entiende cada línea.
+
+### 4. Correr el servidor y probar
+
+```bash
+npm run dev
+```
+
+Abrir Thunder Client, enviar el `POST` a `http://localhost:3000/api/contacto` con los datos de prueba. Verificar en Supabase que el registro existe.
+
+Usa Claude si algo falla:
+
+> "Tengo este error en mi API Route de Next.js: [pega el error]. El código es: [pega el código]. ¿Qué está mal?"
+
+---
+
+## Tarea entre sesiones
+
+**Ruta estándar:** El API Route `/api/contacto` funciona localmente. Puedes enviar un `POST` con Thunder Client y el mensaje aparece en Supabase. Documenta los pasos que seguiste en un mensaje al grupo.
+
+**Ruta acelerada:** Agrega un Server Component que lea los mensajes de `contact_messages` y los muestre en una página protegida (por ejemplo `/admin/mensajes`). No necesita autenticación todavía — solo quiero ver que los datos fluyen de Supabase al HTML. Si tienes ambición: agrega una ruta `GET` al API Route para que también puedas leer mensajes por API.
+
+---
+
+## Recursos
+
+- [Supabase JavaScript Client — documentación oficial](https://supabase.com/docs/reference/javascript/introduction)
+- [Next.js Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) — cómo funcionan los API Routes en App Router
+- [Thunder Client para VS Code](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) — alternativa liviana a Postman

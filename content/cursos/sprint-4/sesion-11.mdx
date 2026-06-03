@@ -1,0 +1,247 @@
+# Sesión 11 — Dominio propio + Autenticación
+
+## Resumen
+
+Hoy tu sitio deja de vivir en `algo.vercel.app` y pasa a ser `tu-nombre.com`. Aprendes cómo funciona el DNS — la guía telefónica de internet — y conectas tu dominio a Vercel en menos de 10 minutos. También implementas autenticación con magic link usando Supabase: sin contraseñas, sin fricciones, y más seguro que guardar passwords en una base de datos.
+
+---
+
+## Conceptos clave
+
+### DNS sin misterio
+
+Cuando alguien escribe `tu-nombre.com` en el browser, ocurre esto:
+
+```
+Browser pregunta: ¿quién es tu-nombre.com?
+  → Servidor DNS responde: es la IP 76.76.21.21
+  → Browser se conecta a esa IP
+  → Vercel responde con tu sitio
+```
+
+Los dos tipos de registros que vas a usar:
+
+| Registro | Para qué sirve | Ejemplo |
+|---|---|---|
+| **A record** | Apunta un dominio a una dirección IP | `tu-nombre.com` → `76.76.21.21` |
+| **CNAME** | Apunta un subdominio a otro dominio | `www.tu-nombre.com` → `cname.vercel-dns.com` |
+
+La propagación DNS tarda entre **1 y 48 horas** después de guardar los cambios. En la práctica, con los registradores modernos suele ser menos de 30 minutos.
+
+### ¿Dónde comprar un dominio?
+
+| Registrador | Precio .com/año | Ventaja |
+|---|---|---|
+| [Porkbun](https://porkbun.com) | ~$9-10 | Suele ser el más barato, UI limpia |
+| [Namecheap](https://namecheap.com) | ~$10-12 | Muchos años en el mercado, confiable |
+| [Squarespace Domains](https://domains.squarespace.com) | ~$20 | Simple, antes era Google Domains |
+| [Cloudflare Registrar](https://www.cloudflare.com/products/registrar/) | Precio de costo | Sin markup, pero necesitas cuenta Cloudflare |
+
+Recomendación para el grupo: **Porkbun o Namecheap**. Evita los dominios con descuento el primer año que cuestan $15+ el segundo — revisa siempre el precio de renovación.
+
+### Conectar dominio a Vercel
+
+**En Vercel Dashboard:**
+
+1. Ir al proyecto → **Settings** → **Domains**
+2. Click en **Add Domain**
+3. Escribir `tu-nombre.com`
+4. Vercel muestra los valores DNS que debes configurar
+
+**En tu registrador de dominio (ejemplo Namecheap):**
+
+1. Ir a **Domain List** → tu dominio → **Manage** → **Advanced DNS**
+2. Agregar un A record:
+   - Host: `@`
+   - Value: `76.76.21.21`
+   - TTL: Automatic
+3. Agregar un CNAME record:
+   - Host: `www`
+   - Value: `cname.vercel-dns.com`
+   - TTL: Automatic
+4. Guardar cambios
+
+**Vercel automáticamente:**
+- Detecta cuando el DNS apunta a sus servidores
+- Solicita y activa el certificado HTTPS (Let's Encrypt)
+- Configura los redirects de `www` a la raíz (o viceversa, según tu preferencia)
+
+Puedes verificar la propagación en [dnschecker.org](https://dnschecker.org) — busca tu dominio y ve si los servidores del mundo ya lo resuelven correctamente.
+
+### Autenticación: el problema de saber quién es quién
+
+Cuando un usuario dice "soy yo", el sistema necesita verificarlo. Las opciones tradicionales:
+
+| Método | Cómo funciona | Problema |
+|---|---|---|
+| Username + password | El usuario crea una contraseña | Las personas reusan contraseñas; si tu BD es hackeada, las contraseñas quedan expuestas |
+| OAuth (Google, GitHub) | Delegas la verificación a otro servicio | Dependes de que esa plataforma exista y esté disponible |
+| **Magic link** | Supabase envía un enlace al email | El email ya es el factor de autenticación — sin contraseñas que guardar ni hackear |
+
+### Magic link con Supabase
+
+El flujo completo:
+
+```
+1. Usuario pone su email en el formulario
+2. Tu app llama a supabase.auth.signInWithOtp()
+3. Supabase envía un email con el enlace mágico
+4. Usuario hace click → su browser va a /auth/callback?code=xyz
+5. Tu callback route llama a exchangeCodeForSession()
+6. Supabase valida el código y crea una sesión
+7. La sesión se guarda como cookie segura
+8. Usuario está autenticado — redirige a /admin
+```
+
+**El código real:**
+
+```typescript
+// Cualquier componente de login — app/admin/login/page.tsx
+'use client'
+import { createClient } from '@/lib/supabase/client'
+
+export default function LoginPage() {
+  async function handleSubmit(formData: FormData) {
+    const email = formData.get('email') as string
+    const supabase = createClient()
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+
+    if (error) {
+      console.error(error.message)
+    } else {
+      // Mostrar mensaje: "Revisa tu email"
+    }
+  }
+
+  return (
+    <form action={handleSubmit}>
+      <input type="email" name="email" required />
+      <button type="submit">Enviar enlace</button>
+    </form>
+  )
+}
+```
+
+```typescript
+// app/auth/callback/route.ts — recibe el código de Supabase
+import { createClient } from '@/lib/supabase/server'
+import { NextResponse } from 'next/server'
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const code = searchParams.get('code')
+
+  if (code) {
+    const supabase = await createClient()
+    await supabase.auth.exchangeCodeForSession(code)
+  }
+
+  return NextResponse.redirect(new URL('/admin', request.url))
+}
+```
+
+### Proteger rutas con middleware
+
+Para que `/admin` solo sea accesible a usuarios autenticados, el middleware de PersonalPage ya lo maneja. Si lo implementas desde cero:
+
+```typescript
+// middleware.ts (o proxy.ts en Next.js 16)
+import { createServerClient } from '@supabase/ssr'
+import { NextResponse, type NextRequest } from 'next/server'
+
+export async function middleware(request: NextRequest) {
+  const response = NextResponse.next()
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() { return request.cookies.getAll() },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options)
+          )
+        },
+      },
+    }
+  )
+
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const isAdminRoute = request.nextUrl.pathname.includes('/admin')
+  const isLoginPage = request.nextUrl.pathname.includes('/admin/login')
+
+  if (isAdminRoute && !isLoginPage && !user) {
+    return NextResponse.redirect(new URL('/admin/login', request.url))
+  }
+
+  return response
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+}
+```
+
+### Configuración requerida en Supabase
+
+Para que los magic links funcionen en producción, agrega estas URLs en Supabase Dashboard → **Authentication** → **URL Configuration** → **Redirect URLs**:
+
+```
+https://tu-nombre.com/auth/callback
+https://tu-proyecto.vercel.app/auth/callback
+http://localhost:3000/auth/callback
+```
+
+Sin estas URLs, Supabase rechaza el redirect con un error de seguridad.
+
+---
+
+## Ejercicio en sesión
+
+### 1. Conectar un dominio a Vercel
+
+Si ya tienes un dominio:
+1. Vercel Dashboard → tu proyecto → Settings → Domains → Add Domain
+2. Copiar los valores DNS que Vercel provee
+3. Ir al registrador y configurar el A record y el CNAME
+4. Verificar en Vercel cuando el status cambia a verde
+
+Si todavía no tienes un dominio:
+- Ir a [porkbun.com](https://porkbun.com) y buscar `tu-nombre.com`
+- El proceso de compra toma menos de 5 minutos con tarjeta
+
+### 2. Implementar magic link
+
+1. En Supabase Dashboard → Authentication → URL Configuration, agregar las redirect URLs de tu dominio
+2. Crear `app/admin/login/page.tsx` con el formulario de email
+3. Crear `app/auth/callback/route.ts` con el exchange de código
+4. Probar el flujo completo: ir a `/admin/login`, ingresar tu email, hacer click en el enlace del email, verificar que llegues a `/admin`
+
+### 3. Proteger la ruta /admin
+
+1. Verificar que el middleware redirige a `/admin/login` cuando no hay sesión
+2. Intentar acceder a `/admin` directamente desde una ventana incógnita — debe redirigir al login
+
+---
+
+## Tarea entre sesiones
+
+**Ruta estándar:** Dominio propio conectado a Vercel con HTTPS funcionando. La URL final debe ser `https://tu-nombre.com` — no `http://`, no `.vercel.app`.
+
+**Ruta acelerada:** Explorar [Supabase Storage](https://supabase.com/docs/guides/storage) para alojar imágenes directamente desde el sitio. Supabase Storage es como S3 pero integrado con la misma auth de tu app — puedes tener buckets públicos para imágenes del blog y privados para archivos del admin.
+
+---
+
+## Recursos
+
+- [Vercel — Custom Domains](https://vercel.com/docs/projects/domains/add-a-domain)
+- [Supabase Auth — Magic Link](https://supabase.com/docs/guides/auth/passwordless-login/auth-magic-link)
+- [DNSChecker.org](https://dnschecker.org) — verificar propagación DNS en tiempo real

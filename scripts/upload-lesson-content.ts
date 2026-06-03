@@ -1,14 +1,15 @@
-// scripts/upload-lesson-content.ts
+// scripts/upload-lesson-content.ts — npx tsx scripts/upload-lesson-content.ts
 import { createClient } from '@supabase/supabase-js'
 import { readFileSync, readdirSync, existsSync } from 'fs'
-import { join } from 'path'
-import * as dotenv from 'dotenv'
-dotenv.config({ path: '.env.local' })
+import { join, resolve } from 'path'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+const envVars = Object.fromEntries(
+  readFileSync(resolve(process.cwd(), '.env.local'), 'utf-8')
+    .split('\n')
+    .filter(l => l.includes('=') && !l.startsWith('#'))
+    .map(l => { const idx = l.indexOf('='); return [l.slice(0, idx).trim(), l.slice(idx + 1).trim().replace(/^["']|["']$/g, '')] })
 )
+Object.assign(process.env, envVars)
 
 const COURSE_SLUG = 'ia-de-cero-a-produccion'
 const CONTENT_DIR = join(process.cwd(), 'content/cursos')
@@ -16,10 +17,20 @@ const CONTENT_DIR = join(process.cwd(), 'content/cursos')
 function parseFilePath(relativePath: string): { moduleOrder: number; lessonOrder: number } | null {
   const match = relativePath.match(/sprint-(\d+)\/sesion-(\d+)\.mdx/)
   if (!match) return null
-  return { moduleOrder: parseInt(match[1]), lessonOrder: parseInt(match[2]) }
+  const moduleOrder = parseInt(match[1])
+  const absoluteSession = parseInt(match[2])
+  // Files use cumulative numbering (1-3 sprint1, 4-6 sprint2, etc.)
+  // Convert to relative (1-3) within each module
+  const lessonOrder = ((absoluteSession - 1) % 3) + 1
+  return { moduleOrder, lessonOrder }
 }
 
 async function upload() {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+
   const { data: course } = await supabase
     .from('courses')
     .select('id')
@@ -53,7 +64,7 @@ async function upload() {
         .from('modules')
         .select('id')
         .eq('course_id', course.id)
-        .eq('order', parsed.moduleOrder)
+        .eq('"order"', parsed.moduleOrder)
         .single()
 
       if (!module) {
@@ -66,7 +77,7 @@ async function upload() {
         .from('lessons')
         .update({ content_mdx: content })
         .eq('module_id', module.id)
-        .eq('order', parsed.lessonOrder)
+        .eq('"order"', parsed.lessonOrder)
 
       if (error) {
         console.error(`  ❌ Error uploading ${relativePath}:`, error.message)
@@ -80,4 +91,4 @@ async function upload() {
   console.log(`\n🎉 Done: ${uploaded} uploaded, ${skipped} skipped`)
 }
 
-upload()
+upload().catch(console.error)

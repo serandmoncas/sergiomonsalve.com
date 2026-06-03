@@ -1,0 +1,248 @@
+# Sesión 9 — Contenido dinámico: el sitio cobra vida
+
+## Resumen
+
+Hoy conectas todo lo que construiste en el sprint: base de datos, API Route, y ahora el formulario en el navegador. Al terminar tienes un formulario de contacto en producción que guarda mensajes reales en Supabase. Puedes ir al dashboard de Supabase y ver quién te escribe.
+
+---
+
+## Conceptos clave
+
+### El ciclo de vida de un formulario web
+
+Sin magia, sin misterio — esto es lo que pasa cuando alguien hace clic en "Enviar":
+
+```
+1. Usuario llena el formulario en el navegador
+2. JavaScript toma los valores del formulario
+3. fetch() envía un POST a /api/contacto con los datos en JSON
+4. El navegador muestra "Enviando..." mientras espera
+5. El API Route (servidor) recibe los datos
+6. El servidor valida: ¿están todos los campos? ¿el email tiene formato válido?
+7. Si pasa validación → Supabase guarda el registro
+8. El servidor responde { success: true }
+9. El navegador recibe la respuesta → muestra "¡Mensaje enviado!"
+```
+
+Si algo falla en el paso 6 o 7, el servidor responde con un error y el navegador muestra el mensaje de error. El usuario nunca ve un crash ni una página en blanco.
+
+### Por qué no puedes confiar en el input del usuario
+
+Los formularios HTML tienen validación (`required`, `type="email"`) — pero esa validación solo existe en el navegador. Cualquiera puede:
+- Desactivar JavaScript y enviar el formulario igualmente
+- Usar Thunder Client o curl para hacer la petición directamente al API Route
+- Modificar el HTML en DevTools y quitar el atributo `required`
+
+La validación del lado del cliente (HTML/JavaScript) es **UX** — mejora la experiencia del usuario y evita viajes innecesarios al servidor. La validación del lado del servidor es **seguridad** — es la que realmente protege tu base de datos.
+
+Siempre valida en ambos lados.
+
+### Zod: validación con tipos incluidos
+
+Zod es una librería que valida datos en tiempo de ejecución y genera los tipos de TypeScript automáticamente:
+
+```typescript
+import { z } from 'zod'
+
+const ContactSchema = z.object({
+  name: z.string().min(2, 'El nombre es muy corto'),
+  email: z.string().email('Email inválido'),
+  message: z.string().min(10, 'El mensaje es muy corto'),
+})
+
+// En tu API Route:
+const result = ContactSchema.safeParse(await request.json())
+if (!result.success) {
+  return NextResponse.json({ error: result.error.flatten() }, { status: 400 })
+}
+// result.data tiene los tipos correctos y ya fue validado
+const { name, email, message } = result.data
+```
+
+No es obligatorio para esta sesión, pero el proyecto `sergiomonsalve.com` lo usa. Claude puede ayudarte a agregar validación Zod a tu API Route si quieres la ruta acelerada.
+
+### UX de formularios: los cuatro estados
+
+Un formulario bien construido siempre sabe en qué estado está:
+
+| Estado | Qué muestra | Cuándo |
+|---|---|---|
+| `idle` | Formulario vacío, botón "Enviar" activo | Estado inicial |
+| `loading` | Botón desactivado con "Enviando..." | Mientras espera respuesta del servidor |
+| `success` | Mensaje verde, formulario limpio | El servidor confirmó que se guardó |
+| `error` | Mensaje rojo con instrucción de reintentar | El servidor reportó un error |
+
+Sin estos cuatro estados, el usuario hace clic en "Enviar", no pasa nada visible, y hace clic tres veces más — guardando el mismo mensaje cuatro veces en tu base de datos.
+
+### El componente completo de contacto
+
+```tsx
+// components/ContactForm.tsx
+'use client'
+import { useState } from 'react'
+
+export default function ContactForm() {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setStatus('loading')
+    const form = e.currentTarget
+    const data = {
+      name: (form.elements.namedItem('name') as HTMLInputElement).value,
+      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    }
+    const res = await fetch('/api/contacto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    setStatus(res.ok ? 'success' : 'error')
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <input
+        name="name"
+        required
+        placeholder="Tu nombre"
+        className="w-full border p-2 rounded"
+      />
+      <input
+        name="email"
+        type="email"
+        required
+        placeholder="tu@email.com"
+        className="w-full border p-2 rounded"
+      />
+      <textarea
+        name="message"
+        required
+        placeholder="Tu mensaje"
+        rows={4}
+        className="w-full border p-2 rounded"
+      />
+      <button type="submit" disabled={status === 'loading'}>
+        {status === 'loading' ? 'Enviando...' : 'Enviar'}
+      </button>
+      {status === 'success' && (
+        <p className="text-green-600">¡Mensaje enviado! Te respondo pronto.</p>
+      )}
+      {status === 'error' && (
+        <p className="text-red-600">Error al enviar. Intenta de nuevo.</p>
+      )}
+    </form>
+  )
+}
+```
+
+Sobre el "código macabro": este componente es deliberadamente simple. No tiene 400 líneas de configuración. Si Claude te genera algo más complejo y no entiendes una parte, pregúntale hasta que lo entiendas o pídele que lo simplifique — ese es el músculo que estamos entrenando.
+
+### Dónde usar el componente
+
+En la página de contacto del template (`app/contact/page.tsx`):
+
+```tsx
+// app/contact/page.tsx
+import ContactForm from '@/components/ContactForm'
+
+export default function ContactPage() {
+  return (
+    <main className="max-w-lg mx-auto py-12 px-4">
+      <h1 className="text-2xl font-bold mb-6">Contacto</h1>
+      <p className="mb-6 text-gray-600">
+        Escríbeme. Respondo dentro de 48 horas.
+      </p>
+      <ContactForm />
+    </main>
+  )
+}
+```
+
+### Desplegar a producción con las variables de entorno
+
+El `.env.local` funciona localmente pero Vercel no lo lee. Debes agregar las variables en el dashboard de Vercel:
+
+1. Ir a [vercel.com](https://vercel.com) → tu proyecto → **Settings** → **Environment Variables**
+2. Agregar cada variable:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+3. Hacer un nuevo deploy (push a `main` o click en **Redeploy**)
+
+Sin este paso, el formulario en producción va a fallar porque el servidor no tiene las credenciales de Supabase.
+
+---
+
+## Ejercicio en sesión
+
+### 1. Crear el componente ContactForm
+
+Crear `components/ContactForm.tsx` con el código de arriba. Si tienes el template clonado de la sesión 8, revisa si ya existe y compáralo con la versión del ejercicio.
+
+### 2. Agregar el componente a la página de contacto
+
+Editar `app/contact/page.tsx` (o la ruta equivalente en tu fork) para usar `<ContactForm />`.
+
+### 3. Probar el flujo completo localmente
+
+```bash
+npm run dev
+```
+
+1. Abrir `http://localhost:3000/contact`
+2. Llenar el formulario y enviar
+3. Verificar en Supabase Table Editor que el mensaje llegó
+4. Probar el estado de error: temporalmente cambia la URL de Supabase en `.env.local` a algo inválido y envía de nuevo — ¿el formulario muestra el mensaje de error?
+5. Restaurar la URL correcta
+
+### 4. Agregar las variables a Vercel y hacer deploy
+
+Seguir los pasos de la sección anterior para agregar las variables de entorno en Vercel. Luego:
+
+```bash
+git add -A
+git commit -m "feat: add contact form connected to Supabase"
+git push origin main
+```
+
+Vercel detecta el push y despliega automáticamente. En ~60 segundos puedes probar el formulario en tu URL de producción.
+
+### 5. Probar en producción
+
+Abrir tu URL de Vercel, llenar el formulario, y ver el mensaje aparecer en Supabase. Compartir la URL en el grupo para que todos puedan enviarte un mensaje real.
+
+---
+
+## Entregable del Sprint 3
+
+Formulario de contacto en producción que:
+- Guarda mensajes en Supabase
+- Muestra feedback visual al usuario (loading, success, error)
+- Funciona en la URL pública de Vercel
+
+Para verificarlo: ve a tu Supabase dashboard → Table Editor → `contact_messages` y deberías ver los mensajes reales enviados desde tu sitio.
+
+---
+
+## Tarea entre sesiones
+
+**Ruta estándar:** El formulario de contacto está en producción. Envíate un mensaje desde tu propio sitio y verifica que aparece en Supabase. Comparte el screenshot en el grupo.
+
+**Ruta acelerada:** Agrega una de estas funcionalidades usando Claude como par:
+
+- **Sistema de comentarios:** tabla `comments` en Supabase, formulario debajo de cada post del blog, lista de comentarios aprobados visible en la página.
+- **Blog desde Supabase:** en lugar de archivos `.mdx`, los posts se guardan en una tabla `posts` y se leen con un Server Component. Agrega un formulario de admin para crear posts.
+
+Para cualquiera de los dos, empieza con este prompt:
+
+> "Quiero agregar [comentarios/blog dinámico] a mi sitio Next.js que ya tiene Supabase configurado. Ya tengo un API Route en `/api/contacto` que funciona. ¿Cuál es el schema de la tabla que necesito en Supabase y cuáles son los pasos para implementarlo?"
+
+---
+
+## Recursos
+
+- [Supabase + Next.js — tutorial oficial completo](https://supabase.com/docs/guides/getting-started/tutorials/with-nextjs)
+- [Zod — documentación y playground](https://zod.dev) — para validación del lado del servidor
+- [Vercel — Environment Variables](https://vercel.com/docs/projects/environment-variables) — cómo gestionar credenciales en producción

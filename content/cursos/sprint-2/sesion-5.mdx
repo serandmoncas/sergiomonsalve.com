@@ -1,0 +1,275 @@
+# Sesión 5 — Leer código con IA como copiloto
+
+## Resumen
+
+Next.js es el framework que usa tu PersonalPage. Hoy aprendes a orientarte en un proyecto real sin necesitar entender cada línea — usas Claude como guía para descifrar qué hace cada archivo y dónde vivie cada parte de tu sitio. Al terminar sabes exactamente qué tocar para cambiar cualquier cosa.
+
+---
+
+## Conceptos clave
+
+### ¿Qué es Next.js y por qué el mundo lo usa?
+
+Next.js es un framework de React que resuelve los problemas más comunes al construir sitios web modernos:
+
+- **Routing automático:** creas un archivo `app/about/page.tsx` y la URL `/about` existe. Sin configuración.
+- **Server-side rendering:** las páginas se pueden pre-generar en el servidor, lo que significa que Google las indexa mejor y cargan más rápido.
+- **API routes:** puedes escribir backend (endpoints HTTP) en el mismo proyecto, sin servidor separado.
+- **Deploy trivial en Vercel:** Vercel es la empresa detrás de Next.js. El despliegue es nativo.
+
+En el ranking de frameworks web más usados en 2024, Next.js es el número uno del ecosistema JavaScript para producción. Tu PersonalPage lo usa en su variante más moderna: el **App Router** con TypeScript.
+
+### Las tres capas del frontend
+
+Antes de entrar al código, tres conceptos en una oración cada uno:
+
+| Capa | Qué hace | Ejemplo |
+|---|---|---|
+| **HTML** | Estructura — qué elementos existen | `<h1>Mi nombre</h1>` |
+| **CSS** | Apariencia — cómo se ven | `color: green; font-size: 24px` |
+| **JavaScript / TypeScript** | Comportamiento — qué hacen | `onClick={() => setOpen(true)}` |
+
+En tu PersonalPage, el CSS lo escribe Tailwind (clases directamente en el HTML), y el JavaScript lo escribe Next.js + React.
+
+### Componentes: los Lego del frontend
+
+Un **componente** es una pieza de UI reutilizable con su propio HTML, CSS y lógica encapsulados. La idea central de React.
+
+**Sin componentes:**
+```html
+<!-- Repites esto en cada página -->
+<nav>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/blog">Blog</a>
+</nav>
+```
+
+**Con componentes:**
+```tsx
+// components/Nav.tsx — definido una vez
+export function Nav() {
+  return (
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/blog">Blog</a>
+    </nav>
+  );
+}
+
+// Usado en cualquier página con una línea:
+<Nav />
+```
+
+Si quieres cambiar la navegación, cambias un solo archivo y se actualiza en todas partes.
+
+---
+
+## Estructura de PersonalPage
+
+```
+PersonalPage/
+├── app/                        ← páginas y rutas
+│   ├── page.tsx                ← Home (/)
+│   ├── about/
+│   │   └── page.tsx            ← About (/about)
+│   ├── blog/
+│   │   ├── page.tsx            ← Listado de posts (/blog)
+│   │   └── [slug]/
+│   │       └── page.tsx        ← Post individual (/blog/mi-post)
+│   ├── projects/
+│   │   ├── page.tsx            ← Listado de proyectos (/projects)
+│   │   └── [slug]/
+│   │       └── page.tsx        ← Proyecto individual
+│   ├── layout.tsx              ← Envuelve TODAS las páginas (Nav, Footer, fuentes)
+│   └── globals.css             ← Estilos globales y variables de color
+│
+├── components/                 ← piezas UI reutilizables
+│   ├── Nav.tsx                 ← barra de navegación
+│   ├── Footer.tsx              ← pie de página
+│   └── ...                     ← otros componentes
+│
+├── lib/
+│   └── site.config.ts          ← EL archivo que personalizas (nombre, bio, links, skills)
+│
+├── content/
+│   ├── blog/                   ← posts .mdx
+│   └── projects/               ← proyectos .mdx
+│
+└── public/                     ← imágenes y archivos estáticos
+```
+
+### El mapa URL → archivo
+
+| URL que visita el usuario | Archivo que la renderiza |
+|---|---|
+| `tunombre.vercel.app/` | `app/page.tsx` |
+| `tunombre.vercel.app/about` | `app/about/page.tsx` |
+| `tunombre.vercel.app/blog` | `app/blog/page.tsx` |
+| `tunombre.vercel.app/blog/mi-post` | `app/blog/[slug]/page.tsx` |
+| `tunombre.vercel.app/projects` | `app/projects/page.tsx` |
+
+El `[slug]` entre corchetes es una ruta dinámica — Next.js genera una página para cada post/proyecto que encuentre en `content/`.
+
+### `lib/site.config.ts`: el panel de control
+
+Es el único archivo que necesitas editar para personalizar toda la información del sitio:
+
+```typescript
+export const site = {
+  name: "Tu Nombre",
+  bio: "Architect & Builder",
+  url: "https://tunombre.com",
+  github: "tu-usuario",
+  twitter: "tu-handle",
+  linkedin: "tu-perfil",
+  email: "tu@email.com",
+  skills: ["TypeScript", "Next.js", "PostgreSQL", "Python"],
+} as const;
+```
+
+Cada campo de este objeto aparece en algún lugar del sitio. Los componentes leen de aquí en lugar de tener el texto hardcodeado.
+
+---
+
+## Cómo usar Claude para entender código real
+
+La estrategia más efectiva: pegar un archivo completo y pedir una explicación específica para tu nivel de experiencia.
+
+### Prompt base para entender un componente
+
+```
+"Tengo este componente de Next.js con TypeScript. Explícamelo como si fuera
+mi primera semana programando en este stack. Para cada sección del código dime:
+1. Qué hace en palabras simples
+2. Si necesitara cambiarlo, qué línea tocaría
+
+[pega el contenido del archivo]"
+```
+
+### Para entender la estructura completa
+
+```
+"Tengo un proyecto Next.js con App Router. Este es el archivo app/page.tsx:
+
+[pega el archivo]
+
+Y este es components/Nav.tsx:
+
+[pega el archivo]
+
+¿Qué relación hay entre estos dos archivos? ¿Cuál se ejecuta primero?"
+```
+
+### Para hacer un cambio específico con ayuda de IA
+
+```
+"Tengo este archivo de Next.js: [pega el archivo].
+Quiero cambiar [descripción exacta de lo que quieres].
+Muéstrame solo las líneas que debo modificar, con el antes y el después."
+```
+
+Esta última forma es importante: pedir "solo las líneas que debo modificar" evita que Claude reescriba todo el archivo y te deje sin contexto de qué cambió.
+
+---
+
+## Ejercicio en sesión
+
+El objetivo es mapear tu propio sitio: saber dónde vive cada cosa antes de tocarla.
+
+### Parte 1: Abrir el proyecto en VS Code (5 minutos)
+
+```bash
+# Si clonaste el repo en la sesión anterior
+cd TU-REPO
+code .
+```
+
+Si no tienes VS Code: [code.visualstudio.com](https://code.visualstudio.com)
+
+### Parte 2: Entender con Claude (20 minutos)
+
+Abre estos archivos en VS Code, copia su contenido y pégalos en Claude usando el prompt base de arriba:
+
+1. `app/page.tsx` — la página de inicio
+2. `app/layout.tsx` — el envoltorio de todas las páginas
+3. `components/Nav.tsx` (o el componente de navegación que tenga el proyecto)
+4. `lib/site.config.ts` — el panel de control
+
+Para cada archivo, anota en papel o en un documento:
+- **¿Qué hace este archivo?** (2 oraciones)
+- **¿Qué cambiaría si quisiera modificar X en el sitio?**
+
+### Parte 3: Hacer 3 cambios con IA (15 minutos)
+
+Usando Claude, aplica los siguientes cambios uno por uno. Para cada uno: describe lo que quieres → Claude te da el código → tú lo aplicas → verificas en el navegador con `npm run dev`.
+
+```bash
+npm install      # solo la primera vez
+npm run dev      # inicia el servidor en http://localhost:3000
+```
+
+**Cambio 1:** Modificar el título principal de la página de inicio.
+
+Prompt:
+```
+"En app/page.tsx tengo este código: [pega el archivo].
+¿En qué línea está el título principal de la página?
+Quiero cambiarlo a '[tu nuevo título]'. Dame solo esa línea modificada."
+```
+
+**Cambio 2:** Cambiar el color de un elemento.
+
+Prompt:
+```
+"En este componente hay un botón/link con clase Tailwind: [pega el fragmento].
+Quiero cambiar el color de fondo a azul oscuro (#1e3a5f) o su equivalente en Tailwind.
+¿Qué clase Tailwind uso y cómo queda esa línea?"
+```
+
+**Cambio 3:** Agregar un link en la navegación.
+
+Prompt:
+```
+"Tengo este componente Nav.tsx: [pega el archivo].
+Quiero agregar un link a '/uses' con el texto 'Uses'. ¿Dónde y cómo lo agrego?"
+```
+
+---
+
+## Tarea entre sesiones
+
+### Ruta estándar
+
+Crea un documento (puede ser digital o papel) con **5 cosas que quieres cambiar** en tu sitio. Para cada una:
+
+1. Descripción del cambio ("quiero que el color de los links sea verde")
+2. Archivo donde crees que está (`app/page.tsx`, `components/Nav.tsx`, etc.)
+3. Si lo identificaste con la exploración de hoy o si aún no sabes
+
+Este mapa te servirá en la sesión 6 para hacer los cambios de diseño.
+
+### Ruta acelerada
+
+Instala **Cursor** ([cursor.com](https://cursor.com)) y ábrelo con tu repositorio:
+
+```bash
+# Instala Cursor, luego:
+cursor .
+```
+
+Prueba el modo **Cmd+K** (edición inline) sobre el archivo `app/page.tsx`:
+- Selecciona un bloque de código
+- Presiona `Cmd+K`
+- Describe en español el cambio que quieres
+
+Observa cómo Cursor propone el diff directamente sobre el archivo sin que tengas que copiar y pegar. Compara la experiencia con el flujo copy-paste de Claude.
+
+---
+
+## Recursos
+
+- [Next.js Docs — App Router](https://nextjs.org/docs/app) — referencia oficial del App Router
+- [TypeScript en 5 minutos](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html) — fundamentos del lenguaje (inglés)
+- [Tailwind CSS — Utility-First](https://tailwindcss.com/docs/utility-first) — la filosofía detrás del CSS de tu sitio
