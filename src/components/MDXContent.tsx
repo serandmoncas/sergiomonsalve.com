@@ -1,4 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import remarkGfm from 'remark-gfm'
 
 function Step({ number, children }: { number?: number; children: React.ReactNode }) {
   return (
@@ -11,12 +12,20 @@ function Step({ number, children }: { number?: number; children: React.ReactNode
   )
 }
 
-const components = { Step }
+// h1 is already rendered by the lesson page — suppress duplicates from MDX source
+const components = {
+  Step,
+  h1: () => null,
+}
 
 export default function MDXContent({ source }: { source: string }) {
   return (
     <div className="mdx-prose">
-      <MDXRemote source={source} components={components} />
+      <MDXRemote
+        source={source}
+        components={components}
+        options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+      />
     </div>
   )
 }
