@@ -1,8 +1,0 @@
-[     296ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
-[    1997ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
-[    2011ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
-[    2013ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
-[    2014ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
-[    2123ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://docs.google.com/document/d/1H8NwjAkH8SUoUy0C-W1OmrRO1ZaDGTMk67KVaycvLf0/calendarimminentrecurringinstances?id=1H8NwjAkH8SUoUy0C-W1OmrRO1ZaDGTMk67KVaycvLf0&jsEventId=MmphcmV2M2g1c3VmMGYxNXZoNzlrMzRrMWdfMjAyNjA2MDNUMDAzMDAwWiBzZXJnaW9AbGFqb2JpdGVrYS5jb20&token=ABg6iWReEpKvdEQIN0OwyTAj5tFB%3A1780458126735&ouid=103076793531711029503&includes_info_params=true&cros_files=false&nded=false&tab=t.0:0
-[    2201ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing. @ https://docs.google.com/drivesharing/clientmodel?id=1H8NwjAkH8SUoUy0C-W1OmrRO1ZaDGTMk67KVaycvLf0&foreignService=kix&authuser=0&origin=https%3A%2F%2Fdocs.google.com:0
-[    2233ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://docs.google.com/document/d/1H8NwjAkH8SUoUy0C-W1OmrRO1ZaDGTMk67KVaycvLf0/calendarevents?id=1H8NwjAkH8SUoUy0C-W1OmrRO1ZaDGTMk67KVaycvLf0&jsEventId=MmphcmV2M2g1c3VmMGYxNXZoNzlrMzRrMWdfMjAyNjA2MDNUMDAzMDAwWiBzZXJnaW9AbGFqb2JpdGVrYS5jb20&token=ABg6iWReEpKvdEQIN0OwyTAj5tFB%3A1780458126735&ouid=103076793531711029503&includes_info_params=true&cros_files=false&nded=false&tab=t.0:0

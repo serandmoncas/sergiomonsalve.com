@@ -1,2 +1,0 @@
-[     798ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://frontend-6xao78ml4-serandmoncas-6387s-projects.vercel.app/favicon.ico:0
-[    1180ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://frontend-6xao78ml4-serandmoncas-6387s-projects.vercel.app/login:0

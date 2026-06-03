@@ -1,7 +1,0 @@
-[    2743ms] [ERROR] Access to script at 'https://connect.facebook.net/en_US/fbevents.js' from origin 'https://ap.www.namecheap.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://ap.www.namecheap.com/domains/domaincontrolpanel/sergiomonsalve.com/advancedns:0
-[    2743ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://connect.facebook.net/en_US/fbevents.js:0
-[   73821ms] [LOG] Blur event triggers @ https://static.nc-img.com/ap/cdn/1177/assets/js/main.js?v=T95dBdnR-hAtJ9XPPxWY2kEujoyn4o3fxKDhpmSJkRU1:9
-[  124923ms] [LOG] Blur event triggers @ https://static.nc-img.com/ap/cdn/1177/assets/js/main.js?v=T95dBdnR-hAtJ9XPPxWY2kEujoyn4o3fxKDhpmSJkRU1:9
-[  142260ms] [LOG] Blur event triggers @ https://static.nc-img.com/ap/cdn/1177/assets/js/main.js?v=T95dBdnR-hAtJ9XPPxWY2kEujoyn4o3fxKDhpmSJkRU1:9
-[  193044ms] [LOG] Blur event triggers @ https://static.nc-img.com/ap/cdn/1177/assets/js/main.js?v=T95dBdnR-hAtJ9XPPxWY2kEujoyn4o3fxKDhpmSJkRU1:9
-[  255583ms] [LOG] Blur event triggers @ https://static.nc-img.com/ap/cdn/1177/assets/js/main.js?v=T95dBdnR-hAtJ9XPPxWY2kEujoyn4o3fxKDhpmSJkRU1:9

@@ -1,4 +1,0 @@
-[     496ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://slogs-app.vercel.app/login:0
-[   19637ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://slogs-app.vercel.app/login:0
-[   36577ms] [ERROR] Access to XMLHttpRequest at 'http://localhost:8000/api/v1/auth/login' from origin 'https://slogs-app.vercel.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://slogs-app.vercel.app/login:0
-[   36578ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8000/api/v1/auth/login:0
