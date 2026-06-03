@@ -99,7 +99,7 @@ async function seed() {
 
     const { data: module, error: modError } = await supabase
       .from('modules')
-      .insert({ ...modData, course_id: course.id })
+      .insert({ ...modData, course_id: course.id, is_published: true })
       .select('id')
       .single()
 
@@ -113,7 +113,7 @@ async function seed() {
     for (const lesson of lessonDefs) {
       const { error: lessonError } = await supabase
         .from('lessons')
-        .insert({ ...lesson, module_id: module.id })
+        .insert({ ...lesson, module_id: module.id, is_published: true })
 
       if (lessonError) {
         console.error('Error creating lesson:', lesson.title, lessonError)
