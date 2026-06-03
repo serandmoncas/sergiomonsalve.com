@@ -99,3 +99,14 @@ CREATE POLICY "progress_student_upsert" ON lesson_progress
 
 CREATE POLICY "progress_student_update" ON lesson_progress
   FOR UPDATE USING (student_id = auth.uid());
+
+-- Revoke direct access to content_mdx — served only via API route with enrollment check
+REVOKE SELECT (content_mdx) ON lessons FROM anon, authenticated;
+
+-- Performance indexes
+CREATE INDEX idx_modules_course_id ON modules(course_id);
+CREATE INDEX idx_lessons_module_id ON lessons(module_id);
+CREATE INDEX idx_enrollments_student_id ON enrollments(student_id);
+CREATE INDEX idx_enrollments_course_id ON enrollments(course_id);
+CREATE INDEX idx_lesson_progress_student_id ON lesson_progress(student_id);
+CREATE INDEX idx_lesson_progress_lesson_id ON lesson_progress(lesson_id);
