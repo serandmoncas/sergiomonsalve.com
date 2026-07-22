@@ -1,0 +1,41 @@
+---
+title: SAMA Mobile
+description: Product and technical proposal for a hydrometeorological risk-alert mobile app for Dagran (Antioquia, Colombia) — architecture, MVP scope, and a 48-ticket backlog, with spec-driven, AI-assisted development now underway.
+date: "2026-07-22"
+role: Product & Technical Proposal, Developer
+stack: [Expo, TypeScript, React Native, Expo Router, MapLibre GL]
+github: https://github.com/serandmoncas/sama-mobile
+demo: ""
+links: []
+status: active
+featured: false
+image: ""
+---
+
+## The problem
+
+SAMA (Antioquia's Alert and Monitoring System) already instruments more than 36 municipalities with weather stations, rain gauges, level sensors, and cameras, generating thousands of alerts a year. But its only public channel is a web geoportal that requires citizens to actively go check it. During a flash flood at 3am, nobody's looking at a web portal — the data exists, but it doesn't reach the people who need it in time.
+
+Dagran (Antioquia's Disaster Risk Management Administrative Department) needed to close that gap: put the alert in the citizen's pocket instead of waiting for them to go find it.
+
+## The solution
+
+I designed the complete proposal for a mobile app MVP (Android/iOS) built around four core capabilities: georeferenced push alerts by municipality/watershed with green/yellow/orange/red levels, a real-time station map with 24–72h trends, a "what do I do?" section with offline before/during/after recommendations by event type plus an emergency directory, and citizen reporting (photo + location + category) moderated by the Dagran team.
+
+Two non-negotiable scope constraints: the app must work under intermittent connectivity (local cache with visible staleness to the user) and must meet basic AA accessibility, including screen readers — in an emergency, the app has to serve people with poor signal or a disability, not just the happy path.
+
+The full proposal — context, scope, architecture, timeline — lives in `docs/proposal/mvp-proposal.md`, with a 48-ticket backlog already broken down in `docs/proposal/backlog.md`.
+
+## Technical decisions
+
+**Spec-driven development from day one** — MVP development follows an explicit discipline: every change starts from a versioned spec with acceptance criteria, goes through an approved plan before any code is touched, ships in small increments, and gets genuinely verified — not just "it compiles." It's the same ADR + Definition of Done discipline I've applied on other projects (see CarritoBot), applied here starting at the proposal stage, before the first line of product code.
+
+**Expo + TypeScript for the app, a separate backend architecture** — the app (this repo) uses Expo Router on top of React Native. The planned backend (a separate repo) is Node.js/NestJS with PostgreSQL + PostGIS for geospatial queries over stations and watersheds, Redis for caching, and push notifications via Firebase Cloud Messaging + APNs through Expo Notifications. MapLibre GL handles the station map — avoiding Google Maps vendor lock-in on a public infrastructure project.
+
+**Designing for the worst case, not the best one** — the local cache with visible staleness and offline support aren't optional features: they're the core requirement of a product whose usefulness is measured exactly when connectivity fails.
+
+## Results
+
+The project is just getting started: the proposal, the full backlog, and the development methodology (spec-driven, AI-agent-assisted) are already defined and version-controlled. The app skeleton, tooling, CI, and code conventions are under active construction.
+
+What can be evaluated from this work today isn't a finished app, but the judgment behind the product and architecture design for a mission-critical system: identifying the real gap between "the data exists" and "the data arrives in time," and scoping an MVP around the constraints that actually matter (offline, accessibility) instead of the ones that are easiest to build first.

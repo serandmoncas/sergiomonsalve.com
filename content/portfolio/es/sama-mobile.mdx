@@ -1,0 +1,41 @@
+---
+title: SAMA Mobile
+description: Propuesta técnica y de producto para una app móvil de alertas de riesgo hidrometeorológico para el Dagran (Antioquia) — arquitectura, alcance de MVP y backlog de 48 tickets, con desarrollo spec-driven asistido por IA en curso.
+date: "2026-07-22"
+role: Product & Technical Proposal, Developer
+stack: [Expo, TypeScript, React Native, Expo Router, MapLibre GL]
+github: https://github.com/serandmoncas/sama-mobile
+demo: ""
+links: []
+status: active
+featured: false
+image: ""
+---
+
+## El problema
+
+El SAMA (Sistema de Alerta y Monitoreo de Antioquia) ya instrumenta más de 36 municipios con estaciones meteorológicas, pluviómetros, sensores de nivel y cámaras, y genera miles de alertas al año. Pero su único canal público es un geoportal web que exige que el ciudadano entre a consultarlo activamente. En una creciente súbita a las 3am, nadie está mirando un portal — la información existe, pero no llega a tiempo a quien la necesita.
+
+El Dagran (Departamento Administrativo de Gestión del Riesgo de Desastres de Antioquia) necesitaba cerrar esa brecha: llevar la alerta al bolsillo del ciudadano, no esperar a que lo busque.
+
+## La solución
+
+Diseñé la propuesta completa de un MVP de app móvil (Android/iOS) que resuelve el problema con cuatro capacidades centrales: alertas push georreferenciadas por municipio/cuenca con niveles verde/amarilla/naranja/roja, un mapa de estaciones en tiempo real con tendencia de 24–72h, una sección de "¿qué hago?" con recomendaciones offline de antes/durante/después por tipo de evento y directorio de emergencia, y reporte ciudadano (foto + ubicación + categoría) con moderación del equipo del Dagran.
+
+Dos restricciones no negociables del alcance: la app tiene que funcionar con conectividad intermitente (caché local con antigüedad visible al usuario) y cumplir accesibilidad básica AA, incluyendo lectores de pantalla — en una emergencia, la app tiene que servir a quien tiene mala señal o alguna discapacidad, no solo al caso feliz.
+
+La propuesta completa —contexto, alcance, arquitectura, cronograma— vive en `docs/proposal/mvp-proposal.md`, con un backlog de 48 tickets ya desglosado en `docs/proposal/backlog.md`.
+
+## Decisiones técnicas
+
+**Spec-driven development desde el día uno** — el desarrollo del MVP sigue una disciplina explícita: cada cambio parte de una spec versionada con criterios de aceptación, pasa por un plan aprobado antes de tocar código, se entrega en incrementos pequeños y se verifica de verdad, no solo "compila". Es la misma disciplina de ADRs y Definition of Done que ya he aplicado en otros proyectos (ver CarritoBot), aplicada aquí desde la propuesta misma, antes de escribir la primera línea de código de producto.
+
+**Expo + TypeScript para la app, arquitectura de backend separada** — la app (este repo) usa Expo Router sobre React Native. El backend planeado (repo aparte) es Node.js/NestJS con PostgreSQL + PostGIS para las consultas geoespaciales de estaciones y cuencas, Redis para caché, y notificaciones vía Firebase Cloud Messaging + APNs a través de Expo Notifications. MapLibre GL para el mapa de estaciones — evita el vendor lock-in de Google Maps en un proyecto de infraestructura pública.
+
+**Diseño para el peor escenario, no el mejor** — la caché local con antigüedad visible y el soporte offline no son features opcionales: son el requisito central de un producto cuya utilidad se mide exactamente cuando la conectividad falla.
+
+## Resultados
+
+Proyecto en arranque: la propuesta, el backlog completo y la metodología de desarrollo (spec-driven, con agentes de IA) ya están definidos y versionados. El esqueleto de la app, el tooling, el CI y las convenciones de código están en construcción activa.
+
+Lo que ya se puede evaluar de este trabajo no es una app terminada, sino el criterio detrás del diseño de producto y arquitectura para un sistema de misión crítica: identificar la brecha real entre "los datos existen" y "los datos llegan a tiempo", y diseñar el alcance de un MVP alrededor de las restricciones que importan (offline, accesibilidad) en vez de las que son más fáciles de construir primero.
