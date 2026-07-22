@@ -1,0 +1,45 @@
+---
+title: Bichongos
+description: Public landing page and admin panel for a gourmet and functional mushroom cultivation project with IoT traceability in Guarne, Colombia. Next.js + Supabase with roles, audited RLS, and Google auth.
+date: "2026-07-15"
+role: Full Stack Developer
+stack: [Next.js, TypeScript, Tailwind CSS, Supabase, PostgreSQL]
+github: https://github.com/serandmoncas/bichongos.store
+demo: "https://bichongos.store"
+links:
+  - label: "Website"
+    url: "https://bichongos.store"
+status: active
+featured: true
+image: /portfolio/bichongos.png
+---
+
+## The problem
+
+Bichongos is a gourmet and functional mushroom cultivation project in Guarne, Colombia, with technical guidance from Songo Sorhongo. Mushrooms available on the market — imported or artisanal — are grown "blind," with no traceability or cultivation data. Bichongos does it differently: IoT-controlled capsules (temperature, humidity, CO₂, light) with full batch traceability via QR.
+
+The site needed to solve two needs at once: a public landing page presenting the project — the value proposition, how it works, the product — and, in parallel, an admin panel where trained staff could manage cultivation day to day. Two audiences, two access levels, one system.
+
+## The solution
+
+I designed and built the project end to end: architecture, data model, authentication, design system, and deployment, with Claude Code assisting throughout — from researching against live documentation to code and security review on every delivery.
+
+The landing page covers hero, value proposition, "how it works," and product, with SEO, responsiveness, and accessibility as first-class requirements, not later polish. Behind it, the `/admin` panel implements Google OAuth login, differentiated roles, and manual access approval — the foundation the next epics will build on: cultivation management, training, and IoT telemetry.
+
+The visual identity is a custom design system: color tokens in `oklch`, IBM Plex Serif/Mono typography, and an SVG logo with four variants.
+
+## Technical decisions
+
+**RLS audited in depth, not assumed** — while implementing roles, a review caught and fixed two real vulnerabilities before production: a policy that let any user self-assign the `admin` role, and infinite recursion in the admin policies that would have broken every query against the profiles table. Both were resolved with a trigger that blocks unauthorized role changes and a `SECURITY DEFINER` function that breaks the recursion without opening security holes.
+
+**Auth built against live documentation, not memory** — Next.js replaced `middleware.ts` with the new `proxy.ts` convention, and Supabase now recommends `getClaims()` (local JWT validation) over `getUser()`/`getSession()`. I verified both against current documentation and the installed packages' source code before implementing.
+
+**Fail-closed authorization gate** — the `/admin` panel is shared by three roles, not just admin. An automated security scanner suggested a fix that would have broken access for the other two legitimate roles; instead I identified and fixed the real bug: an unresolved profile was failing *open*, granting access instead of denying it.
+
+**WCAG AA contrast verified mathematically** — brand colors were reviewed with real contrast calculations (`oklch` → relative luminance via the W3C formula), not by eye. The exercise found and fixed a button that failed the AA threshold for normal text.
+
+## Results
+
+The first three epics are complete: foundations, public landing page, and role-based authentication. The admin panel (user and role management) is under construction, with cultivation management, training, IoT telemetry, and quality/operations as the next epics.
+
+The entire login flow was tested live, end to end, before closing out the feature: automatic profile creation, role gating in both directions, and logout. The most valuable part of the exercise wasn't any single feature, but the discipline of verifying instead of assuming — in RLS security, in official documentation recommendations, and in color contrast.

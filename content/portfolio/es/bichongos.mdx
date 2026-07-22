@@ -1,0 +1,45 @@
+---
+title: Bichongos
+description: Landing pública y panel de administración para un proyecto de cultivo de hongos gourmet y funcionales con trazabilidad IoT en Guarne, Antioquia. Next.js + Supabase con roles, RLS auditada y autenticación con Google.
+date: "2026-07-15"
+role: Full Stack Developer
+stack: [Next.js, TypeScript, Tailwind CSS, Supabase, PostgreSQL]
+github: https://github.com/serandmoncas/bichongos.store
+demo: "https://bichongos.store"
+links:
+  - label: "Sitio web"
+    url: "https://bichongos.store"
+status: active
+featured: true
+image: /portfolio/bichongos.png
+---
+
+## El problema
+
+Bichongos es un proyecto de cultivo de hongos gourmet y funcionales en Guarne, Antioquia, con la asesoría técnica de Songo Sorhongo. El hongo disponible en el mercado —importado o artesanal— se cultiva "a ciegas", sin trazabilidad ni datos de cultivo. Bichongos lo hace distinto: cápsulas controladas por IoT (temperatura, humedad, CO₂, luz) con trazabilidad completa por lote vía QR.
+
+El sitio necesitaba resolver dos necesidades a la vez: una landing pública que presentara el proyecto —la propuesta de valor, cómo funciona, el producto— y, en paralelo, un panel donde las personas capacitadas pudieran administrar el cultivo día a día. Dos audiencias, dos niveles de acceso, un mismo sistema.
+
+## La solución
+
+Diseñé y construí el proyecto de punta a punta: arquitectura, modelo de datos, autenticación, sistema de diseño y despliegue, con Claude Code como asistente en todo el proceso — desde investigar contra documentación viva hasta la revisión de código y seguridad en cada entrega.
+
+La landing cubre hero, propuesta de valor, "cómo funciona" y producto, con SEO, responsive y accesibilidad como requisitos de primera clase, no como pulido posterior. Detrás, el panel `/admin` implementa login con Google OAuth, roles diferenciados y aprobación manual de acceso — la base sobre la que se construirá la gestión del cultivo, la capacitación y la telemetría IoT en las próximas épicas.
+
+La identidad visual es un sistema de diseño propio: tokens de color en `oklch`, tipografía IBM Plex Serif/Mono, y un logo SVG con cuatro variantes.
+
+## Decisiones técnicas
+
+**RLS auditada en profundidad, no asumida** — durante la implementación de roles, una revisión encontró y corrigió dos vulnerabilidades reales antes de producción: una policy que permitía a cualquier usuario auto-asignarse el rol `admin`, y una recursión infinita en las políticas de administrador que hubiera roto todas las consultas a la tabla de perfiles. Se resolvieron con un trigger que bloquea cambios de rol no autorizados y una función `SECURITY DEFINER` que rompe la recursión sin abrir huecos de seguridad.
+
+**Autenticación contra documentación viva, no memoria** — Next.js reemplazó `middleware.ts` por la nueva convención `proxy.ts`, y Supabase recomienda `getClaims()` (validación de JWT local) en vez de `getUser()`/`getSession()`. Verifiqué ambos contra la documentación actual y el código fuente de los paquetes instalados antes de implementar.
+
+**Gate de autorización fail-closed** — el panel `/admin` es compartido por tres roles, no solo admin. Un escáner de seguridad automático sugirió una corrección que hubiera roto el acceso de los otros dos roles legítimos; en cambio identifiqué y corregí el bug real: un perfil no resuelto fallaba *abierto*, otorgando acceso en vez de negarlo.
+
+**Contraste WCAG AA verificado matemáticamente** — los colores de marca se revisaron con cálculos reales de contraste (`oklch` → luminancia relativa vía la fórmula del W3C), no a ojo. El ejercicio encontró y corrigió un botón que fallaba el umbral AA para texto normal.
+
+## Resultados
+
+Las primeras tres épicas están completas: fundaciones, landing pública y autenticación con roles. El panel de administración (gestión de usuarios y roles) está en construcción, con la gestión del cultivo, capacitación, telemetría IoT y calidad/operación como siguientes épicas.
+
+Todo el flujo de login se probó en vivo de extremo a extremo antes de cerrar la funcionalidad: creación automática de perfil, gate por rol en ambos sentidos, y logout. Lo más valioso del ejercicio no fue ninguna característica individual, sino la disciplina de verificar en vez de asumir — en la seguridad de RLS, en las recomendaciones de la documentación oficial, y en el contraste de color.
