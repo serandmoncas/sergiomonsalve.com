@@ -1,0 +1,48 @@
+---
+title: CarritoBot
+description: Carrito robot controlado por celular sobre un ESP32-CAM — joystick táctil, video FPV en vivo, telemetría en tiempo real y un protocolo WebSocket versionado con esquemas Zod compartidos entre firmware y app.
+date: "2026-07-20"
+role: Firmware & Mobile Developer
+stack: [React Native, Expo, TypeScript, C++, PlatformIO, Zod, WebSocket]
+github: https://github.com/serandmoncas/mobile-esp32
+demo: ""
+links:
+  - label: "Repositorio"
+    url: "https://github.com/serandmoncas/mobile-esp32"
+status: active
+featured: true
+image: /portfolio/carritobot.jpg
+---
+
+## El problema
+
+CarritoBot nació como un proyecto personal para aprender **React Native construyendo un robot real**, en vez de otra app de todo-lista. Pero un robot con hardware fijo tiende a convertirse rápido en spaghetti: cada sensor o actuador nuevo termina hardcodeado en la app, acoplando el firmware a una interfaz específica.
+
+La restricción de diseño que me impuse desde el inicio fue explícita: **agregar hardware nuevo no debe requerir rediseñar la app ni el protocolo**. Sumar un LED o un sensor tenía que ser una entrada nueva en un registro del firmware, no un cambio en el código del cliente.
+
+## La solución
+
+El ESP32-CAM levanta su propia red WiFi en modo Access Point — la app se conecta directo, sin depender de un router. Sobre esa red corren dos canales en paralelo:
+
+- **WebSocket** (`ws://192.168.4.1:82/ws`) para comandos y telemetría, con reconexión automática y backoff exponencial.
+- **Video MJPEG** (`http://192.168.4.1:81/stream`) servido por un HTTP server síncrono independiente, porque un mismo servidor async no sostiene bien streaming continuo.
+
+El firmware describe sus actuadores disponibles a la app en un mensaje `hello` del protocolo, y la interfaz se genera dinámicamente a partir de esa descripción. Hoy los motores se **simulan**: el joystick dibuja una flecha direccional en una matriz WS2812B en vez de mover ruedas reales, porque la interfaz de conducción (`hal::Drive`) ya está separada del hardware detrás de una abstracción — cuando lleguen los motores, cambia la implementación, no el protocolo ni la app.
+
+El proyecto avanza por fases con criterios de aceptación explícitos: esqueleto conectado (AP + WebSocket + actuador de luz), joystick con simulación de motores y failsafe, video FPV, telemetría completa con sensor PIR, motores reales sobre ESP32-S3, y publicación en Google Play vía EAS Build.
+
+## Decisiones técnicas
+
+**Zod como fuente de verdad del protocolo** — los esquemas del protocolo viven en un paquete npm compartido dentro del monorepo (`app/`, `firmware/`, `protocol/`), y el firmware en C++ valida contra ese mismo contrato versionado (`v: 1`). Un cambio de protocolo se valida en un solo lugar, no se re-implementa por separado en TypeScript y C++.
+
+**Failsafe de 500 ms** — si el firmware no recibe un comando de control ni un `ping` en ese lapso, detiene el carrito por su cuenta. Es la clase de decisión de seguridad que hay que tomar antes de que exista hardware real que pueda hacerse daño.
+
+**ADRs para decisiones no triviales** — cada fase sigue el mismo ciclo: historia de usuario en Gherkin → diseño documentado → plan de implementación → TDD → revisión de código → verificación en hardware real. Hay 11 *Architecture Decision Records* documentando desde por qué el joystick no usa `react-native-reanimated` hasta por qué el streaming de video necesita un servidor HTTP separado del WebSocket.
+
+**Disciplina de revisión de código como red de seguridad real** — la revisión encontró y corrigió, antes de tocar hardware, un límite de corriente no controlado en la matriz de LEDs (podía superar el presupuesto de 500 mA en ciertas direcciones) y una condición de carrera en la reconexión del WebSocket.
+
+## Resultados
+
+Las fases 1 y 2 están completas: esqueleto conectado y joystick con simulación de motores funcionando sobre hardware real. La fase 3 (video FPV) tiene el código completo pero la verificación en hardware está bloqueada por un módulo de cámara dañado — un recordatorio de que "funciona en el simulador" y "funciona en el dispositivo" son afirmaciones distintas.
+
+El incidente más revelador del proyecto no fue un bug de lógica sino uno de hardware: una librería de animación cerraba la app al tocar el joystick, sin ningún error capturable en JavaScript. Se diagnosticó por aislamiento contra el dispositivo real, confirmando en qué capa fallaba exactamente antes de decidir la solución — el mismo rigor que exige depurar software se vuelve indispensable cuando hay un microcontrolador de por medio.

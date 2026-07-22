@@ -1,0 +1,48 @@
+---
+title: CarritoBot
+description: A phone-controlled robot car built on an ESP32-CAM — touch joystick, live FPV video, real-time telemetry, and a versioned WebSocket protocol with Zod schemas shared between firmware and app.
+date: "2026-07-20"
+role: Firmware & Mobile Developer
+stack: [React Native, Expo, TypeScript, C++, PlatformIO, Zod, WebSocket]
+github: https://github.com/serandmoncas/mobile-esp32
+demo: ""
+links:
+  - label: "Repository"
+    url: "https://github.com/serandmoncas/mobile-esp32"
+status: active
+featured: true
+image: /portfolio/carritobot.jpg
+---
+
+## The problem
+
+CarritoBot started as a personal project to learn **React Native by building an actual robot**, instead of yet another to-do app. But a robot with fixed hardware tends to turn into spaghetti fast: every new sensor or actuator ends up hardcoded into the app, coupling the firmware to one specific interface.
+
+The design constraint I set from day one was explicit: **adding new hardware shouldn't require redesigning the app or the protocol**. Adding an LED or a sensor had to be a new entry in a firmware registry, not a change to the client code.
+
+## The solution
+
+The ESP32-CAM spins up its own WiFi network in Access Point mode — the app connects directly, with no router in the loop. Two channels run in parallel over that network:
+
+- **WebSocket** (`ws://192.168.4.1:82/ws`) for commands and telemetry, with automatic reconnection and exponential backoff.
+- **MJPEG video** (`http://192.168.4.1:81/stream`) served by an independent synchronous HTTP server, since a single async server doesn't hold up well under continuous streaming.
+
+The firmware describes its available actuators to the app in a protocol `hello` message, and the UI generates itself dynamically from that description. Motors are still **simulated** today: the joystick draws a directional arrow on a WS2812B LED matrix instead of moving real wheels, because the driving interface (`hal::Drive`) is already decoupled from the hardware behind an abstraction — when real motors arrive, only the implementation behind that interface changes, not the protocol or the app.
+
+The project moves forward in phases with explicit acceptance criteria: a connected skeleton (AP + WebSocket + a light actuator), a joystick with simulated motors and a failsafe, FPV video, full telemetry with a PIR sensor, real motors on an ESP32-S3, and publishing to Google Play via EAS Build.
+
+## Technical decisions
+
+**Zod as the protocol's source of truth** — protocol schemas live in a shared npm package inside the monorepo (`app/`, `firmware/`, `protocol/`), and the C++ firmware validates against that same versioned contract (`v: 1`). A protocol change is validated in one place instead of being re-implemented separately in TypeScript and C++.
+
+**500 ms failsafe** — if the firmware doesn't receive a control command or a `ping` within that window, it stops the car on its own. That's the kind of safety call you make before real hardware exists that could hurt itself.
+
+**ADRs for non-trivial decisions** — every phase follows the same cycle: a Gherkin user story → a documented design → a step-by-step implementation plan → TDD → code review → verification on real hardware. There are 11 *Architecture Decision Records* documenting everything from why the joystick doesn't use `react-native-reanimated` to why video streaming needs an HTTP server separate from the WebSocket.
+
+**Code review discipline as an actual safety net** — review caught and fixed, before touching hardware, an uncontrolled current draw in the LED matrix (it could exceed the 500 mA budget in certain directions) and a race condition in WebSocket reconnection.
+
+## Results
+
+Phases 1 and 2 are complete: a connected skeleton and a joystick with simulated motors, working on real hardware. Phase 3 (FPV video) has complete code, but hardware verification is blocked by a damaged camera module — a good reminder that "works in the simulator" and "works on the device" are different claims.
+
+The most revealing incident of the project wasn't a logic bug but a hardware one: an animation library was crashing the app on joystick touch, with no error catchable in JavaScript. It was diagnosed by isolating against the real device, confirming exactly which layer was failing before deciding on a fix — the same rigor that debugging software demands becomes non-negotiable once a microcontroller is in the loop.

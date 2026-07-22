@@ -43,7 +43,7 @@ Server-side queries use `createAdminClient()` from `src/lib/supabase/server.ts` 
 - `PATCH /api/admin/comments/[id]` — approve a comment (auth-gated)
 - `DELETE /api/admin/comments/[id]` — delete a comment (auth-gated)
 
-**Email:** Resend sends from `onboarding@resend.dev` temporarily (domain `sergiomonsalve.com` pending full DNS verification in Resend). Once all 4 Resend DNS checks are green, revert `src/lib/resend.ts` line 7 to `from: 'Sergio Monsalve <noreply@sergiomonsalve.com>'`.
+**Email:** Resend sends from `noreply@sergiomonsalve.com` (domain verified 2026-06-02).
 
 **Content (MDX):** File-based via `gray-matter` + `next-mdx-remote/rsc`. Two content types:
 - `content/blog/[locale]/YYYY-MM-DD-slug.mdx` — blog posts (frontmatter: title, date, description, tags)
@@ -61,6 +61,3 @@ Add these redirect URLs at supabase.com → Authentication → URL Configuration
 - `https://sergiomonsalve.com/auth/callback`
 - `http://localhost:3000/auth/callback`
 
-## Known issues
-
-- Resend emails land in spam until domain is fully verified (see Email section above)

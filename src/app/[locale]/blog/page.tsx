@@ -15,7 +15,8 @@ export async function generateMetadata({
     description: t('blogDescription'),
     alternates: {
       canonical: `/${locale}/blog`,
-      languages: { es: '/es/blog', en: '/en/blog' }
+      languages: { es: '/es/blog', en: '/en/blog' },
+      types: { 'application/rss+xml': `/${locale}/blog/rss.xml` }
     }
   }
 }
