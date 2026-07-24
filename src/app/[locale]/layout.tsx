@@ -6,9 +6,6 @@ import { notFound } from 'next/navigation'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/next'
 import { routing } from '@/i18n/routing'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
-import SiteThemeWrapper from '@/components/SiteThemeWrapper'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -50,11 +47,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans`}>
         <NextIntlClientProvider messages={messages}>
-          <SiteThemeWrapper>
-            <Nav />
-            <main className="pt-16 flex-1">{children}</main>
-            <Footer />
-          </SiteThemeWrapper>
+          {children}
         </NextIntlClientProvider>
         <SpeedInsights />
         <Analytics />
