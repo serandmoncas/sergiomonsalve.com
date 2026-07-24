@@ -177,7 +177,7 @@ Se heredan sin cambios los del brief original (sección 8), más los específico
 - [x] El backlog muestra los 12 temas y el filtro por prioridad funciona.
 - [x] Quiénes somos muestra las 18 fichas.
 - [x] Ningún nombre, fecha, cita, referencia o URL fue inventado.
-- [ ] Usable a 360px sin scroll horizontal. **NO cumplido:** `/experiencias-ia/cronograma` desborda horizontalmente a 360px (`.ses-f` con `white-space: nowrap` aplicado a una oración larga en el panel "Pendientes abiertos" — ver `cronograma/page.tsx:44-46` y `experiencias-ia.css:344-350`). Las otras 5 páginas pasan. Ver task-13-report.md para detalle.
+- [x] Usable a 360px sin scroll horizontal. Corregido: el enlace de sesión de origen en el panel "Pendientes abiertos" usaba `.ses-f` (con `white-space: nowrap`, pensado para la fecha corta de `SesionRow`), causando desborde a 360px. Se agregó una clase propia `.pendiente-origen` (misma tipografía, sin `nowrap`) y se aplicó solo a ese enlace — `.ses-f` no se tocó. Re-verificado en vivo con Playwright a 360×800 en las 6 vistas: `scrollWidth === clientWidth === 360` en todas.
 - [x] Paleta y tipografías corresponden a la sección 5 de este documento.
 - [x] Pendientes cerrados visibles pero visualmente distinguibles de los abiertos.
 - [x] "Experiencias IA" aparece como ítem en el Nav principal del sitio.
