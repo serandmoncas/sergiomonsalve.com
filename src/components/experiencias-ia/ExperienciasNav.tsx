@@ -9,6 +9,7 @@ const VISTAS = [
   { href: '/experiencias-ia/cronograma', label: 'Cronograma' },
   { href: '/experiencias-ia/backlog', label: 'Backlog' },
   { href: '/experiencias-ia/quienes-somos', label: 'Quiénes somos' },
+  { href: '/experiencias-ia/glosario', label: 'Glosario' },
 ] as const
 
 export default function ExperienciasNav() {
