@@ -33,6 +33,9 @@ export default async function Nav() {
         <Link href="/guestbook" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('guestbook')}
         </Link>
+        <Link href="/experiencias-ia" className="text-xs text-text-secondary hover:text-text transition-colors">
+          {t('experienciasIa')}
+        </Link>
         <Link href="/contact" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('contact')}
         </Link>
