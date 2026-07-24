@@ -26,6 +26,14 @@ describe('GLOSARIO', () => {
       expect(sesionNumeros.has(termino.sesionOrigen!)).toBe(true)
     }
   })
+
+  it('every referencia.url present is a real https link, never fabricated/empty', () => {
+    const conReferencia = GLOSARIO.filter(t => t.referencia !== undefined)
+    expect(conReferencia.length).toBeGreaterThan(0)
+    for (const termino of conReferencia) {
+      expect(termino.referencia!.url).toMatch(/^https:\/\//)
+    }
+  })
 })
 
 describe('ORDEN_CATEGORIAS', () => {

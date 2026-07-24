@@ -22,6 +22,7 @@ export default function BacklogFilter({ items }: { items: BacklogItem[] }) {
             key={opcion.value}
             type="button"
             className={`filtro-btn${filtro === opcion.value ? ' on' : ''}`}
+            aria-pressed={filtro === opcion.value}
             onClick={() => setFiltro(opcion.value)}
           >
             {opcion.label}

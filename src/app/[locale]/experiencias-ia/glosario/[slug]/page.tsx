@@ -32,7 +32,7 @@ export default async function TerminoDetallePage({
   const termino = getTermino(slug)
   if (!termino) notFound()
 
-  const sesion = termino.sesionOrigen ? getSesion(termino.sesionOrigen) : undefined
+  const sesion = termino.sesionOrigen !== undefined ? getSesion(termino.sesionOrigen) : undefined
 
   return (
     <div>
