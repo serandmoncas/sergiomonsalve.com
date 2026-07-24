@@ -349,6 +349,13 @@
   text-decoration: none;
 }
 
+.experiencias-ia .pendiente-origen {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--tinta-2);
+  text-decoration: none;
+}
+
 @media (max-width: 640px) {
   .experiencias-ia .ses-row {
     grid-template-columns: 40px 1fr;

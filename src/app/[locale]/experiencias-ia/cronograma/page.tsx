@@ -41,7 +41,7 @@ export default function CronogramaPage() {
             <p style={{ marginBottom: 2 }}>
               <strong>{pendiente.quien}</strong> — {pendiente.que}
             </p>
-            <Link href={`/experiencias-ia/sesiones/${pendiente.sesionN}`} className="ses-f">
+            <Link href={`/experiencias-ia/sesiones/${pendiente.sesionN}`} className="pendiente-origen">
               Sesión {pendiente.sesionN}: {pendiente.sesionTitulo}
             </Link>
           </div>
