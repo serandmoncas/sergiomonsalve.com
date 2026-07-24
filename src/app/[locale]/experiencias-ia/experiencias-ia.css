@@ -1,0 +1,566 @@
+.experiencias-ia {
+  --tinta: #141b1f;
+  --tinta-2: #3d4a52;
+  --papel: #e9e5db;
+  --papel-2: #dfd9cc;
+  --cuero: #8a4b2a;
+  --laton: #b08d3f;
+  --verde: #3f6b4e;
+  --linea: rgba(20, 27, 31, 0.16);
+  --linea-fuerte: rgba(20, 27, 31, 0.4);
+
+  --display: var(--font-bricolage), system-ui, sans-serif;
+  --serif: var(--font-newsreader), Georgia, serif;
+  --mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  font-family: var(--serif);
+  background: var(--papel);
+  color: var(--tinta);
+  font-size: 17px;
+  line-height: 1.62;
+  min-height: 100vh;
+  background-image: linear-gradient(var(--linea) 1px, transparent 1px),
+    linear-gradient(90deg, var(--linea) 1px, transparent 1px);
+  background-size: 100% 34px, 34px 100%;
+}
+
+.experiencias-ia * {
+  box-sizing: border-box;
+}
+
+.experiencias-ia .wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+@media (max-width: 640px) {
+  .experiencias-ia .wrap {
+    padding: 0 18px;
+  }
+}
+
+.experiencias-ia h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(32px, 6vw, 58px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.experiencias-ia h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(22px, 3.2vw, 32px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 14px;
+}
+
+.experiencias-ia h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+
+.experiencias-ia p + p {
+  margin-top: 12px;
+}
+
+.experiencias-ia .prose p {
+  margin-bottom: 14px;
+  max-width: 68ch;
+}
+
+.experiencias-ia ul {
+  padding-left: 20px;
+  margin: 12px 0;
+}
+
+.experiencias-ia li {
+  margin-bottom: 6px;
+}
+
+.experiencias-ia .eyebrow {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cuero);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.experiencias-ia .eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--linea-fuerte);
+}
+
+.experiencias-ia .lema {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.4;
+  border-left: 3px solid var(--cuero);
+  padding-left: 16px;
+  margin: 20px 0;
+  max-width: 44ch;
+}
+
+.experiencias-ia a {
+  color: var(--cuero);
+}
+
+.experiencias-ia a:focus-visible,
+.experiencias-ia button:focus-visible {
+  outline: 2px solid var(--cuero);
+  outline-offset: 2px;
+}
+
+/* Nav */
+.experiencias-ia .exp-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(233, 229, 219, 0.93);
+  border-bottom: 1.5px solid var(--tinta);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.experiencias-ia .exp-nav-links {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.experiencias-ia .exp-nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 8px 11px;
+  color: var(--tinta-2);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.experiencias-ia .exp-nav-links a:hover {
+  color: var(--tinta);
+}
+
+.experiencias-ia .exp-nav-links a.on {
+  color: var(--cuero);
+  border-bottom-color: var(--cuero);
+  font-weight: 600;
+}
+
+.experiencias-ia .exp-brand {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.03em;
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.experiencias-ia .exp-back {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--tinta-2);
+}
+
+.experiencias-ia .exp-back:hover {
+  color: var(--cuero);
+}
+
+/* Diagrama de capas (harness) — elemento de firma */
+.experiencias-ia .capas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1.5px solid var(--tinta);
+  background: var(--papel-2);
+  margin-top: 32px;
+}
+
+.experiencias-ia .capa {
+  padding: 22px 18px;
+  border-right: 1px solid var(--linea-fuerte);
+}
+
+.experiencias-ia .capa:last-child {
+  border-right: none;
+}
+
+.experiencias-ia .capa:nth-child(3) {
+  background: linear-gradient(180deg, rgba(138, 75, 42, 0.09), rgba(138, 75, 42, 0.02));
+}
+
+.experiencias-ia .capa:nth-child(3) b {
+  color: var(--cuero);
+}
+
+.experiencias-ia .capa i {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--tinta-2);
+}
+
+.experiencias-ia .capa b {
+  display: block;
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 6px 0 4px;
+}
+
+.experiencias-ia .capa p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--tinta-2);
+}
+
+@media (max-width: 720px) {
+  .experiencias-ia .capas {
+    grid-template-columns: 1fr;
+  }
+  .experiencias-ia .capa {
+    border-right: none;
+    border-bottom: 1px solid var(--linea-fuerte);
+  }
+  .experiencias-ia .capa:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Tarjetas / grids */
+.experiencias-ia .grid {
+  display: grid;
+  gap: 1.5px;
+  background: var(--tinta);
+  border: 1.5px solid var(--tinta);
+  margin-top: 8px;
+}
+
+.experiencias-ia .g2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.experiencias-ia .g3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.experiencias-ia .g4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.experiencias-ia .card {
+  background: var(--papel);
+  padding: 22px 20px;
+}
+
+.experiencias-ia .card.hl {
+  background: var(--papel-2);
+}
+
+@media (max-width: 860px) {
+  .experiencias-ia .g3,
+  .experiencias-ia .g4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .experiencias-ia .g2,
+  .experiencias-ia .g3,
+  .experiencias-ia .g4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Índice de sesiones */
+.experiencias-ia .ses-list {
+  border-top: 1.5px solid var(--tinta);
+  margin-top: 22px;
+}
+
+.experiencias-ia .ses-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 6px;
+  border-bottom: 1px solid var(--linea-fuerte);
+  text-decoration: none;
+  color: inherit;
+}
+
+.experiencias-ia .ses-row:hover {
+  background: rgba(138, 75, 42, 0.06);
+}
+
+.experiencias-ia .ses-num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: -0.05em;
+  color: var(--linea-fuerte);
+}
+
+.experiencias-ia .ses-row:hover .ses-num {
+  color: var(--cuero);
+}
+
+.experiencias-ia .ses-t {
+  display: block;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 3px;
+}
+
+.experiencias-ia .ses-d {
+  display: block;
+  font-size: 14px;
+  color: var(--tinta-2);
+}
+
+.experiencias-ia .ses-f {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--tinta-2);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.experiencias-ia .pendiente-origen {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--tinta-2);
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .experiencias-ia .ses-row {
+    grid-template-columns: 40px 1fr;
+  }
+  .experiencias-ia .ses-f {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
+/* Detalle de sesión */
+.experiencias-ia .det-cols {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  margin-top: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .experiencias-ia .det-cols {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.experiencias-ia .side-box {
+  border: 1.5px solid var(--tinta);
+  padding: 18px;
+  margin-bottom: 18px;
+  background: var(--papel-2);
+}
+
+.experiencias-ia .side-box h4 {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--cuero);
+  font-weight: 600;
+}
+
+.experiencias-ia .ses-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-top: 1.5px solid var(--tinta);
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.experiencias-ia .ses-nav a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--cuero);
+}
+
+/* Pendientes */
+.experiencias-ia .pendiente {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dotted var(--linea-fuerte);
+  font-size: 14px;
+}
+
+.experiencias-ia .pendiente.cerrado {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+.experiencias-ia .pendiente-estado {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.experiencias-ia .pendiente-estado.abierto {
+  color: var(--cuero);
+}
+
+.experiencias-ia .pendiente-estado.cerrado {
+  color: var(--verde);
+}
+
+/* Backlog */
+.experiencias-ia .filtro-prioridad {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.experiencias-ia .filtro-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border: 1.5px solid var(--tinta);
+  background: var(--papel);
+  color: var(--tinta);
+  cursor: pointer;
+}
+
+.experiencias-ia .filtro-btn.on {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.experiencias-ia .prioridad {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.experiencias-ia .prioridad.alta {
+  background: var(--cuero);
+  color: var(--papel);
+}
+
+.experiencias-ia .prioridad.media {
+  background: var(--laton);
+  color: var(--tinta);
+}
+
+.experiencias-ia .prioridad.baja {
+  background: var(--papel-2);
+  color: var(--tinta-2);
+  border: 1px solid var(--linea-fuerte);
+}
+
+/* Cronograma */
+.experiencias-ia .estado-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.experiencias-ia .estado-badge.confirmada {
+  background: var(--verde);
+  color: var(--papel);
+}
+
+.experiencias-ia .estado-badge.propuesta {
+  background: var(--laton);
+  color: var(--tinta);
+}
+
+/* Métricas */
+.experiencias-ia .metrica {
+  text-align: left;
+}
+
+.experiencias-ia .metrica-valor {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -0.03em;
+  color: var(--cuero);
+}
+
+.experiencias-ia .metrica-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tinta-2);
+  margin-top: 4px;
+}
+
+/* Participantes */
+.experiencias-ia .tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border: 1px solid var(--linea-fuerte);
+  color: var(--tinta-2);
+  display: inline-block;
+  margin: 2px 4px 2px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experiencias-ia * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
