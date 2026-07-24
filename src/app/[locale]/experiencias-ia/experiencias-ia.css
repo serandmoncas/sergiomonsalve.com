@@ -6,7 +6,7 @@
   --cuero: #8a4b2a;
   --laton: #b08d3f;
   --verde: #3f6b4e;
-  --linea: rgba(20, 27, 31, 0.16);
+  --linea: rgba(20, 27, 31, 0.05);
   --linea-fuerte: rgba(20, 27, 31, 0.4);
 
   --display: var(--font-bricolage), system-ui, sans-serif;
