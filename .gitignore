@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 .env*.local
 .playwright-mcp/
+
+# claude code local session state (worktrees, local-only settings)
+.claude/worktrees/
+.claude/settings.local.json
