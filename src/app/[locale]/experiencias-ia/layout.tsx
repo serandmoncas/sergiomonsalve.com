@@ -19,7 +19,7 @@ export default function ExperienciasIALayout({ children }: { children: React.Rea
       <div className="wrap" style={{ paddingTop: 40, paddingBottom: 60 }}>
         {children}
       </div>
-      <footer className="wrap" style={{ borderTop: '1.5px solid var(--tinta)', padding: '20px 0' }}>
+      <footer className="wrap" style={{ borderTop: '1.5px solid var(--tinta)', paddingTop: 20, paddingBottom: 20 }}>
         <Link href="/" className="exp-back">
           ← sergiomonsalve.com
         </Link>
