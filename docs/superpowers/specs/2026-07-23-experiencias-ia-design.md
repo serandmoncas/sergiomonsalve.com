@@ -169,18 +169,18 @@ Idéntico al brief original: autenticación o edición desde el navegador, busca
 
 Se heredan sin cambios los del brief original (sección 8), más los específicos de esta integración:
 
-- [ ] Las 6 rutas (`/experiencias-ia`, `/sesiones`, `/sesiones/[n]`, `/cronograma`, `/backlog`, `/quienes-somos`) existen bajo `/[locale]/` y no muestran el Nav/Footer oscuro del sitio principal.
-- [ ] El resto del sitio (`/[locale]/(main)/...`) sigue funcionando exactamente igual tras el `git mv` a `(main)/` — mismas URLs, mismo comportamiento.
-- [ ] Las 8 sesiones aparecen en el índice y cada una abre su detalle completo; navegación anterior/siguiente funciona en los extremos (Sesión 1 sin "anterior", Sesión 8 sin "siguiente").
-- [ ] La Sesión 7 incluye los 5 conceptos, las 4 referencias (sin URL, como texto plano) y los 3 nuevos integrantes.
-- [ ] El cronograma muestra las sesiones 9–12 y el panel de pendientes abiertos coincide exactamente con los pendientes `estado: "abierto"` de `data.ts`, indicando su sesión de origen.
-- [ ] El backlog muestra los 12 temas y el filtro por prioridad funciona.
-- [ ] Quiénes somos muestra las 18 fichas.
-- [ ] Ningún nombre, fecha, cita, referencia o URL fue inventado.
-- [ ] Usable a 360px sin scroll horizontal.
-- [ ] Paleta y tipografías corresponden a la sección 5 de este documento.
-- [ ] Pendientes cerrados visibles pero visualmente distinguibles de los abiertos.
-- [ ] "Experiencias IA" aparece como ítem en el Nav principal del sitio.
+- [x] Las 6 rutas (`/experiencias-ia`, `/sesiones`, `/sesiones/[n]`, `/cronograma`, `/backlog`, `/quienes-somos`) existen bajo `/[locale]/` y no muestran el Nav/Footer oscuro del sitio principal.
+- [x] El resto del sitio (`/[locale]/(main)/...`) sigue funcionando exactamente igual tras el `git mv` a `(main)/` — mismas URLs, mismo comportamiento.
+- [x] Las 8 sesiones aparecen en el índice y cada una abre su detalle completo; navegación anterior/siguiente funciona en los extremos (Sesión 1 sin "anterior", Sesión 8 sin "siguiente").
+- [x] La Sesión 7 incluye los 5 conceptos, las 4 referencias (sin URL, como texto plano) y los 3 nuevos integrantes.
+- [x] El cronograma muestra las sesiones 9–12 y el panel de pendientes abiertos coincide exactamente con los pendientes `estado: "abierto"` de `data.ts`, indicando su sesión de origen.
+- [x] El backlog muestra los 12 temas y el filtro por prioridad funciona.
+- [x] Quiénes somos muestra las 18 fichas.
+- [x] Ningún nombre, fecha, cita, referencia o URL fue inventado.
+- [ ] Usable a 360px sin scroll horizontal. **NO cumplido:** `/experiencias-ia/cronograma` desborda horizontalmente a 360px (`.ses-f` con `white-space: nowrap` aplicado a una oración larga en el panel "Pendientes abiertos" — ver `cronograma/page.tsx:44-46` y `experiencias-ia.css:344-350`). Las otras 5 páginas pasan. Ver task-13-report.md para detalle.
+- [x] Paleta y tipografías corresponden a la sección 5 de este documento.
+- [x] Pendientes cerrados visibles pero visualmente distinguibles de los abiertos.
+- [x] "Experiencias IA" aparece como ítem en el Nav principal del sitio.
 
 ## Anexo
 
