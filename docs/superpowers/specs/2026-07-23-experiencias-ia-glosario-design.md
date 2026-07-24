@@ -253,15 +253,15 @@ export default async function TerminoDetallePage({
 
 ## 9. Criterios de aceptación
 
-- [ ] El índice `/experiencias-ia/glosario` existe, es alcanzable desde el nav de 6 vistas, y lista los 40 términos agrupados en las 4 categorías en el orden fijo.
-- [ ] Cada uno de los 40 términos abre su propia subpágina en `/experiencias-ia/glosario/[slug]` con definición completa.
-- [ ] Un slug inexistente (`/experiencias-ia/glosario/no-existe`) devuelve 404.
-- [ ] Los términos con `ejemplo` lo muestran; los que no lo tienen no muestran una sección de ejemplo vacía.
-- [ ] Los términos con `referencia` muestran un link real y funcional (verificar al menos 3: harness-engineering, rag, mcp); ningún término sin referencia muestra un link fabricado.
-- [ ] Los términos con `sesionOrigen` muestran un link funcional a esa sesión (verificar al menos uno de la Sesión 7); los que no lo tienen no muestran ningún número de sesión.
-- [ ] El resto de la sección (Inicio, Sesiones, Cronograma, Backlog, Quiénes somos) sigue funcionando exactamente igual — el glosario no introduce regresiones.
-- [ ] Usable a 360px sin scroll horizontal (mismo estándar que el resto de la sección), incluyendo el índice y al menos 2 páginas de detalle.
-- [ ] `npm run test:run`, `npm run lint`, `npx tsc --noEmit` y `npm run build` limpios (sin nuevas regresiones; se ignora el error preexistente de `ProjectCard.test.tsx`).
+- [x] El índice `/experiencias-ia/glosario` existe, es alcanzable desde el nav de 6 vistas, y lista los 40 términos agrupados en las 4 categorías en el orden fijo.
+- [x] Cada uno de los 40 términos abre su propia subpágina en `/experiencias-ia/glosario/[slug]` con definición completa.
+- [x] Un slug inexistente (`/experiencias-ia/glosario/no-existe`) devuelve 404.
+- [x] Los términos con `ejemplo` lo muestran; los que no lo tienen no muestran una sección de ejemplo vacía.
+- [x] Los términos con `referencia` muestran un link real y funcional (verificar al menos 3: harness-engineering, rag, mcp); ningún término sin referencia muestra un link fabricado.
+- [x] Los términos con `sesionOrigen` muestran un link funcional a esa sesión (verificar al menos uno de la Sesión 7); los que no lo tienen no muestran ningún número de sesión.
+- [x] El resto de la sección (Inicio, Sesiones, Cronograma, Backlog, Quiénes somos) sigue funcionando exactamente igual — el glosario no introduce regresiones.
+- [x] Usable a 360px sin scroll horizontal (mismo estándar que el resto de la sección), incluyendo el índice y al menos 2 páginas de detalle.
+- [x] `npm run test:run`, `npm run lint`, `npx tsc --noEmit` y `npm run build` limpios (sin nuevas regresiones; se ignora el error preexistente de `ProjectCard.test.tsx`).
 
 ## Fuera de alcance
 
