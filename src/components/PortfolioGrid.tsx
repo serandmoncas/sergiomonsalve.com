@@ -8,7 +8,7 @@ type Labels = {
   viewCase: string
   status: { active: string; archived: string }
   filterAll: string
-  empty: string
+  filterLabel: string
 }
 
 export default function PortfolioGrid({
@@ -30,6 +30,7 @@ export default function PortfolioGrid({
       }
     }
     return Array.from(counts.entries())
+      .filter(([, count]) => count >= 2)
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
       .map(([tech]) => tech)
   }, [projects])
@@ -40,9 +41,11 @@ export default function PortfolioGrid({
 
   return (
     <div>
+      <p className="font-mono text-xs text-text-muted mb-3">{labels.filterLabel}</p>
       <div className="flex flex-wrap gap-1.5 mb-8">
         <button
           type="button"
+          aria-pressed={selectedTech === null}
           onClick={() => setSelectedTech(null)}
           className={`font-mono text-xs px-2.5 py-1 rounded-sm border transition-colors ${
             selectedTech === null
@@ -56,6 +59,7 @@ export default function PortfolioGrid({
           <button
             key={tech}
             type="button"
+            aria-pressed={selectedTech === tech}
             onClick={() => setSelectedTech(current => (current === tech ? null : tech))}
             className={`font-mono text-xs px-2.5 py-1 rounded-sm border transition-colors ${
               selectedTech === tech
@@ -68,20 +72,16 @@ export default function PortfolioGrid({
         ))}
       </div>
 
-      {filtered.length === 0 ? (
-        <p className="font-mono text-xs text-text-muted">{labels.empty}</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {filtered.map(project => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              locale={locale}
-              labels={{ viewCase: labels.viewCase, status: labels.status }}
-            />
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {filtered.map(project => (
+          <ProjectCard
+            key={project.slug}
+            project={project}
+            locale={locale}
+            labels={{ viewCase: labels.viewCase, status: labels.status }}
+          />
+        ))}
+      </div>
     </div>
   )
 }

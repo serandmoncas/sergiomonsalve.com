@@ -4,9 +4,6 @@ import userEvent from '@testing-library/user-event'
 import PortfolioGrid from '../PortfolioGrid'
 import type { ProjectMeta } from '@/lib/portfolio'
 
-vi.mock('next-intl', () => ({
-  useTranslations: () => (key: string) => key,
-}))
 vi.mock('@/i18n/navigation', () => ({
   Link: ({ href, children }: { href: string; children: React.ReactNode }) => (
     <a href={href}>{children}</a>
@@ -45,13 +42,27 @@ const projects: ProjectMeta[] = [
     featured: true,
     image: '',
   },
+  {
+    slug: 'her',
+    title: 'HER',
+    description: 'Currículo de harness engineering',
+    date: '2026-07-24',
+    role: 'Curriculum Designer / AI Educator',
+    stack: ['TypeScript', 'Claude Code'],
+    github: 'https://github.com/serandmoncas/HER',
+    demo: '',
+    links: [],
+    status: 'active',
+    featured: false,
+    image: '',
+  },
 ]
 
 const labels = {
   viewCase: 'Ver caso →',
   status: { active: 'activo', archived: 'archivado' },
   filterAll: 'Todos',
-  empty: 'próximamente',
+  filterLabel: '// filtrar por stack',
 }
 
 describe('PortfolioGrid', () => {
@@ -59,48 +70,55 @@ describe('PortfolioGrid', () => {
     render(<PortfolioGrid projects={projects} locale="es" labels={labels} />)
     expect(screen.getByText('Brayan')).toBeInTheDocument()
     expect(screen.getByText('slogs')).toBeInTheDocument()
+    expect(screen.getByText('HER')).toBeInTheDocument()
   })
 
-  it('renders one filter chip per unique technology plus "Todos"', () => {
+  it('renders a filter chip only for technologies used by 2+ projects, plus "Todos"', () => {
     render(<PortfolioGrid projects={projects} locale="es" labels={labels} />)
     expect(screen.getByRole('button', { name: 'Todos' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Python' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'FastAPI' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'TypeScript' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Ollama' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'FastAPI' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Ollama' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Claude Code' })).not.toBeInTheDocument()
   })
 
   it('filters to only projects matching the clicked technology', async () => {
     const user = userEvent.setup()
     render(<PortfolioGrid projects={projects} locale="es" labels={labels} />)
-    await user.click(screen.getByRole('button', { name: 'FastAPI' }))
+    await user.click(screen.getByRole('button', { name: 'Python' }))
     expect(screen.getByText('Brayan')).toBeInTheDocument()
-    expect(screen.queryByText('slogs')).not.toBeInTheDocument()
+    expect(screen.getByText('slogs')).toBeInTheDocument()
+    expect(screen.queryByText('HER')).not.toBeInTheDocument()
   })
 
   it('clears the filter when the same technology chip is clicked again', async () => {
     const user = userEvent.setup()
     render(<PortfolioGrid projects={projects} locale="es" labels={labels} />)
-    await user.click(screen.getByRole('button', { name: 'FastAPI' }))
-    await user.click(screen.getByRole('button', { name: 'FastAPI' }))
+    await user.click(screen.getByRole('button', { name: 'Python' }))
+    await user.click(screen.getByRole('button', { name: 'Python' }))
     expect(screen.getByText('Brayan')).toBeInTheDocument()
     expect(screen.getByText('slogs')).toBeInTheDocument()
+    expect(screen.getByText('HER')).toBeInTheDocument()
   })
 
   it('clears the filter when "Todos" is clicked', async () => {
     const user = userEvent.setup()
     render(<PortfolioGrid projects={projects} locale="es" labels={labels} />)
-    await user.click(screen.getByRole('button', { name: 'FastAPI' }))
+    await user.click(screen.getByRole('button', { name: 'Python' }))
     await user.click(screen.getByRole('button', { name: 'Todos' }))
     expect(screen.getByText('Brayan')).toBeInTheDocument()
     expect(screen.getByText('slogs')).toBeInTheDocument()
+    expect(screen.getByText('HER')).toBeInTheDocument()
   })
 
-  it('shows the empty-state message when no project matches (defensive edge case)', async () => {
+  it('reflects the selected chip via aria-pressed', async () => {
     const user = userEvent.setup()
-    const singleTechProjects = [{ ...projects[0], stack: ['OnlyOnBrayan'] }]
-    render(<PortfolioGrid projects={singleTechProjects} locale="es" labels={labels} />)
-    await user.click(screen.getByRole('button', { name: 'OnlyOnBrayan' }))
-    expect(screen.getByText('Brayan')).toBeInTheDocument()
+    render(<PortfolioGrid projects={projects} locale="es" labels={labels} />)
+    expect(screen.getByRole('button', { name: 'Todos' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: 'Python' })).toHaveAttribute('aria-pressed', 'false')
+    await user.click(screen.getByRole('button', { name: 'Python' }))
+    expect(screen.getByRole('button', { name: 'Todos' })).toHaveAttribute('aria-pressed', 'false')
+    expect(screen.getByRole('button', { name: 'Python' })).toHaveAttribute('aria-pressed', 'true')
   })
 })

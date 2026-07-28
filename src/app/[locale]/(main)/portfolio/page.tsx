@@ -48,7 +48,7 @@ export default async function PortfolioPage({
               archived: t('status.archived'),
             },
             filterAll: t('filterAll'),
-            empty: t('empty'),
+            filterLabel: t('filterLabel'),
           }}
         />
       )}
