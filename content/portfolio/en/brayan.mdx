@@ -1,0 +1,27 @@
+---
+title: Brayan
+description: A WhatsApp personal agent with tool-calling and a task scheduler — runs 100% local via Ollama (Hermes 3), with a fail-closed authorization gate.
+date: "2026-07-24"
+role: AI Agent Engineer
+stack: [Python, FastAPI, Ollama, WhatsApp Web.js, Node.js]
+github: https://github.com/serandmoncas/brayan
+demo: ""
+links: []
+status: active
+featured: false
+image: ""
+---
+
+## The problem
+
+Most AI personal assistants depend on a paid API and live in their own app. Brayan started from a different need: an agent you talk to in natural language, directly in WhatsApp, that handles real tasks — sending an email, logging an order, setting a reminder for a specific time — without a recurring bill to an LLM provider.
+
+The hard part isn't wiring a model to WhatsApp. It's designing a safe harness: an agent with access to your real email and real contacts needs strict authorization, not just a well-written prompt.
+
+## The solution
+
+Brayan splits responsibilities across two processes: a Node bridge (`whatsapp-web.js`) that only moves messages between WhatsApp and a webhook, and a FastAPI (Python) orchestrator that holds the agent logic — short-term memory per conversation thread, a tool registry with function-calling, and a scheduler for recurring tasks.
+
+The brain is **Hermes 3** (Nous Research) running 100% local via **Ollama**, with an optional fallback to Anthropic or OpenAI when more capability is needed. Development follows a spec-driven cycle: every new capability starts as a spec with acceptance criteria, gets implemented with TDD, and closes with an adversarial verification pass before being marked done.
+
+Security isn't a layer bolted on at the end: only the authorized number (`AUTHORIZED_WHATSAPP_ID`) can trigger tools, and if that variable isn't set the agent responds to no one — it fails closed, not open. Self-programming (the agent scheduling its own reminders) is limited to explicitly allowed actions, with no arbitrary code execution.

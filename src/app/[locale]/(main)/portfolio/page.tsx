@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { getAllProjects } from '@/lib/portfolio'
-import ProjectCard from '@/components/ProjectCard'
+import PortfolioGrid from '@/components/PortfolioGrid'
 
 export async function generateMetadata({
   params,
@@ -38,22 +38,19 @@ export default async function PortfolioPage({
       {projects.length === 0 ? (
         <p className="font-mono text-xs text-text-muted">{t('empty')}</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {projects.map(project => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              locale={locale}
-              labels={{
-                viewCase: t('viewCase'),
-                status: {
-                  active: t('status.active'),
-                  archived: t('status.archived'),
-                },
-              }}
-            />
-          ))}
-        </div>
+        <PortfolioGrid
+          projects={projects}
+          locale={locale}
+          labels={{
+            viewCase: t('viewCase'),
+            status: {
+              active: t('status.active'),
+              archived: t('status.archived'),
+            },
+            filterAll: t('filterAll'),
+            filterLabel: t('filterLabel'),
+          }}
+        />
       )}
     </div>
   )

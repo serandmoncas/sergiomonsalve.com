@@ -1,0 +1,27 @@
+---
+title: Brayan
+description: Agente personal por WhatsApp con tool-calling y un scheduler de tareas — corre 100% local con Ollama (Hermes 3), con un gate de autorización que falla cerrado.
+date: "2026-07-24"
+role: AI Agent Engineer
+stack: [Python, FastAPI, Ollama, WhatsApp Web.js, Node.js]
+github: https://github.com/serandmoncas/brayan
+demo: ""
+links: []
+status: active
+featured: false
+image: ""
+---
+
+## El problema
+
+Los asistentes personales con IA suelen depender de una API de pago y viven en una app aparte. Brayan nace de una necesidad distinta: un agente al que hablarle en lenguaje natural, directo en WhatsApp, que resuelva tareas reales — mandar un correo, anotar un pedido, recordar algo a una hora fija — sin atarse a una factura mensual de un proveedor de LLM.
+
+El reto no es solo conectar un modelo a WhatsApp. Es diseñar un arnés seguro: un agente con acceso a tu correo real y tus contactos reales necesita autorización estricta, no solo un prompt bien escrito.
+
+## La solución
+
+Brayan separa dos responsabilidades en dos procesos: un bridge en Node (`whatsapp-web.js`) que solo mueve mensajes entre WhatsApp y un webhook, y un orchestrator en FastAPI (Python) que concentra la lógica del agente — memoria de corto plazo por hilo, un registro de herramientas con function-calling, y un scheduler para tareas recurrentes.
+
+El cerebro es **Hermes 3** (Nous Research) corriendo 100% local vía **Ollama**, con fallback opcional a Anthropic u OpenAI cuando se necesita más capacidad. El desarrollo sigue un ciclo spec-driven: cada capacidad nueva nace como una spec con criterios de aceptación, se implementa con TDD y se cierra con una verificación adversarial antes de darla por lista.
+
+La seguridad no es una capa añadida al final: solo el número autorizado (`AUTHORIZED_WHATSAPP_ID`) puede activar herramientas, y si esa variable no está configurada el agente no responde a nadie — falla cerrado, no abierto. El "self-programming" (que el propio agente configure recordatorios) está limitado a acciones explícitamente permitidas, sin ejecución arbitraria de código.

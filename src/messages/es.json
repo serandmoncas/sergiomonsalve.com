@@ -132,6 +132,8 @@
   "portfolio": {
     "comment": "// proyectos",
     "pageTitle": "Proyectos",
+    "filterLabel": "// filtrar por stack",
+    "filterAll": "Todos",
     "stack": "// stack",
     "links": "// links",
     "github": "GitHub",
