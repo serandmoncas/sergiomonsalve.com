@@ -9,8 +9,8 @@ import {
 } from '../glosario'
 
 describe('GLOSARIO', () => {
-  it('has exactly 58 entries (40 originales + 18 de ago–oct)', () => {
-    expect(GLOSARIO).toHaveLength(58)
+  it('has exactly 200 entries', () => {
+    expect(GLOSARIO).toHaveLength(200)
   })
 
   it('has all unique slugs', () => {
@@ -56,10 +56,10 @@ describe('ORDEN_CATEGORIAS', () => {
 describe('getTerminosPorCategoria', () => {
   it('returns the expected number of terms per category', () => {
     expect(Object.fromEntries(ORDEN_CATEGORIAS.map(c => [c, getTerminosPorCategoria(c).length]))).toEqual({
-      'fundamentos': 13,
-      'contexto-memoria': 13,
-      'seguridad-control': 12,
-      'operacion-evaluacion': 20,
+      'fundamentos': 50,
+      'contexto-memoria': 50,
+      'seguridad-control': 50,
+      'operacion-evaluacion': 50,
     })
   })
 })
