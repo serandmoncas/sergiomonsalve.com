@@ -1,6 +1,6 @@
 # Imán "Mapa de habilidad" + newsletter — diseño
 
-**Fecha:** 2026-10-15 · **Estado:** aprobado en conversación, pendiente revisión de este documento
+**Fecha:** 2026-10-15 · **Enmienda:** Resend v6 reemplazó Audiences por Segments · **Estado:** aprobado en conversación, pendiente revisión de este documento
 
 ## Objetivo
 
@@ -17,7 +17,7 @@ Convertir el imán del Método MAPA en una página propia del sitio (`/mapa`) qu
 
 | Decisión | Elección | Motivo |
 |---|---|---|
-| Dónde viven los suscriptores | Supabase (fuente de verdad) + Resend Audience (copia para Broadcasts) | Todo en el stack existente, datos propios, sin costo inicial |
+| Dónde viven los suscriptores | Supabase (fuente de verdad) + Resend Segment (copia para Broadcasts) | Todo en el stack existente, datos propios, sin costo inicial |
 | Acceso al imán | Abierto; correo opcional al final | Más uso, SEO y correos de gente que ya probó la herramienta |
 | Consentimiento | Casilla sin marcar para la newsletter; el plan se envía siempre | Ley 1581 (Colombia) y RGPD exigen consentimiento previo, expreso y específico |
 
@@ -63,12 +63,13 @@ alter table subscribers enable row level security;
   - Nuevo: inserta con `newsletter` y `consented_at = now()` si aceptó.
   - Existente: actualiza `name`/`locale`; si aceptó, `newsletter = true`, `status = 'active'`, `consented_at = now()`, `unsubscribed_at = null`. Si no aceptó, no cambia su suscripción.
 - Envía el plan con Resend (`sendPlanEmail` en `src/lib/resend.ts`): texto plano + HTML simple, asunto traducido, enlace `https://www.sergiomonsalve.com/{locale}/newsletter/baja?token=…`.
-- Si aceptó la newsletter y existe `RESEND_AUDIENCE_ID`: crea o actualiza el contacto en la Audience (best-effort; errores se registran y no fallan la respuesta).
+- Si aceptó la newsletter y existe `RESEND_SEGMENT_ID`: crea o actualiza el contacto en el Segment (best-effort; errores se registran y no fallan la respuesta).
 - Error de base de datos → 500. Error al enviar el plan → 502 con mensaje para reintentar.
 
 ### 4. Baja `/[locale]/newsletter/baja`
 
-- Página de servidor que lee `token`, marca `status = 'unsubscribed'`, `newsletter = false`, `unsubscribed_at = now()` y quita el contacto de la Audience (best-effort).
+- Página de servidor que lee `token`, marca `status = 'unsubscribed'`, `newsletter = false`, `unsubscribed_at = now()` y marca el contacto como `unsubscribed` en Resend (best-effort).
+- La baja se ejecuta solo al confirmar con un botón (POST); el GET solo muestra la confirmación, para que los escáneres de enlaces no den de baja a nadie.
 - Muestra confirmación; token inválido o ausente muestra un mensaje claro con enlace a contacto.
 - Idempotente: repetir la baja muestra la misma confirmación.
 
@@ -92,7 +93,7 @@ alter table subscribers enable row level security;
 ## Puesta en producción (requiere acción o permiso de Sergio)
 
 1. Aplicar migraciones 006 y 007 en Supabase producción.
-2. Crear la Audience en Resend y guardar `RESEND_AUDIENCE_ID` en Vercel (production y preview).
+2. Crear el Segment en Resend y guardar `RESEND_SEGMENT_ID` en Vercel (production y preview).
 3. Merge a `main` → despliegue automático. Prueba real con un correo propio.
 
 ## Fuera de alcance
