@@ -59,6 +59,7 @@
     "mapaTitle": "Mapa de habilidad",
     "mapaDescription": "Plantilla gratuita del Método MAPA: convierte cualquier habilidad en un plan de 30 días en 20 minutos.",
     "privacyTitle": "Tratamiento de datos",
+    "propuestaTitle": "Propuesta",
     "formacionTitle": "Formación",
     "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA."
   },
@@ -477,6 +478,172 @@
   },
   "footer": {
     "privacy": "Privacidad"
+  },
+  "propuesta": {
+    "comment": "// propuesta · Sprint de Aprendizaje",
+    "titleFor": "Propuesta para {company}",
+    "titleGeneric": "Propuesta: Sprint de Aprendizaje",
+    "subtitle": "Que tu equipo pase de la teoría a usar la IA en su trabajo real, en semanas.",
+    "by": "Sergio Monsalve · Profesor de la Universidad EAFIT e ingeniero de IA",
+    "validity": "Vigencia: 30 días desde la fecha de envío.",
+    "problem": {
+      "label": "// el problema",
+      "title": "La IA ya está pagada. El aprendizaje no llega.",
+      "text": "Muchas empresas ya invirtieron en herramientas de IA, pero los equipos las usan poco o mal. Las capacitaciones tradicionales transmiten información y se olvidan en semanas: no cambian cómo trabaja la gente.",
+      "stat": "En Chile, el 66% de las empresas pilotea IA, pero solo el 8% logra escalarla.",
+      "statSource": "Índice CCS 2026",
+      "close": "El cuello de botella no es la tecnología. Es cómo aprende el equipo."
+    },
+    "method": {
+      "label": "// el método",
+      "title": "Método MAPA",
+      "steps": [
+        {
+          "letter": "M",
+          "title": "Mapear",
+          "text": "Descomponemos la habilidad y elegimos el 20% que da el 80% del resultado para tu equipo."
+        },
+        {
+          "letter": "A",
+          "title": "Aplicar",
+          "text": "Desde el día 1 se trabaja sobre tareas reales de tu empresa, no sobre ejemplos genéricos."
+        },
+        {
+          "letter": "P",
+          "title": "Practicar lo difícil",
+          "text": "Ejercicios cortos sobre los errores más comunes y recuperación activa para que lo aprendido se quede."
+        },
+        {
+          "letter": "A",
+          "title": "Ajustar",
+          "text": "Feedback semanal, con la IA como tutor, y ajuste del plan según lo que funciona."
+        }
+      ]
+    },
+    "options": {
+      "label": "// opciones",
+      "title": "Dos formas de empezar"
+    },
+    "pilot": {
+      "tag": "Opción 1",
+      "title": "Taller piloto · 90 minutos",
+      "text": "Para probar el método con un equipo de 8 a 25 personas antes de comprometerse con el programa completo. Remoto, en vivo.",
+      "agendaLabel": "Agenda",
+      "agenda": [
+        {
+          "time": "0–10",
+          "title": "Encuadre",
+          "text": "Por qué olvidamos lo que aprendemos en las capacitaciones."
+        },
+        {
+          "time": "10–25",
+          "title": "Mapear",
+          "text": "El equipo mapea la tarea de su trabajo que más quiere acelerar con IA."
+        },
+        {
+          "time": "25–55",
+          "title": "Aplicar",
+          "text": "Cada persona resuelve esa tarea real con una herramienta de IA, guiada paso a paso."
+        },
+        {
+          "time": "55–75",
+          "title": "Practicar lo difícil",
+          "text": "Ejercicio sobre el error más común y recuperación activa."
+        },
+        {
+          "time": "75–90",
+          "title": "Ajustar",
+          "text": "Retroalimentación, plan de práctica de 7 días y cierre."
+        }
+      ],
+      "deliverablesLabel": "Entregables",
+      "deliverables": [
+        "Mapa de habilidad del equipo",
+        "Biblioteca de 5 a 10 prompts aplicados a sus casos reales",
+        "Plan de práctica de 7 días por persona",
+        "Informe de una página para el líder, con lo observado y la recomendación de siguiente paso"
+      ]
+    },
+    "sprint": {
+      "tag": "Opción 2",
+      "title": "Sprint de Aprendizaje · 4 semanas",
+      "text": "El programa completo para que el equipo adopte una habilidad nueva, incluida la IA, en su trabajo diario. Hasta 20 personas, remoto.",
+      "weeks": [
+        {
+          "label": "Semana 1",
+          "title": "Diagnóstico y mapa",
+          "text": "Entrevistas cortas y encuesta inicial. Mapa de habilidades del equipo y metas medibles con el líder."
+        },
+        {
+          "label": "Semana 2",
+          "title": "Aplicar en vivo",
+          "text": "Dos sesiones facilitadas sobre las tareas reales del equipo. Cada persona sale con algo funcionando."
+        },
+        {
+          "label": "Semana 3",
+          "title": "Retos reales",
+          "text": "Retos semanales sobre casos de la empresa, práctica de lo difícil y acompañamiento asincrónico."
+        },
+        {
+          "label": "Semana 4",
+          "title": "Ajuste y cierre",
+          "text": "Demostración de resultados, encuesta final y plan para sostener lo aprendido."
+        }
+      ],
+      "deliverablesLabel": "Entregables",
+      "deliverables": [
+        "Mapa de habilidades y metas del equipo",
+        "4 sesiones en vivo grabadas y sus materiales",
+        "Biblioteca de prompts y procedimientos del equipo",
+        "Informe final con métricas antes y después"
+      ]
+    },
+    "pricing": {
+      "label": "// inversión",
+      "title": "Inversión",
+      "colOption": "Opción",
+      "colCop": "Colombia",
+      "colUsd": "Internacional",
+      "rows": [
+        {
+          "name": "Taller piloto · 90 min",
+          "note": "Solo para los 3 primeros clientes",
+          "cop": "COP 1.800.000",
+          "usd": "US$450"
+        },
+        {
+          "name": "Sprint de Aprendizaje · 4 semanas",
+          "note": "Hasta 20 personas",
+          "cop": "COP 12.000.000",
+          "usd": "US$3.000"
+        }
+      ],
+      "footnote": "Valores antes de impuestos. Si después del piloto contratan el Sprint, el valor del piloto se descuenta.",
+      "exchangeLabel": "A cambio del precio piloto te pido",
+      "exchange": [
+        "Un testimonio corto del líder del equipo",
+        "Permiso para publicar un caso de estudio, con o sin nombre",
+        "Presentarme a otro líder que pueda beneficiarse"
+      ]
+    },
+    "about": {
+      "label": "// quién facilita",
+      "title": "Sergio Monsalve",
+      "items": [
+        "15 años como profesor de la Universidad EAFIT, en pregrado y educación continua",
+        "Acompaño semilleros de investigación desde 2004",
+        "MSc en Ingeniería con énfasis en Educación para la Ingeniería y Cómputo Científico",
+        "AI Software Engineer: construí sistemas de IA para clientes de EE. UU. y Europa en Globant"
+      ]
+    },
+    "next": {
+      "label": "// siguiente paso",
+      "title": "Agendemos 20 minutos para ajustar la propuesta a tu equipo.",
+      "whatsapp": "Escribir por WhatsApp →",
+      "whatsappTextFor": "Hola Sergio, revisé la propuesta para {company} y quiero conversar sobre el Sprint de Aprendizaje.",
+      "whatsappTextGeneric": "Hola Sergio, revisé la propuesta del Sprint de Aprendizaje y quiero conversar.",
+      "contact": "Usar el formulario de contacto →"
+    }
   },
   "cursos": {
     "comment": "// cursos",

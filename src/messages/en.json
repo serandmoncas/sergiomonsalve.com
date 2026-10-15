@@ -59,6 +59,7 @@
     "mapaTitle": "Skill map",
     "mapaDescription": "Free MAPA Method template: turn any skill into a 30-day plan in 20 minutes.",
     "privacyTitle": "Data policy",
+    "propuestaTitle": "Proposal",
     "formacionTitle": "Training",
     "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer."
   },
@@ -477,6 +478,172 @@
   },
   "footer": {
     "privacy": "Privacy"
+  },
+  "propuesta": {
+    "comment": "// proposal · Learning Sprint",
+    "titleFor": "Proposal for {company}",
+    "titleGeneric": "Proposal: Learning Sprint",
+    "subtitle": "Take your team from theory to using AI in their real work, in weeks.",
+    "by": "Sergio Monsalve · Professor at Universidad EAFIT and AI engineer",
+    "validity": "Valid for 30 days from the date it was sent.",
+    "problem": {
+      "label": "// the problem",
+      "title": "AI is already paid for. The learning isn't happening.",
+      "text": "Many companies have already invested in AI tools, but teams use them little or badly. Traditional training passes on information that is forgotten within weeks: it doesn't change how people work.",
+      "stat": "In Chile, 66% of companies pilot AI, but only 8% manage to scale it.",
+      "statSource": "CCS Index 2026",
+      "close": "The bottleneck isn't the technology. It's how the team learns."
+    },
+    "method": {
+      "label": "// the method",
+      "title": "The MAPA Method",
+      "steps": [
+        {
+          "letter": "M",
+          "title": "Map",
+          "text": "We break the skill down and pick the 20% that delivers 80% of the result for your team."
+        },
+        {
+          "letter": "A",
+          "title": "Apply",
+          "text": "From day one the team works on real tasks from your company, not generic examples."
+        },
+        {
+          "letter": "P",
+          "title": "Practice the hard parts",
+          "text": "Short drills on the most common mistakes and active recall so learning sticks."
+        },
+        {
+          "letter": "A",
+          "title": "Adjust",
+          "text": "Weekly feedback, with AI as a tutor, and plan adjustments based on what works."
+        }
+      ]
+    },
+    "options": {
+      "label": "// options",
+      "title": "Two ways to start"
+    },
+    "pilot": {
+      "tag": "Option 1",
+      "title": "Pilot workshop · 90 minutes",
+      "text": "To try the method with a team of 8 to 25 people before committing to the full program. Remote, live.",
+      "agendaLabel": "Agenda",
+      "agenda": [
+        {
+          "time": "0–10",
+          "title": "Framing",
+          "text": "Why we forget what we learn in training sessions."
+        },
+        {
+          "time": "10–25",
+          "title": "Map",
+          "text": "The team maps the work task they most want to speed up with AI."
+        },
+        {
+          "time": "25–55",
+          "title": "Apply",
+          "text": "Each person solves that real task with an AI tool, guided step by step."
+        },
+        {
+          "time": "55–75",
+          "title": "Practice the hard parts",
+          "text": "A drill on the most common mistake and active recall."
+        },
+        {
+          "time": "75–90",
+          "title": "Adjust",
+          "text": "Feedback, a 7-day practice plan and wrap-up."
+        }
+      ],
+      "deliverablesLabel": "Deliverables",
+      "deliverables": [
+        "The team's skill map",
+        "A library of 5 to 10 prompts applied to their real cases",
+        "A 7-day practice plan per person",
+        "A one-page report for the team lead with observations and the recommended next step"
+      ]
+    },
+    "sprint": {
+      "tag": "Option 2",
+      "title": "Learning Sprint · 4 weeks",
+      "text": "The full program for the team to adopt a new skill, including AI, in their daily work. Up to 20 people, remote.",
+      "weeks": [
+        {
+          "label": "Week 1",
+          "title": "Diagnosis and map",
+          "text": "Short interviews and a baseline survey. Team skills map and measurable goals with the lead."
+        },
+        {
+          "label": "Week 2",
+          "title": "Apply live",
+          "text": "Two facilitated sessions on the team's real tasks. Everyone leaves with something working."
+        },
+        {
+          "label": "Week 3",
+          "title": "Real challenges",
+          "text": "Weekly challenges on company cases, practice of the hard parts and async support."
+        },
+        {
+          "label": "Week 4",
+          "title": "Adjust and close",
+          "text": "Results demo, final survey and a plan to sustain what was learned."
+        }
+      ],
+      "deliverablesLabel": "Deliverables",
+      "deliverables": [
+        "Team skills map and goals",
+        "4 recorded live sessions and their materials",
+        "The team's prompt and procedure library",
+        "Final report with before-and-after metrics"
+      ]
+    },
+    "pricing": {
+      "label": "// investment",
+      "title": "Investment",
+      "colOption": "Option",
+      "colCop": "Colombia",
+      "colUsd": "International",
+      "rows": [
+        {
+          "name": "Pilot workshop · 90 min",
+          "note": "Only for the first 3 clients",
+          "cop": "COP 1.800.000",
+          "usd": "US$450"
+        },
+        {
+          "name": "Learning Sprint · 4 weeks",
+          "note": "Up to 20 people",
+          "cop": "COP 12.000.000",
+          "usd": "US$3.000"
+        }
+      ],
+      "footnote": "Prices before taxes. If you book the Sprint after the pilot, the pilot fee is credited.",
+      "exchangeLabel": "In exchange for the pilot price I ask for",
+      "exchange": [
+        "A short testimonial from the team lead",
+        "Permission to publish a case study, named or anonymous",
+        "An introduction to another lead who could benefit"
+      ]
+    },
+    "about": {
+      "label": "// who facilitates",
+      "title": "Sergio Monsalve",
+      "items": [
+        "15 years as a professor at Universidad EAFIT, in undergraduate and continuing education",
+        "Mentoring research groups since 2004",
+        "MSc in Engineering with a focus on Engineering Education and Scientific Computing",
+        "AI Software Engineer: built AI systems for US and European clients at Globant"
+      ]
+    },
+    "next": {
+      "label": "// next step",
+      "title": "Let's book 20 minutes to tailor this proposal to your team.",
+      "whatsapp": "Message on WhatsApp →",
+      "whatsappTextFor": "Hi Sergio, I reviewed the proposal for {company} and I'd like to talk about the Learning Sprint.",
+      "whatsappTextGeneric": "Hi Sergio, I reviewed the Learning Sprint proposal and I'd like to talk.",
+      "contact": "Use the contact form →"
+    }
   },
   "cursos": {
     "comment": "// courses",
