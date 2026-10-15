@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import ContactForm from '@/components/ContactForm'
+import { parseProjectType } from '@/lib/contact-schema'
 
 export async function generateMetadata({
   params
@@ -25,11 +26,14 @@ export async function generateMetadata({
 }
 
 export default async function ContactPage({
-  params
+  params,
+  searchParams
 }: {
   params: Promise<{ locale: string }>
+  searchParams: Promise<{ tipo?: string | string[] }>
 }) {
   const { locale } = await params
+  const { tipo } = await searchParams
   const t = await getTranslations({ locale, namespace: 'contact' })
   return (
     <div className="max-w-lg mx-auto px-6 py-16">
@@ -37,7 +41,7 @@ export default async function ContactPage({
       <h1 className="text-3xl font-extrabold tracking-tight text-text mb-10">
         {t('title')}
       </h1>
-      <ContactForm />
+      <ContactForm initialType={parseProjectType(tipo)} />
     </div>
   )
 }

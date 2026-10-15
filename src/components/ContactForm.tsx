@@ -2,14 +2,11 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { PROJECT_TYPES, type ProjectType } from '@/lib/contact-schema'
 
-type ProjectType = 'freelance' | 'fulltime' | 'collaboration'
-
-const PROJECT_TYPES: ProjectType[] = ['freelance', 'fulltime', 'collaboration']
-
-export default function ContactForm() {
+export default function ContactForm({ initialType }: { initialType?: ProjectType } = {}) {
   const t = useTranslations('contact')
-  const [projectType, setProjectType] = useState<ProjectType | null>(null)
+  const [projectType, setProjectType] = useState<ProjectType | null>(initialType ?? null)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')

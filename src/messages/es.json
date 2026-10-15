@@ -107,7 +107,8 @@
     "projectTypes": {
       "freelance": "Freelance",
       "fulltime": "Full-time",
-      "collaboration": "Colaboración"
+      "collaboration": "Colaboración",
+      "training": "Formación / taller"
     },
     "nameLabel": "nombre",
     "namePlaceholder": "Tu nombre",

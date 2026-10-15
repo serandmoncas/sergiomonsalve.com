@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { contactSchema } from '../contact-schema'
+import { contactSchema, PROJECT_TYPES, parseProjectType } from '../contact-schema'
 
 describe('contactSchema', () => {
   const valid = {
@@ -42,10 +42,17 @@ describe('contactSchema', () => {
     expect(result.error!.issues[0].path).toContain('message')
   })
 
-  it('accepts all three project types', () => {
-    for (const type of ['freelance', 'fulltime', 'collaboration'] as const) {
+  it('accepts all four project types', () => {
+    for (const type of PROJECT_TYPES) {
       const result = contactSchema.safeParse({ ...valid, projectType: type })
       expect(result.success).toBe(true)
     }
+  })
+
+  it('parseProjectType returns a valid type or undefined', () => {
+    expect(parseProjectType('training')).toBe('training')
+    expect(parseProjectType('hacker')).toBeUndefined()
+    expect(parseProjectType(undefined)).toBeUndefined()
+    expect(parseProjectType(['training'])).toBeUndefined()
   })
 })

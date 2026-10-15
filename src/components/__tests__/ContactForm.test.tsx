@@ -10,6 +10,7 @@ vi.mock('next-intl', () => ({
       'projectTypes.freelance': 'Freelance',
       'projectTypes.fulltime': 'Full-time',
       'projectTypes.collaboration': 'Colaboración',
+      'projectTypes.training': 'Formación / taller',
       'nameLabel': 'nombre',
       'namePlaceholder': 'Tu nombre',
       'emailLabel': 'email',
@@ -37,6 +38,16 @@ describe('ContactForm', () => {
     expect(screen.getByRole('button', { name: 'Freelance' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Full-time' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Colaboración' })).toBeInTheDocument()
+  })
+
+  it('renders the training project type', () => {
+    render(<ContactForm />)
+    expect(screen.getByRole('button', { name: 'Formación / taller' })).toBeInTheDocument()
+  })
+
+  it('preselects the initial project type', () => {
+    render(<ContactForm initialType="training" />)
+    expect(screen.getByRole('button', { name: 'Formación / taller' })).toHaveAttribute('data-active', 'true')
   })
 
   it('renders name, email, and message fields', () => {
