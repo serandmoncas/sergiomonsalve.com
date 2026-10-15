@@ -29,8 +29,16 @@ describe('getSesion', () => {
 })
 
 describe('sesiones documentadas', () => {
-  it('has 17 sessions numbered 1..17 with no gaps', () => {
-    expect(getSesionesDocumentadas().map(s => s.n)).toEqual(Array.from({ length: 17 }, (_, i) => i + 1))
+  // Sin cantidades fijas: agregar una sesión no debe obligar a tocar los tests.
+  it('are numbered 1..N with no gaps or repeats', () => {
+    const numeros = getSesionesDocumentadas().map(s => s.n)
+    expect(numeros).toEqual(Array.from({ length: numeros.length }, (_, i) => i + 1))
+  })
+
+  it('every hallazgos list has at most 6 items (recaps cortos)', () => {
+    for (const sesion of getSesionesDocumentadas()) {
+      expect(sesion.hallazgos?.length ?? 0).toBeLessThanOrEqual(6)
+    }
   })
 
   it('every session has a gancho', () => {
@@ -45,7 +53,7 @@ describe('getBitacora', () => {
     const fechas = getBitacora().map(e => e.fecha)
     expect(fechas).toHaveLength(SESIONES.length)
     expect(fechas).toEqual([...fechas].sort().reverse())
-    expect(fechas[0]).toBe('2026-10-14')
+    expect(fechas[0]).toBe([...SESIONES].map(e => e.fecha).sort().at(-1))
   })
 
   it('marks 29 jul, 12 ago and 30 sep as sin registro', () => {
@@ -62,15 +70,17 @@ describe('getAdjacentSesiones', () => {
   })
 
   it('has no siguiente for the last session', () => {
-    const { anterior, siguiente } = getAdjacentSesiones(17)
-    expect(anterior?.n).toBe(16)
+    const ultima = getSesionesDocumentadas().length
+    const { anterior, siguiente } = getAdjacentSesiones(ultima)
+    expect(anterior?.n).toBe(ultima - 1)
     expect(siguiente).toBeUndefined()
   })
 })
 
 describe('getUltimasSesiones', () => {
   it('returns the N most recent documented sessions in descending order', () => {
-    expect(getUltimasSesiones(3).map(s => s.n)).toEqual([17, 16, 15])
+    const ultima = getSesionesDocumentadas().length
+    expect(getUltimasSesiones(3).map(s => s.n)).toEqual([ultima, ultima - 1, ultima - 2])
   })
 })
 

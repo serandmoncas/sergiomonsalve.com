@@ -9,8 +9,9 @@ import {
 } from '../glosario'
 
 describe('GLOSARIO', () => {
-  it('has exactly 200 entries', () => {
-    expect(GLOSARIO).toHaveLength(200)
+  // Es un glosario vivo: puede crecer, nunca bajar de los 200 de octubre 2026.
+  it('has at least 200 entries', () => {
+    expect(GLOSARIO.length).toBeGreaterThanOrEqual(200)
   })
 
   it('has all unique slugs', () => {
@@ -54,13 +55,10 @@ describe('ORDEN_CATEGORIAS', () => {
 })
 
 describe('getTerminosPorCategoria', () => {
-  it('returns the expected number of terms per category', () => {
-    expect(Object.fromEntries(ORDEN_CATEGORIAS.map(c => [c, getTerminosPorCategoria(c).length]))).toEqual({
-      'fundamentos': 50,
-      'contexto-memoria': 50,
-      'seguridad-control': 50,
-      'operacion-evaluacion': 50,
-    })
+  it('every category keeps at least 50 terms', () => {
+    for (const categoria of ORDEN_CATEGORIAS) {
+      expect(getTerminosPorCategoria(categoria).length).toBeGreaterThanOrEqual(50)
+    }
   })
 })
 
