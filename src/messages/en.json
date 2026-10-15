@@ -228,6 +228,96 @@
         "whatsappText": "Hi Sergio, I saw your training page and I'd like to know more about the Learning Sprints."
       }
     },
+  "mapa": {
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "example": {
+      "skill": "SQL for sales analysis",
+      "outcome": "Build the monthly sales report on my own without asking IT for help",
+      "why": "I take over the team's reports in January",
+      "hours": "3",
+      "project": "A dashboard with last quarter's sales by region, built with my own queries",
+      "firstStep": "Install DBeaver and connect to the test database",
+      "weak": "Understanding JOINs across several tables",
+      "drill": "10 short JOIN exercises, 15 minutes a day",
+      "recall": "When do I use LEFT JOIN instead of INNER JOIN?\nWhat does GROUP BY do with NULLs?\nHow do I filter after grouping?",
+      "feedback": "The team's senior analyst + AI as a tutor",
+      "reviewDay": "Friday",
+      "pieces": [
+        {
+          "text": "SELECT, WHERE and ORDER BY",
+          "key": true
+        },
+        {
+          "text": "JOINs between tables",
+          "key": true
+        },
+        {
+          "text": "GROUP BY and aggregates",
+          "key": true
+        },
+        {
+          "text": "Subqueries",
+          "key": false
+        },
+        {
+          "text": "Date functions",
+          "key": false
+        },
+        {
+          "text": "Indexes and performance",
+          "key": false
+        }
+      ]
+    },
+    "plan": {
+      "heading": "MAPA PLAN · 30 DAYS",
+      "skill": "Skill",
+      "goal": "Goal",
+      "why": "Why now",
+      "time": "Time: {hours} h/week · review every {day}",
+      "mapHeading": "M · KEY PIECES (the 20% that matters)",
+      "keyMissing": "[star your 3 key pieces]",
+      "later": "Later",
+      "applyHeading": "A · REAL PROJECT",
+      "today": "Today",
+      "practiceHeading": "P · PRACTICE THE HARD PARTS",
+      "weak": "Weak spot",
+      "drill": "Drill",
+      "recall": "Weekly self-test",
+      "adjustHeading": "A · ADJUST",
+      "feedback": "Feedback",
+      "weeksHeading": "WEEKS",
+      "week1": "{piece} + first version of the project",
+      "week2": "{piece} + practice the weak spot",
+      "week3": "{piece} + bring it all into the project",
+      "week4": "Finish, show the result and ask for feedback",
+      "fallbackPieces": [
+        "key piece 1",
+        "key piece 2",
+        "key piece 3"
+      ],
+      "missing": {
+        "skill": "[your skill]",
+        "outcome": "[your result]",
+        "project": "[your project]",
+        "firstStep": "[your first step]",
+        "weak": "[your weak spot]",
+        "drill": "[your drill]",
+        "feedback": "[who corrects you]"
+      },
+      "mapPrompt": "Act as an expert in {skill} and as a teacher.\nMy 30-day goal: {outcome}.\nI have {hours} hours per week.\n\n1. Break the skill into 10 to 15 concrete pieces (concepts, procedures and tools).\n2. Mark the 3 pieces that bring me closest to my goal and explain why.\n3. Tell me what I can ignore for now without hurting the result.",
+      "tutorPrompt": "You are my {skill} tutor. My goal: {outcome}.\nEvery time I write to you, ask me 3 recall questions about {topics},\none at a time and without giving me the answer. After each answer, correct me,\ntell me what reasoning mistake I made and suggest a short exercise to practice that point.",
+      "tutorTopicsFallback": "what I'm learning"
+    }
+  },
   "cursos": {
     "comment": "// courses",
     "title": "Courses",

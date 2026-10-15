@@ -228,6 +228,96 @@
         "whatsappText": "Hola Sergio, vi tu página de formación y me interesa saber más sobre los Sprints de Aprendizaje."
       }
     },
+  "mapa": {
+    "days": [
+      "Lunes",
+      "Martes",
+      "Miércoles",
+      "Jueves",
+      "Viernes",
+      "Sábado",
+      "Domingo"
+    ],
+    "example": {
+      "skill": "SQL para analizar ventas",
+      "outcome": "Armar yo solo el reporte mensual de ventas sin pedirle ayuda a TI",
+      "why": "En enero asumo los reportes del área",
+      "hours": "3",
+      "project": "Un tablero con las ventas por región del último trimestre, hecho con consultas propias",
+      "firstStep": "Instalar DBeaver y conectarme a la base de prueba",
+      "weak": "Entender los JOIN entre varias tablas",
+      "drill": "10 ejercicios cortos de JOIN, 15 minutos al día",
+      "recall": "¿Cuándo uso LEFT JOIN en vez de INNER JOIN?\n¿Qué hace GROUP BY con los NULL?\n¿Cómo filtro después de agrupar?",
+      "feedback": "La analista senior del equipo + la IA como tutor",
+      "reviewDay": "Viernes",
+      "pieces": [
+        {
+          "text": "SELECT, WHERE y ORDER BY",
+          "key": true
+        },
+        {
+          "text": "JOIN entre tablas",
+          "key": true
+        },
+        {
+          "text": "GROUP BY y agregaciones",
+          "key": true
+        },
+        {
+          "text": "Subconsultas",
+          "key": false
+        },
+        {
+          "text": "Funciones de fecha",
+          "key": false
+        },
+        {
+          "text": "Índices y rendimiento",
+          "key": false
+        }
+      ]
+    },
+    "plan": {
+      "heading": "PLAN MAPA · 30 DÍAS",
+      "skill": "Habilidad",
+      "goal": "Meta",
+      "why": "Por qué ahora",
+      "time": "Tiempo: {hours} h/semana · revisión cada {day}",
+      "mapHeading": "M · PIEZAS CLAVE (el 20% que importa)",
+      "keyMissing": "[marca tus 3 piezas clave]",
+      "later": "Después",
+      "applyHeading": "A · PROYECTO REAL",
+      "today": "Hoy",
+      "practiceHeading": "P · PRÁCTICA DE LO DIFÍCIL",
+      "weak": "Punto débil",
+      "drill": "Ejercicio",
+      "recall": "Autoexamen semanal",
+      "adjustHeading": "A · AJUSTE",
+      "feedback": "Feedback",
+      "weeksHeading": "SEMANAS",
+      "week1": "{piece} + primera versión del proyecto",
+      "week2": "{piece} + práctica del punto débil",
+      "week3": "{piece} + integrar todo en el proyecto",
+      "week4": "Terminar, mostrar el resultado y pedir feedback",
+      "fallbackPieces": [
+        "pieza clave 1",
+        "pieza clave 2",
+        "pieza clave 3"
+      ],
+      "missing": {
+        "skill": "[tu habilidad]",
+        "outcome": "[tu resultado]",
+        "project": "[tu proyecto]",
+        "firstStep": "[tu primer paso]",
+        "weak": "[tu punto débil]",
+        "drill": "[tu ejercicio]",
+        "feedback": "[quién te corrige]"
+      },
+      "mapPrompt": "Actúa como un experto en {skill} y como profesor.\nMi meta en 30 días: {outcome}.\nTengo {hours} horas por semana.\n\n1. Descompón la habilidad en 10 a 15 piezas concretas (conceptos, procedimientos y herramientas).\n2. Marca las 3 piezas que más acercan a mi meta y explica por qué.\n3. Dime qué puedo ignorar por ahora sin afectar el resultado.",
+      "tutorPrompt": "Eres mi tutor de {skill}. Mi meta: {outcome}.\nCada vez que te escriba, hazme 3 preguntas de memoria sobre {topics},\nuna a la vez y sin darme la respuesta. Después de cada respuesta, corrígeme,\ndime qué error de razonamiento cometí y propónme un ejercicio corto para practicar ese punto.",
+      "tutorTopicsFallback": "lo que estoy aprendiendo"
+    }
+  },
   "cursos": {
     "comment": "// cursos",
     "title": "Cursos",
