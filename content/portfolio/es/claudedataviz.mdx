@@ -1,0 +1,47 @@
+---
+title: Visor histórico
+description: Un visor que convierte Wikipedia en líneas de tiempo navegables — efemérides, años mes a mes y la evolución de un tema como la aviación, con capítulos, hitos e imágenes. Hecho para entender cómo funcionan por dentro Claude Dashboards y Claude Motion.
+date: "2026-10-15"
+role: Creador
+stack: [Next.js, React, TypeScript, Wikipedia API, Wikidata, Vitest, Playwright, Claude Code]
+github: ""
+demo: ""
+links: []
+status: active
+featured: false
+image: /portfolio/claudedataviz.jpg
+---
+
+## El problema
+
+Quería aprender cómo funcionan por dentro dos productos nuevos de Claude: **Dashboards**, que convierte una pregunta en un tablero que se mantiene al día, y **Motion**, que convierte un reporte en un video explicador escrito como código. Leer sobre ellos no alcanzaba; necesitaba construir algo con el mismo mecanismo y datos reales.
+
+La historia era el terreno ideal. Wikipedia tiene los datos —qué pasó cada día del año, qué pasó cada año, cronologías completas de temas como la aviación—, pero los presenta como listas largas que no dejan ver la forma del tiempo: dónde se concentran los hechos, cuáles importan más, cómo se conecta una época con la siguiente.
+
+## La solución
+
+El repositorio **ClaudeDataViz** tiene tres partes. Las dos primeras son ejemplos pequeños en HTML, sin dependencias: un mini dashboard donde cada widget recuerda su propia consulta y se refresca a su ritmo, y un explicador animado donde el video es una función pura `render(escena, t)` que se exporta fotograma a fotograma.
+
+La tercera es el **Visor histórico**, una aplicación Next.js que consulta Wikipedia en vivo y tiene tres vistas:
+
+- **Día** — todo lo que pasó, por ejemplo, un 20 de julio, del año 70 a hoy, sobre una línea de tiempo de siglos con densidad por categoría.
+- **Período** — lo que pasó en un año, mes a mes.
+- **Tema** — escribes «aviación» y obtienes su evolución: capítulos tomados de las secciones del anexo de Wikipedia, una cinta panorámica con los hitos y sus fotos, y la lista completa debajo.
+
+Arrastrar sobre la línea de tiempo filtra un rango, un capítulo es un rango de años, y todo el estado vive en la URL: compartir un enlace lleva a otra persona exactamente a «los hitos de la aviación en los años 20».
+
+## Decisiones técnicas
+
+**Leer el HTML ya renderizado de Wikipedia, no el wikitext.** Cada anexo usa plantillas distintas; el HTML de Parsoid ya las trae expandidas. Aun así, el parser tuvo que aprender formatos que solo aparecieron con datos reales: tablas ordenables para los siglos antiguos, listas cortadas por una imagen, años en negrita sin dos puntos. La regla que lo gobierna: ubicar cada hecho o contarlo como descartado, **nunca inventar un año** («1.000 aviones» y «747-400» no son años).
+
+**La importancia no es la popularidad.** Los hitos se eligen con las visitas de los artículos enlazados, pero con solo visitas cualquier hecho que nombrara un país le ganaba al primer vuelo de los Wright: «España» suma 161.357 visitas en 30 días; «Wilbur Wright», 474. Probamos ocho fórmulas con datos reales; ni la frecuencia en el tema ni las coordenadas sirvieron. Lo que funcionó fue una segunda señal: la **descripción corta de Wikidata** («país de Europa» frente a «aviador estadounidense»), que dice qué *es* cada artículo.
+
+**Estética pensada para leer, no solo para impresionar.** La vista Tema usa un gradiente vibrante con tarjetas de vidrio y una línea luminosa que se enciende hasta el hito elegido, pero el contraste del texto se midió (el blanco sobre los extremos del gradiente daba 2,0:1; un velo lo sube por encima de 4,5:1), respeta `prefers-reduced-motion` y la cinta se recorre con el teclado.
+
+**Pruebas con datos reales, y una revisión independiente.** Las pruebas usan respuestas reales de Wikipedia grabadas como fixtures. Una revisión final hecha por otro agente encontró que la API de visitas entrega los datos por partes y que el código no pedía las siguientes: el 84 % de los artículos quedaba en cero, y el fixture se había grabado con el mismo error, así que las pruebas pasaban.
+
+## Resultados
+
+- 141 pruebas unitarias y 9 de punta a punta; la cronología de la aviación queda en 405 hechos, 12 capítulos y 40 hitos, sin descartes.
+- Con la fórmula final, el primer vuelo de los Wright, Lindbergh, Blériot y Santos-Dumont son hitos; antes lo era solo un hecho de siete.
+- Lo más valioso fue lo que el proyecto enseñó sobre los dos productos que lo inspiraron: un dashboard no es una imagen sino un conjunto de consultas que se vuelven a ejecutar, y un video de Motion no es metraje sino una escena que se vuelve a dibujar. Claude no entrega un resultado congelado, sino el programa que lo produce.
