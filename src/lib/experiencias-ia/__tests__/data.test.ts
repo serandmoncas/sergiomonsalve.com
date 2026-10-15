@@ -4,6 +4,7 @@ import {
   TEMAS,
   PERSONAS,
   TALLER,
+  MIERCOLES_SIN_SESION,
   esSinRegistro,
   getSesion,
   getSesionesDocumentadas,
@@ -13,6 +14,7 @@ import {
   getPersonasVisibles,
   getProyectosPublicados,
   getMetricas,
+  getProximaSesion,
 } from '../data'
 
 describe('getSesion', () => {
@@ -104,5 +106,38 @@ describe('getMetricas', () => {
       totalIntegrantes: PERSONAS.length,
       temasPropuestos: TEMAS.length,
     })
+  })
+})
+
+describe('getProximaSesion', () => {
+  // Las horas van en UTC; Bogotá es UTC-5.
+  it('un jueves devuelve el miércoles siguiente', () => {
+    expect(getProximaSesion(new Date('2026-10-15T15:00:00Z'))).toEqual({
+      fecha: '2026-10-21',
+      texto: 'Miércoles 21 de octubre de 2026',
+    })
+  })
+
+  it('el miércoles antes de terminar la sesión devuelve ese mismo día, aunque en UTC ya sea jueves', () => {
+    // 7:30 p.m. en Bogotá = 00:30 UTC del jueves
+    expect(getProximaSesion(new Date('2026-10-22T00:30:00Z')).fecha).toBe('2026-10-21')
+  })
+
+  it('el miércoles después de las 8:30 p.m. pasa a la semana siguiente', () => {
+    // 8:45 p.m. en Bogotá
+    expect(getProximaSesion(new Date('2026-10-22T01:45:00Z')).fecha).toBe('2026-10-28')
+  })
+
+  it('cambia bien de mes y de año', () => {
+    expect(getProximaSesion(new Date('2026-12-31T15:00:00Z')).texto).toBe('Miércoles 6 de enero de 2027')
+  })
+
+  it('se salta los miércoles sin sesión', () => {
+    MIERCOLES_SIN_SESION.push({ fecha: '2026-10-21', nota: 'Prueba' })
+    try {
+      expect(getProximaSesion(new Date('2026-10-15T15:00:00Z')).fecha).toBe('2026-10-28')
+    } finally {
+      MIERCOLES_SIN_SESION.pop()
+    }
   })
 })

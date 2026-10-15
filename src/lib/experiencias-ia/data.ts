@@ -76,7 +76,6 @@ export type Grupo = {
   descripcion: string
   principioMadre: string
   formato: string[]
-  proximaSesion: string
   principios: Principio[]
 }
 
@@ -93,7 +92,6 @@ export const GRUPO: Grupo = {
     'Primero, una ronda de intervenciones cortas: unos 3 a 5 minutos por persona.',
     'Después, conversación abierta. Nada de presentaciones largas tipo tutorial.',
   ],
-  proximaSesion: 'Miércoles 21 de octubre de 2026',
   principios: [
     {
       titulo: 'La IA es colaborador, no reemplazo',
@@ -117,6 +115,10 @@ export const GRUPO: Grupo = {
     },
   ],
 }
+
+// Miércoles en que NO habrá sesión (festivos, vacaciones). La próxima
+// sesión se calcula sola: el siguiente miércoles que no esté aquí.
+export const MIERCOLES_SIN_SESION: Array<{ fecha: string; nota: string }> = []
 
 export const SESIONES: EntradaSesion[] = [
   {
@@ -727,6 +729,34 @@ export const TALLER: ProyectoTaller[] = [
 ]
 
 // ---------- Helpers ----------
+
+const MESES = [
+  'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
+]
+// Bogotá está en UTC-5 todo el año (sin horario de verano).
+const DESFASE_BOGOTA_MS = 5 * 60 * 60 * 1000
+const MIERCOLES = 3
+const FIN_DE_SESION_MIN = 20 * 60 + 30 // 8:30 p.m.
+
+/**
+ * El próximo miércoles con sesión, en hora de Bogotá. Si hoy es miércoles y
+ * la sesión no ha terminado, es hoy. Se salta los de MIERCOLES_SIN_SESION.
+ */
+export function getProximaSesion(ahora: Date = new Date()): { fecha: string; texto: string } {
+  const local = new Date(ahora.getTime() - DESFASE_BOGOTA_MS)
+  let dias = (MIERCOLES - local.getUTCDay() + 7) % 7
+  if (dias === 0 && local.getUTCHours() * 60 + local.getUTCMinutes() >= FIN_DE_SESION_MIN) dias = 7
+
+  const fecha = new Date(Date.UTC(local.getUTCFullYear(), local.getUTCMonth(), local.getUTCDate() + dias))
+  const sinSesion = new Set(MIERCOLES_SIN_SESION.map(m => m.fecha))
+  while (sinSesion.has(fecha.toISOString().slice(0, 10))) fecha.setUTCDate(fecha.getUTCDate() + 7)
+
+  return {
+    fecha: fecha.toISOString().slice(0, 10),
+    texto: `Miércoles ${fecha.getUTCDate()} de ${MESES[fecha.getUTCMonth()]} de ${fecha.getUTCFullYear()}`,
+  }
+}
 
 export function esSinRegistro(entrada: EntradaSesion): entrada is SinRegistro {
   return 'estado' in entrada && entrada.estado === 'sin-registro'
