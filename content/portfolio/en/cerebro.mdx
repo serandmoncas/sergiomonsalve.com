@@ -1,0 +1,43 @@
+---
+title: Cerebro
+description: A personal Obsidian knowledge base that functions as persistent memory and voice for an AI agent — built from real meeting transcripts, with privacy and verification rules built in.
+date: "2026-07-28"
+role: Creator
+stack: [Obsidian, Dataview, Markdown, Git, Claude Code]
+github: ""
+demo: ""
+links: []
+status: active
+featured: true
+image: /portfolio/cerebro.png
+---
+
+## The problem
+
+An AI agent that starts every conversation from zero has no voice of its own — it just repeats whatever it's told in the moment. Every new session means rebuilding context from scratch: who's who, what was decided and why, what's still pending. For someone juggling half a dozen parallel projects (a mushroom-cultivation client, an AI study group, a master's thesis, a personal venture) that constant reconstruction is the real hidden cost of working with a memoryless agent.
+
+The challenge wasn't just *archiving* information — a passive archive doesn't solve anything. It was building a memory layer the agent could actively read and write to, following the same care a person would: never invent data, never merge identities without confirmation, and above all, never expose sensitive information about third parties.
+
+## The solution
+
+**Cerebro** is an Obsidian vault built from 36 real Google Meet recordings, processed, corrected, and maintained by an AI agent. It's not a static summary — it's a living system with its own conventions.
+
+Structured by domain — people, projects, decisions, figures, meetings — where every person note carries an `identidad` field (`confirmed`, `to confirm`, `conflict`) telling the agent exactly how sure it can be about what it knows. Every business decision is logged with its reasoning and what was discarded, not just the outcome. A kanban board lives inside the same vault, with tasks staying in the note where they were born and an aggregated view assembled with Dataview.
+
+The agent does the heavy lifting itself: reads new transcripts, detects when two person notes are actually the same individual (or when they *look* alike but there isn't enough certainty to merge), and corrects errors inherited from automated summaries — one real case was a fabricated "$50 million deal" that the original AI summary invented by stitching together two unrelated sentences.
+
+## Technical decisions
+
+**Obsidian + plain Markdown** — no database, no backend. Every note is a text file; structure lives in YAML frontmatter and `[[wikilinks]]` between notes. That keeps the vault readable by both a human and an agent with zero translation layer.
+
+**Dataview for dynamic views** — the task board, the people/project indices, and coverage reports are all assembled with Dataview queries over the actual content, instead of hand-maintained lists that go stale.
+
+**Git + a pre-commit hook for privacy** — any note flagged `privado: true` in its frontmatter is excluded via `.gitignore` and blocked by a pre-commit hook, so that content can never accidentally reach a remote repository. A script (`verificar-privacidad.sh`) runs before every push to confirm nothing private slipped through.
+
+**Explicit conventions in `CLAUDE.md`** — the rules the agent must follow without exception (never invent data, never merge people without confirmation, never extract third-party health information) are written where the agent reads them at the start of every session, not scattered across the memory of past conversations.
+
+## Results
+
+Cerebro processed 36 recordings, resolved more than a dozen cases of duplicated or mis-transcribed identities, and maintains an active task board with a hard work-in-progress limit. But the most important result isn't the content — it's that an agent can now open a brand-new conversation, read this vault, and pick up exactly where it left off, with real memory and the same privacy discipline that any sensitive third-party information would demand.
+
+At its core, it's an experiment in what it means to give an agent continuity: not more context crammed into one conversation window, but persistent memory that lives outside it.

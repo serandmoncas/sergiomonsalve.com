@@ -1,0 +1,43 @@
+---
+title: Cerebro
+description: Base de conocimiento personal en Obsidian que funciona como memoria persistente y voz para un agente de IA — construida a partir de transcripciones reales de reuniones, con reglas de privacidad y verificación integradas.
+date: "2026-07-28"
+role: Creador
+stack: [Obsidian, Dataview, Markdown, Git, Claude Code]
+github: ""
+demo: ""
+links: []
+status: active
+featured: true
+image: /portfolio/cerebro.png
+---
+
+## El problema
+
+Un agente de IA que empieza cada conversación desde cero no tiene voz propia — solo repite lo que se le dice en el momento. Cada sesión nueva significa reconstruir el contexto desde el principio: quién es quién, qué se decidió y por qué, qué sigue pendiente. Para alguien que maneja media docena de proyectos paralelos (un cliente de cultivo de hongos, un grupo de estudio de IA, una tesis de maestría, un emprendimiento propio) esa reconstrucción constante es el verdadero costo oculto de trabajar con un agente sin memoria.
+
+El reto no era solo *archivar* información — un archivo pasivo no resuelve nada. Era construir una capa de memoria que el agente pudiera leer y escribir activamente, con las mismas reglas de cuidado que seguiría una persona: no inventar datos, no fusionar identidades sin confirmar, y sobre todo, nunca exponer información sensible de terceros.
+
+## La solución
+
+**Cerebro** es un vault de Obsidian construido a partir de 36 grabaciones reales de Google Meet, que un agente de IA procesa, corrige y mantiene al día. No es un resumen estático: es un sistema vivo con convenciones propias.
+
+Estructura por dominio — personas, proyectos, decisiones, cifras, reuniones — donde cada nota de persona lleva un campo `identidad` (`confirmada`, `por confirmar`, `conflicto`) que le dice al agente qué tan seguro puede estar de lo que sabe. Cada decisión de negocio se registra con su razón y lo que se descartó, no solo el resultado. Un tablero kanban vive dentro del mismo vault, con tareas que se quedan en la nota donde nacieron y una vista agregada armada con Dataview.
+
+El agente mismo hace el trabajo pesado: lee transcripciones nuevas, detecta cuando dos notas de persona en realidad son la misma (o cuando *parecen* serlo pero no hay certeza suficiente para fusionar), y corrige errores heredados de los resúmenes automáticos — un caso real fue un "acuerdo de 50 millones" que el resumen de IA original inventó juntando dos frases que no iban juntas.
+
+## Decisiones técnicas
+
+**Obsidian + Markdown plano** — sin base de datos, sin backend. Cada nota es un archivo de texto; la estructura vive en el frontmatter YAML y en los enlaces `[[wikilink]]` entre notas. Esto hace que el vault sea legible tanto por una persona como por un agente sin ninguna capa de traducción.
+
+**Dataview para las vistas dinámicas** — el tablero de tareas, los índices de personas y proyectos, y los reportes de cobertura se arman con consultas Dataview sobre el contenido real, no con listas mantenidas a mano que se desactualizan.
+
+**Git + hook de pre-commit para privacidad** — cualquier nota marcada `privado: true` en su frontmatter queda excluida por `.gitignore` y bloqueada por un hook de pre-commit, para que ese contenido nunca llegue a un repositorio remoto por accidente. Un script (`verificar-privacidad.sh`) corre antes de cada push y confirma que no se coló ninguna nota privada.
+
+**Convenciones explícitas en `CLAUDE.md`** — las reglas que el agente debe seguir sin excepción (nunca inventar datos, nunca fusionar personas sin confirmación, nunca extraer salud de terceros) están escritas donde el agente las lee al empezar cada sesión, no dispersas en la memoria de conversaciones pasadas.
+
+## Resultados
+
+Cerebro procesó 36 grabaciones, resolvió más de una decena de casos de identidades duplicadas o mal atribuidas por transcripción automática, y mantiene un tablero de tareas activo con límite de trabajo en curso. Pero el resultado más importante no es el contenido — es que un agente puede ahora abrir una conversación nueva, leer este vault, y continuar exactamente donde quedó la última vez, con memoria real y con la misma disciplina de privacidad que exigiría cualquier información sensible de terceros.
+
+Es, en el fondo, un experimento sobre qué significa darle continuidad a un agente: no más contexto en la ventana de una conversación, sino memoria persistente que vive fuera de ella.
