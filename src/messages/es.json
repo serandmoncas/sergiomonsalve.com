@@ -58,6 +58,7 @@
     "bibliotecaDescription": "Los libros y audiolibros que Sergio Monsalve está leyendo y estudiando.",
     "mapaTitle": "Mapa de habilidad",
     "mapaDescription": "Plantilla gratuita del Método MAPA: convierte cualquier habilidad en un plan de 30 días en 20 minutos.",
+    "privacyTitle": "Tratamiento de datos",
     "formacionTitle": "Formación",
     "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA."
   },
@@ -169,6 +170,7 @@
       },
       "method": {
         "label": "// el método",
+      "tryTemplate": "Prueba el Método MAPA gratis →",
         "title": "Método MAPA",
         "desc": "Cuatro pasos para aprender cualquier habilidad en semanas, no meses. Combina principios de ultralearning, educación experiencial y la IA como tutor.",
         "steps": [
@@ -440,6 +442,40 @@
     "invalidTitle": "Este enlace no es válido.",
     "invalidText": "Puede que esté incompleto o que ya haya expirado. Escríbeme y lo resuelvo a mano.",
     "contact": "Ir a contacto →"
+  },
+  "privacy": {
+    "comment": "// tratamiento de datos",
+    "title": "Cómo trato tus datos",
+    "updated": "Última actualización: 15 de octubre de 2026",
+    "sections": [
+      {
+        "title": "Responsable",
+        "text": "Sergio Monsalve, Guarne (Antioquia, Colombia). Contacto: formulario de https://www.sergiomonsalve.com/es/contact o WhatsApp +57 350 802 5988."
+      },
+      {
+        "title": "Qué datos recojo",
+        "text": "Tu correo, tu nombre si lo das, el idioma del sitio y, si lo pides, el plan que armaste en la plantilla MAPA. En el formulario de contacto, además, tu mensaje."
+      },
+      {
+        "title": "Para qué los uso",
+        "text": "Para enviarte el plan que pediste y responder tus mensajes. Solo si marcas la casilla, para enviarte la newsletter. No vendo ni cedo tus datos."
+      },
+      {
+        "title": "Con quién los comparto",
+        "text": "Con los proveedores que hacen funcionar el sitio: Supabase (base de datos), Resend (envío de correos) y Vercel (alojamiento). Pueden almacenar datos fuera de Colombia."
+      },
+      {
+        "title": "Tus derechos",
+        "text": "Puedes conocer, actualizar, rectificar y pedir la supresión de tus datos, o revocar tu autorización, conforme a la Ley 1581 de 2012. Escríbeme por el formulario de contacto y respondo en un máximo de 15 días hábiles. Cada correo de la newsletter trae un enlace para darte de baja."
+      },
+      {
+        "title": "Cuánto tiempo los guardo",
+        "text": "Mientras sigas suscrito o hasta que pidas borrarlos."
+      }
+    ]
+  },
+  "footer": {
+    "privacy": "Privacidad"
   },
   "cursos": {
     "comment": "// cursos",

@@ -17,6 +17,7 @@ export const aboutContent = {
     experienceDesc: 'Dos oficios en paralelo: enseñar y construir. La ruta de ingeniería va de analista → ingeniero → IA, y es más limpia en retrospectiva que en el momento.',
     eduMscFocus: 'Énfasis en Educación para la Ingeniería y Cómputo Científico',
     ctaFormacion: 'Formación →',
+    ctaMapa: 'Plantilla MAPA gratis →',
     jobs: [
       {
         period: '2011 → hoy',
@@ -145,6 +146,7 @@ export const aboutContent = {
     experienceDesc: 'Two crafts in parallel: teaching and building. The engineering path runs analyst → engineer → AI, and looks cleaner in hindsight than it felt at the time.',
     eduMscFocus: 'Focus: Engineering Education and Scientific Computing',
     ctaFormacion: 'Training →',
+    ctaMapa: 'Free MAPA template →',
     jobs: [
       {
         period: '2011 → now',

@@ -58,6 +58,7 @@
     "bibliotecaDescription": "Books and audiobooks Sergio Monsalve is reading and studying.",
     "mapaTitle": "Skill map",
     "mapaDescription": "Free MAPA Method template: turn any skill into a 30-day plan in 20 minutes.",
+    "privacyTitle": "Data policy",
     "formacionTitle": "Training",
     "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer."
   },
@@ -169,6 +170,7 @@
       },
       "method": {
         "label": "// the method",
+      "tryTemplate": "Try the MAPA Method for free →",
         "title": "The MAPA Method",
         "desc": "Four steps to learn any skill in weeks, not months. It combines ultralearning principles, experiential learning, and AI as a tutor.",
         "steps": [
@@ -440,6 +442,40 @@
     "invalidTitle": "This link isn't valid.",
     "invalidText": "It may be incomplete or expired. Write to me and I'll sort it out by hand.",
     "contact": "Go to contact →"
+  },
+  "privacy": {
+    "comment": "// data policy",
+    "title": "How I handle your data",
+    "updated": "Last updated: October 15, 2026",
+    "sections": [
+      {
+        "title": "Controller",
+        "text": "Sergio Monsalve, Guarne (Antioquia, Colombia). Contact: the form at https://www.sergiomonsalve.com/en/contact or WhatsApp +57 350 802 5988."
+      },
+      {
+        "title": "What I collect",
+        "text": "Your email, your name if you give it, the site language and, if you ask for it, the plan you built in the MAPA template. In the contact form, also your message."
+      },
+      {
+        "title": "What I use it for",
+        "text": "To send you the plan you requested and reply to your messages. Only if you tick the box, to send you the newsletter. I don't sell or share your data."
+      },
+      {
+        "title": "Who I share it with",
+        "text": "With the providers that run the site: Supabase (database), Resend (email delivery) and Vercel (hosting). They may store data outside Colombia."
+      },
+      {
+        "title": "Your rights",
+        "text": "You can access, update, correct and request deletion of your data, or withdraw consent, under Colombia's Law 1581 of 2012 and, where it applies, the GDPR. Write to me through the contact form and I'll reply within 15 business days. Every newsletter email includes an unsubscribe link."
+      },
+      {
+        "title": "How long I keep it",
+        "text": "While you remain subscribed or until you ask me to delete it."
+      }
+    ]
+  },
+  "footer": {
+    "privacy": "Privacy"
   },
   "cursos": {
     "comment": "// courses",

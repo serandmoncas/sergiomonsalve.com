@@ -1,4 +1,8 @@
-export default function Footer() {
+import { getTranslations } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
+
+export default async function Footer() {
+  const t = await getTranslations('footer')
   return (
     <footer className="border-t border-border py-8 px-6">
       <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-4">
@@ -6,6 +10,9 @@ export default function Footer() {
           © {new Date().getFullYear()} Sergio Monsalve
         </span>
         <div className="flex items-center gap-6">
+          <Link href="/privacidad" className="font-mono text-xs text-text-muted hover:text-accent transition-colors">
+            {t('privacy')}
+          </Link>
           <a
             href="https://github.com/serandmoncas"
             target="_blank"

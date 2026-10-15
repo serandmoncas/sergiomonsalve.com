@@ -47,9 +47,14 @@ describe('FormacionContent', () => {
     expect(screen.getByText('15 años como profesor en EAFIT')).toBeInTheDocument()
   })
 
-  it('links the main CTA to the contact page and offers WhatsApp', () => {
+  it('links to the free MAPA template', () => {
     render(<FormacionContent />)
-    expect(screen.getByRole('link', { name: 'cta.contact' })).toHaveAttribute('href', '/contact')
+    expect(screen.getByRole('link', { name: 'method.tryTemplate' })).toHaveAttribute('href', '/mapa')
+  })
+
+  it('links the main CTA to the contact page with the training type and offers WhatsApp', () => {
+    render(<FormacionContent />)
+    expect(screen.getByRole('link', { name: 'cta.contact' })).toHaveAttribute('href', '/contact?tipo=training')
     expect(screen.getByRole('link', { name: 'cta.whatsapp' }).getAttribute('href')).toMatch(/^https:\/\/wa\.me\/573508025988\?text=/)
   })
 })

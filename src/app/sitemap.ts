@@ -5,7 +5,7 @@ import { getBookAsins } from '@/lib/library'
 
 const base = 'https://sergiomonsalve.com'
 const locales = ['es', 'en']
-const staticRoutes = ['', '/about', '/formacion', '/contact', '/blog', '/recipes', '/biblioteca']
+const staticRoutes = ['', '/about', '/formacion', '/mapa', '/privacidad', '/contact', '/blog', '/recipes', '/biblioteca']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries = locales.flatMap(locale =>

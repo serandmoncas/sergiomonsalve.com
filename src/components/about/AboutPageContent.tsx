@@ -326,6 +326,12 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
                 >
                   {c.ctaFormacion}
                 </Link>
+                <Link
+                  href="/mapa"
+                  className="font-mono text-xs border border-border text-text-secondary px-4 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors"
+                >
+                  {c.ctaMapa}
+                </Link>
                 <a href="https://wa.me/573508025988" target="_blank" rel="noopener noreferrer"
                   className="font-mono text-xs border border-border text-text-secondary px-4 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors">
                   {c.ctaWhatsApp}

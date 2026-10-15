@@ -45,6 +45,9 @@ export default function FormacionContent() {
             </li>
           ))}
         </ol>
+        <Link href="/mapa" className="inline-block font-mono text-xs border border-accent text-accent px-4 py-2.5 rounded-sm hover:bg-accent hover:text-background transition-colors">
+          {t('method.tryTemplate')}
+        </Link>
       </section>
 
       <section className="space-y-8">
@@ -75,7 +78,7 @@ export default function FormacionContent() {
         <h2 className="text-2xl font-bold text-text max-w-2xl text-balance">{t('cta.title')}</h2>
         <div className="flex flex-wrap items-center gap-4">
           <Link
-            href="/contact"
+            href="/contact?tipo=training"
             className="bg-accent text-background text-xs font-bold px-5 py-2.5 rounded-sm hover:opacity-90 transition-opacity"
           >
             {t('cta.contact')}
