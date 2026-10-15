@@ -45,3 +45,6 @@ next-env.d.ts
 # claude code local session state (worktrees, local-only settings)
 .claude/worktrees/
 .claude/settings.local.json
+
+# autorretrato IA: cachés, revisiones y citas privadas
+/.ia-autorretrato/

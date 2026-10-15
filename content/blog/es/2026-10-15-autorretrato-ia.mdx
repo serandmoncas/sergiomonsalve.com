@@ -1,0 +1,168 @@
+---
+title: "Autorretrato con IA: lo que mis datos dicen de cómo aprendo, escribo y programo"
+date: "2026-10-15"
+description: "Analicé trece años de commits, 2.475 prompts y el debate público sobre IA y autoría para entender qué hago yo, qué hace la IA y qué tuve que aprender para llegar aquí."
+tags: ["ia", "datos", "claude", "aprendizaje", "autoria"]
+---
+
+Llevo meses trabajando todos los días con un agente de IA en la terminal. Escribo specs, código, cursos y hasta este blog con él. En algún momento me hice la pregunta incómoda: ¿qué parte de todo eso es mía? No quería responderla con una opinión. Quería responderla con datos.
+
+Así que armé un pipeline que lee mi historial de Claude Code y mis dos cuentas de GitHub, y lo crucé con lo que dice el mundo sobre IA, escritura y autoría. Este post es tres cosas a la vez: un autorretrato honesto, una muestra de cómo trabajo (es lo que enseño en MAPA) y un método que puedes copiar al final.
+
+Y una aclaración desde el principio: **este post también es coautoría.** Claude escribió el borrador a partir de los datos y yo lo revisé, lo corregí y decidí qué se publica. Las citas de mis prompts las aprobé una por una. Si eso te parece trampa, quédate hasta la sección de tensiones.
+
+## El contexto
+
+Antes de mirarme a mí, miré afuera. El debate está lleno de cifras grandes, y casi todas son autodeclaradas. Sundar Pichai dijo que el 75 % del código nuevo de Google lo genera la IA y lo revisan humanos ([fuente](https://the-decoder.com/google-says-75-percent-of-its-new-code-is-now-written-by-ai/)). De Anthropic se repite un "90 %", pero un análisis externo de Redwood Research lo estima en ~50 % de las líneas fusionadas ([fuente](https://blog.redwoodresearch.org/p/is-90-of-code-at-anthropic-being)). Son cifras de directivos, medidas cada una a su manera, y no se pueden comparar entre sí.
+
+Hay mediciones externas más modestas. SemiAnalysis estimó que ~4 % de los commits públicos diarios de GitHub llevan la firma de Claude Code ([fuente](https://www.xataka.com/robotica-e-ia/claude-code-esta-siendo-gran-favorito-programadores-que-firma-4-todo-que-se-sube-a-github)). En la encuesta de Stack Overflow de 2025, el 84 % usa o planea usar IA, pero el 46 % desconfía de su precisión ([fuente](https://survey.stackoverflow.co/2025/ai)).
+
+Sobre productividad y calidad, la evidencia es incómoda. En un experimento controlado de METR, desarrolladores experimentados de código abierto tardaron 19 % más con IA, mientras creían que iban 20 % más rápido ([fuente](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)). GitClear midió 8 veces más bloques de código duplicado en 211 millones de líneas ([fuente](https://devclass.com/2025/02/20/ai-is-eroding-code-quality-states-new-in-depth-report/)). Y un experimento de la propia Anthropic encontró 50 % de comprensión con IA frente a 67 % sin ella ([fuente](https://www.anthropic.com/research/AI-assistance-coding-skills)).
+
+En escritura, el ICMJE es claro: la IA no puede figurar como autora porque no puede responder por el trabajo ([fuente](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html)). Y un estudio de Cornell mostró que las sugerencias de IA empujan la escritura hacia estilos occidentales: escritores indios aceptaron 25 % de las sugerencias frente a 19 % de los estadounidenses ([fuente](https://news.cornell.edu/index%2Ephp/node/330798)).
+
+Alrededor de esas cifras hay posturas: entusiastas pragmáticos, escépticos de la evidencia, quienes defienden una ingeniería agéntica con revisión, mantenedores que cierran la puerta, la preocupación por los juniors y la pregunta de siempre por la autoría. Lo que no encontré fueron datos verificables de Latinoamérica. Por eso este ejercicio, aunque sea de una sola persona, me parece útil.
+
+<MapaDiscurso />
+
+En el mapa resalto los conceptos del debate que también aparecen en mis prompts. Son solo cuatro de 23: ingeniería agéntica, Co-Authored-By, divulgación del uso de IA y revisión de código. Hablo mucho con la IA, pero casi nunca sobre la IA.
+
+## La línea de tiempo
+
+<CalendarioActividad />
+
+El calendario cubre desde el 18 de noviembre de 2025 hasta hoy: 81 días con actividad y 2.600 prompts en 210 sesiones. No es un uso parejo. Mayo tuvo 20 días activos y 795 prompts; septiembre, apenas 3 días y 10 prompts. Los dos días con más prompts son el 14 y el 15 de octubre (116 y 167), escribiendo justo esto, y el tercero fue el 19 de agosto, con 113.
+
+La pregunta que me interesaba era si las conversaciones se convierten en código publicado. A veces sí y a veces no. En marzo escribí 244 prompts y mi cuenta nueva no registra ningún commit ese mes. Fue un mes de explorar, no de publicar.
+
+## Dónde pongo la IA
+
+Agrupé los prompts por dominio. Producto web se lleva 1.133, más de cuatro de cada diez: aquí están este sitio (sergiomonsalve.com), bichongos.store, dharmastudio.art, InteFin y sama-mobile, entre otros. Le siguen experimentos (569), agentes (335, con brayan y HER), hongos e IoT (330, con Bichongos y mobile-esp32) y educación (233, con medmap, New-Old-School y stemedu).
+
+Los repos privados cuentan en los totales, pero no aparecen por nombre. Eso explica por qué "experimentos" pesa tanto y muestra un solo repo público.
+
+## Cómo trabajo con ella
+
+<BarrasHerramientas />
+
+Esto sale de las sesiones completas que guarda Claude Code, una muestra de marzo a octubre, no de todo el historial. La herramienta que más uso, de lejos, es Bash: 3.642 llamadas de 5.801, casi dos de cada tres. Después viene la investigación: 500 búsquedas web y 446 lecturas de páginas. El navegador (Playwright y Chrome) suma 260 usos, y la orquestación (subagentes, skills, artifacts) suma 467 llamadas más.
+
+Hay un dato que me gusta: la IA me hizo 71 preguntas para aclarar algo antes de seguir. No todo es delegar a ciegas.
+
+En modelos, Opus 5.5 dio 8.739 de las 11.755 respuestas de la muestra, seguido de Opus 5 con 2.469. Mi lectura es esta: delego la ejecución y me quedo con el criterio. La terminal la maneja el agente; qué construir y cuándo parar lo decido yo.
+
+## Dos eras
+
+Tengo dos cuentas de GitHub y, sin planearlo, cada una es una era. La antigua (smonsalve) va de 2013 a 2025, con algunos commits de 2026. La nueva (serandmoncas) empezó en febrero de 2026.
+
+En la cuenta antigua tengo 417 commits propios en 73 repos, en trece años. En la nueva llevo 1.460 commits en 31 repos, en unos ocho meses. El cambio en la escritura es todavía más claro: la mediana de mis mensajes de commit era de 13 caracteres. Hoy es de 137, y de 87 si le quito el trailer de coautoría. Antes escribía "fix". Ahora hay un párrafo que explica qué cambió y por qué, aunque buena parte lo redacta la IA.
+
+También cambiaron los coautores. En la era antigua firmaban conmigo cinco personas, compañeros de clase y un socio, que sumaron 101 commits en mis repos públicos. En la nueva no hay ninguna persona: hay seis modelos de Claude que se van relevando. Sonnet 4.6 dominó de febrero a junio, Sonnet 5 tomó julio, Opus 5 llegó en agosto y Opus 5.5 firma los 286 commits co-firmados de octubre. Opus 4.7 y Haiku 4.5 aparecen de forma puntual.
+
+<CoautoriaMensual />
+
+De los 1.460 commits de la cuenta nueva, 903 llevan la firma de Claude, un 62 %. Mes a mes, la proporción ronda la mitad entre mayo y julio, sube al 60 % en agosto y llega al 97 % en octubre (286 de 296). En los tipos de commit aparecen cosas que no son software: cultivo, capacitación, contenido, firmware. La IA ya está en todo lo que hago, no solo en el código.
+
+Y hay un detalle que no esperaba: Claude no solo es coautor. En un repo de educación (New-Old-School) aparece como **autor principal** de 69 commits.
+
+<RedCoautoria />
+
+Tres advertencias, para no engañarme ni engañarte. Primero, el trailer mide quién *hizo el commit*, no quién pensó el cambio. Es un piso, igual que el ~4 % de SemiAnalysis. Segundo, la cifra depende del flujo: en octubre Claude commitea por defecto, y por eso el salto al 97 % dice tanto de mi configuración como de mi forma de trabajar. Tercero, de la cuenta antigua solo se ven los repos públicos: el trabajo de esos años en empresas no aparece, así que la línea base subestima lo que programaba antes de la IA.
+
+## El ecosistema
+
+<MatrizEcosistema />
+
+Claude Code es la única herramienta que puedo medir. Las demás son declaradas: Claude.ai para conversaciones largas y artifacts, ChatGPT para consultas rápidas y la API, Ollama para agentes locales, y Gemini y Cursor de forma esporádica. La matriz lo marca de forma visible porque no es lo mismo un dato que una percepción.
+
+## Domino vs. no domino
+
+Quería saber qué conceptos domino y cuáles solo nombro. Tomé los 200 términos del glosario de [Experiencias IA](/es/experiencias-ia) y los crucé en dos ejes. *Hablado*: el término aparece en mis prompts como instrucción. *Construido*: aparece en el código de mis repos o en mi stack respaldado por código. Si un término solo aparece en preguntas ("qué es", "explícame"), lo marco como *preguntado*.
+
+El clasificador es léxico: mide uso, no comprensión. Por eso revisé la tabla a mano y corregí 3 de los 200 conceptos.
+
+<CuadranteConceptos />
+
+El resultado es más humilde de lo que esperaba. Solo 4 conceptos caen en *ambos*: Superpowers, Claude Code, agentes y pruebas automatizadas. Hay 17 que solo hablo, como handoff, MCP, token, CLAUDE.md o skills. Solo uno es *construido sin hablar*: embeddings. Y 178 no aparecen en ninguno de los dos ejes, entre ellos prompt engineering, context engineering y RAG. RAG figura en mi stack declarado, pero no aparece ni una vez en mis prompts.
+
+Seis conceptos aparecen en preguntas, entre ellos harness engineering (3 veces) y handoff (2). ADR es el único que solo he preguntado, sin usarlo nunca como instrucción. Para mí, un concepto que solo pregunto es una señal honesta: lo estoy aprendiendo, todavía no lo uso.
+
+## El camino hacia atrás
+
+Después me pregunté qué tuve que aprender para llegar al stack que uso hoy. Reconstruí un grafo de conocimiento con 52 nodos y 74 dependencias: 35 con evidencia en GitHub, 7 declarados y 10 fundamentos inferidos que aprobé a mano. Cada fecha sale del primer commit que lo respalda.
+
+<CaminoMotion />
+
+Al rebobinarlo salen dos lecturas que no esperaba.
+
+La primera: mi trabajo actual con agentes no depende solo de programar. La evaluación de agentes se apoya en el diseño experimental (oTree, 2017) y en la estadística, y el método MAPA viene de la docencia en programación (2016) y de producir contenidos educativos (2014). Lo que hoy parece "saber de IA" es, en buena parte, saber enseñar y saber diseñar experimentos.
+
+La segunda: una de las cosas que más delego es la documentación (289 commits de tipo `docs` en la cuenta nueva), y esa es una habilidad que ya tenía. Mi primer repo con escritura técnica en LaTeX es de 2014. No le estoy entregando a la IA algo que nunca aprendí. Le entrego algo que sé revisar. Recuerdo el 50 % frente a 67 % de comprensión del experimento de Anthropic y creo que esa diferencia importa: delegar lo que ya dominas no es lo mismo que delegar lo que estás aprendiendo.
+
+## Cómo hablo con la IA
+
+<PerfilPrompts />
+
+Si quito los comandos (los que empiezan por `/`), quedan 2.475 prompts escritos. Su mediana tiene 18 caracteres. Solo el 13 % son preguntas, y el 80 % están en español. Esa es la observación más clara de todo el ejercicio: **no converso con la IA, le doy órdenes cortas.** "Comitealo." "Continúa." "Actualiza el backlog." Las instrucciones largas existen, pero son la excepción, y casi siempre aparecen cuando empiezo algo nuevo.
+
+Estas son algunas de esas excepciones, tal como las escribí, con solo el mes:
+
+> actua como un arquitecto de software y ayudame a mejorar la funcionalidad y la UX de este proyecto
+>
+> — diciembre de 2025
+
+> ayudame a crear un backlog con las tareas mencionadas hasta ahora con descripcion, prioridad, precedentes, y siempre que mencionemos una nueva tarea o una dependencia de alguna tarea crearla y definirla en el backlog
+>
+> — junio de 2026
+
+> comitealo, recuerda agregar una buena definición para cada termino, tal vez un ejemplo, referencias, vinculos, videos en youtube, libros, o referencias importantes, tal vez sea importante que lleve a otra subpagina con al termino y todos esos campos?
+>
+> — julio de 2026
+
+> actualiza el backlog y continua con el siguiente prioritario
+>
+> — julio de 2026
+
+> ayudame a hacerle un harness engineering a este proyecto creame un backlog con los tickets hechos hasta el momento y si surgen nuevos tickets proponlos
+>
+> — agosto de 2026
+
+> ayudame a aplicar la metodología curioso a este tema y a la presentación ayudame usando las herramientas de [visualización con Claude] que en el momento estamos desarrollando y aprendiendo a usar y lo que creas que vale la pena hecho en otros proyectos
+>
+> — octubre de 2026
+
+> si quisiera que el visor sirviera para crearme una linea de tiempo de lo que ocurrio en la evolucion de un tema: ejemplo quiero aprender de aviación dame un indice mostrandome los grandes acontecimientos de la aviación
+>
+> — octubre de 2026
+
+Se nota un patrón: el backlog aparece una y otra vez. Le pido a la IA que lleve la cuenta de las tareas, y yo decido el orden. Así se ve delegar la ejecución sin soltar el criterio.
+
+## Tensiones
+
+No tengo respuestas cerradas. Tengo cinco preguntas que cruzan lo de afuera con lo mío.
+
+**¿Coautor o asistente?** Git me da `Co-Authored-By`, pero también existe `Assisted-by`, que nombra una asistencia y no una coautoría. El ICMJE dice que la IA no puede ser autora porque no puede responder por el trabajo. Pero 903 de mis 1.460 commits recientes llevan su nombre como coautora. ¿Estoy usando la palabra correcta?
+
+**El trailer es un piso, no una medida.** El ~4 % de SemiAnalysis y mi 97 % de octubre miden lo mismo: quién dejó la firma. En octubre la deja Claude porque así lo configuré, no porque haya hecho más que en mayo. Si apago el trailer, la cifra se desploma y el trabajo sigue siendo el mismo.
+
+**La paradoja de METR, aplicada a mí.** Me siento mucho más rápido. Paso de 417 commits en trece años a 1.460 en ocho meses, aunque esa cuenta suma mis commits y los que Claude co-firmó o escribió: mide el volumen de trabajo publicado, no lo que tecleé yo. Pero METR encontró gente que se sentía 20 % más rápida y era 19 % más lenta. Mis datos miden volumen, no velocidad ni calidad, y no tengo un grupo de control.
+
+**La revisión como nueva forma de autoría.** Simon Willison lo resumió en una frase incómoda: *"But I'm not reviewing that code"*. Si mis prompts tienen una mediana de 18 caracteres, mi aporte no está en lo que escribo, sino en lo que reviso, acepto o rechazo. Y si no reviso, GitClear ya midió lo que pasa: 8 veces más código duplicado.
+
+**La voz propia.** El 80 % de mis prompts está en español y vivo en las montañas de Antioquia. Cornell mostró que las sugerencias de IA empujan hacia estilos occidentales. Este post lo escribió Claude a partir de mis datos y yo lo corregí. ¿Suena a mí? Tú me dirás. Por eso lo declaro como coautoría.
+
+## Hazlo tú
+
+Todo el análisis está en el repo público del sitio, en [scripts/ia-autorretrato](https://github.com/serandmoncas/sergiomonsalve.com/tree/main/scripts/ia-autorretrato). Para correrlo sobre tus propios datos:
+
+<Step number={1}>Clona el repo e instala las dependencias con `npm install`.</Step>
+
+<Step number={2}>Crea `.ia-autorretrato/identidades.json` con tus cuentas de GitHub y los nombres con que firmas tus commits: `{ "cuentas": ["tu-usuario"], "autores": ["Tu Nombre*", "otro-alias"] }` (el `*` final coincide por prefijo). Necesitas el CLI `gh` con sesión iniciada. Además, `scripts/ia-autorretrato/camino.json` y `declarado.json` son mi trayectoria personal: edítalos con la tuya, o el script omitirá con un aviso los repos que no encuentre en tus cuentas.</Step>
+
+<Step number={3}>Corre `npx tsx scripts/ia-autorretrato/index.ts`. Lee tu historial de Claude Code (`~/.claude/history.jsonl` y las sesiones de `~/.claude/projects`) y tus commits de GitHub.</Step>
+
+<Step number={4}>Revisa lo que queda en `.ia-autorretrato/`: la tabla de conceptos para corregir a mano y las citas candidatas. Esa carpeta está en `.gitignore`, y ahí van también los mapeos privados de proyecto a dominio.</Step>
+
+Lo único que se publica es `data/ia-autorretrato.json`, con agregados. Antes de escribirlo, un filtro de privacidad bloquea la salida si detecta texto de tus prompts, nombres de repos privados, nombres de personas, correos o rutas locales. Lo mismo se verifica sobre el texto de este post antes de publicarlo.
+
+Si te interesa aprender a trabajar así, con agentes, con método y sin perder el criterio, eso es lo que hago en los [cursos](/es/cursos). Y si quieres empezar por los conceptos, el glosario está en [Experiencias IA](/es/experiencias-ia).

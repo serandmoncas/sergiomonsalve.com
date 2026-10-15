@@ -1,5 +1,14 @@
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
+import BarrasHerramientas from './blog/ia-autorretrato/BarrasHerramientas'
+import CalendarioActividad from './blog/ia-autorretrato/CalendarioActividad'
+import CaminoMotion from './blog/ia-autorretrato/CaminoMotionServidor'
+import CoautoriaMensual from './blog/ia-autorretrato/CoautoriaMensual'
+import CuadranteConceptos from './blog/ia-autorretrato/CuadranteConceptos'
+import MapaDiscurso from './blog/ia-autorretrato/MapaDiscurso'
+import MatrizEcosistema from './blog/ia-autorretrato/MatrizEcosistema'
+import PerfilPrompts from './blog/ia-autorretrato/PerfilPrompts'
+import RedCoautoria from './blog/ia-autorretrato/RedCoautoria'
 
 function Step({ number, children }: { number?: number; children: React.ReactNode }) {
   return (
@@ -13,9 +22,19 @@ function Step({ number, children }: { number?: number; children: React.ReactNode
 }
 
 // h1 is already rendered by the lesson page — suppress duplicates from MDX source
-const components = {
+export const components = {
   Step,
   h1: () => null,
+  // Autorretrato con IA
+  CalendarioActividad,
+  BarrasHerramientas,
+  CoautoriaMensual,
+  MatrizEcosistema,
+  CuadranteConceptos,
+  PerfilPrompts,
+  RedCoautoria,
+  MapaDiscurso,
+  CaminoMotion,
 }
 
 export default function MDXContent({ source }: { source: string }) {
