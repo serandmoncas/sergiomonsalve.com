@@ -56,6 +56,8 @@
     "recipesDescription": "Recetas de cocina de Sergio Monsalve — vegetarianas, con hongos y de temporada.",
     "bibliotecaTitle": "Biblioteca",
     "bibliotecaDescription": "Los libros y audiolibros que Sergio Monsalve está leyendo y estudiando.",
+    "mapaTitle": "Mapa de habilidad",
+    "mapaDescription": "Plantilla gratuita del Método MAPA: convierte cualquier habilidad en un plan de 30 días en 20 minutos.",
     "formacionTitle": "Formación",
     "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA."
   },
@@ -229,6 +231,116 @@
       }
     },
   "mapa": {
+    "comment": "// plantilla gratuita · Método MAPA",
+    "title": "Mapa de habilidad en 20 minutos",
+    "lede": "Elige algo que quieras aprender en los próximos 30 días. Recorre las cuatro estaciones, de 5 minutos cada una, y al final tendrás un plan concreto.",
+    "howto": [
+      "1 · Define la meta",
+      "2 · Usa el cronómetro de cada estación",
+      "3 · Copia tu plan o recíbelo por correo"
+    ],
+    "loadExample": "Ver un ejemplo lleno (SQL para el trabajo)",
+    "clear": "Empezar en blanco",
+    "hoursOption": "{n} horas",
+    "hoursOptions": [
+      "2",
+      "3",
+      "5",
+      "8",
+      "10"
+    ],
+    "goal": {
+      "title": "Tu meta",
+      "hint": "Qué quieres poder hacer, no qué quieres \"estudiar\".",
+      "skill": "Habilidad",
+      "skillPh": "Ej.: SQL para analizar ventas",
+      "outcome": "Resultado observable en 30 días",
+      "outcomeHint": "Algo que otra persona pueda ver o usar.",
+      "outcomePh": "Ej.: armar yo solo el reporte mensual de ventas",
+      "why": "Por qué ahora",
+      "whyPh": "Ej.: me toca asumir reportes en enero",
+      "hours": "Horas por semana"
+    },
+    "stations": {
+      "map": {
+        "title": "Mapear",
+        "hint": "Descompón la habilidad en piezas. Luego marca con ★ las 3 que más resultado te dan."
+      },
+      "apply": {
+        "title": "Aplicar",
+        "hint": "Aprendes haciendo. Define el proyecto real que vas a construir desde el día 1."
+      },
+      "practice": {
+        "title": "Practicar lo difícil",
+        "hint": "Aísla la parte que más te cuesta y practícala sola. Ponte a prueba sin mirar los apuntes."
+      },
+      "adjust": {
+        "title": "Ajustar",
+        "hint": "Sin feedback repites errores. Decide quién o qué te corrige y cuándo revisas el plan."
+      }
+    },
+    "pieces": {
+      "placeholder": "Pieza de la habilidad",
+      "label": "Pieza {n}",
+      "add": "Agregar pieza",
+      "markKey": "Marcar como clave",
+      "remove": "Quitar pieza",
+      "count": "{n} de 3 clave"
+    },
+    "fields": {
+      "project": "Proyecto real",
+      "projectHint": "Pequeño, útil y terminado en 30 días.",
+      "projectPh": "Ej.: un tablero con las ventas por región del último trimestre",
+      "firstStep": "Primer paso de hoy, en menos de 30 minutos",
+      "firstStepPh": "Ej.: instalar DBeaver y conectarme a la base de prueba",
+      "weak": "Punto débil probable",
+      "weakPh": "Ej.: entender los JOIN entre varias tablas",
+      "drill": "Ejercicio aislado para ese punto",
+      "drillPh": "Ej.: 10 ejercicios cortos de JOIN, 15 minutos al día",
+      "recall": "3 preguntas para autoexaminarte cada semana",
+      "recallHint": "Responderlas de memoria fija lo aprendido más que releer.",
+      "recallPh": "Una pregunta por línea",
+      "feedback": "Fuente de feedback",
+      "feedbackPh": "Ej.: la analista senior del equipo + la IA como tutor",
+      "reviewDay": "Día de revisión semanal"
+    },
+    "timer": {
+      "start": "Iniciar",
+      "pause": "Pausar",
+      "resume": "Seguir",
+      "restart": "Reiniciar",
+      "label": "Cronómetro de 5 minutos"
+    },
+    "prompts": {
+      "mapTitle": "Pídele ayuda a la IA",
+      "tutorTitle": "La IA como tutor",
+      "copy": "Copiar prompt",
+      "copied": "Copiado"
+    },
+    "result": {
+      "label": "// resultado",
+      "title": "Tu plan de 30 días",
+      "hint": "Se arma solo con lo que escribiste.",
+      "copy": "Copiar mi plan",
+      "copied": "Copiado"
+    },
+    "email": {
+      "title": "Recibe tu plan por correo",
+      "hint": "Te lo envío para que no se pierda.",
+      "email": "Correo",
+      "emailPh": "tu@correo.com",
+      "name": "Nombre (opcional)",
+      "newsletter": "Quiero recibir la guía semanal de aprendizaje con IA. Puedo darme de baja cuando quiera.",
+      "privacy": "Cómo trato tus datos",
+      "submit": "Enviarme el plan",
+      "sending": "Enviando…",
+      "success": "Listo. Revisa tu correo en un minuto (y la carpeta de spam).",
+      "error": "No pude enviar el plan. Revisa que no haya enlaces en los campos e intenta de nuevo.",
+      "tooSoon": "Ya te envié un plan a este correo hace unos minutos. Revisa tu bandeja o intenta en 10 minutos."
+    },
+    "author": "Plantilla del Método MAPA de Sergio Monsalve, profesor de la Universidad EAFIT desde hace 15 años e ingeniero de IA.",
+    "cta": "Aplicarlo con tu equipo o en una cohorte →",
+    "storage": "Lo que escribes se guarda solo en este navegador.",
     "days": [
       "Lunes",
       "Martes",

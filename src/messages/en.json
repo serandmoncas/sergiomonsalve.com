@@ -56,6 +56,8 @@
     "recipesDescription": "Recipes by Sergio Monsalve — vegetarian, mushroom-forward, and seasonal.",
     "bibliotecaTitle": "Library",
     "bibliotecaDescription": "Books and audiobooks Sergio Monsalve is reading and studying.",
+    "mapaTitle": "Skill map",
+    "mapaDescription": "Free MAPA Method template: turn any skill into a 30-day plan in 20 minutes.",
     "formacionTitle": "Training",
     "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer."
   },
@@ -229,6 +231,116 @@
       }
     },
   "mapa": {
+    "comment": "// free template · MAPA Method",
+    "title": "Skill map in 20 minutes",
+    "lede": "Pick something you want to learn in the next 30 days. Go through the four stations, 5 minutes each, and you'll end with a concrete plan.",
+    "howto": [
+      "1 · Set the goal",
+      "2 · Use each station's timer",
+      "3 · Copy your plan or get it by email"
+    ],
+    "loadExample": "See a filled-in example (SQL for work)",
+    "clear": "Start blank",
+    "hoursOption": "{n} hours",
+    "hoursOptions": [
+      "2",
+      "3",
+      "5",
+      "8",
+      "10"
+    ],
+    "goal": {
+      "title": "Your goal",
+      "hint": "What you want to be able to do, not what you want to \"study\".",
+      "skill": "Skill",
+      "skillPh": "E.g. SQL for sales analysis",
+      "outcome": "Observable result in 30 days",
+      "outcomeHint": "Something another person can see or use.",
+      "outcomePh": "E.g. build the monthly sales report on my own",
+      "why": "Why now",
+      "whyPh": "E.g. I take over reports in January",
+      "hours": "Hours per week"
+    },
+    "stations": {
+      "map": {
+        "title": "Map",
+        "hint": "Break the skill into pieces. Then star the 3 that give you the most results."
+      },
+      "apply": {
+        "title": "Apply",
+        "hint": "You learn by doing. Define the real project you'll build from day one."
+      },
+      "practice": {
+        "title": "Practice the hard parts",
+        "hint": "Isolate what's hardest and practice it alone. Test yourself without your notes."
+      },
+      "adjust": {
+        "title": "Adjust",
+        "hint": "Without feedback you repeat mistakes. Decide who or what corrects you and when you review the plan."
+      }
+    },
+    "pieces": {
+      "placeholder": "Piece of the skill",
+      "label": "Piece {n}",
+      "add": "Add piece",
+      "markKey": "Mark as key",
+      "remove": "Remove piece",
+      "count": "{n} of 3 key"
+    },
+    "fields": {
+      "project": "Real project",
+      "projectHint": "Small, useful and finished in 30 days.",
+      "projectPh": "E.g. a dashboard with last quarter's sales by region",
+      "firstStep": "Today's first step, under 30 minutes",
+      "firstStepPh": "E.g. install DBeaver and connect to the test database",
+      "weak": "Likely weak spot",
+      "weakPh": "E.g. understanding JOINs across several tables",
+      "drill": "Isolated drill for that spot",
+      "drillPh": "E.g. 10 short JOIN exercises, 15 minutes a day",
+      "recall": "3 questions to test yourself every week",
+      "recallHint": "Answering from memory makes learning stick better than rereading.",
+      "recallPh": "One question per line",
+      "feedback": "Feedback source",
+      "feedbackPh": "E.g. the team's senior analyst + AI as a tutor",
+      "reviewDay": "Weekly review day"
+    },
+    "timer": {
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Resume",
+      "restart": "Restart",
+      "label": "5-minute timer"
+    },
+    "prompts": {
+      "mapTitle": "Ask AI for help",
+      "tutorTitle": "AI as a tutor",
+      "copy": "Copy prompt",
+      "copied": "Copied"
+    },
+    "result": {
+      "label": "// result",
+      "title": "Your 30-day plan",
+      "hint": "It builds itself from what you wrote.",
+      "copy": "Copy my plan",
+      "copied": "Copied"
+    },
+    "email": {
+      "title": "Get your plan by email",
+      "hint": "I'll send it so it doesn't get lost.",
+      "email": "Email",
+      "emailPh": "you@email.com",
+      "name": "Name (optional)",
+      "newsletter": "I want the weekly guide on learning with AI. I can unsubscribe anytime.",
+      "privacy": "How I handle your data",
+      "submit": "Send me the plan",
+      "sending": "Sending…",
+      "success": "Done. Check your inbox in a minute (and your spam folder).",
+      "error": "I couldn't send the plan. Make sure there are no links in the fields and try again.",
+      "tooSoon": "I already sent a plan to this email a few minutes ago. Check your inbox or try again in 10 minutes."
+    },
+    "author": "MAPA Method template by Sergio Monsalve, professor at Universidad EAFIT for 15 years and AI engineer.",
+    "cta": "Apply it with your team or in a cohort →",
+    "storage": "What you write is saved only in this browser.",
     "days": [
       "Monday",
       "Tuesday",
