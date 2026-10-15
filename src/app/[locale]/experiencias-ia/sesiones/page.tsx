@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { SESIONES } from '@/lib/experiencias-ia/data'
+import { getBitacora } from '@/lib/experiencias-ia/data'
 import SesionRow from '@/components/experiencias-ia/SesionRow'
 
 export const metadata: Metadata = {
@@ -7,15 +7,15 @@ export const metadata: Metadata = {
 }
 
 export default function SesionesIndexPage() {
-  const sesionesOrdenadas = [...SESIONES].sort((a, b) => b.n - a.n)
+  const bitacora = getBitacora()
 
   return (
     <div>
       <p className="eyebrow">Bitácora</p>
       <h1>Sesiones</h1>
       <div className="ses-list">
-        {sesionesOrdenadas.map(sesion => (
-          <SesionRow key={sesion.n} sesion={sesion} />
+        {bitacora.map(sesion => (
+          <SesionRow key={sesion.fecha} sesion={sesion} />
         ))}
       </div>
     </div>

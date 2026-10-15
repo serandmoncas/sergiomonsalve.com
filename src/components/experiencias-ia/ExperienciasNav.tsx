@@ -6,9 +6,9 @@ import { Link } from '@/i18n/navigation'
 const VISTAS = [
   { href: '/experiencias-ia', label: 'Inicio' },
   { href: '/experiencias-ia/sesiones', label: 'Sesiones' },
-  { href: '/experiencias-ia/cronograma', label: 'Cronograma' },
-  { href: '/experiencias-ia/backlog', label: 'Backlog' },
+  { href: '/experiencias-ia/temas', label: 'Próximos temas' },
   { href: '/experiencias-ia/quienes-somos', label: 'Quiénes somos' },
+  { href: '/experiencias-ia/taller', label: 'Taller' },
   { href: '/experiencias-ia/glosario', label: 'Glosario' },
 ] as const
 

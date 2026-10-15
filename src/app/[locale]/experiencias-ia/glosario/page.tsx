@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { CATEGORIAS, ORDEN_CATEGORIAS, getTerminosPorCategoria } from '@/lib/experiencias-ia/glosario'
+import { GLOSARIO, CATEGORIAS, ORDEN_CATEGORIAS, getTerminosPorCategoria } from '@/lib/experiencias-ia/glosario'
 import TerminoRow from '@/components/experiencias-ia/TerminoRow'
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function GlosarioIndexPage() {
   return (
     <div>
-      <p className="eyebrow">40 términos</p>
+      <p className="eyebrow">{GLOSARIO.length} términos</p>
       <h1>Glosario</h1>
       {ORDEN_CATEGORIAS.map(categoria => (
         <div key={categoria}>

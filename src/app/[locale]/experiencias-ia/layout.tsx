@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Bricolage_Grotesque, Newsreader } from 'next/font/google'
 import ExperienciasNav from '@/components/experiencias-ia/ExperienciasNav'
 import { Link } from '@/i18n/navigation'
@@ -11,6 +12,11 @@ const newsreader = Newsreader({
   subsets: ['latin'],
   variable: '--font-newsreader',
 })
+
+// Página privada del grupo, no una vitrina pública: que no la indexen.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+}
 
 export default function ExperienciasIALayout({ children }: { children: React.ReactNode }) {
   return (
