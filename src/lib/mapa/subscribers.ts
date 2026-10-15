@@ -9,13 +9,15 @@ export type SubscriberInput = {
   newsletter: boolean
 }
 
-export async function upsertSubscriber(input: SubscriberInput): Promise<{ unsubscribeToken: string }> {
+export type UpsertResult = { unsubscribeToken: string; lastPlanSentAt: Date | null }
+
+export async function upsertSubscriber(input: SubscriberInput): Promise<UpsertResult> {
   const supabase = createAdminClient()
   const now = new Date().toISOString()
 
   const { data: existing, error: findError } = await supabase
     .from('subscribers')
-    .select('id, unsubscribe_token')
+    .select('id, unsubscribe_token, last_plan_sent_at')
     .eq('email', input.email)
     .maybeSingle()
   if (findError) throw new Error(findError.message)
@@ -34,7 +36,7 @@ export async function upsertSubscriber(input: SubscriberInput): Promise<{ unsubs
       .select('unsubscribe_token')
       .single()
     if (error) throw new Error(error.message)
-    return { unsubscribeToken: data.unsubscribe_token }
+    return { unsubscribeToken: data.unsubscribe_token, lastPlanSentAt: null }
   }
 
   const patch: Record<string, unknown> = { locale: input.locale }
@@ -44,7 +46,19 @@ export async function upsertSubscriber(input: SubscriberInput): Promise<{ unsubs
   }
   const { error } = await supabase.from('subscribers').update(patch).eq('id', existing.id)
   if (error) throw new Error(error.message)
-  return { unsubscribeToken: existing.unsubscribe_token }
+  return {
+    unsubscribeToken: existing.unsubscribe_token,
+    lastPlanSentAt: existing.last_plan_sent_at ? new Date(existing.last_plan_sent_at) : null
+  }
+}
+
+export async function markPlanSent(email: string): Promise<void> {
+  const supabase = createAdminClient()
+  const { error } = await supabase
+    .from('subscribers')
+    .update({ last_plan_sent_at: new Date().toISOString() })
+    .eq('email', email)
+  if (error) throw new Error(error.message)
 }
 
 export async function unsubscribeByToken(token: string): Promise<{ email: string } | null> {

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { upsertSubscriber, unsubscribeByToken } from '../subscribers'
+import { upsertSubscriber, unsubscribeByToken, markPlanSent } from '../subscribers'
 
 type Result = { data: unknown; error: unknown }
 type Call = { table: string; method: string; args: unknown[] }
@@ -75,8 +75,18 @@ describe('upsertSubscriber', () => {
     ]
     const r = await upsertSubscriber({ email: 'ana@example.com', name: '', locale: 'es', newsletter: false })
     expect(r.unsubscribeToken).toBe(TOKEN)
+    expect(r.lastPlanSentAt).toBeNull()
     const patch = findCall('update')!.args[0] as Record<string, unknown>
     expect(patch).toEqual({ locale: 'es' })
+  })
+
+  it('returns when the last plan was sent to a returning person', async () => {
+    state.results = [
+      { data: { id: 'id-1', unsubscribe_token: TOKEN, last_plan_sent_at: '2026-10-15T10:00:00.000Z' }, error: null },
+      { data: null, error: null }
+    ]
+    const r = await upsertSubscriber({ email: 'ana@example.com', name: '', locale: 'es', newsletter: false })
+    expect(r.lastPlanSentAt).toEqual(new Date('2026-10-15T10:00:00.000Z'))
   })
 
   it('throws when Supabase fails', async () => {
@@ -84,6 +94,20 @@ describe('upsertSubscriber', () => {
     await expect(
       upsertSubscriber({ email: 'ana@example.com', name: '', locale: 'es', newsletter: false })
     ).rejects.toThrow('boom')
+  })
+})
+
+describe('markPlanSent', () => {
+  beforeEach(() => {
+    state.results = []
+    state.calls = []
+  })
+
+  it('stores the send time for the email', async () => {
+    state.results = [{ data: null, error: null }]
+    await markPlanSent('ana@example.com')
+    expect(findCall('update')!.args[0]).toEqual({ last_plan_sent_at: expect.any(String) })
+    expect(findCall('eq')!.args).toEqual(['email', 'ana@example.com'])
   })
 })
 

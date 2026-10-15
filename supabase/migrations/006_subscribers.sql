@@ -10,6 +10,7 @@ create table subscribers (
   unsubscribe_token  uuid not null unique default gen_random_uuid(),
   created_at         timestamptz not null default now(),
   unsubscribed_at    timestamptz,
+  last_plan_sent_at  timestamptz,
   constraint subscribers_email_lowercase check (email = lower(email))
 );
 

@@ -1,10 +1,12 @@
 import { describe, it, expect } from 'vitest'
+import es from '@/messages/es.json'
 import { planRequestSchema, isHoneypotFilled } from '../schema'
 
-const valid = { email: 'ana@example.com', name: 'Ana', locale: 'es', plan: 'PLAN MAPA', newsletter: false }
+const data = es.mapa.example
+const valid = { email: 'ana@example.com', name: 'Ana', locale: 'es', newsletter: false, data }
 
 describe('planRequestSchema', () => {
-  it('accepts a valid request', () => {
+  it('accepts a valid request with the example data', () => {
     expect(planRequestSchema.safeParse(valid).success).toBe(true)
   })
 
@@ -20,13 +22,25 @@ describe('planRequestSchema', () => {
 
   it.each([
     ['bad email', { email: 'nope' }],
-    ['empty plan', { plan: '' }],
-    ['plan too long', { plan: 'x'.repeat(6001) }],
     ['unknown locale', { locale: 'fr' }],
     ['newsletter as string', { newsletter: 'true' }],
-    ['name too long', { name: 'x'.repeat(81) }]
+    ['name too long', { name: 'x'.repeat(81) }],
+    ['free-text plan instead of data', { data: undefined, plan: 'Click here' }],
+    ['skill too long', { data: { ...data, skill: 'x'.repeat(201) } }],
+    ['recall too long', { data: { ...data, recall: 'x'.repeat(601) } }],
+    ['hours outside the options', { data: { ...data, hours: '99' } }],
+    ['too many pieces', { data: { ...data, pieces: Array.from({ length: 16 }, () => ({ text: 'a', key: false })) } }],
+    ['a link in a field', { data: { ...data, project: 'Gana dinero en https://evil.example' } }],
+    ['a www address', { data: { ...data, skill: 'visita www.spam.co' } }],
+    ['a bare domain', { data: { ...data, pieces: [{ text: 'premios en ganador.com', key: true }] } }],
+    ['a link in the name', { name: 'http://x' }]
   ])('rejects %s', (_label, patch) => {
     expect(planRequestSchema.safeParse({ ...valid, ...patch }).success).toBe(false)
+  })
+
+  it('accepts technical words with dots that are not links', () => {
+    const r = planRequestSchema.safeParse({ ...valid, data: { ...data, skill: 'Next.js y Node.js' } })
+    expect(r.success).toBe(true)
   })
 })
 

@@ -66,6 +66,8 @@ alter table subscribers enable row level security;
 - Si aceptó la newsletter y existe `RESEND_SEGMENT_ID`: crea o actualiza el contacto en el Segment (best-effort; errores se registran y no fallan la respuesta).
 - Error de base de datos → 500. Error al enviar el plan → 502 con mensaje para reintentar.
 
+**Enmienda de seguridad (2026-10-15):** para que el endpoint no funcione como relay de spam, el cliente envía `data` (los campos de la plantilla, con límites por campo y sin enlaces) y el servidor arma el plan con `buildPlan` y las plantillas de texto del sitio. Máximo un correo de plan por dirección cada 10 minutos (`subscribers.last_plan_sent_at`, respuesta 429). El límite por IP se configura como regla del firewall de Vercel al desplegar.
+
 ### 4. Baja `/[locale]/newsletter/baja`
 
 - Página de servidor que lee `token`, marca `status = 'unsubscribed'`, `newsletter = false`, `unsubscribed_at = now()` y marca el contacto como `unsubscribed` en Resend (best-effort).
