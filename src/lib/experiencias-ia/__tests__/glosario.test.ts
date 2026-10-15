@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { SESIONES } from '../data'
+import { getSesionesDocumentadas } from '../data'
 import {
   GLOSARIO,
   CATEGORIAS,
@@ -9,8 +9,8 @@ import {
 } from '../glosario'
 
 describe('GLOSARIO', () => {
-  it('has exactly 40 entries', () => {
-    expect(GLOSARIO).toHaveLength(40)
+  it('has exactly 58 entries (40 originales + 18 de ago–oct)', () => {
+    expect(GLOSARIO).toHaveLength(58)
   })
 
   it('has all unique slugs', () => {
@@ -19,7 +19,7 @@ describe('GLOSARIO', () => {
   })
 
   it('every sesionOrigen present corresponds to a real session in SESIONES', () => {
-    const sesionNumeros = new Set(SESIONES.map(s => s.n))
+    const sesionNumeros = new Set(getSesionesDocumentadas().map(s => s.n))
     const conOrigen = GLOSARIO.filter(t => t.sesionOrigen !== undefined)
     expect(conOrigen.length).toBeGreaterThan(0)
     for (const termino of conOrigen) {
@@ -54,10 +54,13 @@ describe('ORDEN_CATEGORIAS', () => {
 })
 
 describe('getTerminosPorCategoria', () => {
-  it('returns exactly 10 terms for each of the 4 categories', () => {
-    for (const categoria of ORDEN_CATEGORIAS) {
-      expect(getTerminosPorCategoria(categoria)).toHaveLength(10)
-    }
+  it('returns the expected number of terms per category', () => {
+    expect(Object.fromEntries(ORDEN_CATEGORIAS.map(c => [c, getTerminosPorCategoria(c).length]))).toEqual({
+      'fundamentos': 13,
+      'contexto-memoria': 13,
+      'seguridad-control': 12,
+      'operacion-evaluacion': 20,
+    })
   })
 })
 

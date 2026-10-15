@@ -1,17 +1,7 @@
-import type { Metadata } from 'next'
-import { BACKLOG } from '@/lib/experiencias-ia/data'
-import BacklogFilter from '@/components/experiencias-ia/BacklogFilter'
+import { redirect } from '@/i18n/navigation'
 
-export const metadata: Metadata = {
-  title: 'Backlog — Experiencias IA',
-}
-
-export default function BacklogPage() {
-  return (
-    <div>
-      <p className="eyebrow">Temas propuestos</p>
-      <h1>Backlog</h1>
-      <BacklogFilter items={BACKLOG} />
-    </div>
-  )
+// Vista retirada: Cronograma y Backlog se unieron en "Próximos temas".
+export default async function RedirectATemas({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  redirect({ href: '/experiencias-ia/temas', locale })
 }

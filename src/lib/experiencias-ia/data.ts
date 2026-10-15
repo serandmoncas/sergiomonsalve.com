@@ -1,52 +1,69 @@
 // ============================================================
 // Experiencias IA — datos del grupo
-// Fuente de verdad original: docs/superpowers/specs/anexos/experiencias-ia/data.js
-// Editar aquí para agregar sesiones nuevas o actualizar cronograma/backlog.
+// Fuente: transcripciones de las sesiones grupales (ver handoffs en
+// docs/superpowers/specs/anexos/experiencias-ia/). Regla madre: cero
+// contenido inventado; lo que falte se muestra como "pendiente".
+//
+// Para agregar una sesión: agrega un objeto al final de SESIONES.
+// Para una fecha sin transcripción: { fecha, fechaLarga, estado: 'sin-registro' }.
 // ============================================================
 
-export type EstadoPendiente = 'abierto' | 'cerrado'
-export type Pendiente = { quien: string; que: string; estado: EstadoPendiente }
 export type Referencia = { titulo: string; nota: string; url: string }
 export type Concepto = { t: string; d: string }
-export type EstadoSesion = 'cerrada' | 'proxima' | 'planeada'
 
 export type Sesion = {
   n: number
   fecha: string
   fechaLarga: string
   titulo: string
-  estado: EstadoSesion
-  encargado: string
+  /** Frase-gancho que se ve en la tarjeta. */
+  gancho: string
+  /** 3–5 hallazgos cortos. */
+  hallazgos?: string[]
+  asistentes?: string[]
+  enlaces: Referencia[]
+  encargado?: string
   destacada?: boolean
-  resumenCorto: string
-  resumen: string[]
-  temas: string[]
-  conceptos?: Concepto[]
-  decisiones: string[]
-  pendientes: Pendiente[]
-  referencias: Referencia[]
   nuevos?: string[]
+  // Detalle largo (sesiones hasta julio): se muestra colapsado.
+  resumen?: string[]
+  temas?: string[]
+  conceptos?: Concepto[]
+  decisiones?: string[]
 }
 
-export type SesionCronograma = {
-  n: number
+export type SinRegistro = {
   fecha: string
-  titulo: string
-  encargados: string[]
-  estado: 'confirmada' | 'propuesta'
-  contenido: string[]
+  fechaLarga: string
+  estado: 'sin-registro'
+  nota?: string
 }
 
-export type Prioridad = 'alta' | 'media' | 'baja'
-export type BacklogItem = { titulo: string; proponente: string; prioridad: Prioridad; nota: string }
+export type EntradaSesion = Sesion | SinRegistro
 
-export type Participante = {
+/** Propuestas voluntarias: nadie es "responsable", alguien "propone". */
+export type Tema = {
+  tema: string
+  propone: string
+  surgio?: string
+  nota?: string
+  estado: 'propuesto'
+}
+
+/** Solo se muestra con consentimiento: true y el texto que la persona aprobó. */
+export type Persona = {
   nombre: string
-  rol: string
-  campo: string
-  bio: string
-  desde: number
-  tags: string[]
+  desde: string
+  texto: string
+  consentimiento: boolean
+}
+
+/** Proyecto mostrado en sesión; solo se publica con permiso de su autor. */
+export type ProyectoTaller = {
+  autor: string
+  proyecto: string
+  descripcion: string
+  publicar: boolean
 }
 
 export type Principio = { titulo: string; texto: string }
@@ -57,6 +74,9 @@ export type Grupo = {
   lugar: string
   desde: string
   descripcion: string
+  principioMadre: string
+  formato: string[]
+  proximaSesion: string
   principios: Principio[]
 }
 
@@ -68,6 +88,12 @@ export const GRUPO: Grupo = {
   desde: '4 de junio de 2026',
   descripcion:
     'Empezó como un grupo de estudio y terminó siendo un círculo de apoyo técnico. Profesionales de desarrollo, datos, finanzas, biología, logística, educación y dirección tecnológica que se juntan una vez por semana a contar qué probaron, qué se les rompió y qué aprendieron con inteligencia artificial. Sin tareas obligatorias. Sin entregables. Con mucha conversación.',
+  principioMadre: 'Aquí ningún compromiso es obligatorio. Venimos a contar experiencias.',
+  formato: [
+    'Primero, una ronda de intervenciones cortas: unos 3 a 5 minutos por persona.',
+    'Después, conversación abierta. Nada de presentaciones largas tipo tutorial.',
+  ],
+  proximaSesion: 'Miércoles 21 de octubre de 2026',
   principios: [
     {
       titulo: 'La IA es colaborador, no reemplazo',
@@ -92,15 +118,14 @@ export const GRUPO: Grupo = {
   ],
 }
 
-export const SESIONES: Sesion[] = [
+export const SESIONES: EntradaSesion[] = [
   {
     n: 1,
     fecha: '2026-06-04',
     fechaLarga: '4 de junio de 2026',
     titulo: 'Utilidad, dependencia y ética',
-    estado: 'cerrada',
     encargado: 'Sergio Monsalve',
-    resumenCorto:
+    gancho:
       'Sesión fundacional. Experiencias personales, expectativas del grupo y el primer debate ético sobre alucinaciones.',
     resumen: [
       'Sesión fundacional centrada en experiencias personales y reflexión ética. Se presentó la actividad, los participantes y las expectativas del grupo de estudio.',
@@ -112,17 +137,15 @@ export const SESIONES: Sesion[] = [
       'El grupo se acota inicialmente a cuatro sesiones para evaluar si continúa.',
       'No se impondrán tareas académicas rígidas.',
     ],
-    pendientes: [],
-    referencias: [],
+    enlaces: [],
   },
   {
     n: 2,
     fecha: '2026-06-09',
     fechaLarga: '9 de junio de 2026',
     titulo: 'Logística, saturación y automatización de flujos',
-    estado: 'cerrada',
     encargado: 'Sergio Monsalve',
-    resumenCorto:
+    gancho:
       'Se fija la cadencia semanal. Aparecen la saturación cognitiva y las skills conectadas a fuentes de datos.',
     resumen: [
       'Se acordó establecer reuniones semanales para fomentar la colaboración técnica, con un grupo de perfiles diversos interesados en desarrollo de software y optimización mediante IA.',
@@ -131,22 +154,15 @@ export const SESIONES: Sesion[] = [
     ],
     temas: ['Skills', 'Gestión de contexto', 'Infoxicación', 'Obsidian'],
     decisiones: ['Cadencia definitiva: miércoles de 7:30 a 8:30 p.m.'],
-    pendientes: [
-      { quien: 'Daniel Moreno Agudelo', que: 'Presentar Skills y el proyecto de base de datos', estado: 'cerrado' },
-      { quien: 'Sergio, Diego, Jorge', que: 'Crear página personal aplicando lo discutido', estado: 'abierto' },
-      { quien: 'Sergio Monsalve', que: 'Investigar las skills mencionadas por Daniel', estado: 'cerrado' },
-      { quien: 'Sergio Monsalve', que: 'Experimentar con Obsidian y compartir un ejercicio', estado: 'abierto' },
-    ],
-    referencias: [],
+    enlaces: [],
   },
   {
     n: 3,
     fecha: '2026-06-10',
     fechaLarga: '10 de junio de 2026',
     titulo: 'Arquitectura, MemPalas y el rol del programador',
-    estado: 'cerrada',
     encargado: 'Jorge Johnson',
-    resumenCorto:
+    gancho:
       'Calidad de software bajo IA, memoria institucional con palacios de memoria y la primera discusión seria de metodología.',
     resumen: [
       'Los participantes discutieron la dependencia de la IA para generar código, enfatizando la necesidad crítica de supervisión humana constante para garantizar arquitectura y mantenibilidad. La conclusión: la IA funciona como asistente que requiere lineamientos estrictos para evitar fallas estructurales.',
@@ -159,22 +175,15 @@ export const SESIONES: Sesion[] = [
       'Mantener un repositorio compartido para documentar aprendizajes y validar recursos técnicos.',
       'Enfoque flexible: cada integrante comparte sus investigaciones de manera colaborativa.',
     ],
-    pendientes: [
-      { quien: 'Jorge Johnson', que: 'Distribuir el documento sobre desarrollo asistido con IA', estado: 'cerrado' },
-      { quien: 'El grupo', que: 'Evaluar MemPalas para discutirla en futuras sesiones', estado: 'abierto' },
-      { quien: 'Sergio y Jorge', que: 'Definir temas principales y formato de sesiones futuras', estado: 'cerrado' },
-      { quien: 'El grupo', que: 'Preparar exposición breve (3–5 min) sobre un tema investigado', estado: 'cerrado' },
-    ],
-    referencias: [],
+    enlaces: [],
   },
   {
     n: 4,
     fecha: '2026-06-24',
     fechaLarga: '24 de junio de 2026',
     titulo: 'Consolidación de la comunidad de práctica',
-    estado: 'cerrada',
     encargado: 'Jorge Johnson',
-    resumenCorto:
+    gancho:
       'El grupo pasa de definir logística a operar como comunidad de práctica con presentaciones cortas y repositorio compartido.',
     resumen: [
       'El grupo consolidó su dinámica: tareas de investigación individual, presentaciones cortas, repositorio compartido de recursos y un rol de moderación estable.',
@@ -182,17 +191,15 @@ export const SESIONES: Sesion[] = [
     ],
     temas: ['Comunidad de práctica', 'Skill creator', 'Repositorio compartido'],
     decisiones: [],
-    pendientes: [],
-    referencias: [],
+    enlaces: [],
   },
   {
     n: 5,
     fecha: '2026-06-30',
     fechaLarga: '30 de junio – 2 de julio de 2026',
     titulo: 'Jarvis, contexto compartido y el futuro de los dashboards',
-    estado: 'cerrada',
     encargado: 'Sergio Monsalve',
-    resumenCorto:
+    gancho:
       'Asistentes personales tipo Jarvis, sus límites por falta de memoria persistente, y un debate sobre storytelling de datos.',
     resumen: [
       'Diego insistió en la necesidad de contexto compartido en equipos. Se discutió el proyecto «Jarvis» personal —calendario, correo, WhatsApp, Obsidian— y sus límites por falta de memoria persistente.',
@@ -201,17 +208,15 @@ export const SESIONES: Sesion[] = [
     ],
     temas: ['Jarvis', 'Memoria persistente', 'ICP y leads', 'Dashboards vs. storytelling'],
     decisiones: [],
-    pendientes: [],
-    referencias: [],
+    enlaces: [],
   },
   {
     n: 6,
     fecha: '2026-07-08',
     fechaLarga: '8 de julio de 2026',
     titulo: 'Identidad del grupo y seguridad en código generado',
-    estado: 'cerrada',
     encargado: 'Sergio Monsalve',
-    resumenCorto:
+    gancho:
       'Entra sangre nueva. Se consolida la identidad como comunidad horizontal y se abre el frente de seguridad.',
     resumen: [
       'El grupo consolidó su propósito como comunidad técnica centrada en compartir experiencias sobre IA, priorizando el intercambio horizontal frente a estructuras académicas rígidas.',
@@ -222,26 +227,16 @@ export const SESIONES: Sesion[] = [
     ],
     temas: ['Identidad del grupo', 'Seguridad en código generado', 'Educación e IA', 'Metodología Némesis'],
     decisiones: ['El grupo de WhatsApp se usa para proponer temas y organizar la siguiente sesión.'],
-    pendientes: [
-      { quien: 'El grupo', que: 'Participar en WhatsApp proponiendo temas y tópicos', estado: 'abierto' },
-      { quien: 'Andrés Pérez', que: 'Presentar temas pendientes y compartir experiencias', estado: 'abierto' },
-      { quien: 'Diego Fernando Robledo', que: 'Presentar temas pendientes y compartir experiencias', estado: 'abierto' },
-      { quien: 'Juan David Torres', que: 'Compartir casos reales de vulnerabilidades en código generado por IA', estado: 'abierto' },
-      { quien: 'Jorge Johnson', que: 'Incluir el debate sobre uso académico de IA en las diapositivas', estado: 'abierto' },
-      { quien: 'Juan Francisco Cardona McCormick', que: 'Investigar la metodología Némesis para interacción crítica con modelos', estado: 'abierto' },
-      { quien: 'Jorge Johnson y Juan Francisco Cardona', que: 'Reunión de café sobre IA general y argumentos prácticos', estado: 'abierto' },
-    ],
-    referencias: [],
+    enlaces: [],
   },
   {
     n: 7,
     fecha: '2026-07-15',
     fechaLarga: '15 de julio de 2026',
     titulo: 'Harness Engineering',
-    estado: 'cerrada',
     encargado: 'Sergio Monsalve',
     destacada: true,
-    resumenCorto:
+    gancho:
       'El caballo, el arnés y el jinete. Las tres capas de ingeniería con LLMs y el patrón de Hashimoto.',
     resumen: [
       'Todo agente de IA funciona hasta que no. Bajo condiciones controladas escriben código, navegan y operan software de forma autónoma. En producción fallan de forma impredecible: no hay memoria entre sesiones, no se sabe cuándo se detienen ni cómo validan su propio trabajo.',
@@ -282,17 +277,7 @@ export const SESIONES: Sesion[] = [
       'Se comparte un repositorio de aprendizaje con cinco módulos y dos proyectos prácticos.',
       'Jorge Johnson asume formalmente el rol de moderador.',
     ],
-    pendientes: [
-      { quien: 'El grupo', que: 'Construir colaborativamente el glosario de 40 términos', estado: 'abierto' },
-      { quien: 'Diego Fernando Robledo', que: 'Narrar la integración fallida entre Obsidian y Claude', estado: 'abierto' },
-      {
-        quien: 'José Luis Montoya Pareja',
-        que: 'Compartir el video de automatización de talleres de electrónica con sensores (España)',
-        estado: 'abierto',
-      },
-      { quien: 'Juan David Torres', que: 'Profundizar en Loop Engineering como complemento del harness', estado: 'abierto' },
-    ],
-    referencias: [
+    enlaces: [
       { titulo: 'Mitchell Hashimoto — Engineering the Harness', nota: 'Publicación original, febrero de 2026', url: '' },
       { titulo: 'Martin Fowler — definición de harness', nota: 'Herramientas y prácticas para mantener agentes bajo control', url: '' },
       { titulo: 'Repositorio de aprendizaje del grupo', nota: 'Cinco módulos, dos proyectos', url: '' },
@@ -305,9 +290,8 @@ export const SESIONES: Sesion[] = [
     fecha: '2026-07-22',
     fechaLarga: '22 de julio de 2026',
     titulo: 'Agentes en local, infraestructura y democratización',
-    estado: 'cerrada',
     encargado: 'Juan David Torres · Sergio Monsalve',
-    resumenCorto:
+    gancho:
       'Demostración de agentes en entornos aislados, costos de infraestructura local y la IA como mentor de metaaprendizaje.',
     resumen: [
       'Se discutió la implementación de asistentes bajo el concepto de ingeniero de avance. Se acordó desplegar demostraciones iniciales en entornos locales aislados para garantizar la seguridad de los datos.',
@@ -316,322 +300,479 @@ export const SESIONES: Sesion[] = [
     ],
     temas: ['Agentes locales', 'Infraestructura propia', 'Modelos locales', 'Metaaprendizaje', 'Raspberry Pi'],
     decisiones: ['Las demostraciones de agentes se hacen primero en entornos locales aislados.'],
-    pendientes: [
-      {
-        quien: 'Juan David Torres',
-        que: 'Explicar conceptos teóricos básicos de agentes, componentes y funcionamiento',
-        estado: 'abierto',
-      },
-      { quien: 'Sergio Monsalve', que: 'Preparar demostración de un agente funcional', estado: 'abierto' },
-      { quien: 'Sergio Monsalve', que: 'Investigar viabilidad de ejecutar agentes en Raspberry Pi', estado: 'abierto' },
-      {
-        quien: 'Sergio y Juan David Torres',
-        que: 'Estructurar curso de preparación para la certificación oficial de Anthropic',
-        estado: 'abierto',
-      },
-      { quien: 'El grupo', que: 'Identificar modelos locales disponibles para tareas', estado: 'abierto' },
-    ],
-    referencias: [],
+    enlaces: [],
   },
-]
-
-export const CRONOGRAMA: SesionCronograma[] = [
+  // ---------- Actualización 29 jul – 14 oct 2026 ----------
+  { fecha: '2026-07-29', fechaLarga: '29 de julio de 2026', estado: 'sin-registro' },
   {
     n: 9,
-    fecha: '29 de julio de 2026',
-    titulo: 'Agentes: teoría y demostración práctica',
-    encargados: ['Juan David Torres', 'Sergio Monsalve'],
-    estado: 'confirmada',
-    contenido: [
-      'Conceptos teóricos: qué es un agente, sus componentes y cómo funciona.',
-      'Demostración en vivo de un agente funcional en entorno local aislado.',
+    fecha: '2026-08-05',
+    fechaLarga: '5 de agosto de 2026',
+    titulo: '19 modelos, 11 lenguajes',
+    gancho:
+      'Jorge mostró su benchmark: 19 modelos abiertos, 55 problemas, 11 lenguajes, 11.440 ejecuciones; los chinos y el modelo abierto de OpenAI lideran.',
+    hallazgos: [
+      'Hizo tres apps de sistema en una tarde.',
+      'Diego mostró presentaciones en HTML generadas como sistema de diseño.',
+      'Se propuso una sesión de radiofrecuencia.',
     ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'José Luis', 'Juan David Pineda'],
+    enlaces: [],
   },
+  { fecha: '2026-08-12', fechaLarga: '12 de agosto de 2026', estado: 'sin-registro', nota: 'Sin quórum' },
   {
     n: 10,
-    fecha: '5 de agosto de 2026',
-    titulo: 'Seguridad en código generado por IA',
-    encargados: ['Juan David Torres'],
-    estado: 'propuesta',
-    contenido: [
-      'Casos reales de vulnerabilidades en código generado por modelos.',
-      'Prácticas de auditoría antes de llevar código asistido a producción.',
+    fecha: '2026-08-19',
+    fechaLarga: '19 de agosto de 2026',
+    titulo: 'Hacer frente a estudiar',
+    gancho: '¿Vale la pena certificarse? Para el mercado sí; para aprender, construir.',
+    hallazgos: [
+      'Jorge: limpiar la sesión al 25–30 % de contexto y hacer commit cada pocos minutos.',
+      'Diego resolvió un bug de Cowork en Windows.',
+      'Temas propuestos: marcas de agua en texto IA y «arqueología de código».',
     ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'Torres', 'Daniel', 'Juan David Pineda'],
+    enlaces: [],
   },
   {
     n: 11,
-    fecha: '12 de agosto de 2026',
-    titulo: 'Obsidian, segundo cerebro y memoria persistente',
-    encargados: ['Diego Fernando Robledo', 'Pablo Álvarez'],
-    estado: 'propuesta',
-    contenido: [
-      'La integración fallida Obsidian ↔ Claude, contada en detalle.',
-      'Centralización de contextos de cliente en un segundo cerebro.',
+    fecha: '2026-08-26',
+    fechaLarga: '26 de agosto de 2026',
+    titulo: 'Routers, cápsulas y 22 proyectos',
+    gancho: 'Torres aprobó la certificación Architect Foundations y demostró OpenRouter y OmniRouter.',
+    hallazgos: [
+      'Sergio mostró sus cápsulas de cultivo automatizadas (ESP32, MQTT, Home Assistant, app móvil).',
+      'Jorge presentó su catálogo de 22 proyectos en punk, incluida una CPU de 16 bits simulada.',
+      'Diego diseña cohetes con OpenRocket.',
     ],
+    asistentes: [
+      'Sergio',
+      'Jorge',
+      'Diego',
+      'Juan Pablo',
+      'Torres',
+      'Juan David Pineda',
+      'Santiago Osorio',
+      'Juan Francisco Cardona',
+    ],
+    enlaces: [],
+    nuevos: ['Santiago Osorio'],
   },
   {
     n: 12,
-    fecha: '19 de agosto de 2026',
-    titulo: 'IA en la academia y en la formación',
-    encargados: ['Jorge Johnson', 'Rafael David Rincón', 'José Luis Montoya'],
-    estado: 'propuesta',
-    contenido: [
-      'Uso académico de la IA y la justificación de trabajos.',
-      'Especificación y requisitos como disciplina previa al código.',
+    fecha: '2026-09-02',
+    fechaLarga: '2 de septiembre de 2026',
+    titulo: 'Software desechable',
+    gancho: 'Diego construyó un simulador web de lanzamiento de cohetes en ~48 h con Claude Code en terminal.',
+    hallazgos: [
+      'Cowork frente a Claude Code para trabajo de conocimiento.',
+      'Jorge predijo software «desechable» hecho al instante; Torres respondió con la paradoja de Jevons.',
+      'Idea: que todos resuelvan el mismo miniproyecto y comparen sus harness.',
     ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'Torres'],
+    enlaces: [],
+  },
+  {
+    n: 13,
+    fecha: '2026-09-09',
+    fechaLarga: '9 de septiembre de 2026',
+    titulo: '¿Papers o experiencias?',
+    gancho: 'Se descartó leer papers en grupo; para eso, NotebookLM.',
+    hallazgos: [
+      'Diego probó OpenRouter con enrutamiento automático y le resultó caro e inestable.',
+      'Torres propuso un experimento: mismo harness, distinto modelo.',
+      'Jorge mostró su estación de radio por software.',
+    ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'Torres', 'Daniel', 'Juan David Pineda'],
+    enlaces: [],
+  },
+  {
+    n: 14,
+    fecha: '2026-09-16',
+    fechaLarga: '16 de septiembre de 2026',
+    titulo: 'Hooks, skills y la silla de cada uno',
+    gancho: 'Las capas editables del harness: CLAUDE.md, settings, MCP, hooks, agentes.',
+    hallazgos: [
+      'Los hooks son deterministas; los skills no.',
+      'Diego trabaja con Superpowers de punta a punta.',
+      'Advertencia: los modelos leen los handoffs a medias («ley del mínimo token»).',
+      'Torres compartió una iniciativa para donar tokens a problemas matemáticos.',
+    ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'Torres', 'Juan David Pineda'],
+    enlaces: [],
+  },
+  {
+    n: 15,
+    fecha: '2026-09-23',
+    fechaLarga: '23 de septiembre de 2026',
+    titulo: 'La primera app define el patrón',
+    gancho:
+      'Jorge: la primera aplicación que hagas le enseña al modelo tu estilo; si sale mal, mejor borrarla.',
+    hallazgos: [
+      'Hay que saber pedir diseño y arquitectura.',
+      'Debate sobre si el harness dejará de ser necesario y sobre una posible burbuja de inversión en IA.',
+    ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo'],
+    enlaces: [],
+  },
+  { fecha: '2026-09-30', fechaLarga: '30 de septiembre de 2026', estado: 'sin-registro' },
+  {
+    n: 16,
+    fecha: '2026-10-07',
+    fechaLarga: '7 de octubre de 2026',
+    titulo: 'Retrospectiva: ¿nos sigue sirviendo?',
+    gancho: 'Consenso: el grupo sirve y debe seguir siendo práctico, no teórico.',
+    hallazgos: [
+      'Compartir experiencias es la defensa contra el FOMO.',
+      'Juan Pablo mostró su primera app móvil hecha con Claude Code siguiendo buenas prácticas.',
+      'Diego hizo que sus sesiones de Claude Code se comunicaran entre sí.',
+      'Jorge mostró Glotis (modulador de voz) y Ronquera (consola de podcast).',
+      'Daniel usa el harness Gentle AI.',
+    ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'Torres', 'Daniel', 'Santiago'],
+    enlaces: [],
+  },
+  {
+    n: 17,
+    fecha: '2026-10-14',
+    fechaLarga: '14 de octubre de 2026',
+    titulo: 'Nuevo formato y caras nuevas',
+    gancho: 'Primera sesión con ronda de presentaciones cortas.',
+    hallazgos: [
+      'Alejandra mostró una app gamificada de matemáticas para la vida.',
+      'Torres explicó la certificación de arquitecto de Anthropic (5 dominios, 6 escenarios).',
+      'Juan Pablo mostró su app de guitarra y una carátula de reloj Garmin.',
+      'José Luis usa IA para calificar proyectos y planea un libro para aula invertida.',
+      'Diego lanzó su podcast «Cielo contado».',
+      'Sergio propuso un proyecto colaborativo abierto (New Old School).',
+    ],
+    asistentes: [
+      'Sergio',
+      'Jorge',
+      'Diego',
+      'Juan Pablo',
+      'Torres',
+      'José Luis',
+      'Santiago',
+      'Alejandra Santamaría',
+      'Carlos Mario Espíndola',
+      'Javier C. Álvarez',
+      'Sebastián Calle',
+    ],
+    enlaces: [],
+    nuevos: ['Carlos Mario Espíndola', 'Javier C. Álvarez', 'Sebastián Calle'],
   },
 ]
 
-export const BACKLOG: BacklogItem[] = [
+export const TEMAS: Tema[] = [
+  // ---------- Propuestos entre agosto y octubre ----------
   {
-    titulo: 'Curso de preparación para la certificación oficial de Anthropic',
-    proponente: 'Sergio Monsalve · Juan David Torres',
-    prioridad: 'alta',
-    nota: 'Estructurar programa de formación. Sesión 8.',
+    tema: 'Modelos de lenguaje para proteínas y detección de patógenos',
+    propone: 'Javier C. Álvarez',
+    surgio: '2026-10-14',
+    estado: 'propuesto',
   },
   {
-    titulo: 'Glosario vivo de 40 términos',
-    proponente: 'El grupo',
-    prioridad: 'alta',
-    nota: 'Fundamentos, contexto y memoria, seguridad y control, operación y evaluación. Sesión 7.',
+    tema: 'Pasar el contexto de una sesión de Claude a otra máquina vía repositorio',
+    propone: 'José Luis Montoya',
+    surgio: '2026-10-14',
+    estado: 'propuesto',
   },
   {
-    titulo: 'Loop Engineering',
-    proponente: 'Juan David Torres',
-    prioridad: 'alta',
+    tema: 'Cómo contribuir a New Old School donando horas de IA',
+    propone: 'Sergio Monsalve',
+    surgio: '2026-10-14',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Orquestadores de agentes (Orca, Herder): ¿hacen falta?',
+    propone: 'Sergio Monsalve',
+    surgio: '2026-10-07',
+    estado: 'propuesto',
+  },
+  { tema: 'Encuentro presencial en Guarne', propone: 'Sergio Monsalve', surgio: '2026-09-10', estado: 'propuesto' },
+  {
+    tema: 'Mismo harness, distinto modelo: Claude frente a un modelo chino',
+    propone: 'Juan David Torres',
+    surgio: '2026-09-09',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Sesión de trabajo: un mismo miniproyecto, cada uno con su harness',
+    propone: 'Sergio Monsalve',
+    surgio: '2026-09-02',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Computación cuántica con un invitado (preparar preguntas antes)',
+    propone: 'Sergio Monsalve / Jorge Johnson',
+    surgio: '2026-09-02',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Arqueología de código: entender bases heredadas con IA',
+    propone: 'Juan David Torres',
+    surgio: '2026-08-19',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Marcas de agua y esteganografía en texto generado por IA',
+    propone: 'Juan Pablo Duque',
+    surgio: '2026-08-19',
+    estado: 'propuesto',
+  },
+  // ---------- Backlog anterior (junio – julio) ----------
+  {
+    tema: 'Curso de preparación para la certificación oficial de Anthropic',
+    propone: 'Sergio Monsalve · Juan David Torres',
+    surgio: '2026-07-22',
+    nota: 'Estructurar programa de formación.',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Glosario vivo de 40 términos',
+    propone: 'El grupo',
+    surgio: '2026-07-15',
+    nota: 'Fundamentos, contexto y memoria, seguridad y control, operación y evaluación.',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Loop Engineering',
+    propone: 'Juan David Torres',
     nota: 'Complemento del harness engineering para desarrollo con agentes.',
+    estado: 'propuesto',
   },
   {
-    titulo: 'Agentes en Raspberry Pi',
-    proponente: 'Sergio Monsalve',
-    prioridad: 'media',
+    tema: 'Agentes en Raspberry Pi',
+    propone: 'Sergio Monsalve',
     nota: 'Viabilidad técnica de ejecución en hardware modesto.',
+    estado: 'propuesto',
   },
   {
-    titulo: 'Modelos locales disponibles',
-    proponente: 'El grupo',
-    prioridad: 'media',
+    tema: 'Modelos locales disponibles',
+    propone: 'El grupo',
     nota: 'Inventario de modelos ejecutables sin nube.',
+    estado: 'propuesto',
   },
   {
-    titulo: 'MemPalas — memoria institucional',
-    proponente: 'Juan David Pineda Cárdenas',
-    prioridad: 'media',
-    nota: 'Palacios de memoria aplicados a memoria organizacional. Sesión 3.',
+    tema: 'MemPalas — memoria institucional',
+    propone: 'Juan David Pineda Cárdenas',
+    surgio: '2026-06-10',
+    nota: 'Palacios de memoria aplicados a memoria organizacional.',
+    estado: 'propuesto',
   },
   {
-    titulo: 'Metodología Némesis',
-    proponente: 'Juan Francisco Cardona McCormick',
-    prioridad: 'media',
+    tema: 'Metodología Némesis',
+    propone: 'Juan Francisco Cardona McCormick',
     nota: 'Interacción crítica y adversarial con modelos.',
+    estado: 'propuesto',
   },
   {
-    titulo: 'Huellas y sesgos de modelos',
-    proponente: 'Juan David Torres',
-    prioridad: 'media',
+    tema: 'Huellas y sesgos de modelos',
+    propone: 'Juan David Torres',
     nota: 'Estilos de escritura identificables por modelo.',
+    estado: 'propuesto',
   },
   {
-    titulo: 'El futuro de los dashboards',
-    proponente: 'Andrés Pérez',
-    prioridad: 'baja',
-    nota: 'Storytelling de datos frente al tablero tradicional. Sesión 5.',
+    tema: 'El futuro de los dashboards',
+    propone: 'Andrés Pérez',
+    surgio: '2026-06-30',
+    nota: 'Storytelling de datos frente al tablero tradicional.',
+    estado: 'propuesto',
   },
   {
-    titulo: 'Vibe Engineering',
-    proponente: 'Juan David Torres',
-    prioridad: 'media',
+    tema: 'Vibe Engineering',
+    propone: 'Juan David Torres',
     nota: 'Crítica a la ilusión de velocidad y la deuda técnica acumulada. Libro en curso.',
+    estado: 'propuesto',
   },
   {
-    titulo: 'Automatización de talleres de electrónica con sensores',
-    proponente: 'José Luis Montoya Pareja',
-    prioridad: 'baja',
+    tema: 'Automatización de talleres de electrónica con sensores',
+    propone: 'José Luis Montoya Pareja',
     nota: 'Video de la experiencia en España.',
+    estado: 'propuesto',
   },
   {
-    titulo: 'Agilismo en la era de la IA',
-    proponente: 'Carlos Eduardo Monsalve',
-    prioridad: 'baja',
+    tema: 'Agilismo en la era de la IA',
+    propone: 'Carlos Eduardo Monsalve',
     nota: '¿Hay un retorno a fases de análisis tipo cascada?',
+    estado: 'propuesto',
   },
 ]
 
-export const PARTICIPANTES: Participante[] = [
-  {
-    nombre: 'Sergio Monsalve',
-    rol: 'Organizador y anfitrión',
-    campo: 'Emprendimiento · Producto',
-    bio: 'Fundó el grupo desde una inquietud personal por entender qué estaba pasando en el mundo. Plataforma de cursos «Songo Sorongo» con infraestructura propia; cerró exitosamente un negocio de cultivo de hongos con apoyo de IA. Explora Obsidian, biblioteca digital personal, generación multimedia y un asistente tipo Jarvis. Gestiona la IA como «un ejército de juniors» al que hay que entrenar con lineamientos. Aficionado al parapente.',
-    desde: 1,
-    tags: ['Skills', 'Obsidian', 'Jarvis', 'Documentación'],
-  },
-  {
-    nombre: 'Jorge Johnson',
-    rol: 'Moderador y jefe de disciplina',
-    campo: 'Desarrollo de software',
-    bio: 'Desarrollador veterano y voz crítica del grupo. Su proyecto insignia es «Catalejo», software de astronomía —simulación de Saturno y Júpiter, catálogos Hipparcos/ESA— escrito en «punk», un lenguaje de programación propio creado con asistencia de IA. Mantiene 9.350 pruebas automatizadas y un archivo cordura.md con reglas para la IA. Escéptico de la automatización total, defensor de la supervisión rigurosa. Quiere presentar su software en un planetario.',
-    desde: 1,
-    tags: ['Catalejo', 'punk', 'Testing', 'Escepticismo productivo'],
-  },
-  {
-    nombre: 'Juan David Torres',
-    rol: 'Investigación y experimentación',
-    campo: 'Ingeniería de datos',
-    bio: 'Aporta la mirada histórica: compara el salto tecnológico del siglo XX con el momento actual, donde se gestan cinco innovaciones simultáneas —blockchain pública, almacenamiento de energía, IA, robótica y secuenciamiento multiómico—. Investiga huellas de modelos, despliegue eficiente de agentes y optimización de consumo de RAM. Autor del libro en curso «Vibe Engineering».',
-    desde: 1,
-    tags: ['Agentes', 'OpenRouter', 'Vibe Engineering', 'Seguridad'],
-  },
-  {
-    nombre: 'Diego Fernando Robledo',
-    rol: 'Práctica aplicada',
-    campo: 'Ingeniería de datos · Globant',
-    bio: 'Usa agentes para leer repositorios de GitHub, convertir SQL a modelos DBT y automatizar documentación y PRs. Frustrado con herramientas corporativas como Cortex de Snowflake. Desarrolló su página personal con Superpowers y Cloudflare. Conecta el grupo con su rol de padre —hijo estudiando mecatrónica— y con la academia. Tiene pendiente el proyecto «Domus».',
-    desde: 1,
-    tags: ['DBT', 'Agentes', 'Obsidian', 'Domus'],
-  },
-  {
-    nombre: 'Daniel Moreno Agudelo',
-    rol: 'Referente en Skills',
-    campo: 'Finanzas y cooperación internacional · Sabio',
-    bio: 'El más avanzado del grupo en Skills: automatización de reportes financieros, exploración de bases NoSQL con MongoDB, conexión con ERP y CRM. Promotor de la revelación progresiva y del marco GSD. Construye un agente personal que resume su correo. Explora también el concepto Jarvis con Obsidian.',
-    desde: 1,
-    tags: ['Skills', 'MongoDB', 'Revelación progresiva', 'GSD'],
-  },
-  {
-    nombre: 'Juan Pablo Duque Ochoa',
-    rol: 'Referente técnico y estratégico',
-    campo: 'Consultoría',
-    bio: 'Enfatiza fundamentos —RAG, MCP—, encapsulamiento, modularidad, poda de contexto y el skill creator de Anthropic. Articuló la estrategia de servicios híbridos y la idea de «ser dueños del problema». Verbalizó la paradoja emocional que genera el ritmo de la IA.',
-    desde: 1,
-    tags: ['RAG', 'MCP', 'Estrategia', 'Skill creator'],
-  },
-  {
-    nombre: 'Cristina Aristizábal Johnson',
-    rol: 'Diseño, estrategia e investigación',
-    campo: 'Diseño · Ámbito jurídico',
-    bio: 'Creó un sitio web funcional para un baby shower sin saber programar — el caso que abrió la primera sesión. Busca profesionalizar el uso de IA en sus distintos roles. Aportó la mirada ética sobre alucinaciones en Derecho y Medicina.',
-    desde: 1,
-    tags: ['Ética', 'Diseño', 'No-code'],
-  },
-  {
-    nombre: 'Carlos Eduardo Monsalve',
-    rol: 'Gobernanza y liderazgo',
-    campo: 'Dirección de tecnología',
-    bio: 'Enfocado en liderazgo y gobernanza de IA más que en ejecución técnica. Aportó datos de industria —80% del código de Anthropic generado por IA—, el concepto de «infoxicación» de Alfons Cornella y el debate sobre agilismo y posibles retornos a fases de análisis tipo cascada. Trabaja en definir gobierno, estrategia y presupuesto de IA para su organización.',
-    desde: 1,
-    tags: ['Gobernanza', 'Estrategia', 'Infoxicación'],
-  },
-  {
-    nombre: 'Juan David Pineda Cárdenas',
-    rol: 'DevOps / Tech Lead',
-    campo: 'Linux y hardware',
-    bio: 'Perfil técnico Linux y hardware —configuración de firmware por Bluetooth—. Presentó MemPalas, herramienta de memoria institucional basada en palacios de memoria, ya implementada en su oficina. Valora el grupo como espacio de intercambio intelectual sin tareas obligatorias, y fue de los primeros en frenar cualquier intento de imponer deberes.',
-    desde: 1,
-    tags: ['MemPalas', 'Linux', 'Firmware'],
-  },
-  {
-    nombre: 'Pablo Álvarez',
-    rol: 'Estrategia de marca',
-    campo: 'Ingeniería mecánica · Agencia',
-    bio: 'Ingeniero mecánico en agencia de estrategia y conceptualización de marca. Usuario intensivo de Claude. Promotor del «segundo cerebro» con Obsidian para centralizar contextos de clientes y conectar ideas.',
-    desde: 2,
-    tags: ['Obsidian', 'Segundo cerebro', 'Marca'],
-  },
-  {
-    nombre: 'Nicolás Montoya',
-    rol: 'Producción creativa',
-    campo: 'Audiovisual',
-    bio: 'Metodología en tres capas: Claude para planeación y razonamiento, modelos menores para ejecución, humano en el ciclo. Trabaja con Eleven Labs para clonación de voz, Gemini, edición y Touch Designer para experiencias inmersivas reactivas al sonido. Hoy entrega repositorios de GitHub completos y organizados gracias a la IA.',
-    desde: 2,
-    tags: ['Eleven Labs', 'Touch Designer', 'Multimodal'],
-  },
-  {
-    nombre: 'Jorge González',
-    rol: 'Colaborador',
-    campo: 'Ingeniería electrónica · Globant',
-    bio: 'Su afición al aeromodelismo lo reconectó con la ingeniería electrónica. Los LLMs le facilitan programación y automatización en sus pasatiempos.',
-    desde: 2,
-    tags: ['Aeromodelismo', 'Electrónica'],
-  },
-  {
-    nombre: 'Andrés Pérez',
-    rol: 'Aplicación comercial',
-    campo: 'Logística',
-    bio: 'Usa LLMs para generación y calificación de leads según perfil de cliente ideal (ICP), y skills personalizadas como un asistente mecánico que consulta manuales y foros para diagnóstico vehicular. Planteó el debate sobre el futuro de los dashboards.',
-    desde: 3,
-    tags: ['ICP', 'Skills', 'Logística'],
-  },
-  {
-    nombre: 'Juan Francisco Cardona McCormick',
-    rol: 'Perspectiva crítica',
-    campo: 'Ingeniería',
-    bio: 'Se incorporó en la sesión 6. Introdujo la metodología Némesis como enfoque de interacción crítica y adversarial con los modelos. Interesado en el debate sobre inteligencia artificial general y sus argumentos prácticos.',
-    desde: 6,
-    tags: ['Némesis', 'AGI', 'Pensamiento crítico'],
-  },
-  {
-    nombre: 'Rafael David Rincón Bermúdez',
-    rol: 'Especificación y requisitos',
-    campo: 'Academia · Profesor universitario retirado',
-    bio: 'Experto en requisitos y especificación. Su llegada refuerza la línea del grupo sobre specs como fuente de verdad y criterios de aceptación binarios.',
-    desde: 7,
-    tags: ['Requisitos', 'Especificación', 'Academia'],
-  },
+/** Temas que salieron del backlog, con la razón. */
+export const TEMAS_FUERA: Array<{ tema: string; nota: string }> = [
+  { tema: 'Radiofrecuencia', nota: 'Salió del backlog: ahora tiene su propio grupo los viernes.' },
+]
+
+// Los perfiles generados a partir de transcripciones se retiraron.
+// Cada integrante aparece solo con consentimiento: true y el texto que
+// él o ella misma apruebe. Los `texto` de abajo son borradores por aprobar.
+export const PERSONAS: Persona[] = [
+  { nombre: 'Sergio Monsalve', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Jorge Johnson', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Juan David Torres', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Diego Fernando Robledo', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Daniel Moreno Agudelo', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Juan Pablo Duque Ochoa', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Cristina Aristizábal Johnson', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Carlos Eduardo Monsalve', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Juan David Pineda Cárdenas', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Martín Gonzalo Aguilar', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Pablo Álvarez', desde: '2026-06-09', texto: '', consentimiento: false },
+  { nombre: 'Nicolás Montoya', desde: '2026-06-09', texto: '', consentimiento: false },
+  { nombre: 'Jorge González', desde: '2026-06-09', texto: '', consentimiento: false },
+  { nombre: 'Andrés Pérez', desde: '2026-06-10', texto: '', consentimiento: false },
+  { nombre: 'Juan Francisco Cardona McCormick', desde: '2026-07-08', texto: '', consentimiento: false },
+  { nombre: 'Rafael David Rincón Bermúdez', desde: '2026-07-15', texto: '', consentimiento: false },
   {
     nombre: 'Alejandra Santamaría',
-    rol: 'Ingeniería aplicada',
-    campo: 'Ingeniería biológica',
-    bio: 'Ingeniera biológica. Colabora con Sergio en un curso de robótica con ESP32, ampliando el alcance del grupo hacia hardware y educación técnica.',
-    desde: 7,
-    tags: ['ESP32', 'Robótica', 'Biología'],
+    desde: '2026-07-15',
+    texto:
+      'Ingeniera biológica, docente, construye una plataforma de matemáticas por competencias.',
+    consentimiento: false,
+  },
+  { nombre: 'José Luis Montoya Pareja', desde: '2026-07-15', texto: '', consentimiento: false },
+  {
+    nombre: 'Santiago Osorio',
+    desde: '2026-08-26',
+    texto:
+      'Ingeniero de sistemas de EAFIT. Infraestructura, nube y soporte en su propia empresa, junto con Juan Pablo Duque.',
+    consentimiento: false,
   },
   {
-    nombre: 'José Luis Montoya Pareja',
-    rol: 'Educación y comunidad',
-    campo: 'Ingeniería de sistemas · Docencia',
-    bio: 'Reconocido profesor de ingeniería de sistemas y creador de comunidad. Trabaja en automatización de talleres de electrónica con sensores, proyecto desarrollado en España.',
-    desde: 7,
-    tags: ['Docencia', 'Sensores', 'Comunidad'],
+    nombre: 'Carlos Mario Espíndola Roa',
+    desde: '2026-10-14',
+    texto:
+      'Ingeniero ambiental y administrador de empresas. Prepara un proyecto de educación digital y un taller para padres sobre tecnología e IA. Hace doblaje de voz.',
+    consentimiento: false,
   },
   {
-    nombre: 'Martín Gonzalo Aguilar',
-    rol: 'Participación puntual',
-    campo: 'Aviación',
-    bio: 'Trayectoria en aviación. Participación puntual en las sesiones iniciales.',
-    desde: 1,
-    tags: ['Aviación'],
+    nombre: 'Javier C. Álvarez',
+    desde: '2026-10-14',
+    texto:
+      'Biólogo, profesor e investigador en bioinformática en EAFIT desde hace 13 años. Trabaja con modelos de lenguaje para proteínas.',
+    consentimiento: false,
+  },
+  { nombre: 'Sebastián Calle', desde: '2026-10-14', texto: '', consentimiento: false },
+]
+
+// Vista "Taller": cada ficha se publica solo con permiso de su autor. Sin enlaces de descarga.
+export const TALLER: ProyectoTaller[] = [
+  {
+    autor: 'Jorge Johnson',
+    proyecto: 'punk y Metal Toy',
+    descripcion: 'Lenguajes de programación propios hechos con IA; punk genera C y compila con GCC/Clang.',
+    publicar: false,
+  },
+  {
+    autor: 'Jorge Johnson',
+    proyecto: 'Air Glob',
+    descripcion:
+      'Globo terráqueo con capas: satélites, aviones, cables submarinos, sismos, placas tectónicas, gases, naufragios.',
+    publicar: false,
+  },
+  {
+    autor: 'Jorge Johnson',
+    proyecto: 'Catalejo',
+    descripcion: 'Software de astronomía y navegación espacial con cálculo de n cuerpos.',
+    publicar: false,
+  },
+  {
+    autor: 'Jorge Johnson',
+    proyecto: 'Chispa',
+    descripcion:
+      'Simulador de electrónica en protoboard; incluye una CPU de 16 bits que corre programas en un ensamblador propio.',
+    publicar: false,
+  },
+  {
+    autor: 'Jorge Johnson',
+    proyecto: 'Bellaco, Caldo, Topo 3D, Glotis, Ronquera, Sopencos, Brasa',
+    descripcion:
+      'Ajedrez evolutivo; simulación de vida planetaria; vuelo 3D sobre el terreno; modulador de voz; consola de podcast; juego de palabras multijugador por Bluetooth; grabador de ESP32.',
+    publicar: false,
+  },
+  {
+    autor: 'Diego Robledo',
+    proyecto: 'Simulador de cohetes y «Cielo contado»',
+    descripcion:
+      'Lanzamiento simulado de varios cohetes con atmósfera; podcast de astronomía narrado con voz sintética (Eleven Labs).',
+    publicar: false,
+  },
+  {
+    autor: 'Sergio Monsalve',
+    proyecto: 'Cápsulas de cultivo, New Old School, Curioso',
+    descripcion:
+      'Cápsulas de hongos automatizadas con app móvil; colegio virtual open source; espacio de intervenciones cortas con Jorge.',
+    publicar: false,
+  },
+  {
+    autor: 'Juan Pablo Duque',
+    proyecto: 'App de guitarra y carátula Garmin',
+    descripcion: 'Diapasón interactivo con escalas, modos y acordes (React Native/Expo); carátula de reloj en Monkey C.',
+    publicar: false,
+  },
+  {
+    autor: 'Alejandra Santamaría',
+    proyecto: 'Matemáticas para la vida',
+    descripcion: 'App gamificada con diagnóstico por competencias para grados 10 y 11.',
+    publicar: false,
+  },
+  {
+    autor: 'Juan David Torres',
+    proyecto: 'Experimentos de enrutamiento',
+    descripcion: 'OpenRouter, OmniRouter local y LLM Router para bajar costos de modelos.',
+    publicar: false,
   },
 ]
 
+// ---------- Helpers ----------
+
+export function esSinRegistro(entrada: EntradaSesion): entrada is SinRegistro {
+  return 'estado' in entrada && entrada.estado === 'sin-registro'
+}
+
+/** Solo las sesiones documentadas (con número y página propia). */
+export function getSesionesDocumentadas(): Sesion[] {
+  return SESIONES.filter((entrada): entrada is Sesion => !esSinRegistro(entrada))
+}
+
+/** Todas las entradas de la bitácora, la más reciente primero. */
+export function getBitacora(): EntradaSesion[] {
+  return [...SESIONES].sort((a, b) => b.fecha.localeCompare(a.fecha))
+}
+
 export function getSesion(n: number): Sesion | undefined {
-  return SESIONES.find(sesion => sesion.n === n)
+  return getSesionesDocumentadas().find(sesion => sesion.n === n)
 }
 
 export function getAdjacentSesiones(n: number): { anterior?: Sesion; siguiente?: Sesion } {
-  return {
-    anterior: SESIONES.find(sesion => sesion.n === n - 1),
-    siguiente: SESIONES.find(sesion => sesion.n === n + 1),
-  }
+  return { anterior: getSesion(n - 1), siguiente: getSesion(n + 1) }
 }
 
 export function getUltimasSesiones(count: number): Sesion[] {
-  return [...SESIONES].sort((a, b) => b.n - a.n).slice(0, count)
+  return getSesionesDocumentadas()
+    .sort((a, b) => b.n - a.n)
+    .slice(0, count)
 }
 
-export function getPendientesAbiertos(): Array<Pendiente & { sesionN: number; sesionTitulo: string }> {
-  return SESIONES.flatMap(sesion =>
-    sesion.pendientes
-      .filter(p => p.estado === 'abierto')
-      .map(p => ({ ...p, sesionN: sesion.n, sesionTitulo: sesion.titulo }))
-  )
+export function getPersonasVisibles(): Persona[] {
+  return PERSONAS.filter(persona => persona.consentimiento && persona.texto.trim() !== '')
+}
+
+export function getProyectosPublicados(): ProyectoTaller[] {
+  return TALLER.filter(proyecto => proyecto.publicar)
+}
+
+/** Temas ordenados por fecha en que surgieron (más reciente primero; sin fecha al final). */
+export function getTemasOrdenados(): Tema[] {
+  return [...TEMAS].sort((a, b) => (b.surgio ?? '').localeCompare(a.surgio ?? ''))
 }
 
 export function getMetricas() {
   return {
-    totalSesiones: SESIONES.length,
-    totalIntegrantes: PARTICIPANTES.length,
-    pendientesAbiertos: getPendientesAbiertos().length,
-    temasBacklog: BACKLOG.length,
+    totalSesiones: getSesionesDocumentadas().length,
+    totalIntegrantes: PERSONAS.length,
+    temasPropuestos: TEMAS.length,
   }
 }

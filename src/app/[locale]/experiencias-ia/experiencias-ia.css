@@ -19,6 +19,7 @@
   font-size: 17px;
   line-height: 1.62;
   min-height: 100vh;
+  overflow-wrap: anywhere;
   background-image: linear-gradient(var(--linea) 1px, transparent 1px),
     linear-gradient(90deg, var(--linea) 1px, transparent 1px);
   background-size: 100% 34px, 34px 100%;
@@ -418,110 +419,96 @@
   color: var(--cuero);
 }
 
-/* Pendientes */
-.experiencias-ia .pendiente {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px dotted var(--linea-fuerte);
-  font-size: 14px;
+/* Principio y formato (Inicio) */
+.experiencias-ia .principio-madre {
+  border: 1.5px solid var(--cuero);
+  border-left-width: 6px;
+  background: var(--papel-2);
+  padding: 18px 20px;
+  margin: 28px 0 8px;
 }
 
-.experiencias-ia .pendiente.cerrado {
-  opacity: 0.55;
-  text-decoration: line-through;
+.experiencias-ia .principio-madre p {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(19px, 2.6vw, 24px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin: 0;
 }
 
-.experiencias-ia .pendiente-estado {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  border: 1px solid currentColor;
-  white-space: nowrap;
-  text-decoration: none;
+.experiencias-ia .formato {
+  margin-top: 14px;
 }
 
-.experiencias-ia .pendiente-estado.abierto {
-  color: var(--cuero);
+.experiencias-ia .formato p {
+  margin: 0 0 4px;
 }
 
-.experiencias-ia .pendiente-estado.cerrado {
-  color: var(--verde);
+/* Sesiones sin registro */
+.experiencias-ia .ses-row.sin-registro {
+  background: rgba(20, 27, 31, 0.06);
+  color: var(--tinta-2);
 }
 
-/* Backlog */
-.experiencias-ia .filtro-prioridad {
-  display: flex;
-  gap: 8px;
-  margin: 20px 0;
-  flex-wrap: wrap;
+.experiencias-ia .ses-row.sin-registro:hover {
+  background: rgba(20, 27, 31, 0.06);
 }
 
-.experiencias-ia .filtro-btn {
+.experiencias-ia .ses-row.sin-registro .ses-t {
+  font-weight: 500;
+}
+
+/* Detalle de sesión: hallazgos y detalle largo */
+.experiencias-ia .gancho {
+  font-size: clamp(18px, 2.4vw, 21px);
+  line-height: 1.45;
+}
+
+.experiencias-ia .hallazgos li {
+  margin-bottom: 8px;
+}
+
+.experiencias-ia .det-largo {
+  margin-top: 28px;
+  border-top: 1px solid var(--linea-fuerte);
+  padding-top: 14px;
+}
+
+.experiencias-ia .det-largo summary {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 7px 14px;
-  border: 1.5px solid var(--tinta);
-  background: var(--papel);
-  color: var(--tinta);
+  color: var(--cuero);
   cursor: pointer;
 }
 
-.experiencias-ia .filtro-btn.on {
-  background: var(--tinta);
-  color: var(--papel);
+.experiencias-ia .det-largo[open] summary {
+  margin-bottom: 16px;
 }
 
-.experiencias-ia .prioridad {
+/* Etiquetas en mono (propone, pendiente, aviso) */
+.experiencias-ia .meta {
   font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  display: inline-block;
-  margin-bottom: 8px;
-}
-
-.experiencias-ia .prioridad.alta {
-  background: var(--cuero);
-  color: var(--papel);
-}
-
-.experiencias-ia .prioridad.media {
-  background: var(--laton);
-  color: var(--tinta);
-}
-
-.experiencias-ia .prioridad.baja {
-  background: var(--papel-2);
+  font-size: 11px;
+  letter-spacing: 0.06em;
   color: var(--tinta-2);
-  border: 1px solid var(--linea-fuerte);
 }
 
-/* Cronograma */
-.experiencias-ia .estado-badge {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+.experiencias-ia .meta b {
+  color: var(--cuero);
+  font-weight: 600;
   text-transform: uppercase;
-  padding: 2px 8px;
-  display: inline-block;
-  margin-bottom: 8px;
+  letter-spacing: 0.12em;
 }
 
-.experiencias-ia .estado-badge.confirmada {
-  background: var(--verde);
-  color: var(--papel);
-}
-
-.experiencias-ia .estado-badge.propuesta {
-  background: var(--laton);
-  color: var(--tinta);
+.experiencias-ia .aviso {
+  font-size: 14px;
+  color: var(--tinta-2);
+  border-top: 1px dotted var(--linea-fuerte);
+  margin-top: 32px;
+  padding-top: 14px;
 }
 
 /* Métricas */

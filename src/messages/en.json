@@ -68,8 +68,8 @@
     "cursos": "Courses",
     "biblioteca": "Library",
     "aprender": "Learning to learn",
+    "aprenderHref": "/learning-to-learn.html",
     "guestbook": "Guestbook",
-    "experienciasIa": "Experiencias IA",
     "contact": "Contact"
   },
   "hero": {

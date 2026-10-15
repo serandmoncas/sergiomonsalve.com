@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Link } from '@/i18n/navigation'
 import { GRUPO, getMetricas, getUltimasSesiones } from '@/lib/experiencias-ia/data'
 import CapasHarness from '@/components/experiencias-ia/CapasHarness'
 import MetricaTile from '@/components/experiencias-ia/MetricaTile'
@@ -23,9 +24,22 @@ export default function ExperienciasIAHomePage() {
       <p className="lema">&ldquo;{GRUPO.lema}&rdquo;</p>
       <p>{GRUPO.descripcion}</p>
 
+      <div className="principio-madre">
+        <p>{GRUPO.principioMadre}</p>
+      </div>
+
+      <div className="formato">
+        <p className="meta">
+          <b>Cómo son las sesiones</b> · próxima: {GRUPO.proximaSesion}
+        </p>
+        {GRUPO.formato.map(linea => (
+          <p key={linea}>{linea}</p>
+        ))}
+      </div>
+
       <CapasHarness />
 
-      <div className="grid g4" style={{ marginTop: 40 }}>
+      <div className="grid g3" style={{ marginTop: 40 }}>
         <div className="card">
           <MetricaTile valor={metricas.totalSesiones} label="Sesiones" />
         </div>
@@ -33,10 +47,9 @@ export default function ExperienciasIAHomePage() {
           <MetricaTile valor={metricas.totalIntegrantes} label="Integrantes" />
         </div>
         <div className="card">
-          <MetricaTile valor={metricas.pendientesAbiertos} label="Pendientes abiertos" />
-        </div>
-        <div className="card">
-          <MetricaTile valor={metricas.temasBacklog} label="Temas en backlog" />
+          <Link href="/experiencias-ia/temas" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <MetricaTile valor={metricas.temasPropuestos} label="Temas propuestos" />
+          </Link>
         </div>
       </div>
 

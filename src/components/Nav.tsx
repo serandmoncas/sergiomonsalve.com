@@ -34,14 +34,11 @@ export default async function Nav() {
           {t('biblioteca')}
         </Link>
         {/* Página estática en public/: va con <a> porque no pasa por las rutas con idioma */}
-        <a href="/aprender-a-aprender.html" className="text-xs text-text-secondary hover:text-text transition-colors">
+        <a href={t('aprenderHref')} className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('aprender')}
         </a>
         <Link href="/guestbook" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('guestbook')}
-        </Link>
-        <Link href="/experiencias-ia" className="text-xs text-text-secondary hover:text-text transition-colors">
-          {t('experienciasIa')}
         </Link>
         <Link href="/contact" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('contact')}
