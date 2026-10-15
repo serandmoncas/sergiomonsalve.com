@@ -3,12 +3,26 @@ import type { ContactFormData } from './contact-schema'
 import { planEmailCopy } from './mapa/email-copy'
 
 const FROM = 'Sergio Monsalve <noreply@sergiomonsalve.com>'
+const EMAIL = /^[^\s@"]+@[^\s@"]+\.[^\s@"]+$/
+
+// Correo del dueño del sitio (CONTACT_EMAIL). null si falta o tiene un valor inválido.
+function ownerEmail(): string | null {
+  const value = process.env.CONTACT_EMAIL?.trim() ?? ''
+  return EMAIL.test(value) ? value : null
+}
+
+function requireOwnerEmail(): string {
+  const email = ownerEmail()
+  if (!email) throw new Error('CONTACT_EMAIL is missing or invalid')
+  return email
+}
 
 export async function sendContactNotification(data: ContactFormData) {
+  const to = requireOwnerEmail()
   const resend = new Resend(process.env.RESEND_API_KEY!)
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: FROM,
-    to: process.env.CONTACT_EMAIL!,
+    to,
     subject: `Nuevo mensaje de ${data.name} (${data.projectType})`,
     text: [
       `De: ${data.name} <${data.email}>`,
@@ -17,6 +31,7 @@ export async function sendContactNotification(data: ContactFormData) {
       data.message
     ].join('\n')
   })
+  if (error) throw new Error(error.message)
 }
 
 export type CommentNotificationData = {
@@ -27,10 +42,11 @@ export type CommentNotificationData = {
 }
 
 export async function sendCommentNotification(data: CommentNotificationData) {
+  const to = requireOwnerEmail()
   const resend = new Resend(process.env.RESEND_API_KEY!)
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: FROM,
-    to: process.env.CONTACT_EMAIL!,
+    to,
     subject: `Nuevo comentario en /blog/${data.post_slug}`,
     text: [
       `De: ${data.author_name} <${data.author_email}>`,
@@ -42,6 +58,7 @@ export async function sendCommentNotification(data: CommentNotificationData) {
       'Moderar: https://sergiomonsalve.com/es/admin/comments'
     ].join('\n')
   })
+  if (error) throw new Error(error.message)
 }
 
 export type PlanEmailData = {
@@ -58,11 +75,12 @@ function escapeHtml(value: string) {
 
 export async function sendPlanEmail(d: PlanEmailData) {
   const c = planEmailCopy[d.locale]
+  const replyTo = ownerEmail()
   const resend = new Resend(process.env.RESEND_API_KEY!)
   const { error } = await resend.emails.send({
     from: FROM,
     to: d.to,
-    replyTo: process.env.CONTACT_EMAIL,
+    ...(replyTo ? { replyTo } : {}),
     subject: c.subject,
     text: [c.greeting(d.name), '', c.intro, '', d.plan, '', c.outro, '', c.signature, '', `${c.unsubscribe}: ${d.unsubscribeUrl}`].join('\n'),
     html: [
