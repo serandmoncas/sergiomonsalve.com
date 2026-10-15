@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 
-// Tema «Aprendizaje» del visor histórico (proyecto ClaudeDataViz): cronología generada con Claude
+// Tema «Aprendizaje» del visor histórico: cronología generada con Claude
 // a partir de Wikipedia y revisada a mano. El visor vive en su propio despliegue y se embebe aquí.
 export const URL_VISOR = 'https://visor-historico.vercel.app/tema/generado/aprendizaje'
 

@@ -17,7 +17,7 @@ const plan = { to: 'ana@example.com', name: 'Ana', locale: 'es' as const, plan: 
 describe('owner notifications', () => {
   beforeEach(() => {
     send.mockReset().mockResolvedValue({ data: { id: '1' }, error: null })
-    vi.stubEnv('CONTACT_EMAIL', 'sergio@lajobiteka.com')
+    vi.stubEnv('CONTACT_EMAIL', 'contacto@example.com')
   })
   afterEach(() => vi.unstubAllEnvs())
 
@@ -26,7 +26,7 @@ describe('owner notifications', () => {
     ['comment', () => sendCommentNotification(comment)]
   ])('%s: sends to CONTACT_EMAIL', async (_label, run) => {
     await run()
-    expect(send.mock.calls[0][0].to).toBe('sergio@lajobiteka.com')
+    expect(send.mock.calls[0][0].to).toBe('contacto@example.com')
   })
 
   it.each([
@@ -52,9 +52,9 @@ describe('plan email reply-to', () => {
   afterEach(() => vi.unstubAllEnvs())
 
   it('sets replyTo when CONTACT_EMAIL is valid', async () => {
-    vi.stubEnv('CONTACT_EMAIL', 'sergio@lajobiteka.com')
+    vi.stubEnv('CONTACT_EMAIL', 'contacto@example.com')
     await sendPlanEmail(plan)
-    expect(send.mock.calls[0][0].replyTo).toBe('sergio@lajobiteka.com')
+    expect(send.mock.calls[0][0].replyTo).toBe('contacto@example.com')
   })
 
   it('omits replyTo instead of failing when CONTACT_EMAIL is invalid', async () => {
