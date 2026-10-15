@@ -9,7 +9,7 @@ export default async function Footer() {
         <span className="font-mono text-xs text-text-muted">
           © {new Date().getFullYear()} Sergio Monsalve
         </span>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <Link href="/privacidad" className="font-mono text-xs text-text-muted hover:text-accent transition-colors">
             {t('privacy')}
           </Link>

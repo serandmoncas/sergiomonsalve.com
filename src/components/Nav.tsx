@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { createClient } from '@/lib/supabase/server'
 import LocaleSwitcher from './LocaleSwitcher'
+import MenuMovil, { type GrupoMenu } from './MenuMovil'
 import UserMenu from './UserMenu'
 
 export default async function Nav() {
@@ -9,12 +10,34 @@ export default async function Nav() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
+  // Las mismas opciones, agrupadas, para el menú del celular y la tablet.
+  const grupos: GrupoMenu[] = [
+    { items: [
+      { href: '/blog', label: t('blog') },
+      { href: '/portfolio', label: t('portfolio') },
+      { href: '/recipes', label: t('recipes') },
+    ] },
+    { titulo: t('grupoAprender'), items: [
+      { href: '/formacion', label: t('formacion') },
+      { href: '/cursos', label: t('cursos') },
+      { href: '/biblioteca', label: t('biblioteca') },
+      { href: t('aprenderHref'), label: t('aprender'), estatico: true },
+      { href: '/aprendizaje-en-el-tiempo', label: t('lineaAprendizaje') },
+      { href: t('dineroHref'), label: t('dinero'), estatico: true },
+    ] },
+    { items: [
+      { href: '/guestbook', label: t('guestbook') },
+      { href: '/contact', label: t('contact') },
+    ] },
+  ]
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 border-b border-border bg-background/90 backdrop-blur-sm">
       <Link href="/" className="font-mono text-sm font-bold text-accent">
         SM
       </Link>
-      <div className="flex items-center gap-6">
+      {/* Computador (≥ lg): el menú completo en una fila. Mide ~880 px, por eso no se muestra antes de lg. */}
+      <div className="hidden lg:flex items-center gap-6">
         <Link href="/blog" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('blog')}
         </Link>
@@ -51,6 +74,12 @@ export default async function Nav() {
         </Link>
         <LocaleSwitcher />
         <UserMenu isLoggedIn={!!user} />
+      </div>
+      {/* Celular y tablet: idioma, sesión y el botón ☰ */}
+      <div className="flex lg:hidden items-center gap-4">
+        <LocaleSwitcher />
+        <UserMenu isLoggedIn={!!user} />
+        <MenuMovil grupos={grupos} textos={{ abrir: t('menuAbrir'), cerrar: t('menuCerrar') }} />
       </div>
     </nav>
   )
