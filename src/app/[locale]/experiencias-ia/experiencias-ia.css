@@ -511,6 +511,47 @@
   padding-top: 14px;
 }
 
+/* Buscador del glosario */
+.experiencias-ia .buscador {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 14px;
+  font-family: var(--mono);
+  font-size: 16px;
+  color: var(--tinta);
+  background: var(--papel-2);
+  border: 1.5px solid var(--tinta);
+  border-radius: 0;
+}
+
+.experiencias-ia .buscador:focus {
+  outline: 2px solid var(--cuero);
+  outline-offset: 2px;
+}
+
+.experiencias-ia .filtro-modo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.experiencias-ia .filtro-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 7px 12px;
+  border: 1.5px solid var(--tinta);
+  background: var(--papel);
+  color: var(--tinta);
+  cursor: pointer;
+}
+
+.experiencias-ia .filtro-btn.on {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
 /* Métricas */
 .experiencias-ia .metrica {
   text-align: left;
