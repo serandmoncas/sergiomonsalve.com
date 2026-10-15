@@ -318,6 +318,17 @@
       "tutorTopicsFallback": "lo que estoy aprendiendo"
     }
   },
+  "newsletter": {
+    "comment": "// newsletter",
+    "confirmTitle": "¿Quieres dejar de recibir mis correos?",
+    "confirmText": "Al confirmar no te volveré a escribir. Puedes volver a suscribirte cuando quieras desde la plantilla MAPA.",
+    "confirmButton": "Sí, darme de baja",
+    "doneTitle": "Listo, te diste de baja.",
+    "doneText": "No recibirás más correos de la newsletter. Gracias por haber estado.",
+    "invalidTitle": "Este enlace no es válido.",
+    "invalidText": "Puede que esté incompleto o que ya haya expirado. Escríbeme y lo resuelvo a mano.",
+    "contact": "Ir a contacto →"
+  },
   "cursos": {
     "comment": "// cursos",
     "title": "Cursos",
