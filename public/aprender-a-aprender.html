@@ -1,0 +1,1688 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Libros para aprender a aprender</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: catálogo de biblioteca convertido en sala de lectura. Arriba, cinco minutos para entender la idea; luego qué funciona,
+   el veredicto de cada libro, el mapa de cómo dialogan, y al final las fichas catalográficas (línea roja de las tarjetas). */
+:root {
+  --papel: #f2f4f0; --tarjeta: #fbfcf9; --tinta: #1d2430; --tenue: #5b6470;
+  --sello: #2b4f8c; --linea-roja: #b4473f; --regla: #d6dbd3;
+  --v-solido: #2f7a4c; --v-matices: #9a6400; --v-promete: #b4473f; --v-filosofia: #6a5a9e;
+  --u-alta: #2f7a4c; --u-moderada: #9a6400; --u-baja: #b4473f;
+  --b1: #b4473f; --b2: #2b4f8c; --b3: #2f7a4c; --b4: #6a5a9e; --b5: #9a6400;
+  --f-titulo: "Alegreya", Georgia, "Times New Roman", serif;
+  --f-texto: "Alegreya", Georgia, "Times New Roman", serif;
+  --f-ficha: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --papel: #151a21; --tarjeta: #1c222b; --tinta: #e3e7ec; --tenue: #9aa3ae;
+    --sello: #8fb0ea; --linea-roja: #e0786f; --regla: #2e3641;
+    --v-solido: #6cc493; --v-matices: #e3ad4f; --v-promete: #e0786f; --v-filosofia: #ab9be6;
+    --u-alta: #6cc493; --u-moderada: #e3ad4f; --u-baja: #e0786f;
+    --b1: #e0786f; --b2: #8fb0ea; --b3: #6cc493; --b4: #ab9be6; --b5: #e3ad4f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --papel: #151a21; --tarjeta: #1c222b; --tinta: #e3e7ec; --tenue: #9aa3ae;
+  --sello: #8fb0ea; --linea-roja: #e0786f; --regla: #2e3641;
+  --v-solido: #6cc493; --v-matices: #e3ad4f; --v-promete: #e0786f; --v-filosofia: #ab9be6;
+  --u-alta: #6cc493; --u-moderada: #e3ad4f; --u-baja: #e0786f;
+  --b1: #e0786f; --b2: #8fb0ea; --b3: #6cc493; --b4: #ab9be6; --b5: #e3ad4f;
+}
+* { box-sizing: border-box; }
+body { background: var(--papel); color: var(--tinta); font: 1.125rem/1.55 var(--f-texto); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--sello); text-underline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--sello); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--f-titulo); font-weight: 800; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.rotulo { font-family: var(--f-ficha); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tenue); margin: 0; }
+.dato { font-family: var(--f-ficha); font-variant-numeric: tabular-nums; }
+.tenue { color: var(--tenue); }
+.boton { font: 500 .8rem var(--f-ficha); color: var(--tinta); background: var(--tarjeta); border: 1px solid var(--regla); border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.boton.lleno { background: var(--sello); color: var(--tarjeta); border-color: transparent; }
+.boton[aria-pressed="true"] { border-color: var(--sello); color: var(--sello); }
+
+.marco { max-width: 1180px; margin: 0 auto; display: grid; gap: 72px; padding-block: 40px 96px; }
+.barra { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding-block: 10px; background: color-mix(in srgb, var(--papel) 90%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--regla); }
+.barra nav { display: flex; flex-wrap: wrap; gap: 4px 14px; font: .8rem var(--f-ficha); }
+.barra nav a { color: var(--tinta); text-decoration: none; }
+.barra nav a:hover { color: var(--sello); text-decoration: underline; }
+
+.portada { display: grid; gap: 14px; }
+.portada h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.02; }
+.portada > p { max-width: 64ch; color: var(--tenue); font-size: 1.2rem; }
+.leyenda-v { display: flex; flex-wrap: wrap; gap: 8px 16px; font: .8rem var(--f-ficha); color: var(--tenue); }
+.rutas { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 10px; }
+.ruta { background: var(--tarjeta); border: 1px solid var(--regla); border-top: 3px solid var(--sello); padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+.ruta h3 { font-size: 1.3rem; }
+.ruta p { color: var(--tenue); font-size: 1rem; }
+.ruta ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+
+.seccion { display: grid; gap: 22px; scroll-margin-top: 64px; }
+.seccion > header { display: grid; gap: 6px; }
+.seccion h2 { font-size: clamp(1.7rem, 3.6vw, 2.3rem); line-height: 1.1; }
+.seccion > header > p:not(.rotulo) { max-width: 66ch; color: var(--tenue); }
+
+/* Chips de veredicto */
+.chip { font: 600 .66rem var(--f-ficha); letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; color: var(--tarjeta); white-space: nowrap; }
+.v-solido { background: var(--v-solido); } .v-matices { background: var(--v-matices); } .v-promete { background: var(--v-promete); } .v-filosofia { background: var(--v-filosofia); }
+
+/* Curioso */
+.regla { display: flex; height: 38px; overflow: hidden; border-radius: 3px; }
+.regla button { all: unset; cursor: pointer; display: flex; align-items: center; justify-content: center; font: 600 .7rem var(--f-ficha); color: #fff; position: relative; padding: 0 4px; text-align: center; }
+.regla button[aria-current="true"]::after { content: ""; position: absolute; inset: auto 0 0 0; height: 5px; background: var(--tinta); }
+.regla button:focus-visible { outline: 3px solid var(--tinta); outline-offset: -3px; }
+.curioso { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 28px; background: var(--tarjeta); border: 1px solid var(--regla); padding: 24px; }
+@media (max-width: 760px) { .curioso { grid-template-columns: 1fr; } }
+.guion { display: grid; gap: 12px; font-size: 1.2rem; max-width: 62ch; min-height: 11em; }
+.reloj { display: grid; gap: 8px; align-content: start; justify-items: start; }
+.reloj .tiempo { font: 600 2.3rem var(--f-ficha); font-variant-numeric: tabular-nums; }
+.tiempo.ambar { color: var(--v-matices); } .tiempo.rojo { color: var(--v-promete); }
+
+/* Explicador (escena → render(t)) */
+.motion { display: grid; gap: 12px; }
+.motion canvas { width: 100%; height: auto; background: var(--tarjeta); border: 1px solid var(--regla); }
+.controles { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.controles input[type=range] { flex: 1; min-width: 160px; accent-color: var(--sello); }
+
+/* Tablero de veredictos */
+.filtros { display: flex; flex-wrap: wrap; gap: 6px; }
+.tablero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 900px) { .tablero { grid-template-columns: 1fr; } }
+.libros { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; align-content: start; }
+.libro { all: unset; box-sizing: border-box; cursor: pointer; background: var(--tarjeta); border: 1px solid var(--regla); border-top: 3px solid var(--linea-roja); padding: 12px 14px; display: grid; gap: 6px; align-content: start; }
+.libro[aria-pressed="true"] { outline: 2px solid var(--sello); }
+.libro:focus-visible { outline: 2px solid var(--sello); }
+.libro b { font: 800 1.08rem/1.15 var(--f-titulo); }
+.libro .chip { justify-self: start; }
+.libro[hidden] { display: none; }
+.panel { background: var(--tarjeta); border: 1px solid var(--regla); padding: 20px; display: grid; gap: 12px; align-content: start; }
+.panel h3 { font-size: 1.4rem; }
+.panel .fuente { border-top: 1px dotted var(--regla); padding-top: 10px; font-size: 1rem; display: grid; gap: 2px; }
+.panel .fuente a { font: .78rem var(--f-ficha); word-break: break-all; }
+
+/* Mapa */
+.mapa { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 900px) { .mapa { grid-template-columns: 1fr; } }
+.mapa canvas { width: 100%; height: auto; background: var(--tarjeta); border: 1px solid var(--regla); cursor: pointer; touch-action: manipulation; }
+.mapa .lista-cruces { display: grid; gap: 10px; align-content: start; font-size: 1rem; }
+.mapa .lista-cruces li { margin-bottom: 6px; }
+
+/* Fichas */
+.grupo { display: grid; gap: 28px; }
+.grupo-cab h2 { font-size: 1.75rem; }
+.grupo-cab p { margin: 4px 0 0; color: var(--tenue); }
+.ficha { display: grid; gap: 14px; scroll-margin-top: 70px; }
+.tarjeta { background: var(--tarjeta); border: 1px solid var(--regla); border-top: 3px solid var(--linea-roja); padding: 20px 24px 22px; display: grid; gap: 10px; max-width: 760px; }
+.sello { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cota { font: .75rem var(--f-ficha); color: var(--tenue); margin-right: auto; }
+.tarjeta h3 { font-size: 1.9rem; line-height: 1.1; }
+.original { margin: -4px 0 4px; font-style: italic; color: var(--tenue); font-size: 1rem; }
+dl { margin: 0; display: grid; gap: 4px; font: .82rem var(--f-ficha); }
+dl > div { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; border-bottom: 1px dotted var(--regla); padding-bottom: 4px; }
+dt { color: var(--tenue); } dd { margin: 0; }
+.tema { display: inline-block; margin: 0 6px 2px 0; padding: 0 6px; background: var(--papel); border: 1px solid var(--regla); }
+.cruces { display: grid; gap: 6px; padding-top: 6px; }
+.cruces ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 1rem; }
+.cuerpo { max-width: 68ch; }
+.cuerpo summary { cursor: pointer; font: 500 .8rem var(--f-ficha); color: var(--sello); }
+.cuerpo h2 { font: 500 .78rem var(--f-ficha); letter-spacing: .08em; text-transform: uppercase; color: var(--sello); margin: 26px 0 8px; }
+.cuerpo p, .cuerpo ul, .cuerpo ol { margin: 0 0 12px; }
+.tabla { overflow-x: auto; margin: 4px 0 16px; max-width: 100%; }
+.cuerpo table { border-collapse: collapse; font-size: .98rem; line-height: 1.4; min-width: 520px; }
+.cuerpo th { text-align: left; font: 500 .72rem var(--f-ficha); letter-spacing: .06em; text-transform: uppercase; color: var(--tenue); border-bottom: 2px solid var(--tinta); padding: 6px 12px 6px 0; }
+.cuerpo td { vertical-align: top; border-bottom: 1px solid var(--regla); padding: 8px 12px 8px 0; }
+
+
+/* Ponte a prueba */
+.marcador { font: 600 1rem var(--f-ficha); }
+.preguntas { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.pregunta { background: var(--tarjeta); border: 1px solid var(--regla); border-left: 4px solid var(--regla); padding: 14px 16px; display: grid; gap: 10px; align-content: start; }
+.pregunta.acierto { border-left-color: var(--v-solido); }
+.pregunta.error { border-left-color: var(--v-promete); }
+.pregunta q { font-size: 1.12rem; quotes: "«" "»"; }
+.pregunta .opciones { display: flex; gap: 8px; }
+.pregunta .respuesta { font-size: 1rem; display: grid; gap: 4px; }
+.pregunta .respuesta a { font: .76rem var(--f-ficha); word-break: break-all; }
+
+.estado-repaso { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+.cajas { display: flex; gap: 6px; align-items: flex-end; }
+.cajas div { display: grid; justify-items: center; gap: 2px; font: .66rem var(--f-ficha); color: var(--tenue); }
+.cajas i { display: block; width: 28px; background: var(--sello); border-radius: 2px 2px 0 0; min-height: 2px; }
+.pregunta .cuando { font: .74rem var(--f-ficha); color: var(--tenue); }
+
+/* Planificador */
+.planificador { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 24px; background: var(--tarjeta); border: 1px solid var(--regla); padding: 22px; }
+@media (max-width: 820px) { .planificador { grid-template-columns: 1fr; } }
+.campos { display: grid; gap: 14px; align-content: start; }
+.campos label { display: grid; gap: 4px; font: 500 .8rem var(--f-ficha); color: var(--tenue); }
+.campos input, .campos select { font: 1.05rem var(--f-texto); color: var(--tinta); background: var(--papel); border: 1px solid var(--regla); padding: 8px 10px; border-radius: 3px; }
+.calendario { display: grid; gap: 10px; align-content: start; }
+.franja { position: relative; height: 54px; border-bottom: 2px solid var(--regla); margin: 8px 14px 30px; }
+.franja .punto { position: absolute; bottom: -8px; width: 14px; height: 14px; border-radius: 50%; background: var(--sello); transform: translateX(-50%); }
+.franja .punto.examen { background: var(--linea-roja); border-radius: 2px; }
+.franja .punto.examen span { top: auto; bottom: 20px; color: var(--linea-roja); font-weight: 600; }
+.franja .punto span { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font: .68rem var(--f-ficha); color: var(--tenue); white-space: nowrap; }
+.sesiones { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.sesiones li { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px dotted var(--regla); font-size: 1rem; }
+.sesiones li b { font: 600 .9rem var(--f-ficha); }
+
+/* Modo presentar: una pantalla por bloque Curioso */
+.escenario { position: fixed; inset: 0; z-index: 10; background: var(--papel); display: grid; grid-template-rows: auto 1fr auto; gap: 18px; padding: calc(env(safe-area-inset-top, 0px) + 20px) max(24px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 20px) max(24px, env(safe-area-inset-left, 0px)); }
+.escenario .contenido { display: grid; align-content: center; gap: 22px; max-width: 980px; margin: 0 auto; width: 100%; font-size: clamp(1.3rem, 2.6vw, 2rem); line-height: 1.4; }
+.escenario .contenido h2 { font-size: clamp(2rem, 5vw, 3.4rem); color: var(--sello); }
+.escenario .pie { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+
+.escenario[hidden], .libro[hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Libros sobre cómo se aprende mejor, cómo se enseña y qué promesas no tienen evidencia: veredictos, mapa de cruces y ejercicios de repaso. Biblioteca de New Old School.">
+<meta property="og:title" content="Libros para aprender a aprender">
+<meta property="og:description" content="Libros sobre cómo se aprende mejor, cómo se enseña y qué promesas no tienen evidencia: veredictos, mapa de cruces y ejercicios de repaso. Biblioteca de New Old School.">
+<meta property="og:type" content="website">
+<style>body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<div class="marco">
+  <div class="barra">
+    <nav aria-label="Secciones"><a href="https://sergiomonsalve.com">← sergiomonsalve.com</a>
+      <a href="#cinco-minutos">En 5 minutos</a><a href="#que-funciona">Qué funciona</a><a href="#ponte-a-prueba">Ponte a prueba</a><a href="#repaso">Planea tu repaso</a><a href="#veredictos">Veredictos</a><a href="#mapa">Mapa de cruces</a><a href="#fichas">Fichas</a>
+    </nav>
+    <button class="boton lleno" id="presentar">Presentar en 5 minutos</button>
+  </div>
+
+  <header class="portada">
+    <p class="rotulo">Biblioteca de New Old School</p>
+    <h1>Libros para aprender a aprender</h1>
+    <p>16 libros sobre cómo se aprende mejor, cómo se enseña y qué promesas no tienen evidencia. Cada uno trae su veredicto, el estudio que lo sostiene o lo contradice y los libros con los que dialoga.</p>
+    <div class="leyenda-v"><span><span class="chip v-solido">Sólido</span> la evidencia lo respalda</span><span><span class="chip v-matices">Con matices</span> acierta en parte</span><span><span class="chip v-promete">Promete más de lo que prueba</span></span><span><span class="chip v-filosofia">Filosofía de la educación</span> no se mide igual</span></div>
+    <div class="rutas"><div class="ruta"><h3>Si estudias</h3><p>Empieza por cómo funciona tu cerebro y qué técnicas sirven de verdad.</p><ol><li><a href="#learning-how-to-learn">Aprender a aprender</a></li><li><a href="#make-it-stick">Apréndetelo</a></li><li><a href="#moonwalking-with-einstein">Los desafíos de la memoria</a></li><li><a href="#atomic-habits">Hábitos atómicos</a></li></ol></div><div class="ruta"><h3>Si enseñas</h3><p>La ciencia del aprendizaje y las grandes preguntas sobre qué es enseñar.</p><ol><li><a href="#make-it-stick">Apréndetelo</a></li><li><a href="#mindset">Mindset, la actitud del éxito</a></li><li><a href="#pedagogia-del-oprimido">Pedagogía del oprimido</a></li><li><a href="#el-maestro-ignorante">El maestro ignorante</a></li><li><a href="#summerhill">Summerhill</a></li></ol></div><div class="ruta"><h3>Si acompañas a un estudiante en casa</h3><p>Hábitos, concentración y qué esperar del talento y el esfuerzo.</p><ol><li><a href="#atomic-habits">Hábitos atómicos</a></li><li><a href="#deep-work">Enfócate</a></li><li><a href="#mindset">Mindset, la actitud del éxito</a></li><li><a href="#outliers">Fuera de serie</a></li></ol></div></div>
+  </header>
+
+  <section class="seccion" id="cinco-minutos">
+    <header>
+      <p class="rotulo">La idea en Formato Curioso · 300 segundos</p>
+      <h2>Lo que se siente como aprender no siempre es aprender</h2>
+      <p>Una sola idea en cinco bloques, con el tiempo de cada uno. Toca un bloque para leerlo, o usa “Presentar” para mostrarlo en pantalla completa con reloj.</p>
+    </header>
+    <div class="regla" id="regla" role="tablist" aria-label="Bloques"></div>
+    <div class="curioso">
+      <div class="guion" id="guion"></div>
+      <div class="reloj">
+        <span class="rotulo" id="bloque-nombre"></span>
+        <span class="tiempo" id="reloj">0:30</span>
+        <div style="display:flex;gap:8px"><button class="boton lleno" id="iniciar">Iniciar</button><button class="boton" id="reiniciar">Reiniciar</button></div>
+        <span class="tenue" style="font-size:.9rem">Ámbar en los últimos 10 s; rojo si te pasas.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="que-funciona">
+    <header>
+      <p class="rotulo">Explicador animado</p>
+      <h2>Qué funciona al estudiar, y cuánto pesa la práctica</h2>
+      <p>Dos gráficos de la investigación que citan varios de estos libros. Elige uno, reprodúcelo o arrastra la línea de tiempo.</p>
+    </header>
+    <div class="motion">
+      <div class="filtros" id="escenas"></div>
+      <canvas id="lienzo" width="1280" height="680" aria-label="Gráfico animado"></canvas>
+      <div class="controles">
+        <button class="boton lleno" id="play">Reproducir</button>
+        <input id="scrub" type="range" min="0" max="10" step="0.01" value="10" aria-label="Línea de tiempo">
+        <span class="dato tenue" id="t"></span>
+      </div>
+      <p class="tenue" id="fuente-escena" style="font-size:.95rem"></p>
+    </div>
+  </section>
+
+
+  <section class="seccion" id="ponte-a-prueba">
+    <header>
+      <p class="rotulo">Ponte a prueba · práctica de recuperación</p>
+      <h2>¿Mito o evidencia?</h2>
+      <p>Veinte ideas muy repetidas sobre cómo se aprende. Decide antes de ver la respuesta: intentar recordar y equivocarse ayuda más que leer la respuesta. La página recuerda tus respuestas en este navegador y te vuelve a preguntar, días después, lo que fallaste y lo que hace rato no repasas. Así funciona el repaso espaciado.</p>
+    </header>
+    <div class="estado-repaso">
+      <span class="marcador" id="marcador"></span>
+      <div class="cajas" id="cajas" aria-label="Preguntas por caja de repaso"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="boton" id="practicar">Practicar todas</button><button class="boton" id="otra-vez">Empezar de nuevo</button></div>
+    </div>
+    <div class="preguntas" id="preguntas"></div>
+  </section>
+
+  <section class="seccion" id="repaso">
+    <header>
+      <p class="rotulo">Planea tu repaso · práctica espaciada</p>
+      <h2>¿Cuándo repasar para un examen?</h2>
+      <p>Repartir el estudio en varios días rinde más que meter todo la noche anterior. Pon la fecha del examen y el planificador propone sesiones cortas, cada vez más separadas, en las que te pones a prueba sin mirar.</p>
+    </header>
+    <div class="planificador">
+      <div class="campos">
+        <label for="f-hoy">Empiezo a estudiar el<input type="date" id="f-hoy"></label>
+        <label for="f-examen">El examen es el<input type="date" id="f-examen"></label>
+        <label for="f-sesiones">Número de sesiones<select id="f-sesiones"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+        <p class="tenue" style="font-size:.95rem">Cada sesión: 20 a 30 minutos. Cierra el cuaderno, escribe o di en voz alta lo que recuerdas, y después revisa qué te faltó.</p>
+      </div>
+      <div class="calendario">
+        <div class="franja" id="franja" aria-hidden="true"></div>
+        <ol class="sesiones" id="sesiones"></ol>
+        <p class="tenue" id="nota-plan" style="font-size:.92rem"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="veredictos">
+    <header>
+      <p class="rotulo">Tablero de veredictos · toca un libro</p>
+      <h2>¿Qué tanto se sostiene cada libro?</h2>
+      <p>Cada veredicto guarda la afirmación central del libro y el estudio que la juzga. El análisis completo está en su ficha.</p>
+    </header>
+    <div class="filtros" id="filtros"></div>
+    <div class="tablero"><div class="libros" id="libros"></div><aside class="panel" id="panel" aria-live="polite"></aside></div>
+  </section>
+
+  <section class="seccion" id="mapa">
+    <header>
+      <p class="rotulo">Mapa de cruces</p>
+      <h2>Cómo dialogan los libros entre sí</h2>
+      <p>Cada línea es un cruce de la biblioteca. Toca un libro para ver con cuáles conversa y por qué. Los puntos grises son libros de otros temas.</p>
+    </header>
+    <div class="mapa">
+      <canvas id="red" width="900" height="680" aria-label="Mapa de cruces entre libros"></canvas>
+      <div class="lista-cruces" id="cruces"></div>
+      <p class="leyenda-v" id="leyenda-mapa" style="grid-column:1/-1"></p>
+    </div>
+  </section>
+
+  <section class="seccion" id="fichas">
+    <header><p class="rotulo">Las fichas</p><h2>Los 16 libros, uno por uno</h2></header>
+    <section class="grupo"><div class="grupo-cab"><h2>Cómo aprende el cerebro</h2><p>Recordar, practicar y entender</p></div>
+<article class="ficha" id="make-it-stick">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2014</span><span class="chip v-solido">Sólido</span></div>
+    <h3>Apréndetelo</h3>
+    <p class="original">Make It Stick: The Science of Successful Learning</p>
+    <dl><div><dt>Autor</dt><dd>Peter C. Brown, Henry L. Roediger III y Mark A. McDaniel</dd></div><div><dt>Temas</dt><dd><span class="tema">aprender-a-aprender</span> <span class="tema">memoria</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#ultralearning">Ultralearning</a> · Apréndetelo es la ciencia detrás de dos principios de Ultralearning: recuperar y retener.</li><li><a href="#learning-how-to-learn">Aprender a aprender</a> · Las mismas ideas sobre cómo se aprende: una versión para adultos y otra para niños y adolescentes.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Un escritor y dos psicólogos cognitivos (Roediger y McDaniel, que investigan cómo funciona la memoria) explican qué dice la ciencia sobre estudiar bien. Lo publicó Harvard University Press en 2014. En español lo publicó Paidós (México) en 2018 con el título <em>Apréndetelo. La ciencia del aprendizaje exitoso</em>.</p>
+<h2>Resumen</h2>
+<p>El libro tiene ocho capítulos, y cada uno desarma una creencia sobre cómo se aprende:</p>
+<ol>
+<li><strong>El aprendizaje se malentiende.</strong> Las técnicas que más usamos (releer, subrayar, practicar lo mismo muchas veces seguidas) dan la sensación de avanzar, pero dejan poco.</li>
+<li><strong>Para aprender, recupera.</strong> Intentar recordar sin mirar fija lo aprendido mejor que volver a leer.</li>
+<li><strong>Mezcla la práctica.</strong> Espaciar el repaso en el tiempo y alternar tipos de ejercicios cuesta más, pero se aprende más.</li>
+<li><strong>Acepta las dificultades.</strong> Algunas dificultades son "deseables": el esfuerzo de recordar o de distinguir problemas parecidos es lo que hace durar el aprendizaje.</li>
+<li><strong>Evita las ilusiones de saber.</strong> Sentir que algo es familiar no es saberlo. La forma de comprobarlo es ponerse a prueba.</li>
+<li><strong>Más allá de los estilos de aprendizaje.</strong> No hay evidencia de que enseñar según el "estilo" de cada uno funcione; sí importa construir estructuras mentales sobre lo que se aprende.</li>
+<li><strong>Aumenta tus capacidades.</strong> La inteligencia no está fija: se puede ampliar con la mentalidad de crecimiento, la práctica deliberada y las técnicas de memoria.</li>
+<li><strong>Hazlo durar.</strong> Consejos concretos para estudiantes, docentes y quienes aprenden toda la vida.</li>
+</ol>
+<p>La tesis: <strong>la forma en que la mayoría estudia es la menos eficaz</strong>, y las técnicas que funcionan se sienten más difíciles, por eso casi nadie las usa.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es el libro con la evidencia más sólida de esta sección. Cada capítulo desmonta una creencia común sobre el estudio:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Lo que solemos creer</th>
+<th>Lo que muestra la investigación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Releer y subrayar sirve para aprender.</td>
+<td>Da una <strong>falsa sensación de dominio</strong>: el texto se ve familiar, pero no se recuerda. Releer y subrayar tienen "utilidad baja" (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1529100612453266">Dunlosky y otros, 2013</a>).</td>
+</tr>
+<tr>
+<td>Los exámenes solo sirven para medir.</td>
+<td><strong>Recordar sin mirar es la mejor forma de aprender.</strong> Superó a releer (<a target="_blank" rel="noopener" href="https://doi.org/10.1111/j.1467-9280.2006.01693.x">Roediger y Karpicke, 2006</a>) y a hacer mapas conceptuales (<a target="_blank" rel="noopener" href="https://doi.org/10.1126/science.1199327">Karpicke y Blunt, 2011</a>).</td>
+</tr>
+<tr>
+<td>Hay que practicar un tipo de ejercicio hasta dominarlo, y luego pasar al siguiente.</td>
+<td><strong>Mezclar tipos de problemas</strong> cuesta más pero enseña más (<a target="_blank" rel="noopener" href="https://doi.org/10.1007/s11251-007-9015-8">Rohrer y Taylor, 2007</a>; <a target="_blank" rel="noopener" href="https://doi.org/10.1111/j.1467-9280.2008.02127.x">Kornell y Bjork, 2008</a>). Curiosamente, los estudiantes creían que habían aprendido más sin mezclar.</td>
+</tr>
+<tr>
+<td>Si aprender cuesta, es que lo estoy haciendo mal.</td>
+<td>Algunas <strong>dificultades son deseables</strong>: el esfuerzo de recordar o de mezclar es justo lo que hace que lo aprendido dure.</td>
+</tr>
+<tr>
+<td>Cada persona tiene su "estilo de aprendizaje" (visual, auditivo…) y hay que enseñarle según ese estilo.</td>
+<td><strong>No hay evidencia</strong> de que adaptar la enseñanza al estilo mejore el aprendizaje (<a target="_blank" rel="noopener" href="https://doi.org/10.1111/j.1539-6053.2009.01038.x">Pashler y otros, 2008</a>).</td>
+</tr>
+</tbody>
+</table></div>
+<p>Para el colegio, la última fila importa mucho: los nodos no se escriben en versiones "para visuales" o "para auditivos", sino con buenas explicaciones y práctica de recuperación para todos.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Lo escribieron investigadores.</strong> Roediger y McDaniel hicieron muchos de los estudios que el libro cuenta, y la evidencia de sus dos consejos centrales es la más sólida de toda esta sección (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1529100612453266">Dunlosky y otros, 2013</a>).</li>
+<li><strong>Explica por qué nos engañamos.</strong> No solo dice qué hacer, sino por qué lo que hacemos <em>se siente</em> mejor aunque funcione peor. Esa idea cambia la forma de estudiar más que cualquier truco.</li>
+<li><strong>Desmiente un mito muy extendido entre docentes:</strong> los estilos de aprendizaje.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Mucha de la evidencia viene de laboratorio,</strong> con universitarios y textos cortos. La práctica de recuperación y el espaciado sí se han probado en aulas reales; otras ideas del libro, menos.</li>
+<li><strong>El capítulo 7 envejeció peor que el resto.</strong> Se apoya en parte en la mentalidad de crecimiento de Dweck, cuyos efectos resultaron mucho más pequeños en estudios posteriores (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/bul0000352">Macnamara y Burgoyne, 2023</a>; ver <em>Mindset</em>).</li>
+<li><strong>Está pensado para estudiantes universitarios de Estados Unidos.</strong> Los ejemplos (cursos de medicina, pilotos, deportistas) hay que traducirlos a un colegio con pocos recursos.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es la base científica del Formato Curioso y de los ejercicios de cada nodo: preguntar antes de explicar, mezclar problemas y repasar en el tiempo. Los docentes deberían leer al menos los capítulos 2 y 5. Para los estudiantes, la versión adecuada es <em>Aprender a aprender</em>.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo 2, "Para aprender, recupera", junto con el experimento de <em>Ultralearning</em>: un grupo relee y otro escribe lo que recuerda. Pregunta: ¿por qué crees que releer <em>se siente</em> mejor aunque funcione peor?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Está escrito para adultos. Para estudiantes de 11 a 16 años, <em>Aprender a aprender</em> (Oakley y Sejnowski) cuenta lo mismo de forma más sencilla.</li>
+<li>Tiene derechos de autor: en clase se cuenta la idea con palabras propias.</li>
+</ul></details>
+</article>
+<article class="ficha" id="learning-how-to-learn">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2018</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Aprender a aprender</h3>
+    <p class="original">Learning How to Learn: How to Succeed in School Without Spending All Your Time Studying; A Guide for Kids and Teens</p>
+    <dl><div><dt>Autor</dt><dd>Barbara Oakley y Terrence Sejnowski, con Alistair McConville</dd></div><div><dt>Temas</dt><dd><span class="tema">aprender-a-aprender</span> <span class="tema">concentracion</span> <span class="tema">memoria</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#deep-work">Enfócate</a> · Dos maneras de concentrarse: bloques cortos de 25 minutos con descanso (Oakley) o bloques largos sin distracciones (Newport).</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Una guía para niños y adolescentes (la editorial la recomienda desde los 10 años) sobre cómo funciona el cerebro cuando aprende y cómo estudiar mejor sin pasar todo el día estudiando. Nace del curso gratuito <em>Learning How to Learn</em> que Oakley y Sejnowski dan en Coursera, en el que se han inscrito más de cuatro millones de personas. En español lo publicó Ediciones Obelisco en 2021 con el título <em>Aprender a aprender: cómo tener éxito en la escuela sin pasarte todo el día estudiando</em>.</p>
+<h2>Resumen</h2>
+<p>El libro le habla directamente al estudiante, con ilustraciones y ejercicios. Sus ideas principales:</p>
+<ul>
+<li><strong>El cerebro tiene dos modos.</strong> El <em>enfocado</em> sirve para concentrarse en un problema; el <em>difuso</em>, cuando la mente divaga, sirve para conectar ideas. Por eso a veces la solución llega caminando o en la ducha.</li>
+<li><strong>Aprender es construir conexiones</strong> entre neuronas, y esas conexiones se fortalecen practicando y recordando, no releyendo.</li>
+<li><strong>La pereza de empezar se vence con la técnica Pomodoro:</strong> 25 minutos de trabajo sin distracciones y luego un premio pequeño.</li>
+<li><strong>Dormir y hacer ejercicio</strong> ayudan a fijar lo aprendido.</li>
+<li><strong>Las metáforas y los dibujos</strong> ayudan a entender ideas difíciles.</li>
+<li><strong>No pasa nada por ser lento:</strong> quien aprende despacio a veces entiende más a fondo.</li>
+</ul>
+<p>La tesis: <strong>cualquiera puede aprender mejor si entiende cómo funciona su cerebro</strong>, y eso no exige estudiar más horas, sino estudiar distinto.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es el único libro de esta sección escrito para la edad de nuestros estudiantes. Sus ideas principales:</p>
+<ul>
+<li><strong>Dos modos de pensar:</strong> el <em>enfocado</em> (concentrado en un problema) y el <em>difuso</em> (cuando la mente divaga, por ejemplo al caminar o al ducharse). Los dos hacen falta: a veces la solución llega cuando dejas de buscarla.</li>
+<li><strong>La técnica Pomodoro contra la pereza de empezar:</strong> 25 minutos de trabajo concentrado, sin celular, y luego un descanso corto.</li>
+<li><strong>Recordar sin mirar y repasar espaciado,</strong> las dos técnicas con más evidencia (ver <em>Apréndetelo</em>).</li>
+<li><strong>El sueño y el ejercicio</strong> ayudan a fijar lo aprendido.</li>
+<li><strong>Ser "lento" no es ser malo:</strong> quien aprende despacio a veces entiende más a fondo.</li>
+</ul>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Está escrito para nuestra edad.</strong> Es el único libro de la sección pensado para estudiantes de 10 años en adelante, con un lenguaje y unos ejemplos que ellos entienden.</li>
+<li><strong>Convierte la ciencia en hábitos concretos:</strong> un pomodoro, una pregunta de repaso, una caminata antes de volver a un problema.</li>
+<li><strong>Le habla al estudiante que se siente "lento" o "malo para estudiar",</strong> que es justamente el que más necesita este libro.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Simplifica la neurociencia.</strong> Las "conexiones" y los "dos modos" son metáforas útiles, no descripciones exactas del cerebro. Hay que presentarlas como lo que son, para no crear mitos nuevos.</li>
+<li><strong>Algunas ideas tienen más respaldo que otras.</strong> Recuperar y espaciar tienen mucha evidencia (ver <em>Apréndetelo</em>). Que dejar descansar un problema ayude a resolverlo también tiene apoyo, sobre todo en problemas creativos (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/a0014212">Sio y Ormerod, 2009</a>). La técnica Pomodoro, en cambio, no tiene estudios propios: es una herramienta práctica, no un hallazgo científico.</li>
+<li><strong>Supone un estudiante con tiempo y espacio para estudiar.</strong> Hay que adaptarlo para quien estudia entre el trabajo, la casa y el cuidado de hermanos.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es el libro para entregarle al estudiante. Encaja con la promesa del colegio: que cualquiera puede aprender, aunque no tenga a nadie que lo ayude en casa. Conviene leerlo junto con un docente que distinga las metáforas de los hechos.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo sobre la pereza de empezar y la técnica Pomodoro. Actividad: hacer un "pomodoro" en clase (25 minutos de una tarea, sin celulares) y conversar después sobre cómo se sintió. Pregunta: ¿qué es lo que más te cuesta: empezar o seguir?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Las ideas sobre recuperación y espaciado tienen mucha evidencia. La técnica Pomodoro y los "dos modos de pensar" son útiles, pero no encontramos estudios que los evalúen tal como los presenta el libro.</li>
+<li>El curso de Coursera necesita internet; el libro no. Para estudiantes sin conexión, el libro es la mejor puerta.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="moonwalking-with-einstein">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2011</span><span class="chip v-solido">Sólido</span></div>
+    <h3>Los desafíos de la memoria</h3>
+    <p class="original">Moonwalking with Einstein: The Art and Science of Remembering Everything</p>
+    <dl><div><dt>Autor</dt><dd>Joshua Foer</dd></div><div><dt>Temas</dt><dd><span class="tema">memoria</span> <span class="tema">talento-y-practica</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#limitless">Sin límites</a> · El palacio de la memoria: Kwik lo enseña como técnica; Foer cuenta cómo lo aprendió y hasta dónde llega.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Joshua Foer, un periodista que se consideraba de memoria normal, fue a cubrir el campeonato de memoria de Estados Unidos. Un año después, entrenado por el británico Ed Cooke, lo ganó: era 2006, y memorizó una baraja de 52 cartas en 1 minuto y 40 segundos. Lo publicó Penguin Press en 2011. En español lo publicó Seix Barral en 2012 con el título <em>Los desafíos de la memoria</em>.</p>
+<h2>Resumen</h2>
+<p>El libro alterna la historia del año de entrenamiento de Foer con la historia y la ciencia de la memoria. Sus capítulos avanzan así:</p>
+<ol>
+<li><strong>Los campeones de memoria</strong> y el primer encuentro de Foer con ese mundo.</li>
+<li><strong>La persona que recordaba demasiado</strong> y la que olvidaba todo: casos reales que muestran para qué sirve la memoria y qué pasa cuando falla.</li>
+<li><strong>Los expertos:</strong> cómo los maestros de ajedrez o los clasificadores de pollitos "ven" lo que otros no ven, gracias a años de experiencia acumulada.</li>
+<li><strong>El palacio de la memoria</strong> y cómo memorizar un poema: las técnicas que se usan desde la Grecia antigua.</li>
+<li><strong>El fin del recordar:</strong> cómo la escritura, la imprenta y ahora internet han ido sacando la memoria de nuestra cabeza.</li>
+<li><strong>La meseta:</strong> por qué dejamos de mejorar y cómo salir de ahí con práctica deliberada.</li>
+<li><strong>Los "savants":</strong> personas con memorias extraordinarias, y la pregunta de si son de verdad tan distintas al resto.</li>
+<li><strong>El campeonato:</strong> la final en la que Foer gana.</li>
+</ol>
+<p>La tesis: <strong>una memoria excepcional no es un don, sino una técnica,</strong> y recordar sigue importando porque lo que sabemos es el material con el que pensamos.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es la mejor explicación de qué son, en realidad, las técnicas de memoria que prometen libros como <em>Sin límites</em>:</p>
+<ul>
+<li><strong>Los campeones de memoria no tienen cerebros especiales.</strong> Un estudio con memorizadores de campeonato encontró que no tenían más inteligencia ni cerebros distintos; usaban una estrategia espacial, el "método de los lugares" (<a target="_blank" rel="noopener" href="https://doi.org/10.1038/nn988">Maguire y otros, 2003</a>).</li>
+<li><strong>El palacio de la memoria se puede aprender.</strong> Consiste en imaginar un recorrido por un lugar conocido y ubicar en cada punto una imagen absurda y vívida de lo que se quiere recordar. Personas sin experiencia que entrenaron seis semanas mejoraron su memoria, y la mejora seguía cuatro meses después (<a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.neuron.2017.02.003">Dresler y otros, 2017</a>).</li>
+<li><strong>La "meseta":</strong> cuando una tarea se vuelve automática, dejamos de mejorar. Para salir de ahí hace falta práctica deliberada (ver <em>Número uno</em>).</li>
+<li><strong>Recordar todavía importa,</strong> aunque exista internet: lo que sabes de memoria es el material con el que piensas.</li>
+</ul>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Desmitifica.</strong> Muestra que los "genios" de la memoria usan técnicas que cualquiera puede aprender, algo que confirma la investigación (<a target="_blank" rel="noopener" href="https://doi.org/10.1038/nn988">Maguire y otros, 2003</a>).</li>
+<li><strong>Es periodismo honesto.</strong> Foer cuenta su propia experiencia y no vende un curso.</li>
+<li><strong>Defiende la memoria sin nostalgia.</strong> En tiempos de buscadores, su argumento de que saber de memoria sigue importando es útil para un colegio que quiere llegar a estudiantes sin internet.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Las técnicas sirven para un tipo de memoria.</strong> Recordar listas, cartas o números no es lo mismo que entender un tema. Las técnicas de imagen y "palabra clave" recibieron utilidad baja para el estudio escolar (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1529100612453266">Dunlosky y otros, 2013</a>).</li>
+<li><strong>Es la historia de un caso.</strong> Que Foer ganara en un año dice mucho del método y de su entrenador, pero un caso no es un estudio.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es el compañero ideal de <em>Sin límites</em>: enseña la misma técnica (el palacio de la memoria) sin promesas exageradas y con sus límites claros. Sirve para un ejercicio de clase y para hablar de cuándo vale la pena memorizar (tablas, fórmulas, vocabulario) y cuándo hay que entender.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo sobre el palacio de la memoria. Actividad: memorizar una lista de diez cosas en un recorrido por la casa, la escuela o la vereda, y compararlo con memorizarla repitiéndola. Pregunta: ¿para qué te sirve esta técnica, y para qué no?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Estas técnicas sirven para <strong>listas y datos sueltos</strong>, no para <strong>entender</strong>. Un estudiante puede recordar los nombres de los huesos del cuerpo sin saber cómo funcionan. Para estudiar, recuperar y repasar espaciado sirven más (ver <em>Apréndetelo</em>).</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>Práctica, talento y mentalidad</h2><p>Cuánto pesa lo innato y cuánto el esfuerzo</p></div>
+<article class="ficha" id="peak">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2016</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Número uno</h3>
+    <p class="original">Peak: Secrets from the New Science of Expertise</p>
+    <dl><div><dt>Autor</dt><dd>Anders Ericsson y Robert Pool</dd></div><div><dt>Temas</dt><dd><span class="tema">talento-y-practica</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#outliers">Fuera de serie</a> · La regla de las 10.000 horas: Gladwell la popularizó con el estudio de Ericsson, y Ericsson responde que no es eso lo que encontró.</li><li><a href="#moonwalking-with-einstein">Los desafíos de la memoria</a> · Foer usa la práctica deliberada de Ericsson para salir de la &quot;meseta&quot; en la que dejó de mejorar su memoria.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Anders Ericsson pasó su carrera estudiando a expertos: músicos, ajedrecistas, deportistas, médicos. Su conclusión es que el talento innato pesa menos de lo que creemos, y que la pericia se construye con un tipo especial de práctica: la <strong>práctica deliberada</strong>. Lo publicaron Houghton Mifflin Harcourt (EE. UU.) y Bodley Head (Reino Unido) en 2016. En español lo publicó Conecta en 2017 con el título <em>Número uno: secretos para ser el mejor en lo que nos propongamos</em>.</p>
+<h2>Resumen</h2>
+<p>El libro avanza de la investigación a la práctica:</p>
+<ol>
+<li><strong>La práctica con propósito.</strong> No basta con repetir: hace falta una meta concreta, concentración, retroalimentación y salir de lo cómodo.</li>
+<li><strong>El cerebro se adapta.</strong> El cuerpo y el cerebro cambian según cómo se entrenan; esa capacidad de adaptarse es la base de toda pericia.</li>
+<li><strong>Las representaciones mentales.</strong> Lo que distingue a un experto es cómo "ve" su campo: un ajedrecista ve posiciones donde otros ven piezas sueltas.</li>
+<li><strong>La práctica deliberada,</strong> el "estándar de oro": práctica con propósito guiada por un maestro que sabe cómo se entrena esa habilidad.</li>
+<li><strong>Cómo aplicarla en el trabajo y en la vida diaria,</strong> incluso sin maestro.</li>
+<li><strong>¿Y el talento natural?</strong> Ericsson sostiene que casi todo lo que llamamos talento se explica por la práctica, y que la idea de "don" desanima a quien no cree tenerlo.</li>
+</ol>
+<p>La tesis: <strong>los expertos se hacen, no nacen,</strong> y la clave no es cuántas horas se practica sino cómo.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Distingue tres maneras de "practicar" que parecen iguales y no lo son:</p>
+<ol>
+<li><strong>Repetir sin más:</strong> tocar la misma canción cien veces. Después de un punto, ya no mejora.</li>
+<li><strong>Práctica con propósito:</strong> una meta concreta, concentración total, saber en qué se falló y salirse de lo cómodo.</li>
+<li><strong>Práctica deliberada:</strong> lo anterior, más un maestro que sabe cómo se entrena esa habilidad.</li>
+</ol>
+<p><strong>La evidencia, con matices.</strong> El estudio clásico de Ericsson con violinistas de Berlín (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/0033-295X.100.3.363">Ericsson, Krampe y Tesch-Römer, 1993</a>) encontró que los mejores habían acumulado más práctica. Pero estudios posteriores encontraron que la práctica explica menos de lo que se creía:</p>
+<ul>
+<li><strong>Un metaanálisis</strong> (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/0956797614535810">Macnamara, Hambrick y Oswald, 2014</a>) encontró que la práctica explica el 26 % de las diferencias en juegos como el ajedrez, el 21 % en música, el 18 % en deportes, el 4 % en educación y menos del 1 % en profesiones.</li>
+<li><strong>Una réplica del estudio de los violinistas</strong> (<a target="_blank" rel="noopener" href="https://doi.org/10.1098/rsos.190327">Macnamara y Maitra, 2019</a>) encontró un efecto real, pero bastante menor que el original.</li>
+<li><strong>Ericsson respondió</strong> que esos estudios suman cualquier práctica, no la práctica deliberada como él la define (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1745691616635600">Ericsson, 2016</a>).</li>
+</ul>
+<p>La conclusión honesta es esta: <strong>practicar bien importa mucho, pero no lo explica todo.</strong></p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Distingue tipos de práctica.</strong> Esa diferencia (repetir, practicar con propósito, practicar deliberadamente) es útil para cualquier estudiante y cualquier docente.</li>
+<li><strong>Corrige un mito que el propio Ericsson ayudó a crear sin querer:</strong> la regla de las 10.000 horas (ver <em>Fuera de serie</em>).</li>
+<li><strong>Es optimista y concreto:</strong> muestra que mejorar depende en buena parte de cosas que se pueden cambiar.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Exagera el peso de la práctica.</strong> Los estudios posteriores encontraron que la práctica explica una parte de las diferencias entre personas, no casi todas: cerca de un tercio en ajedrez y música según una revisión (<a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.intell.2013.04.001">Hambrick y otros, 2014</a>), y menos en otros campos (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/0956797614535810">Macnamara, Hambrick y Oswald, 2014</a>). Ericsson responde que esos estudios no miden la práctica deliberada como él la define, pero eso también hace difícil comprobar su idea.</li>
+<li><strong>La práctica deliberada necesita un maestro experto,</strong> y eso no está al alcance de todos. Es justo el problema que este colegio intenta resolver.</li>
+<li><strong>Le resta importancia a las condiciones:</strong> tiempo libre, dinero para clases e instrumentos, y una familia que apoye. Sin eso, "practica más" no basta.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Su mejor aporte es la idea de práctica con propósito, que sirve para diseñar los ejercicios de cada nodo: una meta clara, retroalimentación inmediata y dificultad creciente. Pero hay que enseñarlo junto con <em>Fuera de serie</em> y la evidencia de la tabla, para no caer en "si no llegaste, es porque no practicaste".</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo 1, sobre la práctica con propósito. Actividad: elegir algo que cada uno ya hace (un deporte, un instrumento, dibujar) y escribir cómo sería practicarlo "con propósito" en vez de solo repetirlo. Pregunta: ¿en qué cosa llevas años haciendo lo mismo sin mejorar?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Que el talento "pese menos" no quiere decir que no exista. Conviene no usar el libro para culpar a quien no llega lejos: también influyen el acceso a buenos maestros, el tiempo libre y el dinero (ver <em>Outliers</em>).</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="outliers">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2008</span><span class="chip v-promete">Promete más de lo que prueba</span></div>
+    <h3>Fuera de serie</h3>
+    <p class="original">Outliers: The Story of Success</p>
+    <dl><div><dt>Autor</dt><dd>Malcolm Gladwell</dd></div><div><dt>Temas</dt><dd><span class="tema">talento-y-practica</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>El periodista Malcolm Gladwell sostiene que el éxito no depende solo del talento: también pesan las oportunidades, el momento en que se nace y el lugar de donde se viene. Lo publicó Little, Brown and Co. en 2008. En español lo publicó Taurus en 2009 con el título <em>Fuera de serie: por qué unas personas tienen éxito y otras no</em>.</p>
+<h2>Resumen</h2>
+<p>El libro tiene dos partes y una conclusión:</p>
+<p><strong>Primera parte: la oportunidad.</strong>
+1. <strong>El efecto Mateo.</strong> Los jugadores de hockey canadienses nacidos en los primeros meses del año llegan más lejos: una pequeña ventaja inicial se va acumulando.
+2. <strong>La regla de las 10.000 horas.</strong> Los Beatles tocando ocho horas por noche en Hamburgo y Bill Gates programando de adolescente: la maestría exige muchísima práctica, y la oportunidad de practicar no le llega a todo el mundo.
+3. <strong>El problema de los genios.</strong> Un coeficiente intelectual altísimo no garantiza el éxito.
+4. <strong>El error de Terman.</strong> El psicólogo Lewis Terman siguió por décadas a niños muy inteligentes; los que triunfaron venían, sobre todo, de familias con más recursos, que les enseñaron a moverse en el mundo.
+5. <strong>El ascenso de los abogados judíos</strong> de Nueva York: una generación que aprovechó una oportunidad que llegó en el momento justo.</p>
+<p><strong>Segunda parte: la herencia cultural.</strong>
+6. <strong>Harlan, Kentucky:</strong> una "cultura del honor" que se hereda por generaciones.
+7. <strong>Accidentes de avión:</strong> cómo la forma de hablarle a un superior puede influir en una cabina.
+8. <strong>Los arrozales y las matemáticas:</strong> la idea de que una tradición de trabajo constante explica el buen desempeño en matemáticas de algunos países de Asia.
+9. <strong>El trato de Marquita:</strong> una escuela KIPP del Bronx con jornadas y años escolares más largos.</p>
+<p><strong>Conclusión: una historia jamaicana,</strong> la de la familia del propio autor.</p>
+<p>La tesis: <strong>el éxito no es solo mérito individual;</strong> depende de oportunidades, fechas, lugares y herencias que nadie elige.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Tiene dos ideas que llegaron a todo el mundo, una muy sólida y otra mal entendida:</p>
+<ol>
+<li><strong>La fecha de nacimiento cuenta (sólida).</strong> En el hockey canadiense, los equipos se arman por año de nacimiento. Los nacidos en enero son casi un año mayores que los nacidos en diciembre: a los 9 años eso es ser más grande y más fuerte. Los eligen, los entrenan mejor y la ventaja crece. Es el "efecto de la edad relativa", y sigue apareciendo 40 años después: en el hockey juvenil de élite y en mundiales de fútbol sub-17 y sub-20, cerca del 40 % de los jugadores nació en el primer trimestre del año, frente a cerca del 10 % en el último (<a target="_blank" rel="noopener" href="https://doi.org/10.3389/fspor.2024.1516173">Barnsley, 2025</a>).</li>
+<li><strong>La "regla de las 10.000 horas" (mal entendida).</strong> Gladwell dice que para dominar algo hacen falta unas 10.000 horas de práctica, y pone de ejemplo a los Beatles en Hamburgo y a Bill Gates. Se basó en el estudio de Ericsson con violinistas. Pero Ericsson respondió que 10.000 era un promedio aproximado de los mejores violinistas a los 20 años, no un umbral mágico, y que lo que cuenta no es sumar horas sino el <em>tipo</em> de práctica (ver <em>Número uno</em>). Además, la práctica explica solo una parte de las diferencias (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/0956797614535810">Macnamara, Hambrick y Oswald, 2014</a>).</li>
+</ol>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Saca el éxito del individuo.</strong> Es el contrapeso de <em>Mindset</em> y <em>Número uno</em>: muestra que el lugar y la fecha en que nacimos pesan, y que eso se puede corregir con buenas reglas (como armar los equipos por edad real y no por año).</li>
+<li><strong>Cuenta historias inolvidables.</strong> Hamburgo, el hockey, los aviones: son ganchos perfectos, del tipo que buscamos en la sección <em>El gancho</em> de los nodos.</li>
+<li><strong>El efecto de la edad relativa es sólido</strong> y se sigue encontrando 40 años después (<a target="_blank" rel="noopener" href="https://doi.org/10.3389/fspor.2024.1516173">Barnsley, 2025</a>).</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Elige las historias que encajan.</strong> Gladwell es periodista, no investigador, y usa estudios ajenos para sostener una idea, dejando de lado los que la complican. La regla de las 10.000 horas es el ejemplo: Ericsson, autor del estudio en que se basó, dijo que lo malinterpretó (ver <em>Número uno</em>).</li>
+<li><strong>Algunas explicaciones culturales son muy discutibles.</strong> La de los arrozales y las matemáticas, o la de los accidentes de avión, simplifican culturas enteras en un rasgo. Conviene leerlas como hipótesis, no como hechos.</li>
+<li><strong>El capítulo de KIPP mezcla algo sólido con algo dudoso.</strong> Lo sólido: una evaluación con sorteos de admisión encontró que una escuela KIPP de Massachusetts mejoraba los resultados en matemáticas, sobre todo de los estudiantes con más dificultades (<a target="_blank" rel="noopener" href="https://doi.org/10.1002/pam.21647">Angrist y otros, 2012</a>). Lo dudoso: Gladwell explica la brecha entre ricos y pobres con lo que pasa en las vacaciones, pero estudios posteriores encontraron que esa evidencia es inconsistente y depende de cómo se miden los resultados (<a target="_blank" rel="noopener" href="https://doi.org/10.15195/v6.a3">von Hippel y Hamrock, 2019</a>).</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es el mejor libro de la biblioteca para hablar de <strong>oportunidades e injusticia</strong> sin culpar a nadie, y para practicar la pregunta "¿qué dice el estudio original?". Funciona muy bien leído junto con <em>Mindset</em>: uno mira dentro de la persona, el otro mira afuera, y la verdad está en el cruce de los dos.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo 1, sobre el hockey. Actividad: contar en qué trimestre nacieron los jugadores de un equipo del colegio o de la selección de fútbol del país. ¿Se repite el patrón? Pregunta: si fueras entrenador, ¿cómo evitarías esa injusticia?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Gladwell escribe muy bien y simplifica mucho. Es un buen libro para practicar la pregunta "¿y qué dice el estudio original?".</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="mindset">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2006</span><span class="chip v-promete">Promete más de lo que prueba</span></div>
+    <h3>Mindset, la actitud del éxito</h3>
+    <p class="original">Mindset: The New Psychology of Success</p>
+    <dl><div><dt>Autor</dt><dd>Carol S. Dweck</dd></div><div><dt>Temas</dt><dd><span class="tema">talento-y-practica</span> <span class="tema">aprender-a-aprender</span> <span class="tema">identidad</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#limitless">Sin límites</a> · Los dos dicen que las creencias sobre uno mismo limitan lo que aprendemos; Dweck tiene más estudios detrás, y aun así su efecto es pequeño.</li><li><a href="#outliers">Fuera de serie</a> · Dweck mira lo que pasa dentro de la persona (su mentalidad); Gladwell, lo que pasa afuera (sus oportunidades).</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>La psicóloga Carol Dweck distingue dos maneras de pensar sobre las propias capacidades. Con <strong>mentalidad fija</strong>, uno cree que la inteligencia o el talento vienen dados: o se tienen o no. Con <strong>mentalidad de crecimiento</strong>, cree que se desarrollan con esfuerzo, estrategia y ayuda. Lo publicó Random House en 2006. En español lo publicó Editorial Sirio en 2016 con el título <em>Mindset: la actitud del éxito</em>.</p>
+<h2>Resumen</h2>
+<p>El libro presenta las dos mentalidades en los primeros capítulos y luego las sigue por distintos campos de la vida:</p>
+<ol>
+<li><strong>Las dos mentalidades.</strong> Con mentalidad fija, el éxito sirve para demostrar que uno es inteligente; con mentalidad de crecimiento, sirve para aprender.</li>
+<li><strong>Por dentro.</strong> Cada mentalidad cambia lo que significan el fracaso (¿prueba de que no sirvo, o información?) y el esfuerzo (¿señal de poca capacidad, o el camino?).</li>
+<li><strong>Capacidad y logro.</strong> El rendimiento escolar, el talento artístico y, sobre todo, <strong>el peligro de los elogios y las etiquetas</strong>: decirle a un niño "eres inteligente" puede volverlo miedoso ante los retos.</li>
+<li><strong>Deporte.</strong> Campeones que se hicieron, no que nacieron así.</li>
+<li><strong>Empresas y liderazgo.</strong> Líderes que necesitan parecer genios frente a líderes que aprenden.</li>
+<li><strong>Relaciones.</strong> Las mentalidades en la pareja y la amistad.</li>
+<li><strong>Padres, maestros y entrenadores.</strong> Cómo se transmite cada mentalidad sin darse cuenta.</li>
+<li><strong>Cambiar de mentalidad.</strong> Ejercicios para pasar de una a la otra.</li>
+</ol>
+<p>Una edición actualizada posterior agrega la advertencia sobre la "falsa mentalidad de crecimiento".</p>
+<p>La tesis: <strong>lo que creemos sobre nuestras capacidades cambia cómo aprendemos,</strong> y esa creencia se puede cambiar.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Sus ideas cambiaron la forma en que muchos colegios hablan de los errores:</p>
+<ul>
+<li><strong>El error cambia de significado:</strong> con mentalidad fija, equivocarse demuestra que "no sirvo"; con mentalidad de crecimiento, muestra qué me falta aprender.</li>
+<li><strong>Cómo se elogia importa:</strong> decirle a un niño "eres muy inteligente" puede volverlo reacio a los retos difíciles, para no arriesgar esa etiqueta. Elogiar el proceso ("probaste otra estrategia") no tiene ese efecto.</li>
+<li><strong>La "falsa mentalidad de crecimiento":</strong> la propia Dweck advirtió después que elogiar solo el esfuerzo, aunque no se aprenda nada, tampoco sirve.</li>
+</ul>
+<p><strong>La evidencia: un caso perfecto para la sección de evidencia de un nodo.</strong> El libro se volvió famosísimo, pero los estudios posteriores encontraron efectos mucho más pequeños de lo que se prometía:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Estudio</th>
+<th>Qué encontró</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dos metaanálisis (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/0956797617739704">Sisk y otros, 2018</a>)</td>
+<td>La relación entre mentalidad y notas es débil, y las intervenciones tienen efectos débiles. Algo ayudan a estudiantes de familias pobres o en riesgo de reprobar.</td>
+</tr>
+<tr>
+<td>Un experimento nacional en EE. UU. (<a target="_blank" rel="noopener" href="https://doi.org/10.1038/s41586-019-1466-y">Yeager y otros, 2019</a>)</td>
+<td>Una actividad de menos de una hora mejoró las notas de los estudiantes de menor rendimiento, pero solo en colegios donde los compañeros apoyaban el mensaje.</td>
+</tr>
+<tr>
+<td>Otro metaanálisis (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/bul0000352">Macnamara y Burgoyne, 2023</a>)</td>
+<td>El efecto promedio es casi cero. En los estudios de mejor calidad no hubo efecto claro. Los estudios hechos por autores con interés económico encontraron efectos mayores.</td>
+</tr>
+</tbody>
+</table></div>
+<p>La conclusión honesta: <strong>la idea es razonable y puede ayudar a algunos estudiantes, pero no es la palanca enorme que se vendió.</strong></p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Cambió la conversación sobre los errores.</strong> Que equivocarse sea parte de aprender es una idea sana para cualquier colegio, y el libro la volvió popular.</li>
+<li><strong>Hace pensar sobre cómo se elogia.</strong> Elogiar la estrategia y el proceso, en vez de la etiqueta "eres inteligente", es un buen consejo aunque su efecto sea pequeño.</li>
+<li><strong>La autora corrigió su propia idea.</strong> La "falsa mentalidad de crecimiento" es Dweck reconociendo que su mensaje se estaba usando mal.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Promete más de lo que la evidencia sostiene.</strong> Es el libro de esta sección con la distancia más grande entre su fama y sus resultados (ver la tabla de evidencia). El metaanálisis más reciente encontró un efecto casi nulo en las notas (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/bul0000352">Macnamara y Burgoyne, 2023</a>).</li>
+<li><strong>El experimento estrella no se repitió.</strong> El famoso estudio sobre elogiar la inteligencia (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/0022-3514.75.1.33">Mueller y Dweck, 1998</a>) se replicó con 624 niños chinos de 9 a 13 años: el efecto sobre la motivación no apareció, y la mentalidad de los niños no tuvo relación con cómo enfrentaban el fracaso ni con sus notas (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/xge0000669">Li y Bates, 2019</a>).</li>
+<li><strong>Se apoya en anécdotas.</strong> Los capítulos de deporte, empresa y pareja cuentan historias de personas famosas, elegidas porque encajan con la idea. Es el sesgo de supervivencia que explica <em>El arte de pensar</em>.</li>
+<li><strong>Pone el peso en la persona.</strong> Si todo depende de la mentalidad, quien no avanza "no quiso". El experimento nacional de <a target="_blank" rel="noopener" href="https://doi.org/10.1038/s41586-019-1466-y">Yeager y otros (2019)</a> mostró lo contrario: el efecto dependió del colegio y de los compañeros.</li>
+</ul>
+<p><strong>Para el colegio.</strong> No conviene enseñar la mentalidad de crecimiento como una técnica que sube las notas, porque no lo hace de forma confiable. Sí sirve como forma de hablar de los errores en clase, y como <strong>el mejor caso de la biblioteca para estudiar cómo una idea se vuelve famosa antes de estar comprobada.</strong></p>
+<h2>Para leer en clase</h2>
+<p>Con docentes: el capítulo sobre el peligro de los elogios y las etiquetas. Con estudiantes: la tabla de la evidencia. Pregunta: ¿por qué una idea con efectos tan pequeños se volvió tan famosa? ¿Qué nos dice eso sobre cómo leer libros de autoayuda?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>La mentalidad no reemplaza las condiciones. Decirle a un estudiante con hambre o sin luz en casa que "solo le falta actitud" es injusto. Yeager y otros (2019) encontraron que el contexto del colegio decidía si la intervención funcionaba.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>Hábitos y concentración</h2><p>Lo que hacemos sin pensar y cómo cuidar la atención</p></div>
+<article class="ficha" id="atomic-habits">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2018</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Hábitos atómicos</h3>
+    <p class="original">Atomic Habits: Tiny Changes, Remarkable Results</p>
+    <dl><div><dt>Autor</dt><dd>James Clear</dd></div><div><dt>Temas</dt><dd><span class="tema">habitos</span> <span class="tema">autocontrol</span> <span class="tema">ahorro</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><em>La Odisea</em> · Diseñar el entorno para no caer en la tentación es la versión moderna de atarse al mástil.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>James Clear explica cómo se forman y se cambian los hábitos con cambios muy pequeños. Lo publicó Avery (Penguin Random House) en 2018. En español lo publicó Paidós en 2019 con el título <em>Hábitos atómicos</em>.</p>
+<h2>Resumen</h2>
+<p>El libro tiene una introducción, una parte de fundamentos, cuatro partes (una por cada ley) y una parte final:</p>
+<ol>
+<li><strong>Fundamentos.</strong> El poder de los cambios pequeños; cómo los hábitos forman la identidad; y el ciclo de todo hábito: <em>señal → deseo → respuesta → recompensa</em>.</li>
+<li><strong>Primera ley: hacerlo obvio.</strong> Decidir de antemano cuándo y dónde se hará algo ("después de almorzar, guardo 1.000 pesos"); encadenar un hábito nuevo a uno que ya existe; y diseñar el entorno, porque la motivación está sobrevalorada.</li>
+<li><strong>Segunda ley: hacerlo atractivo.</strong> Juntar lo que hay que hacer con algo que se disfruta, y rodearse de gente que ya tiene el hábito.</li>
+<li><strong>Tercera ley: hacerlo sencillo.</strong> Repetir importa más que hacerlo perfecto; reducir el esfuerzo de empezar; y la "regla de los dos minutos": empezar con una versión del hábito que tome menos de dos minutos.</li>
+<li><strong>Cuarta ley: hacerlo satisfactorio.</strong> Darse una recompensa inmediata y llevar un registro visible de los días cumplidos.</li>
+<li><strong>Tácticas avanzadas.</strong> Elegir hábitos que encajen con uno, mantenerse en el punto justo de dificultad y revisar los hábitos cuando ya son automáticos.</li>
+</ol>
+<p>Para dejar un mal hábito se invierten las cuatro leyes: volverlo invisible, poco atractivo, difícil e insatisfactorio.</p>
+<p>La tesis: <strong>los resultados dependen de los sistemas, no de las metas,</strong> y los sistemas se construyen con cambios pequeños repetidos.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Sus ideas principales se pueden usar al día siguiente:</p>
+<ul>
+<li><strong>Sistemas, no metas:</strong> "quiero ahorrar" es una meta; "guardo una moneda cada vez que compro algo" es un sistema.</li>
+<li><strong>Las cuatro leyes de un buen hábito:</strong> hacerlo obvio, atractivo, sencillo y satisfactorio. Para dejar un mal hábito se hace lo contrario: volverlo invisible, poco atractivo, difícil e insatisfactorio.</li>
+<li><strong>El entorno pesa más que la fuerza de voluntad:</strong> si el celular no está en la mesa, no lo miras.</li>
+<li><strong>Identidad:</strong> cada vez que haces algo, "votas" por la persona que quieres ser.</li>
+</ul>
+<p>Encaja con <em>Ahorro y metas</em> (el ahorro como hábito y no como esfuerzo heroico) y con <em>Interés compuesto</em>: Clear dice que mejorar un 1 % al día durante un año te hace unas 37 veces mejor. <strong>Ojo: eso es solo aritmética</strong> (1,01 multiplicado por sí mismo 365 veces da 37,8), igual que el tablero de ajedrez del nodo. No es un dato medido en personas.</p>
+<p><strong>La evidencia.</strong> Un estudio siguió a 96 voluntarios que querían crear un hábito sencillo, como comer una fruta al almuerzo (<a target="_blank" rel="noopener" href="https://doi.org/10.1002/ejsp.674">Lally y otros, 2010</a>). A la persona típica (la mediana) volverlo automático le tomó unos 66 días, con mucha diferencia entre personas (de 18 a 254 días). Saltarse un día no arruinó el proceso. <strong>El famoso "un hábito se forma en 21 días" no tiene respaldo.</strong></p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Convierte la investigación en reglas que se recuerdan.</strong> Varias de sus herramientas tienen buen respaldo. Decidir de antemano "cuándo y dónde" (los investigadores lo llaman <em>intención de implementación</em>) tuvo un efecto de tamaño medio a grande en un metaanálisis de 94 estudios (<a target="_blank" rel="noopener" href="https://doi.org/10.1016/S0065-2601(06)38002-1">Gollwitzer y Sheeran, 2006</a>).</li>
+<li><strong>No depende de la fuerza de voluntad.</strong> Su consejo de cambiar el entorno es más realista que "esfuérzate más", y encaja con las dudas sobre si la voluntad se agota (ver <em>El arte de pensar</em>).</li>
+<li><strong>Es honesto con el tiempo:</strong> dice que los resultados tardan, y la evidencia le da la razón (Lally y otros, en la tabla).</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Las historias de éxito pesan más que los estudios.</strong> El libro abre con el ciclismo británico, que pasó de perdedor a campeón mejorando un poco cada detalle. Es un buen gancho, pero es un caso elegido porque salió bien.</li>
+<li><strong>La idea de la identidad no está probada.</strong> Que cada acción sea un "voto" por la persona que quieres ser es una metáfora útil, no un hallazgo.</li>
+<li><strong>Supone vidas con margen.</strong> Los ejemplos (gimnasio, lectura, dieta) son de adultos con tiempo y dinero; hay que traducirlos a la vida de un estudiante que trabaja o cuida a otros.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es probablemente el libro más útil de la biblioteca para la vida diaria del estudiante, y conecta directo con <em>Ahorro y metas</em>: el ahorro funciona mejor como un sistema pequeño y automático que como un esfuerzo heroico. El ejercicio del nodo puede usar las cuatro leyes tal cual.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo 1, sobre el poder de los cambios pequeños, junto con el nodo <em>Interés compuesto</em>. Actividad: cada estudiante diseña un sistema de ahorro con las cuatro leyes. Pregunta: ¿qué hábito tuyo cambiaría si cambiara tu entorno?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>No promete resultados rápidos, y está bien que no lo haga: los cambios pequeños tardan en notarse.</li>
+<li>Los ejemplos son de adultos de clase media en países ricos; conviene traducirlos a la vida de los estudiantes.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="deep-work">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2016</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Enfócate</h3>
+    <p class="original">Deep Work: Rules for Focused Success in a Distracted World</p>
+    <dl><div><dt>Autor</dt><dd>Cal Newport</dd></div><div><dt>Temas</dt><dd><span class="tema">concentracion</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#ultralearning">Ultralearning</a> · La concentración es uno de los nueve principios de Ultralearning; Newport le dedica un libro entero.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Cal Newport, profesor de computación, distingue el <strong>trabajo profundo</strong> (concentrarse sin distracciones en algo difícil) del <strong>trabajo superficial</strong> (mensajes, correo, tareas que se hacen distraído). El profundo es cada vez más valioso y más escaso. Lo publicó Grand Central Publishing en 2016. En español hay dos ediciones: <em>Enfócate</em> (Paidós México, 2017) y <em>Céntrate (Deep Work)</em> (Península, España, 2022).</p>
+<h2>Resumen</h2>
+<p>El libro tiene dos partes:</p>
+<p><strong>Primera parte: la idea.</strong>
+1. <strong>El trabajo profundo es valioso.</strong> En una economía que cambia rápido, quien aprende cosas difíciles rápido y produce trabajo de calidad tiene ventaja.
+2. <strong>El trabajo profundo es escaso.</strong> Las oficinas abiertas, los mensajes instantáneos y las redes sociales lo vuelven raro.
+3. <strong>El trabajo profundo da sentido.</strong> Concentrarse en algo exigente es también una fuente de satisfacción.</p>
+<p><strong>Segunda parte: las reglas.</strong>
+1. <strong>Trabaja en profundidad:</strong> elegir un horario y un lugar fijos para concentrarse, y protegerlos.
+2. <strong>Acepta el aburrimiento:</strong> no sacar el celular en cada pausa, para que la mente no pierda la costumbre de concentrarse.
+3. <strong>Deja las redes sociales,</strong> o al menos elige cuáles usar según lo que de verdad aportan.
+4. <strong>Reduce lo superficial:</strong> planear el día por bloques y limitar el tiempo que se va en mensajes y correos.</p>
+<p>La tesis: <strong>la capacidad de concentrarse es cada vez más valiosa y cada vez más rara,</strong> y se puede entrenar como un músculo.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Habla del problema de estudio más común de nuestros estudiantes: el celular. Sus ideas:</p>
+<ul>
+<li><strong>Cambiar de tarea deja "residuo":</strong> después de mirar un mensaje, parte de la atención sigue ahí y la tarea siguiente sale peor (<a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.obhdp.2009.04.002">Leroy, 2009</a>).</li>
+<li><strong>Las interrupciones estresan:</strong> quien es interrumpido termina igual de rápido, pero con más estrés y frustración (<a target="_blank" rel="noopener" href="https://doi.org/10.1145/1357054.1357072">Mark, Gudith y Klocke, 2008</a>).</li>
+<li><strong>Hay que aceptar el aburrimiento:</strong> si sacas el celular en cada pausa, el cerebro se desacostumbra a concentrarse.</li>
+<li><strong>Elegir las herramientas por lo que aportan,</strong> no usarlas todas por defecto.</li>
+</ul>
+<p><strong>Un estudio que conviene contar con cuidado.</strong> Un estudio famoso encontró que quienes usan muchos medios a la vez (chat, video, música) se distraen más (<a target="_blank" rel="noopener" href="https://doi.org/10.1073/pnas.0903620106">Ophir, Nass y Wagner, 2009</a>). Pero cuando otros investigadores intentaron repetirlo, solo 5 de 14 pruebas dieron el mismo resultado (<a target="_blank" rel="noopener" href="https://doi.org/10.3758/s13414-017-1408-4">Wiradhany y Nieuwenstein, 2017</a>). Es un buen ejemplo de por qué un solo estudio no basta.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Nombra un problema que todos sienten.</strong> La diferencia entre trabajo profundo y superficial ayuda a entender por qué una tarde de "estudio" con el celular al lado rinde tan poco.</li>
+<li><strong>Se apoya en investigación real</strong> sobre el costo de cambiar de tarea y de las interrupciones (ver la tabla).</li>
+<li><strong>Propone reglas concretas,</strong> no solo diagnósticos.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Exagera el daño de la tecnología para los adolescentes.</strong> En un estudio con más de 350.000 adolescentes, el uso de tecnología digital tuvo una relación muy pequeña con su bienestar (<a target="_blank" rel="noopener" href="https://doi.org/10.1038/s41562-018-0506-1">Orben y Przybylski, 2019</a>). Dejar Facebook cuatro semanas sí mejoró un poco el bienestar de adultos en un experimento, pero también les quitó información sobre noticias (<a target="_blank" rel="noopener" href="https://doi.org/10.1257/aer.20190658">Allcott y otros, 2020</a>). El efecto existe, pero es más pequeño y más mezclado de lo que el libro sugiere.</li>
+<li><strong>Está escrito para profesionales con control de su agenda:</strong> profesores universitarios, programadores, escritores. Un estudiante no decide su horario ni su lugar de estudio, y a veces el celular es su única herramienta de aprendizaje.</li>
+<li><strong>La idea central no está medida directamente.</strong> Que el trabajo profundo sea "cada vez más valioso" es un argumento razonable, no un dato.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Su mejor aporte para nuestros estudiantes es la regla "acepta el aburrimiento" y la idea de un lugar y un horario fijos para estudiar, aunque sea media hora. Conviene enseñarlo con la evidencia en la mano, para no convertirlo en un sermón contra el celular, que para muchos estudiantes del colegio es justamente la puerta de entrada al aprendizaje.</p>
+<h2>Para leer en clase</h2>
+<p>La regla "Acepta el aburrimiento". Actividad: una semana sin celular durante las tareas, con registro de cuánto se avanzó. Pregunta: ¿cuántas veces miras el celular mientras estudias, y qué pasaría si lo dejaras en otro cuarto?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Newport escribe para trabajadores del conocimiento adultos; algunas reglas (como dejar las redes sociales) son decisiones personales, no obligaciones.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>Aprender por cuenta propia</h2><p>Métodos para autodidactas, y sus promesas</p></div>
+<article class="ficha" id="ultralearning">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2019</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Ultralearning</h3>
+    <p class="original">Ultralearning: Master Hard Skills, Outsmart the Competition, and Accelerate Your Career</p>
+    <dl><div><dt>Autor</dt><dd>Scott H. Young</dd></div><div><dt>Temas</dt><dd><span class="tema">aprender-a-aprender</span> <span class="tema">autocontrol</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#limitless">Sin límites</a> · Dos promesas de aprender más rápido; compararlas es un buen ejercicio para separar lo que tiene evidencia de lo que solo se dice.</li><li><a href="#el-arte-de-pensar">El arte de pensar</a> · Ultralearning se apoya en historias de gente que lo logró; Dobelli explica por qué eso puede ser sesgo de supervivencia.</li><li><em>Robinson Crusoe</em> · Aprender solo y haciendo: Robinson aprende a hornear pan y a hacer vasijas a punta de intentos fallidos.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Scott Young cuenta cómo aprender por cuenta propia, de forma intensa y organizada, algo difícil: un idioma, una materia, un oficio. Su ejemplo más conocido es el "Desafío MIT": entre octubre de 2011 y septiembre de 2012 estudió el plan de cuatro años de Ciencias de la Computación del MIT con los materiales que la universidad publica gratis, sin asistir a clases. En español lo publicó Conecta (Penguin Random House) en 2020, con el título <em>Ultralearning. Aprende más y más rápido, alcanza tus objetivos</em>.</p>
+<h2>Resumen</h2>
+<p>El libro tiene tres partes:</p>
+<ol>
+<li><strong>Qué es el ultraaprendizaje.</strong> Young lo define como una forma de aprender por cuenta propia, intensa y planeada, para dominar una habilidad difícil. Lo muestra con su propio caso y con otros autodidactas:</li>
+<li><strong>El Desafío MIT</strong> (2011-2012): el plan de Computación del MIT en un año, con los materiales gratuitos de la universidad.</li>
+<li><strong>"El año sin inglés"</strong> (2013-2014): con su amigo Vat Jaiswal pasó un año entre España, Brasil, China y Corea del Sur, aprendiendo cada idioma e intentando no hablar inglés. Los dos llegaron a un nivel intermedio en los cuatro.</li>
+<li><strong>Otros casos:</strong> Roger Craig, que estudió con datos de programas anteriores y en 2010 batió el récord de ganancias en un día del concurso <em>Jeopardy!</em>; Eric Barone, que aprendió solo programación, dibujo y música para crear el videojuego <em>Stardew Valley</em>; y figuras históricas como Benjamin Franklin y Richard Feynman.</li>
+<li><strong>Los nueve principios,</strong> uno por capítulo (ver la tabla más abajo).</li>
+<li><strong>Cómo armar tu propio proyecto:</strong> elegir qué aprender, investigar antes de empezar, reservar el tiempo, y un capítulo sobre la educación de las hermanas Polgár, a quienes su padre educó en casa para ser campeonas de ajedrez.</li>
+</ol>
+<p>La tesis es que en un mundo donde las habilidades cambian rápido, saber aprender solo y a fondo es una ventaja enorme, y que eso se puede entrenar.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Este colegio se basa en que cualquiera puede aprender con materiales abiertos, aunque no tenga un profesor al lado. <em>Ultralearning</em> es un manual para eso. Lo resume en nueve principios; algunos tienen mucha evidencia detrás y otros son buen sentido común. Vale la pena saber cuál es cuál:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Principio</th>
+<th>Qué significa</th>
+<th>Qué dice la evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Metaaprendizaje</td>
+<td>Antes de empezar, hacer el mapa: qué hay que aprender, con qué materiales y cómo lo aprendió otra gente.</td>
+<td>Sentido común; no citamos un estudio.</td>
+</tr>
+<tr>
+<td>Concentración</td>
+<td>Reservar bloques de tiempo protegidos para estudiar.</td>
+<td>Sentido común; no citamos un estudio.</td>
+</tr>
+<tr>
+<td>Ir directo</td>
+<td>Practicar la habilidad real, no un sustituto cómodo: si quieres hablar un idioma, habla.</td>
+<td>Sentido común; no citamos un estudio.</td>
+</tr>
+<tr>
+<td>Ejercitar lo débil</td>
+<td>Separar la parte que más cuesta, practicarla sola y luego volver al conjunto.</td>
+<td>Sentido común; no citamos un estudio.</td>
+</tr>
+<tr>
+<td>Recuperar</td>
+<td>Cerrar el cuaderno e intentar recordar o resolver sin mirar. Ponerse a prueba es una forma de aprender, no solo de medir.</td>
+<td><strong>Fuerte.</strong> Quienes practicaron recordando retuvieron más, una semana después, que quienes releyeron (<a target="_blank" rel="noopener" href="https://doi.org/10.1111/j.1467-9280.2006.01693.x">Roediger y Karpicke, 2006</a>). Una revisión de diez técnicas de estudio le dio "utilidad alta" (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1529100612453266">Dunlosky y otros, 2013</a>).</td>
+</tr>
+<tr>
+<td>Retroalimentación</td>
+<td>Buscar que alguien (o algo) te diga en qué fallaste.</td>
+<td><strong>Con matices.</strong> En promedio ayuda, pero en más de un tercio de los casos estudiados empeoró el desempeño, sobre todo cuando se centra en la persona y no en la tarea (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/0033-2909.119.2.254">Kluger y DeNisi, 1996</a>). El propio Young advierte que no toda retroalimentación sirve.</td>
+</tr>
+<tr>
+<td>Retener</td>
+<td>Repasar espaciado en el tiempo, no todo de una vez la noche antes.</td>
+<td><strong>Fuerte.</strong> El repaso espaciado supera al estudio concentrado (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/0033-2909.132.3.354">Cepeda y otros, 2006</a>); también recibió "utilidad alta" en Dunlosky y otros (2013).</td>
+</tr>
+<tr>
+<td>Intuición</td>
+<td>Entender a fondo, poder explicarlo con palabras sencillas, en vez de memorizar trucos.</td>
+<td>Sentido común; no citamos un estudio.</td>
+</tr>
+<tr>
+<td>Experimentar</td>
+<td>Probar métodos propios cuando los conocidos ya no alcanzan.</td>
+<td>Sentido común; no citamos un estudio.</td>
+</tr>
+</tbody>
+</table></div>
+<p>La misma revisión de Dunlosky califica con "utilidad baja" justo lo que más hacen los estudiantes: <strong>releer y subrayar</strong>. Ese contraste es la lección más útil del libro.</p>
+<p>Encaja en el frente <em>Pensar y decidir</em> del marco curricular ("aprender a aprender"), que todavía no tiene nodos.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Se apoya en la investigación donde importa.</strong> Sus dos consejos centrales, recuperar de memoria y repasar espaciado, son las técnicas con más evidencia (ver la tabla).</li>
+<li><strong>Es práctico.</strong> Cada principio termina en algo que se puede hacer mañana.</li>
+<li><strong>El autor es honesto con sus propios límites,</strong> y eso lo vuelve un buen ejemplo para clase. En su blog revisó el Desafío MIT con reglas más estrictas: sin puntos parciales en los ejercicios largos, habría aprobado 27 de los 33 exámenes finales, no 33. Reconoce que reemplazó las materias de laboratorio por otras teóricas, que no hizo proyecto de grado y que tuvo acceso solo a una parte del material de un estudiante real. Dice que nunca pretendió igualar un título del MIT.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Casos de éxito, sin los fracasos.</strong> El libro cuenta las historias de quienes lo lograron, no las de quienes intentaron un proyecto así y lo abandonaron. Es el sesgo de supervivencia que explica <em>El arte de pensar</em>: no sabemos cuántos lo intentaron para que estos casos existan.</li>
+<li><strong>Intensidad frente a espaciado.</strong> Hacer en un año lo que toma cuatro va en contra de su propio principio de retener con repaso espaciado. A Young se lo criticaron, y él responde que el espaciado importa menos en habilidades complejas que en memorizar datos. Es un punto discutible: la evidencia fuerte del espaciado viene sobre todo de recordar información (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/0033-2909.132.3.354">Cepeda y otros, 2006</a>).</li>
+<li><strong>Condiciones que pocos tienen.</strong> Young tenía tiempo libre e internet. El libro casi no habla de cómo aprender así trabajando, cuidando a otros o sin conexión.</li>
+<li><strong>Lo que no mide.</strong> Aprobar exámenes no es lo mismo que poder usar lo aprendido. El principio de "ir directo" apunta a eso, pero el Desafío MIT se evaluó sobre todo con exámenes.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es el libro que mejor describe lo que se le pide a un estudiante de New Old School: aprender con materiales abiertos, a veces sin profesor al lado. Pero hay que adaptarlo: no un año de intensidad, sino <strong>un proyecto pequeño</strong>, por ejemplo 30 días y media hora al día, con los principios que tienen más evidencia (recuperar, repasar espaciado y recibir retroalimentación de un compañero). Y hay que enseñarlo junto con la pregunta de <em>El arte de pensar</em>: ¿de quién no oímos hablar?</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo sobre recuperar, y luego un experimento: la mitad del grupo relee un texto dos veces; la otra mitad lo lee una vez y escribe todo lo que recuerda. Al día siguiente, todos responden las mismas preguntas y se comparan los resultados. Pregunta: ¿cómo estudias tú, y cómo sabes que funciona?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Young estudió con internet y con tiempo libre, sin tener que trabajar para vivir. Hay que decir que no todos tienen esas condiciones. El método también sirve a menor escala: media hora al día, con un cuaderno y sin conexión.</li>
+<li>La lista de los nueve principios se cotejó con varios resúmenes publicados del libro, que coinciden entre sí. Los nombres en español son nuestra traducción.</li>
+<li>Tiene derechos de autor: en clase se cuenta la idea con palabras propias.</li>
+</ul></details>
+</article>
+<article class="ficha" id="limitless">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2020</span><span class="chip v-promete">Promete más de lo que prueba</span></div>
+    <h3>Sin límites</h3>
+    <p class="original">Limitless: Upgrade Your Brain, Learn Anything Faster, and Unlock Your Exceptional Life</p>
+    <dl><div><dt>Autor</dt><dd>Jim Kwik</dd></div><div><dt>Temas</dt><dd><span class="tema">aprender-a-aprender</span> <span class="tema">sesgos</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#el-arte-de-pensar">El arte de pensar</a> · Dobelli enseña a desconfiar de las buenas historias y de la autoridad; sirve para leer con cabeza fría cualquier libro que prometa cambiarte la vida, incluido este.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Jim Kwik es un "entrenador del cerebro" estadounidense. Cuenta que de niño sufrió una lesión en la cabeza que le dejó serias dificultades para aprender, y que aprendió a leer con cómics. El libro propone que cualquiera puede aprender más rápido y está organizado en cuatro partes:</p>
+<ol>
+<li><strong>Libera tu mente:</strong> por qué importa aprender hoy y cómo leer y recordar el propio libro.</li>
+<li><strong>Mentalidad:</strong> las creencias que nos limitan y "las siete mentiras del aprendizaje".</li>
+<li><strong>Motivación:</strong> propósito, energía, pasos pequeños y "flujo".</li>
+<li><strong>Métodos:</strong> concentración, estudio, memoria, <strong>lectura rápida</strong> (capítulo 14) y pensamiento.</li>
+</ol>
+<p>Lo publicó Hay House en 2020; en español, Urano lo publicó en 2022 con el título <em>Sin límites</em>. La edición ampliada (Hay House, 2023) agrega cuatro capítulos: inteligencia artificial, nutrición y "nootrópicos" (suplementos para el cerebro), trabajo remoto y un test para descubrir tu "animal cerebral".</p>
+<h2>Resumen</h2>
+<p>El libro avanza en el mismo orden que su modelo, que Kwik llama "sin límites": primero se cambia la <strong>mentalidad</strong>, después se encuentra la <strong>motivación</strong> y al final se aprenden los <strong>métodos</strong>.</p>
+<ul>
+<li><strong>Mentalidad.</strong> Kwik dice que nos limitan "siete mentiras del aprendizaje": que la inteligencia es fija, que solo usamos el 10 % del cerebro, que equivocarse es fracasar, que el conocimiento es poder (para él, solo lo es si se aplica), que aprender cosas nuevas es muy difícil, que la crítica de los demás importa y que el genio se nace.</li>
+<li><strong>Motivación.</strong> Tener un propósito, cuidar la energía (sueño, comida, ejercicio), avanzar con pasos pequeños y buscar el estado de "flujo", cuando uno está tan concentrado que pierde la noción del tiempo.</li>
+<li><strong>Métodos.</strong> Técnicas de concentración, de estudio, de memoria (como el palacio de la memoria), de lectura rápida y de pensamiento. La más citada es su método <strong>FASTER</strong> (en inglés, "más rápido"): <em>olvidar</em> lo que crees saber y las distracciones, <em>actuar</em> (tomar notas, ponerse a prueba), cuidar el <em>estado</em> de ánimo, estudiar como si fueras a <em>enseñarlo</em>, <em>agendar</em> el tiempo de estudio y <em>repasar</em>.</li>
+</ul>
+<p>La tesis es que el cerebro no tiene un límite fijo y que cualquiera puede aprender mucho más rápido con las creencias y las técnicas correctas.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Por dos razones:</p>
+<ol>
+<li><strong>Su mensaje de fondo sirve:</strong> las dificultades para aprender no son un destino, y algunas de sus técnicas sí tienen respaldo.</li>
+<li><strong>Es un caso perfecto para practicar el pensamiento crítico,</strong> porque mezcla promesas con evidencia sólida y promesas sin ella:</li>
+</ol>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Lo que propone</th>
+<th>Qué dice la evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Técnicas de memoria, como el "palacio de la memoria" (ubicar lo que quieres recordar en un recorrido por un lugar conocido)</td>
+<td><strong>Sirven para listas y datos sueltos.</strong> Personas sin experiencia que entrenaron seis semanas con este método mejoraron su memoria, y la mejora seguía cuatro meses después (<a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.neuron.2017.02.003">Dresler y otros, 2017</a>). Pero recordar una lista no es entender un tema: otra técnica de este tipo (la "palabra clave") recibió "utilidad baja" para el estudio escolar (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1529100612453266">Dunlosky y otros, 2013</a>).</td>
+</tr>
+<tr>
+<td>Lectura rápida (capítulo 14)</td>
+<td><strong>No resiste la evidencia.</strong> La revisión más completa concluye que leer mucho más rápido sin entender menos no es posible: cuando se acelera, se pierde comprensión. Lo que sí ayuda es leer mucho y conocer más palabras (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1529100615623267">Rayner y otros, 2016</a>).</td>
+</tr>
+<tr>
+<td>Mentalidad y motivación</td>
+<td>Ideas razonables, pero el libro las presenta con más seguridad de la que tienen los estudios.</td>
+</tr>
+<tr>
+<td>Nutrición y suplementos (edición ampliada)</td>
+<td><strong>Tema de salud.</strong> No se enseña a partir de este libro. Si se toca, va con revisión experta (AGENTS.md, regla 6).</td>
+</tr>
+</tbody>
+</table></div>
+<p>Leerlo junto con <em>Ultralearning</em> y <em>El arte de pensar</em> enseña algo que el colegio quiere que todo estudiante sepa hacer: <strong>separar lo comprobado de lo que solo "se dice"</strong>, como en la sección de evidencia de cada nodo.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Derriba un mito.</strong> Lo de que "solo usamos el 10 % del cerebro" es falso, y Kwik lo dice. También insiste en que equivocarse es parte de aprender.</li>
+<li><strong>Parte de su método FASTER coincide con la evidencia.</strong> <em>Actuar</em> (ponerse a prueba) y <em>repasar</em> son las dos técnicas con más respaldo (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1529100612453266">Dunlosky y otros, 2013</a>). Y <em>estudiar como si fueras a enseñarlo</em> también tiene apoyo: en dos experimentos, quienes estudiaron un texto creyendo que luego lo iban a enseñar lo recordaron mejor y más organizado que quienes esperaban un examen, aunque al final nadie enseñó (<a target="_blank" rel="noopener" href="https://doi.org/10.3758/s13421-014-0416-z">Nestojko y otros, 2014</a>).</li>
+<li><strong>Su historia motiva.</strong> Un niño con una lesión cerebral que aprendió a leer con cómics es una buena puerta para estudiantes que creen que "no sirven para estudiar".</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Mezcla lo comprobado con lo que no lo está, con la misma seguridad.</strong> El libro no le da al lector forma de distinguir <em>repasar</em>, que tiene décadas de investigación, de la lectura rápida, que no resiste la evidencia (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1529100615623267">Rayner y otros, 2016</a>), o de los suplementos de la edición ampliada.</li>
+<li><strong>La autoridad viene de la historia personal, no de la investigación.</strong> Kwik es entrenador y empresario, no investigador. Las evaluaciones independientes de su curso de lectura rápida, escritas por lectores que lo probaron, reportan mejoras mucho menores que las prometidas.</li>
+<li><strong>El libro también vende.</strong> Kwik dirige una empresa de cursos pagados sobre los mismos temas. No invalida lo que dice, pero es una razón para pedir más pruebas. Algo parecido pasó con la investigación sobre mentalidad de crecimiento: los estudios de autores con interés económico encontraron efectos mayores (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/bul0000352">Macnamara y Burgoyne, 2023</a>; ver <em>Mindset</em>).</li>
+<li><strong>"Sin límites" es una promesa, no un hallazgo.</strong> El cerebro cambia con la práctica, pero eso no significa que cualquiera pueda aprender cualquier cosa a cualquier velocidad. La promesa puede hacer sentir culpable a quien no lo logra.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es el mejor libro de la biblioteca para un ejercicio de evidencia, justamente porque mezcla lo bueno con lo dudoso. Se puede hacer una tabla con los estudiantes: cada consejo del libro en una fila y, al lado, qué dice la investigación (sólido, con matices, sin estudio, en contra). Al final del ejercicio, el estudiante se queda con lo que sirve (ponerse a prueba, repasar, estudiar para enseñar) y con algo más valioso: la costumbre de preguntar "¿cómo lo sabemos?".</p>
+<h2>Para leer en clase</h2>
+<p>Dos actividades:</p>
+<ul>
+<li><strong>Probar el palacio de la memoria:</strong> cada estudiante recuerda una lista de diez cosas, primero sin técnica y luego ubicándolas en un recorrido por su casa o su vereda.</li>
+<li><strong>Poner a prueba la lectura rápida:</strong> leer un fragmento a velocidad normal y otro "a toda velocidad", y responder las mismas preguntas de comprensión sobre cada uno.</li>
+</ul>
+<p>Pregunta: ¿qué te haría creerle a un libro que promete que vas a aprender el doble de rápido? ¿Qué pruebas pedirías?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>No se trata de burlarse del autor ni de quien lo lee. La meta es aprender a preguntar "¿cómo lo sabemos?".</li>
+<li>La estructura en cuatro partes, las siete "mentiras" y el método FASTER se cotejaron con varios resúmenes publicados del libro, que coinciden entre sí; la traducción es nuestra.</li>
+<li>Tiene derechos de autor: se citan frases cortas y se cuenta la idea con palabras propias.</li>
+</ul></details>
+</article>
+<article class="ficha" id="el-arte-de-pensar">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2011</span><span class="chip v-matices">Con matices</span></div>
+    <h3>El arte de pensar</h3>
+    <p class="original">Die Kunst des klaren Denkens (en inglés, The Art of Thinking Clearly)</p>
+    <dl><div><dt>Autor</dt><dd>Rolf Dobelli</dd></div><div><dt>Temas</dt><dd><span class="tema">sesgos</span> <span class="tema">especulacion</span> <span class="tema">autocontrol</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><em>Delirios multitudinarios</em> · Dobelli explica en un capítulo la prueba social; Mackay muestra a países enteros cayendo en ella.</li><li><em>La Odisea</em> · El descuento hiperbólico (preferir el premio de hoy) es el problema; atarse al mástil, una solución.</li><li><a href="#make-it-stick">Apréndetelo</a> · El exceso de confianza en versión de estudiante: releer da la ilusión de saber, y Apréndetelo muestra cómo comprobarlo.</li><li><a href="#atomic-habits">Hábitos atómicos</a> · Dobelli dice que la fuerza de voluntad se agota; Clear propone no depender de ella y cambiar el entorno.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Un catálogo de errores de pensamiento, cada uno explicado en un capítulo de dos o tres páginas con un ejemplo cotidiano. Nació como una columna semanal en periódicos de Alemania y Suiza, y en 2011 se publicó en Alemania. La edición original trae 52 errores; la edición en inglés (2013), <em>The Art of Thinking Clearly</em>, reúne 99. En español lo publicó Ediciones B en 2013.</p>
+<h2>Resumen</h2>
+<p>El libro no tiene partes ni un hilo que lo atraviese: son capítulos independientes, cada uno con un nombre para el error, una anécdota y un consejo. Leídos juntos, los errores caen en cinco familias. La agrupación es nuestra, no del autor, y los ejemplos son capítulos de la edición original alemana.</p>
+<ol>
+<li><strong>Cómo juzgamos el éxito.</strong> Vemos solo a los ganadores (<em>sesgo de supervivencia</em>); creemos que los nadadores tienen ese cuerpo por nadar, cuando nadan bien porque tienen ese cuerpo (<em>ilusión del cuerpo del nadador</em>); juzgamos una decisión solo por cómo salió y no por cómo se tomó (<em>sesgo de resultado</em>).</li>
+<li><strong>Números y probabilidades.</strong> Después de cinco rojos en la ruleta, esperamos un negro (<em>falacia del jugador</em>); ignoramos qué tan común es algo antes de juzgar un caso (<em>olvido de la tasa base</em>); confundimos una mejora natural con el efecto de un remedio (<em>regresión a la media</em>); no imaginamos bien cómo crece algo que se duplica (<em>crecimiento exponencial</em>).</li>
+<li><strong>La presión de los demás.</strong> Hacemos lo que hace el grupo (<em>prueba social</em>, <em>pensamiento de grupo</em>); obedecemos a quien parece experto (<em>sesgo de autoridad</em>); le compramos más a quien nos cae bien (<em>sesgo de simpatía</em>).</li>
+<li><strong>Dinero y decisiones.</strong> Seguimos en algo malo porque ya invertimos (<em>costo hundido</em>); perder nos duele más de lo que nos alegra ganar (<em>aversión a la pérdida</em>); valoramos más lo que ya es nuestro (<em>efecto dotación</em>); un número cualquiera nos guía (<em>anclaje</em>); "solo hoy" nos hace comprar (<em>error de escasez</em>); quien gana una subasta suele pagar de más (<em>maldición del ganador</em>).</li>
+<li><strong>Cómo nos vemos a nosotros mismos.</strong> Creemos saber más de lo que sabemos (<em>exceso de confianza</em>); los éxitos son nuestros y los fracasos, mala suerte (<em>sesgo de autoservicio</em>); la alegría de lo nuevo se gasta pronto (<em>adaptación hedónica</em>); cambiamos la historia para no sentirnos mal (<em>disonancia cognitiva</em>); preferimos el premio de hoy (<em>descuento hiperbólico</em>).</li>
+</ol>
+<p>La tesis del autor es sencilla: no hay que desconfiar de toda intuición, pero en las decisiones importantes conviene pensar con calma y revisar la lista de errores. En una entrevista lo dijo así: la intuición y los sentimientos tienen su lugar, pero muchas veces el pensamiento claro lleva más lejos.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Varios de sus capítulos son el "puente" de los nodos del módulo Dinero, escritos para adultos. Pero el libro presenta todos los errores con la misma seguridad, y la investigación no los respalda a todos por igual. Vale la pena leerlo con esta tabla al lado:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Error</th>
+<th>En qué consiste</th>
+<th>Nodo</th>
+<th>Qué dice la evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sesgo de supervivencia</td>
+<td>Solo vemos a los que triunfaron; los que fracasaron no cuentan su historia.</td>
+<td><em>Estafas y pirámides</em></td>
+<td><strong>Es lógica, no un hallazgo de laboratorio.</strong> Siempre que falten los casos que fracasaron, la conclusión se tuerce.</td>
+</tr>
+<tr>
+<td>Prueba social</td>
+<td>Hacemos lo que vemos hacer a los demás.</td>
+<td><em>Estafas y pirámides</em></td>
+<td><strong>Sólida.</strong> En los experimentos de Asch, muchas personas dieron una respuesta claramente equivocada solo porque el grupo la daba (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/h0093718">Asch, 1956</a>).</td>
+</tr>
+<tr>
+<td>Crecimiento exponencial</td>
+<td>Por intuición, imaginamos el crecimiento como una recta, no como una curva que se dispara.</td>
+<td><em>Interés compuesto</em></td>
+<td><strong>Sólida.</strong> Quienes más subestiman el crecimiento exponencial ahorran menos y se endeudan más (<a target="_blank" rel="noopener" href="https://doi.org/10.1111/j.1540-6261.2009.01518.x">Stango y Zinman, 2009</a>).</td>
+</tr>
+<tr>
+<td>Descuento hiperbólico</td>
+<td>Preferimos un premio pequeño hoy a uno grande mañana, aunque no lo haríamos si los dos fueran lejanos.</td>
+<td><em>Ahorro y metas</em></td>
+<td><strong>Sólida.</strong> Es la base de los modelos económicos del ahorro (<a target="_blank" rel="noopener" href="https://doi.org/10.1162/003355397555253">Laibson, 1997</a>).</td>
+</tr>
+<tr>
+<td>Costo hundido</td>
+<td>Seguimos con algo malo porque "ya invertimos mucho".</td>
+<td><em>Invertir, lo básico</em></td>
+<td><strong>Sólida.</strong> En un experimento, quienes pagaron precio completo por un abono de teatro fueron a más funciones que quienes recibieron descuento (<a target="_blank" rel="noopener" href="https://doi.org/10.1016/0749-5978(85)90049-4">Arkes y Blumer, 1985</a>).</td>
+</tr>
+<tr>
+<td>Aversión a la pérdida</td>
+<td>Perder duele más de lo que alegra ganar lo mismo.</td>
+<td><em>Invertir, lo básico</em></td>
+<td><strong>Sólida, con debate.</strong> Es parte de la teoría de Kahneman y Tversky (<a target="_blank" rel="noopener" href="https://doi.org/10.2307/1914185">1979</a>), pero hay investigadores que sostienen que es menos general de lo que se cree (<a target="_blank" rel="noopener" href="https://doi.org/10.1002/jcpy.1047">Gal y Rucker, 2018</a>).</td>
+</tr>
+<tr>
+<td>Anclaje</td>
+<td>Un número cualquiera que vimos antes cambia lo que estimamos después.</td>
+<td><em>El costo real de un crédito</em></td>
+<td><strong>Muy sólida.</strong> Descrito por Tversky y Kahneman (<a target="_blank" rel="noopener" href="https://doi.org/10.1126/science.185.4157.1124">1974</a>) y replicado en 36 laboratorios a la vez (<a target="_blank" rel="noopener" href="https://doi.org/10.1027/1864-9335/a000178">Klein y otros, 2014</a>).</td>
+</tr>
+<tr>
+<td>Fatiga de decisión (cap. 53 de la edición inglesa)</td>
+<td>La fuerza de voluntad se gasta a lo largo del día, como una batería.</td>
+<td>—</td>
+<td><strong>No resistió la réplica.</strong> Cuando 23 laboratorios repitieron el experimento clásico de "agotamiento de la voluntad" con 2.141 personas, el efecto fue casi cero (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/1745691616652873">Hagger y otros, 2016</a>). El debate sigue, pero no se puede enseñar como un hecho.</td>
+</tr>
+</tbody>
+</table></div>
+<p>La última fila es la lección más valiosa del libro, aunque no sea la que el autor quiso dar: <strong>hasta un libro sobre errores de pensamiento puede cometerlos.</strong> Por eso la sección de evidencia de cada nodo separa lo comprobado de lo que solo "se dice".</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Les pone nombre a los errores.</strong> Es su mayor aporte. Un error que tiene nombre se reconoce más fácil en la vida diaria, y el libro funciona como un diccionario para conversar sobre decisiones.</li>
+<li><strong>Es corto y concreto.</strong> Cada capítulo se lee en cinco minutos y parte de una escena cotidiana. Es el mismo principio del Formato Curioso: una sola idea por vez.</li>
+<li><strong>Se puede leer en cualquier orden,</strong> lo que lo vuelve fácil de usar en clase.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Trata igual lo sólido y lo dudoso.</strong> La tabla de arriba lo muestra: el anclaje se replicó en 36 laboratorios; la fatiga de decisión no resistió la réplica. El lector no tiene cómo distinguirlos.</li>
+<li><strong>Es una lista, no una explicación.</strong> No dice <em>por qué</em> la mente comete estos errores ni cómo se relacionan entre sí, y varios capítulos se superponen. Para eso está <em>Pensar rápido, pensar despacio</em> (Daniel Kahneman, 2011; en español, Debate), que explica muchos de estos sesgos con una sola teoría: un pensamiento rápido y automático, y otro lento y esforzado.</li>
+<li><strong>Mira la intuición casi siempre como enemiga.</strong> Otros investigadores sostienen que los atajos mentales muchas veces funcionan bien, sobre todo cuando hay poca información y poco tiempo, y que a veces le ganan al cálculo detallado (<a target="_blank" rel="noopener" href="https://doi.org/10.1146/annurev-psych-120709-145346">Gigerenzer y Gaissmaier, 2011</a>). Un atajo no es un error por definición; depende del ambiente donde se usa.</li>
+<li><strong>Conocer los sesgos no basta para evitarlos.</strong> Las personas ven los sesgos mucho más en los demás que en sí mismas, incluso después de leer cómo funcionan (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/0146167202286008">Pronin, Lin y Ross, 2002</a>). La buena noticia es que el entrenamiento con práctica sí ayuda: en dos experimentos, una sola sesión con un videojuego que daba retroalimentación redujo varios sesgos, y el efecto seguía dos meses después (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/2372732215600886">Morewedge y otros, 2015</a>). Leer el libro sirve de poco; <strong>practicar con casos y recibir retroalimentación sirve más.</strong></li>
+<li><strong>Está escrito para ejecutivos europeos.</strong> Los ejemplos son de inversiones, empresas y viajes de negocios. Para nuestros estudiantes hay que traducirlos a la tienda del barrio, la cosecha, la cadena de WhatsApp o la "flor de la abundancia".</li>
+</ul>
+<p><strong>Para el colegio.</strong> El libro sirve como diccionario de errores, no como fuente de evidencia. La forma de usarlo es la misma de los nodos: tomar un error, buscar el estudio que lo respalda (o que lo pone en duda) y practicarlo con un caso real. Así el estudiante no solo aprende el nombre del sesgo, sino que entrena a reconocerlo, que es lo que según Morewedge y otros sí funciona.</p>
+<h2>Para leer en clase</h2>
+<p>Capítulos sueltos, uno por sesión: es un libro que no se lee en orden. Sugerencias:</p>
+<ul>
+<li>El del <strong>sesgo de supervivencia</strong>, junto con <em>Estafas y pirámides</em>. Pregunta: ¿de qué personas no oímos hablar nunca, y por qué eso cambia la historia?</li>
+<li>El del <strong>anclaje</strong>, con un experimento: la mitad del grupo ve el número 10 y la otra mitad el 90; luego todos estiman cuántos países hay en África. ¿Cambian las respuestas?</li>
+<li>El de la <strong>fatiga de decisión</strong>, junto con la réplica de Hagger. Pregunta: ¿cómo puede un libro famoso equivocarse en algo, y cómo nos damos cuenta?</li>
+</ul>
+<h2>Con cuidado</h2>
+<ul>
+<li>Es divulgación, no un libro de texto. Cada capítulo resume la investigación de otros con demasiada seguridad. Cuando un dato importe, hay que ir al estudio original.</li>
+<li>El escritor Nassim Taleb acusó a Dobelli de usar sin citarlo material de su manuscrito de <em>Antifrágil</em>. Es una buena excusa para hablar de por qué hay que citar las fuentes.</li>
+<li>Tiene derechos de autor: en clase se usan fragmentos breves o se cuenta la idea con palabras propias.</li>
+</ul></details>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>Pedagogía</h2><p>Qué es enseñar y para qué se aprende</p></div>
+<article class="ficha" id="pedagogia-del-oprimido">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">ensayo · 1970</span><span class="chip v-filosofia">Filosofía de la educación</span></div>
+    <h3>Pedagogía del oprimido</h3>
+    <p class="original">Pedagogia do oprimido</p>
+    <dl><div><dt>Autor</dt><dd>Paulo Freire</dd></div><div><dt>Temas</dt><dd><span class="tema">educacion</span> <span class="tema">justicia</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#el-maestro-ignorante">El maestro ignorante</a> · Dos críticas al maestro que solo &quot;deposita&quot; o &quot;explica&quot;: Freire propone el diálogo; Rancière, la igualdad de las inteligencias.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>El educador brasileño Paulo Freire salió al exilio tras el golpe militar de 1964 y terminó este libro en Santiago de Chile en 1968. Antes había alfabetizado adultos campesinos y obreros partiendo de "palabras generadoras": palabras de su vida diaria. Aquí convierte esa experiencia en una teoría de la educación. La primera edición en español salió en 1970 (Tierra Nueva, Montevideo), el mismo año que la inglesa; hoy la publica Siglo XXI Editores.</p>
+<h2>Resumen</h2>
+<p>El libro tiene cuatro capítulos:</p>
+<ol>
+<li><strong>Por qué una pedagogía del oprimido.</strong> Quien vive oprimido termina viéndose como lo ve su opresor, y a veces sueña con ocupar su lugar. Liberarse exige tomar conciencia de esa situación, y nadie lo hace solo: el capítulo cierra con un apartado titulado "Nadie libera a nadie, ni nadie se libera solo".</li>
+<li><strong>La educación "bancaria".</strong> El maestro sabe y el estudiante no; el maestro habla y el estudiante escucha; el maestro "deposita" y el estudiante archiva. Esa educación forma personas que se adaptan, no que piensan. La alternativa es la educación "problematizadora": maestro y estudiante investigan juntos un problema real.</li>
+<li><strong>El diálogo.</strong> Para Freire, el diálogo es la esencia de la educación que libera. El contenido no se decide desde arriba: sale de los "temas generadores", los problemas y palabras de la vida de quienes aprenden, que un equipo investiga con la comunidad.</li>
+<li><strong>La acción.</strong> Contrasta la acción "antidialógica" (conquistar, dividir, manipular, imponer la cultura propia) con la "dialógica" (cooperar, unir, organizar, construir la cultura juntos).</li>
+</ol>
+<p>La tesis: <strong>educar nunca es neutral.</strong> O ayuda a las personas a adaptarse a su situación, o les ayuda a entenderla para poder cambiarla.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es probablemente el libro de pedagogía latinoamericano más leído en el mundo, y está en la raíz de lo que este colegio quiere ser:</p>
+<ul>
+<li><strong>La "educación bancaria":</strong> el maestro "deposita" datos en el estudiante, que solo los recibe, los guarda y los repite. Es lo contrario del Formato Curioso.</li>
+<li><strong>La educación "problematizadora":</strong> se aprende dialogando sobre problemas reales de la vida de los estudiantes, y el maestro también aprende. Es la idea detrás de las secciones <em>¿Y a mí qué?</em> de cada nodo.</li>
+<li><strong>Los "temas generadores":</strong> el contenido sale de la realidad de quien aprende, no solo del programa oficial.</li>
+<li><strong>Leer el mundo para transformarlo:</strong> aprender a leer no es solo descifrar letras, sino entender la propia situación.</li>
+</ul>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Pone al estudiante en el centro.</strong> La crítica a la educación "bancaria" sigue siendo útil para cualquier maestro, y es la razón por la que los nodos del colegio empiezan con una pregunta y no con una definición.</li>
+<li><strong>Parte de la realidad de quien aprende.</strong> Los "temas generadores" son el antecedente de la sección <em>¿Y a mí qué?</em>: aprender sobre lo que importa en la propia vida.</li>
+<li><strong>El diálogo tiene respaldo.</strong> En un estudio con 72 salones de clase de primaria en Inglaterra, cuando muchos estudiantes participaban y se construía sobre lo que otros decían, los estudiantes dominaban mejor los contenidos, aun controlando por su nivel previo (<a target="_blank" rel="noopener" href="https://doi.org/10.1080/10508406.2019.1573730">Howe y otros, 2019</a>).</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Es un libro político antes que pedagógico.</strong> Está escrito con el lenguaje del marxismo y de la teología de la liberación de los años sesenta, y muchos lectores lo encuentran abstracto y difícil. Algunos críticos sostienen que, por su énfasis en la conciencia política, descuida los contenidos que los estudiantes necesitan dominar.</li>
+<li><strong>Dice poco de cómo se enseña cada cosa.</strong> Explica para qué educar y desde dónde, pero casi no habla de cómo se aprende a leer, a sumar o a escribir bien. Y la investigación muestra que los principiantes aprenden mejor con guía explícita que descubriendo solos (<a target="_blank" rel="noopener" href="https://doi.org/10.1207/s15326985ep4102_1">Kirschner, Sweller y Clark, 2006</a>).</li>
+<li><strong>Su lenguaje original era sexista</strong> ("el hombre" para hablar de todas las personas); el propio Freire lo reconoció y se revisó en ediciones posteriores.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es la raíz filosófica de New Old School: enseñar lo que importa en la vida de quien aprende y empezar por sus preguntas. Pero hay que combinarlo con lo que dice la ciencia del aprendizaje: dialogar sobre problemas reales <strong>y</strong> enseñar con claridad lo que hace falta para resolverlos.</p>
+<h2>Para leer en clase</h2>
+<p>Para docentes: el capítulo II, sobre la concepción "bancaria" de la educación, con su lista de oposiciones ("el educador es el que sabe; los educandos, los que no saben…"). Para estudiantes de 14 a 16 años, adaptada: ¿en qué clases te has sentido como una alcancía? ¿En cuáles has pensado de verdad?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Es un libro político, escrito en lenguaje filosófico y marxista, y no es fácil. Hay críticas serias: que descuida los contenidos tradicionales y que su primera versión usaba un lenguaje sexista (se revisó después).</li>
+<li>Hay que presentarlo como una propuesta para discutir, no como la única forma correcta de enseñar.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="el-maestro-ignorante">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">ensayo · 1987</span><span class="chip v-filosofia">Filosofía de la educación</span></div>
+    <h3>El maestro ignorante</h3>
+    <p class="original">Le Maître ignorant. Cinq leçons sur l&#x27;émancipation intellectuelle</p>
+    <dl><div><dt>Autor</dt><dd>Jacques Rancière</dd></div><div><dt>Temas</dt><dd><span class="tema">educacion</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#ultralearning">Ultralearning</a> · Aprender sin que nadie te explique: Jacotot en 1818 y Scott Young con los cursos abiertos del MIT.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>En 1818, Joseph Jacotot, un profesor francés exiliado, tenía que enseñar en la Universidad de Lovaina a estudiantes que hablaban holandés, una lengua que él no conocía. Les dio una edición bilingüe de una novela, el <em>Telémaco</em> de Fénelon, y les pidió que aprendieran francés por su cuenta comparando las dos versiones. Lo lograron. El filósofo Jacques Rancière cuenta esta historia y saca de ella una idea incómoda. Lo publicó Fayard en 1987. En español hay ediciones de Laertes (2003) y de Libros del Zorzal (2007, ampliada en 2016).</p>
+<h2>Resumen</h2>
+<p>El libro tiene cinco capítulos, que Rancière llama "lecciones":</p>
+<ol>
+<li><strong>Una aventura intelectual.</strong> La historia de Jacotot y el <em>Telémaco</em> bilingüe. De ahí sale la crítica al "orden explicador": la idea de que el estudiante necesita que alguien le explique para entender.</li>
+<li><strong>La lección del ignorante.</strong> Un maestro que no sabe puede enseñar, si exige al estudiante atención y voluntad y le pregunta qué ve, qué piensa y qué hace con eso. "Todo está en todo": cualquier libro sirve para aprender a partir de él.</li>
+<li><strong>La razón de los iguales.</strong> Todas las inteligencias son iguales; lo que cambia es la voluntad y la atención con que se usan.</li>
+<li><strong>La sociedad del desprecio.</strong> La sociedad se organiza sobre la idea de que unos son superiores a otros, y la escuela la reproduce cuando trata a algunos estudiantes como incapaces.</li>
+<li><strong>El emancipador y su mono.</strong> Por qué el método de Jacotot no se puede convertir en una institución: cuando la emancipación se vuelve un sistema, deja de emancipar.</li>
+</ol>
+<p>La tesis: <strong>la igualdad de las inteligencias es un punto de partida, no una meta.</strong> Quien enseña suponiendo que el otro es incapaz, lo vuelve incapaz.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Hace preguntas que este colegio necesita hacerse, porque muchos de sus estudiantes aprenderán sin un profesor al lado:</p>
+<ul>
+<li><strong>Todas las inteligencias son iguales:</strong> para Rancière, es un punto de partida, no una meta.</li>
+<li><strong>Explicar puede embrutecer:</strong> si el maestro siempre explica, el estudiante aprende que no puede entender solo.</li>
+<li><strong>Un maestro puede enseñar lo que no sabe,</strong> si exige atención y voluntad.</li>
+</ul>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Cambia la pregunta.</strong> En vez de "¿cómo explico mejor?", pregunta "¿qué puede hacer este estudiante por sí mismo?". Es una pregunta poderosa para un colegio cuyos estudiantes muchas veces aprenderán sin nadie al lado.</li>
+<li><strong>Ataca el desprecio.</strong> Su crítica a tratar a ciertos estudiantes como incapaces es una advertencia útil para cualquier docente.</li>
+<li><strong>Es corto, raro y memorable.</strong> La historia de Jacotot se queda en la cabeza.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Es filosofía, no investigación.</strong> No tiene datos sobre si el método de Jacotot funciona con todos, y el propio Rancière dice que no es un método.</li>
+<li><strong>La evidencia sobre aprender sin guía es en contra, al menos para principiantes.</strong> Quien no sabe nada de un tema aprende mejor con instrucción explícita y ejemplos resueltos que descubriendo solo (<a target="_blank" rel="noopener" href="https://doi.org/10.1207/s15326985ep4102_1">Kirschner, Sweller y Clark, 2006</a>). Los estudiantes de Jacotot eran universitarios, ya sabían leer y tenían un libro bilingüe: no partían de cero.</li>
+<li><strong>Se puede usar mal.</strong> Algunos críticos advierten que leerlo como "el maestro sobra" es un error: Jacotot no explicaba, pero exigía, preguntaba y verificaba.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Su idea más útil es la confianza: suponer que cada estudiante puede entender, y diseñar los nodos para que pueda avanzar solo. Pero esa confianza debe ir con buenos materiales: explicaciones claras, ejemplos y ejercicios con soluciones, que son el "libro bilingüe" de nuestros estudiantes.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo 1, "Una aventura intelectual", con la historia de Jacotot, para estudiantes de 13 a 16 años. Actividad: con un texto corto en dos idiomas (español y una lengua indígena, o español e inglés), intentar descubrir el significado de diez palabras sin diccionario. Pregunta: ¿qué aprendiste tú solo, sin que nadie te lo explicara?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>No es un manual. El propio Rancière dice que no propone un método. Hay críticos que advierten contra usarlo para justificar quitar a los maestros: lo que discute es <em>cómo</em> enseñan, no si hacen falta.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="emilio">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">tratado · 1762</span><span class="chip v-filosofia">Filosofía de la educación</span></div>
+    <h3>Emilio, o De la educación</h3>
+    <p class="original">Émile, ou De l&#x27;éducation</p>
+    <dl><div><dt>Autor</dt><dd>Jean-Jacques Rousseau</dd></div><div><dt>Temas</dt><dd><span class="tema">educacion</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><em>Robinson Crusoe</em> · Es el primer libro que Rousseau le deja leer a Emilio: el modelo de alguien que aprende de las cosas y no de los discursos.</li><li><a href="#pedagogia-del-oprimido">Pedagogía del oprimido</a> · Dos raíces de la educación activa, separadas por dos siglos: aprender de la experiencia (Rousseau) y del diálogo sobre la propia realidad (Freire).</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Rousseau imagina la educación de un niño, Emilio, desde que nace hasta que se casa. Es en parte novela y en parte tratado. Su idea central es que el niño aprende mejor de la experiencia y de las cosas que de los libros y los sermones. En 1762 el libro se prohibió y se quemó en París y en Ginebra, sobre todo por sus ideas sobre la religión.</p>
+<h2>Resumen</h2>
+<p>El libro tiene cinco partes, que siguen las etapas de la vida de Emilio:</p>
+<ol>
+<li><strong>Libro I, la primera infancia.</strong> Dejar que el bebé se mueva libre, sin fajas ni encierros, y no responder a todos sus caprichos.</li>
+<li><strong>Libro II, la niñez (hasta cerca de los 12 años).</strong> La "educación negativa": no llenar al niño de lecciones y libros, sino protegerlo y dejar que aprenda de las cosas y de las consecuencias de sus actos. Aquí están las habas del hortelano Roberto.</li>
+<li><strong>Libro III, cerca de los 12 a los 15 años.</strong> La edad de la curiosidad y de lo útil: Emilio aprende geografía perdiéndose en el bosque, lee <em>Robinson Crusoe</em> y aprende un oficio manual (Rousseau prefiere el de ebanista), para ser útil y libre.</li>
+<li><strong>Libro IV, la adolescencia.</strong> Las pasiones, la compasión y la religión. Incluye la "Profesión de fe del vicario saboyano", la parte que hizo que el libro se quemara en París y Ginebra.</li>
+<li><strong>Libro V, la juventud.</strong> La educación de Sofía, la futura esposa de Emilio, y los viajes antes del matrimonio.</li>
+</ol>
+<p>La tesis: <strong>el ser humano es bueno por naturaleza y la sociedad lo corrompe;</strong> la educación debe seguir el desarrollo natural del niño y enseñarle a partir de la experiencia, no de los discursos.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es una de las raíces de la "educación activa", y tiene escenas que se entienden a cualquier edad:</p>
+<ul>
+<li><strong>Las habas de Emilio (Libro II):</strong> Emilio siembra habas en un terreno donde el hortelano Roberto ya había plantado melones. Del conflicto aprende qué es la propiedad, sin que nadie le dé una lección.</li>
+<li><strong>Perdidos en el bosque (Libro III):</strong> Emilio pregunta "¿para qué sirve eso?" cuando le enseñan a orientarse por el sol. Días después se pierden en el bosque de Montmorency, tiene hambre y quiere volver a casa, y entonces lo aprende de verdad. Es la pregunta de la sección <em>¿Y a mí qué?</em> de cada nodo.</li>
+<li><strong>Robinson Crusoe (Libro III):</strong> el único libro que Rousseau quiere para Emilio a esa edad, porque muestra a alguien que aprende a sobrevivir con sus manos.</li>
+</ul>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Inventó la idea de que el niño no es un adulto pequeño.</strong> Que cada edad tenga su forma de aprender fue revolucionario en 1762, y hoy es sentido común.</li>
+<li><strong>Aprender de la experiencia y con sentido.</strong> El "¿para qué sirve eso?" de Emilio y la escena del bosque son la mejor defensa de enseñar lo útil, y la raíz de la educación activa, de Pestalozzi a Dewey (ver <em>El abordaje de la educación experiencial</em>).</li>
+<li><strong>Valora el trabajo manual.</strong> Que Emilio aprenda ebanistería, en un libro escrito para la élite, es una idea que este colegio comparte.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Es un experimento imaginario.</strong> Emilio es un niño rico, sin familia que se meta, con un preceptor dedicado solo a él durante veinte años. Ninguna escuela real funciona así.</li>
+<li><strong>El preceptor manipula.</strong> Muchas de las "experiencias" de Emilio están preparadas en secreto por su maestro. Es una libertad dirigida, y eso plantea preguntas éticas.</li>
+<li><strong>El Libro V educa a la mujer para servir al hombre.</strong> Mary Wollstonecraft lo refutó en 1792. No se puede enseñar sin discutirlo.</li>
+<li><strong>Rousseau dejó a sus cinco hijos en un orfanato.</strong> No invalida sus ideas, pero obliga a leerlas con distancia.</li>
+<li><strong>Retrasa la lectura.</strong> "Cuando tenga doce años Emilio apenas sabrá qué es un libro", escribe en el Libro II. Hoy eso no tiene sentido: aprender a leer temprano es una de las bases de todo lo demás.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es la raíz más antigua de la idea de aprender haciendo y de preguntar "¿para qué sirve eso?". Es de dominio público y está libre en español, así que los estudiantes pueden leer las escenas originales. Conviene leerlo como un clásico con ideas valiosas y errores graves, que es justo el ejercicio crítico que queremos enseñar.</p>
+<h2>Para leer en clase</h2>
+<p>Los dos episodios, que están en la edición libre enlazada (Wikisource): las habas en el Libro II y el bosque de Montmorency en el Libro III. Pregunta: ¿qué cosa aprendiste porque la necesitabas, y no porque te la enseñaron?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li><strong>La contradicción del autor:</strong> según sus propias <em>Confesiones</em>, Rousseau dejó a sus cinco hijos en un orfanato. El autor del libro más famoso sobre cómo criar a un niño no crió a los suyos.</li>
+<li><strong>El Libro V educa a la mujer para depender del hombre.</strong> Mary Wollstonecraft le respondió en 1792 con <em>Vindicación de los derechos de la mujer</em>. Hay que leerlo como una idea de su época que fue refutada.</li>
+<li>La edición de Wikisource no dice quién la tradujo.</li>
+</ul></details>
+</article>
+<article class="ficha" id="summerhill">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">ensayo · 1960</span><span class="chip v-filosofia">Filosofía de la educación</span></div>
+    <h3>Summerhill</h3>
+    <p class="original">Summerhill: A Radical Approach to Child Rearing</p>
+    <dl><div><dt>Autor</dt><dd>A. S. Neill</dd></div><div><dt>Temas</dt><dd><span class="tema">educacion</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#emilio">Emilio, o De la educación</a> · Los dos parten de que el niño es bueno por naturaleza y aprende mejor en libertad; Neill llevó la idea a una escuela real.</li><li><a href="#el-maestro-ignorante">El maestro ignorante</a> · Confiar en que el estudiante puede aprender por sí mismo: Jacotot sin explicar, Neill sin clases obligatorias.</li><li><a href="#el-abordaje-de-la-educacion-experiencial">El abordaje de la educación experiencial</a> · El &quot;reto por opción&quot; y las clases voluntarias de Summerhill comparten una idea: nadie aprende a la fuerza.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>A. S. Neill (1883-1973), un maestro escocés, fundó en 1921 una escuela donde <strong>las clases son voluntarias</strong> y las reglas se votan en una asamblea en la que cada estudiante y cada maestro tiene un voto. La escuela empezó cerca de Dresde (Alemania), tomó el nombre de Summerhill en Lyme Regis (Inglaterra) y hoy funciona en Leiston, Suffolk. El libro reúne textos de cuatro libros anteriores de Neill, con prólogo del psicoanalista Erich Fromm. Se publicó en Estados Unidos en 1960 y vendió millones de copias. En español lo publicó el Fondo de Cultura Económica en 1963, con el título <em>Summerhill: un punto de vista radical sobre la educación de los niños</em>.</p>
+<h2>Resumen</h2>
+<p>Es un libro de anécdotas y reflexiones, más que de teoría. Sus siete capítulos:</p>
+<ol>
+<li><strong>La escuela.</strong> Cómo funciona Summerhill: los estudiantes eligen si van o no a clase; muchos pasan meses jugando y luego deciden estudiar por su cuenta. La asamblea semanal hace las normas y resuelve los conflictos.</li>
+<li><strong>La crianza.</strong> Neill defiende la "autorregulación": dejar que el niño se desarrolle a su ritmo, sin miedo, culpa ni castigos.</li>
+<li><strong>El sexo,</strong> tratado con la franqueza de los años sesenta.</li>
+<li><strong>La moral y la religión:</strong> Neill prefiere el ejemplo y la comprensión a la instrucción moral.</li>
+<li><strong>Los problemas de los niños.</strong> Para Neill, la mayoría de los "niños problema" no nacen así: se vuelven así por una crianza basada en el miedo y la autoridad.</li>
+<li><strong>Los problemas de los padres.</strong></li>
+<li><strong>Preguntas y respuestas</strong> de padres sobre su método.</li>
+</ol>
+<p>Su principio central es <strong>"libertad, no libertinaje"</strong>: cada uno puede hacer lo que quiera mientras no le haga daño a otro.</p>
+<p>La tesis: <strong>la escuela debe adaptarse al niño, y no el niño a la escuela.</strong> Un niño libre y feliz aprende lo que necesita cuando está listo.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es la propuesta más radical sobre una pregunta que este colegio también se hace: <strong>¿qué pasa si el estudiante decide qué y cuándo aprende?</strong> New Old School no obliga a nadie: un estudiante entra a un nodo porque le interesa. Summerhill lleva esa idea hasta el extremo, y por eso ayuda a pensar dónde están sus límites.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Toma en serio a los niños.</strong> La asamblea, donde un estudiante de 8 años vota igual que el director, enseña ciudadanía de verdad, no de cartilla.</li>
+<li><strong>Mostró que funciona en la práctica.</strong> Summerhill lleva más de cien años abierta. En 1999 el gobierno británico la amenazó con cerrarla por tener clases voluntarias; la escuela fue a juicio y en 2000 el gobierno retiró el caso a los cuatro días de audiencia. En 2011 una inspección oficial la calificó de excelente en todas las áreas salvo la enseñanza, que calificó de buena.</li>
+<li><strong>Hay alguna evidencia sobre sus egresados.</strong> Una encuesta a exalumnos de otra escuela democrática, Sudbury Valley en Estados Unidos, encontró que la mayoría había seguido estudiando o trabajando sin grandes dificultades (<a target="_blank" rel="noopener" href="https://doi.org/10.1086/443842">Gray y Chanoff, 1986</a>).</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Las familias eligen la escuela.</strong> Summerhill es un internado privado que cobra matrícula, y los estudios con egresados de escuelas democráticas tienen el mismo problema: quienes llegan ahí ya son distintos del promedio. No se puede saber cuánto del resultado se debe a la escuela.</li>
+<li><strong>Se apoya en la autoridad de un hombre.</strong> Muchos lectores de la época notaron el carisma de Neill y dudaron de que su escuela se pudiera copiar en otro lugar. Sus ideas sobre psicología, influidas por el psicoanálisis, no se sostienen hoy como ciencia.</li>
+<li><strong>No aplica a todos los aprendizajes por igual.</strong> Aprender a leer o las bases de las matemáticas requiere práctica sistemática que pocos niños eligen solos. La investigación sobre aprendizaje (ver <em>Apréndetelo</em>) muestra que las técnicas que más sirven se sienten difíciles, y por eso casi nadie las elige espontáneamente.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Lo más valioso de Summerhill no es quitar las clases, sino dos ideas que se pueden usar en cualquier parte: <strong>la asamblea</strong> (que los estudiantes participen en las normas de su grupo) y <strong>la confianza</strong> en que un estudiante que se interesa por algo aprende mucho más. New Old School toma la segunda: los nodos empiezan con un gancho para despertar el interés, no con una obligación.</p>
+<h2>Para leer en clase</h2>
+<p>Para docentes: los capítulos sobre cómo funciona la escuela y la asamblea. Actividad con estudiantes: hacer una asamblea de grupo para decidir una norma real del curso, con un voto por persona. Pregunta: ¿qué aprenderías si nadie te obligara a ir a clase? ¿Y qué no aprenderías nunca?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>El libro trata temas de sexualidad y religión con ideas de los años sesenta, que conviene leer con contexto.</li>
+<li>No es un manual para copiar: una escuela pública con 40 estudiantes por salón no funciona como un internado pequeño.</li>
+<li>Tiene derechos de autor: se cuenta la idea con palabras propias.</li>
+</ul></details>
+</article>
+<article class="ficha" id="el-abordaje-de-la-educacion-experiencial">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">monografia · 2003</span><span class="chip v-matices">Con matices</span></div>
+    <h3>El abordaje de la educación experiencial</h3>
+    
+    <dl><div><dt>Autor</dt><dd>Juan Felipe Builes Jaramillo</dd></div><div><dt>Temas</dt><dd><span class="tema">educacion</span> <span class="tema">aprender-a-aprender</span></dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#emilio">Emilio, o De la educación</a> · Rousseau aparece entre las bases filosóficas de la educación experiencial: aprender de las cosas y no de los discursos.</li><li><a href="#pedagogia-del-oprimido">Pedagogía del oprimido</a> · Los dos parten de John Dewey: Freire lo lleva a la alfabetización de adultos y la justicia social; Builes, a los talleres de aventura en grupo.</li><li><a href="#make-it-stick">Apréndetelo</a> · Coinciden en que vivir algo no basta para aprenderlo: hace falta reflexionar (Builes) o recuperar de memoria (Apréndetelo).</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Una introducción a la <strong>educación experiencial</strong>: aprender a partir de vivir algo directamente (un reto en grupo, una actividad al aire libre, un juego) y luego reflexionar sobre lo vivido. El autor, el psicólogo colombiano Juan Felipe Builes Jaramillo, la escribió como monografía de grado en la Facultad de Psicología de la Universidad de La Sabana (Chía, 2002), y la publicó como libro en 2003. Hoy se consigue como libro electrónico. El autor la presenta como el primer libro en español sobre esta metodología.</p>
+<h2>Resumen</h2>
+<p>El libro es una recopilación ordenada de lo que se había escrito, sobre todo en Estados Unidos, sobre educación experiencial. Tiene cuatro partes:</p>
+<ol>
+<li><strong>Historia.</strong> La educación experiencial moderna nace con Kurt Hahn (1886-1974), un educador alemán que fundó el colegio de Salem (Alemania, 1920), huyó del nazismo, fundó Gordonstoun (Escocia, 1934) y en 1941 creó la primera escuela Outward Bound en Gales, que llegó a Estados Unidos en 1962. Para Hahn, la aventura no era el fin: el fin era formar personas compasivas y responsables.</li>
+<li><strong>Bases filosóficas y psicológicas.</strong> Platón, Aristóteles, Rousseau y, sobre todo, John Dewey, para quien se aprende resolviendo problemas reales. En psicología, autores como Maslow, Piaget y Kurt Lewin.</li>
+<li><strong>Qué es y qué valores busca.</strong> La define, con la Asociación de Educación Experiencial, como construir conocimiento, destrezas y valores a partir de la experiencia directa. Los valores que quiere fortalecer: autoestima, confianza, comunicación, cooperación, diversión, responsabilidad, fijarse metas, enfrentar retos y resolver problemas.</li>
+<li><strong>Metodología.</strong> Es la parte más práctica:</li>
+<li><strong>El ciclo del aprendizaje experiencial</strong> (a partir de David Kolb): <em>experiencia → reflexión → generalización → aplicación</em>. Si se queda en la experiencia, "todo el aprendizaje se deja al azar". La pregunta del final es "¿y ahora qué?".</li>
+<li><strong>El papel del facilitador,</strong> que no enseña desde el frente sino que diseña la experiencia y guía la conversación posterior.</li>
+<li><strong>El "reto por opción"</strong> (Karl Rohnke, 1974): cada persona decide si participa y hasta dónde, sin ser juzgada; el intento vale más que el resultado.</li>
+<li><strong>Las etapas de un grupo:</strong> formación, crisis, normas, eficiencia y transformación.</li>
+</ol>
+<p>Cierra con una recopilación de estudios y un análisis: la educación experiencial cambia lo que la persona siente, piensa y hace al ponerla en un desequilibrio (un reto) del que sale con una nueva forma de verse a sí misma.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es el único libro de la biblioteca escrito en Colombia sobre cómo se aprende, y describe algo que el colegio hace en pequeño en cada nodo: la sección <em>¿Y a mí qué?</em> y los casos prácticos buscan lo mismo que el ciclo experiencial, que lo aprendido salga de la clase y se use en la vida. Su pregunta central, "¿y ahora qué?", es casi la misma de nuestros nodos.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Abrió el tema en español.</strong> En 2002 había muy poco escrito en nuestro idioma sobre educación experiencial, y el libro reúne su historia, sus bases y su método en un solo lugar.</li>
+<li><strong>Insiste en la reflexión.</strong> Su idea más útil es que la experiencia sola no enseña: hay que detenerse a pensar qué pasó y cómo se aplica. Eso coincide con la investigación sobre aprendizaje, que muestra que lo que fija lo aprendido es el esfuerzo de recordar y relacionar, no la exposición (ver <em>Apréndetelo</em>).</li>
+<li><strong>El "reto por opción"</strong> es una buena regla para cualquier actividad con estudiantes: invitar sin obligar, y valorar el intento.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Es una recopilación más que un estudio propio.</strong> El autor lo dice: su trabajo es descriptivo y no busca comprobar hipótesis. La mayoría de las fuentes son manuales y revistas de quienes practican la metodología, y varios de los estudios que cita son de los años sesenta y setenta, con muestras pequeñas.</li>
+<li><strong>No cita la mejor evidencia que ya existía.</strong> Un metaanálisis de 96 estudios sobre programas de aventura y Outward Bound (<a target="_blank" rel="noopener" href="https://doi.org/10.3102/00346543067001043">Hattie y otros, 1997</a>) encontró efectos positivos moderados en autoconcepto, sensación de control y liderazgo, y algo poco común: las mejoras <em>seguían creciendo</em> después de terminar el programa. Pero también encontró mucha diferencia entre programas, y que no se sabe bien por qué unos funcionan mejor que otros. Esa evidencia respalda al libro, con matices que el libro no tiene.</li>
+<li><strong>Está pensado para talleres al aire libre</strong> con cuerdas, equipos y facilitadores formados (el libro describe el centro de la organización Ser Humano en Villa de Leyva), a los que muy pocos colegios tienen acceso.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Lo más aprovechable no son los cursos de cuerdas, sino el ciclo: vivir algo, hablar de lo que pasó, sacar una idea general y decidir qué hacer distinto. Eso se puede hacer en cualquier salón, con un juego, un caso o un problema del barrio, y encaja con los casos prácticos de los nodos.</p>
+<h2>Para leer en clase</h2>
+<p>Para docentes: el capítulo de metodología, sobre todo el ciclo del aprendizaje experiencial y el "reto por opción". Actividad: hacer un reto corto en grupo (por ejemplo, ordenarse por fecha de cumpleaños sin hablar) y luego recorrer el ciclo con cuatro preguntas: ¿qué pasó?, ¿qué sentimos?, ¿qué aprendimos?, ¿y ahora qué?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>En el capítulo de análisis, el autor plantea como pregunta si enfermedades como la esquizofrenia, la depresión o las adicciones podrían deberse a formas aprendidas de responder al ambiente. Esa idea no se sostiene con la evidencia actual, sobre todo en el caso de la esquizofrenia. Los temas de salud mental llevan revisión experta y no se enseñan a partir de este libro (AGENTS.md, regla 6).</li>
+<li>Las actividades de aventura (alturas, cuerdas) necesitan facilitadores formados y protocolos de seguridad. No se improvisan.</li>
+<li>La monografía original está en el repositorio institucional de la Universidad de La Sabana. El libro tiene derechos de autor: se cuenta con palabras propias.</li>
+</ul></details>
+</article></section>
+  </section>
+</div>
+
+<div class="escenario" id="escenario" hidden>
+  <div class="regla" id="regla2" aria-hidden="true"></div>
+  <div class="contenido" id="contenido"></div>
+  <div class="pie">
+    <span class="dato" id="reloj2" style="font-size:1.6rem">0:30</span>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="boton" id="atras">← Bloque anterior</button>
+      <button class="boton lleno" id="iniciar2">Iniciar</button>
+      <button class="boton" id="adelante">Bloque siguiente →</button>
+      <button class="boton" id="salir">Salir</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATOS = {"libros": [{"id": "make-it-stick", "titulo": "Apréndetelo", "autor": "Peter C. Brown, Henry L. Roediger III y Mark A. McDaniel", "anio": "2014", "grupo": 0, "veredicto": "solido", "frase": "Recordar sin mirar enseña más que releer", "juicio": "Recordar lo estudiado sin mirar superó a releerlo, y también a hacer mapas conceptuales.", "cita": "Roediger y Karpicke, 2006", "doi": "10.1111/j.1467-9280.2006.01693.x"}, {"id": "learning-how-to-learn", "titulo": "Aprender a aprender", "autor": "Barbara Oakley y Terrence Sejnowski, con Alistair McConville", "anio": "2018", "grupo": 0, "veredicto": "matices", "frase": "Dejar descansar un problema ayuda a resolverlo", "juicio": "Tiene apoyo, sobre todo en problemas creativos. Otras herramientas del libro, como la técnica Pomodoro, no tienen estudios propios.", "cita": "Sio y Ormerod, 2009", "doi": "10.1037/a0014212"}, {"id": "moonwalking-with-einstein", "titulo": "Los desafíos de la memoria", "autor": "Joshua Foer", "anio": "2011", "grupo": 0, "veredicto": "solido", "frase": "La memoria excepcional es una técnica, no un don", "juicio": "Personas sin experiencia que entrenaron seis semanas con el palacio de la memoria mejoraron, y la mejora seguía cuatro meses después. Sirve para listas, no para entender un tema.", "cita": "Dresler y otros, 2017", "doi": "10.1016/j.neuron.2017.02.003"}, {"id": "peak", "titulo": "Número uno", "autor": "Anders Ericsson y Robert Pool", "anio": "2016", "grupo": 1, "veredicto": "matices", "frase": "Los expertos se hacen con práctica deliberada", "juicio": "La práctica importa, pero explica menos de lo que el libro sugiere: el 26 % de las diferencias en juegos como el ajedrez y el 4 % en educación.", "cita": "Macnamara, Hambrick y Oswald, 2014", "doi": "10.1177/0956797614535810"}, {"id": "outliers", "titulo": "Fuera de serie", "autor": "Malcolm Gladwell", "anio": "2008", "grupo": 1, "veredicto": "promete", "frase": "La regla de las 10.000 horas", "juicio": "El efecto de la fecha de nacimiento es sólido, pero la regla de las 10.000 horas no: la práctica explica menos del 1 % de las diferencias en profesiones.", "cita": "Macnamara, Hambrick y Oswald, 2014", "doi": "10.1177/0956797614535810"}, {"id": "mindset", "titulo": "Mindset, la actitud del éxito", "autor": "Carol S. Dweck", "anio": "2006", "grupo": 1, "veredicto": "promete", "frase": "Creer que puedes mejorar mejora tus notas", "juicio": "En los estudios de mejor calidad, el efecto promedio de las intervenciones de mentalidad es casi cero.", "cita": "Macnamara y Burgoyne, 2023", "doi": "10.1037/bul0000352"}, {"id": "atomic-habits", "titulo": "Hábitos atómicos", "autor": "James Clear", "anio": "2018", "grupo": 2, "veredicto": "matices", "frase": "Decidir cuándo y dónde vas a hacer algo", "juicio": "Las intenciones de implementación tuvieron un efecto de tamaño medio a grande en 94 estudios. La idea de cambiar de identidad, en cambio, no está probada.", "cita": "Gollwitzer y Sheeran, 2006", "doi": "10.1016/S0065-2601(06)38002-1"}, {"id": "deep-work", "titulo": "Enfócate", "autor": "Cal Newport", "anio": "2016", "grupo": 2, "veredicto": "matices", "frase": "La tecnología arruina la concentración de los jóvenes", "juicio": "En más de 350.000 adolescentes, el uso de tecnología digital tuvo una relación muy pequeña con su bienestar. El problema existe, pero el libro lo agranda.", "cita": "Orben y Przybylski, 2019", "doi": "10.1038/s41562-018-0506-1"}, {"id": "ultralearning", "titulo": "Ultralearning", "autor": "Scott H. Young", "anio": "2019", "grupo": 3, "veredicto": "matices", "frase": "Aprender en poco tiempo y con intensidad", "juicio": "Repasar espaciado en el tiempo supera a estudiar todo de una vez, y eso choca con la intensidad que propone el libro.", "cita": "Cepeda y otros, 2006", "doi": "10.1037/0033-2909.132.3.354"}, {"id": "limitless", "titulo": "Sin límites", "autor": "Jim Kwik", "anio": "2020", "grupo": 3, "veredicto": "promete", "frase": "Puedes leer mucho más rápido sin entender menos", "juicio": "La revisión más completa concluye que no: cuando se acelera la lectura, se pierde comprensión.", "cita": "Rayner y otros, 2016", "doi": "10.1177/1529100615623267"}, {"id": "el-arte-de-pensar", "titulo": "El arte de pensar", "autor": "Rolf Dobelli", "anio": "2011", "grupo": 3, "veredicto": "matices", "frase": "Conocer los sesgos te protege de ellos", "juicio": "Leer sobre los sesgos sirve de poco. Practicar con casos y recibir retroalimentación sí los redujo, y el efecto duró dos meses.", "cita": "Morewedge y otros, 2015", "doi": "10.1177/2372732215600886"}, {"id": "pedagogia-del-oprimido", "titulo": "Pedagogía del oprimido", "autor": "Paulo Freire", "anio": "1970", "grupo": 4, "veredicto": "filosofia", "frase": "Enseñar con diálogo, no con depósitos", "juicio": "Es filosofía y política de la educación. El diálogo en clase tiene respaldo: en 72 salones, la participación amplia se asoció con mejor dominio de los contenidos.", "cita": "Howe y otros, 2019", "doi": "10.1080/10508406.2019.1573730"}, {"id": "el-maestro-ignorante", "titulo": "El maestro ignorante", "autor": "Jacques Rancière", "anio": "1987", "grupo": 4, "veredicto": "filosofia", "frase": "Se puede enseñar lo que no se sabe", "juicio": "Es filosofía. Para principiantes, la evidencia favorece la instrucción explícita y los ejemplos resueltos sobre descubrir solo.", "cita": "Kirschner, Sweller y Clark, 2006", "doi": "10.1207/s15326985ep4102_1"}, {"id": "emilio", "titulo": "Emilio, o De la educación", "autor": "Jean-Jacques Rousseau", "anio": "1762", "grupo": 4, "veredicto": "filosofia", "frase": "El niño no es un adulto pequeño", "juicio": "Es un experimento imaginario de 1762, no una investigación. Su valor está en las preguntas que abrió.", "cita": null, "doi": null}, {"id": "summerhill", "titulo": "Summerhill", "autor": "A. S. Neill", "anio": "1960", "grupo": 4, "veredicto": "filosofia", "frase": "Una escuela donde las clases son voluntarias", "juicio": "Lleva más de cien años abierta. Los egresados de otra escuela democrática siguieron estudiando o trabajando sin grandes dificultades, aunque las familias eligen la escuela.", "cita": "Gray y Chanoff, 1986", "doi": "10.1086/443842"}, {"id": "el-abordaje-de-la-educacion-experiencial", "titulo": "El abordaje de la educación experiencial", "autor": "Juan Felipe Builes Jaramillo", "anio": "2003", "grupo": 4, "veredicto": "matices", "frase": "Aprender haciendo y reflexionando", "juicio": "Los programas de aventura tienen efectos positivos moderados que siguen creciendo después, pero varían mucho entre programas.", "cita": "Hattie y otros, 1997", "doi": "10.3102/00346543067001043"}], "aristas": [{"a": "ultralearning", "b": "21-lecciones-para-el-siglo-xxi", "por": "Si lo que se aprende hoy puede quedar obsoleto, saber aprender solo es la habilidad clave: Harari lo plantea, Young propone cómo.", "fuera": true, "titulo_b": "21 lecciones para el siglo XXI"}, {"a": "pedagogia-del-oprimido", "b": "a-more-beautiful-question", "por": "Freire criticó la escuela que solo da respuestas; Berger muestra qué pasa cuando se enseña a preguntar.", "fuera": true, "titulo_b": "A More Beautiful Question"}, {"a": "el-maestro-ignorante", "b": "a-more-beautiful-question", "por": "Jacotot no explicaba: preguntaba y dejaba que los estudiantes buscaran. Berger defiende lo mismo para cualquier edad.", "fuera": true, "titulo_b": "A More Beautiful Question"}, {"a": "deep-work", "b": "algorithms-to-live-by", "por": "Saltar de una tarea a otra tiene un costo: Newport lo llama residuo de atención; los informáticos, thrashing.", "fuera": true, "titulo_b": "Algoritmos para la vida cotidiana"}, {"a": "moonwalking-with-einstein", "b": "algorithms-to-live-by", "por": "Foer entrena la memoria para recordar más; Christian y Griffiths explican por qué olvidar también es útil.", "fuera": true, "titulo_b": "Algoritmos para la vida cotidiana"}, {"a": "atomic-habits", "b": "odisea", "por": "Diseñar el entorno para no caer en la tentación es la versión moderna de atarse al mástil.", "fuera": true, "titulo_b": "La Odisea"}, {"a": "pedagogia-del-oprimido", "b": "autobiografia-de-malcolm-x", "por": "Aprender a leer para entender la propia opresión: Malcolm X lo hizo solo en una cárcel; Freire lo convirtió en un método.", "fuera": true, "titulo_b": "Malcolm X: una autobiografía"}, {"a": "ultralearning", "b": "autobiografia-de-malcolm-x", "por": "Uno de los autodidactas más famosos: copió el diccionario entero en la cárcel para aprender a leer y a escribir bien.", "fuera": true, "titulo_b": "Malcolm X: una autobiografía"}, {"a": "pedagogia-del-oprimido", "b": "comunicacion-no-violenta", "por": "Los dos ponen el diálogo en el centro: Freire para educar, Rosenberg para resolver conflictos.", "fuera": true, "titulo_b": "Comunicación no violenta"}, {"a": "summerhill", "b": "comunicacion-no-violenta", "por": "Resolver los conflictos sin castigos ni culpas: la asamblea de Neill y las cuatro preguntas de Rosenberg.", "fuera": true, "titulo_b": "Comunicación no violenta"}, {"a": "el-arte-de-pensar", "b": "comunicacion-no-violenta", "por": "Separar lo que pasó de lo que juzgamos: Rosenberg lo pide para hablar mejor; Dobelli muestra cuánto nos cuesta.", "fuera": true, "titulo_b": "Comunicación no violenta"}, {"a": "mindset", "b": "daring-greatly", "por": "Atreverse a fallar: Dweck lo explica con la mentalidad de crecimiento; Brown, con la vergüenza que nos impide intentarlo.", "fuera": true, "titulo_b": "El poder de ser vulnerable"}, {"a": "deep-work", "b": "ultralearning", "por": "La concentración es uno de los nueve principios de Ultralearning; Newport le dedica un libro entero.", "fuera": false, "titulo_b": "Ultralearning"}, {"a": "mindset", "b": "designing-your-life", "por": "Los dos ven el fracaso como parte del proceso: Dweck lo explica con la mentalidad de crecimiento; Burnett y Evans proponen anotar los fracasos para aprender de ellos.", "fuera": true, "titulo_b": "Design de vida"}, {"a": "el-abordaje-de-la-educacion-experiencial", "b": "emilio", "por": "Rousseau aparece entre las bases filosóficas de la educación experiencial: aprender de las cosas y no de los discursos.", "fuera": false, "titulo_b": "Emilio, o De la educación"}, {"a": "el-abordaje-de-la-educacion-experiencial", "b": "pedagogia-del-oprimido", "por": "Los dos parten de John Dewey: Freire lo lleva a la alfabetización de adultos y la justicia social; Builes, a los talleres de aventura en grupo.", "fuera": false, "titulo_b": "Pedagogía del oprimido"}, {"a": "el-abordaje-de-la-educacion-experiencial", "b": "make-it-stick", "por": "Coinciden en que vivir algo no basta para aprenderlo: hace falta reflexionar (Builes) o recuperar de memoria (Apréndetelo).", "fuera": false, "titulo_b": "Apréndetelo"}, {"a": "el-arte-de-pensar", "b": "delirios-multitudinarios", "por": "Dobelli explica en un capítulo la prueba social; Mackay muestra a países enteros cayendo en ella.", "fuera": true, "titulo_b": "Delirios multitudinarios"}, {"a": "el-arte-de-pensar", "b": "odisea", "por": "El descuento hiperbólico (preferir el premio de hoy) es el problema; atarse al mástil, una solución.", "fuera": true, "titulo_b": "La Odisea"}, {"a": "el-arte-de-pensar", "b": "make-it-stick", "por": "El exceso de confianza en versión de estudiante: releer da la ilusión de saber, y Apréndetelo muestra cómo comprobarlo.", "fuera": false, "titulo_b": "Apréndetelo"}, {"a": "el-arte-de-pensar", "b": "atomic-habits", "por": "Dobelli dice que la fuerza de voluntad se agota; Clear propone no depender de ella y cambiar el entorno.", "fuera": false, "titulo_b": "Hábitos atómicos"}, {"a": "mindset", "b": "el-hombre-en-busca-de-sentido", "por": "Los dos dicen que la actitud cuenta, y los dos corren el riesgo de culpar a quien no pudo con circunstancias que no eligió.", "fuera": true, "titulo_b": "El hombre en busca de sentido"}, {"a": "el-maestro-ignorante", "b": "ultralearning", "por": "Aprender sin que nadie te explique: Jacotot en 1818 y Scott Young con los cursos abiertos del MIT.", "fuera": false, "titulo_b": "Ultralearning"}, {"a": "emilio", "b": "robinson-crusoe", "por": "Es el primer libro que Rousseau le deja leer a Emilio: el modelo de alguien que aprende de las cosas y no de los discursos.", "fuera": true, "titulo_b": "Robinson Crusoe"}, {"a": "emilio", "b": "pedagogia-del-oprimido", "por": "Dos raíces de la educación activa, separadas por dos siglos: aprender de la experiencia (Rousseau) y del diálogo sobre la propia realidad (Freire).", "fuera": false, "titulo_b": "Pedagogía del oprimido"}, {"a": "mindset", "b": "inteligencia-emocional", "por": "Dos ideas de psicología que se volvieron moda: tienen una base real, pero la versión popular promete más de lo que muestran los estudios.", "fuera": true, "titulo_b": "Inteligencia emocional"}, {"a": "learning-how-to-learn", "b": "deep-work", "por": "Dos maneras de concentrarse: bloques cortos de 25 minutos con descanso (Oakley) o bloques largos sin distracciones (Newport).", "fuera": false, "titulo_b": "Enfócate"}, {"a": "limitless", "b": "el-arte-de-pensar", "por": "Dobelli enseña a desconfiar de las buenas historias y de la autoridad; sirve para leer con cabeza fría cualquier libro que prometa cambiarte la vida, incluido este.", "fuera": false, "titulo_b": "El arte de pensar"}, {"a": "make-it-stick", "b": "ultralearning", "por": "Apréndetelo es la ciencia detrás de dos principios de Ultralearning: recuperar y retener.", "fuera": false, "titulo_b": "Ultralearning"}, {"a": "make-it-stick", "b": "learning-how-to-learn", "por": "Las mismas ideas sobre cómo se aprende: una versión para adultos y otra para niños y adolescentes.", "fuera": false, "titulo_b": "Aprender a aprender"}, {"a": "mindset", "b": "limitless", "por": "Los dos dicen que las creencias sobre uno mismo limitan lo que aprendemos; Dweck tiene más estudios detrás, y aun así su efecto es pequeño.", "fuera": false, "titulo_b": "Sin límites"}, {"a": "mindset", "b": "outliers", "por": "Dweck mira lo que pasa dentro de la persona (su mentalidad); Gladwell, lo que pasa afuera (sus oportunidades).", "fuera": false, "titulo_b": "Fuera de serie"}, {"a": "outliers", "b": "moneyball", "por": "Los dos discuten cómo se reconoce el talento: Gladwell mira las oportunidades; Lewis, los errores de los que buscan jugadores.", "fuera": true, "titulo_b": "Moneyball"}, {"a": "moonwalking-with-einstein", "b": "limitless", "por": "El palacio de la memoria: Kwik lo enseña como técnica; Foer cuenta cómo lo aprendió y hasta dónde llega.", "fuera": false, "titulo_b": "Sin límites"}, {"a": "atomic-habits", "b": "nudge", "por": "Los dos dicen que el entorno pesa más que la fuerza de voluntad: Clear lo aplica a uno mismo; Thaler y Sunstein, a quien diseña las opciones de otros.", "fuera": true, "titulo_b": "Un pequeño empujón"}, {"a": "peak", "b": "outliers", "por": "La regla de las 10.000 horas: Gladwell la popularizó con el estudio de Ericsson, y Ericsson responde que no es eso lo que encontró.", "fuera": false, "titulo_b": "Fuera de serie"}, {"a": "peak", "b": "moonwalking-with-einstein", "por": "Foer usa la práctica deliberada de Ericsson para salir de la \"meseta\" en la que dejó de mejorar su memoria.", "fuera": false, "titulo_b": "Los desafíos de la memoria"}, {"a": "pedagogia-del-oprimido", "b": "el-maestro-ignorante", "por": "Dos críticas al maestro que solo \"deposita\" o \"explica\": Freire propone el diálogo; Rancière, la igualdad de las inteligencias.", "fuera": false, "titulo_b": "El maestro ignorante"}, {"a": "el-arte-de-pensar", "b": "pensar-rapido-pensar-despacio", "por": "Dobelli enumera los errores de pensamiento; Kahneman explica de dónde salen, con la teoría de los dos sistemas.", "fuera": true, "titulo_b": "Pensar rápido, pensar despacio"}, {"a": "atomic-habits", "b": "pequeno-cerdo-capitalista", "por": "Ahorrar como un hábito pequeño y automático, no como un esfuerzo heroico.", "fuera": true, "titulo_b": "Pequeño cerdo capitalista"}, {"a": "summerhill", "b": "emilio", "por": "Los dos parten de que el niño es bueno por naturaleza y aprende mejor en libertad; Neill llevó la idea a una escuela real.", "fuera": false, "titulo_b": "Emilio, o De la educación"}, {"a": "summerhill", "b": "el-maestro-ignorante", "por": "Confiar en que el estudiante puede aprender por sí mismo: Jacotot sin explicar, Neill sin clases obligatorias.", "fuera": false, "titulo_b": "El maestro ignorante"}, {"a": "summerhill", "b": "el-abordaje-de-la-educacion-experiencial", "por": "El \"reto por opción\" y las clases voluntarias de Summerhill comparten una idea: nadie aprende a la fuerza.", "fuera": false, "titulo_b": "El abordaje de la educación experiencial"}, {"a": "outliers", "b": "talking-to-strangers", "por": "El mismo autor y el mismo método: historias muy bien contadas que a veces sostienen más de lo que prueban.", "fuera": true, "titulo_b": "Hablar con extraños"}, {"a": "atomic-habits", "b": "the-power-of-habit", "por": "Clear construye su método sobre el bucle de Duhigg (señal, rutina, recompensa) y le agrega una cuarta pieza: el anhelo como paso propio.", "fuera": true, "titulo_b": "El poder de los hábitos"}, {"a": "pedagogia-del-oprimido", "b": "the-radical-king", "por": "Dos voces de los años sesenta contra la opresión: King desde la no violencia y la fe; Freire desde la educación.", "fuera": true, "titulo_b": "Martin Luther King Jr.: textos y discursos radicales"}, {"a": "ultralearning", "b": "limitless", "por": "Dos promesas de aprender más rápido; compararlas es un buen ejercicio para separar lo que tiene evidencia de lo que solo se dice.", "fuera": false, "titulo_b": "Sin límites"}, {"a": "ultralearning", "b": "el-arte-de-pensar", "por": "Ultralearning se apoya en historias de gente que lo logró; Dobelli explica por qué eso puede ser sesgo de supervivencia.", "fuera": false, "titulo_b": "El arte de pensar"}, {"a": "ultralearning", "b": "robinson-crusoe", "por": "Aprender solo y haciendo: Robinson aprende a hornear pan y a hacer vasijas a punta de intentos fallidos.", "fuera": true, "titulo_b": "Robinson Crusoe"}, {"a": "make-it-stick", "b": "why-we-sleep", "por": "Dormir después de estudiar consolida lo aprendido: la otra mitad de las técnicas de estudio que propone Make It Stick.", "fuera": true, "titulo_b": "Por qué dormimos"}], "grupos": ["Cómo aprende el cerebro", "Práctica, talento y mentalidad", "Hábitos y concentración", "Aprender por cuenta propia", "Pedagogía"], "etiquetas": {"solido": "Sólido", "matices": "Con matices", "promete": "Promete más de lo que prueba", "filosofia": "Filosofía de la educación"}, "preguntas": [{"frase": "Cada persona aprende mejor si le enseñan según su estilo, visual, auditivo o kinestésico.", "es": "mito", "explica": "No hay evidencia de que adaptar la enseñanza al estilo de cada estudiante mejore lo que aprende.", "cita": "Pashler y otros, 2008", "doi": "10.1111/j.1539-6053.2009.01038.x"}, {"frase": "Cerrar el cuaderno e intentar recordar enseña más que releer.", "es": "evidencia", "explica": "Recordar sin mirar superó a releer, y también a hacer mapas conceptuales.", "cita": "Roediger y Karpicke, 2006", "doi": "10.1111/j.1467-9280.2006.01693.x"}, {"frase": "Un hábito nuevo se forma en 21 días.", "es": "mito", "explica": "En 96 voluntarios, volver automática una conducta tomó entre 18 y 254 días, según la persona. Saltarse un día no arruinó el proceso.", "cita": "Lally y otros, 2010", "doi": "10.1002/ejsp.674"}, {"frase": "Con 10.000 horas de práctica, cualquiera llega a ser experto.", "es": "mito", "explica": "La práctica importa, pero explica el 26 % de las diferencias en juegos como el ajedrez, el 4 % en educación y menos del 1 % en profesiones.", "cita": "Macnamara, Hambrick y Oswald, 2014", "doi": "10.1177/0956797614535810"}, {"frase": "Con entrenamiento se puede leer el doble de rápido sin entender menos.", "es": "mito", "explica": "Cuando se acelera la lectura, se pierde comprensión. Lo que sí ayuda es leer mucho y conocer más palabras.", "cita": "Rayner y otros, 2016", "doi": "10.1177/1529100615623267"}, {"frase": "Repartir el estudio en varios días rinde más que estudiar todo la noche anterior.", "es": "evidencia", "explica": "El repaso espaciado supera al estudio concentrado en cientos de experimentos.", "cita": "Cepeda y otros, 2006", "doi": "10.1037/0033-2909.132.3.354"}, {"frase": "Convencerte de que puedes mejorar sube tus notas de forma clara.", "es": "mito", "explica": "En los estudios de mejor calidad, el efecto promedio de las intervenciones de mentalidad de crecimiento es casi cero.", "cita": "Macnamara y Burgoyne, 2023", "doi": "10.1037/bul0000352"}, {"frase": "Cualquiera puede entrenar su memoria con el palacio de la memoria.", "es": "evidencia", "explica": "Personas sin experiencia que entrenaron seis semanas mejoraron su memoria, y la mejora seguía cuatro meses después. Sirve para listas, no para entender un tema.", "cita": "Dresler y otros, 2017", "doi": "10.1016/j.neuron.2017.02.003"}, {"frase": "Los campeones de memoria nacen con cerebros distintos a los demás.", "es": "mito", "explica": "Un estudio con memorizadores de campeonato no encontró más inteligencia ni cerebros distintos. Usaban una estrategia espacial, el método de los lugares.", "cita": "Maguire y otros, 2003", "doi": "10.1038/nn988"}, {"frase": "Subrayar es una de las técnicas de estudio más útiles.", "es": "mito", "explica": "Una revisión de diez técnicas le dio utilidad baja a subrayar y a releer. Las de utilidad alta fueron ponerse a prueba y repartir el estudio en el tiempo.", "cita": "Dunlosky y otros, 2013", "doi": "10.1177/1529100612453266"}, {"frase": "Mezclar distintos tipos de ejercicios cuesta más, pero enseña más que practicar uno hasta dominarlo.", "es": "evidencia", "explica": "Mezclar tipos de problemas se siente más difícil y da mejores resultados después.", "cita": "Rohrer y Taylor, 2007", "doi": "10.1007/s11251-007-9015-8"}, {"frase": "Decidir de antemano cuándo y dónde vas a hacer algo te ayuda a cumplirlo.", "es": "evidencia", "explica": "Las intenciones de implementación tuvieron un efecto de tamaño medio a grande en un metaanálisis de 94 estudios.", "cita": "Gollwitzer y Sheeran, 2006", "doi": "10.1016/S0065-2601(06)38002-1"}, {"frase": "Si conoces tus sesgos, dejas de caer en ellos.", "es": "mito", "explica": "Las personas ven los sesgos mucho más en los demás que en sí mismas, incluso después de leer cómo funcionan. Lo que ayuda es practicar con retroalimentación.", "cita": "Pronin, Lin y Ross, 2002", "doi": "10.1177/0146167202286008"}, {"frase": "Para alguien que empieza de cero, descubrir solo enseña más que una explicación con ejemplos resueltos.", "es": "mito", "explica": "Quien no sabe nada de un tema aprende mejor con instrucción explícita y ejemplos resueltos que descubriendo solo.", "cita": "Kirschner, Sweller y Clark, 2006", "doi": "10.1207/s15326985ep4102_1"}, {"frase": "Cuando un problema se atasca, dejarlo descansar un rato puede ayudar a resolverlo.", "es": "evidencia", "explica": "Tiene apoyo, sobre todo en problemas creativos.", "cita": "Sio y Ormerod, 2009", "doi": "10.1037/a0014212"}, {"frase": "Recibir retroalimentación siempre mejora el desempeño.", "es": "mito", "explica": "En promedio ayuda, pero en más de un tercio de los casos estudiados lo empeoró, sobre todo cuando se centra en la persona y no en la tarea.", "cita": "Kluger y DeNisi, 1996", "doi": "10.1037/0033-2909.119.2.254"}, {"frase": "Una noche sin dormir empeora lo que logras guardar en la memoria al día siguiente.", "es": "evidencia", "explica": "Sin dormir, la zona del cerebro que guarda los recuerdos nuevos trabajó menos, y se recordó peor lo aprendido.", "cita": "Yoo y otros, 2007", "doi": "10.1038/nn1851"}, {"frase": "Usar el celular y la tecnología digital es la gran causa del malestar de los adolescentes.", "es": "mito", "explica": "En más de 350.000 adolescentes, el uso de tecnología digital tuvo una relación muy pequeña con su bienestar.", "cita": "Orben y Przybylski, 2019", "doi": "10.1038/s41562-018-0506-1"}, {"frase": "En el deporte juvenil de élite hay muchos más nacidos a comienzos del año que a finales.", "es": "evidencia", "explica": "En el hockey juvenil de élite y en mundiales de fútbol juveniles, cerca del 40 % nació en el primer trimestre y cerca del 10 % en el último.", "cita": "Barnsley, 2025", "doi": "10.3389/fspor.2024.1516173"}, {"frase": "Hablar en clase, construyendo sobre lo que dicen otros, se asocia con aprender mejor los contenidos.", "es": "evidencia", "explica": "En 72 salones de primaria, la participación amplia y el diálogo se asociaron con mejor dominio de los contenidos, aun controlando el nivel previo.", "cita": "Howe y otros, 2019", "doi": "10.1080/10508406.2019.1573730"}]};
+const $ = id => document.getElementById(id);
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/* ===== Curioso: guion de 300 s ===== */
+const CURIOSO = [
+  { nombre: 'Gancho', objetivo: 30, texto: [
+    '¿Cómo estudiaron para su último examen? Si la respuesta es “leí el cuaderno otra vez y subrayé lo importante”, están en buena compañía: es lo que más hace la gente.',
+    'Y, según la investigación, es de lo que menos funciona.' ] },
+  { nombre: 'Idea', objetivo: 90, texto: [
+    'Cuando releemos, el texto se vuelve familiar, y esa familiaridad se siente como saber. Pero reconocer algo no es poder recordarlo.',
+    'En cambio, cerrar el cuaderno e intentar recordar cuesta. Uno se equivoca, se queda en blanco, siente que no avanza. Ese esfuerzo es justamente lo que hace que lo aprendido dure. Los psicólogos lo llaman dificultades deseables.',
+    'Lo mismo pasa con repartir el estudio en varios días en vez de meter todo la noche anterior: se siente peor, y funciona mejor. Lo que se siente como aprender no siempre es aprender.' ] },
+  { nombre: 'Evidencia', objetivo: 60, texto: [
+    'En 2013, un grupo de psicólogos revisó diez técnicas de estudio. Solo dos recibieron utilidad alta: ponerse a prueba y repartir el estudio en el tiempo. Releer y subrayar recibieron utilidad baja.',
+    'Y una idea muy popular, enseñar según el “estilo de aprendizaje” de cada uno, visual o auditivo, no tiene evidencia de que mejore lo que se aprende.' ] },
+  { nombre: '¿Y a mí qué?', objetivo: 60, texto: [
+    'Si estudias: cierra el cuaderno y escribe lo que recuerdas; reparte el estudio en varios días; mezcla tipos de ejercicios.',
+    'Si enseñas: empieza la clase con tres preguntas cortas sobre la anterior, sin nota.',
+    'Si acompañas en casa: en vez de “¿estudiaste?”, pregunta “¿qué aprendiste? Explícamelo sin mirar”.' ] },
+  { nombre: 'Puerta abierta', objetivo: 30, texto: [
+    'Dos libros para seguir: Apréndetelo (Make It Stick), escrito por los propios investigadores, y Aprender a aprender, pensado para estudiantes.',
+    'Y la pregunta para conversar: ¿qué vas a dejar de hacer la próxima vez que estudies?' ] },
+];
+const COLORES = ['--b1', '--b2', '--b3', '--b4', '--b5'];
+let bloque = 0, gastado = CURIOSO.map(() => 0), andando = false, marca = 0;
+const fmt = s => { const n = s < 0; s = Math.abs(Math.round(s)); return (n ? '−' : '') + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+function armarRegla(el, conClic) {
+  CURIOSO.forEach((b, i) => {
+    const x = document.createElement('button');
+    x.style.flex = `${b.objetivo} 0 0`; x.style.background = `var(${COLORES[i]})`;
+    x.textContent = `${b.nombre} · ${b.objetivo} s`;
+    if (conClic) { x.setAttribute('role', 'tab'); x.onclick = () => { bloque = i; pintarCurioso(); }; } else x.tabIndex = -1;
+    el.append(x);
+  });
+}
+armarRegla($('regla'), true); armarRegla($('regla2'), false);
+function pintarCurioso() {
+  const b = CURIOSO[bloque], resta = b.objetivo - gastado[bloque];
+  for (const r of [$('regla'), $('regla2')]) [...r.children].forEach((x, j) => x.setAttribute('aria-current', j === bloque));
+  $('bloque-nombre').textContent = `${b.nombre} · objetivo ${b.objetivo} s`;
+  for (const el of [$('reloj'), $('reloj2')]) { el.textContent = fmt(resta); el.classList.toggle('ambar', resta <= 10 && resta >= 0); el.classList.toggle('rojo', resta < 0); }
+  $('guion').innerHTML = b.texto.map(p => `<p>${esc(p)}</p>`).join('');
+  $('contenido').innerHTML = `<h2>${esc(b.nombre)}</h2>` + b.texto.map(p => `<p>${esc(p)}</p>`).join('');
+}
+function tic(ahora) { if (!andando) return; gastado[bloque] += (ahora - marca) / 1000; marca = ahora; pintarCurioso(); requestAnimationFrame(tic); }
+function alternar() { andando = !andando; for (const b of [$('iniciar'), $('iniciar2')]) b.textContent = andando ? 'Pausa' : 'Iniciar'; if (andando) { marca = performance.now(); requestAnimationFrame(tic); } }
+$('iniciar').onclick = alternar; $('iniciar2').onclick = alternar;
+$('reiniciar').onclick = () => { gastado = CURIOSO.map(() => 0); bloque = 0; if (andando) alternar(); pintarCurioso(); };
+const mover = d => { bloque = Math.max(0, Math.min(CURIOSO.length - 1, bloque + d)); pintarCurioso(); };
+$('atras').onclick = () => mover(-1); $('adelante').onclick = () => mover(1);
+$('presentar').onclick = () => { $('escenario').hidden = false; pintarCurioso(); $('iniciar2').focus(); };
+$('salir').onclick = () => { $('escenario').hidden = true; };
+document.addEventListener('keydown', e => {
+  if ($('escenario').hidden) return;
+  if (e.key === 'ArrowRight') mover(1);
+  else if (e.key === 'ArrowLeft') mover(-1);
+  else if (e.key === 'Escape') $('escenario').hidden = true;
+  else if (e.code === 'Space' && !e.target.matches('button')) { e.preventDefault(); alternar(); }
+});
+
+/* ===== Explicador: escena (datos) → render(escena, t) ===== */
+const ease = t => 1 - Math.pow(1 - t, 3);   // ease-out cúbica: nunca pasa del valor real
+const ESCENAS = {
+  tecnicas: {
+    nombre: 'Diez técnicas de estudio', duracion: 7,
+    fuente: 'Dunlosky, Rawson, Marsh, Nathan y Willingham (2013), Psychological Science in the Public Interest. doi.org/10.1177/1529100612453266',
+    titulo: 'Utilidad de diez técnicas de estudio, según una revisión de 2013',
+    grupos: [
+      { nivel: 'Alta', color: '--u-alta', tecnicas: ['Ponerse a prueba (recordar sin mirar)', 'Repartir el estudio en el tiempo'] },
+      { nivel: 'Moderada', color: '--u-moderada', tecnicas: ['Preguntarse por qué', 'Explicarse a uno mismo', 'Mezclar tipos de ejercicios'] },
+      { nivel: 'Baja', color: '--u-baja', tecnicas: ['Resumir', 'Subrayar', 'Palabras clave (mnemotecnia)', 'Imaginar el texto', 'Releer'] },
+    ],
+  },
+  practica: {
+    nombre: 'Cuánto explica la práctica', duracion: 7,
+    fuente: 'Macnamara, Hambrick y Oswald (2014), Psychological Science. doi.org/10.1177/0956797614535810',
+    titulo: 'Porcentaje de las diferencias de desempeño que explica la práctica',
+    datos: [ { etiqueta: 'Juegos (ajedrez y otros)', valor: 26 }, { etiqueta: 'Música', valor: 21 }, { etiqueta: 'Deportes', valor: 18 }, { etiqueta: 'Educación', valor: 4 }, { etiqueta: 'Profesiones', valor: 1, menor: true } ],
+  },
+};
+let escenaActual = 'tecnicas';
+const lienzo = $('lienzo'), ctx = lienzo.getContext('2d');
+const lim = v => Math.max(0, Math.min(1, v));
+const prog = (t, ini, dur = .7) => ease(lim((t - ini) / dur));
+function textoEnvuelto(txt, x, y, ancho, alto) {
+  let linea = '', yy = y;
+  for (const p of txt.split(' ')) { const prueba = linea ? linea + ' ' + p : p; if (ctx.measureText(prueba).width > ancho && linea) { ctx.fillText(linea, x, yy); linea = p; yy += alto; } else linea = prueba; }
+  ctx.fillText(linea, x, yy);
+}
+const RENDER = {
+  tecnicas(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 36px ${tok('--f-titulo')}`; ctx.fillText(e.titulo, 50, 66);
+    const anchoCol = 380, x0 = 50;
+    e.grupos.forEach((g, i) => {
+      const ini = .7 + i * 1.2, x = x0 + i * (anchoCol + 20), p = prog(t, ini);
+      if (t < ini) return;
+      ctx.globalAlpha = p; ctx.fillStyle = tok(g.color); ctx.fillRect(x, 110, anchoCol, 56);
+      ctx.fillStyle = tok('--tarjeta'); ctx.font = `600 24px ${tok('--f-ficha')}`; ctx.fillText(`Utilidad ${g.nivel.toLowerCase()}`, x + 18, 146);
+      g.tecnicas.forEach((tec, j) => {
+        const pj = prog(t, ini + .3 + j * .25); if (pj <= 0) return;
+        ctx.globalAlpha = pj; const y = 190 + j * 92 + (1 - pj) * 16;
+        ctx.strokeStyle = tok(g.color); ctx.lineWidth = 2; ctx.strokeRect(x, y, anchoCol, 76);
+        ctx.fillStyle = tok('--tinta'); ctx.font = `400 25px ${tok('--f-texto')}`; textoEnvuelto(tec, x + 18, y + 33, anchoCol - 36, 28);
+      });
+    });
+    ctx.globalAlpha = prog(t, 5.3); ctx.fillStyle = tok('--sello'); ctx.font = `600 26px ${tok('--f-titulo')}`;
+    ctx.fillText('Lo que más hace la gente, releer y subrayar, está abajo.', 50, 655);
+  },
+  practica(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 36px ${tok('--f-titulo')}`; ctx.fillText(e.titulo, 50, 66);
+    const X0 = 400, X1 = 1180, max = 30, xv = v => X0 + v / max * (X1 - X0);
+    ctx.globalAlpha = prog(t, .5); ctx.strokeStyle = tok('--regla'); ctx.fillStyle = tok('--tenue'); ctx.font = `500 18px ${tok('--f-ficha')}`; ctx.lineWidth = 1; ctx.textAlign = 'center';
+    for (let v = 0; v <= max; v += 10) { ctx.beginPath(); ctx.moveTo(xv(v), 110); ctx.lineTo(xv(v), 580); ctx.stroke(); ctx.fillText(`${v} %`, xv(v), 605); }
+    ctx.textAlign = 'left';
+    e.datos.forEach((d, i) => {
+      const ini = 1 + i * .5; if (t < ini) return;
+      const p = prog(t, ini, .9), y = 130 + i * 92;
+      ctx.globalAlpha = 1; ctx.fillStyle = tok('--tinta'); ctx.font = `400 26px ${tok('--f-texto')}`; ctx.fillText(d.etiqueta, 50, y + 36);
+      const w = (xv(d.valor) - X0) * p; ctx.fillStyle = tok('--sello'); ctx.fillRect(X0, y + 8, w, 44);
+      ctx.fillStyle = tok('--tinta'); ctx.font = `600 24px ${tok('--f-ficha')}`;
+      ctx.fillText(`${d.menor ? 'menos de ' : ''}${Math.round(d.valor * p)} %`, X0 + w + 12, y + 39);
+    });
+    ctx.globalAlpha = prog(t, 4.6); ctx.fillStyle = tok('--linea-roja'); ctx.font = `600 26px ${tok('--f-titulo')}`;
+    ctx.fillText('La práctica importa, pero en el estudio y el trabajo explica muy poco de las diferencias.', 50, 655);
+  },
+};
+function render(t) {
+  ctx.globalAlpha = 1; ctx.textAlign = 'left'; ctx.fillStyle = tok('--tarjeta'); ctx.fillRect(0, 0, lienzo.width, lienzo.height);
+  RENDER[escenaActual](ESCENAS[escenaActual], t); ctx.globalAlpha = 1;
+}
+let tm = 0, corriendo = false, previo = 0;
+function pintarEscena() { const e = ESCENAS[escenaActual]; $('scrub').max = e.duracion; render(tm); $('scrub').value = tm; $('t').textContent = `${tm.toFixed(2)} / ${e.duracion.toFixed(2)} s`; $('fuente-escena').textContent = 'Fuente: ' + e.fuente; }
+function bucle(a) { if (!corriendo) return; tm += (a - previo) / 1000; previo = a; const d = ESCENAS[escenaActual].duracion; if (tm >= d) { tm = d; parar(); } pintarEscena(); if (corriendo) requestAnimationFrame(bucle); }
+function parar() { corriendo = false; $('play').textContent = 'Reproducir'; }
+$('play').onclick = () => { if (corriendo) return parar(); if (tm >= ESCENAS[escenaActual].duracion) tm = 0; corriendo = true; $('play').textContent = 'Pausa'; previo = performance.now(); requestAnimationFrame(bucle); };
+$('scrub').addEventListener('input', () => { tm = +$('scrub').value; pintarEscena(); });
+Object.entries(ESCENAS).forEach(([k, e]) => {
+  const b = document.createElement('button'); b.className = 'boton'; b.textContent = e.nombre; b.setAttribute('aria-pressed', k === escenaActual);
+  b.onclick = () => { escenaActual = k; tm = ESCENAS[k].duracion; parar(); [...$('escenas').children].forEach(x => x.setAttribute('aria-pressed', x === b)); pintarEscena(); };
+  $('escenas').append(b);
+});
+tm = ESCENAS[escenaActual].duracion;
+
+
+/* ===== Ponte a prueba con repaso espaciado (cajas de Leitner) =====
+   Cada pregunta vive en una caja del 1 al 5. Si aciertas, sube de caja y vuelve más tarde;
+   si fallas, regresa a la caja 1 y vuelve mañana. Se guarda solo en este navegador. */
+const PREGUNTAS = DATOS.preguntas;
+const INTERVALO = [1, 2, 4, 8, 16];   // días hasta el próximo repaso según la caja
+const NUEVAS_POR_DIA = 8;
+const CLAVE = 'aprender-repaso-v1';
+const leer = () => { try { return JSON.parse(localStorage.getItem(CLAVE)) || {}; } catch (e) { return {}; } };
+const guardar = r => { try { localStorage.setItem(CLAVE, JSON.stringify(r)); } catch (e) { /* sin almacenamiento: funciona solo en esta visita */ } };
+const hoyIso = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+const sumarDias = (isoD, n) => { const [y, m, d] = isoD.split('-').map(Number); const f = new Date(y, m - 1, d + n); return `${f.getFullYear()}-${String(f.getMonth() + 1).padStart(2, '0')}-${String(f.getDate()).padStart(2, '0')}`; };
+const fechaLarga = isoD => { const [y, m, d] = isoD.split('-').map(Number); return new Date(y, m - 1, d).toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long' }); };
+let registro = leer(), deHoy = {}, practicando = false, turno = null;
+
+function armarTurno() {
+  const hoy = hoyIso();
+  const pendientes = PREGUNTAS.map((q, i) => i).filter(i => registro[PREGUNTAS[i].frase] && registro[PREGUNTAS[i].frase].proxima <= hoy);
+  const nuevas = PREGUNTAS.map((q, i) => i).filter(i => !registro[PREGUNTAS[i].frase]).slice(0, Math.max(0, NUEVAS_POR_DIA - pendientes.length));
+  turno = practicando ? PREGUNTAS.map((q, i) => i) : [...pendientes, ...nuevas];
+}
+function responder(i, r) {
+  const q = PREGUNTAS[i], bien = r === q.es;
+  deHoy[i] = r;
+  if (!practicando) {
+    const antes = registro[q.frase] || { caja: 1 };   // una pregunta nueva entra en la caja 1
+    const caja = bien ? Math.min(5, antes.caja + 1) : 1;
+    registro[q.frase] = { caja, proxima: sumarDias(hoyIso(), bien ? INTERVALO[caja - 1] : 1) };
+    guardar(registro);
+  }
+  pintarPreguntas();
+}
+function pintarPreguntas() {
+  if (!turno) armarTurno();
+  const cont = $('preguntas'); cont.innerHTML = '';
+  turno.forEach(i => {
+    const q = PREGUNTAS[i], r = deHoy[i], div = document.createElement('div'), reg = registro[q.frase];
+    div.className = 'pregunta' + (r ? (r === q.es ? ' acierto' : ' error') : '');
+    div.innerHTML = `<q>${esc(q.frase)}</q>` + (r
+      ? `<div class="respuesta"><b>${r === q.es ? 'Correcto' : 'No'}: es ${q.es === 'mito' ? 'un mito' : 'evidencia'}.</b><span>${esc(q.explica)}</span><a href="https://doi.org/${q.doi}" target="_blank" rel="noopener">${esc(q.cita)} · doi.org/${esc(q.doi)}</a>${!practicando && reg ? `<span class="cuando">Caja ${reg.caja} · vuelve el ${esc(fechaLarga(reg.proxima))}</span>` : ''}</div>`
+      : `<div class="opciones"><button class="boton" data-r="mito">Mito</button><button class="boton" data-r="evidencia">Evidencia</button></div>`);
+    div.querySelectorAll('button[data-r]').forEach(b => b.onclick = () => responder(i, b.dataset.r));
+    cont.append(div);
+  });
+  const faltan = turno.filter(i => !deHoy[i]).length;
+  const proximas = Object.values(registro).map(x => x.proxima).filter(f => f > hoyIso()).sort();
+  $('marcador').textContent = practicando
+    ? `Práctica libre: ${turno.length - faltan} de ${turno.length} respondidas. No cambia tu calendario.`
+    : turno.length === 0
+      ? (proximas.length ? `Terminaste el repaso de hoy. La próxima pregunta vuelve el ${fechaLarga(proximas[0])}.` : 'No hay preguntas pendientes.')
+      : faltan ? `Hoy te tocan ${turno.length} preguntas; faltan ${faltan}.` : `Terminaste el repaso de hoy.${proximas.length ? ` Vuelve el ${fechaLarga(proximas[0])}.` : ''}`;
+  const conteo = [0, 0, 0, 0, 0, 0]; PREGUNTAS.forEach(q => { conteo[registro[q.frase] ? registro[q.frase].caja : 0]++; });
+  const max = Math.max(...conteo, 1);
+  $('cajas').innerHTML = conteo.map((n, c) => `<div title="${c === 0 ? 'Sin ver' : 'Caja ' + c}: ${n}"><span>${n}</span><i style="height:${4 + n / max * 36}px;opacity:${c === 0 ? .35 : .45 + c * .11}"></i><span>${c === 0 ? 'nuevas' : 'caja ' + c}</span></div>`).join('');
+  $('practicar').textContent = practicando ? 'Volver a mi repaso de hoy' : 'Practicar todas';
+}
+$('practicar').onclick = () => { practicando = !practicando; deHoy = {}; turno = null; pintarPreguntas(); };
+let confirmando = null;   // dos toques para borrar el progreso: el visor no muestra diálogos de confirmación
+$('otra-vez').onclick = () => {
+  if (!confirmando) { $('otra-vez').textContent = '¿Borrar tu progreso? Toca otra vez'; confirmando = setTimeout(() => { confirmando = null; $('otra-vez').textContent = 'Empezar de nuevo'; }, 4000); return; }
+  clearTimeout(confirmando); confirmando = null; $('otra-vez').textContent = 'Empezar de nuevo';
+  registro = {}; guardar(registro); deHoy = {}; practicando = false; turno = null; pintarPreguntas();
+};
+pintarPreguntas();
+
+/* ===== Planificador de repaso espaciado ===== */
+const DIA = 864e5;
+const aFecha = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const desdeIso = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const largo = d => d.toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long' });
+const corto = d => d.toLocaleDateString('es-CO', { day: 'numeric', month: 'short' });
+// Sesiones con separaciones crecientes (1, 2, 3, ...) escaladas a los días disponibles; la última, el día antes del examen.
+function planear(hoy, examen, n) {
+  const dias = Math.round((examen - hoy) / DIA);
+  if (dias < 1) return { error: 'La fecha del examen debe ser posterior al día en que empiezas.' };
+  const k = Math.min(n, dias), pesos = Array.from({ length: k - 1 }, (_, i) => i + 1), total = pesos.reduce((a, b) => a + b, 0);
+  const offs = [0]; let acc = 0;
+  for (const w of pesos) { acc += w; offs.push(Math.round(acc / total * (dias - 1))); }
+  const unicos = [...new Set(offs)].sort((a, b) => a - b);
+  return { dias, sesiones: unicos.map(o => new Date(hoy.getTime() + o * DIA)) };
+}
+function pintarPlan() {
+  const hoy = desdeIso($('f-hoy').value), examen = desdeIso($('f-examen').value), n = +$('f-sesiones').value;
+  const p = planear(hoy, examen, n), lista = $('sesiones'), franja = $('franja');
+  lista.innerHTML = ''; franja.innerHTML = '';
+  if (p.error) { $('nota-plan').textContent = p.error; return; }
+  const tareas = ['Estudia el tema por primera vez y, al final, escribe lo que recuerdas sin mirar.', 'Ponte a prueba sin mirar. Revisa solo lo que olvidaste.', 'Mezcla tipos de ejercicios y explica en voz alta los pasos.', 'Ponte a prueba otra vez, como si fuera el examen.', 'Repaso corto: preguntas rápidas, sin releer todo.', 'Último repaso, corto. Duerme bien esta noche.'];
+  p.sesiones.forEach((d, i) => {
+    const ultimo = i === p.sesiones.length - 1;
+    lista.insertAdjacentHTML('beforeend', `<li><b>${esc(largo(d))}</b><span>${esc(ultimo && i > 0 ? tareas[5] : tareas[Math.min(i, 4)])}</span></li>`);
+    const x = (d - hoy) / (examen - hoy) * 100;
+    franja.insertAdjacentHTML('beforeend', `<div class="punto" style="left:${x}%"><span>${esc(corto(d))}</span></div>`);
+  });
+  franja.insertAdjacentHTML('beforeend', `<div class="punto examen" style="left:100%"><span>Examen</span></div>`);
+  const gaps = p.sesiones.slice(1).map((d, i) => Math.round((d - p.sesiones[i]) / DIA));
+  $('nota-plan').textContent = `${p.sesiones.length} sesiones en ${p.dias} días, separadas por ${gaps.join(', ')} días. Ejemplo calculado desde hoy; cambia las fechas para tu examen.`;
+}
+{ const h = aFecha(new Date()); $('f-hoy').value = iso(h); $('f-examen').value = iso(new Date(h.getTime() + 14 * DIA)); }
+['f-hoy', 'f-examen', 'f-sesiones'].forEach(id => $(id).addEventListener('input', pintarPlan));
+pintarPlan();
+
+/* ===== Tablero de veredictos ===== */
+const libros = DATOS.libros, porId = Object.fromEntries(libros.map(l => [l.id, l]));
+let filtro = 'todos', elegido = 'make-it-stick';
+const FILTROS = [['todos', 'Todos'], ...Object.entries(DATOS.etiquetas)];
+FILTROS.forEach(([k, n]) => {
+  const b = document.createElement('button'); b.className = 'boton'; b.textContent = n; b.setAttribute('aria-pressed', k === filtro);
+  b.onclick = () => { filtro = k; [...$('filtros').children].forEach(x => x.setAttribute('aria-pressed', x === b)); pintarTablero(); };
+  $('filtros').append(b);
+});
+libros.forEach(l => {
+  const b = document.createElement('button'); b.className = 'libro'; b.dataset.id = l.id;
+  b.innerHTML = `<span class="chip v-${l.veredicto}">${esc(DATOS.etiquetas[l.veredicto])}</span><b>${esc(l.titulo)}</b><span class="tenue" style="font-size:.95rem">${esc(l.frase)}</span>`;
+  b.onclick = () => { elegido = l.id; pintarTablero(); elegirEnMapa(l.id); };
+  $('libros').append(b);
+});
+function pintarTablero() {
+  [...$('libros').children].forEach(b => { const l = porId[b.dataset.id]; b.hidden = filtro !== 'todos' && l.veredicto !== filtro; b.setAttribute('aria-pressed', l.id === elegido); });
+  const l = porId[elegido];
+  $('panel').innerHTML = `<span class="chip v-${l.veredicto}" style="justify-self:start">${esc(DATOS.etiquetas[l.veredicto])}</span>
+    <h3>${esc(l.titulo)}</h3><p class="tenue">${esc(l.autor)} · ${esc(l.anio)}</p>
+    <p><b>La promesa:</b> ${esc(l.frase)}.</p><p>${esc(l.juicio)}</p>
+    ${l.doi ? `<div class="fuente"><span>${esc(l.cita)}</span><a href="https://doi.org/${l.doi}" target="_blank" rel="noopener">doi.org/${esc(l.doi)}</a></div>` : ''}
+    <a href="#${l.id}">Ir a la ficha completa</a>`;
+}
+
+/* ===== Mapa de cruces (fuerzas simples en canvas) ===== */
+const red = $('red'), rx = red.getContext('2d'), W = red.width, H = red.height;
+const nodos = libros.map((l, i) => ({ id: l.id, titulo: l.titulo, grupo: l.grupo, fuera: false, x: W / 2 + Math.cos(i * 2.4) * 220, y: H / 2 + Math.sin(i * 2.4) * 200, vx: 0, vy: 0 }));
+const nodoDe = Object.fromEntries(nodos.map(n => [n.id, n]));
+DATOS.aristas.forEach((a, i) => { if (a.fuera && !nodoDe[a.b]) { const n = { id: a.b, titulo: a.titulo_b, fuera: true, x: W / 2 + Math.cos(i) * 300, y: H / 2 + Math.sin(i) * 280, vx: 0, vy: 0 }; nodos.push(n); nodoDe[a.b] = n; } });
+const COL_GRUPO = ['--b2', '--b1', '--b3', '--b5', '--b4'];
+for (let it = 0; it < 500; it++) {   // simulación fija y determinista: misma posición en cada carga
+  for (const a of nodos) for (const b of nodos) { if (a === b) continue; const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy + .01, f = 5200 / d2; a.vx += dx * f / Math.sqrt(d2); a.vy += dy * f / Math.sqrt(d2); }
+  for (const e of DATOS.aristas) { const a = nodoDe[e.a], b = nodoDe[e.b]; const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, f = (d - 170) * .01; a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f; }
+  for (const n of nodos) { n.vx += (W / 2 - n.x) * .004; n.vy += (H / 2 - n.y) * .004; n.x += n.vx * .5; n.y += n.vy * .5; n.vx *= .6; n.vy *= .6; n.x = Math.max(70, Math.min(W - 70, n.x)); n.y = Math.max(40, Math.min(H - 40, n.y)); }
+}
+{ // ajustar el dibujo al lienzo
+  const xs = nodos.map(n => n.x), ys = nodos.map(n => n.y), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  for (const n of nodos) { n.x = 90 + (n.x - x0) / (x1 - x0 || 1) * (W - 180); n.y = 50 + (n.y - y0) / (y1 - y0 || 1) * (H - 90); }
+}
+let enMapa = 'make-it-stick';
+function dibujarRed() {
+  rx.fillStyle = tok('--tarjeta'); rx.fillRect(0, 0, W, H);
+  const vecinos = new Set(DATOS.aristas.filter(e => e.a === enMapa || e.b === enMapa).flatMap(e => [e.a, e.b]));
+  for (const e of DATOS.aristas) {
+    const a = nodoDe[e.a], b = nodoDe[e.b], activa = e.a === enMapa || e.b === enMapa;
+    rx.strokeStyle = activa ? tok('--sello') : tok('--regla'); rx.lineWidth = activa ? 2.5 : 1;
+    rx.beginPath(); rx.moveTo(a.x, a.y); rx.lineTo(b.x, b.y); rx.stroke();
+  }
+  for (const n of nodos) {
+    const sel = n.id === enMapa, cerca = vecinos.has(n.id);
+    rx.fillStyle = n.fuera ? tok('--tenue') : tok(COL_GRUPO[n.grupo]);
+    rx.globalAlpha = sel || cerca || !enMapa ? 1 : .45;
+    rx.beginPath(); rx.arc(n.x, n.y, n.fuera ? 5 : sel ? 12 : 9, 0, Math.PI * 2); rx.fill();
+    if (!n.fuera || cerca) {
+      rx.fillStyle = tok('--tinta'); rx.font = `${sel ? 800 : 400} ${n.fuera ? 13 : 15}px ${tok('--f-titulo')}`; rx.textAlign = 'center';
+      rx.fillText(n.titulo.length > 28 ? n.titulo.slice(0, 26) + '…' : n.titulo, n.x, n.y - 15);
+    }
+    rx.globalAlpha = 1;
+  }
+  const lista = DATOS.aristas.filter(e => e.a === enMapa || e.b === enMapa);
+  const l = porId[enMapa];
+  $('cruces').innerHTML = `<h3 style="font-size:1.35rem">${esc(l ? l.titulo : nodoDe[enMapa].titulo)}</h3>` +
+    (lista.length ? '<ul style="padding-left:18px;margin:0">' + lista.map(e => { const otro = e.a === enMapa ? e.b : e.a; const t = nodoDe[otro].titulo; return `<li><b>${esc(t)}</b>${nodoDe[otro].fuera ? ' <span class="tenue">(otro tema)</span>' : ''}: ${esc(e.por)}</li>`; }).join('') + '</ul>' : '<p class="tenue">Este libro todavía no tiene cruces.</p>') +
+    (l ? `<a href="#${l.id}">Ir a la ficha</a>` : '');
+}
+$('leyenda-mapa').innerHTML = DATOS.grupos.map((g, i) => `<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(${COL_GRUPO[i]})"></span> ${esc(g)}</span>`).join('') + '<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tenue)"></span> Otros temas</span>';
+function elegirEnMapa(id) { enMapa = id; dibujarRed(); }
+red.addEventListener('click', ev => {
+  const r = red.getBoundingClientRect(), x = (ev.clientX - r.left) * W / r.width, y = (ev.clientY - r.top) * H / r.height;
+  let mejor = null, dm = 30; for (const n of nodos) { const d = Math.hypot(n.x - x, n.y - y); if (d < dm) { dm = d; mejor = n; } }
+  if (mejor) { enMapa = mejor.id; if (porId[mejor.id]) { elegido = mejor.id; pintarTablero(); } dibujarRed(); }
+});
+
+/* ===== Arranque y cambio de tema ===== */
+function todo() { pintarCurioso(); pintarEscena(); pintarTablero(); dibujarRed(); }
+todo();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', todo);
+new MutationObserver(todo).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
+</body>
+</html>
