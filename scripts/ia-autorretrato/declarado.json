@@ -1,0 +1,8 @@
+[
+  { "herramienta": "Claude Code", "fuente": "medido", "uso": { "es": "Agente en la terminal: código, specs, datos y despliegues", "en": "Terminal agent: code, specs, data and deploys" }, "intensidad": 3 },
+  { "herramienta": "Claude.ai", "fuente": "declarado", "uso": { "es": "Conversaciones largas, Projects y Artifacts", "en": "Long conversations, Projects and Artifacts" }, "intensidad": 3 },
+  { "herramienta": "ChatGPT / OpenAI", "fuente": "declarado", "uso": { "es": "Consultas rápidas y API en proyectos", "en": "Quick questions and the API in projects" }, "intensidad": 2 },
+  { "herramienta": "Ollama (modelos locales)", "fuente": "declarado", "uso": { "es": "Agentes locales (Hermes 3 en brayan) y pruebas offline", "en": "Local agents (Hermes 3 in brayan) and offline tests" }, "intensidad": 2 },
+  { "herramienta": "Gemini / Antigravity", "fuente": "declarado", "uso": { "es": "Exploración puntual", "en": "Occasional exploration" }, "intensidad": 1 },
+  { "herramienta": "Cursor", "fuente": "declarado", "uso": { "es": "Editor con IA, uso esporádico", "en": "AI editor, occasional use" }, "intensidad": 1 }
+]

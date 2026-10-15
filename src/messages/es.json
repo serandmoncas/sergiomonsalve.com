@@ -682,5 +682,63 @@
     "free": "Gratis",
     "no_courses": "No hay cursos disponibles aún.",
     "no_enrollments": "Aún no estás inscrito en ningún curso."
+  },
+  "autorretrato": {
+    "verDatos": "Ver los datos",
+    "calendario": {
+      "titulo": "Prompts por día en Claude Code y commits por mes",
+      "resumen": "{dias} días con actividad; el día más intenso tuvo {max} prompts.",
+      "fecha": "Fecha", "prompts": "Prompts", "sesiones": "Sesiones", "commits": "commits", "mes": "Mes", "commitsMes": "Commits"
+    },
+    "herramientas": {
+      "titulo": "Las herramientas que más usa el agente",
+      "resumen": "{top} es la herramienta más usada: {usos} usos.",
+      "herramienta": "Herramienta", "usos": "Usos", "grupo": "Grupo",
+      "grupos": { "ejecucion": "ejecución", "investigacion": "investigación", "navegador": "navegador", "orquestacion": "orquestación", "mcp": "MCP", "edicion": "edición" }
+    },
+    "coautoria": {
+      "titulo": "Commits co-firmados por Claude, por mes",
+      "resumen": "En {mes}, {pct}% de los commits llevan la firma de Claude.",
+      "mes": "Mes", "total": "Total", "conClaude": "Con Claude", "soloHumano": "Solo yo", "modelo": "Modelo principal"
+    },
+    "ecosistema": {
+      "titulo": "Las herramientas de IA que uso",
+      "herramienta": "Herramienta", "uso": "Para qué", "intensidad": "Intensidad", "fuente": "Fuente",
+      "medido": "medido", "declarado": "declarado"
+    },
+    "conceptos": {
+      "titulo": "Conceptos: lo que hablo frente a lo que construyo",
+      "resumen": "{ambos} conceptos aparecen tanto en mis prompts como en mi código; {ninguno} en ninguno.",
+      "termino": "Concepto", "categoria": "Categoría", "hablado": "Hablado", "preguntado": "Preguntado", "construido": "Construido", "cuadrante": "Cuadrante",
+      "cuadrantes": { "ambos": "Hablado y construido", "solo-hablado": "Solo hablado", "solo-construido": "Solo construido", "ninguno": "Ninguno" },
+      "leyendaPreguntado": "Anillo: lo he preguntado («¿qué es…?»)",
+      "si": "sí", "no": "no"
+    },
+    "prompts": {
+      "titulo": "Cómo le hablo a la IA",
+      "resumen": "{total} prompts; mediana de {mediana} caracteres; {espanol}% en español.",
+      "total": "prompts", "mediana": "caracteres (mediana)", "preguntas": "son preguntas", "espanol": "en español"
+    },
+    "red": {
+      "titulo": "Con quién escribo código",
+      "resumen": "Antes, {personas} personas; ahora, {modelos} modelos de Claude.",
+      "tipo": { "sergio": "Sergio", "persona": "Persona", "modelo": "Modelo" },
+      "autor": "Autor", "dominio": "Dominio", "commits": "Commits", "sergio": "Sergio"
+    },
+    "discurso": {
+      "titulo": "El debate sobre IA, autoría y código",
+      "resumen": "{resaltados} de {total} conceptos del debate aparecen en mis propios prompts.",
+      "concepto": "Concepto", "otros": "No aparece en mis prompts", "enMisPrompts": "En mis prompts", "relacion": "Relación"
+    },
+    "camino": {
+      "titulo": "El camino hacia atrás",
+      "resumen": "{total} conocimientos detrás de mis {hoy} tecnologías de hoy; el más antiguo con evidencia es de {anio}.",
+      "play": "Reproducir", "pausa": "Pausar", "tiempo": "Momento de la animación", "desplazar": "Diagrama desplazable", "raices": "raíces",
+      "fases": { "presente": "Hoy", "rebobinar": "Rebobinando", "raices": "Las raíces", "avanzar": "De vuelta a hoy" },
+      "evidencia": { "github": "en GitHub", "declarado": "declarado", "inferido": "inferido" },
+      "conocimiento": "Conocimiento", "rama": "Rama", "evidenciaColumna": "Evidencia", "primeraEvidencia": "Primera evidencia"
+    },
+    "dominios": { "producto-web": "producto web", "hongos-iot": "hongos e IoT", "educacion": "educación", "agentes": "agentes", "experimentos": "experimentos" },
+    "ramas": { "fundamentos": "fundamentos", "backend": "backend", "web": "web", "datos-ml": "datos y ML", "iot": "IoT", "infra": "infra", "agentes": "agentes", "educacion": "educación", "escritura": "escritura" }
   }
 }

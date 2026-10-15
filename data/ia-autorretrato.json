@@ -1,0 +1,4363 @@
+{
+  "generado": "2026-10-15T16:02:00.441Z",
+  "periodo": {
+    "desde": "2025-11-18",
+    "hasta": "2026-10-15"
+  },
+  "actividadDiaria": [
+    {
+      "fecha": "2025-11-18",
+      "prompts": 6,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2025-11-19",
+      "prompts": 4,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2025-12-03",
+      "prompts": 5,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2025-12-04",
+      "prompts": 7,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2025-12-05",
+      "prompts": 15,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2025-12-06",
+      "prompts": 4,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2025-12-09",
+      "prompts": 1,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2025-12-30",
+      "prompts": 2,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-02-23",
+      "prompts": 2,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-02-25",
+      "prompts": 19,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-02-26",
+      "prompts": 10,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-02-27",
+      "prompts": 8,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-03-05",
+      "prompts": 12,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-03-11",
+      "prompts": 24,
+      "sesiones": 6
+    },
+    {
+      "fecha": "2026-03-13",
+      "prompts": 40,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-03-16",
+      "prompts": 17,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-03-17",
+      "prompts": 9,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-03-18",
+      "prompts": 32,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-03-19",
+      "prompts": 105,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-03-20",
+      "prompts": 5,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-04-30",
+      "prompts": 46,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-05-03",
+      "prompts": 27,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-05-04",
+      "prompts": 41,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-05-05",
+      "prompts": 22,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-05-06",
+      "prompts": 30,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-05-07",
+      "prompts": 36,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-05-08",
+      "prompts": 32,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-05-09",
+      "prompts": 50,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-05-11",
+      "prompts": 30,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-05-12",
+      "prompts": 40,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-05-16",
+      "prompts": 72,
+      "sesiones": 4
+    },
+    {
+      "fecha": "2026-05-17",
+      "prompts": 24,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-05-18",
+      "prompts": 37,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-05-19",
+      "prompts": 50,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-05-20",
+      "prompts": 28,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-05-22",
+      "prompts": 69,
+      "sesiones": 4
+    },
+    {
+      "fecha": "2026-05-23",
+      "prompts": 29,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-05-24",
+      "prompts": 27,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-05-25",
+      "prompts": 93,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-05-26",
+      "prompts": 39,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-05-28",
+      "prompts": 19,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-06-02",
+      "prompts": 52,
+      "sesiones": 4
+    },
+    {
+      "fecha": "2026-06-03",
+      "prompts": 36,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-06-10",
+      "prompts": 9,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-06-22",
+      "prompts": 1,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-06-23",
+      "prompts": 18,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-06-24",
+      "prompts": 4,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-06-25",
+      "prompts": 1,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-06-30",
+      "prompts": 59,
+      "sesiones": 4
+    },
+    {
+      "fecha": "2026-07-01",
+      "prompts": 4,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-07-13",
+      "prompts": 6,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-07-14",
+      "prompts": 29,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-07-15",
+      "prompts": 29,
+      "sesiones": 4
+    },
+    {
+      "fecha": "2026-07-16",
+      "prompts": 21,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-07-20",
+      "prompts": 44,
+      "sesiones": 4
+    },
+    {
+      "fecha": "2026-07-21",
+      "prompts": 28,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-07-22",
+      "prompts": 39,
+      "sesiones": 6
+    },
+    {
+      "fecha": "2026-07-23",
+      "prompts": 111,
+      "sesiones": 5
+    },
+    {
+      "fecha": "2026-07-24",
+      "prompts": 90,
+      "sesiones": 8
+    },
+    {
+      "fecha": "2026-07-26",
+      "prompts": 17,
+      "sesiones": 6
+    },
+    {
+      "fecha": "2026-07-28",
+      "prompts": 41,
+      "sesiones": 5
+    },
+    {
+      "fecha": "2026-07-29",
+      "prompts": 79,
+      "sesiones": 5
+    },
+    {
+      "fecha": "2026-08-08",
+      "prompts": 8,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-08-10",
+      "prompts": 1,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-08-11",
+      "prompts": 11,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-08-12",
+      "prompts": 29,
+      "sesiones": 4
+    },
+    {
+      "fecha": "2026-08-14",
+      "prompts": 23,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-08-15",
+      "prompts": 50,
+      "sesiones": 6
+    },
+    {
+      "fecha": "2026-08-16",
+      "prompts": 2,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-08-18",
+      "prompts": 33,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-08-19",
+      "prompts": 113,
+      "sesiones": 7
+    },
+    {
+      "fecha": "2026-08-20",
+      "prompts": 96,
+      "sesiones": 9
+    },
+    {
+      "fecha": "2026-08-21",
+      "prompts": 16,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-08-22",
+      "prompts": 11,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-08-26",
+      "prompts": 14,
+      "sesiones": 2
+    },
+    {
+      "fecha": "2026-08-28",
+      "prompts": 14,
+      "sesiones": 3
+    },
+    {
+      "fecha": "2026-09-01",
+      "prompts": 1,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-09-02",
+      "prompts": 6,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-09-08",
+      "prompts": 3,
+      "sesiones": 1
+    },
+    {
+      "fecha": "2026-10-14",
+      "prompts": 116,
+      "sesiones": 6
+    },
+    {
+      "fecha": "2026-10-15",
+      "prompts": 176,
+      "sesiones": 8
+    }
+  ],
+  "commitsPorMes": [
+    {
+      "mes": "2026-02",
+      "total": 22,
+      "coautoriaClaude": 19,
+      "porTipo": {
+        "docs": 2,
+        "otro": 20
+      }
+    },
+    {
+      "mes": "2026-05",
+      "total": 382,
+      "coautoriaClaude": 197,
+      "porTipo": {
+        "feat": 210,
+        "otro": 23,
+        "fix": 59,
+        "docs": 66,
+        "chore": 18,
+        "refactor": 2,
+        "test": 2,
+        "ci": 2
+      }
+    },
+    {
+      "mes": "2026-06",
+      "total": 99,
+      "coautoriaClaude": 48,
+      "porTipo": {
+        "otro": 24,
+        "fix": 15,
+        "feat": 39,
+        "docs": 11,
+        "chore": 5,
+        "test": 3,
+        "ci": 2
+      }
+    },
+    {
+      "mes": "2026-07",
+      "total": 411,
+      "coautoriaClaude": 202,
+      "porTipo": {
+        "feat": 50,
+        "otro": 233,
+        "fix": 22,
+        "docs": 65,
+        "chore": 8,
+        "refactor": 1,
+        "cultivo": 10,
+        "test": 10,
+        "ci": 4,
+        "firmware": 8
+      }
+    },
+    {
+      "mes": "2026-08",
+      "total": 250,
+      "coautoriaClaude": 151,
+      "porTipo": {
+        "otro": 50,
+        "docs": 92,
+        "fix": 26,
+        "merge": 1,
+        "feat": 31,
+        "chore": 6,
+        "capacitacion": 22,
+        "test": 13,
+        "cultivo": 7,
+        "refactor": 2
+      }
+    },
+    {
+      "mes": "2026-10",
+      "total": 296,
+      "coautoriaClaude": 286,
+      "porTipo": {
+        "docs": 53,
+        "otro": 104,
+        "fix": 23,
+        "feat": 72,
+        "style": 1,
+        "test": 2,
+        "chore": 5,
+        "contenido": 33,
+        "refactor": 1,
+        "ci": 2
+      }
+    }
+  ],
+  "promptsPorDominio": [
+    {
+      "dominio": "producto-web",
+      "prompts": 1133,
+      "reposPublicos": [
+        "bichongos.store",
+        "dharmastudio.art",
+        "InteFin",
+        "personal_page",
+        "PersonalPage",
+        "pp_nextjs",
+        "sama-mobile",
+        "sergiomonsalve.com",
+        "slogs"
+      ]
+    },
+    {
+      "dominio": "experimentos",
+      "prompts": 574,
+      "reposPublicos": [
+        "fastapi_crudadmin"
+      ]
+    },
+    {
+      "dominio": "agentes",
+      "prompts": 339,
+      "reposPublicos": [
+        "brayan",
+        "HER"
+      ]
+    },
+    {
+      "dominio": "hongos-iot",
+      "prompts": 330,
+      "reposPublicos": [
+        "Bichongos",
+        "mobile-esp32"
+      ]
+    },
+    {
+      "dominio": "educacion",
+      "prompts": 233,
+      "reposPublicos": [
+        "medmap",
+        "New-Old-School",
+        "stemedu"
+      ]
+    }
+  ],
+  "herramientas": [
+    {
+      "nombre": "Bash",
+      "usos": 3835,
+      "grupo": "ejecucion"
+    },
+    {
+      "nombre": "WebSearch",
+      "usos": 500,
+      "grupo": "investigacion"
+    },
+    {
+      "nombre": "WebFetch",
+      "usos": 447,
+      "grupo": "investigacion"
+    },
+    {
+      "nombre": "Read",
+      "usos": 265,
+      "grupo": "edicion"
+    },
+    {
+      "nombre": "Write",
+      "usos": 193,
+      "grupo": "edicion"
+    },
+    {
+      "nombre": "mcp:plugin_playwright_playwright",
+      "usos": 185,
+      "grupo": "navegador"
+    },
+    {
+      "nombre": "mcp:claude-in-chrome",
+      "usos": 124,
+      "grupo": "navegador"
+    },
+    {
+      "nombre": "Agent",
+      "usos": 115,
+      "grupo": "orquestacion"
+    },
+    {
+      "nombre": "SubagentHandback",
+      "usos": 115,
+      "grupo": "orquestacion"
+    },
+    {
+      "nombre": "ToolSearch",
+      "usos": 87,
+      "grupo": "orquestacion"
+    },
+    {
+      "nombre": "Edit",
+      "usos": 78,
+      "grupo": "edicion"
+    },
+    {
+      "nombre": "AskUserQuestion",
+      "usos": 76,
+      "grupo": "orquestacion"
+    },
+    {
+      "nombre": "Skill",
+      "usos": 57,
+      "grupo": "orquestacion"
+    },
+    {
+      "nombre": "Artifact",
+      "usos": 42,
+      "grupo": "orquestacion"
+    },
+    {
+      "nombre": "SendMessage",
+      "usos": 20,
+      "grupo": "orquestacion"
+    }
+  ],
+  "modelos": [
+    {
+      "modelo": "claude-opus-5-5",
+      "respuestas": 9101
+    },
+    {
+      "modelo": "claude-opus-5",
+      "respuestas": 2469
+    },
+    {
+      "modelo": "claude-sonnet-5-5",
+      "respuestas": 468
+    },
+    {
+      "modelo": "claude-haiku-5-5",
+      "respuestas": 290
+    },
+    {
+      "modelo": "claude-fable-5-1",
+      "respuestas": 33
+    }
+  ],
+  "ecosistema": [
+    {
+      "herramienta": "Claude Code",
+      "fuente": "medido",
+      "uso": {
+        "es": "Agente en la terminal: código, specs, datos y despliegues",
+        "en": "Terminal agent: code, specs, data and deploys"
+      },
+      "intensidad": 3
+    },
+    {
+      "herramienta": "Claude.ai",
+      "fuente": "declarado",
+      "uso": {
+        "es": "Conversaciones largas, Projects y Artifacts",
+        "en": "Long conversations, Projects and Artifacts"
+      },
+      "intensidad": 3
+    },
+    {
+      "herramienta": "ChatGPT / OpenAI",
+      "fuente": "declarado",
+      "uso": {
+        "es": "Consultas rápidas y API en proyectos",
+        "en": "Quick questions and the API in projects"
+      },
+      "intensidad": 2
+    },
+    {
+      "herramienta": "Ollama (modelos locales)",
+      "fuente": "declarado",
+      "uso": {
+        "es": "Agentes locales (Hermes 3 en brayan) y pruebas offline",
+        "en": "Local agents (Hermes 3 in brayan) and offline tests"
+      },
+      "intensidad": 2
+    },
+    {
+      "herramienta": "Gemini / Antigravity",
+      "fuente": "declarado",
+      "uso": {
+        "es": "Exploración puntual",
+        "en": "Occasional exploration"
+      },
+      "intensidad": 1
+    },
+    {
+      "herramienta": "Cursor",
+      "fuente": "declarado",
+      "uso": {
+        "es": "Editor con IA, uso esporádico",
+        "en": "AI editor, occasional use"
+      },
+      "intensidad": 1
+    }
+  ],
+  "conceptos": [
+    {
+      "slug": "prompt-engineering",
+      "termino": "Prompt engineering",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "context-engineering",
+      "termino": "Context engineering",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "harness-engineering",
+      "termino": "Harness engineering",
+      "categoria": "fundamentos",
+      "hablado": 7,
+      "preguntado": 3,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "patron-de-hashimoto",
+      "termino": "Patrón de Hashimoto",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "cinco-primitivas",
+      "termino": "Cinco primitivas",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "rag",
+      "termino": "RAG (Retrieval-Augmented Generation)",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "mcp",
+      "termino": "MCP (Model Context Protocol)",
+      "categoria": "fundamentos",
+      "hablado": 12,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "skills",
+      "termino": "Skills",
+      "categoria": "fundamentos",
+      "hablado": 8,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "skill-creator",
+      "termino": "Skill creator",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "agentes",
+      "termino": "Agentes",
+      "categoria": "fundamentos",
+      "hablado": 2,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ambos",
+      "corregido": true
+    },
+    {
+      "slug": "gestion-de-contexto",
+      "termino": "Gestión de contexto",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "memoria-persistente",
+      "termino": "Memoria persistente",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "revelacion-progresiva",
+      "termino": "Revelación progresiva",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "poda-de-contexto",
+      "termino": "Poda de contexto",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "obsidian",
+      "termino": "Obsidian",
+      "categoria": "contexto-memoria",
+      "hablado": 1,
+      "preguntado": 2,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "segundo-cerebro",
+      "termino": "Segundo cerebro",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "jarvis",
+      "termino": "Jarvis (asistente personal)",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "mempalas",
+      "termino": "MemPalas",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "infoxicacion",
+      "termino": "Infoxicación",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "encapsulamiento",
+      "termino": "Encapsulamiento",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "friccion-productiva",
+      "termino": "Fricción productiva",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "metodologia-nemesis",
+      "termino": "Metodología Némesis",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "seguridad-en-codigo-generado",
+      "termino": "Seguridad en código generado",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "huellas-de-modelos",
+      "termino": "Huellas de modelos",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "escepticismo-productivo",
+      "termino": "Escepticismo productivo",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "auditoria-de-codigo-ia",
+      "termino": "Auditoría de código IA",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "supervision-humana",
+      "termino": "Supervisión humana",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "agi",
+      "termino": "AGI (inteligencia artificial general)",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "etica-y-alucinaciones",
+      "termino": "Ética y alucinaciones",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "gsd",
+      "termino": "GSD (Getting Stuff Done, marco)",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "loop-engineering",
+      "termino": "Loop Engineering",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "vibe-engineering",
+      "termino": "Vibe Engineering",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "backlog-de-tickets",
+      "termino": "Backlog de tickets",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "pruebas-automatizadas",
+      "termino": "Pruebas automatizadas (Testing)",
+      "categoria": "operacion-evaluacion",
+      "hablado": 1,
+      "preguntado": 0,
+      "construido": true,
+      "cuadrante": "ambos",
+      "corregido": false
+    },
+    {
+      "slug": "openrouter",
+      "termino": "OpenRouter",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "modelos-locales",
+      "termino": "Modelos locales",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "metaaprendizaje",
+      "termino": "Metaaprendizaje",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "icp",
+      "termino": "ICP (perfil de cliente ideal)",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "comunidad-de-practica",
+      "termino": "Comunidad de práctica",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "agilismo-en-la-era-de-la-ia",
+      "termino": "Agilismo en la era de la IA",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "hook",
+      "termino": "Hook",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "status-line",
+      "termino": "Status line",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "handoff",
+      "termino": "Handoff",
+      "categoria": "contexto-memoria",
+      "hablado": 13,
+      "preguntado": 2,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "ley-del-minimo-token",
+      "termino": "Ley del mínimo token",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "maximo-local",
+      "termino": "Máximo local",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "superpowers",
+      "termino": "Superpowers",
+      "categoria": "operacion-evaluacion",
+      "hablado": 12,
+      "preguntado": 0,
+      "construido": true,
+      "cuadrante": "ambos",
+      "corregido": false
+    },
+    {
+      "slug": "omnirouter-llm-router",
+      "termino": "OmniRouter / LLM Router",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "hermes-agent",
+      "termino": "Hermes Agent",
+      "categoria": "fundamentos",
+      "hablado": 1,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "adr",
+      "termino": "ADR",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 1,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "ultimo-momento-responsable",
+      "termino": "Último momento responsable",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "capa-de-dominio",
+      "termino": "Capa de dominio",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "sdr",
+      "termino": "SDR",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "paradoja-de-jevons",
+      "termino": "Paradoja de Jevons",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "software-desechable",
+      "termino": "Software desechable",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "arqueologia-de-codigo",
+      "termino": "Arqueología de código",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "esteganografia",
+      "termino": "Esteganografía",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "informacion-asimetrica",
+      "termino": "Información asimétrica",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "aula-invertida",
+      "termino": "Aula invertida",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "llm",
+      "termino": "LLM (modelo de lenguaje grande)",
+      "categoria": "fundamentos",
+      "hablado": 3,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "token",
+      "termino": "Token",
+      "categoria": "fundamentos",
+      "hablado": 9,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "tokenizacion",
+      "termino": "Tokenización",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "transformer",
+      "termino": "Transformer",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "mecanismo-de-atencion",
+      "termino": "Mecanismo de atención",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "parametros",
+      "termino": "Parámetros",
+      "categoria": "fundamentos",
+      "hablado": 3,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "pesos-abiertos",
+      "termino": "Pesos abiertos (open weights)",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "preentrenamiento",
+      "termino": "Preentrenamiento",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "ajuste-fino",
+      "termino": "Ajuste fino (fine-tuning)",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "rlhf",
+      "termino": "RLHF",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "ia-constitucional",
+      "termino": "IA constitucional",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "modelo-de-razonamiento",
+      "termino": "Modelo de razonamiento",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "cadena-de-pensamiento",
+      "termino": "Cadena de pensamiento",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "pensamiento-extendido",
+      "termino": "Pensamiento extendido",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "temperatura",
+      "termino": "Temperatura",
+      "categoria": "fundamentos",
+      "hablado": 2,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "inferencia",
+      "termino": "Inferencia",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "multimodalidad",
+      "termino": "Multimodalidad",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "modelo-de-difusion",
+      "termino": "Modelo de difusión",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "few-shot",
+      "termino": "Few-shot",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "zero-shot",
+      "termino": "Zero-shot",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "prompt-de-sistema",
+      "termino": "Prompt de sistema",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "uso-de-herramientas",
+      "termino": "Uso de herramientas (tool use)",
+      "categoria": "fundamentos",
+      "hablado": 1,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "salida-estructurada",
+      "termino": "Salida estructurada",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "claude-code",
+      "termino": "Claude Code",
+      "categoria": "fundamentos",
+      "hablado": 3,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ambos",
+      "corregido": true
+    },
+    {
+      "slug": "cowork",
+      "termino": "Cowork",
+      "categoria": "fundamentos",
+      "hablado": 2,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "subagente",
+      "termino": "Subagente",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "orquestador-de-agentes",
+      "termino": "Orquestador de agentes",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "sistema-multiagente",
+      "termino": "Sistema multiagente",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "computer-use",
+      "termino": "Computer use",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "modelo-fundacional",
+      "termino": "Modelo fundacional",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "destilacion",
+      "termino": "Destilación",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "mezcla-de-expertos",
+      "termino": "Mezcla de expertos (MoE)",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "leyes-de-escalamiento",
+      "termino": "Leyes de escalamiento",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "modelo-de-frontera",
+      "termino": "Modelo de frontera",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "ingeniero-de-avance",
+      "termino": "Ingeniero de avance",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "vibe-coding",
+      "termino": "Vibe coding",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "programacion-agentica",
+      "termino": "Programación agéntica",
+      "categoria": "fundamentos",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "ventana-de-contexto",
+      "termino": "Ventana de contexto",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "embeddings",
+      "termino": "Embeddings",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": true,
+      "cuadrante": "solo-construido",
+      "corregido": false
+    },
+    {
+      "slug": "base-de-datos-vectorial",
+      "termino": "Base de datos vectorial",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "busqueda-semantica",
+      "termino": "Búsqueda semántica",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "chunking",
+      "termino": "Fragmentación (chunking)",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "reranking",
+      "termino": "Reordenamiento (reranking)",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "busqueda-hibrida",
+      "termino": "Búsqueda híbrida",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "grafo-de-conocimiento",
+      "termino": "Grafo de conocimiento",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "claude-md",
+      "termino": "CLAUDE.md",
+      "categoria": "contexto-memoria",
+      "hablado": 9,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "proyectos-de-claude",
+      "termino": "Proyectos (Claude)",
+      "categoria": "contexto-memoria",
+      "hablado": 37,
+      "preguntado": 5,
+      "construido": true,
+      "cuadrante": "ninguno",
+      "corregido": true
+    },
+    {
+      "slug": "compactacion",
+      "termino": "Compactación",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "cache-de-prompts",
+      "termino": "Caché de prompts",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "memoria-de-corto-plazo",
+      "termino": "Memoria de corto plazo",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "memoria-de-largo-plazo",
+      "termino": "Memoria de largo plazo",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "memoria-episodica",
+      "termino": "Memoria episódica",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "contexto-compartido",
+      "termino": "Contexto compartido",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "limpieza-de-contexto",
+      "termino": "Limpieza de contexto",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "degradacion-de-contexto",
+      "termino": "Degradación de contexto",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "perdido-en-el-medio",
+      "termino": "Perdido en el medio",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "aguja-en-el-pajar",
+      "termino": "Aguja en el pajar",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "notebooklm",
+      "termino": "NotebookLM",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "spec-como-fuente-de-verdad",
+      "termino": "Spec como fuente de verdad",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "commit-frecuente",
+      "termino": "Commit frecuente",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "llms-txt",
+      "termino": "llms.txt",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "documentacion-viva",
+      "termino": "Documentación viva",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "memoria-institucional",
+      "termino": "Memoria institucional",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "resumen-recursivo",
+      "termino": "Resumen recursivo",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "recuperacion-agentica",
+      "termino": "Recuperación agéntica",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "mapa-del-repositorio",
+      "termino": "Mapa del repositorio",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "traspaso-de-contexto-por-repositorio",
+      "termino": "Traspaso de contexto por repositorio",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "comunicacion-entre-sesiones",
+      "termino": "Comunicación entre sesiones",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "ventana-deslizante",
+      "termino": "Ventana deslizante",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "tokens-de-entrada-y-salida",
+      "termino": "Tokens de entrada y salida",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "presupuesto-de-tokens",
+      "termino": "Presupuesto de tokens",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "zettelkasten",
+      "termino": "Zettelkasten",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "conectores",
+      "termino": "Conectores",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "ingesta-de-documentos",
+      "termino": "Ingesta de documentos",
+      "categoria": "contexto-memoria",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "inyeccion-de-prompts",
+      "termino": "Inyección de prompts",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "inyeccion-indirecta",
+      "termino": "Inyección indirecta",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "jailbreak",
+      "termino": "Jailbreak",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "sandbox",
+      "termino": "Sandbox",
+      "categoria": "seguridad-control",
+      "hablado": 3,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "permisos-de-herramientas",
+      "termino": "Permisos de herramientas",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "humano-en-el-ciclo",
+      "termino": "Humano en el ciclo",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "puerta-de-aprobacion",
+      "termino": "Puerta de aprobación",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "guardarrailes",
+      "termino": "Guardarraíles",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "alineacion",
+      "termino": "Alineación",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "sesgo-de-automatizacion",
+      "termino": "Sesgo de automatización",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "fuga-de-datos",
+      "termino": "Fuga de datos",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "exfiltracion",
+      "termino": "Exfiltración",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "datos-personales",
+      "termino": "Datos personales",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "retencion-cero-de-datos",
+      "termino": "Retención cero de datos",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "secretos-en-el-codigo",
+      "termino": "Secretos en el código",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "cadena-de-suministro",
+      "termino": "Cadena de suministro de software",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "slopsquatting",
+      "termino": "Slopsquatting",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "minimo-privilegio",
+      "termino": "Mínimo privilegio",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "red-teaming",
+      "termino": "Red teaming",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "clasificador-de-seguridad",
+      "termino": "Clasificador de seguridad",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "registro-de-auditoria",
+      "termino": "Registro de auditoría",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "marcas-de-agua",
+      "termino": "Marcas de agua en texto IA",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "deepfake",
+      "termino": "Deepfake",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "clonacion-de-voz",
+      "termino": "Clonación de voz",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "derechos-de-autor-e-ia",
+      "termino": "Derechos de autor e IA",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "sesgo-algoritmico",
+      "termino": "Sesgo algorítmico",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "explicabilidad",
+      "termino": "Explicabilidad",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "interpretabilidad",
+      "termino": "Interpretabilidad",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "sicofancia",
+      "termino": "Sicofancia",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "envenenamiento-de-datos",
+      "termino": "Envenenamiento de datos",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "agencia-excesiva",
+      "termino": "Agencia excesiva",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "condicion-de-parada",
+      "termino": "Condición de parada",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "lista-de-permitidos",
+      "termino": "Lista de permitidos (allowlist)",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "gobernanza-de-ia",
+      "termino": "Gobernanza de IA",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "politica-de-uso-aceptable",
+      "termino": "Política de uso aceptable",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "ley-de-ia-europea",
+      "termino": "Ley de IA de la Unión Europea",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "owasp-top-10-llm",
+      "termino": "OWASP Top 10 para LLM",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "verificacion-de-fuentes",
+      "termino": "Verificación de fuentes",
+      "categoria": "seguridad-control",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "evals",
+      "termino": "Evals",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "benchmark",
+      "termino": "Benchmark",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "llm-como-juez",
+      "termino": "LLM como juez",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "conjunto-dorado",
+      "termino": "Conjunto dorado",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "pruebas-de-regresion",
+      "termino": "Pruebas de regresión",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "tdd",
+      "termino": "TDD (desarrollo guiado por pruebas)",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "integracion-continua",
+      "termino": "Integración continua",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "observabilidad",
+      "termino": "Observabilidad",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "trazas",
+      "termino": "Trazas",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "latencia",
+      "termino": "Latencia",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "costo-por-token",
+      "termino": "Costo por token",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "enrutamiento-de-modelos",
+      "termino": "Enrutamiento de modelos",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "cuantizacion",
+      "termino": "Cuantización",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "ollama",
+      "termino": "Ollama",
+      "categoria": "operacion-evaluacion",
+      "hablado": 1,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "modo-plan",
+      "termino": "Modo plan",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "criterios-de-aceptacion-binarios",
+      "termino": "Criterios de aceptación binarios",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "deuda-tecnica",
+      "termino": "Deuda técnica",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "refactorizacion",
+      "termino": "Refactorización",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "fomo",
+      "termino": "FOMO",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "certificacion-claude-architect",
+      "termino": "Certificación de arquitecto de Anthropic",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "miniproyecto-comparativo",
+      "termino": "Miniproyecto comparativo",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "mismo-harness-distinto-modelo",
+      "termino": "Mismo harness, distinto modelo",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "limite-de-gasto",
+      "termino": "Límite de gasto",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "limite-de-uso",
+      "termino": "Límite de uso (rate limit)",
+      "categoria": "operacion-evaluacion",
+      "hablado": 2,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "procesamiento-por-lotes",
+      "termino": "Procesamiento por lotes",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "despliegue",
+      "termino": "Despliegue",
+      "categoria": "operacion-evaluacion",
+      "hablado": 2,
+      "preguntado": 2,
+      "construido": false,
+      "cuadrante": "solo-hablado",
+      "corregido": false
+    },
+    {
+      "slug": "gamificacion",
+      "termino": "Gamificación",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "voz-sintetica",
+      "termino": "Voz sintética",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "burbuja-de-inversion-en-ia",
+      "termino": "Burbuja de inversión en IA",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    },
+    {
+      "slug": "donacion-de-tokens",
+      "termino": "Donación de tokens",
+      "categoria": "operacion-evaluacion",
+      "hablado": 0,
+      "preguntado": 0,
+      "construido": false,
+      "cuadrante": "ninguno",
+      "corregido": false
+    }
+  ],
+  "perfilPrompts": {
+    "total": 2484,
+    "medianaCaracteres": 18,
+    "pctPreguntas": 14,
+    "pctEspanol": 80
+  },
+  "eras": [
+    {
+      "cuenta": "smonsalve",
+      "desde": "2013-01-18",
+      "hasta": "2026-04-30",
+      "commitsPropios": 417,
+      "reposActivos": 73,
+      "medianaMensaje": 13,
+      "medianaMensajeSinTrailer": 13,
+      "coautores": [
+        {
+          "tipo": "persona",
+          "n": 5
+        },
+        {
+          "tipo": "modelo",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "cuenta": "serandmoncas",
+      "desde": "2026-02-25",
+      "hasta": "2026-10-15",
+      "commitsPropios": 1460,
+      "reposActivos": 31,
+      "medianaMensaje": 137,
+      "medianaMensajeSinTrailer": 87,
+      "coautores": [
+        {
+          "tipo": "persona",
+          "n": 0
+        },
+        {
+          "tipo": "modelo",
+          "n": 6
+        }
+      ]
+    }
+  ],
+  "modelosPorMes": [
+    {
+      "mes": "2026-02",
+      "modelo": "Claude Sonnet 4.6",
+      "commits": 19
+    },
+    {
+      "mes": "2026-05",
+      "modelo": "Claude Opus 4.7",
+      "commits": 19
+    },
+    {
+      "mes": "2026-05",
+      "modelo": "Claude Sonnet 4.6",
+      "commits": 178
+    },
+    {
+      "mes": "2026-06",
+      "modelo": "Claude Sonnet 4.6",
+      "commits": 40
+    },
+    {
+      "mes": "2026-06",
+      "modelo": "Claude Sonnet 5",
+      "commits": 8
+    },
+    {
+      "mes": "2026-07",
+      "modelo": "Claude Sonnet 4.6",
+      "commits": 1
+    },
+    {
+      "mes": "2026-07",
+      "modelo": "Claude Sonnet 5",
+      "commits": 201
+    },
+    {
+      "mes": "2026-08",
+      "modelo": "Claude Haiku 4.5",
+      "commits": 1
+    },
+    {
+      "mes": "2026-08",
+      "modelo": "Claude Opus 5",
+      "commits": 137
+    },
+    {
+      "mes": "2026-08",
+      "modelo": "Claude Sonnet 5",
+      "commits": 13
+    },
+    {
+      "mes": "2026-10",
+      "modelo": "Claude Opus 5.5",
+      "commits": 286
+    }
+  ],
+  "grafoCoautoria": [
+    {
+      "era": "smonsalve",
+      "nodos": [
+        {
+          "id": "sergio",
+          "tipo": "sergio",
+          "etiqueta": "Sergio",
+          "peso": 417,
+          "x": 0.32,
+          "y": 0.125
+        },
+        {
+          "id": "persona-1",
+          "tipo": "persona",
+          "etiqueta": "Persona 1",
+          "peso": 12,
+          "x": 0.32,
+          "y": 0.25
+        },
+        {
+          "id": "persona-2",
+          "tipo": "persona",
+          "etiqueta": "Persona 2",
+          "peso": 51,
+          "x": 0.32,
+          "y": 0.375
+        },
+        {
+          "id": "persona-3",
+          "tipo": "persona",
+          "etiqueta": "Persona 3",
+          "peso": 9,
+          "x": 0.32,
+          "y": 0.5
+        },
+        {
+          "id": "persona-4",
+          "tipo": "persona",
+          "etiqueta": "Persona 4",
+          "peso": 28,
+          "x": 0.32,
+          "y": 0.625
+        },
+        {
+          "id": "persona-5",
+          "tipo": "persona",
+          "etiqueta": "Persona 5",
+          "peso": 1,
+          "x": 0.32,
+          "y": 0.75
+        },
+        {
+          "id": "modelo:Claude Sonnet 4.6",
+          "tipo": "modelo",
+          "etiqueta": "Claude Sonnet 4.6",
+          "peso": 4,
+          "x": 0.32,
+          "y": 0.875
+        },
+        {
+          "id": "dominio:experimentos",
+          "tipo": "dominio",
+          "etiqueta": "experimentos",
+          "peso": 507,
+          "x": 0.72,
+          "y": 0.333
+        },
+        {
+          "id": "dominio:producto-web",
+          "tipo": "dominio",
+          "etiqueta": "producto-web",
+          "peso": 15,
+          "x": 0.72,
+          "y": 0.667
+        }
+      ],
+      "aristas": [
+        {
+          "de": "modelo:Claude Sonnet 4.6",
+          "a": "dominio:producto-web",
+          "peso": 4
+        },
+        {
+          "de": "persona-1",
+          "a": "dominio:experimentos",
+          "peso": 12
+        },
+        {
+          "de": "persona-2",
+          "a": "dominio:experimentos",
+          "peso": 51
+        },
+        {
+          "de": "persona-3",
+          "a": "dominio:experimentos",
+          "peso": 9
+        },
+        {
+          "de": "persona-4",
+          "a": "dominio:experimentos",
+          "peso": 28
+        },
+        {
+          "de": "persona-5",
+          "a": "dominio:experimentos",
+          "peso": 1
+        },
+        {
+          "de": "sergio",
+          "a": "dominio:experimentos",
+          "peso": 406
+        },
+        {
+          "de": "sergio",
+          "a": "dominio:producto-web",
+          "peso": 11
+        }
+      ]
+    },
+    {
+      "era": "serandmoncas",
+      "nodos": [
+        {
+          "id": "sergio",
+          "tipo": "sergio",
+          "etiqueta": "Sergio",
+          "peso": 1391,
+          "x": 0.32,
+          "y": 0.111
+        },
+        {
+          "id": "modelo:Claude Sonnet 4.6",
+          "tipo": "modelo",
+          "etiqueta": "Claude Sonnet 4.6",
+          "peso": 238,
+          "x": 0.32,
+          "y": 0.222
+        },
+        {
+          "id": "modelo:Claude Opus 4.7",
+          "tipo": "modelo",
+          "etiqueta": "Claude Opus 4.7",
+          "peso": 19,
+          "x": 0.32,
+          "y": 0.333
+        },
+        {
+          "id": "modelo:Claude Sonnet 5",
+          "tipo": "modelo",
+          "etiqueta": "Claude Sonnet 5",
+          "peso": 222,
+          "x": 0.32,
+          "y": 0.444
+        },
+        {
+          "id": "modelo:Claude Opus 5",
+          "tipo": "modelo",
+          "etiqueta": "Claude Opus 5",
+          "peso": 137,
+          "x": 0.32,
+          "y": 0.556
+        },
+        {
+          "id": "modelo:Claude Haiku 4.5",
+          "tipo": "modelo",
+          "etiqueta": "Claude Haiku 4.5",
+          "peso": 1,
+          "x": 0.32,
+          "y": 0.667
+        },
+        {
+          "id": "modelo:Claude (autor)",
+          "tipo": "modelo",
+          "etiqueta": "Claude (autor)",
+          "peso": 69,
+          "x": 0.32,
+          "y": 0.778
+        },
+        {
+          "id": "modelo:Claude Opus 5.5",
+          "tipo": "modelo",
+          "etiqueta": "Claude Opus 5.5",
+          "peso": 286,
+          "x": 0.32,
+          "y": 0.889
+        },
+        {
+          "id": "dominio:producto-web",
+          "tipo": "dominio",
+          "etiqueta": "producto-web",
+          "peso": 1194,
+          "x": 0.72,
+          "y": 0.167
+        },
+        {
+          "id": "dominio:hongos-iot",
+          "tipo": "dominio",
+          "etiqueta": "hongos-iot",
+          "peso": 548,
+          "x": 0.72,
+          "y": 0.333
+        },
+        {
+          "id": "dominio:educacion",
+          "tipo": "dominio",
+          "etiqueta": "educacion",
+          "peso": 517,
+          "x": 0.72,
+          "y": 0.5
+        },
+        {
+          "id": "dominio:agentes",
+          "tipo": "dominio",
+          "etiqueta": "agentes",
+          "peso": 91,
+          "x": 0.72,
+          "y": 0.667
+        },
+        {
+          "id": "dominio:experimentos",
+          "tipo": "dominio",
+          "etiqueta": "experimentos",
+          "peso": 13,
+          "x": 0.72,
+          "y": 0.833
+        }
+      ],
+      "aristas": [
+        {
+          "de": "modelo:Claude (autor)",
+          "a": "dominio:educacion",
+          "peso": 69
+        },
+        {
+          "de": "modelo:Claude Haiku 4.5",
+          "a": "dominio:producto-web",
+          "peso": 1
+        },
+        {
+          "de": "modelo:Claude Opus 4.7",
+          "a": "dominio:producto-web",
+          "peso": 19
+        },
+        {
+          "de": "modelo:Claude Opus 5",
+          "a": "dominio:educacion",
+          "peso": 1
+        },
+        {
+          "de": "modelo:Claude Opus 5",
+          "a": "dominio:hongos-iot",
+          "peso": 121
+        },
+        {
+          "de": "modelo:Claude Opus 5",
+          "a": "dominio:producto-web",
+          "peso": 15
+        },
+        {
+          "de": "modelo:Claude Opus 5.5",
+          "a": "dominio:educacion",
+          "peso": 243
+        },
+        {
+          "de": "modelo:Claude Opus 5.5",
+          "a": "dominio:hongos-iot",
+          "peso": 4
+        },
+        {
+          "de": "modelo:Claude Opus 5.5",
+          "a": "dominio:producto-web",
+          "peso": 39
+        },
+        {
+          "de": "modelo:Claude Sonnet 4.6",
+          "a": "dominio:educacion",
+          "peso": 2
+        },
+        {
+          "de": "modelo:Claude Sonnet 4.6",
+          "a": "dominio:hongos-iot",
+          "peso": 31
+        },
+        {
+          "de": "modelo:Claude Sonnet 4.6",
+          "a": "dominio:producto-web",
+          "peso": 205
+        },
+        {
+          "de": "modelo:Claude Sonnet 5",
+          "a": "dominio:agentes",
+          "peso": 32
+        },
+        {
+          "de": "modelo:Claude Sonnet 5",
+          "a": "dominio:educacion",
+          "peso": 8
+        },
+        {
+          "de": "modelo:Claude Sonnet 5",
+          "a": "dominio:hongos-iot",
+          "peso": 71
+        },
+        {
+          "de": "modelo:Claude Sonnet 5",
+          "a": "dominio:producto-web",
+          "peso": 111
+        },
+        {
+          "de": "sergio",
+          "a": "dominio:agentes",
+          "peso": 59
+        },
+        {
+          "de": "sergio",
+          "a": "dominio:educacion",
+          "peso": 194
+        },
+        {
+          "de": "sergio",
+          "a": "dominio:experimentos",
+          "peso": 13
+        },
+        {
+          "de": "sergio",
+          "a": "dominio:hongos-iot",
+          "peso": 321
+        },
+        {
+          "de": "sergio",
+          "a": "dominio:producto-web",
+          "peso": 804
+        }
+      ]
+    }
+  ],
+  "grafoDiscurso": {
+    "nodos": [
+      {
+        "id": "vibe-coding",
+        "etiqueta": "vibe coding",
+        "etiquetaEn": "vibe coding",
+        "resaltado": false,
+        "x": 0.5,
+        "y": 0.12
+      },
+      {
+        "id": "agentic-engineering",
+        "etiqueta": "ingeniería agéntica",
+        "etiquetaEn": "agentic engineering",
+        "resaltado": true,
+        "x": 0.603,
+        "y": 0.134
+      },
+      {
+        "id": "co-authored-by",
+        "etiqueta": "Co-Authored-By",
+        "etiquetaEn": "Co-Authored-By",
+        "resaltado": true,
+        "x": 0.697,
+        "y": 0.175
+      },
+      {
+        "id": "assisted-by",
+        "etiqueta": "Assisted-by",
+        "etiquetaEn": "Assisted-by",
+        "resaltado": false,
+        "x": 0.778,
+        "y": 0.241
+      },
+      {
+        "id": "signed-off-by",
+        "etiqueta": "Signed-off-by",
+        "etiquetaEn": "Signed-off-by",
+        "resaltado": false,
+        "x": 0.837,
+        "y": 0.325
+      },
+      {
+        "id": "responsabilidad",
+        "etiqueta": "responsabilidad",
+        "etiquetaEn": "accountability",
+        "resaltado": false,
+        "x": 0.872,
+        "y": 0.423
+      },
+      {
+        "id": "medicion",
+        "etiqueta": "medición",
+        "etiquetaEn": "measurement",
+        "resaltado": false,
+        "x": 0.879,
+        "y": 0.526
+      },
+      {
+        "id": "datos-entrenamiento",
+        "etiqueta": "datos de entrenamiento",
+        "etiquetaEn": "training data",
+        "resaltado": false,
+        "x": 0.858,
+        "y": 0.627
+      },
+      {
+        "id": "divulgacion",
+        "etiqueta": "divulgación del uso de IA",
+        "etiquetaEn": "AI disclosure",
+        "resaltado": true,
+        "x": 0.81,
+        "y": 0.719
+      },
+      {
+        "id": "confianza",
+        "etiqueta": "confianza",
+        "etiquetaEn": "trust",
+        "resaltado": false,
+        "x": 0.74,
+        "y": 0.795
+      },
+      {
+        "id": "casi-correcto",
+        "etiqueta": "\"casi correcto\"",
+        "etiquetaEn": "\"almost right\"",
+        "resaltado": false,
+        "x": 0.651,
+        "y": 0.849
+      },
+      {
+        "id": "deuda-tecnica",
+        "etiqueta": "deuda técnica",
+        "etiquetaEn": "technical debt",
+        "resaltado": false,
+        "x": 0.552,
+        "y": 0.876
+      },
+      {
+        "id": "duplicacion",
+        "etiqueta": "duplicación",
+        "etiquetaEn": "duplication",
+        "resaltado": false,
+        "x": 0.448,
+        "y": 0.876
+      },
+      {
+        "id": "desgaste",
+        "etiqueta": "desgaste de habilidades",
+        "etiquetaEn": "deskilling",
+        "resaltado": false,
+        "x": 0.349,
+        "y": 0.849
+      },
+      {
+        "id": "juniors",
+        "etiqueta": "juniors",
+        "etiquetaEn": "juniors",
+        "resaltado": false,
+        "x": 0.26,
+        "y": 0.795
+      },
+      {
+        "id": "productividad",
+        "etiqueta": "productividad",
+        "etiquetaEn": "productivity",
+        "resaltado": false,
+        "x": 0.19,
+        "y": 0.719
+      },
+      {
+        "id": "amplificador",
+        "etiqueta": "la IA como amplificador",
+        "etiquetaEn": "AI as amplifier",
+        "resaltado": false,
+        "x": 0.142,
+        "y": 0.627
+      },
+      {
+        "id": "slop",
+        "etiqueta": "slop",
+        "etiquetaEn": "slop",
+        "resaltado": false,
+        "x": 0.121,
+        "y": 0.526
+      },
+      {
+        "id": "copyright",
+        "etiqueta": "derechos de autor",
+        "etiquetaEn": "copyright",
+        "resaltado": false,
+        "x": 0.128,
+        "y": 0.423
+      },
+      {
+        "id": "autoria",
+        "etiqueta": "autoría",
+        "etiquetaEn": "authorship",
+        "resaltado": false,
+        "x": 0.163,
+        "y": 0.325
+      },
+      {
+        "id": "homogeneizacion",
+        "etiqueta": "homogeneización",
+        "etiquetaEn": "homogenization",
+        "resaltado": false,
+        "x": 0.222,
+        "y": 0.241
+      },
+      {
+        "id": "voz-propia",
+        "etiqueta": "voz propia",
+        "etiquetaEn": "own voice",
+        "resaltado": false,
+        "x": 0.303,
+        "y": 0.175
+      },
+      {
+        "id": "revision",
+        "etiqueta": "revisión de código",
+        "etiquetaEn": "code review",
+        "resaltado": true,
+        "x": 0.397,
+        "y": 0.134
+      }
+    ],
+    "aristas": [
+      {
+        "de": "vibe-coding",
+        "a": "agentic-engineering",
+        "motivo": "el mismo acto con distinto grado de revisión"
+      },
+      {
+        "de": "co-authored-by",
+        "a": "assisted-by",
+        "motivo": "coautoría frente a asistencia"
+      },
+      {
+        "de": "signed-off-by",
+        "a": "responsabilidad",
+        "motivo": "solo un humano certifica el trabajo"
+      },
+      {
+        "de": "co-authored-by",
+        "a": "medicion",
+        "motivo": "los conteos públicos dependen del trailer: son un piso"
+      },
+      {
+        "de": "co-authored-by",
+        "a": "datos-entrenamiento",
+        "motivo": "el trailer permitiría excluir código del entrenamiento"
+      },
+      {
+        "de": "divulgacion",
+        "a": "confianza",
+        "motivo": "93% exige atribución para confiar"
+      },
+      {
+        "de": "casi-correcto",
+        "a": "deuda-tecnica",
+        "motivo": "salidas casi correctas cuestan horas de revisión"
+      },
+      {
+        "de": "deuda-tecnica",
+        "a": "duplicacion",
+        "motivo": "8x más bloques duplicados"
+      },
+      {
+        "de": "desgaste",
+        "a": "juniors",
+        "motivo": "menos comprensión al aprender con IA"
+      },
+      {
+        "de": "productividad",
+        "a": "medicion",
+        "motivo": "brecha entre lo percibido y lo medido"
+      },
+      {
+        "de": "amplificador",
+        "a": "productividad",
+        "motivo": "la IA amplifica lo que el equipo ya es"
+      },
+      {
+        "de": "slop",
+        "a": "confianza",
+        "motivo": "la avalancha de texto generado erosiona la confianza"
+      },
+      {
+        "de": "autoria",
+        "a": "copyright",
+        "motivo": "sin autor humano no hay derecho de autor"
+      },
+      {
+        "de": "autoria",
+        "a": "responsabilidad",
+        "motivo": "ser autor es poder responder por el trabajo"
+      },
+      {
+        "de": "homogeneizacion",
+        "a": "voz-propia",
+        "motivo": "las sugerencias empujan hacia estilos occidentales"
+      },
+      {
+        "de": "revision",
+        "a": "agentic-engineering",
+        "motivo": "revisar es lo que separa ingeniería de vibe coding"
+      },
+      {
+        "de": "revision",
+        "a": "autoria",
+        "motivo": "la revisión como nueva forma de autoría"
+      },
+      {
+        "de": "desgaste",
+        "a": "revision",
+        "motivo": "revisar exige entender lo que se delegó"
+      }
+    ]
+  },
+  "contexto": [
+    {
+      "cifra": "75%",
+      "mide": "Código nuevo de Google generado por IA y revisado por humanos",
+      "fuente": "Sundar Pichai vía The Decoder",
+      "fecha": "2026-04",
+      "url": "https://the-decoder.com/google-says-75-percent-of-its-new-code-is-now-written-by-ai/"
+    },
+    {
+      "cifra": "~4%",
+      "mide": "Commits públicos diarios en GitHub con firma de Claude Code",
+      "fuente": "SemiAnalysis vía Xataka",
+      "fecha": "2026-02-06",
+      "url": "https://www.xataka.com/robotica-e-ia/claude-code-esta-siendo-gran-favorito-programadores-que-firma-4-todo-que-se-sube-a-github"
+    },
+    {
+      "cifra": "~50%",
+      "mide": "Estimación externa de líneas fusionadas escritas por IA en Anthropic (frente al \"90%\" declarado)",
+      "fuente": "Ryan Greenblatt, Redwood Research",
+      "fecha": "2025-10-22",
+      "url": "https://blog.redwoodresearch.org/p/is-90-of-code-at-anthropic-being"
+    },
+    {
+      "cifra": "+19% / −20%",
+      "mide": "Tiempo real con IA frente al percibido en devs OSS experimentados (RCT)",
+      "fuente": "METR",
+      "fecha": "2025-07-10",
+      "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"
+    },
+    {
+      "cifra": "84% / 46%",
+      "mide": "Devs que usan o planean usar IA / que desconfían de su precisión",
+      "fuente": "Stack Overflow Developer Survey 2025",
+      "fecha": "2025-07",
+      "url": "https://survey.stackoverflow.co/2025/ai"
+    },
+    {
+      "cifra": "8x",
+      "mide": "Aumento de bloques de código duplicado (211M de líneas, 2020–2024)",
+      "fuente": "GitClear vía DevClass",
+      "fecha": "2025-02-20",
+      "url": "https://devclass.com/2025/02/20/ai-is-eroding-code-quality-states-new-in-depth-report/"
+    },
+    {
+      "cifra": "50% vs 67%",
+      "mide": "Comprensión con IA frente a sin IA (RCT, n=52)",
+      "fuente": "Anthropic",
+      "fecha": "2026-01-29",
+      "url": "https://www.anthropic.com/research/AI-assistance-coding-skills"
+    },
+    {
+      "cifra": "—",
+      "mide": "La IA no puede figurar como autora: no puede responder por el trabajo",
+      "fuente": "ICMJE",
+      "fecha": "vigente",
+      "url": "https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html"
+    },
+    {
+      "cifra": "25% vs 19%",
+      "mide": "Sugerencias aceptadas por escritores indios frente a estadounidenses; la escritura se homogeniza hacia lo occidental",
+      "fuente": "Cornell, CHI 2025",
+      "fecha": "2025-04-28",
+      "url": "https://news.cornell.edu/index%2Ephp/node/330798"
+    }
+  ],
+  "camino": {
+    "nodos": [
+      {
+        "id": "logica",
+        "etiqueta": "Lógica y algoritmos",
+        "etiquetaEn": "Logic and algorithms",
+        "rama": "fundamentos",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "algebra-lineal",
+        "etiqueta": "Álgebra lineal",
+        "etiquetaEn": "Linear algebra",
+        "rama": "fundamentos",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "estadistica",
+        "etiqueta": "Estadística",
+        "etiquetaEn": "Statistics",
+        "rama": "fundamentos",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "redes",
+        "etiqueta": "Redes y protocolos",
+        "etiquetaEn": "Networking and protocols",
+        "rama": "fundamentos",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "electronica",
+        "etiqueta": "Electrónica básica",
+        "etiquetaEn": "Basic electronics",
+        "rama": "fundamentos",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "linux-shell",
+        "etiqueta": "Linux y la terminal",
+        "etiquetaEn": "Linux and the shell",
+        "rama": "fundamentos",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "teoria-aprendizaje",
+        "etiqueta": "Teorías del aprendizaje",
+        "etiquetaEn": "Learning theories",
+        "rama": "fundamentos",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "escritura-academica",
+        "etiqueta": "Lectura y escritura académica",
+        "etiquetaEn": "Academic reading and writing",
+        "rama": "fundamentos",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "programacion",
+        "etiqueta": "Programación (Ruby, Java, C++)",
+        "etiquetaEn": "Programming (Ruby, Java, C++)",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "test_projects",
+          "BluetoothController",
+          "tesis"
+        ],
+        "primeraEvidencia": "2013-01"
+      },
+      {
+        "id": "rails",
+        "etiqueta": "Ruby on Rails",
+        "etiquetaEn": "Ruby on Rails",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "lacasona",
+          "test_projects",
+          "bailando"
+        ],
+        "primeraEvidencia": "2013-01"
+      },
+      {
+        "id": "sql",
+        "etiqueta": "SQL y modelo relacional",
+        "etiquetaEn": "SQL and relational modeling",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "lacasona"
+        ],
+        "primeraEvidencia": "2013-02"
+      },
+      {
+        "id": "http-apis",
+        "etiqueta": "APIs HTTP / REST",
+        "etiquetaEn": "HTTP / REST APIs",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "API_REST",
+          "flask_restfull_test1",
+          "flask-api-todo-firebase"
+        ],
+        "primeraEvidencia": "2022-09"
+      },
+      {
+        "id": "tipado",
+        "etiqueta": "Tipado estático (Java, Go)",
+        "etiquetaEn": "Static typing (Java, Go)",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "Zpp",
+          "retoprog",
+          "GoProLang",
+          "SamLearnsGo"
+        ],
+        "primeraEvidencia": "2015-10"
+      },
+      {
+        "id": "python",
+        "etiqueta": "Python",
+        "etiquetaEn": "Python",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "POCVT",
+          "ProgPyIntro",
+          "microcourse"
+        ],
+        "primeraEvidencia": "2014-10"
+      },
+      {
+        "id": "django",
+        "etiqueta": "Django",
+        "etiquetaEn": "Django",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "InmoCode",
+          "hellodjango"
+        ],
+        "primeraEvidencia": "2016-03"
+      },
+      {
+        "id": "flask",
+        "etiqueta": "Flask",
+        "etiquetaEn": "Flask",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "flask_heroku",
+          "flask_template"
+        ],
+        "primeraEvidencia": "2020-10"
+      },
+      {
+        "id": "html-css",
+        "etiqueta": "HTML y CSS",
+        "etiquetaEn": "HTML and CSS",
+        "rama": "web",
+        "evidencia": "github",
+        "repos": [
+          "paisahuevo",
+          "smonsalve.github.io"
+        ],
+        "primeraEvidencia": "2013-10"
+      },
+      {
+        "id": "javascript",
+        "etiqueta": "JavaScript",
+        "etiquetaEn": "JavaScript",
+        "rama": "web",
+        "evidencia": "github",
+        "repos": [
+          "personal",
+          "ST0240-20162",
+          "js_course"
+        ],
+        "primeraEvidencia": "2013-10"
+      },
+      {
+        "id": "react",
+        "etiqueta": "React",
+        "etiquetaEn": "React",
+        "rama": "web",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "cpp",
+        "etiqueta": "C++",
+        "etiquetaEn": "C++",
+        "rama": "iot",
+        "evidencia": "github",
+        "repos": [
+          "tesis"
+        ],
+        "primeraEvidencia": "2013-08"
+      },
+      {
+        "id": "sensores",
+        "etiqueta": "Sensores y Raspberry Pi",
+        "etiquetaEn": "Sensors and Raspberry Pi",
+        "rama": "iot",
+        "evidencia": "github",
+        "repos": [
+          "temp_hum",
+          "pimon"
+        ],
+        "primeraEvidencia": "2017-04"
+      },
+      {
+        "id": "android-bt",
+        "etiqueta": "Android + Bluetooth",
+        "etiquetaEn": "Android + Bluetooth",
+        "rama": "iot",
+        "evidencia": "github",
+        "repos": [
+          "BluetoothController"
+        ],
+        "primeraEvidencia": "2013-03"
+      },
+      {
+        "id": "git",
+        "etiqueta": "Git",
+        "etiquetaEn": "Git",
+        "rama": "infra",
+        "evidencia": "github",
+        "repos": [
+          "intro-git"
+        ],
+        "primeraEvidencia": "2020-10"
+      },
+      {
+        "id": "heroku",
+        "etiqueta": "Heroku",
+        "etiquetaEn": "Heroku",
+        "rama": "infra",
+        "evidencia": "github",
+        "repos": [
+          "flask_heroku"
+        ],
+        "primeraEvidencia": "2020-10"
+      },
+      {
+        "id": "pandas",
+        "etiqueta": "Análisis de datos (Pandas)",
+        "etiquetaEn": "Data analysis (Pandas)",
+        "rama": "datos-ml",
+        "evidencia": "github",
+        "repos": [
+          "DS4A",
+          "ds4a-w4"
+        ],
+        "primeraEvidencia": "2019-10"
+      },
+      {
+        "id": "ml",
+        "etiqueta": "Machine learning (scikit-learn)",
+        "etiquetaEn": "Machine learning (scikit-learn)",
+        "rama": "datos-ml",
+        "evidencia": "github",
+        "repos": [
+          "ds4a-w4",
+          "ingSisAnon_titanic"
+        ],
+        "primeraEvidencia": "2019-11"
+      },
+      {
+        "id": "scraping",
+        "etiqueta": "Web scraping",
+        "etiquetaEn": "Web scraping",
+        "rama": "datos-ml",
+        "evidencia": "github",
+        "repos": [
+          "Prod_scrap",
+          "scrapy_tut"
+        ],
+        "primeraEvidencia": "2018-02"
+      },
+      {
+        "id": "visualizacion",
+        "etiqueta": "Visualización (Dash)",
+        "etiquetaEn": "Visualization (Dash)",
+        "rama": "datos-ml",
+        "evidencia": "github",
+        "repos": [
+          "dash_demo",
+          "M4"
+        ],
+        "primeraEvidencia": "2020-10"
+      },
+      {
+        "id": "diseno-experimental",
+        "etiqueta": "Diseño experimental (oTree)",
+        "etiquetaEn": "Experimental design (oTree)",
+        "rama": "datos-ml",
+        "evidencia": "github",
+        "repos": [
+          "OtreeExp",
+          "otreecourse.github.io"
+        ],
+        "primeraEvidencia": "2017-04"
+      },
+      {
+        "id": "embeddings",
+        "etiqueta": "Embeddings",
+        "etiquetaEn": "Embeddings",
+        "rama": "datos-ml",
+        "evidencia": "declarado",
+        "declaradoEn": "about: stackGroups (Embeddings)"
+      },
+      {
+        "id": "prompting",
+        "etiqueta": "Prompting",
+        "etiquetaEn": "Prompting",
+        "rama": "agentes",
+        "evidencia": "inferido"
+      },
+      {
+        "id": "llm-apis",
+        "etiqueta": "APIs de LLM",
+        "etiquetaEn": "LLM APIs",
+        "rama": "agentes",
+        "evidencia": "github",
+        "repos": [
+          "demo_crew_ai",
+          "brayan"
+        ],
+        "primeraEvidencia": "2025-03"
+      },
+      {
+        "id": "tool-calling",
+        "etiqueta": "Tool-calling",
+        "etiquetaEn": "Tool calling",
+        "rama": "agentes",
+        "evidencia": "declarado",
+        "declaradoEn": "about: stackGroups (Tool-calling)"
+      },
+      {
+        "id": "latex",
+        "etiqueta": "Escritura técnica en LaTeX",
+        "etiquetaEn": "Technical writing in LaTeX",
+        "rama": "escritura",
+        "evidencia": "github",
+        "repos": [
+          "Bioinfo",
+          "OA",
+          "Epi",
+          "progcomp"
+        ],
+        "primeraEvidencia": "2014-03"
+      },
+      {
+        "id": "contenidos",
+        "etiqueta": "Producción de contenidos educativos",
+        "etiquetaEn": "Educational content production",
+        "rama": "educacion",
+        "evidencia": "github",
+        "repos": [
+          "OA"
+        ],
+        "primeraEvidencia": "2014-04"
+      },
+      {
+        "id": "docencia",
+        "etiqueta": "Docencia en programación",
+        "etiquetaEn": "Teaching programming",
+        "rama": "educacion",
+        "evidencia": "github",
+        "repos": [
+          "progcomp",
+          "ProgCompMon",
+          "ProgPyIntro",
+          "Python2022-1",
+          "python_comfama_202211"
+        ],
+        "primeraEvidencia": "2016-01"
+      },
+      {
+        "id": "maestria",
+        "etiqueta": "Maestría en educación",
+        "etiquetaEn": "Master's in education",
+        "rama": "educacion",
+        "evidencia": "github",
+        "repos": [
+          "TesisMaestria"
+        ],
+        "primeraEvidencia": "2026-07"
+      },
+      {
+        "id": "metaaprendizaje",
+        "etiqueta": "Metaaprendizaje",
+        "etiquetaEn": "Meta-learning",
+        "rama": "educacion",
+        "evidencia": "github",
+        "repos": [],
+        "primeraEvidencia": "2026-06"
+      },
+      {
+        "id": "agentes-harness",
+        "etiqueta": "Agentes y harness engineering",
+        "etiquetaEn": "Agents and harness engineering",
+        "rama": "agentes",
+        "evidencia": "github",
+        "repos": [
+          "HER",
+          "brayan"
+        ],
+        "hoy": true,
+        "primeraEvidencia": "2026-07"
+      },
+      {
+        "id": "claude-code",
+        "etiqueta": "Claude Code",
+        "etiquetaEn": "Claude Code",
+        "rama": "agentes",
+        "evidencia": "github",
+        "repos": [
+          "sergiomonsalve.com",
+          "HER"
+        ],
+        "primeraEvidencia": "2026-02",
+        "hoy": true
+      },
+      {
+        "id": "mcp",
+        "etiqueta": "MCP",
+        "etiquetaEn": "MCP",
+        "rama": "agentes",
+        "evidencia": "declarado",
+        "declaradoEn": "Claude Code: herramientas MCP registradas",
+        "primeraEvidencia": "2026-05",
+        "hoy": true
+      },
+      {
+        "id": "evals",
+        "etiqueta": "Evaluación de agentes",
+        "etiquetaEn": "Agent evaluation",
+        "rama": "agentes",
+        "evidencia": "declarado",
+        "declaradoEn": "about: tesis (mayo 2026)",
+        "primeraEvidencia": "2026-05",
+        "hoy": true
+      },
+      {
+        "id": "rag",
+        "etiqueta": "RAG y bases vectoriales",
+        "etiquetaEn": "RAG and vector databases",
+        "rama": "datos-ml",
+        "evidencia": "declarado",
+        "declaradoEn": "about: stackGroups (RAG, Vector DBs)",
+        "hoy": true
+      },
+      {
+        "id": "dagster",
+        "etiqueta": "Pipelines de datos (Dagster, ETL)",
+        "etiquetaEn": "Data pipelines (Dagster, ETL)",
+        "rama": "datos-ml",
+        "evidencia": "declarado",
+        "declaradoEn": "about: stackGroups (Dagster, ETL)",
+        "hoy": true
+      },
+      {
+        "id": "nextjs-ts",
+        "etiqueta": "Next.js + TypeScript",
+        "etiquetaEn": "Next.js + TypeScript",
+        "rama": "web",
+        "evidencia": "github",
+        "repos": [
+          "pp_nextjs",
+          "sergiomonsalve.com"
+        ],
+        "hoy": true,
+        "primeraEvidencia": "2026-04"
+      },
+      {
+        "id": "react-native",
+        "etiqueta": "React Native",
+        "etiquetaEn": "React Native",
+        "rama": "web",
+        "evidencia": "github",
+        "repos": [
+          "mobile-esp32",
+          "sama-mobile"
+        ],
+        "hoy": true,
+        "primeraEvidencia": "2026-07"
+      },
+      {
+        "id": "supabase",
+        "etiqueta": "Supabase / Postgres",
+        "etiquetaEn": "Supabase / Postgres",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "sergiomonsalve.com",
+          "InteFin"
+        ],
+        "hoy": true,
+        "primeraEvidencia": "2026-05"
+      },
+      {
+        "id": "fastapi",
+        "etiqueta": "FastAPI",
+        "etiquetaEn": "FastAPI",
+        "rama": "backend",
+        "evidencia": "github",
+        "repos": [
+          "FastApi_BP",
+          "fa_todo",
+          "brayan"
+        ],
+        "hoy": true,
+        "primeraEvidencia": "2025-11"
+      },
+      {
+        "id": "esp32",
+        "etiqueta": "ESP32 + PlatformIO + MQTT",
+        "etiquetaEn": "ESP32 + PlatformIO + MQTT",
+        "rama": "iot",
+        "evidencia": "github",
+        "repos": [
+          "Bichongos",
+          "mobile-esp32"
+        ],
+        "primeraEvidencia": "2026-02",
+        "hoy": true
+      },
+      {
+        "id": "deploy",
+        "etiqueta": "Deploy (Vercel, Railway)",
+        "etiquetaEn": "Deploy (Vercel, Railway)",
+        "rama": "infra",
+        "evidencia": "github",
+        "repos": [
+          "sergiomonsalve.com"
+        ],
+        "hoy": true,
+        "primeraEvidencia": "2026-05"
+      },
+      {
+        "id": "specs-docs",
+        "etiqueta": "Specs y docs escritos con Claude",
+        "etiquetaEn": "Specs and docs written with Claude",
+        "rama": "escritura",
+        "evidencia": "github",
+        "repos": [
+          "sergiomonsalve.com",
+          "HER"
+        ],
+        "hoy": true,
+        "primeraEvidencia": "2026-05"
+      },
+      {
+        "id": "mapa",
+        "etiqueta": "Método MAPA / formación",
+        "etiquetaEn": "MAPA method / training",
+        "rama": "educacion",
+        "evidencia": "declarado",
+        "declaradoEn": "about: Oct 2026",
+        "primeraEvidencia": "2026-10",
+        "hoy": true
+      }
+    ],
+    "aristas": [
+      {
+        "de": "logica",
+        "a": "programacion"
+      },
+      {
+        "de": "logica",
+        "a": "sql"
+      },
+      {
+        "de": "programacion",
+        "a": "rails"
+      },
+      {
+        "de": "programacion",
+        "a": "python"
+      },
+      {
+        "de": "programacion",
+        "a": "tipado"
+      },
+      {
+        "de": "programacion",
+        "a": "cpp"
+      },
+      {
+        "de": "programacion",
+        "a": "android-bt"
+      },
+      {
+        "de": "programacion",
+        "a": "javascript"
+      },
+      {
+        "de": "programacion",
+        "a": "docencia"
+      },
+      {
+        "de": "sql",
+        "a": "rails"
+      },
+      {
+        "de": "rails",
+        "a": "http-apis"
+      },
+      {
+        "de": "redes",
+        "a": "http-apis"
+      },
+      {
+        "de": "python",
+        "a": "django"
+      },
+      {
+        "de": "python",
+        "a": "flask"
+      },
+      {
+        "de": "python",
+        "a": "pandas"
+      },
+      {
+        "de": "python",
+        "a": "scraping"
+      },
+      {
+        "de": "http-apis",
+        "a": "flask"
+      },
+      {
+        "de": "flask",
+        "a": "fastapi"
+      },
+      {
+        "de": "http-apis",
+        "a": "fastapi"
+      },
+      {
+        "de": "tipado",
+        "a": "fastapi"
+      },
+      {
+        "de": "sql",
+        "a": "supabase"
+      },
+      {
+        "de": "http-apis",
+        "a": "supabase"
+      },
+      {
+        "de": "html-css",
+        "a": "javascript"
+      },
+      {
+        "de": "javascript",
+        "a": "react"
+      },
+      {
+        "de": "react",
+        "a": "nextjs-ts"
+      },
+      {
+        "de": "tipado",
+        "a": "nextjs-ts"
+      },
+      {
+        "de": "react",
+        "a": "react-native"
+      },
+      {
+        "de": "android-bt",
+        "a": "react-native"
+      },
+      {
+        "de": "electronica",
+        "a": "sensores"
+      },
+      {
+        "de": "cpp",
+        "a": "esp32"
+      },
+      {
+        "de": "sensores",
+        "a": "esp32"
+      },
+      {
+        "de": "redes",
+        "a": "esp32"
+      },
+      {
+        "de": "linux-shell",
+        "a": "git"
+      },
+      {
+        "de": "git",
+        "a": "heroku"
+      },
+      {
+        "de": "linux-shell",
+        "a": "heroku"
+      },
+      {
+        "de": "git",
+        "a": "deploy"
+      },
+      {
+        "de": "heroku",
+        "a": "deploy"
+      },
+      {
+        "de": "estadistica",
+        "a": "pandas"
+      },
+      {
+        "de": "pandas",
+        "a": "ml"
+      },
+      {
+        "de": "estadistica",
+        "a": "ml"
+      },
+      {
+        "de": "pandas",
+        "a": "visualizacion"
+      },
+      {
+        "de": "ml",
+        "a": "embeddings"
+      },
+      {
+        "de": "algebra-lineal",
+        "a": "embeddings"
+      },
+      {
+        "de": "embeddings",
+        "a": "rag"
+      },
+      {
+        "de": "sql",
+        "a": "rag"
+      },
+      {
+        "de": "scraping",
+        "a": "dagster"
+      },
+      {
+        "de": "pandas",
+        "a": "dagster"
+      },
+      {
+        "de": "visualizacion",
+        "a": "dagster"
+      },
+      {
+        "de": "estadistica",
+        "a": "diseno-experimental"
+      },
+      {
+        "de": "diseno-experimental",
+        "a": "evals"
+      },
+      {
+        "de": "llm-apis",
+        "a": "evals"
+      },
+      {
+        "de": "escritura-academica",
+        "a": "prompting"
+      },
+      {
+        "de": "prompting",
+        "a": "llm-apis"
+      },
+      {
+        "de": "http-apis",
+        "a": "llm-apis"
+      },
+      {
+        "de": "llm-apis",
+        "a": "tool-calling"
+      },
+      {
+        "de": "tool-calling",
+        "a": "agentes-harness"
+      },
+      {
+        "de": "http-apis",
+        "a": "mcp"
+      },
+      {
+        "de": "mcp",
+        "a": "agentes-harness"
+      },
+      {
+        "de": "llm-apis",
+        "a": "claude-code"
+      },
+      {
+        "de": "linux-shell",
+        "a": "claude-code"
+      },
+      {
+        "de": "git",
+        "a": "claude-code"
+      },
+      {
+        "de": "claude-code",
+        "a": "agentes-harness"
+      },
+      {
+        "de": "escritura-academica",
+        "a": "latex"
+      },
+      {
+        "de": "latex",
+        "a": "specs-docs"
+      },
+      {
+        "de": "claude-code",
+        "a": "specs-docs"
+      },
+      {
+        "de": "escritura-academica",
+        "a": "contenidos"
+      },
+      {
+        "de": "contenidos",
+        "a": "docencia"
+      },
+      {
+        "de": "teoria-aprendizaje",
+        "a": "maestria"
+      },
+      {
+        "de": "diseno-experimental",
+        "a": "maestria"
+      },
+      {
+        "de": "docencia",
+        "a": "maestria"
+      },
+      {
+        "de": "maestria",
+        "a": "metaaprendizaje"
+      },
+      {
+        "de": "metaaprendizaje",
+        "a": "mapa"
+      },
+      {
+        "de": "docencia",
+        "a": "mapa"
+      },
+      {
+        "de": "agentes-harness",
+        "a": "mapa"
+      }
+    ]
+  }
+}

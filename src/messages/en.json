@@ -682,5 +682,63 @@
     "free": "Free",
     "no_courses": "No courses available yet.",
     "no_enrollments": "You're not enrolled in any courses yet."
+  },
+  "autorretrato": {
+    "verDatos": "See the data",
+    "calendario": {
+      "titulo": "Claude Code prompts per day and commits per month",
+      "resumen": "{dias} active days; the busiest day had {max} prompts.",
+      "fecha": "Date", "prompts": "Prompts", "sesiones": "Sessions", "commits": "commits", "mes": "Month", "commitsMes": "Commits"
+    },
+    "herramientas": {
+      "titulo": "The agent's most used tools",
+      "resumen": "{top} is the most used tool: {usos} uses.",
+      "herramienta": "Tool", "usos": "Uses", "grupo": "Group",
+      "grupos": { "ejecucion": "execution", "investigacion": "research", "navegador": "browser", "orquestacion": "orchestration", "mcp": "MCP", "edicion": "editing" }
+    },
+    "coautoria": {
+      "titulo": "Commits co-signed by Claude, per month",
+      "resumen": "In {mes}, {pct}% of commits carry Claude's signature.",
+      "mes": "Month", "total": "Total", "conClaude": "With Claude", "soloHumano": "Just me", "modelo": "Main model"
+    },
+    "ecosistema": {
+      "titulo": "The AI tools I use",
+      "herramienta": "Tool", "uso": "What for", "intensidad": "Intensity", "fuente": "Source",
+      "medido": "measured", "declarado": "self-reported"
+    },
+    "conceptos": {
+      "titulo": "Concepts: what I talk about vs. what I build",
+      "resumen": "{ambos} concepts appear both in my prompts and in my code; {ninguno} in neither.",
+      "termino": "Concept", "categoria": "Category", "hablado": "Talked", "preguntado": "Asked", "construido": "Built", "cuadrante": "Quadrant",
+      "cuadrantes": { "ambos": "Talked and built", "solo-hablado": "Only talked", "solo-construido": "Only built", "ninguno": "Neither" },
+      "leyendaPreguntado": "Ring: I've asked about it (\"what is…?\")",
+      "si": "yes", "no": "no"
+    },
+    "prompts": {
+      "titulo": "How I talk to AI",
+      "resumen": "{total} prompts; median of {mediana} characters; {espanol}% in Spanish.",
+      "total": "prompts", "mediana": "characters (median)", "preguntas": "are questions", "espanol": "in Spanish"
+    },
+    "red": {
+      "titulo": "Who I write code with",
+      "resumen": "Before, {personas} people; now, {modelos} Claude models.",
+      "tipo": { "sergio": "Sergio", "persona": "Person", "modelo": "Model" },
+      "autor": "Author", "dominio": "Domain", "commits": "Commits", "sergio": "Sergio"
+    },
+    "discurso": {
+      "titulo": "The debate on AI, authorship and code",
+      "resumen": "{resaltados} of {total} concepts in the debate show up in my own prompts.",
+      "concepto": "Concept", "otros": "Not in my prompts", "enMisPrompts": "In my prompts", "relacion": "Relation"
+    },
+    "camino": {
+      "titulo": "The path backwards",
+      "resumen": "{total} pieces of knowledge behind my {hoy} technologies of today; the oldest with evidence is from {anio}.",
+      "play": "Play", "pausa": "Pause", "tiempo": "Animation time", "desplazar": "Scrollable diagram", "raices": "roots",
+      "fases": { "presente": "Today", "rebobinar": "Rewinding", "raices": "The roots", "avanzar": "Back to today" },
+      "evidencia": { "github": "on GitHub", "declarado": "self-reported", "inferido": "inferred" },
+      "conocimiento": "Knowledge", "rama": "Branch", "evidenciaColumna": "Evidence", "primeraEvidencia": "First evidence"
+    },
+    "dominios": { "producto-web": "web product", "hongos-iot": "mushrooms & IoT", "educacion": "education", "agentes": "agents", "experimentos": "experiments" },
+    "ramas": { "fundamentos": "foundations", "backend": "backend", "web": "web", "datos-ml": "data & ML", "iot": "IoT", "infra": "infra", "agentes": "agents", "educacion": "education", "escritura": "writing" }
   }
 }
