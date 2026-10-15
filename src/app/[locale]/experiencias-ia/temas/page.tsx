@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { GRUPO, TEMAS_FUERA, getTemasOrdenados } from '@/lib/experiencias-ia/data'
+import { TEMAS_FUERA, getProximaSesion, getTemasOrdenados } from '@/lib/experiencias-ia/data'
 
 export const metadata: Metadata = {
   title: 'Próximos temas — Experiencias IA',
@@ -14,7 +14,7 @@ export default function TemasPage() {
 
   return (
     <div>
-      <p className="eyebrow">Próxima sesión: {GRUPO.proximaSesion}</p>
+      <p className="eyebrow">Próxima sesión: {getProximaSesion().texto}</p>
       <h1>Próximos temas</h1>
       <p>
         Propuestas voluntarias. Quien propone un tema no queda comprometido a nada: si alguien quiere contar algo

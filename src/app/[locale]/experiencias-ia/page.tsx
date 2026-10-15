@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Link } from '@/i18n/navigation'
-import { GRUPO, getMetricas, getUltimasSesiones } from '@/lib/experiencias-ia/data'
+import { GRUPO, getMetricas, getProximaSesion, getUltimasSesiones } from '@/lib/experiencias-ia/data'
 import CapasHarness from '@/components/experiencias-ia/CapasHarness'
 import MetricaTile from '@/components/experiencias-ia/MetricaTile'
 import PrincipioCard from '@/components/experiencias-ia/PrincipioCard'
@@ -30,7 +30,7 @@ export default function ExperienciasIAHomePage() {
 
       <div className="formato">
         <p className="meta">
-          <b>Cómo son las sesiones</b> · próxima: {GRUPO.proximaSesion}
+          <b>Cómo son las sesiones</b> · próxima: {getProximaSesion().texto}
         </p>
         {GRUPO.formato.map(linea => (
           <p key={linea}>{linea}</p>
