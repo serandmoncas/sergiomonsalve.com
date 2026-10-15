@@ -1,0 +1,1304 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Libros para entender el dinero</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: catálogo de biblioteca convertido en sala de lectura. Arriba, cinco minutos para entender la idea; luego qué funciona,
+   el veredicto de cada libro, el mapa de cómo dialogan, y al final las fichas catalográficas (línea roja de las tarjetas). */
+:root {
+  --papel: #f2f4f0; --tarjeta: #fbfcf9; --tinta: #1d2430; --tenue: #5b6470;
+  --sello: #2b4f8c; --linea-roja: #b4473f; --regla: #d6dbd3;
+  --v-solido: #2f7a4c; --v-matices: #9a6400; --v-promete: #b4473f; --v-filosofia: #6a5a9e; --v-literatura: #2b6f80;
+  --u-alta: #2f7a4c; --u-moderada: #9a6400; --u-baja: #b4473f;
+  --b1: #b4473f; --b2: #2b4f8c; --b3: #2f7a4c; --b4: #6a5a9e; --b5: #9a6400;
+  --f-titulo: "Alegreya", Georgia, "Times New Roman", serif;
+  --f-texto: "Alegreya", Georgia, "Times New Roman", serif;
+  --f-ficha: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --papel: #151a21; --tarjeta: #1c222b; --tinta: #e3e7ec; --tenue: #9aa3ae;
+    --sello: #8fb0ea; --linea-roja: #e0786f; --regla: #2e3641;
+    --v-solido: #6cc493; --v-matices: #e3ad4f; --v-promete: #e0786f; --v-filosofia: #ab9be6; --v-literatura: #7cc3d4;
+    --u-alta: #6cc493; --u-moderada: #e3ad4f; --u-baja: #e0786f;
+    --b1: #e0786f; --b2: #8fb0ea; --b3: #6cc493; --b4: #ab9be6; --b5: #e3ad4f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --papel: #151a21; --tarjeta: #1c222b; --tinta: #e3e7ec; --tenue: #9aa3ae;
+  --sello: #8fb0ea; --linea-roja: #e0786f; --regla: #2e3641;
+  --v-solido: #6cc493; --v-matices: #e3ad4f; --v-promete: #e0786f; --v-filosofia: #ab9be6; --v-literatura: #7cc3d4;
+  --u-alta: #6cc493; --u-moderada: #e3ad4f; --u-baja: #e0786f;
+  --b1: #e0786f; --b2: #8fb0ea; --b3: #6cc493; --b4: #ab9be6; --b5: #e3ad4f;
+}
+* { box-sizing: border-box; }
+body { background: var(--papel); color: var(--tinta); font: 1.125rem/1.55 var(--f-texto); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--sello); text-underline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--sello); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--f-titulo); font-weight: 800; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.rotulo { font-family: var(--f-ficha); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tenue); margin: 0; }
+.dato { font-family: var(--f-ficha); font-variant-numeric: tabular-nums; }
+.tenue { color: var(--tenue); }
+.boton { font: 500 .8rem var(--f-ficha); color: var(--tinta); background: var(--tarjeta); border: 1px solid var(--regla); border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.boton.lleno { background: var(--sello); color: var(--tarjeta); border-color: transparent; }
+.boton[aria-pressed="true"] { border-color: var(--sello); color: var(--sello); }
+
+.marco { max-width: 1180px; margin: 0 auto; display: grid; gap: 72px; padding-block: 40px 96px; }
+.marco > *, .seccion > * { min-width: 0; }   /* que ningún hijo de la cuadrícula la ensanche */
+.barra { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding-block: 10px; background: color-mix(in srgb, var(--papel) 90%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--regla); }
+.barra nav { display: flex; flex-wrap: wrap; gap: 4px 14px; font: .8rem var(--f-ficha); }
+.barra nav a { color: var(--tinta); text-decoration: none; }
+.barra nav a:hover { color: var(--sello); text-decoration: underline; }
+
+.portada { display: grid; gap: 14px; }
+.portada h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.02; }
+.portada > p { max-width: 64ch; color: var(--tenue); font-size: 1.2rem; }
+.leyenda-v { display: flex; flex-wrap: wrap; gap: 8px 16px; font: .8rem var(--f-ficha); color: var(--tenue); }
+.rutas { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 10px; }
+.ruta { background: var(--tarjeta); border: 1px solid var(--regla); border-top: 3px solid var(--sello); padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+.ruta h3 { font-size: 1.3rem; }
+.ruta p { color: var(--tenue); font-size: 1rem; }
+.ruta ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+
+.seccion { display: grid; gap: 22px; scroll-margin-top: 64px; }
+.seccion > header { display: grid; gap: 6px; }
+.seccion h2 { font-size: clamp(1.7rem, 3.6vw, 2.3rem); line-height: 1.1; }
+.seccion > header > p:not(.rotulo) { max-width: 66ch; color: var(--tenue); }
+
+/* Chips de veredicto */
+.chip { font: 600 .66rem var(--f-ficha); letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; color: var(--tarjeta); white-space: nowrap; }
+.v-solido { background: var(--v-solido); } .v-matices { background: var(--v-matices); } .v-promete { background: var(--v-promete); } .v-filosofia { background: var(--v-filosofia); } .v-literatura { background: var(--v-literatura); }
+
+/* Curioso */
+.regla { display: flex; height: 38px; overflow: hidden; border-radius: 3px; }
+.regla button { all: unset; cursor: pointer; display: flex; align-items: center; justify-content: center; font: 600 .7rem var(--f-ficha); color: #fff; position: relative; padding: 0 4px; text-align: center; }
+.regla button[aria-current="true"]::after { content: ""; position: absolute; inset: auto 0 0 0; height: 5px; background: var(--tinta); }
+.regla button:focus-visible { outline: 3px solid var(--tinta); outline-offset: -3px; }
+.curioso { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 28px; background: var(--tarjeta); border: 1px solid var(--regla); padding: 24px; }
+@media (max-width: 760px) { .curioso { grid-template-columns: 1fr; } }
+.guion { display: grid; gap: 12px; font-size: 1.2rem; max-width: 62ch; min-height: 11em; }
+.reloj { display: grid; gap: 8px; align-content: start; justify-items: start; }
+.reloj .tiempo { font: 600 2.3rem var(--f-ficha); font-variant-numeric: tabular-nums; }
+.tiempo.ambar { color: var(--v-matices); } .tiempo.rojo { color: var(--v-promete); }
+
+/* Explicador (escena → render(t)) */
+.motion { display: grid; gap: 12px; }
+.motion canvas { width: 100%; height: auto; background: var(--tarjeta); border: 1px solid var(--regla); }
+.controles { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.controles input[type=range] { flex: 1; min-width: 160px; accent-color: var(--sello); }
+
+/* Tablero de veredictos */
+.filtros { display: flex; flex-wrap: wrap; gap: 6px; }
+.tablero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 900px) { .tablero { grid-template-columns: 1fr; } }
+.libros { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; align-content: start; }
+.libro { all: unset; box-sizing: border-box; cursor: pointer; background: var(--tarjeta); border: 1px solid var(--regla); border-top: 3px solid var(--linea-roja); padding: 12px 14px; display: grid; gap: 6px; align-content: start; }
+.libro[aria-pressed="true"] { outline: 2px solid var(--sello); }
+.libro:focus-visible { outline: 2px solid var(--sello); }
+.libro b { font: 800 1.08rem/1.15 var(--f-titulo); }
+.libro .chip { justify-self: start; }
+.libro[hidden] { display: none; }
+.panel { background: var(--tarjeta); border: 1px solid var(--regla); padding: 20px; display: grid; gap: 12px; align-content: start; }
+.panel h3 { font-size: 1.4rem; }
+.panel .fuente { border-top: 1px dotted var(--regla); padding-top: 10px; font-size: 1rem; display: grid; gap: 2px; }
+.panel .fuente a { font: .78rem var(--f-ficha); word-break: break-all; }
+
+/* Mapa */
+.mapa { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 900px) { .mapa { grid-template-columns: 1fr; } }
+.mapa canvas { width: 100%; height: auto; background: var(--tarjeta); border: 1px solid var(--regla); cursor: pointer; touch-action: manipulation; }
+.mapa .lista-cruces { display: grid; gap: 10px; align-content: start; font-size: 1rem; }
+.mapa .lista-cruces li { margin-bottom: 6px; }
+
+/* Fichas */
+.grupo { display: grid; gap: 28px; }
+.grupo-cab h2 { font-size: 1.75rem; }
+.grupo-cab p { margin: 4px 0 0; color: var(--tenue); }
+.ficha { display: grid; gap: 14px; scroll-margin-top: 70px; }
+.tarjeta { background: var(--tarjeta); border: 1px solid var(--regla); border-top: 3px solid var(--linea-roja); padding: 20px 24px 22px; display: grid; gap: 10px; max-width: 760px; }
+.sello { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cota { font: .75rem var(--f-ficha); color: var(--tenue); margin-right: auto; }
+.tarjeta h3 { font-size: 1.9rem; line-height: 1.1; }
+.original { margin: -4px 0 4px; font-style: italic; color: var(--tenue); font-size: 1rem; }
+dl { margin: 0; display: grid; gap: 4px; font: .82rem var(--f-ficha); }
+dl > div { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; border-bottom: 1px dotted var(--regla); padding-bottom: 4px; }
+dt { color: var(--tenue); } dd { margin: 0; }
+.tema { display: inline-block; margin: 0 6px 2px 0; padding: 0 6px; background: var(--papel); border: 1px solid var(--regla); }
+.cruces { display: grid; gap: 6px; padding-top: 6px; }
+.cruces ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 1rem; }
+.cuerpo { max-width: 68ch; }
+.cuerpo summary { cursor: pointer; font: 500 .8rem var(--f-ficha); color: var(--sello); }
+.cuerpo h2 { font: 500 .78rem var(--f-ficha); letter-spacing: .08em; text-transform: uppercase; color: var(--sello); margin: 26px 0 8px; }
+.cuerpo p, .cuerpo ul, .cuerpo ol { margin: 0 0 12px; }
+.tabla { overflow-x: auto; margin: 4px 0 16px; max-width: 100%; }
+.cuerpo table { border-collapse: collapse; font-size: .98rem; line-height: 1.4; min-width: 520px; }
+.cuerpo th { text-align: left; font: 500 .72rem var(--f-ficha); letter-spacing: .06em; text-transform: uppercase; color: var(--tenue); border-bottom: 2px solid var(--tinta); padding: 6px 12px 6px 0; }
+.cuerpo td { vertical-align: top; border-bottom: 1px solid var(--regla); padding: 8px 12px 8px 0; }
+
+
+/* Ponte a prueba */
+.marcador { font: 600 1rem var(--f-ficha); }
+.preguntas { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.pregunta { background: var(--tarjeta); border: 1px solid var(--regla); border-left: 4px solid var(--regla); padding: 14px 16px; display: grid; gap: 10px; align-content: start; }
+.pregunta.acierto { border-left-color: var(--v-solido); }
+.pregunta.error { border-left-color: var(--v-promete); }
+.pregunta q { font-size: 1.12rem; quotes: "«" "»"; }
+.pregunta .opciones { display: flex; gap: 8px; }
+.pregunta .respuesta { font-size: 1rem; display: grid; gap: 4px; }
+.pregunta .respuesta a { font: .76rem var(--f-ficha); word-break: break-all; }
+
+.estado-repaso { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+.cajas { display: flex; gap: 6px; align-items: flex-end; }
+.cajas div { display: grid; justify-items: center; gap: 2px; font: .66rem var(--f-ficha); color: var(--tenue); }
+.cajas i { display: block; width: 28px; background: var(--sello); border-radius: 2px 2px 0 0; min-height: 2px; }
+.pregunta .cuando { font: .74rem var(--f-ficha); color: var(--tenue); }
+
+/* Línea de tiempo por décadas */
+.linea { display: grid; gap: 0; border-top: 1px solid var(--regla); }
+.decada { display: grid; grid-template-columns: 6.8rem minmax(0, 1fr); gap: 16px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--regla); }
+.decada > span { font: 600 1.05rem var(--f-ficha); color: var(--tenue); font-variant-numeric: tabular-nums; }
+.decada.salto { border-bottom-style: dashed; }
+.decada .fila { display: flex; flex-wrap: wrap; gap: 8px; }
+.hito { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px 5px 6px; background: var(--tarjeta); border: 1px solid var(--regla); border-radius: 3px; font-size: 1rem; line-height: 1.2; }
+.hito i { width: 12px; height: 12px; border-radius: 2px; flex: none; }
+.hito small { font: .72rem var(--f-ficha); color: var(--tenue); }
+.hito[aria-pressed="true"] { outline: 2px solid var(--sello); }
+.hito:focus-visible { outline: 2px solid var(--sello); }
+.resumen-linea { font-size: 1.05rem; max-width: 70ch; }
+.lecciones .decada { grid-template-columns: minmax(8rem, 15rem) minmax(0, 1fr); }
+.lecciones .nodo { font: 600 1rem/1.25 var(--f-titulo); color: var(--tinta); }
+a.hito { color: var(--tinta); text-decoration: none; }
+@media (max-width: 640px) { .lecciones .decada { grid-template-columns: 1fr; gap: 8px; } }
+
+/* Planificador */
+.planificador { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 24px; background: var(--tarjeta); border: 1px solid var(--regla); padding: 22px; }
+@media (max-width: 820px) { .planificador { grid-template-columns: 1fr; } }
+.campos { display: grid; gap: 14px; align-content: start; }
+.campos label { display: grid; gap: 4px; font: 500 .8rem var(--f-ficha); color: var(--tenue); }
+.campos input, .campos select { font: 1.05rem var(--f-texto); color: var(--tinta); background: var(--papel); border: 1px solid var(--regla); padding: 8px 10px; border-radius: 3px; }
+.calendario { display: grid; gap: 10px; align-content: start; }
+.franja { position: relative; height: 54px; border-bottom: 2px solid var(--regla); margin: 8px 14px 30px; }
+.franja .punto { position: absolute; bottom: -8px; width: 14px; height: 14px; border-radius: 50%; background: var(--sello); transform: translateX(-50%); }
+.franja .punto.examen { background: var(--linea-roja); border-radius: 2px; }
+.franja .punto.examen span { top: auto; bottom: 20px; color: var(--linea-roja); font-weight: 600; }
+.franja .punto span { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font: .68rem var(--f-ficha); color: var(--tenue); white-space: nowrap; }
+.sesiones { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.sesiones li { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px dotted var(--regla); font-size: 1rem; }
+.sesiones li b { font: 600 .9rem var(--f-ficha); }
+
+/* Modo presentar: una pantalla por bloque Curioso */
+.escenario { position: fixed; inset: 0; z-index: 10; background: var(--papel); display: grid; grid-template-rows: auto 1fr auto; gap: 18px; padding: calc(env(safe-area-inset-top, 0px) + 20px) max(24px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 20px) max(24px, env(safe-area-inset-left, 0px)); }
+.escenario .contenido { display: grid; align-content: center; gap: 22px; max-width: 980px; margin: 0 auto; width: 100%; font-size: clamp(1.3rem, 2.6vw, 2rem); line-height: 1.4; }
+.escenario .contenido h2 { font-size: clamp(2rem, 5vw, 3.4rem); color: var(--sello); }
+.escenario .pie { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+
+.escenario[hidden], .libro[hidden], .seccion[hidden], .boton[hidden] { display: none !important; }
+
+/* Celular: la barra no se queda fija ni ocupa varias líneas; la regla muestra solo los nombres */
+@media (max-width: 640px) {
+  .barra { position: static; flex-wrap: nowrap; gap: 10px; }
+  .barra nav { flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; scrollbar-width: none; min-width: 0; padding-block: 4px; }
+  .barra nav::-webkit-scrollbar { display: none; }
+  .barra .boton { flex: none; }
+  .regla { height: 46px; }
+  .regla .seg { display: none; }
+  .franja .punto:not(.examen) span { display: none; }   /* las fechas ya están en la lista de abajo */
+  .regla button { font-size: .68rem; line-height: 1.15; }
+  .marco { gap: 56px; }
+  .decada { grid-template-columns: 4.6rem minmax(0, 1fr); gap: 10px; }
+  .decada > span { font-size: .82rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Libros, fábulas y novelas para el módulo Dinero de New Old School: qué enseña cada uno, qué tanto se sostiene y con qué lección se conecta.">
+<meta property="og:title" content="Libros para entender el dinero">
+<meta property="og:description" content="Libros, fábulas y novelas para el módulo Dinero de New Old School: qué enseña cada uno, qué tanto se sostiene y con qué lección se conecta.">
+<meta property="og:type" content="website">
+<style>body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<div class="marco">
+  <div class="barra">
+    <nav aria-label="Secciones"><a href="https://sergiomonsalve.com">← sergiomonsalve.com</a><a href="/books-on-money.html" hreflang="en">English</a><a href="/aprender-a-aprender.html">Aprender a aprender</a>
+      <a href="#ponte-a-prueba">Ponte a prueba</a><a href="#veredictos">Veredictos</a><a href="#nodos">Por lección</a><a href="#linea">Línea de tiempo</a><a href="#mapa">Mapa de cruces</a><a href="#fichas">Fichas</a>
+    </nav>
+    <button class="boton lleno" id="presentar" hidden>Presentar en 5 minutos</button>
+  </div>
+
+  <header class="portada">
+    <p class="rotulo">Biblioteca de New Old School · módulo Dinero</p>
+    <h1>Libros para entender el dinero</h1>
+    <p>16 libros para el módulo Dinero: fábulas y novelas que cuentan una idea mejor que una explicación, y libros de divulgación sobre cómo decidimos con la plata. Cada uno trae su veredicto, la lección del módulo con la que se conecta y los libros con los que dialoga.</p>
+    <div class="leyenda-v"><span><span class="chip v-solido">Sólido</span> la evidencia lo respalda</span><span><span class="chip v-matices">Con matices</span> acierta en parte</span><span><span class="chip v-literatura">Literatura e historia</span> no se juzga con estudios</span></div>
+    <div class="rutas"><div class="ruta"><h3>Si estudias</h3><p>Historias cortas y un libro práctico para empezar a manejar tu plata.</p><ol><li><a href="#fabulas-de-esopo">Fábulas de Esopo</a></li><li><a href="#david-copperfield">David Copperfield</a></li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a></li><li><a href="#robinson-crusoe">Robinson Crusoe</a></li></ol></div><div class="ruta"><h3>Si enseñas</h3><p>Por qué decidimos mal con el dinero y cómo usarlo en clase.</p><ol><li><a href="#misbehaving">Portarse mal</a></li><li><a href="#nudge">Un pequeño empujón</a></li><li><a href="#pensar-rapido-pensar-despacio">Pensar rápido, pensar despacio</a></li><li><a href="#mercader-de-venecia">El mercader de Venecia</a></li></ol></div><div class="ruta"><h3>Si acompañas a un estudiante en casa</h3><p>Ahorrar sin heroísmo, desconfiar de las promesas fáciles y no confundir dinero con felicidad.</p><ol><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a></li><li><a href="#delirios-multitudinarios">Delirios multitudinarios</a></li><li><a href="#the-good-life">Una buena vida</a></li><li><a href="#nudge">Un pequeño empujón</a></li></ol></div></div>
+  </header>
+
+  <section class="seccion" id="cinco-minutos" hidden>
+    <header>
+      <p class="rotulo">La idea en Formato Curioso · 300 segundos</p>
+      <h2>Lo que se siente como aprender no siempre es aprender</h2>
+      <p>Una sola idea en cinco bloques, con el tiempo de cada uno. Toca un bloque para leerlo, o usa “Presentar” para mostrarlo en pantalla completa con reloj.</p>
+    </header>
+    <div class="regla" id="regla" role="tablist" aria-label="Bloques"></div>
+    <div class="curioso">
+      <div class="guion" id="guion"></div>
+      <div class="reloj">
+        <span class="rotulo" id="bloque-nombre"></span>
+        <span class="tiempo" id="reloj">0:30</span>
+        <div style="display:flex;gap:8px"><button class="boton lleno" id="iniciar">Iniciar</button><button class="boton" id="reiniciar">Reiniciar</button></div>
+        <span class="tenue" style="font-size:.9rem">Ámbar en los últimos 10 s; rojo si te pasas.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="que-funciona" hidden>
+    <header>
+      <p class="rotulo">Explicador animado</p>
+      <h2>Qué funciona al estudiar, y cuánto pesa la práctica</h2>
+      <p>Dos gráficos de la investigación que citan varios de estos libros. Elige uno, reprodúcelo o arrastra la línea de tiempo.</p>
+    </header>
+    <div class="motion">
+      <div class="filtros" id="escenas"></div>
+      <canvas id="lienzo" width="1280" height="680" aria-label="Gráfico animado"></canvas>
+      <div class="controles">
+        <button class="boton lleno" id="play">Reproducir</button>
+        <input id="scrub" type="range" min="0" max="10" step="0.01" value="10" aria-label="Línea de tiempo">
+        <span class="dato tenue" id="t"></span>
+      </div>
+      <p class="tenue" id="fuente-escena" style="font-size:.95rem"></p>
+    </div>
+  </section>
+
+
+  <section class="seccion" id="ponte-a-prueba">
+    <header>
+      <p class="rotulo">Ponte a prueba · práctica de recuperación</p>
+      <h2>¿Mito o evidencia?</h2>
+      <p>Diez ideas sobre el dinero y cómo lo manejamos. Decide antes de ver la respuesta: intentar recordar y equivocarse ayuda a aprender más que leer la respuesta. La página recuerda tus respuestas en este navegador y te vuelve a preguntar, días después, lo que fallaste.</p>
+    </header>
+    <div class="estado-repaso">
+      <span class="marcador" id="marcador"></span>
+      <div class="cajas" id="cajas" aria-label="Preguntas por caja de repaso"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="boton" id="practicar">Practicar todas</button><button class="boton" id="otra-vez">Empezar de nuevo</button></div>
+    </div>
+    <div class="preguntas" id="preguntas"></div>
+  </section>
+
+  <section class="seccion" id="repaso" hidden>
+    <header>
+      <p class="rotulo">Planea tu repaso · práctica espaciada</p>
+      <h2>¿Cuándo repasar para un examen?</h2>
+      <p>Repartir el estudio en varios días rinde más que meter todo la noche anterior. Pon la fecha del examen y el planificador propone sesiones cortas, cada vez más separadas, en las que te pones a prueba sin mirar.</p>
+    </header>
+    <div class="planificador">
+      <div class="campos">
+        <label for="f-hoy">Empiezo a estudiar el<input type="date" id="f-hoy"></label>
+        <label for="f-examen">El examen es el<input type="date" id="f-examen"></label>
+        <label for="f-sesiones">Número de sesiones<select id="f-sesiones"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+        <p class="tenue" style="font-size:.95rem">Cada sesión, 20 a 30 minutos. Cierra el cuaderno, escribe o di en voz alta lo que recuerdas, y después revisa qué te faltó.</p>
+      </div>
+      <div class="calendario">
+        <div class="franja" id="franja" aria-hidden="true"></div>
+        <ol class="sesiones" id="sesiones"></ol>
+        <p class="tenue" id="nota-plan" style="font-size:.92rem"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="veredictos">
+    <header>
+      <p class="rotulo">Tablero de veredictos · toca un libro</p>
+      <h2>¿Qué tanto se sostiene cada libro?</h2>
+      <p>Cada veredicto guarda la idea central del libro. En los de divulgación, también el estudio que la juzga; las fábulas y novelas no se juzgan con estudios, sino por lo que ayudan a entender.</p>
+    </header>
+    <div class="filtros" id="filtros"></div>
+    <div class="tablero"><div class="libros" id="libros"></div><aside class="panel" id="panel" aria-live="polite"></aside></div>
+  </section>
+
+  <section class="seccion" id="nodos">
+    <header>
+      <p class="rotulo">Qué leer para cada lección</p>
+      <h2>Los libros de cada nodo del módulo</h2>
+      <p>Los nodos del módulo en su orden, con los libros que los iluminan. Toca un libro para ir a su ficha.</p>
+    </header>
+    <div class="linea lecciones"><div class="decada"><span class="nodo">Ingresos y gastos</span><div class="fila"><a class="hito" href="#david-copperfield" data-id="david-copperfield"><i style="background:var(--v-literatura)"></i>David Copperfield</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">¿Necesidad o deseo?</span><div class="fila"><a class="hito" href="#robinson-crusoe" data-id="robinson-crusoe"><i style="background:var(--v-literatura)"></i>Robinson Crusoe</a><a class="hito" href="#misbehaving" data-id="misbehaving"><i style="background:var(--v-matices)"></i>Portarse mal</a><a class="hito" href="#the-good-life" data-id="the-good-life"><i style="background:var(--v-matices)"></i>Una buena vida</a></div></div><div class="decada"><span class="nodo">Presupuesto</span><div class="fila"><a class="hito" href="#robinson-crusoe" data-id="robinson-crusoe"><i style="background:var(--v-literatura)"></i>Robinson Crusoe</a><a class="hito" href="#david-copperfield" data-id="david-copperfield"><i style="background:var(--v-literatura)"></i>David Copperfield</a><a class="hito" href="#misbehaving" data-id="misbehaving"><i style="background:var(--v-matices)"></i>Portarse mal</a><a class="hito" href="#nudge" data-id="nudge"><i style="background:var(--v-matices)"></i>Un pequeño empujón</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">Porcentajes en la vida real</span><div class="fila"><span class="tenue">Todavía no hay libros para esta lección.</span></div></div><div class="decada"><span class="nodo">Ahorro y metas</span><div class="fila"><a class="hito" href="#fabulas-de-esopo" data-id="fabulas-de-esopo"><i style="background:var(--v-literatura)"></i>Fábulas de Esopo</a><a class="hito" href="#odisea" data-id="odisea"><i style="background:var(--v-literatura)"></i>La Odisea</a><a class="hito" href="#misbehaving" data-id="misbehaving"><i style="background:var(--v-matices)"></i>Portarse mal</a><a class="hito" href="#nudge" data-id="nudge"><i style="background:var(--v-matices)"></i>Un pequeño empujón</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">Dónde guardar el dinero</span><div class="fila"><span class="tenue">Todavía no hay libros para esta lección.</span></div></div><div class="decada"><span class="nodo">Interés simple</span><div class="fila"><span class="tenue">Todavía no hay libros para esta lección.</span></div></div><div class="decada"><span class="nodo">Interés compuesto</span><div class="fila"><span class="tenue">Todavía no hay libros para esta lección.</span></div></div><div class="decada"><span class="nodo">Inflación</span><div class="fila"><a class="hito" href="#ensayo-sobre-el-comercio" data-id="ensayo-sobre-el-comercio"><i style="background:var(--v-literatura)"></i>Ensayo sobre la naturaleza del comercio en general</a><a class="hito" href="#delirios-multitudinarios" data-id="delirios-multitudinarios"><i style="background:var(--v-literatura)"></i>Delirios multitudinarios</a></div></div><div class="decada"><span class="nodo">Invertir, lo básico</span><div class="fila"><a class="hito" href="#fabulas-de-esopo" data-id="fabulas-de-esopo"><i style="background:var(--v-literatura)"></i>Fábulas de Esopo</a><a class="hito" href="#delirios-multitudinarios" data-id="delirios-multitudinarios"><i style="background:var(--v-literatura)"></i>Delirios multitudinarios</a><a class="hito" href="#pensar-rapido-pensar-despacio" data-id="pensar-rapido-pensar-despacio"><i style="background:var(--v-matices)"></i>Pensar rápido, pensar despacio</a><a class="hito" href="#misbehaving" data-id="misbehaving"><i style="background:var(--v-matices)"></i>Portarse mal</a><a class="hito" href="#the-signal-and-the-noise" data-id="the-signal-and-the-noise"><i style="background:var(--v-solido)"></i>La señal y el ruido</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">Deuda buena y deuda mala</span><div class="fila"><a class="hito" href="#mercader-de-venecia" data-id="mercader-de-venecia"><i style="background:var(--v-literatura)"></i>El mercader de Venecia</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">Tarjetas de crédito</span><div class="fila"><a class="hito" href="#nudge" data-id="nudge"><i style="background:var(--v-matices)"></i>Un pequeño empujón</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">El costo real de un crédito</span><div class="fila"><a class="hito" href="#mercader-de-venecia" data-id="mercader-de-venecia"><i style="background:var(--v-literatura)"></i>El mercader de Venecia</a><a class="hito" href="#liber-abaci" data-id="liber-abaci"><i style="background:var(--v-literatura)"></i>Liber Abaci (El libro del cálculo)</a><a class="hito" href="#pensar-rapido-pensar-despacio" data-id="pensar-rapido-pensar-despacio"><i style="background:var(--v-matices)"></i>Pensar rápido, pensar despacio</a></div></div><div class="decada"><span class="nodo">Historial crediticio</span><div class="fila"><span class="tenue">Todavía no hay libros para esta lección.</span></div></div><div class="decada"><span class="nodo">Estafas y pirámides</span><div class="fila"><a class="hito" href="#delirios-multitudinarios" data-id="delirios-multitudinarios"><i style="background:var(--v-literatura)"></i>Delirios multitudinarios</a><a class="hito" href="#pensar-rapido-pensar-despacio" data-id="pensar-rapido-pensar-despacio"><i style="background:var(--v-matices)"></i>Pensar rápido, pensar despacio</a><a class="hito" href="#the-signal-and-the-noise" data-id="the-signal-and-the-noise"><i style="background:var(--v-solido)"></i>La señal y el ruido</a></div></div><div class="decada"><span class="nodo">Seguros</span><div class="fila"><a class="hito" href="#pensar-rapido-pensar-despacio" data-id="pensar-rapido-pensar-despacio"><i style="background:var(--v-matices)"></i>Pensar rápido, pensar despacio</a></div></div><div class="decada"><span class="nodo">Impuestos básicos</span><div class="fila"><span class="tenue">Todavía no hay libros para esta lección.</span></div></div><div class="decada"><span class="nodo">Primer salario y seguridad social</span><div class="fila"><a class="hito" href="#el-coronel-no-tiene-quien-le-escriba" data-id="el-coronel-no-tiene-quien-le-escriba"><i style="background:var(--v-literatura)"></i>El coronel no tiene quien le escriba</a></div></div><div class="decada"><span class="nodo">Trabajo independiente</span><div class="fila"><a class="hito" href="#the-lean-startup" data-id="the-lean-startup"><i style="background:var(--v-matices)"></i>El método Lean Startup</a></div></div><div class="decada"><span class="nodo">Emprender con números</span><div class="fila"><a class="hito" href="#ensayo-sobre-el-comercio" data-id="ensayo-sobre-el-comercio"><i style="background:var(--v-literatura)"></i>Ensayo sobre la naturaleza del comercio en general</a><a class="hito" href="#the-lean-startup" data-id="the-lean-startup"><i style="background:var(--v-matices)"></i>El método Lean Startup</a></div></div></div>
+  </section>
+
+  <section class="seccion" id="linea">
+    <header>
+      <p class="rotulo">Línea de tiempo · toca un libro</p>
+      <h2>Casi tres mil años de historias sobre el dinero</h2>
+      <p>Los libros por la década en que se publicaron, con el color de su veredicto. Al tocar uno, el tablero y el mapa lo muestran.</p>
+    </header>
+    <div class="linea" id="linea-tiempo"></div>
+    <p class="resumen-linea" id="resumen-linea"></p>
+  </section>
+
+  <section class="seccion" id="mapa">
+    <header>
+      <p class="rotulo">Mapa de cruces</p>
+      <h2>Cómo dialogan los libros entre sí</h2>
+      <p>Cada línea es un cruce de la biblioteca. Toca un libro para ver con cuáles conversa y por qué. Los puntos grises son libros de otros temas.</p>
+    </header>
+    <div class="mapa">
+      <canvas id="red" width="900" height="680" aria-label="Mapa de cruces entre libros"></canvas>
+      <div class="lista-cruces" id="cruces"></div>
+      <p class="leyenda-v" id="leyenda-mapa" style="grid-column:1/-1"></p>
+    </div>
+  </section>
+
+  <section class="seccion" id="fichas">
+    <header><p class="rotulo">Las fichas</p><h2>Los 16 libros, uno por uno</h2></header>
+    <section class="grupo"><div class="grupo-cab"><h2>Historias que enseñan sobre el dinero</h2><p>Fábulas, poemas, teatro y novelas que cuentan una idea del módulo mejor que una explicación</p></div>
+<article class="ficha" id="fabulas-de-esopo">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">fabula · s. VI a. C. (según la tradición)</span><span class="chip v-literatura">Literatura e historia</span></div>
+    <h3>Fábulas de Esopo</h3>
+    
+    <dl><div><dt>Autor</dt><dd>Esopo (atribuidas)</dd></div><div><dt>Temas</dt><dd><span class="tema">ahorro</span> <span class="tema">codicia</span></dd></div><div><dt>Nodos</dt><dd>Ahorro y metas, Invertir, lo básico</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#delirios-multitudinarios">Delirios multitudinarios</a> · La gallina de los huevos de oro en versión real: gente que lo arriesga todo por ganar más, y más rápido.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Historias muy cortas, casi siempre con animales, que terminan en una enseñanza. Se atribuyen a Esopo, un narrador de la antigua Grecia, pero las escribieron y reescribieron muchas personas durante siglos.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Dos fábulas resumen dos nodos del módulo Dinero en un minuto:</p>
+<ul>
+<li><strong>La cigarra y la hormiga:</strong> la hormiga guarda comida en verano; la cigarra canta y llega al invierno sin nada. Es <em>Ahorro y metas</em> contado a un niño.</li>
+<li><strong>La gallina de los huevos de oro:</strong> el dueño, impaciente por tener todo el oro de una vez, mata a la gallina y se queda sin nada. Es la idea de no destruir lo que produce, central en <em>Invertir, lo básico</em>.</li>
+</ul>
+<h2>Para leer en clase</h2>
+<p>Las dos fábulas, en voz alta (caben en dos minutos). Pregunta: ¿la hormiga fue justa al no compartir? Hay versiones modernas que defienden a la cigarra; vale la pena discutirlo.</p>
+<h2>Con cuidado</h2>
+<p>La moraleja de la cigarra puede sonar a "el pobre es pobre porque no ahorró". Conviene aclarar que ahorrar depende también de cuánto se gana (ver <em>Ingresos y gastos</em>).</p></details>
+</article>
+<article class="ficha" id="odisea">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">poema · s. VIII a. C. (según la tradición)</span><span class="chip v-literatura">Literatura e historia</span></div>
+    <h3>La Odisea</h3>
+    <p class="original">Ὀδύσσεια</p>
+    <dl><div><dt>Autor</dt><dd>Homero</dd></div><div><dt>Temas</dt><dd><span class="tema">viaje</span> <span class="tema">autocontrol</span></dd></div><div><dt>Nodos</dt><dd>Ahorro y metas</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#robinson-crusoe">Robinson Crusoe</a> · Dos náufragos lejos de casa: Ulises sale adelante con astucia; Robinson, con trabajo y cuentas.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Después de la guerra de Troya, Ulises tarda diez años en volver a su casa, en la isla de Ítaca. En el camino enfrenta monstruos, tormentas y tentaciones, mientras en su casa unos pretendientes se comen su fortuna y quieren casarse con su esposa, Penélope.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>En el canto XII, Ulises quiere oír el canto de las sirenas sin morir. Sabe que cuando lo oiga no va a poder resistirse, así que se hace atar al mástil y les tapa los oídos con cera a sus marineros. Es la imagen más antigua de una idea moderna: <strong>si sabes que tu "yo" de mañana va a caer en la tentación, el "yo" de hoy le puede poner una traba</strong>. Los economistas llaman a eso un <em>mecanismo de compromiso</em>, y un estudio sobre ahorro en Filipinas lleva el nombre de Ulises en el título (ver el nodo <em>Ahorro y metas</em>).</p>
+<h2>Para leer en clase</h2>
+<p>El episodio de las sirenas (canto XII). Pregunta: ¿qué "mástil" podrías usar tú para no gastarte lo que estás ahorrando?</p>
+<h2>Con cuidado</h2>
+<p>Hay violencia, sobre todo al final (la venganza contra los pretendientes). Para clase basta con el canto XII.</p>
+<p>La edición enlazada es la traducción al español de Luis Segalá y Estalella (1910), que está en dominio público.</p></details>
+</article>
+<article class="ficha" id="mercader-de-venecia">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">teatro · hacia 1596-1598</span><span class="chip v-literatura">Literatura e historia</span></div>
+    <h3>El mercader de Venecia</h3>
+    <p class="original">The Merchant of Venice</p>
+    <dl><div><dt>Autor</dt><dd>William Shakespeare</dd></div><div><dt>Temas</dt><dd><span class="tema">deuda</span> <span class="tema">justicia</span> <span class="tema">comercio</span></dd></div><div><dt>Nodos</dt><dd>Deuda buena y deuda mala, El costo real de un crédito</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#david-copperfield">David Copperfield</a> · Dos deudores: Antonio pone su propio cuerpo como garantía; Micawber termina en la cárcel por deudas.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Antonio, un comerciante de Venecia, le pide prestados 3.000 ducados por tres meses al prestamista Shylock, para ayudar a un amigo. Shylock pone una condición: si no paga a tiempo, se cobrará una libra de la carne de Antonio. Los barcos de Antonio se pierden y la deuda se vence.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es la historia más famosa sobre la <strong>garantía</strong> de un préstamo: qué se pierde si no se paga. Sirve para hablar de por qué hay que leer las condiciones antes de firmar (ver <em>El costo real de un crédito</em>) y de cuándo una deuda deja de ser una ayuda (ver <em>Deuda buena y deuda mala</em>).</p>
+<h2>Para leer en clase</h2>
+<p>La escena del contrato (acto I, escena 3) y el juicio (acto IV, escena 1). Pregunta: ¿un contrato firmado es justo solo porque las dos partes lo firmaron?</p>
+<h2>Con cuidado</h2>
+<p>Shylock es judío y la obra repite prejuicios antisemitas de su época. Hay que ponerlos en contexto y nunca presentarlos como una verdad. El discurso de Shylock "¿Acaso un judío no tiene ojos?" (acto III, escena 1) ayuda a hacerlo.</p>
+<p>La edición enlazada es el volumen 1 de los <em>Dramas</em> de Shakespeare traducidos por Marcelino Menéndez y Pelayo, que está en dominio público.</p></details>
+</article>
+<article class="ficha" id="robinson-crusoe">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">novela · 1719</span><span class="chip v-literatura">Literatura e historia</span></div>
+    <h3>Robinson Crusoe</h3>
+    <p class="original">Robinson Crusoe</p>
+    <dl><div><dt>Autor</dt><dd>Daniel Defoe</dd></div><div><dt>Temas</dt><dd><span class="tema">necesidad-y-deseo</span> <span class="tema">presupuesto</span> <span class="tema">soledad</span> <span class="tema">viaje</span></dd></div><div><dt>Nodos</dt><dd>¿Necesidad o deseo?, Presupuesto</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><em>El lobo estepario</em> · Dos hombres solos: a Robinson la soledad se la impone un naufragio; Harry Haller la elige.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Un marinero inglés naufraga y vive casi treinta años en una isla. Rescata lo que puede del barco, construye su casa, cultiva, cría cabras y lleva un diario de todo.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Tiene dos escenas que son clases de Dinero:</p>
+<ul>
+<li><strong>El dinero que no sirve:</strong> en el barco encuentra monedas y se ríe de ellas. En la isla un cuchillo vale más que todo ese oro, y aun así se las lleva. Es la mejor entrada al nodo <em>Necesidad o deseo</em>: el valor de las cosas depende de lo que puedes hacer con ellas.</li>
+<li><strong>El balance:</strong> cuando está desesperado, escribe en dos columnas los males y los bienes de su situación, "como deudor y acreedor". Es un presupuesto aplicado a la vida.</li>
+</ul>
+<h2>Para leer en clase</h2>
+<p>El inventario del barco y la escena de las monedas, y la lista de males y bienes. Pregunta: si naufragaras con diez cosas, ¿cuáles serían? ¿Cuántas de ellas compraste en el último mes?</p>
+<h2>Con cuidado</h2>
+<p>Robinson naufraga en un viaje para comprar esclavos, y trata a Viernes como su sirviente. Son ideas de su época que hay que discutir, no repetir.</p></details>
+</article>
+<article class="ficha" id="david-copperfield">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">novela · 1849-1850</span><span class="chip v-literatura">Literatura e historia</span></div>
+    <h3>David Copperfield</h3>
+    <p class="original">David Copperfield</p>
+    <dl><div><dt>Autor</dt><dd>Charles Dickens</dd></div><div><dt>Temas</dt><dd><span class="tema">presupuesto</span> <span class="tema">deuda</span> <span class="tema">dignidad</span></dd></div><div><dt>Nodos</dt><dd>Ingresos y gastos, Presupuesto</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#robinson-crusoe">Robinson Crusoe</a> · Dos maneras de llevar cuentas: la regla de Micawber y la lista de males y bienes de Robinson.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>La vida de David desde la infancia hasta la adultez: queda huérfano, trabaja de niño en una fábrica y sale adelante. En el camino conoce al señor Micawber, un hombre simpático que vive endeudado y siempre cree que "algo va a aparecer".</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>En el capítulo 12, Micawber resume en dos frases todo el nodo <em>Presupuesto</em>: con un ingreso de veinte libras al año, si gastas un poquito menos de veinte, el resultado es la felicidad; si gastas un poquito más, el resultado es la miseria. Lo dice desde la experiencia, porque acaba de salir de la cárcel por deudas. Dickens sabía de qué hablaba: su propio padre estuvo preso por deudas cuando él era niño.</p>
+<h2>Para leer en clase</h2>
+<p>El consejo de Micawber (capítulo 12). Pregunta: ¿por qué una diferencia tan pequeña (unos peniques) cambia "felicidad" por "miseria"?</p>
+<h2>Con cuidado</h2>
+<p>La edición enlazada está en inglés. Hay traducciones al español, pero no encontramos una libre en línea.</p></details>
+</article>
+<article class="ficha" id="el-coronel-no-tiene-quien-le-escriba">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">novela · 1961</span><span class="chip v-literatura">Literatura e historia</span></div>
+    <h3>El coronel no tiene quien le escriba</h3>
+    
+    <dl><div><dt>Autor</dt><dd>Gabriel García Márquez</dd></div><div><dt>Temas</dt><dd><span class="tema">vejez-y-proteccion</span> <span class="tema">dignidad</span></dd></div><div><dt>Nodos</dt><dd>Primer salario y seguridad social</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#david-copperfield">David Copperfield</a> · Pobreza con dignidad: el coronel y Micawber mantienen las apariencias aunque no tienen con qué.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Un coronel retirado, veterano de la guerra de los Mil Días, espera desde hace años la carta que le confirme su pensión. Cada viernes va al puerto a esperar el correo, y cada viernes no llega nada. Mientras tanto, él y su esposa pasan hambre y cuidan un gallo de pelea que fue de su hijo muerto.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es la mejor novela corta para entender <strong>de qué vive una persona cuando ya no puede trabajar</strong>, y qué pasa cuando esa protección depende de un trámite que nunca llega (ver <em>Primer salario y seguridad social</em>). Es de un autor colombiano y pasa en un pueblo, no en una gran ciudad.</p>
+<h2>Para leer en clase</h2>
+<p>Es corta (unas cien páginas) y se puede leer completa. Pregunta: ¿de qué va a vivir tu familia cuando los adultos ya no puedan trabajar? ¿Quién está pagando hoy por eso?</p>
+<h2>Con cuidado</h2>
+<p>Tiene derechos de autor: no se reparten copias.</p></details>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>La historia del dinero y los mercados</h2><p>De dónde vienen las cuentas, el comercio y las burbujas</p></div>
+<article class="ficha" id="liber-abaci">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">tratado · 1202</span><span class="chip v-literatura">Literatura e historia</span></div>
+    <h3>Liber Abaci (El libro del cálculo)</h3>
+    <p class="original">Liber Abaci</p>
+    <dl><div><dt>Autor</dt><dd>Leonardo de Pisa (Fibonacci)</dd></div><div><dt>Temas</dt><dd><span class="tema">matematicas</span> <span class="tema">comercio</span></dd></div><div><dt>Nodos</dt><dd>El costo real de un crédito</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#mercader-de-venecia">El mercader de Venecia</a> · Comerciantes italianos y préstamos: Fibonacci les enseñó a hacer las cuentas; Shakespeare mostró qué pasa cuando un préstamo sale mal.</li><li><a href="#ensayo-sobre-el-comercio">Ensayo sobre la naturaleza del comercio en general</a> · Dos libros escritos para comerciantes, con cinco siglos de distancia.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Un manual de aritmética escrito en latín por un comerciante y matemático de Pisa. Enseña a usar los números que hoy llamamos arábigos (que vienen de la India) y los aplica a problemas de comerciantes: cambio de monedas, reparto de ganancias entre socios e intereses.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Ayudó a que Europa dejara los números romanos, con los que es casi imposible multiplicar. Y muestra que las matemáticas del crédito tienen más de 800 años (ver <em>El costo real de un crédito</em>). De este libro sale también la famosa sucesión de Fibonacci, con un problema sobre la cría de conejos.</p>
+<h2>Para leer en clase</h2>
+<p>No es un libro para leer completo. Basta con contar su historia y resolver el problema de los conejos, o comparar una multiplicación con números romanos y otra con arábigos.</p>
+<h2>Con cuidado</h2>
+<p>No hay una edición libre en español. El texto latino es de dominio público; la traducción al inglés más conocida (Sigler, 2002) tiene derechos.</p></details>
+</article>
+<article class="ficha" id="ensayo-sobre-el-comercio">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">tratado · 1755</span><span class="chip v-literatura">Literatura e historia</span></div>
+    <h3>Ensayo sobre la naturaleza del comercio en general</h3>
+    <p class="original">Essai sur la nature du commerce en général</p>
+    <dl><div><dt>Autor</dt><dd>Richard Cantillon</dd></div><div><dt>Temas</dt><dd><span class="tema">emprendimiento</span> <span class="tema">comercio</span> <span class="tema">especulacion</span></dd></div><div><dt>Nodos</dt><dd>Emprender con números, Inflación</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#delirios-multitudinarios">Delirios multitudinarios</a> · Cantillon se hizo rico con la burbuja de John Law que cuenta Mackay, y vendió antes de que estallara.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Uno de los primeros libros de economía. Lo escribió hacia 1730 un banquero irlandés que vivía en París, y circuló a mano durante años antes de publicarse en 1755.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Define al <strong>emprendedor</strong> como quien compra a un precio cierto para vender a un precio incierto: alguien que asume el riesgo (ver <em>Emprender con números</em>). Y explica algo que hoy se llama "efecto Cantillon": cuando se crea dinero nuevo, quienes lo reciben primero ganan, y quienes lo reciben de últimos pagan precios más altos (ver <em>Inflación</em>).</p>
+<h2>Para leer en clase</h2>
+<p>No para leer completo. Basta con la definición de emprendedor y la historia de su autor: se hizo rico especulando con la Compañía del Misisipi aunque creía que iba a fracasar, y vendió a tiempo.</p>
+<h2>Con cuidado</h2>
+<p>La edición enlazada (Econlib) es la del texto original en francés con su traducción al inglés. No encontramos una traducción libre al español.</p></details>
+</article>
+<article class="ficha" id="delirios-multitudinarios">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">historia · 1841</span><span class="chip v-literatura">Literatura e historia</span></div>
+    <h3>Delirios multitudinarios</h3>
+    <p class="original">Extraordinary Popular Delusions and the Madness of Crowds</p>
+    <dl><div><dt>Autor</dt><dd>Charles Mackay</dd></div><div><dt>Temas</dt><dd><span class="tema">especulacion</span> <span class="tema">codicia</span></dd></div><div><dt>Nodos</dt><dd>Estafas y pirámides, Invertir, lo básico, Inflación</dd></div></dl>
+    
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Un periodista escocés reúne historias de momentos en que multitudes enteras perdieron la cabeza. Las tres primeras son de dinero: la Compañía del Misisipi de John Law en Francia, la burbuja de los Mares del Sur en Inglaterra y la "tulipomanía" en Holanda, cuando un bulbo de tulipán llegó a valer más que una casa.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Muestra que las pirámides y las burbujas no son un invento moderno: el mismo patrón (todos compran porque todos compran) se repite desde hace siglos (ver <em>Estafas y pirámides</em> e <em>Invertir, lo básico</em>). La historia de John Law, que imprimió billetes sin control, también sirve para <em>Inflación</em>.</p>
+<h2>Para leer en clase</h2>
+<p>La burbuja de los Mares del Sur, que es corta. Pregunta: ¿qué señales de alarma del nodo <em>Estafas y pirámides</em> aparecen en la historia?</p>
+<h2>Con cuidado</h2>
+<p>Mackay exageró. La historiadora Anne Goldgar (<em>Tulipmania</em>, 2007) revisó los archivos holandeses y encontró que la tulipomanía no arruinó a tanta gente como él contó. Esto es útil en clase: <strong>incluso un libro clásico hay que contrastarlo con las fuentes</strong>. La edición enlazada está en inglés.</p></details>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>Cómo decidimos con el dinero</h2><p>Los errores predecibles y cómo diseñar mejores decisiones</p></div>
+<article class="ficha" id="pensar-rapido-pensar-despacio">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2011</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Pensar rápido, pensar despacio</h3>
+    <p class="original">Thinking, Fast and Slow</p>
+    <dl><div><dt>Autor</dt><dd>Daniel Kahneman</dd></div><div><dt>Temas</dt><dd><span class="tema">sesgos</span> <span class="tema">matematicas</span></dd></div><div><dt>Nodos</dt><dd>Estafas y pirámides, Invertir, lo básico, El costo real de un crédito, Seguros</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><em>El arte de pensar</em> · Dobelli enumera los errores de pensamiento; Kahneman explica de dónde salen, con la teoría de los dos sistemas.</li><li><a href="#nudge">Un pequeño empujón</a> · Kahneman describe cómo se equivoca la mente; Thaler y Sunstein, cómo diseñar las decisiones para que esos errores pesen menos.</li><li><a href="#delirios-multitudinarios">Delirios multitudinarios</a> · Las burbujas que cuenta Mackay son exceso de confianza y prueba social a escala de un país.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>El psicólogo Daniel Kahneman (1934-2024), Premio Nobel de Economía en 2002 por llevar la psicología del juicio y la decisión a la economía, resume aquí casi cincuenta años de investigación, buena parte hecha con Amos Tversky. Lo publicó Farrar, Straus and Giroux en 2011. En español lo publicó Debate en 2012, traducido por Joaquín Chamorro Mielke, con ediciones posteriores de bolsillo y ediciones impresas en Colombia.</p>
+<h2>Resumen</h2>
+<p>El libro tiene cinco partes:</p>
+<ol>
+<li><strong>Dos sistemas.</strong> La mente trabaja con un <strong>Sistema 1</strong>, rápido, automático e intuitivo, y un <strong>Sistema 2</strong>, lento, esforzado y deliberado. El Sistema 2 es "perezoso": muchas veces acepta lo que propone el Sistema 1 sin revisarlo.</li>
+<li><strong>Heurísticas y sesgos.</strong> Los atajos del Sistema 1 y los errores que producen: sacar conclusiones de muestras pequeñas, el anclaje, la disponibilidad (creer más probable lo que recordamos fácil), ignorar las estadísticas cuando hay una buena historia, y la regresión a la media.</li>
+<li><strong>Exceso de confianza.</strong> Creemos entender el pasado y predecir el futuro mejor de lo que podemos. Cuándo confiar en la intuición de un experto, y por qué una fórmula sencilla muchas veces le gana.</li>
+<li><strong>Decisiones.</strong> La <strong>teoría prospectiva</strong>, por la que Kahneman recibió el Nobel: perder duele más de lo que alegra ganar lo mismo, sobrevaloramos lo que ya es nuestro, y la forma de presentar una opción cambia lo que elegimos.</li>
+<li><strong>Dos yoes.</strong> El yo que vive las experiencias y el yo que las recuerda no siempre están de acuerdo, y eso cambia cómo medimos la felicidad.</li>
+</ol>
+<p>La tesis: <strong>muchos de nuestros errores no son descuidos al azar, sino desvíos predecibles</strong> del pensamiento rápido, y conocerlos ayuda a decidir cuándo hay que pensar despacio.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es la teoría que está detrás de varios nodos del módulo Dinero: el anclaje (<em>El costo real de un crédito</em>), la aversión a la pérdida y el exceso de confianza (<em>Invertir, lo básico</em>), la forma de valorar sucesos raros (<em>Seguros</em>) y la confianza en una historia convincente (<em>Estafas y pirámides</em>). También es el libro que <em>El arte de pensar</em> resume sin explicar.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Da una explicación, no solo una lista.</strong> Los dos sistemas organizan errores que en otros libros aparecen sueltos.</li>
+<li><strong>Lo escribió quien hizo la investigación.</strong> No es un periodista contando estudios ajenos, sino el autor de muchos de ellos.</li>
+<li><strong>Tiene problemas que se pueden hacer en clase.</strong> El más famoso es el del bate y la pelota: juntos cuestan 1,10 dólares y el bate cuesta 1 dólar más que la pelota; ¿cuánto cuesta la pelota? La respuesta que salta es 10 centavos; la correcta es 5. Según Kahneman, más de la mitad de los estudiantes de universidades como Harvard o el MIT dieron la respuesta intuitiva.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Un capítulo se cayó con la crisis de replicación.</strong> El capítulo 4 se apoya en estudios de <em>priming</em>, por ejemplo uno en el que leer palabras sobre la vejez hacía caminar más despacio (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/0022-3514.71.2.230">Bargh, Chen y Burrows, 1996</a>). Cuando otros investigadores lo repitieron con cronómetros automáticos y más participantes, el efecto solo apareció si quienes medían esperaban verlo (<a target="_blank" rel="noopener" href="https://doi.org/10.1371/journal.pone.0029081">Doyen y otros, 2012</a>). Un análisis de los estudios de ese capítulo estimó que muy pocos se replicarían, y Kahneman lo aceptó en público: reconoció que había confiado demasiado en estudios con muestras pequeñas.</li>
+<li><strong>Lo sólido sigue en pie.</strong> Otros efectos del libro, como el anclaje, sí se replicaron en decenas de laboratorios (<a target="_blank" rel="noopener" href="https://doi.org/10.1027/1864-9335/a000178">Klein y otros, 2014</a>). La lección es la misma de <em>El arte de pensar</em>: no todos los capítulos valen lo mismo.</li>
+<li><strong>Es largo y denso.</strong> Casi 500 páginas, para adultos. No es lectura para estudiantes de 12 años.</li>
+<li><strong>Los "dos sistemas" son una metáfora.</strong> El propio Kahneman advierte que no son dos partes del cerebro, sino una forma de hablar de dos tipos de pensamiento.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es una lectura de referencia para docentes y para quien escribe nodos, no para estudiantes. De aquí salen ejercicios excelentes (el bate y la pelota, el anclaje con una ruleta) y una lección de honestidad: un premio Nobel que admitió en público que parte de su libro se apoyaba en evidencia débil.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo 3, "El controlador perezoso", con el problema del bate y la pelota adaptado a pesos. Actividad: que todos respondan en diez segundos, luego que lo resuelvan con lápiz y papel, y comparar. Pregunta: ¿en qué otras situaciones la primera respuesta que se te ocurre parece obvia y está mal?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>No enseñar los estudios de <em>priming</em> del capítulo 4 como hechos.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="misbehaving">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2015</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Portarse mal</h3>
+    <p class="original">Misbehaving: The Making of Behavioral Economics</p>
+    <dl><div><dt>Autor</dt><dd>Richard H. Thaler</dd></div><div><dt>Temas</dt><dd><span class="tema">sesgos</span> <span class="tema">presupuesto</span> <span class="tema">ahorro</span></dd></div><div><dt>Nodos</dt><dd>Presupuesto, Ahorro y metas, ¿Necesidad o deseo?, Invertir, lo básico</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#pensar-rapido-pensar-despacio">Pensar rápido, pensar despacio</a> · La misma historia vista desde dos lados: Kahneman desde la psicología, Thaler desde la economía. Trabajaron juntos.</li><li><a href="#nudge">Un pequeño empujón</a> · Misbehaving cuenta cómo nació la idea de los empujones y cómo llegó a los gobiernos.</li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a> · Macías enseña a ver los gastos hormiga; Thaler explica por qué se escapan: no tratamos igual todo el dinero, depende del cajón mental donde lo ponemos.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Richard H. Thaler, Premio Nobel de Economía en 2017 "por sus aportes a la economía del comportamiento" (<a target="_blank" rel="noopener" href="https://www.nobelprize.org/prizes/economic-sciences/2017/press-release/">Fundación Nobel</a>), cuenta cómo él y unos pocos colegas convencieron a los economistas de que las personas no deciden como dicen los libros de texto. Es una historia de la economía del comportamiento contada en primera persona, con humor. Lo publicó W. W. Norton en 2015; en español lo publicó Paidós (<em>Portarse mal: el comportamiento irracional en la vida económica</em>, Buenos Aires, 2017, y México, 2018).</p>
+<h2>Resumen</h2>
+<p>El libro tiene ocho partes, ordenadas como la carrera de Thaler:</p>
+<ol>
+<li><strong>Comienzos (1970-1978).</strong> La "lista" de conductas que la economía no explicaba y que Thaler empezó a anotar, como valorar más una cosa solo porque es nuestra (el <strong>efecto dotación</strong>).</li>
+<li><strong>Contabilidad mental (1979-1985).</strong> Cómo separamos el dinero en "cajones" según de dónde viene o para qué es: las gangas y los abusos, el <strong>costo hundido</strong> (seguir con algo porque ya pagamos), los presupuestos y el póquer.</li>
+<li><strong>Autocontrol (1975-1988).</strong> El modelo del <strong>planificador y el hacedor</strong>: una parte de nosotros piensa en el futuro y otra quiere todo ya.</li>
+<li><strong>Trabajando con Danny (1984-1985).</strong> Su colaboración con Daniel Kahneman: qué nos parece justo y el experimento de las tazas.</li>
+<li><strong>Frente a los economistas (1986-1994).</strong> La pelea por la idea, y las columnas de "anomalías" que Thaler publicó durante años.</li>
+<li><strong>Finanzas (1983-2003).</strong> Por qué los mercados de acciones también reaccionan de más.</li>
+<li><strong>Bienvenido a Chicago (1995-hoy).</strong> El derecho, la repartición de oficinas en su universidad, el fútbol americano y un concurso de televisión.</li>
+<li><strong>Ayudando (2004-hoy).</strong> El programa <em>Ahorra Más Mañana</em>, los empujones y la unidad del gobierno británico que los aplica.</li>
+</ol>
+<p>La tesis: <strong>las personas reales cometen errores predecibles con el dinero, y una economía que los tenga en cuenta explica y ayuda mejor.</strong></p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Thaler ya aparece en el nodo <em>Presupuesto</em> por su idea de la contabilidad mental. Este libro la explica completa, junto con otras que sirven para el módulo Dinero: por qué no ahorramos aunque queramos (<em>Ahorro y metas</em>), por qué gastamos más fácil la plata que nos regalan (<em>Necesidad o deseo</em>) y por qué es difícil vender una acción que perdió valor (<em>Invertir, lo básico</em>).</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Cada idea viene de un experimento o de datos reales:</strong></li>
+<li><strong>El efecto dotación.</strong> A la mitad de un grupo le regalaban una taza; los que la tenían pedían mucho más por venderla de lo que los otros ofrecían por comprarla, y se intercambiaron muchas menos tazas de las que predecía la teoría (<a target="_blank" rel="noopener" href="https://doi.org/10.1086/261737">Kahneman, Knetsch y Thaler, 1990</a>).</li>
+<li><strong>La contabilidad mental.</strong> Thaler la definió con tres partes: cómo percibimos lo que ganamos o perdemos, en qué "cuenta" ponemos cada gasto, y cada cuánto revisamos las cuentas. Las tres contradicen la idea de que todo el dinero vale lo mismo (<a target="_blank" rel="noopener" href="https://doi.org/10.1002/(SICI)1099-0771(199909)12:3&lt;183::AID-BDM318&gt;3.0.CO;2-F">Thaler, 1999</a>).</li>
+<li><strong>Revisar demasiado las inversiones.</strong> Si una persona mira su inversión muy seguido, ve más pérdidas, y como las pérdidas duelen más que las ganancias, prefiere opciones más seguras aunque rindan menos (<a target="_blank" rel="noopener" href="https://doi.org/10.2307/2118511">Benartzi y Thaler, 1995</a>).</li>
+<li><strong>Las acciones que reaccionan de más.</strong> Las acciones que más habían caído en los años anteriores luego rindieron más que las que más habían subido (<a target="_blank" rel="noopener" href="https://doi.org/10.1111/j.1540-6261.1985.tb05004.x">De Bondt y Thaler, 1985</a>).</li>
+<li><strong>Un concurso de televisión.</strong> En <em>Deal or No Deal</em>, con premios de mucho dinero, los concursantes arriesgaban más después de un golpe de mala suerte, como predice la teoría de Kahneman y Tversky (<a target="_blank" rel="noopener" href="https://doi.org/10.1257/aer.98.1.38">Post y otros, 2008</a>).</li>
+<li><strong>Muestra cómo avanza la ciencia:</strong> con datos, con discusión y con rivales que obligan a mejorar los experimentos.</li>
+<li><strong>Se lee fácil.</strong> Es el libro de economía del comportamiento más entretenido de la biblioteca.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Algunos resultados se discuten.</strong></li>
+<li><strong>Las tazas.</strong> Cuando se entrenó bien a los participantes en las reglas del experimento, la diferencia entre el precio de venta y el de compra desapareció (<a target="_blank" rel="noopener" href="https://doi.org/10.1257/0002828054201387">Plott y Zeiler, 2005</a>). Otros investigadores encontraron que con loterías la diferencia sí se mantiene (<a target="_blank" rel="noopener" href="https://doi.org/10.1257/aer.101.2.991">Isoni, Loomes y Sugden, 2011</a>). El debate sigue.</li>
+<li><strong>Los taxistas de Nueva York.</strong> Un estudio con Thaler encontró que los taxistas trabajaban menos horas los días buenos, como si se pusieran una meta diaria de ingresos (<a target="_blank" rel="noopener" href="https://doi.org/10.1162/003355397555244">Camerer y otros, 1997</a>). Henry Farber, con otros datos, encontró que lo que más pesa para dejar de trabajar son las horas ya trabajadas (<a target="_blank" rel="noopener" href="https://doi.org/10.1086/426040">Farber, 2005</a>).</li>
+<li><strong>¿Cuánto pesan de verdad las pérdidas?</strong> La idea de que una pérdida duele más que una ganancia del mismo tamaño está en el centro del libro, y hay revisiones que dicen que no se cumple siempre (<a target="_blank" rel="noopener" href="https://doi.org/10.1002/jcpy.1047">Gal y Rucker, 2018</a>). Gerd Gigerenzer acusa a la economía del comportamiento de ver sesgos donde no los hay (<a target="_blank" rel="noopener" href="https://doi.org/10.1561/105.00000092">Gigerenzer, 2018</a>).</li>
+<li><strong>Es la historia contada por su protagonista.</strong> Thaler es generoso con sus colegas, pero es su versión. Además, los ejemplos son de Estados Unidos (fútbol americano, el mercado de acciones), y conviene traducirlos.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es la base del nodo <em>Presupuesto</em> y el complemento de <em>Pensar rápido, pensar despacio</em> y <em>Un pequeño empujón</em>. La parte 2 (contabilidad mental) y el capítulo 16 (las tazas) son las más útiles.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo 16, "Tazas", y repetir el experimento en clase con un objeto barato. A la mitad del grupo se le da el objeto y se le pregunta por cuánto lo vendería como mínimo; a la otra mitad, cuánto pagaría como máximo. Se comparan los precios. Pregunta para conversar: ¿por qué algo vale más solo porque es tuyo? Y para cerrar, la crítica: ¿todos entendieron bien las reglas?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="nudge">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2008</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Un pequeño empujón</h3>
+    <p class="original">Nudge: Improving Decisions About Health, Wealth, and Happiness</p>
+    <dl><div><dt>Autor</dt><dd>Richard H. Thaler y Cass R. Sunstein</dd></div><div><dt>Temas</dt><dd><span class="tema">sesgos</span> <span class="tema">ahorro</span> <span class="tema">habitos</span></dd></div><div><dt>Nodos</dt><dd>Ahorro y metas, Presupuesto, Tarjetas de crédito</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><em>Hábitos atómicos</em> · Los dos dicen que el entorno pesa más que la fuerza de voluntad: Clear lo aplica a uno mismo; Thaler y Sunstein, a quien diseña las opciones de otros.</li><li><a href="#odisea">La Odisea</a> · Ahorrar Más Mañana es atarse al mástil: comprometerse hoy a ahorrar los aumentos de sueldo que vendrán.</li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a> · Ahorrar de forma automática, para no depender de acordarse ni de la fuerza de voluntad.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Un economista, Richard H. Thaler (Premio Nobel de Economía en 2017 por sus aportes a la economía del comportamiento), y un jurista, Cass R. Sunstein, proponen diseñar las decisiones para ayudar a la gente a elegir mejor sin prohibirle nada. Lo publicó Yale University Press en 2008, y en 2021 salió una versión revisada, <em>Nudge: The Final Edition</em>. En español lo publicó Taurus en 2009 (<em>Un pequeño empujón</em>, traducción de Belén Urrutia); la edición revisada salió en Debolsillo en 2022.</p>
+<h2>Resumen</h2>
+<p>La edición original tiene cinco partes:</p>
+<ol>
+<li><strong>Humanos y "econs".</strong> Los modelos económicos suponen personas perfectamente racionales ("econs"); las personas reales ("humanos") tienen sesgos, ceden a las tentaciones y siguen al rebaño. Por eso a veces necesitan un empujón.</li>
+<li><strong>La arquitectura de las decisiones.</strong> Toda decisión se presenta de alguna forma: un orden, una opción por defecto, un formulario. Quien la diseña (un "arquitecto de decisiones") siempre influye, aunque no quiera. El ejemplo clásico: poner la fruta a la altura de los ojos en una cafetería es un empujón; prohibir la comida chatarra no lo es.</li>
+<li><strong>El dinero.</strong> Ahorrar más mañana, invertir sin errores ingenuos, los mercados de crédito y las pensiones.</li>
+<li><strong>La salud y la sociedad.</strong> Los medicamentos, la donación de órganos, el medio ambiente, la elección de colegio.</li>
+<li><strong>Extensiones y objeciones.</strong> Una docena de empujones posibles y las críticas a la idea.</li>
+</ol>
+<p>La edición de 2021 agrega la idea de <strong>sludge</strong> ("lodo"): los trámites y trabas que hacen difícil decidir bien, como un formulario eterno para cancelar una suscripción.</p>
+<p>La tesis: <strong>no existe una forma neutral de presentar las opciones,</strong> así que conviene diseñarlas para que lo más fácil sea lo que más le conviene a la gente, sin quitarle la libertad de elegir otra cosa. Los autores lo llaman <em>paternalismo libertario</em>.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es el libro que más conecta con <em>Ahorro y metas</em>: explica por qué el ahorro automático funciona mejor que la fuerza de voluntad. Thaler ya aparece en el nodo <em>Presupuesto</em> por su idea de la contabilidad mental.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Tiene un caso de éxito muy sólido: el ahorro por defecto.</strong> En una empresa de Estados Unidos, inscribir automáticamente a los empleados en el plan de ahorro para la jubilación subió muchísimo la participación, y la mayoría se quedó con el aporte que venía por defecto (<a target="_blank" rel="noopener" href="https://doi.org/10.1162/003355301753265543">Madrian y Shea, 2001</a>). Y en el programa <em>Ahorra Más Mañana</em>, los empleados se comprometían a ahorrar parte de sus aumentos futuros: en la primera empresa, el 78 % se unió y su tasa de ahorro promedio pasó del 3,5 % al 13,6 % en 40 meses (<a target="_blank" rel="noopener" href="https://doi.org/10.1086/380085">Thaler y Benartzi, 2004</a>).</li>
+<li><strong>Cambia la mirada.</strong> Enseña a ver que cada formulario, menú o factura está diseñado por alguien, y que ese diseño nos empuja.</li>
+<li><strong>Respeta la libertad.</strong> Los empujones no prohíben nada: se puede elegir otra opción.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>El efecto promedio de los empujones está en discusión.</strong> Un metaanálisis con más de 200 estudios encontró un efecto pequeño a mediano (<a target="_blank" rel="noopener" href="https://doi.org/10.1073/pnas.2107346118">Mertens y otros, 2022</a>). Otros investigadores corrigieron por los estudios que no se publican (los que no encuentran nada) y el efecto promedio casi desapareció (<a target="_blank" rel="noopener" href="https://doi.org/10.1073/pnas.2200300119">Maier y otros, 2022</a>). Los autores del metaanálisis respondieron que algunos empujones sí funcionan, sobre todo los que cambian la estructura de la decisión (como la opción por defecto), y que los que solo informan funcionan poco. La conclusión honesta: <strong>unos empujones funcionan muy bien y muchos otros, casi nada.</strong></li>
+<li><strong>¿Quién decide qué nos conviene?</strong> La crítica ética más común: un gobierno o una empresa puede usar las mismas técnicas para empujar hacia lo que le conviene a él, no a nosotros. El libro dedica una parte a las objeciones, pero la pregunta sigue abierta.</li>
+<li><strong>Está pensado para Estados Unidos.</strong> Los ejemplos de pensiones, seguros médicos y elección de colegio hay que traducirlos.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es la mejor herramienta para el nodo <em>Ahorro y metas</em>: ahorrar automáticamente, antes de gastar, es un empujón que uno se da a sí mismo. Y es una buena lección de ciudadanía: aprender a reconocer cuándo alguien está diseñando nuestras decisiones, por ejemplo en una oferta de crédito o en un juego del celular.</p>
+<h2>Para leer en clase</h2>
+<p>La introducción, con el ejemplo de la cafetería: cambiar solo el orden en que se presenta la comida, sin cambiar el menú, cambia lo que la gente come. Actividad: buscar "empujones" en el colegio, la tienda o el celular (qué está a la vista, qué viene marcado por defecto). Pregunta: ¿ese empujón te ayuda a ti, o a quien lo diseñó?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Distinguir un empujón (que deja elegir) de una manipulación (que esconde opciones o engaña). La edición de 2021 llama <em>sludge</em> a las trabas que juegan en contra del usuario.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="the-signal-and-the-noise">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2012</span><span class="chip v-solido">Sólido</span></div>
+    <h3>La señal y el ruido</h3>
+    <p class="original">The Signal and the Noise: Why So Many Predictions Fail — but Some Don&#x27;t</p>
+    <dl><div><dt>Autor</dt><dd>Nate Silver</dd></div><div><dt>Temas</dt><dd><span class="tema">decisiones</span> <span class="tema">matematicas</span> <span class="tema">especulacion</span></dd></div><div><dt>Nodos</dt><dd>Invertir, lo básico, Estafas y pirámides</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><em>Algoritmos para la vida cotidiana</em> · Los dos enseñan la regla de Bayes y el sobreajuste: actualizar lo que creemos con cada dato nuevo, sin confundir el ruido con la señal.</li><li><a href="#delirios-multitudinarios">Delirios multitudinarios</a> · Mackay cuenta las burbujas del siglo XVIII; Silver, la de 2008, y por qué casi nadie la vio venir.</li><li><a href="#pensar-rapido-pensar-despacio">Pensar rápido, pensar despacio</a> · Los expertos se equivocan con mucha confianza: Kahneman explica por qué; Silver muestra cómo pronosticar mejor.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Nate Silver, el estadístico que se hizo famoso por pronosticar las elecciones de Estados Unidos en su sitio FiveThirtyEight, se pregunta por qué tantas predicciones fallan y por qué algunas aciertan. Recorre campos muy distintos, de la economía al clima, para separar la "señal" (lo que de verdad dice algo) del "ruido" (lo que solo parece decirlo). Lo publicó Penguin Press en 2012; en español lo publicó Península en 2014 (<em>La señal y el ruido</em>, traducción de Carles Andreu Saburit y Carmen Villalba Ruiz), y en 2024 salió una nueva edición con el subtítulo <em>Por qué algunas predicciones fallan y otras no</em>.</p>
+<h2>Resumen</h2>
+<p>Una introducción, trece capítulos y una conclusión. Cada capítulo es un campo distinto:</p>
+<ol>
+<li><strong>La crisis de 2008:</strong> las agencias que calificaban como seguras inversiones que luego quebraron.</li>
+<li><strong>La política:</strong> los comentaristas de televisión y la diferencia entre "zorros" y "erizos".</li>
+<li><strong>El béisbol.</strong></li>
+<li><strong>El pronóstico del tiempo:</strong> el gran caso de éxito.</li>
+<li><strong>Los terremotos:</strong> por qué no se pueden predecir y el peligro del sobreajuste.</li>
+<li><strong>La economía.</strong></li>
+<li><strong>Las epidemias.</strong></li>
+<li><strong>La regla de Bayes:</strong> el centro teórico del libro.</li>
+<li><strong>El ajedrez por computador.</strong></li>
+<li><strong>El póquer.</strong></li>
+<li><strong>La bolsa de valores.</strong></li>
+<li><strong>El cambio climático.</strong></li>
+<li><strong>El terrorismo.</strong></li>
+</ol>
+<p>Tres ideas recorren el libro:</p>
+<ul>
+<li><strong>Pensar en probabilidades.</strong> No "va a llover", sino "hay un 70 % de probabilidad de lluvia", y revisar ese número cada vez que llega un dato nuevo. Es la regla de Bayes.</li>
+<li><strong>Ser zorro, no erizo.</strong> La imagen viene del politólogo Philip Tetlock: el erizo sabe una sola gran cosa y la aplica a todo; el zorro sabe muchas pequeñas y cambia de opinión. Los zorros pronostican mejor.</li>
+<li><strong>Cuidarse del sobreajuste.</strong> Un modelo que explica perfectamente el pasado, con todos sus detalles, suele fallar con el futuro, porque aprendió el ruido.</li>
+</ul>
+<p>La tesis: <strong>predecir bien es posible en algunos campos, pero exige humildad, pensar en probabilidades y revisar lo que creemos.</strong></p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Los estudiantes van a escuchar pronósticos toda la vida: del clima, de la economía, de una inversión "segura". Este libro les enseña a preguntar qué tan probable es algo y quién gana con que lo crean. Sirve para <em>Invertir, lo básico</em> (nadie sabe qué hará la bolsa mañana) y para <em>Estafas y pirámides</em> (desconfiar de quien promete certeza).</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Muestra que pronosticar mejor sí se puede aprender.</strong> En un torneo de pronósticos de política internacional de dos años, entrenar a los participantes en probabilidad, ponerlos a trabajar en equipo y juntar a los mejores en equipos de élite mejoró sus pronósticos (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/0956797614524255">Mellers y otros, 2014</a>). El estudio es del equipo de Tetlock, la misma fuente de los zorros y los erizos.</li>
+<li><strong>El pronóstico del tiempo es un caso real de progreso.</strong> Los modelos de pronóstico mejoraron poco a poco durante décadas, en una "revolución silenciosa" que es uno de los mayores logros de las ciencias físicas (<a target="_blank" rel="noopener" href="https://doi.org/10.1038/nature14956">Bauer, Thorpe y Brunet, 2015</a>).</li>
+<li><strong>Toma en serio que la ciencia también se equivoca.</strong> Silver discute el artículo de John Ioannidis que mostró que un hallazgo tiene menos probabilidad de ser cierto cuando los estudios son pequeños, los efectos son pequeños o hay intereses de por medio (<a target="_blank" rel="noopener" href="https://doi.org/10.1371/journal.pmed.0020124">Ioannidis, 2005</a>).</li>
+<li><strong>Tiene credibilidad propia:</strong> en 2008, Silver acertó el resultado en 49 de los 50 estados, y en 2012 en los 50.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Su versión de la estadística es discutida por estadísticos.</strong> Gary Marcus y Ernest Davis elogian el libro, pero dicen que la regla de Bayes funciona cuando hay probabilidades de partida razonables, y no siempre las hay, y que Silver es injusto con los métodos estadísticos clásicos (<a target="_blank" rel="noopener" href="https://www.newyorker.com/books/page-turner/what-nate-silver-gets-wrong">The New Yorker, 2013</a>). El estadístico Larry Wasserman añade que lo que Silver más valora, que los pronósticos acierten en la proporción que anuncian, es en realidad una idea de la estadística clásica.</li>
+<li><strong>El capítulo del cambio climático es el más polémico.</strong> El climatólogo Michael Mann, que se declara admirador de Silver, criticó que se apoyara en un autor escéptico del calentamiento global y que exagerara los errores de los primeros modelos (<a target="_blank" rel="noopener" href="https://www.huffpost.com/entry/nate-silver-climate-change_b_1909482">HuffPost, 2012</a>).</li>
+<li><strong>Un 29 % no es un 0 %.</strong> En 2016, FiveThirtyEight le daba a Trump cerca de un 29 % de probabilidad de ganar, más que casi cualquier otro pronóstico, y mucha gente dijo que Silver "se había equivocado". Es el mejor ejemplo para enseñar qué significa una probabilidad: algo con un 29 % de probabilidad pasa casi una de cada tres veces.</li>
+<li><strong>Es largo,</strong> y varios capítulos (béisbol, póquer) son muy de Estados Unidos.</li>
+</ul>
+<p><strong>Para el colegio.</strong> El capítulo 4, sobre el clima, es el mejor para estudiantes. Los capítulos 1 y 11, sobre la crisis de 2008 y la bolsa, sirven a los docentes del módulo Dinero. Se cruza con <em>Algorithms to Live By</em>, que explica la regla de Bayes de otra manera, y con <em>Delirios multitudinarios</em>, sobre las burbujas.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo 4, sobre el pronóstico del tiempo. Actividad: durante dos o tres semanas, cada estudiante anota cada día la probabilidad de lluvia que anuncia una aplicación o el IDEAM para su municipio, y si llovió o no. Al final se agrupan los días por probabilidad anunciada y se calcula en qué fracción de ellos llovió de verdad. Pregunta para conversar: si una aplicación anuncia lluvia más de la que cae, ¿por qué lo haría?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Los capítulos 8 y 10 tratan de apuestas deportivas y de póquer; el autor fue jugador profesional. En Colombia el juego de apuestas está prohibido para menores. Si se mencionan, que sea para mostrar por qué la casa siempre gana.</li>
+<li>El capítulo 13 trata del terrorismo y del 11 de septiembre.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>Ahorrar, emprender y vivir bien</h2><p>Del presupuesto al negocio propio, y qué tanto pesa el dinero en una buena vida</p></div>
+<article class="ficha" id="pequeno-cerdo-capitalista">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2011</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Pequeño cerdo capitalista</h3>
+    
+    <dl><div><dt>Autor</dt><dd>Sofía Macías</dd></div><div><dt>Temas</dt><dd><span class="tema">ahorro</span> <span class="tema">presupuesto</span> <span class="tema">deuda</span></dd></div><div><dt>Nodos</dt><dd>Ingresos y gastos, Presupuesto, Ahorro y metas, Deuda buena y deuda mala, Tarjetas de crédito, Invertir, lo básico</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><a href="#fabulas-de-esopo">Fábulas de Esopo</a> · Los gastos hormiga y la hormiga de la fábula: dos maneras de explicar que lo pequeño, repetido, se vuelve grande.</li><li><a href="#david-copperfield">David Copperfield</a> · La regla de Micawber y el presupuesto de Macías dicen lo mismo con 160 años de distancia: gastar un poco menos de lo que entra.</li><li><em>Hábitos atómicos</em> · Ahorrar como un hábito pequeño y automático, no como un esfuerzo heroico.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Un libro de finanzas personales escrito por la periodista mexicana Sofía Macías (Ciudad de México, 1984), que empezó como un blog en 2008. Su subtítulo lo dice todo: <em>Finanzas personales para hippies, yuppies y bohemios</em>. Lo publicó Aguilar en México en 2011 y se volvió uno de los libros de finanzas más vendidos en español, con ediciones adaptadas en España, una edición impresa en Colombia (2017) y versiones actualizadas en 2021 y 2025.</p>
+<h2>Resumen</h2>
+<p>La primera edición tiene una introducción ("¿Por qué volverse un pequeño cerdo capitalista?") y nueve capítulos:</p>
+<ol>
+<li><strong>Ahorrar:</strong> todos pueden, aunque ganen poco.</li>
+<li><strong>Metas:</strong> ahorrar para algo concreto.</li>
+<li><strong>¿En qué se te va el dinero?:</strong> registrar los gastos y encontrar los "gastos hormiga".</li>
+<li><strong>El fondo de emergencia:</strong> tener un colchón para lo imprevisto.</li>
+<li><strong>Las deudas:</strong> "tu deuda no es culpa de tu banco"; cómo usar la tarjeta de crédito a favor.</li>
+<li><strong>Inversiones:</strong> opciones para hacer crecer el dinero.</li>
+<li><strong>El retiro:</strong> el sistema de pensiones mexicano (las Afore).</li>
+<li><strong>Los seguros.</strong></li>
+<li><strong>¿Con quién quejarse?:</strong> qué hacer cuando una entidad financiera abusa.</li>
+</ol>
+<p>Los <strong>gastos hormiga</strong> son su idea más conocida: gastos pequeños que se repiten casi sin darse cuenta (un café, un chicle, un paquete de papas) y que al año suman mucho. Su método: detectarlos registrando los gastos una semana, redirigir esa plata y ahorrarla o invertirla, sin renunciar a todos los gustos.</p>
+<p>La tesis: <strong>las finanzas personales no son para expertos ni para ricos;</strong> cualquiera puede ordenarlas con hábitos sencillos y un poco de humor.</p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es el libro de la biblioteca más cercano al módulo Dinero: casi cada capítulo corresponde a un nodo (<em>Ingresos y gastos</em>, <em>Presupuesto</em>, <em>Ahorro y metas</em>, <em>Deuda buena y mala</em>, <em>Tarjetas de crédito</em>, <em>Invertir, lo básico</em>). Y está escrito en español, por una latinoamericana, con ejemplos de nuestra región.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Habla claro y con humor.</strong> Los lectores destacan que solo exige saber sumar, restar, multiplicar y dividir, y que le quita lo solemne al tema.</li>
+<li><strong>Los gastos hormiga tienen respaldo en la psicología.</strong> Un costo presentado "por día" parece mucho menor que el mismo costo al año (<a target="_blank" rel="noopener" href="https://doi.org/10.1086/209517">Gourville, 1998</a>), y la gente subestima cuánto gasta en cosas que considera "excepcionales", aunque se repitan todo el tiempo (<a target="_blank" rel="noopener" href="https://doi.org/10.1086/665833">Sussman y Alter, 2012</a>). Por eso registrar los gastos funciona: hace visible lo que la mente esconde.</li>
+<li><strong>Pone la responsabilidad en el lector sin culparlo.</strong> "Tu deuda no es culpa de tu banco" invita a tomar el control, no a sentirse mal.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Gran parte es de México.</strong> Las pensiones (Afore), los instrumentos de inversión, los impuestos y las instituciones de queja son mexicanos. En Colombia hay que traducirlos (fondos de pensiones, Colpensiones, la Superintendencia Financiera, el defensor del consumidor financiero), y eso ya lo hacen los nodos locales del colegio.</li>
+<li><strong>Envejece rápido.</strong> Cita tasas, leyes y teléfonos que cambian; por eso tiene ediciones actualizadas.</li>
+<li><strong>Los gastos hormiga no explican la pobreza.</strong> Para quien gana poco, el problema rara vez es el café: es que el ingreso no alcanza. El nodo <em>Ingresos y gastos</em> pone primero el ingreso; el libro, a veces, pone primero el recorte.</li>
+<li><strong>Está escrito para adultos jóvenes con salario.</strong> Los ejemplos (tarjeta de crédito, inversión, retiro) quedan lejos de un estudiante de 12 años.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Es la mejor lectura complementaria del módulo Dinero para docentes y estudiantes mayores, sobre todo el capítulo de los gastos hormiga. Conviene leerlo junto con los nodos locales de Colombia, para cambiar las instituciones mexicanas por las nuestras.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo 3, "¿En qué se te va el dinero?". Actividad: cada estudiante anota durante una semana todo lo que gasta (o lo que gasta su familia en la tienda) y busca sus gastos hormiga; luego calcula cuánto suman en un año. Pregunta: ¿cuál de esos gastos cambiarías, y cuál no, porque te importa?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Las cifras de instituciones, tasas e impuestos son de México y cambian con el tiempo: no se usan en clase sin comprobar el dato local.</li>
+<li>En internet circulan copias completas del libro que no son autorizadas; no se comparten.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="the-lean-startup">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2011</span><span class="chip v-matices">Con matices</span></div>
+    <h3>El método Lean Startup</h3>
+    <p class="original">The Lean Startup: How Today&#x27;s Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses</p>
+    <dl><div><dt>Autor</dt><dd>Eric Ries</dd></div><div><dt>Temas</dt><dd><span class="tema">emprendimiento</span> <span class="tema">decisiones</span></dd></div><div><dt>Nodos</dt><dd>Emprender con números, Trabajo independiente</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><em>Design de vida</em> · La misma idea aplicada a cosas distintas: probar en pequeño antes de decidir, Ries con un negocio y Burnett y Evans con la propia vida.</li><li><a href="#the-signal-and-the-noise">La señal y el ruido</a> · Los dos piden tratar lo que creemos como una hipótesis y cambiar de opinión cuando los datos lo indican.</li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a> · Macías enseña a cuidar el dinero propio; Ries, a no gastarlo en un negocio antes de saber si alguien lo quiere.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>Eric Ries, emprendedor de Silicon Valley, propone crear empresas como si fueran experimentos: en vez de pasar meses construyendo un producto perfecto, lanzar rápido una versión mínima, medir cómo responde la gente y aprender de eso. Lo publicó Crown Business en 2011; en español lo publicó Deusto en 2012 (<em>El método Lean Startup: cómo crear empresas de éxito utilizando la innovación continua</em>, traducción de Javier San Julián), y Paidós Empresa sacó una edición colombiana en 2019.</p>
+<h2>Resumen</h2>
+<p>Una introducción, tres partes con doce capítulos y un epílogo. Los títulos, traducidos de la edición en inglés:</p>
+<ol>
+<li><strong>Visión:</strong> Empezar · Definir · Aprender · Experimentar.</li>
+<li><strong>Dirección:</strong> Saltar · Probar · Medir · Pivotar (o perseverar).</li>
+<li><strong>Aceleración:</strong> Lotes · Crecer · Adaptarse · Innovar.</li>
+</ol>
+<p>Sus ideas principales (<a target="_blank" rel="noopener" href="https://theleanstartup.com/principles">sitio del método</a>):</p>
+<ul>
+<li><strong>Crear, medir, aprender.</strong> Un ciclo que se repite: construir algo pequeño, ver qué pasa y decidir.</li>
+<li><strong>Producto mínimo viable.</strong> La versión más sencilla que permite aprender lo máximo sobre los clientes con el menor esfuerzo. No es un producto malo, sino un experimento. El ejemplo más conocido: antes de tener el producto, Dropbox publicó un video de tres minutos que mostraba cómo funcionaría, y la lista de personas interesadas pasó de 5.000 a 75.000 en una noche, según contó Ries (<a target="_blank" rel="noopener" href="https://techcrunch.com/2011/10/19/dropbox-minimal-viable-product/">TechCrunch, 2011</a>).</li>
+<li><strong>Aprendizaje validado.</strong> El progreso no se mide por lo que se construye, sino por lo que se aprende y se comprueba.</li>
+<li><strong>Pivotar o perseverar.</strong> Si los datos dicen que la idea no funciona, cambiar de rumbo sin abandonar todo lo aprendido.</li>
+<li><strong>Métricas de vanidad frente a métricas útiles.</strong> Mil "me gusta" no dicen si alguien va a comprar; doce reservas con nombre sí dicen algo.</li>
+</ul>
+<p>La tesis: <strong>un emprendimiento es un experimento, y la forma de reducir el riesgo es probar cada suposición antes de invertir en ella.</strong></p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Es el complemento práctico de <em>Emprender con números</em>: antes de calcular el punto de equilibrio de un negocio, conviene saber si alguien va a comprar. Y su idea central sirve para cualquier proyecto escolar: probar barato antes de gastar.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Hay evidencia experimental de que pensar así ayuda.</strong> En un ensayo con 116 emprendimientos italianos asignados al azar, los emprendedores entrenados para formular hipótesis y ponerlas a prueba, como propone Ries, tuvieron mejor desempeño y cambiaron de rumbo más a menudo, sin abandonar más que los demás (<a target="_blank" rel="noopener" href="https://doi.org/10.1287/mnsc.2018.3249">Camuffo y otros, 2020</a>).</li>
+<li><strong>Las pruebas con clientes funcionan.</strong> Pocas empresas nuevas hacen pruebas A/B (mostrar dos versiones a grupos distintos y comparar), pero las que las adoptaron mejoraron su desempeño entre un 30 % y un 100 % después de un año, y abandonaron más rápido las ideas que no servían (<a target="_blank" rel="noopener" href="https://doi.org/10.1287/mnsc.2021.4209">Koning, Hasan y Chatterji, 2022</a>).</li>
+<li><strong>En 152 equipos de científicos</strong> que convertían sus inventos en negocios, usar más el método se asoció con mejores resultados a los 18 meses (<a target="_blank" rel="noopener" href="https://doi.org/10.1002/sej.1373">Leatherbee y Katila, 2020</a>).</li>
+<li><strong>Da un vocabulario muy útil:</strong> producto mínimo, pivotar, métricas de vanidad.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Nació de anécdotas, no de investigación.</strong> El método surgió entre emprendedores, en gran parte desconectado de lo que ya se sabía en la academia (<a target="_blank" rel="noopener" href="https://doi.org/10.1093/icc/dtz013">Contigiani y Levinthal, 2019</a>). Los propios Leatherbee y Katila advierten que se presentó como una receta para todos sin pruebas rigurosas.</li>
+<li><strong>Puede llevar a pensar en pequeño.</strong> Si solo se prueba lo que da respuestas rápidas y fáciles de medir, se buscan mejoras pequeñas y se pierden las ideas grandes (<a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.lrp.2019.06.002">Felin y otros, 2020</a>).</li>
+<li><strong>No sirve igual para todo.</strong> En negocios que exigen mucha inversión desde el principio, como una fábrica o un medicamento, no se puede lanzar una versión mínima.</li>
+<li><strong>Sus casos son de Silicon Valley,</strong> con software y capital de riesgo, lejos de una tienda de barrio.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Sirve para el nodo <em>Emprender con números</em> y para cualquier proyecto con estudiantes que quieran vender algo. Se cruza con <em>Design de vida</em>, que aplica la misma idea a decidir qué hacer con la vida.</p>
+<h2>Para leer en clase</h2>
+<p>El capítulo "Experimentar", de la primera parte, y el de "Medir", con las métricas de vanidad. Actividad: el curso quiere vender algo en un evento del colegio (por ejemplo, refrigerios o tutorías).</p>
+<ol>
+<li>Escribir la hipótesis: "al menos 20 de cada 100 compañeros pagarían 3.000 pesos".</li>
+<li>Calcular el costo de cada unidad y el punto de equilibrio.</li>
+<li>Probar sin gastar: un formulario de reservas, una foto de un prototipo de cartón o un mensaje al grupo del curso.</li>
+<li>Antes de ver los resultados, decidir qué número los haría seguir y cuál los haría cambiar de idea.</li>
+</ol>
+<p>Pregunta para conversar: ¿cuántos "me gusta" equivalen a una venta?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>En la actividad, pedir reservas y no cobrar dinero real a menores sin autorización de las familias.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article>
+<article class="ficha" id="the-good-life">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">divulgacion · 2023</span><span class="chip v-matices">Con matices</span></div>
+    <h3>Una buena vida</h3>
+    <p class="original">The Good Life: Lessons from the World&#x27;s Longest Scientific Study of Happiness</p>
+    <dl><div><dt>Autor</dt><dd>Robert Waldinger y Marc Schulz</dd></div><div><dt>Temas</dt><dd><span class="tema">relaciones</span> <span class="tema">necesidad-y-deseo</span> <span class="tema">sentido</span></dd></div><div><dt>Nodos</dt><dd>¿Necesidad o deseo?</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Se cruza con</p><ul><li><em>El hombre en busca de sentido</em> · Frankl se sostuvo pensando en su esposa; 85 años de datos dicen que las relaciones son lo que más pesa en una buena vida.</li><li><em>Comunicación no violenta</em> · Waldinger dice que las relaciones se cuidan como la salud; Rosenberg da una forma concreta de hacerlo cuando hay conflicto.</li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a> · El dinero sí importa para estar bien, pero no reemplaza a los amigos: un buen par para el nodo Necesidad o deseo.</li></ul></div>
+  </header>
+  <details class="cuerpo"><summary>Leer la ficha completa</summary><h2>De qué trata</h2>
+<p>El psiquiatra Robert Waldinger y el psicólogo Marc Schulz dirigen el Estudio de Harvard sobre el Desarrollo Adulto, que sigue a las mismas personas desde 1938. En este libro cuentan qué aprendieron de esas vidas sobre la felicidad. Lo publicó Simon &amp; Schuster en 2023; en español salió ese mismo año en Planeta (<em>Una buena vida</em>, traducción de Gema Moraleda Díaz).</p>
+<h2>Resumen</h2>
+<p>El estudio empezó con dos grupos de hombres jóvenes: 268 estudiantes de Harvard y 456 muchachos de barrios pobres de Boston (<a target="_blank" rel="noopener" href="https://www.adultdevelopmentstudy.org/grantandglueckstudy">sitio del estudio</a>). Hoy incluye a sus esposas y a más de 1.300 de sus hijos. Waldinger es su cuarto director.</p>
+<p>El libro tiene diez capítulos y una conclusión:</p>
+<ol>
+<li><strong>¿Qué hace buena una vida?</strong> Lo que la gente cree que la hará feliz (dinero, fama) frente a lo que muestran los datos.</li>
+<li><strong>Por qué las relaciones importan.</strong></li>
+<li><strong>Las relaciones en el sinuoso camino de la vida.</strong></li>
+<li><strong>Buena forma social.</strong> Las relaciones se cuidan como el cuerpo: si no se ejercitan, se debilitan.</li>
+<li><strong>Prestar atención a tus relaciones.</strong></li>
+<li><strong>Seguir el ritmo.</strong></li>
+<li><strong>La persona a tu lado.</strong> La pareja.</li>
+<li><strong>La familia importa.</strong></li>
+<li><strong>La buena vida en el trabajo.</strong></li>
+<li><strong>Todos los amigos comportan beneficios.</strong></li>
+<li><strong>Conclusión: Nunca es tarde para ser feliz.</strong></li>
+</ol>
+<p>La tesis: <strong>las buenas relaciones nos mantienen más felices y más sanos, y se pueden cultivar a cualquier edad.</strong></p>
+<h2>Por qué está en la biblioteca</h2>
+<p>Los adolescentes viven en redes sociales que muestran vidas perfectas y premian la fama. Este libro responde con datos de toda una vida a la pregunta "¿qué me va a hacer feliz?". Además matiza lo que se enseña en <em>Necesidad o deseo</em>: el dinero ayuda, pero no es lo único.</p>
+<h2>Análisis</h2>
+<p><strong>Lo que hace bien.</strong></p>
+<ul>
+<li><strong>Se basa en un estudio que casi no tiene par.</strong> Seguir a las mismas personas durante más de 80 años permite ver qué pasó antes y qué después, cosa que una encuesta de un solo momento no puede hacer.</li>
+<li><strong>Sus hallazgos centrales están publicados en revistas revisadas por pares:</strong></li>
+<li>En parejas de más de 80 años, estar más satisfecho con la pareja protegía el ánimo en los días de peor salud (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/a0019087">Waldinger y Schulz, 2010</a>).</li>
+<li>Un apego más seguro a la pareja en la vejez se asoció con menos depresión y, dos años y medio después, con más satisfacción con la vida; en las mujeres, también con mejor memoria (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/2167702614541261">Waldinger y otros, 2015</a>).</li>
+<li>Haber crecido en un hogar cálido se asoció con relaciones de pareja más seguras más de 60 años después (<a target="_blank" rel="noopener" href="https://doi.org/10.1177/0956797616661556">Waldinger y Schulz, 2016</a>).</li>
+<li>Entre los 30 y los 90 años, la red de personas en quienes uno confía para el apoyo emocional se reduce hasta la mitad; un hogar infantil cálido predijo redes más grandes, y el nivel económico no (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/pag0000843">Petrova y otros, 2024</a>).</li>
+<li><strong>Cuenta vidas reales.</strong> Los hallazgos llegan a través de las historias de los participantes, no solo de cifras.</li>
+</ul>
+<p><strong>Sus límites.</strong></p>
+<ul>
+<li><strong>Los participantes originales eran solo hombres blancos de Estados Unidos.</strong> Lo reconoce incluso un artículo reciente del propio estudio (<a target="_blank" rel="noopener" href="https://doi.org/10.1037/pag0000843">Petrova y otros, 2024</a>). Las mujeres entraron después, como esposas de los participantes.</li>
+<li><strong>Correlación no es causalidad.</strong> Que las personas con buenas relaciones vivan más sanas no prueba que las relaciones causen la salud: puede ser al revés, o puede haber una tercera causa. Un estudio anterior del mismo grupo encontró que la relación entre apoyo social y salud a los 70 años se debilitaba mucho al tener en cuenta el tabaco, el alcohol y la depresión (<a target="_blank" rel="noopener" href="https://doi.org/10.1017/s0033291798007211">Vaillant y otros, 1998</a>).</li>
+<li><strong>El dinero sí importa.</strong> El libro insiste en que la riqueza no da la felicidad, pero eso no quiere decir que dé igual. En Estados Unidos, el bienestar sigue subiendo con el ingreso, sin un tope en los 75.000 dólares que se citaba antes (<a target="_blank" rel="noopener" href="https://doi.org/10.1073/pnas.2016976118">Killingsworth, 2021</a>). Una investigación conjunta de quienes defendían posiciones opuestas encontró que solo para las personas más infelices el bienestar deja de subir a partir de cierto ingreso (<a target="_blank" rel="noopener" href="https://doi.org/10.1073/pnas.2208661120">Killingsworth, Kahneman y Mellers, 2023</a>). En un país con pobreza, la conclusión correcta es: el dinero importa, y las relaciones también.</li>
+<li><strong>Lo que dice no es sorprendente.</strong> Su valor está en la evidencia, no en la novedad.</li>
+</ul>
+<p><strong>Para el colegio.</strong> Sirve para el nodo <em>Necesidad o deseo</em> y para hablar de amistad, soledad y redes sociales. Se cruza con <em>Comunicación no violenta</em>, que enseña cómo cuidar una relación cuando hay conflicto.</p>
+<h2>Para leer en clase</h2>
+<p>La apertura del capítulo 1, con una encuesta en la que muchos jóvenes ponían como metas de vida hacerse ricos y famosos, y con la reflexión sobre las versiones idealizadas que mostramos en las redes sociales. Pregunta para conversar: si te siguieran durante 80 años, ¿qué crees que diría el estudio sobre lo que te hizo feliz?</p>
+<h2>Con cuidado</h2>
+<ul>
+<li>Las historias del estudio incluyen alcoholismo, pobreza, enfermedad y muerte.</li>
+<li>Los capítulos sobre la pareja y la familia están pensados para adultos; para esta edad, mejor los de amistad y relaciones en general.</li>
+<li>Tiene derechos de autor.</li>
+</ul></details>
+</article></section>
+  </section>
+</div>
+
+<div class="escenario" id="escenario" hidden>
+  <div class="regla" id="regla2" aria-hidden="true"></div>
+  <div class="contenido" id="contenido"></div>
+  <div class="pie">
+    <span class="dato" id="reloj2" style="font-size:1.6rem">0:30</span>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="boton" id="atras">← Bloque anterior</button>
+      <button class="boton lleno" id="iniciar2">Iniciar</button>
+      <button class="boton" id="adelante">Bloque siguiente →</button>
+      <button class="boton" id="salir">Salir</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATOS = {"libros": [{"id": "fabulas-de-esopo", "titulo": "Fábulas de Esopo", "autor": "Esopo (atribuidas)", "anio": "s. VI a. C. (según la tradición)", "grupo": 0, "orden": -550, "siglo": "s. VI a. C.", "veredicto": "literatura", "frase": "Ahorrar a tiempo y no destruir lo que produce", "juicio": "La cigarra y la hormiga es el nodo Ahorro y metas contado a un niño; la gallina de los huevos de oro, la idea de no destruir lo que produce, central en Invertir, lo básico.", "cita": null, "doi": null}, {"id": "odisea", "titulo": "La Odisea", "autor": "Homero", "anio": "s. VIII a. C. (según la tradición)", "grupo": 0, "orden": -750, "siglo": "s. VIII a. C.", "veredicto": "literatura", "frase": "Atarse al mástil antes de la tentación", "juicio": "Ulises se hace atar para oír a las sirenas sin perderse. Es la imagen más antigua de un mecanismo de compromiso, la idea detrás de ahorrar en automático.", "cita": null, "doi": null}, {"id": "mercader-de-venecia", "titulo": "El mercader de Venecia", "autor": "William Shakespeare", "anio": "hacia 1596-1598", "grupo": 0, "orden": 1596, "siglo": null, "veredicto": "literatura", "frase": "Lo que se pierde si un préstamo no se paga", "juicio": "Es la historia más famosa sobre la garantía de un préstamo. Sirve para hablar de leer las condiciones antes de firmar y de cuándo una deuda deja de ser una ayuda.", "cita": null, "doi": null}, {"id": "robinson-crusoe", "titulo": "Robinson Crusoe", "autor": "Daniel Defoe", "anio": "1719", "grupo": 0, "orden": 1719, "siglo": null, "veredicto": "literatura", "frase": "El valor de las cosas depende de lo que puedes hacer con ellas", "juicio": "En la isla, un cuchillo vale más que todas las monedas del barco. Y cuando está desesperado, Robinson escribe sus males y sus bienes en dos columnas, como un balance.", "cita": null, "doi": null}, {"id": "david-copperfield", "titulo": "David Copperfield", "autor": "Charles Dickens", "anio": "1849-1850", "grupo": 0, "orden": 1849, "siglo": null, "veredicto": "literatura", "frase": "Gastar un poquito menos de lo que entra", "juicio": "Micawber resume el nodo Presupuesto en dos frases, la diferencia entre la felicidad y la miseria está en gastar un poco menos o un poco más de lo que se gana. Lo dice al salir de la cárcel por deudas.", "cita": null, "doi": null}, {"id": "el-coronel-no-tiene-quien-le-escriba", "titulo": "El coronel no tiene quien le escriba", "autor": "Gabriel García Márquez", "anio": "1961", "grupo": 0, "orden": 1961, "siglo": null, "veredicto": "literatura", "frase": "De qué vive una persona cuando ya no puede trabajar", "juicio": "Un coronel espera durante años una pensión que no llega. Es la mejor novela corta, colombiana, para entender la seguridad social.", "cita": null, "doi": null}, {"id": "liber-abaci", "titulo": "Liber Abaci (El libro del cálculo)", "autor": "Leonardo de Pisa (Fibonacci)", "anio": "1202", "grupo": 1, "orden": 1202, "siglo": null, "veredicto": "literatura", "frase": "Los números con los que hoy hacemos las cuentas", "juicio": "Ayudó a que Europa dejara los números romanos y muestra que las matemáticas del crédito tienen más de 800 años.", "cita": null, "doi": null}, {"id": "ensayo-sobre-el-comercio", "titulo": "Ensayo sobre la naturaleza del comercio en general", "autor": "Richard Cantillon", "anio": "1755", "grupo": 1, "orden": 1755, "siglo": null, "veredicto": "literatura", "frase": "El emprendedor compra a un precio cierto para vender a uno incierto", "juicio": "Define al emprendedor como quien asume el riesgo, y explica por qué, cuando se crea dinero nuevo, quienes lo reciben de últimos pagan precios más altos.", "cita": null, "doi": null}, {"id": "delirios-multitudinarios", "titulo": "Delirios multitudinarios", "autor": "Charles Mackay", "anio": "1841", "grupo": 1, "orden": 1841, "siglo": null, "veredicto": "literatura", "frase": "Todos compran porque todos compran", "juicio": "Las burbujas y las pirámides se repiten desde hace siglos con el mismo patrón. La historia de John Law, que imprimió billetes sin control, sirve también para Inflación.", "cita": null, "doi": null}, {"id": "pensar-rapido-pensar-despacio", "titulo": "Pensar rápido, pensar despacio", "autor": "Daniel Kahneman", "anio": "2011", "grupo": 2, "orden": 2011, "siglo": null, "veredicto": "matices", "frase": "Pensamos con un sistema rápido y otro lento", "juicio": "El libro da una teoría seria y buena parte se sostiene, como el efecto ancla. Pero un experimento famoso de su capítulo 4, en el que leer palabras sobre la vejez hacía caminar más despacio, no se pudo repetir.", "cita": "Doyen y otros, 2012", "doi": "10.1371/journal.pone.0029081"}, {"id": "misbehaving", "titulo": "Portarse mal", "autor": "Richard H. Thaler", "anio": "2015", "grupo": 2, "orden": 2015, "siglo": null, "veredicto": "matices", "frase": "Las personas cometen errores predecibles con el dinero", "juicio": "Quienes recibían una taza pedían mucho más por venderla de lo que otros ofrecían por comprarla. Es el efecto dotación; con un entrenamiento cuidadoso en las reglas del experimento, la diferencia puede desaparecer.", "cita": "Kahneman, Knetsch y Thaler, 1990", "doi": "10.1086/261737"}, {"id": "nudge", "titulo": "Un pequeño empujón", "autor": "Richard H. Thaler y Cass R. Sunstein", "anio": "2008", "grupo": 2, "orden": 2008, "siglo": null, "veredicto": "matices", "frase": "Un empujón bien diseñado cambia lo que la gente elige", "juicio": "El ahorro por defecto funciona muy bien. Pero al corregir por los estudios que no se publican, el efecto promedio de los empujones casi desaparece. Unos funcionan mucho y otros casi nada.", "cita": "Maier y otros, 2022", "doi": "10.1073/pnas.2200300119"}, {"id": "the-signal-and-the-noise", "titulo": "La señal y el ruido", "autor": "Nate Silver", "anio": "2012", "grupo": 2, "orden": 2012, "siglo": null, "veredicto": "solido", "frase": "Pronosticar mejor se puede aprender", "juicio": "En un torneo de pronósticos de dos años, entrenar en probabilidad, trabajar en equipo y juntar a los mejores mejoró los pronósticos.", "cita": "Mellers y otros, 2014", "doi": "10.1177/0956797614524255"}, {"id": "pequeno-cerdo-capitalista", "titulo": "Pequeño cerdo capitalista", "autor": "Sofía Macías", "anio": "2011", "grupo": 3, "orden": 2011, "siglo": null, "veredicto": "matices", "frase": "Los gastos hormiga se comen tu dinero", "juicio": "Tiene respaldo, un costo presentado por día parece menor de lo que es. Pero el libro piensa en México y en quien tiene margen, y los gastos hormiga no explican la falta de dinero cuando el ingreso no alcanza.", "cita": "Gourville, 1998", "doi": "10.1086/209517"}, {"id": "the-lean-startup", "titulo": "El método Lean Startup", "autor": "Eric Ries", "anio": "2011", "grupo": 3, "orden": 2011, "siglo": null, "veredicto": "matices", "frase": "Probar una idea de negocio antes de invertir en ella", "juicio": "En un ensayo con 116 emprendimientos asignados al azar, quienes aprendieron a probar hipótesis tuvieron mejor desempeño. El método nació de anécdotas de Silicon Valley y no sirve igual para todos los negocios.", "cita": "Camuffo y otros, 2020", "doi": "10.1287/mnsc.2018.3249"}, {"id": "the-good-life", "titulo": "Una buena vida", "autor": "Robert Waldinger y Marc Schulz", "anio": "2023", "grupo": 3, "orden": 2023, "siglo": null, "veredicto": "matices", "frase": "Las relaciones pesan más que el dinero en una buena vida", "juicio": "Las relaciones se asocian con más salud y felicidad, aunque eso no prueba que las causen. Y el dinero sí importa, el bienestar sigue subiendo con el ingreso para la mayoría de las personas.", "cita": "Killingsworth, Kahneman y Mellers, 2023", "doi": "10.1073/pnas.2208661120"}], "aristas": [{"a": "the-signal-and-the-noise", "b": "21-lecciones-para-el-siglo-xxi", "por": "Harari pronostica el futuro del trabajo con mucha seguridad; Silver enseña a desconfiar de los pronósticos que no dan probabilidades.", "fuera": true, "titulo_b": "21 lecciones para el siglo XXI"}, {"a": "pensar-rapido-pensar-despacio", "b": "algorithms-to-live-by", "por": "Kahneman muestra cuánto nos equivocamos; Christian y Griffiths, que muchas veces decidimos razonablemente bien con lo poco que sabemos.", "fuera": true, "titulo_b": "Algoritmos para la vida cotidiana"}, {"a": "odisea", "b": "atomic-habits", "por": "Diseñar el entorno para no caer en la tentación es la versión moderna de atarse al mástil.", "fuera": true, "titulo_b": "Hábitos atómicos"}, {"a": "liber-abaci", "b": "cosmos", "por": "Historia de las matemáticas que cambiaron el mundo: Sagan cuenta a Eratóstenes y a Kepler; Fibonacci trajo los números que usamos hoy.", "fuera": true, "titulo_b": "Cosmos"}, {"a": "david-copperfield", "b": "robinson-crusoe", "por": "Dos maneras de llevar cuentas: la regla de Micawber y la lista de males y bienes de Robinson.", "fuera": false, "titulo_b": "Robinson Crusoe"}, {"a": "odisea", "b": "designing-your-life", "por": "Los autores llaman \"planes Odisea\" a imaginar tres caminos posibles para los próximos cinco años; Ulises tampoco volvió por la ruta que había planeado.", "fuera": true, "titulo_b": "Design de vida"}, {"a": "delirios-multitudinarios", "b": "el-arte-de-pensar", "por": "Dobelli explica en un capítulo la prueba social; Mackay muestra a países enteros cayendo en ella.", "fuera": true, "titulo_b": "El arte de pensar"}, {"a": "odisea", "b": "el-arte-de-pensar", "por": "El descuento hiperbólico (preferir el premio de hoy) es el problema; atarse al mástil, una solución.", "fuera": true, "titulo_b": "El arte de pensar"}, {"a": "el-coronel-no-tiene-quien-le-escriba", "b": "david-copperfield", "por": "Pobreza con dignidad: el coronel y Micawber mantienen las apariencias aunque no tienen con qué.", "fuera": false, "titulo_b": "David Copperfield"}, {"a": "el-coronel-no-tiene-quien-le-escriba", "b": "el-hombre-en-busca-de-sentido", "por": "Sostenerse cuando falta todo: el coronel espera una carta; Frankl, volver a ver a los suyos.", "fuera": true, "titulo_b": "El hombre en busca de sentido"}, {"a": "robinson-crusoe", "b": "emilio", "por": "Es el primer libro que Rousseau le deja leer a Emilio: el modelo de alguien que aprende de las cosas y no de los discursos.", "fuera": true, "titulo_b": "Emilio, o De la educación"}, {"a": "ensayo-sobre-el-comercio", "b": "delirios-multitudinarios", "por": "Cantillon se hizo rico con la burbuja de John Law que cuenta Mackay, y vendió antes de que estallara.", "fuera": false, "titulo_b": "Delirios multitudinarios"}, {"a": "fabulas-de-esopo", "b": "delirios-multitudinarios", "por": "La gallina de los huevos de oro en versión real: gente que lo arriesga todo por ganar más, y más rápido.", "fuera": false, "titulo_b": "Delirios multitudinarios"}, {"a": "odisea", "b": "inteligencia-emocional", "por": "Ulises se ata al mástil porque sabe que no resistirá a las sirenas: autocontrol con un plan, no con fuerza de voluntad.", "fuera": true, "titulo_b": "Inteligencia emocional"}, {"a": "odisea", "b": "la-invencion-de-todas-las-cosas", "por": "Una de las ficciones más antiguas que seguimos contando; Volpi pregunta por qué los seres humanos no podemos dejar de contar historias.", "fuera": true, "titulo_b": "La invención de todas las cosas"}, {"a": "fabulas-de-esopo", "b": "la-invencion-de-todas-las-cosas", "por": "Las fábulas son ficciones que enseñan a cooperar y a desconfiar: justo la función que Volpi le atribuye a la ficción.", "fuera": true, "titulo_b": "La invención de todas las cosas"}, {"a": "pensar-rapido-pensar-despacio", "b": "la-invencion-de-todas-las-cosas", "por": "Volpi usa el cerebro rápido de Kahneman para explicar por qué creemos en las historias antes de pensarlas.", "fuera": true, "titulo_b": "La invención de todas las cosas"}, {"a": "liber-abaci", "b": "mercader-de-venecia", "por": "Comerciantes italianos y préstamos: Fibonacci les enseñó a hacer las cuentas; Shakespeare mostró qué pasa cuando un préstamo sale mal.", "fuera": false, "titulo_b": "El mercader de Venecia"}, {"a": "liber-abaci", "b": "ensayo-sobre-el-comercio", "por": "Dos libros escritos para comerciantes, con cinco siglos de distancia.", "fuera": false, "titulo_b": "Ensayo sobre la naturaleza del comercio en general"}, {"a": "the-good-life", "b": "maybe-you-should-talk-to-someone", "por": "Waldinger dice que las relaciones sostienen una buena vida; Gottlieb muestra cómo una relación, la de terapia, ayuda a cambiar.", "fuera": true, "titulo_b": "Deberías hablar con alguien"}, {"a": "mercader-de-venecia", "b": "david-copperfield", "por": "Dos deudores: Antonio pone su propio cuerpo como garantía; Micawber termina en la cárcel por deudas.", "fuera": false, "titulo_b": "David Copperfield"}, {"a": "misbehaving", "b": "pensar-rapido-pensar-despacio", "por": "La misma historia vista desde dos lados: Kahneman desde la psicología, Thaler desde la economía. Trabajaron juntos.", "fuera": false, "titulo_b": "Pensar rápido, pensar despacio"}, {"a": "misbehaving", "b": "nudge", "por": "Misbehaving cuenta cómo nació la idea de los empujones y cómo llegó a los gobiernos.", "fuera": false, "titulo_b": "Un pequeño empujón"}, {"a": "misbehaving", "b": "pequeno-cerdo-capitalista", "por": "Macías enseña a ver los gastos hormiga; Thaler explica por qué se escapan: no tratamos igual todo el dinero, depende del cajón mental donde lo ponemos.", "fuera": false, "titulo_b": "Pequeño cerdo capitalista"}, {"a": "misbehaving", "b": "moneyball", "por": "Thaler y Sunstein reseñaron Moneyball como un caso de economía del comportamiento, y Thaler estudió el mismo error en el draft del fútbol americano.", "fuera": true, "titulo_b": "Moneyball"}, {"a": "the-signal-and-the-noise", "b": "moneyball", "por": "Silver dedica un capítulo al béisbol: cuándo los datos le ganan al ojo del experto, y cuándo los dos se complementan.", "fuera": true, "titulo_b": "Moneyball"}, {"a": "nudge", "b": "atomic-habits", "por": "Los dos dicen que el entorno pesa más que la fuerza de voluntad: Clear lo aplica a uno mismo; Thaler y Sunstein, a quien diseña las opciones de otros.", "fuera": true, "titulo_b": "Hábitos atómicos"}, {"a": "nudge", "b": "odisea", "por": "Ahorrar Más Mañana es atarse al mástil: comprometerse hoy a ahorrar los aumentos de sueldo que vendrán.", "fuera": false, "titulo_b": "La Odisea"}, {"a": "nudge", "b": "pequeno-cerdo-capitalista", "por": "Ahorrar de forma automática, para no depender de acordarse ni de la fuerza de voluntad.", "fuera": false, "titulo_b": "Pequeño cerdo capitalista"}, {"a": "odisea", "b": "robinson-crusoe", "por": "Dos náufragos lejos de casa: Ulises sale adelante con astucia; Robinson, con trabajo y cuentas.", "fuera": false, "titulo_b": "Robinson Crusoe"}, {"a": "pensar-rapido-pensar-despacio", "b": "el-arte-de-pensar", "por": "Dobelli enumera los errores de pensamiento; Kahneman explica de dónde salen, con la teoría de los dos sistemas.", "fuera": true, "titulo_b": "El arte de pensar"}, {"a": "pensar-rapido-pensar-despacio", "b": "nudge", "por": "Kahneman describe cómo se equivoca la mente; Thaler y Sunstein, cómo diseñar las decisiones para que esos errores pesen menos.", "fuera": false, "titulo_b": "Un pequeño empujón"}, {"a": "pensar-rapido-pensar-despacio", "b": "delirios-multitudinarios", "por": "Las burbujas que cuenta Mackay son exceso de confianza y prueba social a escala de un país.", "fuera": false, "titulo_b": "Delirios multitudinarios"}, {"a": "pequeno-cerdo-capitalista", "b": "fabulas-de-esopo", "por": "Los gastos hormiga y la hormiga de la fábula: dos maneras de explicar que lo pequeño, repetido, se vuelve grande.", "fuera": false, "titulo_b": "Fábulas de Esopo"}, {"a": "pequeno-cerdo-capitalista", "b": "david-copperfield", "por": "La regla de Micawber y el presupuesto de Macías dicen lo mismo con 160 años de distancia: gastar un poco menos de lo que entra.", "fuera": false, "titulo_b": "David Copperfield"}, {"a": "pequeno-cerdo-capitalista", "b": "atomic-habits", "por": "Ahorrar como un hábito pequeño y automático, no como un esfuerzo heroico.", "fuera": true, "titulo_b": "Hábitos atómicos"}, {"a": "robinson-crusoe", "b": "el-lobo-estepario", "por": "Dos hombres solos: a Robinson la soledad se la impone un naufragio; Harry Haller la elige.", "fuera": true, "titulo_b": "El lobo estepario"}, {"a": "the-good-life", "b": "el-hombre-en-busca-de-sentido", "por": "Frankl se sostuvo pensando en su esposa; 85 años de datos dicen que las relaciones son lo que más pesa en una buena vida.", "fuera": true, "titulo_b": "El hombre en busca de sentido"}, {"a": "the-good-life", "b": "comunicacion-no-violenta", "por": "Waldinger dice que las relaciones se cuidan como la salud; Rosenberg da una forma concreta de hacerlo cuando hay conflicto.", "fuera": true, "titulo_b": "Comunicación no violenta"}, {"a": "the-good-life", "b": "pequeno-cerdo-capitalista", "por": "El dinero sí importa para estar bien, pero no reemplaza a los amigos: un buen par para el nodo Necesidad o deseo.", "fuera": false, "titulo_b": "Pequeño cerdo capitalista"}, {"a": "the-lean-startup", "b": "the-innovators", "por": "Dos miradas a Silicon Valley: la historia de cómo se hizo la revolución digital y el método que salió de sus empresas.", "fuera": true, "titulo_b": "Los innovadores"}, {"a": "the-lean-startup", "b": "designing-your-life", "por": "La misma idea aplicada a cosas distintas: probar en pequeño antes de decidir, Ries con un negocio y Burnett y Evans con la propia vida.", "fuera": true, "titulo_b": "Design de vida"}, {"a": "the-lean-startup", "b": "the-signal-and-the-noise", "por": "Los dos piden tratar lo que creemos como una hipótesis y cambiar de opinión cuando los datos lo indican.", "fuera": false, "titulo_b": "La señal y el ruido"}, {"a": "the-lean-startup", "b": "pequeno-cerdo-capitalista", "por": "Macías enseña a cuidar el dinero propio; Ries, a no gastarlo en un negocio antes de saber si alguien lo quiere.", "fuera": false, "titulo_b": "Pequeño cerdo capitalista"}, {"a": "nudge", "b": "the-power-of-habit", "por": "Las empresas también estudian nuestros hábitos para vendernos más: Duhigg lo muestra con Target; Thaler y Sunstein, con los empujones.", "fuera": true, "titulo_b": "El poder de los hábitos"}, {"a": "the-signal-and-the-noise", "b": "algorithms-to-live-by", "por": "Los dos enseñan la regla de Bayes y el sobreajuste: actualizar lo que creemos con cada dato nuevo, sin confundir el ruido con la señal.", "fuera": true, "titulo_b": "Algoritmos para la vida cotidiana"}, {"a": "the-signal-and-the-noise", "b": "delirios-multitudinarios", "por": "Mackay cuenta las burbujas del siglo XVIII; Silver, la de 2008, y por qué casi nadie la vio venir.", "fuera": false, "titulo_b": "Delirios multitudinarios"}, {"a": "the-signal-and-the-noise", "b": "pensar-rapido-pensar-despacio", "por": "Los expertos se equivocan con mucha confianza: Kahneman explica por qué; Silver muestra cómo pronosticar mejor.", "fuera": false, "titulo_b": "Pensar rápido, pensar despacio"}, {"a": "robinson-crusoe", "b": "ultralearning", "por": "Aprender solo y haciendo: Robinson aprende a hornear pan y a hacer vasijas a punta de intentos fallidos.", "fuera": true, "titulo_b": "Ultralearning"}, {"a": "the-signal-and-the-noise", "b": "why-we-sleep", "por": "Un buen caso para la lección de Silver: una gráfica a la que le quitaron un dato cambia lo que parece decir.", "fuera": true, "titulo_b": "Por qué dormimos"}], "grupos": ["Historias que enseñan sobre el dinero", "La historia del dinero y los mercados", "Cómo decidimos con el dinero", "Ahorrar, emprender y vivir bien"], "etiquetas": {"solido": "Sólido", "matices": "Con matices", "promete": "Promete más de lo que prueba", "filosofia": "Filosofía de la educación", "literatura": "Literatura e historia"}, "preguntas": [{"frase": "Si la empresa te inscribe por defecto en un plan de ahorro, es mucho más probable que ahorres.", "es": "evidencia", "explica": "Inscribir a los empleados automáticamente subió mucho la participación en el plan de ahorro, y la mayoría se quedó con el aporte que venía por defecto.", "cita": "Madrian y Shea, 2001", "doi": "10.1162/003355301753265543"}, {"frase": "Un gasto presentado \"por día\" parece más pequeño de lo que es.", "es": "evidencia", "explica": "Presentar un costo en pequeñas cantidades diarias hace que parezca menor que el mismo costo presentado completo.", "cita": "Gourville, 1998", "doi": "10.1086/209517"}, {"frase": "Comprometerse hoy a ahorrar los aumentos de sueldo futuros puede subir mucho el ahorro.", "es": "evidencia", "explica": "En el programa Ahorra Más Mañana, la tasa de ahorro de quienes se unieron pasó del 3,5 % al 13,6 % en 40 meses.", "cita": "Thaler y Benartzi, 2004", "doi": "10.1086/380085"}, {"frase": "Todos los empujones para decidir mejor funcionan muy bien.", "es": "mito", "explica": "Al corregir por los estudios que no se publican, el efecto promedio de los empujones casi desaparece. Unos funcionan mucho y otros casi nada.", "cita": "Maier y otros, 2022", "doi": "10.1073/pnas.2200300119"}, {"frase": "Valoramos más una cosa solo porque ya es nuestra.", "es": "evidencia", "explica": "Quienes recibían una taza pedían mucho más por venderla de lo que otros ofrecían por comprarla, y se intercambiaron muchas menos tazas de las esperadas.", "cita": "Kahneman, Knetsch y Thaler, 1990", "doi": "10.1086/261737"}, {"frase": "Mirar tu inversión todos los días te ayuda a decidir mejor.", "es": "mito", "explica": "Quien revisa muy seguido ve más pérdidas, y como las pérdidas duelen más que las ganancias, termina eligiendo opciones más seguras que rinden menos.", "cita": "Benartzi y Thaler, 1995", "doi": "10.2307/2118511"}, {"frase": "Las acciones que más han caído en los últimos años van a seguir cayendo.", "es": "mito", "explica": "Las acciones que más habían caído luego rindieron más que las que más habían subido, señal de que el mercado reacciona de más.", "cita": "De Bondt y Thaler, 1985", "doi": "10.1111/j.1540-6261.1985.tb05004.x"}, {"frase": "Después de cierto ingreso, ganar más dinero ya no aumenta el bienestar de nadie.", "es": "mito", "explica": "Para la mayoría de las personas, el bienestar sigue subiendo con el ingreso. Solo entre las más infelices deja de subir a partir de cierto nivel.", "cita": "Killingsworth, Kahneman y Mellers, 2023", "doi": "10.1073/pnas.2208661120"}, {"frase": "Enseñar a los emprendedores a poner a prueba sus ideas mejora los resultados de su negocio.", "es": "evidencia", "explica": "En un ensayo con 116 emprendimientos asignados al azar, quienes aprendieron a formular y probar hipótesis tuvieron mejor desempeño.", "cita": "Camuffo y otros, 2020", "doi": "10.1287/mnsc.2018.3249"}, {"frase": "Está comprobado que leer palabras sobre la vejez hace caminar más despacio.", "es": "mito", "explica": "Un experimento famoso lo encontró, pero cuando otros investigadores lo repitieron con más cuidado, el efecto no apareció.", "cita": "Doyen y otros, 2012", "doi": "10.1371/journal.pone.0029081"}]};
+const UI = {"lang": "es", "locale": "es-CO", "titulo": "Libros para entender el dinero", "descripcion": "Libros, fábulas y novelas para el módulo Dinero de New Old School: qué enseña cada uno, qué tanto se sostiene y con qué lección se conecta.", "nav": {"cinco-minutos": "En 5 minutos", "que-funciona": "Qué funciona", "ponte-a-prueba": "Ponte a prueba", "repaso": "Planea tu repaso", "veredictos": "Veredictos", "nodos": "Por lección", "linea": "Línea de tiempo", "mapa": "Mapa de cruces", "fichas": "Fichas"}, "clave_repaso": "dinero-repaso-v1", "nodos": "Nodos", "sin_libros": "Todavía no hay libros para esta lección.", "n_rotulo": "Qué leer para cada lección", "n_h2": "Los libros de cada nodo del módulo", "n_p": "Los nodos del módulo en su orden, con los libros que los iluminan. Toca un libro para ir a su ficha.", "nav_aria": "Secciones", "presentar": "Presentar en 5 minutos", "portada_rotulo": "Biblioteca de New Old School · módulo Dinero", "portada_p": "{n} libros para el módulo Dinero: fábulas y novelas que cuentan una idea mejor que una explicación, y libros de divulgación sobre cómo decidimos con la plata. Cada uno trae su veredicto, la lección del módulo con la que se conecta y los libros con los que dialoga.", "leyenda": {"solido": "la evidencia lo respalda", "matices": "acierta en parte", "promete": "", "filosofia": "no se mide igual", "literatura": "no se juzga con estudios"}, "c_rotulo": "La idea en Formato Curioso · 300 segundos", "c_h2": "Lo que se siente como aprender no siempre es aprender", "c_p": "Una sola idea en cinco bloques, con el tiempo de cada uno. Toca un bloque para leerlo, o usa “Presentar” para mostrarlo en pantalla completa con reloj.", "c_aria": "Bloques", "iniciar": "Iniciar", "pausa": "Pausa", "reiniciar": "Reiniciar", "c_nota": "Ámbar en los últimos 10 s; rojo si te pasas.", "objetivo": "objetivo", "f_rotulo": "Explicador animado", "f_h2": "Qué funciona al estudiar, y cuánto pesa la práctica", "f_p": "Dos gráficos de la investigación que citan varios de estos libros. Elige uno, reprodúcelo o arrastra la línea de tiempo.", "f_aria_grafico": "Gráfico animado", "f_aria_linea": "Línea de tiempo", "reproducir": "Reproducir", "fuente": "Fuente: ", "p_rotulo": "Ponte a prueba · práctica de recuperación", "p_h2": "¿Mito o evidencia?", "p_p": "Diez ideas sobre el dinero y cómo lo manejamos. Decide antes de ver la respuesta: intentar recordar y equivocarse ayuda a aprender más que leer la respuesta. La página recuerda tus respuestas en este navegador y te vuelve a preguntar, días después, lo que fallaste.", "p_aria_cajas": "Preguntas por caja de repaso", "practicar": "Practicar todas", "volver_repaso": "Volver a mi repaso de hoy", "otra_vez": "Empezar de nuevo", "otra_vez_confirmar": "¿Borrar tu progreso? Toca otra vez", "mito": "Mito", "evidencia": "Evidencia", "correcto": "Correcto", "incorrecto": "No", "es_mito": "es un mito", "es_evidencia": "es evidencia", "caja": "Caja", "vuelve": "vuelve el", "nuevas": "nuevas", "sin_ver": "Sin ver", "q_practica": "Práctica libre: {r} de {n} respondidas. No cambia tu calendario.", "q_fin_proxima": "Terminaste el repaso de hoy. La próxima pregunta vuelve el {f}.", "q_nada": "No hay preguntas pendientes.", "q_tocan": "Hoy te tocan {n} preguntas; faltan {f}.", "q_fin": "Terminaste el repaso de hoy.", "q_vuelve": " Vuelve el {f}.", "r_rotulo": "Planea tu repaso · práctica espaciada", "r_h2": "¿Cuándo repasar para un examen?", "r_p": "Repartir el estudio en varios días rinde más que meter todo la noche anterior. Pon la fecha del examen y el planificador propone sesiones cortas, cada vez más separadas, en las que te pones a prueba sin mirar.", "r_empiezo": "Empiezo a estudiar el", "r_examen": "El examen es el", "r_sesiones": "Número de sesiones", "r_nota": "Cada sesión, 20 a 30 minutos. Cierra el cuaderno, escribe o di en voz alta lo que recuerdas, y después revisa qué te faltó.", "r_error": "La fecha del examen debe ser posterior al día en que empiezas.", "r_examen_corto": "Examen", "r_resumen": "{n} sesiones en {d} días, separadas por {g} días. Ejemplo calculado desde hoy; cambia las fechas para tu examen.", "r_tareas": ["Estudia el tema por primera vez y, al final, escribe lo que recuerdas sin mirar.", "Ponte a prueba sin mirar. Revisa solo lo que olvidaste.", "Mezcla tipos de ejercicios y explica en voz alta los pasos.", "Ponte a prueba otra vez, como si fuera el examen.", "Repaso corto: preguntas rápidas, sin releer todo.", "Último repaso, corto. Duerme bien esta noche."], "v_rotulo": "Tablero de veredictos · toca un libro", "v_h2": "¿Qué tanto se sostiene cada libro?", "v_p": "Cada veredicto guarda la idea central del libro. En los de divulgación, también el estudio que la juzga; las fábulas y novelas no se juzgan con estudios, sino por lo que ayudan a entender.", "todos": "Todos", "la_promesa": "La promesa:", "ir_ficha_completa": "Ir a la ficha completa", "l_rotulo": "Línea de tiempo · toca un libro", "l_h2": "Casi tres mil años de historias sobre el dinero", "l_p": "Los libros por la década en que se publicaron, con el color de su veredicto. Al tocar uno, el tablero y el mapa lo muestran.", "l_resumen": "Las historias y los clásicos van desde el {la} hasta {lb}. La divulgación sobre cómo decidimos con el dinero es de {da} a {db}.", "l_decada": "{d}-{h}", "m_rotulo": "Mapa de cruces", "m_h2": "Cómo dialogan los libros entre sí", "m_p": "Cada línea es un cruce de la biblioteca. Toca un libro para ver con cuáles conversa y por qué. Los puntos grises son libros de otros temas.", "m_aria": "Mapa de cruces entre libros", "otro_tema": "(otro tema)", "sin_cruces": "Este libro todavía no tiene cruces.", "ir_ficha": "Ir a la ficha", "otros_temas": "Otros temas", "fi_rotulo": "Las fichas", "fi_h2": "Los {n} libros, uno por uno", "leer_ficha": "Leer la ficha completa", "ficha_es": "", "autor": "Autor", "temas": "Temas", "se_cruza": "Se cruza con", "atras": "← Bloque anterior", "adelante": "Bloque siguiente →", "salir": "Salir", "curioso": [{"nombre": "Gancho", "objetivo": 30, "texto": ["¿Cómo estudiaron para su último examen? Si la respuesta es “leí el cuaderno otra vez y subrayé lo importante”, están en buena compañía, porque es lo que más hace la gente.", "Y, según la investigación, es de lo que menos funciona."]}, {"nombre": "Idea", "objetivo": 90, "texto": ["Cuando releemos, el texto se vuelve familiar, y esa familiaridad se siente como saber. Pero reconocer algo no es poder recordarlo.", "En cambio, cerrar el cuaderno e intentar recordar cuesta. Uno se equivoca, se queda en blanco, siente que no avanza. Ese esfuerzo es justamente lo que hace que lo aprendido dure. Los psicólogos lo llaman dificultades deseables.", "Lo mismo pasa con repartir el estudio en varios días en vez de meter todo la noche anterior. Se siente peor, y funciona mejor. Lo que se siente como aprender no siempre es aprender."]}, {"nombre": "Evidencia", "objetivo": 60, "texto": ["En 2013, un grupo de psicólogos revisó diez técnicas de estudio. Solo dos recibieron utilidad alta: ponerse a prueba y repartir el estudio en el tiempo. Releer y subrayar recibieron utilidad baja.", "Y una idea muy popular, enseñar según el “estilo de aprendizaje” de cada uno, visual o auditivo, no tiene evidencia de que mejore lo que se aprende."]}, {"nombre": "¿Y a mí qué?", "objetivo": 60, "texto": ["Si estudias, cierra el cuaderno y escribe lo que recuerdas; reparte el estudio en varios días; mezcla tipos de ejercicios.", "Si enseñas, empieza la clase con tres preguntas cortas sobre la anterior, sin nota.", "Si acompañas en casa, en vez de “¿estudiaste?”, pregunta “¿qué aprendiste? Explícamelo sin mirar”."]}, {"nombre": "Puerta abierta", "objetivo": 30, "texto": ["Dos libros para seguir. Apréndetelo (Make It Stick), escrito por los propios investigadores, y Aprender a aprender, pensado para estudiantes.", "Y la pregunta para conversar, ¿qué vas a dejar de hacer la próxima vez que estudies?"]}], "escenas": {"tecnicas": {"nombre": "Diez técnicas de estudio", "fuente": "Dunlosky, Rawson, Marsh, Nathan y Willingham (2013), Psychological Science in the Public Interest. doi.org/10.1177/1529100612453266", "titulo": "Utilidad de diez técnicas de estudio, según una revisión de 2013", "utilidad": "Utilidad", "niveles": ["alta", "moderada", "baja"], "tecnicas": [["Ponerse a prueba (recordar sin mirar)", "Repartir el estudio en el tiempo"], ["Preguntarse por qué", "Explicarse a uno mismo", "Mezclar tipos de ejercicios"], ["Resumir", "Subrayar", "Palabras clave (mnemotecnia)", "Imaginar el texto", "Releer"]], "cierre": "Lo que más hace la gente, releer y subrayar, está abajo."}, "practica": {"nombre": "Cuánto explica la práctica", "fuente": "Macnamara, Hambrick y Oswald (2014), Psychological Science. doi.org/10.1177/0956797614535810", "titulo": "Porcentaje de las diferencias de desempeño que explica la práctica", "etiquetas": ["Juegos (ajedrez y otros)", "Música", "Deportes", "Educación", "Profesiones"], "menos_de": "menos de ", "cierre": "La práctica importa, pero en el estudio y el trabajo explica muy poco de las diferencias."}}};
+const fmtT = (s, v) => s.replace(/\{(\w+)\}/g, (_, k) => v[k]);
+const $ = id => document.getElementById(id);
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/* En pantallas angostas los lienzos se dibujan con un diseño vertical y letra más grande */
+const ANGOSTO = matchMedia('(max-width: 640px)');
+
+/* ===== Curioso: guion de 300 s ===== */
+const CURIOSO = UI.curioso;
+const COLORES = ['--b1', '--b2', '--b3', '--b4', '--b5'];
+let bloque = 0, gastado = CURIOSO.map(() => 0), andando = false, marca = 0;
+const fmt = s => { const n = s < 0; s = Math.abs(Math.round(s)); return (n ? '−' : '') + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+function armarRegla(el, conClic) {
+  CURIOSO.forEach((b, i) => {
+    const x = document.createElement('button');
+    x.style.flex = `${b.objetivo} 0 0`; x.style.background = `var(${COLORES[i]})`;
+    x.innerHTML = `${esc(b.nombre)}<span class="seg">&nbsp;· ${b.objetivo} s</span>`;
+    if (conClic) { x.setAttribute('role', 'tab'); x.onclick = () => { bloque = i; pintarCurioso(); }; } else x.tabIndex = -1;
+    el.append(x);
+  });
+}
+armarRegla($('regla'), true); armarRegla($('regla2'), false);
+function pintarCurioso() {
+  const b = CURIOSO[bloque], resta = b.objetivo - gastado[bloque];
+  for (const r of [$('regla'), $('regla2')]) [...r.children].forEach((x, j) => x.setAttribute('aria-current', j === bloque));
+  $('bloque-nombre').textContent = `${b.nombre} · ${UI.objetivo} ${b.objetivo} s`;
+  for (const el of [$('reloj'), $('reloj2')]) { el.textContent = fmt(resta); el.classList.toggle('ambar', resta <= 10 && resta >= 0); el.classList.toggle('rojo', resta < 0); }
+  $('guion').innerHTML = b.texto.map(p => `<p>${esc(p)}</p>`).join('');
+  $('contenido').innerHTML = `<h2>${esc(b.nombre)}</h2>` + b.texto.map(p => `<p>${esc(p)}</p>`).join('');
+}
+function tic(ahora) { if (!andando) return; gastado[bloque] += (ahora - marca) / 1000; marca = ahora; pintarCurioso(); requestAnimationFrame(tic); }
+function alternar() { andando = !andando; for (const b of [$('iniciar'), $('iniciar2')]) b.textContent = andando ? UI.pausa : UI.iniciar; if (andando) { marca = performance.now(); requestAnimationFrame(tic); } }
+$('iniciar').onclick = alternar; $('iniciar2').onclick = alternar;
+$('reiniciar').onclick = () => { gastado = CURIOSO.map(() => 0); bloque = 0; if (andando) alternar(); pintarCurioso(); };
+const mover = d => { bloque = Math.max(0, Math.min(CURIOSO.length - 1, bloque + d)); pintarCurioso(); };
+$('atras').onclick = () => mover(-1); $('adelante').onclick = () => mover(1);
+$('presentar').onclick = () => { $('escenario').hidden = false; pintarCurioso(); $('iniciar2').focus(); };
+$('salir').onclick = () => { $('escenario').hidden = true; };
+document.addEventListener('keydown', e => {
+  if ($('escenario').hidden) return;
+  if (e.key === 'ArrowRight') mover(1);
+  else if (e.key === 'ArrowLeft') mover(-1);
+  else if (e.key === 'Escape') $('escenario').hidden = true;
+  else if (e.code === 'Space' && !e.target.matches('button')) { e.preventDefault(); alternar(); }
+});
+
+/* ===== Explicador: escena (datos) → render(escena, t) ===== */
+const ease = t => 1 - Math.pow(1 - t, 3);   // ease-out cúbica: nunca pasa del valor real
+const ET = UI.escenas.tecnicas, EP = UI.escenas.practica;
+const ESCENAS = {
+  tecnicas: {
+    nombre: ET.nombre, duracion: 7, fuente: ET.fuente, titulo: ET.titulo, cierre: ET.cierre,
+    grupos: ['--u-alta', '--u-moderada', '--u-baja'].map((color, i) => ({ nivel: ET.niveles[i], color, tecnicas: ET.tecnicas[i] })),
+  },
+  practica: {
+    nombre: EP.nombre, duracion: 7, fuente: EP.fuente, titulo: EP.titulo, cierre: EP.cierre,
+    datos: [26, 21, 18, 4, 1].map((valor, i) => ({ etiqueta: EP.etiquetas[i], valor, menor: i === 4 })),
+  },
+};
+let escenaActual = 'tecnicas';
+const lienzo = $('lienzo'), ctx = lienzo.getContext('2d');
+const lim = v => Math.max(0, Math.min(1, v));
+const prog = (t, ini, dur = .7) => ease(lim((t - ini) / dur));
+function textoEnvuelto(txt, x, y, ancho, alto) {
+  let linea = '', yy = y;
+  for (const p of txt.split(' ')) { const prueba = linea ? linea + ' ' + p : p; if (ctx.measureText(prueba).width > ancho && linea) { ctx.fillText(linea, x, yy); linea = p; yy += alto; } else linea = prueba; }
+  ctx.fillText(linea, x, yy);
+}
+const MEDIDAS = { ancho: [1280, 680], tecnicas: [720, 1240], practica: [720, 940] };
+function medirLienzo() {
+  const [w, h] = ANGOSTO.matches ? MEDIDAS[escenaActual] : MEDIDAS.ancho;
+  if (lienzo.width !== w || lienzo.height !== h) { lienzo.width = w; lienzo.height = h; }
+}
+const RENDER_ANGOSTO = {
+  tecnicas(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 40px ${tok('--f-titulo')}`; textoEnvuelto(e.titulo, 30, 60, 660, 46);
+    let y = 170;
+    e.grupos.forEach((g, i) => {
+      const ini = .7 + i * 1.2;
+      if (t < ini) { y += 76 + g.tecnicas.length * 76; return; }
+      const p = prog(t, ini);
+      ctx.globalAlpha = p; ctx.fillStyle = tok(g.color); ctx.fillRect(30, y, 660, 58);
+      ctx.fillStyle = tok('--tarjeta'); ctx.font = `600 28px ${tok('--f-ficha')}`; ctx.fillText(`${ET.utilidad} ${g.nivel}`, 50, y + 39);
+      y += 76;
+      g.tecnicas.forEach((tec, j) => {
+        const pj = prog(t, ini + .3 + j * .25);
+        if (pj > 0) {
+          ctx.globalAlpha = pj; ctx.strokeStyle = tok(g.color); ctx.lineWidth = 3; ctx.strokeRect(30, y, 660, 62);
+          ctx.fillStyle = tok('--tinta'); ctx.font = `400 30px ${tok('--f-texto')}`; ctx.fillText(tec, 50, y + 41);
+        }
+        y += 76;
+      });
+    });
+    ctx.globalAlpha = prog(t, 5.3); ctx.fillStyle = tok('--sello'); ctx.font = `600 30px ${tok('--f-titulo')}`; textoEnvuelto(e.cierre, 30, y + 30, 660, 38);
+  },
+  practica(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 40px ${tok('--f-titulo')}`; textoEnvuelto(e.titulo, 30, 60, 660, 46);
+    const X0 = 30, X1 = 600, max = 30, xv = v => X0 + v / max * (X1 - X0);
+    ctx.globalAlpha = prog(t, .5); ctx.strokeStyle = tok('--regla'); ctx.fillStyle = tok('--tenue'); ctx.font = `500 24px ${tok('--f-ficha')}`; ctx.lineWidth = 1; ctx.textAlign = 'center';
+    for (let v = 0; v <= max; v += 10) { ctx.beginPath(); ctx.moveTo(xv(v), 170); ctx.lineTo(xv(v), 760); ctx.stroke(); ctx.fillText(`${v} %`, xv(v), 795); }
+    ctx.textAlign = 'left';
+    e.datos.forEach((d, i) => {
+      const ini = 1 + i * .5; if (t < ini) return;
+      const p = prog(t, ini, .9), y = 180 + i * 116;
+      ctx.globalAlpha = 1; ctx.fillStyle = tok('--tinta'); ctx.font = `400 30px ${tok('--f-texto')}`; ctx.fillText(d.etiqueta, X0, y + 30);
+      const w = (xv(d.valor) - X0) * p; ctx.fillStyle = tok('--sello'); ctx.fillRect(X0, y + 46, w, 44);
+      ctx.fillStyle = tok('--tinta'); ctx.font = `600 28px ${tok('--f-ficha')}`;
+      ctx.fillText(`${d.menor ? EP.menos_de : ''}${Math.round(d.valor * p)} %`, X0 + w + 12, y + 79);
+    });
+    ctx.globalAlpha = prog(t, 4.6); ctx.fillStyle = tok('--linea-roja'); ctx.font = `600 30px ${tok('--f-titulo')}`; textoEnvuelto(e.cierre, 30, 850, 660, 38);
+  },
+};
+const RENDER = {
+  tecnicas(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 36px ${tok('--f-titulo')}`; ctx.fillText(e.titulo, 50, 66);
+    const anchoCol = 380, x0 = 50;
+    e.grupos.forEach((g, i) => {
+      const ini = .7 + i * 1.2, x = x0 + i * (anchoCol + 20), p = prog(t, ini);
+      if (t < ini) return;
+      ctx.globalAlpha = p; ctx.fillStyle = tok(g.color); ctx.fillRect(x, 110, anchoCol, 56);
+      ctx.fillStyle = tok('--tarjeta'); ctx.font = `600 24px ${tok('--f-ficha')}`; ctx.fillText(`${ET.utilidad} ${g.nivel}`, x + 18, 146);
+      g.tecnicas.forEach((tec, j) => {
+        const pj = prog(t, ini + .3 + j * .25); if (pj <= 0) return;
+        ctx.globalAlpha = pj; const y = 190 + j * 92 + (1 - pj) * 16;
+        ctx.strokeStyle = tok(g.color); ctx.lineWidth = 2; ctx.strokeRect(x, y, anchoCol, 76);
+        ctx.fillStyle = tok('--tinta'); ctx.font = `400 25px ${tok('--f-texto')}`; textoEnvuelto(tec, x + 18, y + 33, anchoCol - 36, 28);
+      });
+    });
+    ctx.globalAlpha = prog(t, 5.3); ctx.fillStyle = tok('--sello'); ctx.font = `600 26px ${tok('--f-titulo')}`;
+    ctx.fillText(e.cierre, 50, 655);
+  },
+  practica(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 36px ${tok('--f-titulo')}`; ctx.fillText(e.titulo, 50, 66);
+    const X0 = 400, X1 = 1180, max = 30, xv = v => X0 + v / max * (X1 - X0);
+    ctx.globalAlpha = prog(t, .5); ctx.strokeStyle = tok('--regla'); ctx.fillStyle = tok('--tenue'); ctx.font = `500 18px ${tok('--f-ficha')}`; ctx.lineWidth = 1; ctx.textAlign = 'center';
+    for (let v = 0; v <= max; v += 10) { ctx.beginPath(); ctx.moveTo(xv(v), 110); ctx.lineTo(xv(v), 580); ctx.stroke(); ctx.fillText(`${v} %`, xv(v), 605); }
+    ctx.textAlign = 'left';
+    e.datos.forEach((d, i) => {
+      const ini = 1 + i * .5; if (t < ini) return;
+      const p = prog(t, ini, .9), y = 130 + i * 92;
+      ctx.globalAlpha = 1; ctx.fillStyle = tok('--tinta'); ctx.font = `400 26px ${tok('--f-texto')}`; ctx.fillText(d.etiqueta, 50, y + 36);
+      const w = (xv(d.valor) - X0) * p; ctx.fillStyle = tok('--sello'); ctx.fillRect(X0, y + 8, w, 44);
+      ctx.fillStyle = tok('--tinta'); ctx.font = `600 24px ${tok('--f-ficha')}`;
+      ctx.fillText(`${d.menor ? EP.menos_de : ''}${Math.round(d.valor * p)} %`, X0 + w + 12, y + 39);
+    });
+    ctx.globalAlpha = prog(t, 4.6); ctx.fillStyle = tok('--linea-roja'); ctx.font = `600 26px ${tok('--f-titulo')}`;
+    ctx.fillText(e.cierre, 50, 655);
+  },
+};
+function render(t) {
+  medirLienzo();
+  ctx.globalAlpha = 1; ctx.textAlign = 'left'; ctx.fillStyle = tok('--tarjeta'); ctx.fillRect(0, 0, lienzo.width, lienzo.height);
+  (ANGOSTO.matches ? RENDER_ANGOSTO : RENDER)[escenaActual](ESCENAS[escenaActual], t); ctx.globalAlpha = 1;
+}
+let tm = 0, corriendo = false, previo = 0;
+function pintarEscena() { const e = ESCENAS[escenaActual]; $('scrub').max = e.duracion; render(tm); $('scrub').value = tm; $('t').textContent = `${tm.toFixed(2)} / ${e.duracion.toFixed(2)} s`; $('fuente-escena').textContent = UI.fuente + e.fuente; }
+function bucle(a) { if (!corriendo) return; tm += (a - previo) / 1000; previo = a; const d = ESCENAS[escenaActual].duracion; if (tm >= d) { tm = d; parar(); } pintarEscena(); if (corriendo) requestAnimationFrame(bucle); }
+function parar() { corriendo = false; $('play').textContent = UI.reproducir; }
+$('play').onclick = () => { if (corriendo) return parar(); if (tm >= ESCENAS[escenaActual].duracion) tm = 0; corriendo = true; $('play').textContent = UI.pausa; previo = performance.now(); requestAnimationFrame(bucle); };
+$('scrub').addEventListener('input', () => { tm = +$('scrub').value; pintarEscena(); });
+Object.entries(ESCENAS).forEach(([k, e]) => {
+  const b = document.createElement('button'); b.className = 'boton'; b.textContent = e.nombre; b.setAttribute('aria-pressed', k === escenaActual);
+  b.onclick = () => { escenaActual = k; tm = ESCENAS[k].duracion; parar(); [...$('escenas').children].forEach(x => x.setAttribute('aria-pressed', x === b)); pintarEscena(); };
+  $('escenas').append(b);
+});
+tm = ESCENAS[escenaActual].duracion;
+
+
+/* ===== Ponte a prueba con repaso espaciado (cajas de Leitner) =====
+   Cada pregunta vive en una caja del 1 al 5. Si aciertas, sube de caja y vuelve más tarde;
+   si fallas, regresa a la caja 1 y vuelve mañana. Se guarda solo en este navegador. */
+const PREGUNTAS = DATOS.preguntas;
+const INTERVALO = [1, 2, 4, 8, 16];   // días hasta el próximo repaso según la caja
+const NUEVAS_POR_DIA = 8;
+const CLAVE = UI.clave_repaso;   // cada página guarda su propio repaso
+const leer = () => { try { return JSON.parse(localStorage.getItem(CLAVE)) || {}; } catch (e) { return {}; } };
+const guardar = r => { try { localStorage.setItem(CLAVE, JSON.stringify(r)); } catch (e) { /* sin almacenamiento: funciona solo en esta visita */ } };
+const hoyIso = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+const sumarDias = (isoD, n) => { const [y, m, d] = isoD.split('-').map(Number); const f = new Date(y, m - 1, d + n); return `${f.getFullYear()}-${String(f.getMonth() + 1).padStart(2, '0')}-${String(f.getDate()).padStart(2, '0')}`; };
+const fechaLarga = isoD => { const [y, m, d] = isoD.split('-').map(Number); return new Date(y, m - 1, d).toLocaleDateString(UI.locale, { weekday: 'long', day: 'numeric', month: 'long' }); };
+let registro = leer(), deHoy = {}, practicando = false, turno = null;
+
+function armarTurno() {
+  const hoy = hoyIso();
+  const pendientes = PREGUNTAS.map((q, i) => i).filter(i => registro[PREGUNTAS[i].frase] && registro[PREGUNTAS[i].frase].proxima <= hoy);
+  const nuevas = PREGUNTAS.map((q, i) => i).filter(i => !registro[PREGUNTAS[i].frase]).slice(0, Math.max(0, NUEVAS_POR_DIA - pendientes.length));
+  turno = practicando ? PREGUNTAS.map((q, i) => i) : [...pendientes, ...nuevas];
+}
+function responder(i, r) {
+  const q = PREGUNTAS[i], bien = r === q.es;
+  deHoy[i] = r;
+  if (!practicando) {
+    const antes = registro[q.frase] || { caja: 1 };   // una pregunta nueva entra en la caja 1
+    const caja = bien ? Math.min(5, antes.caja + 1) : 1;
+    registro[q.frase] = { caja, proxima: sumarDias(hoyIso(), bien ? INTERVALO[caja - 1] : 1) };
+    guardar(registro);
+  }
+  pintarPreguntas();
+}
+function pintarPreguntas() {
+  if (!turno) armarTurno();
+  const cont = $('preguntas'); cont.innerHTML = '';
+  turno.forEach(i => {
+    const q = PREGUNTAS[i], r = deHoy[i], div = document.createElement('div'), reg = registro[q.frase];
+    div.className = 'pregunta' + (r ? (r === q.es ? ' acierto' : ' error') : '');
+    div.innerHTML = `<q>${esc(q.frase)}</q>` + (r
+      ? `<div class="respuesta"><b>${r === q.es ? UI.correcto : UI.incorrecto}: ${q.es === 'mito' ? UI.es_mito : UI.es_evidencia}.</b><span>${esc(q.explica)}</span><a href="https://doi.org/${q.doi}" target="_blank" rel="noopener">${esc(q.cita)} · doi.org/${esc(q.doi)}</a>${!practicando && reg ? `<span class="cuando">${UI.caja} ${reg.caja} · ${UI.vuelve} ${esc(fechaLarga(reg.proxima))}</span>` : ''}</div>`
+      : `<div class="opciones"><button class="boton" data-r="mito">${UI.mito}</button><button class="boton" data-r="evidencia">${UI.evidencia}</button></div>`);
+    div.querySelectorAll('button[data-r]').forEach(b => b.onclick = () => responder(i, b.dataset.r));
+    cont.append(div);
+  });
+  const faltan = turno.filter(i => !deHoy[i]).length;
+  const proximas = Object.values(registro).map(x => x.proxima).filter(f => f > hoyIso()).sort();
+  $('marcador').textContent = practicando
+    ? fmtT(UI.q_practica, { r: turno.length - faltan, n: turno.length })
+    : turno.length === 0
+      ? (proximas.length ? fmtT(UI.q_fin_proxima, { f: fechaLarga(proximas[0]) }) : UI.q_nada)
+      : faltan ? fmtT(UI.q_tocan, { n: turno.length, f: faltan }) : UI.q_fin + (proximas.length ? fmtT(UI.q_vuelve, { f: fechaLarga(proximas[0]) }) : '');
+  const conteo = [0, 0, 0, 0, 0, 0]; PREGUNTAS.forEach(q => { conteo[registro[q.frase] ? registro[q.frase].caja : 0]++; });
+  const max = Math.max(...conteo, 1);
+  $('cajas').innerHTML = conteo.map((n, c) => `<div title="${c === 0 ? UI.sin_ver : UI.caja + ' ' + c}: ${n}"><span>${n}</span><i style="height:${4 + n / max * 36}px;opacity:${c === 0 ? .35 : .45 + c * .11}"></i><span>${c === 0 ? UI.nuevas : UI.caja.toLowerCase() + ' ' + c}</span></div>`).join('');
+  $('practicar').textContent = practicando ? UI.volver_repaso : UI.practicar;
+}
+$('practicar').onclick = () => { practicando = !practicando; deHoy = {}; turno = null; pintarPreguntas(); };
+let confirmando = null;   // dos toques para borrar el progreso: el visor no muestra diálogos de confirmación
+$('otra-vez').onclick = () => {
+  if (!confirmando) { $('otra-vez').textContent = UI.otra_vez_confirmar; confirmando = setTimeout(() => { confirmando = null; $('otra-vez').textContent = UI.otra_vez; }, 4000); return; }
+  clearTimeout(confirmando); confirmando = null; $('otra-vez').textContent = UI.otra_vez;
+  registro = {}; guardar(registro); deHoy = {}; practicando = false; turno = null; pintarPreguntas();
+};
+pintarPreguntas();
+
+/* ===== Planificador de repaso espaciado ===== */
+const DIA = 864e5;
+const aFecha = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const desdeIso = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const largo = d => d.toLocaleDateString(UI.locale, { weekday: 'long', day: 'numeric', month: 'long' });
+const corto = d => d.toLocaleDateString(UI.locale, { day: 'numeric', month: 'short' });
+// Sesiones con separaciones crecientes (1, 2, 3, ...) escaladas a los días disponibles; la última, el día antes del examen.
+function planear(hoy, examen, n) {
+  const dias = Math.round((examen - hoy) / DIA);
+  if (dias < 1) return { error: UI.r_error };
+  const k = Math.min(n, dias), pesos = Array.from({ length: k - 1 }, (_, i) => i + 1), total = pesos.reduce((a, b) => a + b, 0);
+  const offs = [0]; let acc = 0;
+  for (const w of pesos) { acc += w; offs.push(Math.round(acc / total * (dias - 1))); }
+  const unicos = [...new Set(offs)].sort((a, b) => a - b);
+  return { dias, sesiones: unicos.map(o => new Date(hoy.getTime() + o * DIA)) };
+}
+function pintarPlan() {
+  const hoy = desdeIso($('f-hoy').value), examen = desdeIso($('f-examen').value), n = +$('f-sesiones').value;
+  const p = planear(hoy, examen, n), lista = $('sesiones'), franja = $('franja');
+  lista.innerHTML = ''; franja.innerHTML = '';
+  if (p.error) { $('nota-plan').textContent = p.error; return; }
+  const tareas = UI.r_tareas;
+  p.sesiones.forEach((d, i) => {
+    const ultimo = i === p.sesiones.length - 1;
+    lista.insertAdjacentHTML('beforeend', `<li><b>${esc(largo(d))}</b><span>${esc(ultimo && i > 0 ? tareas[5] : tareas[Math.min(i, 4)])}</span></li>`);
+    const x = (d - hoy) / (examen - hoy) * 100;
+    franja.insertAdjacentHTML('beforeend', `<div class="punto" style="left:${x}%"><span>${esc(corto(d))}</span></div>`);
+  });
+  franja.insertAdjacentHTML('beforeend', `<div class="punto examen" style="left:100%"><span>${esc(UI.r_examen_corto)}</span></div>`);
+  const gaps = p.sesiones.slice(1).map((d, i) => Math.round((d - p.sesiones[i]) / DIA));
+  $('nota-plan').textContent = fmtT(UI.r_resumen, { n: p.sesiones.length, d: p.dias, g: gaps.join(', ') });
+}
+{ const h = aFecha(new Date()); $('f-hoy').value = iso(h); $('f-examen').value = iso(new Date(h.getTime() + 14 * DIA)); }
+['f-hoy', 'f-examen', 'f-sesiones'].forEach(id => $(id).addEventListener('input', pintarPlan));
+pintarPlan();
+
+/* ===== Tablero de veredictos ===== */
+const libros = DATOS.libros, porId = Object.fromEntries(libros.map(l => [l.id, l]));
+let filtro = 'todos', elegido = DATOS.libros[0].id;
+const FILTROS = [['todos', UI.todos], ...Object.entries(DATOS.etiquetas).filter(([k]) => DATOS.libros.some(l => l.veredicto === k))];
+FILTROS.forEach(([k, n]) => {
+  const b = document.createElement('button'); b.className = 'boton'; b.textContent = n; b.setAttribute('aria-pressed', k === filtro);
+  b.onclick = () => { filtro = k; [...$('filtros').children].forEach(x => x.setAttribute('aria-pressed', x === b)); pintarTablero(); };
+  $('filtros').append(b);
+});
+libros.forEach(l => {
+  const b = document.createElement('button'); b.className = 'libro'; b.dataset.id = l.id;
+  b.innerHTML = `<span class="chip v-${l.veredicto}">${esc(DATOS.etiquetas[l.veredicto])}</span><b>${esc(l.titulo)}</b><span class="tenue" style="font-size:.95rem">${esc(l.frase)}</span>`;
+  b.onclick = () => {
+    elegido = l.id; pintarTablero(); elegirEnMapa(l.id); pintarLinea();
+    if (ANGOSTO.matches) $('panel').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });   // en el celular el detalle queda debajo de la lista
+  };
+  $('libros').append(b);
+});
+function pintarTablero() {
+  [...$('libros').children].forEach(b => { const l = porId[b.dataset.id]; b.hidden = filtro !== 'todos' && l.veredicto !== filtro; b.setAttribute('aria-pressed', l.id === elegido); });
+  const l = porId[elegido];
+  $('panel').innerHTML = `<span class="chip v-${l.veredicto}" style="justify-self:start">${esc(DATOS.etiquetas[l.veredicto])}</span>
+    <h3>${esc(l.titulo)}</h3><p class="tenue">${esc(l.autor)} · ${esc(l.anio)}</p>
+    <p><b>${esc(UI.la_promesa)}</b> ${esc(l.frase)}.</p><p>${esc(l.juicio)}</p>
+    ${l.doi ? `<div class="fuente"><span>${esc(l.cita)}</span><a href="https://doi.org/${l.doi}" target="_blank" rel="noopener">doi.org/${esc(l.doi)}</a></div>` : ''}
+    <a href="#${l.id}">${esc(UI.ir_ficha_completa)}</a>`;
+}
+
+/* ===== Línea de tiempo por décadas ===== */
+const anioDe = l => l.orden;   // año numérico calculado por el generador; negativo antes de Cristo
+function pintarLinea() {
+  const porDecada = {};
+  libros.forEach(l => { const d = l.siglo ? anioDe(l) : Math.floor(anioDe(l) / 10) * 10; (porDecada[d] = porDecada[d] || []).push(l); });   // antes de Cristo, por siglo
+  const decadas = Object.keys(porDecada).map(Number).sort((a, b) => a - b);
+  $('linea-tiempo').innerHTML = decadas.map((d, i) => {
+    const salto = i < decadas.length - 1 && decadas[i + 1] - d > 10;   // un salto de décadas vacías se marca con línea punteada
+    const hitos = porDecada[d].sort((a, b) => anioDe(a) - anioDe(b)).map(l =>
+      `<button class="hito" data-id="${l.id}" aria-pressed="${l.id === elegido}"><i style="background:var(--v-${l.veredicto})" title="${esc(DATOS.etiquetas[l.veredicto])}"></i>${esc(l.titulo)} <small>${esc(l.siglo || anioDe(l))}</small></button>`).join('');
+    const etiqueta = porDecada[d][0].siglo || fmtT(UI.l_decada, { d, h: String(d + 9).slice(-2) });
+    return `<div class="decada${salto ? ' salto' : ''}"><span>${esc(etiqueta)}</span><div class="fila">${hitos}</div></div>`;
+  }).join('');
+  $('linea-tiempo').querySelectorAll('.hito').forEach(b => b.onclick = () => {
+    elegido = b.dataset.id; pintarTablero(); elegirEnMapa(b.dataset.id); pintarLinea();
+    $('panel').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+  });
+  const nombre = a => { const l = libros.find(x => anioDe(x) === a); return l && l.siglo ? l.siglo : a; };   // un año antes de Cristo se nombra por su siglo
+  const rango = v => { const a = libros.filter(l => l.veredicto === v).map(anioDe); return a.length ? [nombre(Math.min(...a)), nombre(Math.max(...a))] : ['–', '–']; };
+  const [fa, fb] = rango('filosofia'), [pa, pb] = rango('promete'), [la, lb] = rango('literatura');
+  const div = libros.filter(l => ['solido', 'matices', 'promete'].includes(l.veredicto)).map(anioDe), [da, db] = div.length ? [nombre(Math.min(...div)), nombre(Math.max(...div))] : ['–', '–'];
+  $('resumen-linea').textContent = fmtT(UI.l_resumen, { fa, fb, pa, pb, la, lb, da, db });
+}
+
+/* ===== Mapa de cruces (fuerzas simples en canvas) ===== */
+const red = $('red'), rx = red.getContext('2d');
+let W = 900, H = 680, K = 1;   // K agranda letra, puntos y zona de toque en el celular
+const COL_GRUPO = ['--b2', '--b1', '--b3', '--b5', '--b4'];
+let nodos = [], nodoDe = {};
+function armarRed() {
+  [W, H, K] = ANGOSTO.matches ? [700, 1000, 2] : [900, 680, 1];
+  red.width = W; red.height = H;
+  nodos = libros.map((l, i) => ({ id: l.id, titulo: l.titulo, grupo: l.grupo, fuera: false, x: W / 2 + Math.cos(i * 2.4) * 220, y: H / 2 + Math.sin(i * 2.4) * 200, vx: 0, vy: 0 }));
+  nodoDe = Object.fromEntries(nodos.map(n => [n.id, n]));
+  DATOS.aristas.forEach((a, i) => { if (a.fuera && !nodoDe[a.b]) { const n = { id: a.b, titulo: a.titulo_b, fuera: true, x: W / 2 + Math.cos(i) * 300, y: H / 2 + Math.sin(i) * 280, vx: 0, vy: 0 }; nodos.push(n); nodoDe[a.b] = n; } });
+  for (let it = 0; it < 500; it++) {   // simulación fija y determinista: misma posición en cada carga
+    for (const a of nodos) for (const b of nodos) { if (a === b) continue; const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy + .01, f = 5200 / d2; a.vx += dx * f / Math.sqrt(d2); a.vy += dy * f / Math.sqrt(d2); }
+    for (const e of DATOS.aristas) { const a = nodoDe[e.a], b = nodoDe[e.b]; const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, f = (d - 170) * .01; a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f; }
+    for (const n of nodos) { n.vx += (W / 2 - n.x) * .004; n.vy += (H / 2 - n.y) * .004; n.x += n.vx * .5; n.y += n.vy * .5; n.vx *= .6; n.vy *= .6; n.x = Math.max(70, Math.min(W - 70, n.x)); n.y = Math.max(40, Math.min(H - 40, n.y)); }
+  }
+  // ajustar el dibujo al lienzo, dejando margen para los nombres
+  const xs = nodos.map(n => n.x), ys = nodos.map(n => n.y), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const mx = K > 1 ? 150 : 90, my = K > 1 ? 80 : 50;
+  for (const n of nodos) { n.x = mx + (n.x - x0) / (x1 - x0 || 1) * (W - 2 * mx); n.y = my + (n.y - y0) / (y1 - y0 || 1) * (H - 2 * my + 10 * K); }
+}
+armarRed();
+let enMapa = DATOS.libros[0].id;
+function dibujarRed() {
+  rx.fillStyle = tok('--tarjeta'); rx.fillRect(0, 0, W, H);
+  const vecinos = new Set(DATOS.aristas.filter(e => e.a === enMapa || e.b === enMapa).flatMap(e => [e.a, e.b]));
+  for (const e of DATOS.aristas) {
+    const a = nodoDe[e.a], b = nodoDe[e.b], activa = e.a === enMapa || e.b === enMapa;
+    rx.strokeStyle = activa ? tok('--sello') : tok('--regla'); rx.lineWidth = (activa ? 2.5 : 1) * K;
+    rx.beginPath(); rx.moveTo(a.x, a.y); rx.lineTo(b.x, b.y); rx.stroke();
+  }
+  for (const n of nodos) {
+    const sel = n.id === enMapa, cerca = vecinos.has(n.id);
+    rx.fillStyle = n.fuera ? tok('--tenue') : tok(COL_GRUPO[n.grupo]);
+    rx.globalAlpha = sel || cerca || !enMapa ? 1 : .45;
+    rx.beginPath(); rx.arc(n.x, n.y, (n.fuera ? 5 : sel ? 12 : 9) * K, 0, Math.PI * 2); rx.fill();
+    if (K > 1 ? sel || cerca : !n.fuera || cerca) {   // en el celular, solo los nombres del libro elegido y sus vecinos
+      rx.fillStyle = tok('--tinta'); rx.font = `${sel ? 800 : 400} ${(n.fuera ? 13 : 15) * K}px ${tok('--f-titulo')}`; rx.textAlign = 'center';
+      const largo = K > 1 ? 20 : 28;
+      rx.fillText(n.titulo.length > largo ? n.titulo.slice(0, largo - 2) + '…' : n.titulo, n.x, n.y - 15 * K);
+    }
+    rx.globalAlpha = 1;
+  }
+  const lista = DATOS.aristas.filter(e => e.a === enMapa || e.b === enMapa);
+  const l = porId[enMapa];
+  $('cruces').innerHTML = `<h3 style="font-size:1.35rem">${esc(l ? l.titulo : nodoDe[enMapa].titulo)}</h3>` +
+    (lista.length ? '<ul style="padding-left:18px;margin:0">' + lista.map(e => { const otro = e.a === enMapa ? e.b : e.a; const t = nodoDe[otro].titulo; return `<li><b>${esc(t)}</b>${nodoDe[otro].fuera ? ` <span class="tenue">${esc(UI.otro_tema)}</span>` : ''}: ${esc(e.por)}</li>`; }).join('') + '</ul>' : `<p class="tenue">${esc(UI.sin_cruces)}</p>`) +
+    (l ? `<a href="#${l.id}">${esc(UI.ir_ficha)}</a>` : '');
+}
+$('leyenda-mapa').innerHTML = DATOS.grupos.map((g, i) => `<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(${COL_GRUPO[i]})"></span> ${esc(g)}</span>`).join('') + '<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tenue)"></span> ' + esc(UI.otros_temas) + '</span>';
+function elegirEnMapa(id) { enMapa = id; dibujarRed(); }
+red.addEventListener('click', ev => {
+  const r = red.getBoundingClientRect(), x = (ev.clientX - r.left) * W / r.width, y = (ev.clientY - r.top) * H / r.height;
+  let mejor = null, dm = 30 * K; for (const n of nodos) { const d = Math.hypot(n.x - x, n.y - y); if (d < dm) { dm = d; mejor = n; } }
+  if (mejor) { enMapa = mejor.id; if (porId[mejor.id]) { elegido = mejor.id; pintarTablero(); pintarLinea(); } dibujarRed(); }
+});
+
+/* ===== Arranque y cambio de tema ===== */
+function todo() { pintarCurioso(); pintarEscena(); pintarTablero(); pintarLinea(); dibujarRed(); }
+todo();
+ANGOSTO.addEventListener('change', () => { armarRed(); todo(); });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', todo);
+new MutationObserver(todo).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
+</body>
+</html>

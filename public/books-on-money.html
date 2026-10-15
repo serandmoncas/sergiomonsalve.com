@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Books for understanding money</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: catálogo de biblioteca convertido en sala de lectura. Arriba, cinco minutos para entender la idea; luego qué funciona,
+   el veredicto de cada libro, el mapa de cómo dialogan, y al final las fichas catalográficas (línea roja de las tarjetas). */
+:root {
+  --papel: #f2f4f0; --tarjeta: #fbfcf9; --tinta: #1d2430; --tenue: #5b6470;
+  --sello: #2b4f8c; --linea-roja: #b4473f; --regla: #d6dbd3;
+  --v-solido: #2f7a4c; --v-matices: #9a6400; --v-promete: #b4473f; --v-filosofia: #6a5a9e; --v-literatura: #2b6f80;
+  --u-alta: #2f7a4c; --u-moderada: #9a6400; --u-baja: #b4473f;
+  --b1: #b4473f; --b2: #2b4f8c; --b3: #2f7a4c; --b4: #6a5a9e; --b5: #9a6400;
+  --f-titulo: "Alegreya", Georgia, "Times New Roman", serif;
+  --f-texto: "Alegreya", Georgia, "Times New Roman", serif;
+  --f-ficha: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --papel: #151a21; --tarjeta: #1c222b; --tinta: #e3e7ec; --tenue: #9aa3ae;
+    --sello: #8fb0ea; --linea-roja: #e0786f; --regla: #2e3641;
+    --v-solido: #6cc493; --v-matices: #e3ad4f; --v-promete: #e0786f; --v-filosofia: #ab9be6; --v-literatura: #7cc3d4;
+    --u-alta: #6cc493; --u-moderada: #e3ad4f; --u-baja: #e0786f;
+    --b1: #e0786f; --b2: #8fb0ea; --b3: #6cc493; --b4: #ab9be6; --b5: #e3ad4f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --papel: #151a21; --tarjeta: #1c222b; --tinta: #e3e7ec; --tenue: #9aa3ae;
+  --sello: #8fb0ea; --linea-roja: #e0786f; --regla: #2e3641;
+  --v-solido: #6cc493; --v-matices: #e3ad4f; --v-promete: #e0786f; --v-filosofia: #ab9be6; --v-literatura: #7cc3d4;
+  --u-alta: #6cc493; --u-moderada: #e3ad4f; --u-baja: #e0786f;
+  --b1: #e0786f; --b2: #8fb0ea; --b3: #6cc493; --b4: #ab9be6; --b5: #e3ad4f;
+}
+* { box-sizing: border-box; }
+body { background: var(--papel); color: var(--tinta); font: 1.125rem/1.55 var(--f-texto); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--sello); text-underline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--sello); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--f-titulo); font-weight: 800; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.rotulo { font-family: var(--f-ficha); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tenue); margin: 0; }
+.dato { font-family: var(--f-ficha); font-variant-numeric: tabular-nums; }
+.tenue { color: var(--tenue); }
+.boton { font: 500 .8rem var(--f-ficha); color: var(--tinta); background: var(--tarjeta); border: 1px solid var(--regla); border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.boton.lleno { background: var(--sello); color: var(--tarjeta); border-color: transparent; }
+.boton[aria-pressed="true"] { border-color: var(--sello); color: var(--sello); }
+
+.marco { max-width: 1180px; margin: 0 auto; display: grid; gap: 72px; padding-block: 40px 96px; }
+.marco > *, .seccion > * { min-width: 0; }   /* que ningún hijo de la cuadrícula la ensanche */
+.barra { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding-block: 10px; background: color-mix(in srgb, var(--papel) 90%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--regla); }
+.barra nav { display: flex; flex-wrap: wrap; gap: 4px 14px; font: .8rem var(--f-ficha); }
+.barra nav a { color: var(--tinta); text-decoration: none; }
+.barra nav a:hover { color: var(--sello); text-decoration: underline; }
+
+.portada { display: grid; gap: 14px; }
+.portada h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.02; }
+.portada > p { max-width: 64ch; color: var(--tenue); font-size: 1.2rem; }
+.leyenda-v { display: flex; flex-wrap: wrap; gap: 8px 16px; font: .8rem var(--f-ficha); color: var(--tenue); }
+.rutas { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 10px; }
+.ruta { background: var(--tarjeta); border: 1px solid var(--regla); border-top: 3px solid var(--sello); padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+.ruta h3 { font-size: 1.3rem; }
+.ruta p { color: var(--tenue); font-size: 1rem; }
+.ruta ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+
+.seccion { display: grid; gap: 22px; scroll-margin-top: 64px; }
+.seccion > header { display: grid; gap: 6px; }
+.seccion h2 { font-size: clamp(1.7rem, 3.6vw, 2.3rem); line-height: 1.1; }
+.seccion > header > p:not(.rotulo) { max-width: 66ch; color: var(--tenue); }
+
+/* Chips de veredicto */
+.chip { font: 600 .66rem var(--f-ficha); letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; color: var(--tarjeta); white-space: nowrap; }
+.v-solido { background: var(--v-solido); } .v-matices { background: var(--v-matices); } .v-promete { background: var(--v-promete); } .v-filosofia { background: var(--v-filosofia); } .v-literatura { background: var(--v-literatura); }
+
+/* Curioso */
+.regla { display: flex; height: 38px; overflow: hidden; border-radius: 3px; }
+.regla button { all: unset; cursor: pointer; display: flex; align-items: center; justify-content: center; font: 600 .7rem var(--f-ficha); color: #fff; position: relative; padding: 0 4px; text-align: center; }
+.regla button[aria-current="true"]::after { content: ""; position: absolute; inset: auto 0 0 0; height: 5px; background: var(--tinta); }
+.regla button:focus-visible { outline: 3px solid var(--tinta); outline-offset: -3px; }
+.curioso { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 28px; background: var(--tarjeta); border: 1px solid var(--regla); padding: 24px; }
+@media (max-width: 760px) { .curioso { grid-template-columns: 1fr; } }
+.guion { display: grid; gap: 12px; font-size: 1.2rem; max-width: 62ch; min-height: 11em; }
+.reloj { display: grid; gap: 8px; align-content: start; justify-items: start; }
+.reloj .tiempo { font: 600 2.3rem var(--f-ficha); font-variant-numeric: tabular-nums; }
+.tiempo.ambar { color: var(--v-matices); } .tiempo.rojo { color: var(--v-promete); }
+
+/* Explicador (escena → render(t)) */
+.motion { display: grid; gap: 12px; }
+.motion canvas { width: 100%; height: auto; background: var(--tarjeta); border: 1px solid var(--regla); }
+.controles { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.controles input[type=range] { flex: 1; min-width: 160px; accent-color: var(--sello); }
+
+/* Tablero de veredictos */
+.filtros { display: flex; flex-wrap: wrap; gap: 6px; }
+.tablero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 900px) { .tablero { grid-template-columns: 1fr; } }
+.libros { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; align-content: start; }
+.libro { all: unset; box-sizing: border-box; cursor: pointer; background: var(--tarjeta); border: 1px solid var(--regla); border-top: 3px solid var(--linea-roja); padding: 12px 14px; display: grid; gap: 6px; align-content: start; }
+.libro[aria-pressed="true"] { outline: 2px solid var(--sello); }
+.libro:focus-visible { outline: 2px solid var(--sello); }
+.libro b { font: 800 1.08rem/1.15 var(--f-titulo); }
+.libro .chip { justify-self: start; }
+.libro[hidden] { display: none; }
+.panel { background: var(--tarjeta); border: 1px solid var(--regla); padding: 20px; display: grid; gap: 12px; align-content: start; }
+.panel h3 { font-size: 1.4rem; }
+.panel .fuente { border-top: 1px dotted var(--regla); padding-top: 10px; font-size: 1rem; display: grid; gap: 2px; }
+.panel .fuente a { font: .78rem var(--f-ficha); word-break: break-all; }
+
+/* Mapa */
+.mapa { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 900px) { .mapa { grid-template-columns: 1fr; } }
+.mapa canvas { width: 100%; height: auto; background: var(--tarjeta); border: 1px solid var(--regla); cursor: pointer; touch-action: manipulation; }
+.mapa .lista-cruces { display: grid; gap: 10px; align-content: start; font-size: 1rem; }
+.mapa .lista-cruces li { margin-bottom: 6px; }
+
+/* Fichas */
+.grupo { display: grid; gap: 28px; }
+.grupo-cab h2 { font-size: 1.75rem; }
+.grupo-cab p { margin: 4px 0 0; color: var(--tenue); }
+.ficha { display: grid; gap: 14px; scroll-margin-top: 70px; }
+.tarjeta { background: var(--tarjeta); border: 1px solid var(--regla); border-top: 3px solid var(--linea-roja); padding: 20px 24px 22px; display: grid; gap: 10px; max-width: 760px; }
+.sello { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cota { font: .75rem var(--f-ficha); color: var(--tenue); margin-right: auto; }
+.tarjeta h3 { font-size: 1.9rem; line-height: 1.1; }
+.original { margin: -4px 0 4px; font-style: italic; color: var(--tenue); font-size: 1rem; }
+dl { margin: 0; display: grid; gap: 4px; font: .82rem var(--f-ficha); }
+dl > div { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; border-bottom: 1px dotted var(--regla); padding-bottom: 4px; }
+dt { color: var(--tenue); } dd { margin: 0; }
+.tema { display: inline-block; margin: 0 6px 2px 0; padding: 0 6px; background: var(--papel); border: 1px solid var(--regla); }
+.cruces { display: grid; gap: 6px; padding-top: 6px; }
+.cruces ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 1rem; }
+.cuerpo { max-width: 68ch; }
+.cuerpo summary { cursor: pointer; font: 500 .8rem var(--f-ficha); color: var(--sello); }
+.cuerpo h2 { font: 500 .78rem var(--f-ficha); letter-spacing: .08em; text-transform: uppercase; color: var(--sello); margin: 26px 0 8px; }
+.cuerpo p, .cuerpo ul, .cuerpo ol { margin: 0 0 12px; }
+.tabla { overflow-x: auto; margin: 4px 0 16px; max-width: 100%; }
+.cuerpo table { border-collapse: collapse; font-size: .98rem; line-height: 1.4; min-width: 520px; }
+.cuerpo th { text-align: left; font: 500 .72rem var(--f-ficha); letter-spacing: .06em; text-transform: uppercase; color: var(--tenue); border-bottom: 2px solid var(--tinta); padding: 6px 12px 6px 0; }
+.cuerpo td { vertical-align: top; border-bottom: 1px solid var(--regla); padding: 8px 12px 8px 0; }
+
+
+/* Ponte a prueba */
+.marcador { font: 600 1rem var(--f-ficha); }
+.preguntas { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.pregunta { background: var(--tarjeta); border: 1px solid var(--regla); border-left: 4px solid var(--regla); padding: 14px 16px; display: grid; gap: 10px; align-content: start; }
+.pregunta.acierto { border-left-color: var(--v-solido); }
+.pregunta.error { border-left-color: var(--v-promete); }
+.pregunta q { font-size: 1.12rem; quotes: "«" "»"; }
+.pregunta .opciones { display: flex; gap: 8px; }
+.pregunta .respuesta { font-size: 1rem; display: grid; gap: 4px; }
+.pregunta .respuesta a { font: .76rem var(--f-ficha); word-break: break-all; }
+
+.estado-repaso { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+.cajas { display: flex; gap: 6px; align-items: flex-end; }
+.cajas div { display: grid; justify-items: center; gap: 2px; font: .66rem var(--f-ficha); color: var(--tenue); }
+.cajas i { display: block; width: 28px; background: var(--sello); border-radius: 2px 2px 0 0; min-height: 2px; }
+.pregunta .cuando { font: .74rem var(--f-ficha); color: var(--tenue); }
+
+/* Línea de tiempo por décadas */
+.linea { display: grid; gap: 0; border-top: 1px solid var(--regla); }
+.decada { display: grid; grid-template-columns: 6.8rem minmax(0, 1fr); gap: 16px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--regla); }
+.decada > span { font: 600 1.05rem var(--f-ficha); color: var(--tenue); font-variant-numeric: tabular-nums; }
+.decada.salto { border-bottom-style: dashed; }
+.decada .fila { display: flex; flex-wrap: wrap; gap: 8px; }
+.hito { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px 5px 6px; background: var(--tarjeta); border: 1px solid var(--regla); border-radius: 3px; font-size: 1rem; line-height: 1.2; }
+.hito i { width: 12px; height: 12px; border-radius: 2px; flex: none; }
+.hito small { font: .72rem var(--f-ficha); color: var(--tenue); }
+.hito[aria-pressed="true"] { outline: 2px solid var(--sello); }
+.hito:focus-visible { outline: 2px solid var(--sello); }
+.resumen-linea { font-size: 1.05rem; max-width: 70ch; }
+.lecciones .decada { grid-template-columns: minmax(8rem, 15rem) minmax(0, 1fr); }
+.lecciones .nodo { font: 600 1rem/1.25 var(--f-titulo); color: var(--tinta); }
+a.hito { color: var(--tinta); text-decoration: none; }
+@media (max-width: 640px) { .lecciones .decada { grid-template-columns: 1fr; gap: 8px; } }
+
+/* Planificador */
+.planificador { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 24px; background: var(--tarjeta); border: 1px solid var(--regla); padding: 22px; }
+@media (max-width: 820px) { .planificador { grid-template-columns: 1fr; } }
+.campos { display: grid; gap: 14px; align-content: start; }
+.campos label { display: grid; gap: 4px; font: 500 .8rem var(--f-ficha); color: var(--tenue); }
+.campos input, .campos select { font: 1.05rem var(--f-texto); color: var(--tinta); background: var(--papel); border: 1px solid var(--regla); padding: 8px 10px; border-radius: 3px; }
+.calendario { display: grid; gap: 10px; align-content: start; }
+.franja { position: relative; height: 54px; border-bottom: 2px solid var(--regla); margin: 8px 14px 30px; }
+.franja .punto { position: absolute; bottom: -8px; width: 14px; height: 14px; border-radius: 50%; background: var(--sello); transform: translateX(-50%); }
+.franja .punto.examen { background: var(--linea-roja); border-radius: 2px; }
+.franja .punto.examen span { top: auto; bottom: 20px; color: var(--linea-roja); font-weight: 600; }
+.franja .punto span { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font: .68rem var(--f-ficha); color: var(--tenue); white-space: nowrap; }
+.sesiones { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.sesiones li { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px dotted var(--regla); font-size: 1rem; }
+.sesiones li b { font: 600 .9rem var(--f-ficha); }
+
+/* Modo presentar: una pantalla por bloque Curioso */
+.escenario { position: fixed; inset: 0; z-index: 10; background: var(--papel); display: grid; grid-template-rows: auto 1fr auto; gap: 18px; padding: calc(env(safe-area-inset-top, 0px) + 20px) max(24px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 20px) max(24px, env(safe-area-inset-left, 0px)); }
+.escenario .contenido { display: grid; align-content: center; gap: 22px; max-width: 980px; margin: 0 auto; width: 100%; font-size: clamp(1.3rem, 2.6vw, 2rem); line-height: 1.4; }
+.escenario .contenido h2 { font-size: clamp(2rem, 5vw, 3.4rem); color: var(--sello); }
+.escenario .pie { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+
+.escenario[hidden], .libro[hidden], .seccion[hidden], .boton[hidden] { display: none !important; }
+
+/* Celular: la barra no se queda fija ni ocupa varias líneas; la regla muestra solo los nombres */
+@media (max-width: 640px) {
+  .barra { position: static; flex-wrap: nowrap; gap: 10px; }
+  .barra nav { flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; scrollbar-width: none; min-width: 0; padding-block: 4px; }
+  .barra nav::-webkit-scrollbar { display: none; }
+  .barra .boton { flex: none; }
+  .regla { height: 46px; }
+  .regla .seg { display: none; }
+  .franja .punto:not(.examen) span { display: none; }   /* las fechas ya están en la lista de abajo */
+  .regla button { font-size: .68rem; line-height: 1.15; }
+  .marco { gap: 56px; }
+  .decada { grid-template-columns: 4.6rem minmax(0, 1fr); gap: 10px; }
+  .decada > span { font-size: .82rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Books, fables and novels for the New Old School Money module: what each one teaches, how well it holds up and which lesson it connects to.">
+<meta property="og:title" content="Books for understanding money">
+<meta property="og:description" content="Books, fables and novels for the New Old School Money module: what each one teaches, how well it holds up and which lesson it connects to.">
+<meta property="og:type" content="website">
+<style>body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<div class="marco">
+  <div class="barra">
+    <nav aria-label="Sections"><a href="https://sergiomonsalve.com">← sergiomonsalve.com</a><a href="/libros-del-dinero.html" hreflang="es">Español</a><a href="/learning-to-learn.html">Learning to learn</a>
+      <a href="#ponte-a-prueba">Test yourself</a><a href="#veredictos">Verdicts</a><a href="#nodos">By lesson</a><a href="#linea">Timeline</a><a href="#mapa">Map</a><a href="#fichas">Books</a>
+    </nav>
+    <button class="boton lleno" id="presentar" hidden>Present in 5 minutes</button>
+  </div>
+
+  <header class="portada">
+    <p class="rotulo">New Old School library · Money module</p>
+    <h1>Books for understanding money</h1>
+    <p>16 books for the Money module: fables and novels that tell an idea better than an explanation, and popular science on how we decide with money. Each one comes with its verdict, the module lesson it connects to, and the books it talks to.</p>
+    <div class="leyenda-v"><span><span class="chip v-solido">Solid</span> the evidence backs it</span><span><span class="chip v-matices">Partly right</span> right in part</span><span><span class="chip v-literatura">Literature and history</span> not judged by studies</span></div>
+    <div class="rutas"><div class="ruta"><h3>If you are a student</h3><p>Short stories and a practical book to start managing your money.</p><ol><li><a href="#fabulas-de-esopo">Aesop&#x27;s Fables</a></li><li><a href="#david-copperfield">David Copperfield</a></li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a></li><li><a href="#robinson-crusoe">Robinson Crusoe</a></li></ol></div><div class="ruta"><h3>If you teach</h3><p>Why we decide badly with money, and how to use it in class.</p><ol><li><a href="#misbehaving">Misbehaving</a></li><li><a href="#nudge">Nudge</a></li><li><a href="#pensar-rapido-pensar-despacio">Thinking, Fast and Slow</a></li><li><a href="#mercader-de-venecia">The Merchant of Venice</a></li></ol></div><div class="ruta"><h3>If you support a student at home</h3><p>Saving without heroics, distrusting easy promises and not confusing money with happiness.</p><ol><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a></li><li><a href="#delirios-multitudinarios">Extraordinary Popular Delusions and the Madness of Crowds</a></li><li><a href="#the-good-life">The Good Life</a></li><li><a href="#nudge">Nudge</a></li></ol></div></div>
+  </header>
+
+  <section class="seccion" id="cinco-minutos" hidden>
+    <header>
+      <p class="rotulo">The idea in Curioso Format · 300 seconds</p>
+      <h2>What feels like learning is not always learning</h2>
+      <p>One idea in five blocks, each with its time. Tap a block to read it, or use “Present” to show it full screen with a timer.</p>
+    </header>
+    <div class="regla" id="regla" role="tablist" aria-label="Blocks"></div>
+    <div class="curioso">
+      <div class="guion" id="guion"></div>
+      <div class="reloj">
+        <span class="rotulo" id="bloque-nombre"></span>
+        <span class="tiempo" id="reloj">0:30</span>
+        <div style="display:flex;gap:8px"><button class="boton lleno" id="iniciar">Start</button><button class="boton" id="reiniciar">Reset</button></div>
+        <span class="tenue" style="font-size:.9rem">Amber in the last 10 s; red if you go over.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="que-funciona" hidden>
+    <header>
+      <p class="rotulo">Animated explainer</p>
+      <h2>What works when studying, and how much practice matters</h2>
+      <p>Two charts from research that several of these books cite. Pick one, play it or drag the timeline.</p>
+    </header>
+    <div class="motion">
+      <div class="filtros" id="escenas"></div>
+      <canvas id="lienzo" width="1280" height="680" aria-label="Animated chart"></canvas>
+      <div class="controles">
+        <button class="boton lleno" id="play">Play</button>
+        <input id="scrub" type="range" min="0" max="10" step="0.01" value="10" aria-label="Timeline">
+        <span class="dato tenue" id="t"></span>
+      </div>
+      <p class="tenue" id="fuente-escena" style="font-size:.95rem"></p>
+    </div>
+  </section>
+
+
+  <section class="seccion" id="ponte-a-prueba">
+    <header>
+      <p class="rotulo">Test yourself · retrieval practice</p>
+      <h2>Myth or evidence?</h2>
+      <p>Ten ideas about money and how we handle it. Decide before you see the answer: trying to recall and getting it wrong helps you learn more than reading the answer. The page remembers your answers in this browser and asks you again, days later, what you got wrong.</p>
+    </header>
+    <div class="estado-repaso">
+      <span class="marcador" id="marcador"></span>
+      <div class="cajas" id="cajas" aria-label="Questions per review box"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="boton" id="practicar">Practice all</button><button class="boton" id="otra-vez">Start over</button></div>
+    </div>
+    <div class="preguntas" id="preguntas"></div>
+  </section>
+
+  <section class="seccion" id="repaso" hidden>
+    <header>
+      <p class="rotulo">Plan your review · spaced practice</p>
+      <h2>When should you review for an exam?</h2>
+      <p>Spreading study over several days pays off more than cramming the night before. Enter the exam date and the planner suggests short sessions, further and further apart, where you test yourself without looking.</p>
+    </header>
+    <div class="planificador">
+      <div class="campos">
+        <label for="f-hoy">I start studying on<input type="date" id="f-hoy"></label>
+        <label for="f-examen">The exam is on<input type="date" id="f-examen"></label>
+        <label for="f-sesiones">Number of sessions<select id="f-sesiones"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+        <p class="tenue" style="font-size:.95rem">Each session, 20 to 30 minutes. Close the notebook, write or say out loud what you remember, and then check what you missed.</p>
+      </div>
+      <div class="calendario">
+        <div class="franja" id="franja" aria-hidden="true"></div>
+        <ol class="sesiones" id="sesiones"></ol>
+        <p class="tenue" id="nota-plan" style="font-size:.92rem"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="veredictos">
+    <header>
+      <p class="rotulo">Verdict board · tap a book</p>
+      <h2>How well does each book hold up?</h2>
+      <p>Each verdict keeps the book&#x27;s central idea. For popular science books, also the study that judges it; fables and novels are not judged by studies, but by what they help you understand. The full reviews are in Spanish.</p>
+    </header>
+    <div class="filtros" id="filtros"></div>
+    <div class="tablero"><div class="libros" id="libros"></div><aside class="panel" id="panel" aria-live="polite"></aside></div>
+  </section>
+
+  <section class="seccion" id="nodos">
+    <header>
+      <p class="rotulo">What to read for each lesson</p>
+      <h2>The books for each lesson in the module</h2>
+      <p>The module&#x27;s lessons in order, with the books that shed light on them. Tap a book to go to it.</p>
+    </header>
+    <div class="linea lecciones"><div class="decada"><span class="nodo">Income and expenses</span><div class="fila"><a class="hito" href="#david-copperfield" data-id="david-copperfield"><i style="background:var(--v-literatura)"></i>David Copperfield</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">Need or want?</span><div class="fila"><a class="hito" href="#robinson-crusoe" data-id="robinson-crusoe"><i style="background:var(--v-literatura)"></i>Robinson Crusoe</a><a class="hito" href="#misbehaving" data-id="misbehaving"><i style="background:var(--v-matices)"></i>Misbehaving</a><a class="hito" href="#the-good-life" data-id="the-good-life"><i style="background:var(--v-matices)"></i>The Good Life</a></div></div><div class="decada"><span class="nodo">Budget</span><div class="fila"><a class="hito" href="#robinson-crusoe" data-id="robinson-crusoe"><i style="background:var(--v-literatura)"></i>Robinson Crusoe</a><a class="hito" href="#david-copperfield" data-id="david-copperfield"><i style="background:var(--v-literatura)"></i>David Copperfield</a><a class="hito" href="#misbehaving" data-id="misbehaving"><i style="background:var(--v-matices)"></i>Misbehaving</a><a class="hito" href="#nudge" data-id="nudge"><i style="background:var(--v-matices)"></i>Nudge</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">Percentages in real life</span><div class="fila"><span class="tenue">No books for this lesson yet.</span></div></div><div class="decada"><span class="nodo">Saving and goals</span><div class="fila"><a class="hito" href="#fabulas-de-esopo" data-id="fabulas-de-esopo"><i style="background:var(--v-literatura)"></i>Aesop&#x27;s Fables</a><a class="hito" href="#odisea" data-id="odisea"><i style="background:var(--v-literatura)"></i>The Odyssey</a><a class="hito" href="#misbehaving" data-id="misbehaving"><i style="background:var(--v-matices)"></i>Misbehaving</a><a class="hito" href="#nudge" data-id="nudge"><i style="background:var(--v-matices)"></i>Nudge</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">Where to keep your money</span><div class="fila"><span class="tenue">No books for this lesson yet.</span></div></div><div class="decada"><span class="nodo">Simple interest</span><div class="fila"><span class="tenue">No books for this lesson yet.</span></div></div><div class="decada"><span class="nodo">Compound interest</span><div class="fila"><span class="tenue">No books for this lesson yet.</span></div></div><div class="decada"><span class="nodo">Inflation</span><div class="fila"><a class="hito" href="#ensayo-sobre-el-comercio" data-id="ensayo-sobre-el-comercio"><i style="background:var(--v-literatura)"></i>Essay on the Nature of Trade in General</a><a class="hito" href="#delirios-multitudinarios" data-id="delirios-multitudinarios"><i style="background:var(--v-literatura)"></i>Extraordinary Popular Delusions and the Madness of Crowds</a></div></div><div class="decada"><span class="nodo">Investing, the basics</span><div class="fila"><a class="hito" href="#fabulas-de-esopo" data-id="fabulas-de-esopo"><i style="background:var(--v-literatura)"></i>Aesop&#x27;s Fables</a><a class="hito" href="#delirios-multitudinarios" data-id="delirios-multitudinarios"><i style="background:var(--v-literatura)"></i>Extraordinary Popular Delusions and the Madness of Crowds</a><a class="hito" href="#pensar-rapido-pensar-despacio" data-id="pensar-rapido-pensar-despacio"><i style="background:var(--v-matices)"></i>Thinking, Fast and Slow</a><a class="hito" href="#misbehaving" data-id="misbehaving"><i style="background:var(--v-matices)"></i>Misbehaving</a><a class="hito" href="#the-signal-and-the-noise" data-id="the-signal-and-the-noise"><i style="background:var(--v-solido)"></i>The Signal and the Noise</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">Good debt and bad debt</span><div class="fila"><a class="hito" href="#mercader-de-venecia" data-id="mercader-de-venecia"><i style="background:var(--v-literatura)"></i>The Merchant of Venice</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">Credit cards</span><div class="fila"><a class="hito" href="#nudge" data-id="nudge"><i style="background:var(--v-matices)"></i>Nudge</a><a class="hito" href="#pequeno-cerdo-capitalista" data-id="pequeno-cerdo-capitalista"><i style="background:var(--v-matices)"></i>Pequeño cerdo capitalista</a></div></div><div class="decada"><span class="nodo">The real cost of a loan</span><div class="fila"><a class="hito" href="#mercader-de-venecia" data-id="mercader-de-venecia"><i style="background:var(--v-literatura)"></i>The Merchant of Venice</a><a class="hito" href="#liber-abaci" data-id="liber-abaci"><i style="background:var(--v-literatura)"></i>Liber Abaci</a><a class="hito" href="#pensar-rapido-pensar-despacio" data-id="pensar-rapido-pensar-despacio"><i style="background:var(--v-matices)"></i>Thinking, Fast and Slow</a></div></div><div class="decada"><span class="nodo">Credit history</span><div class="fila"><span class="tenue">No books for this lesson yet.</span></div></div><div class="decada"><span class="nodo">Scams and pyramid schemes</span><div class="fila"><a class="hito" href="#delirios-multitudinarios" data-id="delirios-multitudinarios"><i style="background:var(--v-literatura)"></i>Extraordinary Popular Delusions and the Madness of Crowds</a><a class="hito" href="#pensar-rapido-pensar-despacio" data-id="pensar-rapido-pensar-despacio"><i style="background:var(--v-matices)"></i>Thinking, Fast and Slow</a><a class="hito" href="#the-signal-and-the-noise" data-id="the-signal-and-the-noise"><i style="background:var(--v-solido)"></i>The Signal and the Noise</a></div></div><div class="decada"><span class="nodo">Insurance</span><div class="fila"><a class="hito" href="#pensar-rapido-pensar-despacio" data-id="pensar-rapido-pensar-despacio"><i style="background:var(--v-matices)"></i>Thinking, Fast and Slow</a></div></div><div class="decada"><span class="nodo">Basic taxes</span><div class="fila"><span class="tenue">No books for this lesson yet.</span></div></div><div class="decada"><span class="nodo">First salary and social security</span><div class="fila"><a class="hito" href="#el-coronel-no-tiene-quien-le-escriba" data-id="el-coronel-no-tiene-quien-le-escriba"><i style="background:var(--v-literatura)"></i>No One Writes to the Colonel</a></div></div><div class="decada"><span class="nodo">Self-employment</span><div class="fila"><a class="hito" href="#the-lean-startup" data-id="the-lean-startup"><i style="background:var(--v-matices)"></i>The Lean Startup</a></div></div><div class="decada"><span class="nodo">Starting a business with numbers</span><div class="fila"><a class="hito" href="#ensayo-sobre-el-comercio" data-id="ensayo-sobre-el-comercio"><i style="background:var(--v-literatura)"></i>Essay on the Nature of Trade in General</a><a class="hito" href="#the-lean-startup" data-id="the-lean-startup"><i style="background:var(--v-matices)"></i>The Lean Startup</a></div></div></div>
+  </section>
+
+  <section class="seccion" id="linea">
+    <header>
+      <p class="rotulo">Timeline · tap a book</p>
+      <h2>Nearly three thousand years of stories about money</h2>
+      <p>The books by the decade they were published, colored by their verdict. Tap one and the board and the map show it.</p>
+    </header>
+    <div class="linea" id="linea-tiempo"></div>
+    <p class="resumen-linea" id="resumen-linea"></p>
+  </section>
+
+  <section class="seccion" id="mapa">
+    <header>
+      <p class="rotulo">Map of connections</p>
+      <h2>How the books talk to each other</h2>
+      <p>Each line is a connection in the library. Tap a book to see which others it talks to and why. Grey dots are books on other topics.</p>
+    </header>
+    <div class="mapa">
+      <canvas id="red" width="900" height="680" aria-label="Map of connections between books"></canvas>
+      <div class="lista-cruces" id="cruces"></div>
+      <p class="leyenda-v" id="leyenda-mapa" style="grid-column:1/-1"></p>
+    </div>
+  </section>
+
+  <section class="seccion" id="fichas">
+    <header><p class="rotulo">The books</p><h2>The 16 books, one by one</h2></header>
+    <section class="grupo"><div class="grupo-cab"><h2>Stories that teach about money</h2><p>Fables, poems, plays and novels that tell an idea from the module better than an explanation</p></div>
+<article class="ficha" id="fabulas-de-esopo">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">s. VI a. C. (según la tradición)</span><span class="chip v-literatura">Literature and history</span></div>
+    <h3>Aesop&#x27;s Fables</h3>
+    
+    <dl><div><dt>Author</dt><dd>Esopo (atribuidas)</dd></div><div><dt>Lessons</dt><dd>Saving and goals, Investing, the basics</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><a href="#delirios-multitudinarios">Extraordinary Popular Delusions and the Madness of Crowds</a> · The Goose That Laid the Golden Eggs in real life, people who risk everything to earn more, and faster.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> Save in time, and do not destroy what produces.</p><p>The Ant and the Grasshopper is the Saving and goals lesson told to a child; the Goose That Laid the Golden Eggs, the idea of not destroying what produces, central to Investing, the basics.</p><p><a href="/libros-del-dinero.html#fabulas-de-esopo" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="odisea">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">s. VIII a. C. (según la tradición)</span><span class="chip v-literatura">Literature and history</span></div>
+    <h3>The Odyssey</h3>
+    
+    <dl><div><dt>Author</dt><dd>Homero</dd></div><div><dt>Lessons</dt><dd>Saving and goals</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><a href="#robinson-crusoe">Robinson Crusoe</a> · Two castaways far from home. Ulysses gets through with cunning; Robinson, with work and accounts.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> Tie yourself to the mast before temptation.</p><p>Ulysses has himself tied up to hear the sirens without being lost. It is the oldest image of a commitment device, the idea behind saving automatically.</p><p><a href="/libros-del-dinero.html#odisea" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="mercader-de-venecia">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">hacia 1596-1598</span><span class="chip v-literatura">Literature and history</span></div>
+    <h3>The Merchant of Venice</h3>
+    
+    <dl><div><dt>Author</dt><dd>William Shakespeare</dd></div><div><dt>Lessons</dt><dd>Good debt and bad debt, The real cost of a loan</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><a href="#david-copperfield">David Copperfield</a> · Two debtors. Antonio pledges his own body as collateral; Micawber ends up in debtors&#x27; prison.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> What you lose if a loan is not repaid.</p><p>It is the most famous story about the collateral of a loan. It helps to talk about reading the terms before signing, and about when a debt stops being a help.</p><p><a href="/libros-del-dinero.html#mercader-de-venecia" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="robinson-crusoe">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">1719</span><span class="chip v-literatura">Literature and history</span></div>
+    <h3>Robinson Crusoe</h3>
+    
+    <dl><div><dt>Author</dt><dd>Daniel Defoe</dd></div><div><dt>Lessons</dt><dd>Need or want?, Budget</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><em>Steppenwolf</em> · Two men alone. Robinson&#x27;s solitude is forced on him by a shipwreck; Harry Haller chooses his.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> The value of things depends on what you can do with them.</p><p>On the island, a knife is worth more than all the coins from the ship. And when he is desperate, Robinson writes his evils and his goods in two columns, like a balance sheet.</p><p><a href="/libros-del-dinero.html#robinson-crusoe" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="david-copperfield">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">1849-1850</span><span class="chip v-literatura">Literature and history</span></div>
+    <h3>David Copperfield</h3>
+    
+    <dl><div><dt>Author</dt><dd>Charles Dickens</dd></div><div><dt>Lessons</dt><dd>Income and expenses, Budget</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><a href="#robinson-crusoe">Robinson Crusoe</a> · Two ways of keeping accounts, Micawber&#x27;s rule and Robinson&#x27;s list of evils and goods.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> Spend a little less than what comes in.</p><p>Micawber sums up the Budget lesson in two sentences, the difference between happiness and misery lies in spending a little less or a little more than you earn. He says it on leaving debtors&#x27; prison.</p><p><a href="/libros-del-dinero.html#david-copperfield" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="el-coronel-no-tiene-quien-le-escriba">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">1961</span><span class="chip v-literatura">Literature and history</span></div>
+    <h3>No One Writes to the Colonel</h3>
+    
+    <dl><div><dt>Author</dt><dd>Gabriel García Márquez</dd></div><div><dt>Lessons</dt><dd>First salary and social security</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><a href="#david-copperfield">David Copperfield</a> · Poverty with dignity. The colonel and Micawber keep up appearances even though they have nothing to do it with.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> What a person lives on when they can no longer work.</p><p>A colonel waits for years for a pension that never arrives. It is the best short novel, and a Colombian one, for understanding social security.</p><p><a href="/libros-del-dinero.html#el-coronel-no-tiene-quien-le-escriba" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>The history of money and markets</h2><p>Where accounting, trade and bubbles come from</p></div>
+<article class="ficha" id="liber-abaci">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">1202</span><span class="chip v-literatura">Literature and history</span></div>
+    <h3>Liber Abaci</h3>
+    
+    <dl><div><dt>Author</dt><dd>Leonardo de Pisa (Fibonacci)</dd></div><div><dt>Lessons</dt><dd>The real cost of a loan</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><a href="#mercader-de-venecia">The Merchant of Venice</a> · Italian merchants and loans. Fibonacci taught them to do the sums; Shakespeare showed what happens when a loan goes wrong.</li><li><a href="#ensayo-sobre-el-comercio">Essay on the Nature of Trade in General</a> · Two books written for merchants, five centuries apart.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> The numbers we do our sums with today.</p><p>It helped Europe leave Roman numerals behind, and it shows that the mathematics of credit is more than 800 years old.</p><p><a href="/libros-del-dinero.html#liber-abaci" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="ensayo-sobre-el-comercio">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">1755</span><span class="chip v-literatura">Literature and history</span></div>
+    <h3>Essay on the Nature of Trade in General</h3>
+    
+    <dl><div><dt>Author</dt><dd>Richard Cantillon</dd></div><div><dt>Lessons</dt><dd>Starting a business with numbers, Inflation</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><a href="#delirios-multitudinarios">Extraordinary Popular Delusions and the Madness of Crowds</a> · Cantillon got rich from the John Law bubble that Mackay tells about, and sold before it burst.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> The entrepreneur buys at a certain price to sell at an uncertain one.</p><p>It defines the entrepreneur as the one who takes on risk, and explains why, when new money is created, those who receive it last pay higher prices.</p><p><a href="/libros-del-dinero.html#ensayo-sobre-el-comercio" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="delirios-multitudinarios">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">1841</span><span class="chip v-literatura">Literature and history</span></div>
+    <h3>Extraordinary Popular Delusions and the Madness of Crowds</h3>
+    
+    <dl><div><dt>Author</dt><dd>Charles Mackay</dd></div><div><dt>Lessons</dt><dd>Scams and pyramid schemes, Investing, the basics, Inflation</dd></div></dl>
+    
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> Everyone buys because everyone buys.</p><p>Bubbles and pyramid schemes have repeated the same pattern for centuries. The story of John Law, who printed banknotes without control, also works for Inflation.</p><p><a href="/libros-del-dinero.html#delirios-multitudinarios" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>How we decide with money</h2><p>Predictable mistakes, and how to design better decisions</p></div>
+<article class="ficha" id="pensar-rapido-pensar-despacio">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">2011</span><span class="chip v-matices">Partly right</span></div>
+    <h3>Thinking, Fast and Slow</h3>
+    
+    <dl><div><dt>Author</dt><dd>Daniel Kahneman</dd></div><div><dt>Lessons</dt><dd>Scams and pyramid schemes, Investing, the basics, The real cost of a loan, Insurance</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><em>The Art of Thinking Clearly</em> · Dobelli lists thinking errors; Kahneman explains where they come from, with the theory of two systems.</li><li><a href="#nudge">Nudge</a> · Kahneman describes how the mind goes wrong; Thaler and Sunstein, how to design decisions so those errors weigh less.</li><li><a href="#delirios-multitudinarios">Extraordinary Popular Delusions and the Madness of Crowds</a> · The bubbles Mackay tells about are overconfidence and social proof on the scale of a country.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> We think with a fast system and a slow one.</p><p>The book offers a serious theory and much of it holds, such as the anchoring effect. But a famous experiment in chapter 4, in which reading words about old age made people walk more slowly, could not be repeated.</p><p class="tenue" style="font-size:1rem">Doyen y otros, 2012 · <a href="https://doi.org/10.1371/journal.pone.0029081" target="_blank" rel="noopener">doi.org/10.1371/journal.pone.0029081</a></p><p><a href="/libros-del-dinero.html#pensar-rapido-pensar-despacio" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="misbehaving">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">2015</span><span class="chip v-matices">Partly right</span></div>
+    <h3>Misbehaving</h3>
+    
+    <dl><div><dt>Author</dt><dd>Richard H. Thaler</dd></div><div><dt>Lessons</dt><dd>Budget, Saving and goals, Need or want?, Investing, the basics</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><a href="#pensar-rapido-pensar-despacio">Thinking, Fast and Slow</a> · The same story seen from two sides, Kahneman from psychology and Thaler from economics. They worked together.</li><li><a href="#nudge">Nudge</a> · Misbehaving tells how the idea of nudges was born and how it reached governments.</li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a> · Macías teaches you to see small daily expenses; Thaler explains why they slip away, because we do not treat all money the same, it depends on the mental drawer we put it in.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> People make predictable mistakes with money.</p><p>Those given a mug asked much more to sell it than others offered to buy it. It is the endowment effect; with careful training on the rules of the experiment, the gap can disappear.</p><p class="tenue" style="font-size:1rem">Kahneman, Knetsch y Thaler, 1990 · <a href="https://doi.org/10.1086/261737" target="_blank" rel="noopener">doi.org/10.1086/261737</a></p><p><a href="/libros-del-dinero.html#misbehaving" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="nudge">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">2008</span><span class="chip v-matices">Partly right</span></div>
+    <h3>Nudge</h3>
+    
+    <dl><div><dt>Author</dt><dd>Richard H. Thaler y Cass R. Sunstein</dd></div><div><dt>Lessons</dt><dd>Saving and goals, Budget, Credit cards</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><em>Atomic Habits</em> · Both say surroundings matter more than willpower. Clear applies it to yourself; Thaler and Sunstein, to whoever designs other people&#x27;s choices.</li><li><a href="#odisea">The Odyssey</a> · Save More Tomorrow is tying yourself to the mast, committing today to save the pay raises still to come.</li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a> · Saving automatically, so you do not depend on remembering or on willpower.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> A well-designed nudge changes what people choose.</p><p>Default saving works very well. But after correcting for unpublished studies, the average effect of nudges almost disappears. Some work a lot and others hardly at all.</p><p class="tenue" style="font-size:1rem">Maier y otros, 2022 · <a href="https://doi.org/10.1073/pnas.2200300119" target="_blank" rel="noopener">doi.org/10.1073/pnas.2200300119</a></p><p><a href="/libros-del-dinero.html#nudge" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="the-signal-and-the-noise">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">2012</span><span class="chip v-solido">Solid</span></div>
+    <h3>The Signal and the Noise</h3>
+    
+    <dl><div><dt>Author</dt><dd>Nate Silver</dd></div><div><dt>Lessons</dt><dd>Investing, the basics, Scams and pyramid schemes</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><em>Algorithms to Live By</em> · Both teach Bayes&#x27; rule and overfitting, updating what we believe with each new piece of data without mistaking noise for signal.</li><li><a href="#delirios-multitudinarios">Extraordinary Popular Delusions and the Madness of Crowds</a> · Mackay tells of the 18th-century bubbles; Silver, of the 2008 one, and why almost nobody saw it coming.</li><li><a href="#pensar-rapido-pensar-despacio">Thinking, Fast and Slow</a> · Experts are wrong with great confidence. Kahneman explains why; Silver shows how to forecast better.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> Forecasting better can be learned.</p><p>In a two-year forecasting tournament, training in probability, working in teams and grouping the best forecasters improved the forecasts.</p><p class="tenue" style="font-size:1rem">Mellers y otros, 2014 · <a href="https://doi.org/10.1177/0956797614524255" target="_blank" rel="noopener">doi.org/10.1177/0956797614524255</a></p><p><a href="/libros-del-dinero.html#the-signal-and-the-noise" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article></section><section class="grupo"><div class="grupo-cab"><h2>Saving, starting a business and living well</h2><p>From the budget to your own business, and how much money matters in a good life</p></div>
+<article class="ficha" id="pequeno-cerdo-capitalista">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">2011</span><span class="chip v-matices">Partly right</span></div>
+    <h3>Pequeño cerdo capitalista</h3>
+    
+    <dl><div><dt>Author</dt><dd>Sofía Macías</dd></div><div><dt>Lessons</dt><dd>Income and expenses, Budget, Saving and goals, Good debt and bad debt, Credit cards, Investing, the basics</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><a href="#fabulas-de-esopo">Aesop&#x27;s Fables</a> · Small daily expenses and the ant in the fable, two ways of explaining that small things, repeated, become big.</li><li><a href="#david-copperfield">David Copperfield</a> · Micawber&#x27;s rule and Macías&#x27;s budget say the same thing 160 years apart, spend a little less than what comes in.</li><li><em>Atomic Habits</em> · Saving as a small, automatic habit, not as a heroic effort.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> Small daily expenses eat your money.</p><p>It has support, a cost presented per day seems smaller than it is. But the book thinks of Mexico and of people with some margin, and small expenses do not explain a lack of money when income is not enough.</p><p class="tenue" style="font-size:1rem">Gourville, 1998 · <a href="https://doi.org/10.1086/209517" target="_blank" rel="noopener">doi.org/10.1086/209517</a></p><p><a href="/libros-del-dinero.html#pequeno-cerdo-capitalista" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="the-lean-startup">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">2011</span><span class="chip v-matices">Partly right</span></div>
+    <h3>The Lean Startup</h3>
+    
+    <dl><div><dt>Author</dt><dd>Eric Ries</dd></div><div><dt>Lessons</dt><dd>Starting a business with numbers, Self-employment</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><em>Designing Your Life</em> · The same idea applied to different things, testing small before deciding. Ries with a business, Burnett and Evans with your own life.</li><li><a href="#the-signal-and-the-noise">The Signal and the Noise</a> · Both ask you to treat what you believe as a hypothesis and change your mind when the data says so.</li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a> · Macías teaches you to look after your own money; Ries, not to spend it on a business before knowing if anyone wants it.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> Test a business idea before investing in it.</p><p>In a trial with 116 startups assigned at random, those who learned to test hypotheses performed better. The method grew out of Silicon Valley anecdotes and does not work equally for every business.</p><p class="tenue" style="font-size:1rem">Camuffo y otros, 2020 · <a href="https://doi.org/10.1287/mnsc.2018.3249" target="_blank" rel="noopener">doi.org/10.1287/mnsc.2018.3249</a></p><p><a href="/libros-del-dinero.html#the-lean-startup" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article>
+<article class="ficha" id="the-good-life">
+  <header class="tarjeta">
+    <div class="sello"><span class="cota">2023</span><span class="chip v-matices">Partly right</span></div>
+    <h3>The Good Life</h3>
+    
+    <dl><div><dt>Author</dt><dd>Robert Waldinger y Marc Schulz</dd></div><div><dt>Lessons</dt><dd>Need or want?</dd></div></dl>
+    <div class='cruces'><p class='rotulo'>Connects with</p><ul><li><em>Man&#x27;s Search for Meaning</em> · Frankl held on by thinking of his wife; 85 years of data say relationships are what matters most in a good life.</li><li><em>Nonviolent Communication</em> · Waldinger says relationships are cared for like health; Rosenberg gives a concrete way to do it when there is conflict.</li><li><a href="#pequeno-cerdo-capitalista">Pequeño cerdo capitalista</a> · Money does matter for well-being, but it does not replace friends. A good pair for the Need or want? lesson.</li></ul></div>
+  </header>
+  <div class="cuerpo"><p><b>The promise:</b> Relationships matter more than money in a good life.</p><p>Relationships are associated with more health and happiness, although that does not prove they cause them. And money does matter, well-being keeps rising with income for most people.</p><p class="tenue" style="font-size:1rem">Killingsworth, Kahneman y Mellers, 2023 · <a href="https://doi.org/10.1073/pnas.2208661120" target="_blank" rel="noopener">doi.org/10.1073/pnas.2208661120</a></p><p><a href="/libros-del-dinero.html#the-good-life" hreflang="es">Read the full review (in Spanish)</a></p></div>
+</article></section>
+  </section>
+</div>
+
+<div class="escenario" id="escenario" hidden>
+  <div class="regla" id="regla2" aria-hidden="true"></div>
+  <div class="contenido" id="contenido"></div>
+  <div class="pie">
+    <span class="dato" id="reloj2" style="font-size:1.6rem">0:30</span>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="boton" id="atras">← Previous block</button>
+      <button class="boton lleno" id="iniciar2">Start</button>
+      <button class="boton" id="adelante">Next block →</button>
+      <button class="boton" id="salir">Exit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATOS = {"libros": [{"id": "fabulas-de-esopo", "titulo": "Aesop's Fables", "autor": "Esopo (atribuidas)", "anio": "s. VI a. C. (según la tradición)", "grupo": 0, "orden": -550, "siglo": "s. VI a. C.", "veredicto": "literatura", "frase": "Save in time, and do not destroy what produces", "juicio": "The Ant and the Grasshopper is the Saving and goals lesson told to a child; the Goose That Laid the Golden Eggs, the idea of not destroying what produces, central to Investing, the basics.", "cita": null, "doi": null}, {"id": "odisea", "titulo": "The Odyssey", "autor": "Homero", "anio": "s. VIII a. C. (según la tradición)", "grupo": 0, "orden": -750, "siglo": "s. VIII a. C.", "veredicto": "literatura", "frase": "Tie yourself to the mast before temptation", "juicio": "Ulysses has himself tied up to hear the sirens without being lost. It is the oldest image of a commitment device, the idea behind saving automatically.", "cita": null, "doi": null}, {"id": "mercader-de-venecia", "titulo": "The Merchant of Venice", "autor": "William Shakespeare", "anio": "hacia 1596-1598", "grupo": 0, "orden": 1596, "siglo": null, "veredicto": "literatura", "frase": "What you lose if a loan is not repaid", "juicio": "It is the most famous story about the collateral of a loan. It helps to talk about reading the terms before signing, and about when a debt stops being a help.", "cita": null, "doi": null}, {"id": "robinson-crusoe", "titulo": "Robinson Crusoe", "autor": "Daniel Defoe", "anio": "1719", "grupo": 0, "orden": 1719, "siglo": null, "veredicto": "literatura", "frase": "The value of things depends on what you can do with them", "juicio": "On the island, a knife is worth more than all the coins from the ship. And when he is desperate, Robinson writes his evils and his goods in two columns, like a balance sheet.", "cita": null, "doi": null}, {"id": "david-copperfield", "titulo": "David Copperfield", "autor": "Charles Dickens", "anio": "1849-1850", "grupo": 0, "orden": 1849, "siglo": null, "veredicto": "literatura", "frase": "Spend a little less than what comes in", "juicio": "Micawber sums up the Budget lesson in two sentences, the difference between happiness and misery lies in spending a little less or a little more than you earn. He says it on leaving debtors' prison.", "cita": null, "doi": null}, {"id": "el-coronel-no-tiene-quien-le-escriba", "titulo": "No One Writes to the Colonel", "autor": "Gabriel García Márquez", "anio": "1961", "grupo": 0, "orden": 1961, "siglo": null, "veredicto": "literatura", "frase": "What a person lives on when they can no longer work", "juicio": "A colonel waits for years for a pension that never arrives. It is the best short novel, and a Colombian one, for understanding social security.", "cita": null, "doi": null}, {"id": "liber-abaci", "titulo": "Liber Abaci", "autor": "Leonardo de Pisa (Fibonacci)", "anio": "1202", "grupo": 1, "orden": 1202, "siglo": null, "veredicto": "literatura", "frase": "The numbers we do our sums with today", "juicio": "It helped Europe leave Roman numerals behind, and it shows that the mathematics of credit is more than 800 years old.", "cita": null, "doi": null}, {"id": "ensayo-sobre-el-comercio", "titulo": "Essay on the Nature of Trade in General", "autor": "Richard Cantillon", "anio": "1755", "grupo": 1, "orden": 1755, "siglo": null, "veredicto": "literatura", "frase": "The entrepreneur buys at a certain price to sell at an uncertain one", "juicio": "It defines the entrepreneur as the one who takes on risk, and explains why, when new money is created, those who receive it last pay higher prices.", "cita": null, "doi": null}, {"id": "delirios-multitudinarios", "titulo": "Extraordinary Popular Delusions and the Madness of Crowds", "autor": "Charles Mackay", "anio": "1841", "grupo": 1, "orden": 1841, "siglo": null, "veredicto": "literatura", "frase": "Everyone buys because everyone buys", "juicio": "Bubbles and pyramid schemes have repeated the same pattern for centuries. The story of John Law, who printed banknotes without control, also works for Inflation.", "cita": null, "doi": null}, {"id": "pensar-rapido-pensar-despacio", "titulo": "Thinking, Fast and Slow", "autor": "Daniel Kahneman", "anio": "2011", "grupo": 2, "orden": 2011, "siglo": null, "veredicto": "matices", "frase": "We think with a fast system and a slow one", "juicio": "The book offers a serious theory and much of it holds, such as the anchoring effect. But a famous experiment in chapter 4, in which reading words about old age made people walk more slowly, could not be repeated.", "cita": "Doyen y otros, 2012", "doi": "10.1371/journal.pone.0029081"}, {"id": "misbehaving", "titulo": "Misbehaving", "autor": "Richard H. Thaler", "anio": "2015", "grupo": 2, "orden": 2015, "siglo": null, "veredicto": "matices", "frase": "People make predictable mistakes with money", "juicio": "Those given a mug asked much more to sell it than others offered to buy it. It is the endowment effect; with careful training on the rules of the experiment, the gap can disappear.", "cita": "Kahneman, Knetsch y Thaler, 1990", "doi": "10.1086/261737"}, {"id": "nudge", "titulo": "Nudge", "autor": "Richard H. Thaler y Cass R. Sunstein", "anio": "2008", "grupo": 2, "orden": 2008, "siglo": null, "veredicto": "matices", "frase": "A well-designed nudge changes what people choose", "juicio": "Default saving works very well. But after correcting for unpublished studies, the average effect of nudges almost disappears. Some work a lot and others hardly at all.", "cita": "Maier y otros, 2022", "doi": "10.1073/pnas.2200300119"}, {"id": "the-signal-and-the-noise", "titulo": "The Signal and the Noise", "autor": "Nate Silver", "anio": "2012", "grupo": 2, "orden": 2012, "siglo": null, "veredicto": "solido", "frase": "Forecasting better can be learned", "juicio": "In a two-year forecasting tournament, training in probability, working in teams and grouping the best forecasters improved the forecasts.", "cita": "Mellers y otros, 2014", "doi": "10.1177/0956797614524255"}, {"id": "pequeno-cerdo-capitalista", "titulo": "Pequeño cerdo capitalista", "autor": "Sofía Macías", "anio": "2011", "grupo": 3, "orden": 2011, "siglo": null, "veredicto": "matices", "frase": "Small daily expenses eat your money", "juicio": "It has support, a cost presented per day seems smaller than it is. But the book thinks of Mexico and of people with some margin, and small expenses do not explain a lack of money when income is not enough.", "cita": "Gourville, 1998", "doi": "10.1086/209517"}, {"id": "the-lean-startup", "titulo": "The Lean Startup", "autor": "Eric Ries", "anio": "2011", "grupo": 3, "orden": 2011, "siglo": null, "veredicto": "matices", "frase": "Test a business idea before investing in it", "juicio": "In a trial with 116 startups assigned at random, those who learned to test hypotheses performed better. The method grew out of Silicon Valley anecdotes and does not work equally for every business.", "cita": "Camuffo y otros, 2020", "doi": "10.1287/mnsc.2018.3249"}, {"id": "the-good-life", "titulo": "The Good Life", "autor": "Robert Waldinger y Marc Schulz", "anio": "2023", "grupo": 3, "orden": 2023, "siglo": null, "veredicto": "matices", "frase": "Relationships matter more than money in a good life", "juicio": "Relationships are associated with more health and happiness, although that does not prove they cause them. And money does matter, well-being keeps rising with income for most people.", "cita": "Killingsworth, Kahneman y Mellers, 2023", "doi": "10.1073/pnas.2208661120"}], "aristas": [{"a": "the-signal-and-the-noise", "b": "21-lecciones-para-el-siglo-xxi", "por": "Harari forecasts the future of work with great confidence; Silver teaches you to distrust forecasts that give no probabilities.", "fuera": true, "titulo_b": "21 Lessons for the 21st Century"}, {"a": "pensar-rapido-pensar-despacio", "b": "algorithms-to-live-by", "por": "Kahneman shows how often we are wrong; Christian and Griffiths, that we often decide reasonably well with the little we know.", "fuera": true, "titulo_b": "Algorithms to Live By"}, {"a": "odisea", "b": "atomic-habits", "por": "Designing your surroundings so you do not give in to temptation is the modern version of tying yourself to the mast.", "fuera": true, "titulo_b": "Atomic Habits"}, {"a": "liber-abaci", "b": "cosmos", "por": "A history of the mathematics that changed the world. Sagan tells of Eratosthenes and Kepler; Fibonacci brought the numbers we use today.", "fuera": true, "titulo_b": "Cosmos"}, {"a": "david-copperfield", "b": "robinson-crusoe", "por": "Two ways of keeping accounts, Micawber's rule and Robinson's list of evils and goods.", "fuera": false, "titulo_b": "Robinson Crusoe"}, {"a": "odisea", "b": "designing-your-life", "por": "The authors call imagining three possible paths for the next five years \"Odyssey plans\"; Ulysses did not come home by the route he had planned either.", "fuera": true, "titulo_b": "Designing Your Life"}, {"a": "delirios-multitudinarios", "b": "el-arte-de-pensar", "por": "Dobelli explains social proof in a chapter; Mackay shows whole countries falling for it.", "fuera": true, "titulo_b": "The Art of Thinking Clearly"}, {"a": "odisea", "b": "el-arte-de-pensar", "por": "Hyperbolic discounting (preferring today's reward) is the problem; tying yourself to the mast is a solution.", "fuera": true, "titulo_b": "The Art of Thinking Clearly"}, {"a": "el-coronel-no-tiene-quien-le-escriba", "b": "david-copperfield", "por": "Poverty with dignity. The colonel and Micawber keep up appearances even though they have nothing to do it with.", "fuera": false, "titulo_b": "David Copperfield"}, {"a": "el-coronel-no-tiene-quien-le-escriba", "b": "el-hombre-en-busca-de-sentido", "por": "Holding on when everything is missing. The colonel waits for a letter; Frankl, to see his loved ones again.", "fuera": true, "titulo_b": "Man's Search for Meaning"}, {"a": "robinson-crusoe", "b": "emilio", "por": "It is the first book Rousseau lets Emile read, the model of someone who learns from things and not from speeches.", "fuera": true, "titulo_b": "Emile, or On Education"}, {"a": "ensayo-sobre-el-comercio", "b": "delirios-multitudinarios", "por": "Cantillon got rich from the John Law bubble that Mackay tells about, and sold before it burst.", "fuera": false, "titulo_b": "Extraordinary Popular Delusions and the Madness of Crowds"}, {"a": "fabulas-de-esopo", "b": "delirios-multitudinarios", "por": "The Goose That Laid the Golden Eggs in real life, people who risk everything to earn more, and faster.", "fuera": false, "titulo_b": "Extraordinary Popular Delusions and the Madness of Crowds"}, {"a": "odisea", "b": "inteligencia-emocional", "por": "Ulysses ties himself to the mast because he knows he will not resist the sirens. Self-control with a plan, not with willpower.", "fuera": true, "titulo_b": "Emotional Intelligence"}, {"a": "odisea", "b": "la-invencion-de-todas-las-cosas", "por": "One of the oldest fictions we still tell; Volpi asks why human beings cannot stop telling stories.", "fuera": true, "titulo_b": "La invención de todas las cosas (in Spanish only)"}, {"a": "fabulas-de-esopo", "b": "la-invencion-de-todas-las-cosas", "por": "Fables are fictions that teach us to cooperate and to be wary, exactly the role Volpi gives to fiction.", "fuera": true, "titulo_b": "La invención de todas las cosas (in Spanish only)"}, {"a": "pensar-rapido-pensar-despacio", "b": "la-invencion-de-todas-las-cosas", "por": "Volpi uses Kahneman's fast brain to explain why we believe stories before we think them through.", "fuera": true, "titulo_b": "La invención de todas las cosas (in Spanish only)"}, {"a": "liber-abaci", "b": "mercader-de-venecia", "por": "Italian merchants and loans. Fibonacci taught them to do the sums; Shakespeare showed what happens when a loan goes wrong.", "fuera": false, "titulo_b": "The Merchant of Venice"}, {"a": "liber-abaci", "b": "ensayo-sobre-el-comercio", "por": "Two books written for merchants, five centuries apart.", "fuera": false, "titulo_b": "Essay on the Nature of Trade in General"}, {"a": "the-good-life", "b": "maybe-you-should-talk-to-someone", "por": "Waldinger says relationships sustain a good life; Gottlieb shows how one relationship, therapy, helps people change.", "fuera": true, "titulo_b": "Maybe You Should Talk to Someone"}, {"a": "mercader-de-venecia", "b": "david-copperfield", "por": "Two debtors. Antonio pledges his own body as collateral; Micawber ends up in debtors' prison.", "fuera": false, "titulo_b": "David Copperfield"}, {"a": "misbehaving", "b": "pensar-rapido-pensar-despacio", "por": "The same story seen from two sides, Kahneman from psychology and Thaler from economics. They worked together.", "fuera": false, "titulo_b": "Thinking, Fast and Slow"}, {"a": "misbehaving", "b": "nudge", "por": "Misbehaving tells how the idea of nudges was born and how it reached governments.", "fuera": false, "titulo_b": "Nudge"}, {"a": "misbehaving", "b": "pequeno-cerdo-capitalista", "por": "Macías teaches you to see small daily expenses; Thaler explains why they slip away, because we do not treat all money the same, it depends on the mental drawer we put it in.", "fuera": false, "titulo_b": "Pequeño cerdo capitalista"}, {"a": "misbehaving", "b": "moneyball", "por": "Thaler and Sunstein reviewed Moneyball as a case of behavioral economics, and Thaler studied the same mistake in the American football draft.", "fuera": true, "titulo_b": "Moneyball"}, {"a": "the-signal-and-the-noise", "b": "moneyball", "por": "Silver devotes a chapter to baseball, when data beats the expert's eye and when the two complement each other.", "fuera": true, "titulo_b": "Moneyball"}, {"a": "nudge", "b": "atomic-habits", "por": "Both say surroundings matter more than willpower. Clear applies it to yourself; Thaler and Sunstein, to whoever designs other people's choices.", "fuera": true, "titulo_b": "Atomic Habits"}, {"a": "nudge", "b": "odisea", "por": "Save More Tomorrow is tying yourself to the mast, committing today to save the pay raises still to come.", "fuera": false, "titulo_b": "The Odyssey"}, {"a": "nudge", "b": "pequeno-cerdo-capitalista", "por": "Saving automatically, so you do not depend on remembering or on willpower.", "fuera": false, "titulo_b": "Pequeño cerdo capitalista"}, {"a": "odisea", "b": "robinson-crusoe", "por": "Two castaways far from home. Ulysses gets through with cunning; Robinson, with work and accounts.", "fuera": false, "titulo_b": "Robinson Crusoe"}, {"a": "pensar-rapido-pensar-despacio", "b": "el-arte-de-pensar", "por": "Dobelli lists thinking errors; Kahneman explains where they come from, with the theory of two systems.", "fuera": true, "titulo_b": "The Art of Thinking Clearly"}, {"a": "pensar-rapido-pensar-despacio", "b": "nudge", "por": "Kahneman describes how the mind goes wrong; Thaler and Sunstein, how to design decisions so those errors weigh less.", "fuera": false, "titulo_b": "Nudge"}, {"a": "pensar-rapido-pensar-despacio", "b": "delirios-multitudinarios", "por": "The bubbles Mackay tells about are overconfidence and social proof on the scale of a country.", "fuera": false, "titulo_b": "Extraordinary Popular Delusions and the Madness of Crowds"}, {"a": "pequeno-cerdo-capitalista", "b": "fabulas-de-esopo", "por": "Small daily expenses and the ant in the fable, two ways of explaining that small things, repeated, become big.", "fuera": false, "titulo_b": "Aesop's Fables"}, {"a": "pequeno-cerdo-capitalista", "b": "david-copperfield", "por": "Micawber's rule and Macías's budget say the same thing 160 years apart, spend a little less than what comes in.", "fuera": false, "titulo_b": "David Copperfield"}, {"a": "pequeno-cerdo-capitalista", "b": "atomic-habits", "por": "Saving as a small, automatic habit, not as a heroic effort.", "fuera": true, "titulo_b": "Atomic Habits"}, {"a": "robinson-crusoe", "b": "el-lobo-estepario", "por": "Two men alone. Robinson's solitude is forced on him by a shipwreck; Harry Haller chooses his.", "fuera": true, "titulo_b": "Steppenwolf"}, {"a": "the-good-life", "b": "el-hombre-en-busca-de-sentido", "por": "Frankl held on by thinking of his wife; 85 years of data say relationships are what matters most in a good life.", "fuera": true, "titulo_b": "Man's Search for Meaning"}, {"a": "the-good-life", "b": "comunicacion-no-violenta", "por": "Waldinger says relationships are cared for like health; Rosenberg gives a concrete way to do it when there is conflict.", "fuera": true, "titulo_b": "Nonviolent Communication"}, {"a": "the-good-life", "b": "pequeno-cerdo-capitalista", "por": "Money does matter for well-being, but it does not replace friends. A good pair for the Need or want? lesson.", "fuera": false, "titulo_b": "Pequeño cerdo capitalista"}, {"a": "the-lean-startup", "b": "the-innovators", "por": "Two views of Silicon Valley, the history of how the digital revolution was made and the method that came out of its companies.", "fuera": true, "titulo_b": "The Innovators"}, {"a": "the-lean-startup", "b": "designing-your-life", "por": "The same idea applied to different things, testing small before deciding. Ries with a business, Burnett and Evans with your own life.", "fuera": true, "titulo_b": "Designing Your Life"}, {"a": "the-lean-startup", "b": "the-signal-and-the-noise", "por": "Both ask you to treat what you believe as a hypothesis and change your mind when the data says so.", "fuera": false, "titulo_b": "The Signal and the Noise"}, {"a": "the-lean-startup", "b": "pequeno-cerdo-capitalista", "por": "Macías teaches you to look after your own money; Ries, not to spend it on a business before knowing if anyone wants it.", "fuera": false, "titulo_b": "Pequeño cerdo capitalista"}, {"a": "nudge", "b": "the-power-of-habit", "por": "Companies also study our habits to sell us more. Duhigg shows it with Target; Thaler and Sunstein, with nudges.", "fuera": true, "titulo_b": "The Power of Habit"}, {"a": "the-signal-and-the-noise", "b": "algorithms-to-live-by", "por": "Both teach Bayes' rule and overfitting, updating what we believe with each new piece of data without mistaking noise for signal.", "fuera": true, "titulo_b": "Algorithms to Live By"}, {"a": "the-signal-and-the-noise", "b": "delirios-multitudinarios", "por": "Mackay tells of the 18th-century bubbles; Silver, of the 2008 one, and why almost nobody saw it coming.", "fuera": false, "titulo_b": "Extraordinary Popular Delusions and the Madness of Crowds"}, {"a": "the-signal-and-the-noise", "b": "pensar-rapido-pensar-despacio", "por": "Experts are wrong with great confidence. Kahneman explains why; Silver shows how to forecast better.", "fuera": false, "titulo_b": "Thinking, Fast and Slow"}, {"a": "robinson-crusoe", "b": "ultralearning", "por": "Learning alone and by doing. Robinson learns to bake bread and make pots through failed attempts.", "fuera": true, "titulo_b": "Ultralearning"}, {"a": "the-signal-and-the-noise", "b": "why-we-sleep", "por": "A good case for Silver's lesson, a chart with one data point removed changes what it seems to say.", "fuera": true, "titulo_b": "Why We Sleep"}], "grupos": ["Stories that teach about money", "The history of money and markets", "How we decide with money", "Saving, starting a business and living well"], "etiquetas": {"solido": "Solid", "matices": "Partly right", "promete": "Promises more than it proves", "filosofia": "Philosophy of education", "literatura": "Literature and history"}, "preguntas": [{"frase": "If your employer enrolls you in a savings plan by default, you are much more likely to save.", "es": "evidencia", "explica": "Enrolling employees automatically raised participation in the savings plan a lot, and most kept the default contribution.", "cita": "Madrian y Shea, 2001", "doi": "10.1162/003355301753265543"}, {"frase": "An expense presented \"per day\" seems smaller than it is.", "es": "evidencia", "explica": "Presenting a cost in small daily amounts makes it seem smaller than the same cost presented in full.", "cita": "Gourville, 1998", "doi": "10.1086/209517"}, {"frase": "Committing today to save future pay raises can greatly increase saving.", "es": "evidencia", "explica": "In the Save More Tomorrow program, the saving rate of those who joined rose from 3.5 % to 13.6 % in 40 months.", "cita": "Thaler y Benartzi, 2004", "doi": "10.1086/380085"}, {"frase": "All nudges to help people decide better work very well.", "es": "mito", "explica": "After correcting for unpublished studies, the average effect of nudges almost disappears. Some work a lot and others hardly at all.", "cita": "Maier y otros, 2022", "doi": "10.1073/pnas.2200300119"}, {"frase": "We value something more just because it is already ours.", "es": "evidencia", "explica": "Those given a mug asked much more to sell it than others offered to buy it, and far fewer mugs were traded than expected.", "cita": "Kahneman, Knetsch y Thaler, 1990", "doi": "10.1086/261737"}, {"frase": "Checking your investment every day helps you decide better.", "es": "mito", "explica": "Checking very often shows more losses, and since losses hurt more than gains, you end up choosing safer options that earn less.", "cita": "Benartzi y Thaler, 1995", "doi": "10.2307/2118511"}, {"frase": "The stocks that fell the most in recent years will keep falling.", "es": "mito", "explica": "The stocks that had fallen the most later earned more than those that had risen the most, a sign that the market overreacts.", "cita": "De Bondt y Thaler, 1985", "doi": "10.1111/j.1540-6261.1985.tb05004.x"}, {"frase": "Beyond a certain income, earning more no longer increases anyone's well-being.", "es": "mito", "explica": "For most people, well-being keeps rising with income. Only among the unhappiest does it stop rising beyond a certain level.", "cita": "Killingsworth, Kahneman y Mellers, 2023", "doi": "10.1073/pnas.2208661120"}, {"frase": "Teaching entrepreneurs to test their ideas improves their business results.", "es": "evidencia", "explica": "In a trial with 116 startups assigned at random, those who learned to formulate and test hypotheses performed better.", "cita": "Camuffo y otros, 2020", "doi": "10.1287/mnsc.2018.3249"}, {"frase": "It has been proven that reading words about old age makes people walk more slowly.", "es": "mito", "explica": "A famous experiment found it, but when other researchers repeated it more carefully, the effect did not appear.", "cita": "Doyen y otros, 2012", "doi": "10.1371/journal.pone.0029081"}]};
+const UI = {"lang": "en", "locale": "en-US", "titulo": "Books for understanding money", "descripcion": "Books, fables and novels for the New Old School Money module: what each one teaches, how well it holds up and which lesson it connects to.", "nav": {"cinco-minutos": "In 5 minutes", "que-funciona": "What works", "ponte-a-prueba": "Test yourself", "repaso": "Plan your review", "veredictos": "Verdicts", "nodos": "By lesson", "linea": "Timeline", "mapa": "Map", "fichas": "Books"}, "clave_repaso": "dinero-repaso-v1", "nodos": "Lessons", "sin_libros": "No books for this lesson yet.", "n_rotulo": "What to read for each lesson", "n_h2": "The books for each lesson in the module", "n_p": "The module's lessons in order, with the books that shed light on them. Tap a book to go to it.", "nav_aria": "Sections", "presentar": "Present in 5 minutes", "portada_rotulo": "New Old School library · Money module", "portada_p": "{n} books for the Money module: fables and novels that tell an idea better than an explanation, and popular science on how we decide with money. Each one comes with its verdict, the module lesson it connects to, and the books it talks to.", "leyenda": {"solido": "the evidence backs it", "matices": "right in part", "promete": "", "filosofia": "not measured the same way", "literatura": "not judged by studies"}, "c_rotulo": "The idea in Curioso Format · 300 seconds", "c_h2": "What feels like learning is not always learning", "c_p": "One idea in five blocks, each with its time. Tap a block to read it, or use “Present” to show it full screen with a timer.", "c_aria": "Blocks", "iniciar": "Start", "pausa": "Pause", "reiniciar": "Reset", "c_nota": "Amber in the last 10 s; red if you go over.", "objetivo": "target", "f_rotulo": "Animated explainer", "f_h2": "What works when studying, and how much practice matters", "f_p": "Two charts from research that several of these books cite. Pick one, play it or drag the timeline.", "f_aria_grafico": "Animated chart", "f_aria_linea": "Timeline", "reproducir": "Play", "fuente": "Source: ", "p_rotulo": "Test yourself · retrieval practice", "p_h2": "Myth or evidence?", "p_p": "Ten ideas about money and how we handle it. Decide before you see the answer: trying to recall and getting it wrong helps you learn more than reading the answer. The page remembers your answers in this browser and asks you again, days later, what you got wrong.", "p_aria_cajas": "Questions per review box", "practicar": "Practice all", "volver_repaso": "Back to today's review", "otra_vez": "Start over", "otra_vez_confirmar": "Erase your progress? Tap again", "mito": "Myth", "evidencia": "Evidence", "correcto": "Correct", "incorrecto": "No", "es_mito": "it is a myth", "es_evidencia": "it is evidence", "caja": "Box", "vuelve": "back on", "nuevas": "new", "sin_ver": "Not seen", "q_practica": "Free practice: {r} of {n} answered. It does not change your schedule.", "q_fin_proxima": "You finished today's review. The next question comes back on {f}.", "q_nada": "No questions pending.", "q_tocan": "You have {n} questions today; {f} to go.", "q_fin": "You finished today's review.", "q_vuelve": " Come back on {f}.", "r_rotulo": "Plan your review · spaced practice", "r_h2": "When should you review for an exam?", "r_p": "Spreading study over several days pays off more than cramming the night before. Enter the exam date and the planner suggests short sessions, further and further apart, where you test yourself without looking.", "r_empiezo": "I start studying on", "r_examen": "The exam is on", "r_sesiones": "Number of sessions", "r_nota": "Each session, 20 to 30 minutes. Close the notebook, write or say out loud what you remember, and then check what you missed.", "r_error": "The exam date must be after the day you start.", "r_examen_corto": "Exam", "r_resumen": "{n} sessions over {d} days, spaced {g} days apart. Example calculated from today; change the dates for your exam.", "r_tareas": ["Study the topic for the first time and, at the end, write what you remember without looking.", "Test yourself without looking. Review only what you forgot.", "Mix kinds of exercises and explain the steps out loud.", "Test yourself again, as if it were the exam.", "Short review: quick questions, without rereading everything.", "Last review, short. Sleep well tonight."], "v_rotulo": "Verdict board · tap a book", "v_h2": "How well does each book hold up?", "v_p": "Each verdict keeps the book's central idea. For popular science books, also the study that judges it; fables and novels are not judged by studies, but by what they help you understand. The full reviews are in Spanish.", "todos": "All", "la_promesa": "The promise:", "ir_ficha_completa": "Go to the book", "l_rotulo": "Timeline · tap a book", "l_h2": "Nearly three thousand years of stories about money", "l_p": "The books by the decade they were published, colored by their verdict. Tap one and the board and the map show it.", "l_resumen": "The stories and classics run from the {la} to {lb}. The popular science on how we decide with money is from {da} to {db}.", "l_decada": "{d}s", "m_rotulo": "Map of connections", "m_h2": "How the books talk to each other", "m_p": "Each line is a connection in the library. Tap a book to see which others it talks to and why. Grey dots are books on other topics.", "m_aria": "Map of connections between books", "otro_tema": "(other topic)", "sin_cruces": "This book has no connections yet.", "ir_ficha": "Go to the book", "otros_temas": "Other topics", "fi_rotulo": "The books", "fi_h2": "The {n} books, one by one", "leer_ficha": "Read the full review (in Spanish)", "ficha_es": "The full review, with summary and analysis, is in Spanish.", "autor": "Author", "temas": "Topics", "se_cruza": "Connects with", "atras": "← Previous block", "adelante": "Next block →", "salir": "Exit", "curioso": [{"nombre": "Hook", "objetivo": 30, "texto": ["How did you study for your last exam? If the answer is “I reread my notes and highlighted the important parts”, you are in good company, because that is what most people do.", "And, according to research, it is one of the things that works least."]}, {"nombre": "Idea", "objetivo": 90, "texto": ["When we reread, the text becomes familiar, and that familiarity feels like knowing. But recognizing something is not the same as being able to recall it.", "Closing the notebook and trying to recall, on the other hand, is hard. You make mistakes, you go blank, you feel you are not getting anywhere. That effort is exactly what makes learning last. Psychologists call it desirable difficulties.", "The same happens with spreading study over several days instead of cramming the night before. It feels worse, and it works better. What feels like learning is not always learning."]}, {"nombre": "Evidence", "objetivo": 60, "texto": ["In 2013, a group of psychologists reviewed ten study techniques. Only two were rated high utility: practice testing and spreading study over time. Rereading and highlighting were rated low utility.", "And a very popular idea, teaching each student according to their “learning style”, visual or auditory, has no evidence that it improves what is learned."]}, {"nombre": "So what?", "objetivo": 60, "texto": ["If you study, close the notebook and write what you remember; spread study over several days; mix kinds of exercises.", "If you teach, start class with three short, ungraded questions about the previous one.", "If you support a student at home, instead of “did you study?”, ask “what did you learn? Explain it to me without looking”."]}, {"nombre": "Open door", "objetivo": 30, "texto": ["Two books to keep going. Make It Stick, written by the researchers themselves, and Learning How to Learn, written for students.", "And the question to discuss, what will you stop doing the next time you study?"]}], "escenas": {"tecnicas": {"nombre": "Ten study techniques", "fuente": "Dunlosky, Rawson, Marsh, Nathan and Willingham (2013), Psychological Science in the Public Interest. doi.org/10.1177/1529100612453266", "titulo": "Utility of ten study techniques, according to a 2013 review", "utilidad": "Utility", "niveles": ["high", "moderate", "low"], "tecnicas": [["Practice testing (recall without looking)", "Spreading study over time"], ["Asking yourself why", "Explaining to yourself", "Mixing kinds of exercises"], ["Summarizing", "Highlighting", "Keyword mnemonic", "Imagery for text", "Rereading"]], "cierre": "What people do most, rereading and highlighting, is at the bottom."}, "practica": {"nombre": "How much practice explains", "fuente": "Macnamara, Hambrick and Oswald (2014), Psychological Science. doi.org/10.1177/0956797614535810", "titulo": "Share of performance differences explained by practice", "etiquetas": ["Games (chess and others)", "Music", "Sports", "Education", "Professions"], "menos_de": "less than ", "cierre": "Practice matters, but in school and work it explains very little of the differences."}}};
+const fmtT = (s, v) => s.replace(/\{(\w+)\}/g, (_, k) => v[k]);
+const $ = id => document.getElementById(id);
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/* En pantallas angostas los lienzos se dibujan con un diseño vertical y letra más grande */
+const ANGOSTO = matchMedia('(max-width: 640px)');
+
+/* ===== Curioso: guion de 300 s ===== */
+const CURIOSO = UI.curioso;
+const COLORES = ['--b1', '--b2', '--b3', '--b4', '--b5'];
+let bloque = 0, gastado = CURIOSO.map(() => 0), andando = false, marca = 0;
+const fmt = s => { const n = s < 0; s = Math.abs(Math.round(s)); return (n ? '−' : '') + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+function armarRegla(el, conClic) {
+  CURIOSO.forEach((b, i) => {
+    const x = document.createElement('button');
+    x.style.flex = `${b.objetivo} 0 0`; x.style.background = `var(${COLORES[i]})`;
+    x.innerHTML = `${esc(b.nombre)}<span class="seg">&nbsp;· ${b.objetivo} s</span>`;
+    if (conClic) { x.setAttribute('role', 'tab'); x.onclick = () => { bloque = i; pintarCurioso(); }; } else x.tabIndex = -1;
+    el.append(x);
+  });
+}
+armarRegla($('regla'), true); armarRegla($('regla2'), false);
+function pintarCurioso() {
+  const b = CURIOSO[bloque], resta = b.objetivo - gastado[bloque];
+  for (const r of [$('regla'), $('regla2')]) [...r.children].forEach((x, j) => x.setAttribute('aria-current', j === bloque));
+  $('bloque-nombre').textContent = `${b.nombre} · ${UI.objetivo} ${b.objetivo} s`;
+  for (const el of [$('reloj'), $('reloj2')]) { el.textContent = fmt(resta); el.classList.toggle('ambar', resta <= 10 && resta >= 0); el.classList.toggle('rojo', resta < 0); }
+  $('guion').innerHTML = b.texto.map(p => `<p>${esc(p)}</p>`).join('');
+  $('contenido').innerHTML = `<h2>${esc(b.nombre)}</h2>` + b.texto.map(p => `<p>${esc(p)}</p>`).join('');
+}
+function tic(ahora) { if (!andando) return; gastado[bloque] += (ahora - marca) / 1000; marca = ahora; pintarCurioso(); requestAnimationFrame(tic); }
+function alternar() { andando = !andando; for (const b of [$('iniciar'), $('iniciar2')]) b.textContent = andando ? UI.pausa : UI.iniciar; if (andando) { marca = performance.now(); requestAnimationFrame(tic); } }
+$('iniciar').onclick = alternar; $('iniciar2').onclick = alternar;
+$('reiniciar').onclick = () => { gastado = CURIOSO.map(() => 0); bloque = 0; if (andando) alternar(); pintarCurioso(); };
+const mover = d => { bloque = Math.max(0, Math.min(CURIOSO.length - 1, bloque + d)); pintarCurioso(); };
+$('atras').onclick = () => mover(-1); $('adelante').onclick = () => mover(1);
+$('presentar').onclick = () => { $('escenario').hidden = false; pintarCurioso(); $('iniciar2').focus(); };
+$('salir').onclick = () => { $('escenario').hidden = true; };
+document.addEventListener('keydown', e => {
+  if ($('escenario').hidden) return;
+  if (e.key === 'ArrowRight') mover(1);
+  else if (e.key === 'ArrowLeft') mover(-1);
+  else if (e.key === 'Escape') $('escenario').hidden = true;
+  else if (e.code === 'Space' && !e.target.matches('button')) { e.preventDefault(); alternar(); }
+});
+
+/* ===== Explicador: escena (datos) → render(escena, t) ===== */
+const ease = t => 1 - Math.pow(1 - t, 3);   // ease-out cúbica: nunca pasa del valor real
+const ET = UI.escenas.tecnicas, EP = UI.escenas.practica;
+const ESCENAS = {
+  tecnicas: {
+    nombre: ET.nombre, duracion: 7, fuente: ET.fuente, titulo: ET.titulo, cierre: ET.cierre,
+    grupos: ['--u-alta', '--u-moderada', '--u-baja'].map((color, i) => ({ nivel: ET.niveles[i], color, tecnicas: ET.tecnicas[i] })),
+  },
+  practica: {
+    nombre: EP.nombre, duracion: 7, fuente: EP.fuente, titulo: EP.titulo, cierre: EP.cierre,
+    datos: [26, 21, 18, 4, 1].map((valor, i) => ({ etiqueta: EP.etiquetas[i], valor, menor: i === 4 })),
+  },
+};
+let escenaActual = 'tecnicas';
+const lienzo = $('lienzo'), ctx = lienzo.getContext('2d');
+const lim = v => Math.max(0, Math.min(1, v));
+const prog = (t, ini, dur = .7) => ease(lim((t - ini) / dur));
+function textoEnvuelto(txt, x, y, ancho, alto) {
+  let linea = '', yy = y;
+  for (const p of txt.split(' ')) { const prueba = linea ? linea + ' ' + p : p; if (ctx.measureText(prueba).width > ancho && linea) { ctx.fillText(linea, x, yy); linea = p; yy += alto; } else linea = prueba; }
+  ctx.fillText(linea, x, yy);
+}
+const MEDIDAS = { ancho: [1280, 680], tecnicas: [720, 1240], practica: [720, 940] };
+function medirLienzo() {
+  const [w, h] = ANGOSTO.matches ? MEDIDAS[escenaActual] : MEDIDAS.ancho;
+  if (lienzo.width !== w || lienzo.height !== h) { lienzo.width = w; lienzo.height = h; }
+}
+const RENDER_ANGOSTO = {
+  tecnicas(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 40px ${tok('--f-titulo')}`; textoEnvuelto(e.titulo, 30, 60, 660, 46);
+    let y = 170;
+    e.grupos.forEach((g, i) => {
+      const ini = .7 + i * 1.2;
+      if (t < ini) { y += 76 + g.tecnicas.length * 76; return; }
+      const p = prog(t, ini);
+      ctx.globalAlpha = p; ctx.fillStyle = tok(g.color); ctx.fillRect(30, y, 660, 58);
+      ctx.fillStyle = tok('--tarjeta'); ctx.font = `600 28px ${tok('--f-ficha')}`; ctx.fillText(`${ET.utilidad} ${g.nivel}`, 50, y + 39);
+      y += 76;
+      g.tecnicas.forEach((tec, j) => {
+        const pj = prog(t, ini + .3 + j * .25);
+        if (pj > 0) {
+          ctx.globalAlpha = pj; ctx.strokeStyle = tok(g.color); ctx.lineWidth = 3; ctx.strokeRect(30, y, 660, 62);
+          ctx.fillStyle = tok('--tinta'); ctx.font = `400 30px ${tok('--f-texto')}`; ctx.fillText(tec, 50, y + 41);
+        }
+        y += 76;
+      });
+    });
+    ctx.globalAlpha = prog(t, 5.3); ctx.fillStyle = tok('--sello'); ctx.font = `600 30px ${tok('--f-titulo')}`; textoEnvuelto(e.cierre, 30, y + 30, 660, 38);
+  },
+  practica(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 40px ${tok('--f-titulo')}`; textoEnvuelto(e.titulo, 30, 60, 660, 46);
+    const X0 = 30, X1 = 600, max = 30, xv = v => X0 + v / max * (X1 - X0);
+    ctx.globalAlpha = prog(t, .5); ctx.strokeStyle = tok('--regla'); ctx.fillStyle = tok('--tenue'); ctx.font = `500 24px ${tok('--f-ficha')}`; ctx.lineWidth = 1; ctx.textAlign = 'center';
+    for (let v = 0; v <= max; v += 10) { ctx.beginPath(); ctx.moveTo(xv(v), 170); ctx.lineTo(xv(v), 760); ctx.stroke(); ctx.fillText(`${v} %`, xv(v), 795); }
+    ctx.textAlign = 'left';
+    e.datos.forEach((d, i) => {
+      const ini = 1 + i * .5; if (t < ini) return;
+      const p = prog(t, ini, .9), y = 180 + i * 116;
+      ctx.globalAlpha = 1; ctx.fillStyle = tok('--tinta'); ctx.font = `400 30px ${tok('--f-texto')}`; ctx.fillText(d.etiqueta, X0, y + 30);
+      const w = (xv(d.valor) - X0) * p; ctx.fillStyle = tok('--sello'); ctx.fillRect(X0, y + 46, w, 44);
+      ctx.fillStyle = tok('--tinta'); ctx.font = `600 28px ${tok('--f-ficha')}`;
+      ctx.fillText(`${d.menor ? EP.menos_de : ''}${Math.round(d.valor * p)} %`, X0 + w + 12, y + 79);
+    });
+    ctx.globalAlpha = prog(t, 4.6); ctx.fillStyle = tok('--linea-roja'); ctx.font = `600 30px ${tok('--f-titulo')}`; textoEnvuelto(e.cierre, 30, 850, 660, 38);
+  },
+};
+const RENDER = {
+  tecnicas(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 36px ${tok('--f-titulo')}`; ctx.fillText(e.titulo, 50, 66);
+    const anchoCol = 380, x0 = 50;
+    e.grupos.forEach((g, i) => {
+      const ini = .7 + i * 1.2, x = x0 + i * (anchoCol + 20), p = prog(t, ini);
+      if (t < ini) return;
+      ctx.globalAlpha = p; ctx.fillStyle = tok(g.color); ctx.fillRect(x, 110, anchoCol, 56);
+      ctx.fillStyle = tok('--tarjeta'); ctx.font = `600 24px ${tok('--f-ficha')}`; ctx.fillText(`${ET.utilidad} ${g.nivel}`, x + 18, 146);
+      g.tecnicas.forEach((tec, j) => {
+        const pj = prog(t, ini + .3 + j * .25); if (pj <= 0) return;
+        ctx.globalAlpha = pj; const y = 190 + j * 92 + (1 - pj) * 16;
+        ctx.strokeStyle = tok(g.color); ctx.lineWidth = 2; ctx.strokeRect(x, y, anchoCol, 76);
+        ctx.fillStyle = tok('--tinta'); ctx.font = `400 25px ${tok('--f-texto')}`; textoEnvuelto(tec, x + 18, y + 33, anchoCol - 36, 28);
+      });
+    });
+    ctx.globalAlpha = prog(t, 5.3); ctx.fillStyle = tok('--sello'); ctx.font = `600 26px ${tok('--f-titulo')}`;
+    ctx.fillText(e.cierre, 50, 655);
+  },
+  practica(e, t) {
+    ctx.globalAlpha = prog(t, .1); ctx.fillStyle = tok('--tinta'); ctx.font = `800 36px ${tok('--f-titulo')}`; ctx.fillText(e.titulo, 50, 66);
+    const X0 = 400, X1 = 1180, max = 30, xv = v => X0 + v / max * (X1 - X0);
+    ctx.globalAlpha = prog(t, .5); ctx.strokeStyle = tok('--regla'); ctx.fillStyle = tok('--tenue'); ctx.font = `500 18px ${tok('--f-ficha')}`; ctx.lineWidth = 1; ctx.textAlign = 'center';
+    for (let v = 0; v <= max; v += 10) { ctx.beginPath(); ctx.moveTo(xv(v), 110); ctx.lineTo(xv(v), 580); ctx.stroke(); ctx.fillText(`${v} %`, xv(v), 605); }
+    ctx.textAlign = 'left';
+    e.datos.forEach((d, i) => {
+      const ini = 1 + i * .5; if (t < ini) return;
+      const p = prog(t, ini, .9), y = 130 + i * 92;
+      ctx.globalAlpha = 1; ctx.fillStyle = tok('--tinta'); ctx.font = `400 26px ${tok('--f-texto')}`; ctx.fillText(d.etiqueta, 50, y + 36);
+      const w = (xv(d.valor) - X0) * p; ctx.fillStyle = tok('--sello'); ctx.fillRect(X0, y + 8, w, 44);
+      ctx.fillStyle = tok('--tinta'); ctx.font = `600 24px ${tok('--f-ficha')}`;
+      ctx.fillText(`${d.menor ? EP.menos_de : ''}${Math.round(d.valor * p)} %`, X0 + w + 12, y + 39);
+    });
+    ctx.globalAlpha = prog(t, 4.6); ctx.fillStyle = tok('--linea-roja'); ctx.font = `600 26px ${tok('--f-titulo')}`;
+    ctx.fillText(e.cierre, 50, 655);
+  },
+};
+function render(t) {
+  medirLienzo();
+  ctx.globalAlpha = 1; ctx.textAlign = 'left'; ctx.fillStyle = tok('--tarjeta'); ctx.fillRect(0, 0, lienzo.width, lienzo.height);
+  (ANGOSTO.matches ? RENDER_ANGOSTO : RENDER)[escenaActual](ESCENAS[escenaActual], t); ctx.globalAlpha = 1;
+}
+let tm = 0, corriendo = false, previo = 0;
+function pintarEscena() { const e = ESCENAS[escenaActual]; $('scrub').max = e.duracion; render(tm); $('scrub').value = tm; $('t').textContent = `${tm.toFixed(2)} / ${e.duracion.toFixed(2)} s`; $('fuente-escena').textContent = UI.fuente + e.fuente; }
+function bucle(a) { if (!corriendo) return; tm += (a - previo) / 1000; previo = a; const d = ESCENAS[escenaActual].duracion; if (tm >= d) { tm = d; parar(); } pintarEscena(); if (corriendo) requestAnimationFrame(bucle); }
+function parar() { corriendo = false; $('play').textContent = UI.reproducir; }
+$('play').onclick = () => { if (corriendo) return parar(); if (tm >= ESCENAS[escenaActual].duracion) tm = 0; corriendo = true; $('play').textContent = UI.pausa; previo = performance.now(); requestAnimationFrame(bucle); };
+$('scrub').addEventListener('input', () => { tm = +$('scrub').value; pintarEscena(); });
+Object.entries(ESCENAS).forEach(([k, e]) => {
+  const b = document.createElement('button'); b.className = 'boton'; b.textContent = e.nombre; b.setAttribute('aria-pressed', k === escenaActual);
+  b.onclick = () => { escenaActual = k; tm = ESCENAS[k].duracion; parar(); [...$('escenas').children].forEach(x => x.setAttribute('aria-pressed', x === b)); pintarEscena(); };
+  $('escenas').append(b);
+});
+tm = ESCENAS[escenaActual].duracion;
+
+
+/* ===== Ponte a prueba con repaso espaciado (cajas de Leitner) =====
+   Cada pregunta vive en una caja del 1 al 5. Si aciertas, sube de caja y vuelve más tarde;
+   si fallas, regresa a la caja 1 y vuelve mañana. Se guarda solo en este navegador. */
+const PREGUNTAS = DATOS.preguntas;
+const INTERVALO = [1, 2, 4, 8, 16];   // días hasta el próximo repaso según la caja
+const NUEVAS_POR_DIA = 8;
+const CLAVE = UI.clave_repaso;   // cada página guarda su propio repaso
+const leer = () => { try { return JSON.parse(localStorage.getItem(CLAVE)) || {}; } catch (e) { return {}; } };
+const guardar = r => { try { localStorage.setItem(CLAVE, JSON.stringify(r)); } catch (e) { /* sin almacenamiento: funciona solo en esta visita */ } };
+const hoyIso = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+const sumarDias = (isoD, n) => { const [y, m, d] = isoD.split('-').map(Number); const f = new Date(y, m - 1, d + n); return `${f.getFullYear()}-${String(f.getMonth() + 1).padStart(2, '0')}-${String(f.getDate()).padStart(2, '0')}`; };
+const fechaLarga = isoD => { const [y, m, d] = isoD.split('-').map(Number); return new Date(y, m - 1, d).toLocaleDateString(UI.locale, { weekday: 'long', day: 'numeric', month: 'long' }); };
+let registro = leer(), deHoy = {}, practicando = false, turno = null;
+
+function armarTurno() {
+  const hoy = hoyIso();
+  const pendientes = PREGUNTAS.map((q, i) => i).filter(i => registro[PREGUNTAS[i].frase] && registro[PREGUNTAS[i].frase].proxima <= hoy);
+  const nuevas = PREGUNTAS.map((q, i) => i).filter(i => !registro[PREGUNTAS[i].frase]).slice(0, Math.max(0, NUEVAS_POR_DIA - pendientes.length));
+  turno = practicando ? PREGUNTAS.map((q, i) => i) : [...pendientes, ...nuevas];
+}
+function responder(i, r) {
+  const q = PREGUNTAS[i], bien = r === q.es;
+  deHoy[i] = r;
+  if (!practicando) {
+    const antes = registro[q.frase] || { caja: 1 };   // una pregunta nueva entra en la caja 1
+    const caja = bien ? Math.min(5, antes.caja + 1) : 1;
+    registro[q.frase] = { caja, proxima: sumarDias(hoyIso(), bien ? INTERVALO[caja - 1] : 1) };
+    guardar(registro);
+  }
+  pintarPreguntas();
+}
+function pintarPreguntas() {
+  if (!turno) armarTurno();
+  const cont = $('preguntas'); cont.innerHTML = '';
+  turno.forEach(i => {
+    const q = PREGUNTAS[i], r = deHoy[i], div = document.createElement('div'), reg = registro[q.frase];
+    div.className = 'pregunta' + (r ? (r === q.es ? ' acierto' : ' error') : '');
+    div.innerHTML = `<q>${esc(q.frase)}</q>` + (r
+      ? `<div class="respuesta"><b>${r === q.es ? UI.correcto : UI.incorrecto}: ${q.es === 'mito' ? UI.es_mito : UI.es_evidencia}.</b><span>${esc(q.explica)}</span><a href="https://doi.org/${q.doi}" target="_blank" rel="noopener">${esc(q.cita)} · doi.org/${esc(q.doi)}</a>${!practicando && reg ? `<span class="cuando">${UI.caja} ${reg.caja} · ${UI.vuelve} ${esc(fechaLarga(reg.proxima))}</span>` : ''}</div>`
+      : `<div class="opciones"><button class="boton" data-r="mito">${UI.mito}</button><button class="boton" data-r="evidencia">${UI.evidencia}</button></div>`);
+    div.querySelectorAll('button[data-r]').forEach(b => b.onclick = () => responder(i, b.dataset.r));
+    cont.append(div);
+  });
+  const faltan = turno.filter(i => !deHoy[i]).length;
+  const proximas = Object.values(registro).map(x => x.proxima).filter(f => f > hoyIso()).sort();
+  $('marcador').textContent = practicando
+    ? fmtT(UI.q_practica, { r: turno.length - faltan, n: turno.length })
+    : turno.length === 0
+      ? (proximas.length ? fmtT(UI.q_fin_proxima, { f: fechaLarga(proximas[0]) }) : UI.q_nada)
+      : faltan ? fmtT(UI.q_tocan, { n: turno.length, f: faltan }) : UI.q_fin + (proximas.length ? fmtT(UI.q_vuelve, { f: fechaLarga(proximas[0]) }) : '');
+  const conteo = [0, 0, 0, 0, 0, 0]; PREGUNTAS.forEach(q => { conteo[registro[q.frase] ? registro[q.frase].caja : 0]++; });
+  const max = Math.max(...conteo, 1);
+  $('cajas').innerHTML = conteo.map((n, c) => `<div title="${c === 0 ? UI.sin_ver : UI.caja + ' ' + c}: ${n}"><span>${n}</span><i style="height:${4 + n / max * 36}px;opacity:${c === 0 ? .35 : .45 + c * .11}"></i><span>${c === 0 ? UI.nuevas : UI.caja.toLowerCase() + ' ' + c}</span></div>`).join('');
+  $('practicar').textContent = practicando ? UI.volver_repaso : UI.practicar;
+}
+$('practicar').onclick = () => { practicando = !practicando; deHoy = {}; turno = null; pintarPreguntas(); };
+let confirmando = null;   // dos toques para borrar el progreso: el visor no muestra diálogos de confirmación
+$('otra-vez').onclick = () => {
+  if (!confirmando) { $('otra-vez').textContent = UI.otra_vez_confirmar; confirmando = setTimeout(() => { confirmando = null; $('otra-vez').textContent = UI.otra_vez; }, 4000); return; }
+  clearTimeout(confirmando); confirmando = null; $('otra-vez').textContent = UI.otra_vez;
+  registro = {}; guardar(registro); deHoy = {}; practicando = false; turno = null; pintarPreguntas();
+};
+pintarPreguntas();
+
+/* ===== Planificador de repaso espaciado ===== */
+const DIA = 864e5;
+const aFecha = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const desdeIso = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const largo = d => d.toLocaleDateString(UI.locale, { weekday: 'long', day: 'numeric', month: 'long' });
+const corto = d => d.toLocaleDateString(UI.locale, { day: 'numeric', month: 'short' });
+// Sesiones con separaciones crecientes (1, 2, 3, ...) escaladas a los días disponibles; la última, el día antes del examen.
+function planear(hoy, examen, n) {
+  const dias = Math.round((examen - hoy) / DIA);
+  if (dias < 1) return { error: UI.r_error };
+  const k = Math.min(n, dias), pesos = Array.from({ length: k - 1 }, (_, i) => i + 1), total = pesos.reduce((a, b) => a + b, 0);
+  const offs = [0]; let acc = 0;
+  for (const w of pesos) { acc += w; offs.push(Math.round(acc / total * (dias - 1))); }
+  const unicos = [...new Set(offs)].sort((a, b) => a - b);
+  return { dias, sesiones: unicos.map(o => new Date(hoy.getTime() + o * DIA)) };
+}
+function pintarPlan() {
+  const hoy = desdeIso($('f-hoy').value), examen = desdeIso($('f-examen').value), n = +$('f-sesiones').value;
+  const p = planear(hoy, examen, n), lista = $('sesiones'), franja = $('franja');
+  lista.innerHTML = ''; franja.innerHTML = '';
+  if (p.error) { $('nota-plan').textContent = p.error; return; }
+  const tareas = UI.r_tareas;
+  p.sesiones.forEach((d, i) => {
+    const ultimo = i === p.sesiones.length - 1;
+    lista.insertAdjacentHTML('beforeend', `<li><b>${esc(largo(d))}</b><span>${esc(ultimo && i > 0 ? tareas[5] : tareas[Math.min(i, 4)])}</span></li>`);
+    const x = (d - hoy) / (examen - hoy) * 100;
+    franja.insertAdjacentHTML('beforeend', `<div class="punto" style="left:${x}%"><span>${esc(corto(d))}</span></div>`);
+  });
+  franja.insertAdjacentHTML('beforeend', `<div class="punto examen" style="left:100%"><span>${esc(UI.r_examen_corto)}</span></div>`);
+  const gaps = p.sesiones.slice(1).map((d, i) => Math.round((d - p.sesiones[i]) / DIA));
+  $('nota-plan').textContent = fmtT(UI.r_resumen, { n: p.sesiones.length, d: p.dias, g: gaps.join(', ') });
+}
+{ const h = aFecha(new Date()); $('f-hoy').value = iso(h); $('f-examen').value = iso(new Date(h.getTime() + 14 * DIA)); }
+['f-hoy', 'f-examen', 'f-sesiones'].forEach(id => $(id).addEventListener('input', pintarPlan));
+pintarPlan();
+
+/* ===== Tablero de veredictos ===== */
+const libros = DATOS.libros, porId = Object.fromEntries(libros.map(l => [l.id, l]));
+let filtro = 'todos', elegido = DATOS.libros[0].id;
+const FILTROS = [['todos', UI.todos], ...Object.entries(DATOS.etiquetas).filter(([k]) => DATOS.libros.some(l => l.veredicto === k))];
+FILTROS.forEach(([k, n]) => {
+  const b = document.createElement('button'); b.className = 'boton'; b.textContent = n; b.setAttribute('aria-pressed', k === filtro);
+  b.onclick = () => { filtro = k; [...$('filtros').children].forEach(x => x.setAttribute('aria-pressed', x === b)); pintarTablero(); };
+  $('filtros').append(b);
+});
+libros.forEach(l => {
+  const b = document.createElement('button'); b.className = 'libro'; b.dataset.id = l.id;
+  b.innerHTML = `<span class="chip v-${l.veredicto}">${esc(DATOS.etiquetas[l.veredicto])}</span><b>${esc(l.titulo)}</b><span class="tenue" style="font-size:.95rem">${esc(l.frase)}</span>`;
+  b.onclick = () => {
+    elegido = l.id; pintarTablero(); elegirEnMapa(l.id); pintarLinea();
+    if (ANGOSTO.matches) $('panel').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });   // en el celular el detalle queda debajo de la lista
+  };
+  $('libros').append(b);
+});
+function pintarTablero() {
+  [...$('libros').children].forEach(b => { const l = porId[b.dataset.id]; b.hidden = filtro !== 'todos' && l.veredicto !== filtro; b.setAttribute('aria-pressed', l.id === elegido); });
+  const l = porId[elegido];
+  $('panel').innerHTML = `<span class="chip v-${l.veredicto}" style="justify-self:start">${esc(DATOS.etiquetas[l.veredicto])}</span>
+    <h3>${esc(l.titulo)}</h3><p class="tenue">${esc(l.autor)} · ${esc(l.anio)}</p>
+    <p><b>${esc(UI.la_promesa)}</b> ${esc(l.frase)}.</p><p>${esc(l.juicio)}</p>
+    ${l.doi ? `<div class="fuente"><span>${esc(l.cita)}</span><a href="https://doi.org/${l.doi}" target="_blank" rel="noopener">doi.org/${esc(l.doi)}</a></div>` : ''}
+    <a href="#${l.id}">${esc(UI.ir_ficha_completa)}</a>`;
+}
+
+/* ===== Línea de tiempo por décadas ===== */
+const anioDe = l => l.orden;   // año numérico calculado por el generador; negativo antes de Cristo
+function pintarLinea() {
+  const porDecada = {};
+  libros.forEach(l => { const d = l.siglo ? anioDe(l) : Math.floor(anioDe(l) / 10) * 10; (porDecada[d] = porDecada[d] || []).push(l); });   // antes de Cristo, por siglo
+  const decadas = Object.keys(porDecada).map(Number).sort((a, b) => a - b);
+  $('linea-tiempo').innerHTML = decadas.map((d, i) => {
+    const salto = i < decadas.length - 1 && decadas[i + 1] - d > 10;   // un salto de décadas vacías se marca con línea punteada
+    const hitos = porDecada[d].sort((a, b) => anioDe(a) - anioDe(b)).map(l =>
+      `<button class="hito" data-id="${l.id}" aria-pressed="${l.id === elegido}"><i style="background:var(--v-${l.veredicto})" title="${esc(DATOS.etiquetas[l.veredicto])}"></i>${esc(l.titulo)} <small>${esc(l.siglo || anioDe(l))}</small></button>`).join('');
+    const etiqueta = porDecada[d][0].siglo || fmtT(UI.l_decada, { d, h: String(d + 9).slice(-2) });
+    return `<div class="decada${salto ? ' salto' : ''}"><span>${esc(etiqueta)}</span><div class="fila">${hitos}</div></div>`;
+  }).join('');
+  $('linea-tiempo').querySelectorAll('.hito').forEach(b => b.onclick = () => {
+    elegido = b.dataset.id; pintarTablero(); elegirEnMapa(b.dataset.id); pintarLinea();
+    $('panel').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+  });
+  const nombre = a => { const l = libros.find(x => anioDe(x) === a); return l && l.siglo ? l.siglo : a; };   // un año antes de Cristo se nombra por su siglo
+  const rango = v => { const a = libros.filter(l => l.veredicto === v).map(anioDe); return a.length ? [nombre(Math.min(...a)), nombre(Math.max(...a))] : ['–', '–']; };
+  const [fa, fb] = rango('filosofia'), [pa, pb] = rango('promete'), [la, lb] = rango('literatura');
+  const div = libros.filter(l => ['solido', 'matices', 'promete'].includes(l.veredicto)).map(anioDe), [da, db] = div.length ? [nombre(Math.min(...div)), nombre(Math.max(...div))] : ['–', '–'];
+  $('resumen-linea').textContent = fmtT(UI.l_resumen, { fa, fb, pa, pb, la, lb, da, db });
+}
+
+/* ===== Mapa de cruces (fuerzas simples en canvas) ===== */
+const red = $('red'), rx = red.getContext('2d');
+let W = 900, H = 680, K = 1;   // K agranda letra, puntos y zona de toque en el celular
+const COL_GRUPO = ['--b2', '--b1', '--b3', '--b5', '--b4'];
+let nodos = [], nodoDe = {};
+function armarRed() {
+  [W, H, K] = ANGOSTO.matches ? [700, 1000, 2] : [900, 680, 1];
+  red.width = W; red.height = H;
+  nodos = libros.map((l, i) => ({ id: l.id, titulo: l.titulo, grupo: l.grupo, fuera: false, x: W / 2 + Math.cos(i * 2.4) * 220, y: H / 2 + Math.sin(i * 2.4) * 200, vx: 0, vy: 0 }));
+  nodoDe = Object.fromEntries(nodos.map(n => [n.id, n]));
+  DATOS.aristas.forEach((a, i) => { if (a.fuera && !nodoDe[a.b]) { const n = { id: a.b, titulo: a.titulo_b, fuera: true, x: W / 2 + Math.cos(i) * 300, y: H / 2 + Math.sin(i) * 280, vx: 0, vy: 0 }; nodos.push(n); nodoDe[a.b] = n; } });
+  for (let it = 0; it < 500; it++) {   // simulación fija y determinista: misma posición en cada carga
+    for (const a of nodos) for (const b of nodos) { if (a === b) continue; const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy + .01, f = 5200 / d2; a.vx += dx * f / Math.sqrt(d2); a.vy += dy * f / Math.sqrt(d2); }
+    for (const e of DATOS.aristas) { const a = nodoDe[e.a], b = nodoDe[e.b]; const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, f = (d - 170) * .01; a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f; }
+    for (const n of nodos) { n.vx += (W / 2 - n.x) * .004; n.vy += (H / 2 - n.y) * .004; n.x += n.vx * .5; n.y += n.vy * .5; n.vx *= .6; n.vy *= .6; n.x = Math.max(70, Math.min(W - 70, n.x)); n.y = Math.max(40, Math.min(H - 40, n.y)); }
+  }
+  // ajustar el dibujo al lienzo, dejando margen para los nombres
+  const xs = nodos.map(n => n.x), ys = nodos.map(n => n.y), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const mx = K > 1 ? 150 : 90, my = K > 1 ? 80 : 50;
+  for (const n of nodos) { n.x = mx + (n.x - x0) / (x1 - x0 || 1) * (W - 2 * mx); n.y = my + (n.y - y0) / (y1 - y0 || 1) * (H - 2 * my + 10 * K); }
+}
+armarRed();
+let enMapa = DATOS.libros[0].id;
+function dibujarRed() {
+  rx.fillStyle = tok('--tarjeta'); rx.fillRect(0, 0, W, H);
+  const vecinos = new Set(DATOS.aristas.filter(e => e.a === enMapa || e.b === enMapa).flatMap(e => [e.a, e.b]));
+  for (const e of DATOS.aristas) {
+    const a = nodoDe[e.a], b = nodoDe[e.b], activa = e.a === enMapa || e.b === enMapa;
+    rx.strokeStyle = activa ? tok('--sello') : tok('--regla'); rx.lineWidth = (activa ? 2.5 : 1) * K;
+    rx.beginPath(); rx.moveTo(a.x, a.y); rx.lineTo(b.x, b.y); rx.stroke();
+  }
+  for (const n of nodos) {
+    const sel = n.id === enMapa, cerca = vecinos.has(n.id);
+    rx.fillStyle = n.fuera ? tok('--tenue') : tok(COL_GRUPO[n.grupo]);
+    rx.globalAlpha = sel || cerca || !enMapa ? 1 : .45;
+    rx.beginPath(); rx.arc(n.x, n.y, (n.fuera ? 5 : sel ? 12 : 9) * K, 0, Math.PI * 2); rx.fill();
+    if (K > 1 ? sel || cerca : !n.fuera || cerca) {   // en el celular, solo los nombres del libro elegido y sus vecinos
+      rx.fillStyle = tok('--tinta'); rx.font = `${sel ? 800 : 400} ${(n.fuera ? 13 : 15) * K}px ${tok('--f-titulo')}`; rx.textAlign = 'center';
+      const largo = K > 1 ? 20 : 28;
+      rx.fillText(n.titulo.length > largo ? n.titulo.slice(0, largo - 2) + '…' : n.titulo, n.x, n.y - 15 * K);
+    }
+    rx.globalAlpha = 1;
+  }
+  const lista = DATOS.aristas.filter(e => e.a === enMapa || e.b === enMapa);
+  const l = porId[enMapa];
+  $('cruces').innerHTML = `<h3 style="font-size:1.35rem">${esc(l ? l.titulo : nodoDe[enMapa].titulo)}</h3>` +
+    (lista.length ? '<ul style="padding-left:18px;margin:0">' + lista.map(e => { const otro = e.a === enMapa ? e.b : e.a; const t = nodoDe[otro].titulo; return `<li><b>${esc(t)}</b>${nodoDe[otro].fuera ? ` <span class="tenue">${esc(UI.otro_tema)}</span>` : ''}: ${esc(e.por)}</li>`; }).join('') + '</ul>' : `<p class="tenue">${esc(UI.sin_cruces)}</p>`) +
+    (l ? `<a href="#${l.id}">${esc(UI.ir_ficha)}</a>` : '');
+}
+$('leyenda-mapa').innerHTML = DATOS.grupos.map((g, i) => `<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(${COL_GRUPO[i]})"></span> ${esc(g)}</span>`).join('') + '<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tenue)"></span> ' + esc(UI.otros_temas) + '</span>';
+function elegirEnMapa(id) { enMapa = id; dibujarRed(); }
+red.addEventListener('click', ev => {
+  const r = red.getBoundingClientRect(), x = (ev.clientX - r.left) * W / r.width, y = (ev.clientY - r.top) * H / r.height;
+  let mejor = null, dm = 30 * K; for (const n of nodos) { const d = Math.hypot(n.x - x, n.y - y); if (d < dm) { dm = d; mejor = n; } }
+  if (mejor) { enMapa = mejor.id; if (porId[mejor.id]) { elegido = mejor.id; pintarTablero(); pintarLinea(); } dibujarRed(); }
+});
+
+/* ===== Arranque y cambio de tema ===== */
+function todo() { pintarCurioso(); pintarEscena(); pintarTablero(); pintarLinea(); dibujarRed(); }
+todo();
+ANGOSTO.addEventListener('change', () => { armarRed(); todo(); });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', todo);
+new MutationObserver(todo).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
+</body>
+</html>
