@@ -2,61 +2,38 @@ import { createAdminClient } from '@/lib/supabase/server'
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
-export type SubscriberInput = {
+export type ClaimInput = {
   email: string
   name: string
   locale: 'es' | 'en'
-  newsletter: boolean
 }
 
-export type UpsertResult = { unsubscribeToken: string; lastPlanSentAt: Date | null }
-
-export async function upsertSubscriber(input: SubscriberInput): Promise<UpsertResult> {
+// Reserva el envío del plan de forma atómica (ver claim_plan_send en 006_subscribers.sql):
+// crea el suscriptor si no existe y marca last_plan_sent_at solo si pasó el tiempo de espera.
+// Devuelve null si la dirección sigue en espera.
+export async function claimPlanSend(input: ClaimInput): Promise<{ unsubscribeToken: string } | null> {
   const supabase = createAdminClient()
-  const now = new Date().toISOString()
-
-  const { data: existing, error: findError } = await supabase
-    .from('subscribers')
-    .select('id, unsubscribe_token, last_plan_sent_at')
-    .eq('email', input.email)
-    .maybeSingle()
-  if (findError) throw new Error(findError.message)
-
-  if (!existing) {
-    const { data, error } = await supabase
-      .from('subscribers')
-      .insert({
-        email: input.email,
-        name: input.name || null,
-        locale: input.locale,
-        source: 'mapa',
-        newsletter: input.newsletter,
-        consented_at: input.newsletter ? now : null
-      })
-      .select('unsubscribe_token')
-      .single()
-    if (error) throw new Error(error.message)
-    return { unsubscribeToken: data.unsubscribe_token, lastPlanSentAt: null }
-  }
-
-  const patch: Record<string, unknown> = { locale: input.locale }
-  if (input.name) patch.name = input.name
-  if (input.newsletter) {
-    Object.assign(patch, { newsletter: true, status: 'active', consented_at: now, unsubscribed_at: null })
-  }
-  const { error } = await supabase.from('subscribers').update(patch).eq('id', existing.id)
+  const { data, error } = await supabase.rpc('claim_plan_send', {
+    p_email: input.email,
+    p_name: input.name,
+    p_locale: input.locale
+  })
   if (error) throw new Error(error.message)
-  return {
-    unsubscribeToken: existing.unsubscribe_token,
-    lastPlanSentAt: existing.last_plan_sent_at ? new Date(existing.last_plan_sent_at) : null
-  }
+  const row = (Array.isArray(data) ? data[0] : data) as { unsubscribe_token: string } | null | undefined
+  return row ? { unsubscribeToken: row.unsubscribe_token } : null
 }
 
-export async function markPlanSent(email: string): Promise<void> {
+export async function releasePlanSend(email: string): Promise<void> {
+  const supabase = createAdminClient()
+  const { error } = await supabase.from('subscribers').update({ last_plan_sent_at: null }).eq('email', email)
+  if (error) throw new Error(error.message)
+}
+
+export async function recordNewsletterConsent(email: string): Promise<void> {
   const supabase = createAdminClient()
   const { error } = await supabase
     .from('subscribers')
-    .update({ last_plan_sent_at: new Date().toISOString() })
+    .update({ newsletter: true, status: 'active', consented_at: new Date().toISOString(), unsubscribed_at: null })
     .eq('email', email)
   if (error) throw new Error(error.message)
 }

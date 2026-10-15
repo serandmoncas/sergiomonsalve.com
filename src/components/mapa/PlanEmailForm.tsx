@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import type { MapaData } from '@/lib/mapa/plan'
 
-type Status = 'idle' | 'loading' | 'success' | 'error' | 'tooSoon'
+type Status = 'idle' | 'loading' | 'success' | 'error' | 'tooSoon' | 'noLinks'
 
 export default function PlanEmailForm({ data, locale }: { data: MapaData; locale: 'es' | 'en' }) {
   const t = useTranslations('mapa')
@@ -25,7 +25,10 @@ export default function PlanEmailForm({ data, locale }: { data: MapaData; locale
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, name, locale, newsletter, website, data })
       })
-      setStatus(res.ok ? 'success' : res.status === 429 ? 'tooSoon' : 'error')
+      if (res.ok) return setStatus('success')
+      if (res.status === 429) return setStatus('tooSoon')
+      const body: { error?: string } = await res.json().catch(() => ({}))
+      setStatus(body.error === 'links_not_allowed' ? 'noLinks' : 'error')
     } catch {
       setStatus('error')
     }
@@ -65,8 +68,8 @@ export default function PlanEmailForm({ data, locale }: { data: MapaData; locale
           <Link href="/privacidad" className="underline hover:text-accent">{t('email.privacy')}</Link>
         </span>
       </label>
-      {(status === 'error' || status === 'tooSoon') && (
-        <p role="alert" className="font-mono text-xs text-red-400">{t(status === 'tooSoon' ? 'email.tooSoon' : 'email.error')}</p>
+      {(status === 'error' || status === 'tooSoon' || status === 'noLinks') && (
+        <p role="alert" className="font-mono text-xs text-red-400">{t(`email.${status}`)}</p>
       )}
       <button type="submit" disabled={status === 'loading'} aria-busy={status === 'loading'} className="bg-accent text-background font-mono text-xs font-bold px-5 py-2.5 rounded-sm hover:opacity-90 transition-opacity disabled:opacity-40">
         {status === 'loading' ? t('email.sending') : t('email.submit')}

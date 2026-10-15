@@ -1,10 +1,14 @@
 import { z } from 'zod'
 
 // Bloquea enlaces para que el endpoint no sirva para enviar spam o phishing desde nuestro dominio.
-const LINK = /(https?:|www\.|\b[a-z0-9-]+\.(com|net|org|io|co|ly|xyz|ru|info|biz|me|link|app|site|top)\b)/i
+// Esquemas (https://, ftp://), www., cualquier dominio seguido de una ruta (evil.shop/login) y dominios
+// sueltos con TLD de uso común en spam. Deja pasar nombres técnicos como ASP.NET, Node.js o Socket.io.
+export const LINK_MESSAGE = 'Links are not allowed'
+const LINK =
+  /(:\/\/|https?:|www\.|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,}\/|\b[a-z0-9-]+\.(?:com|org|co|es|mx|cl|ly|xyz|ru|info|biz|shop|site|top|link|click)\b)/i
 
 const text = (max: number) =>
-  z.string().max(max).refine(value => !LINK.test(value), { message: 'Links are not allowed' })
+  z.string().max(max).refine(value => !LINK.test(value), { message: LINK_MESSAGE })
 
 export const HOURS_OPTIONS = ['2', '3', '5', '8', '10'] as const
 

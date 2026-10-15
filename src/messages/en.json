@@ -337,7 +337,8 @@
       "submit": "Send me the plan",
       "sending": "Sending…",
       "success": "Done. Check your inbox in a minute (and your spam folder).",
-      "error": "I couldn't send the plan. Make sure there are no links in the fields and try again.",
+      "error": "I couldn't send the plan. Please try again in a moment.",
+      "noLinks": "Remove links or web addresses from the template fields so I can send you the plan.",
       "tooSoon": "I already sent a plan to this email a few minutes ago. Check your inbox or try again in 10 minutes."
     },
     "author": "MAPA Method template by Sergio Monsalve, professor at Universidad EAFIT for 15 years and AI engineer.",

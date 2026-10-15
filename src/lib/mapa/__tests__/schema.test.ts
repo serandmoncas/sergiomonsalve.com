@@ -38,10 +38,19 @@ describe('planRequestSchema', () => {
     expect(planRequestSchema.safeParse({ ...valid, ...patch }).success).toBe(false)
   })
 
-  it('accepts technical words with dots that are not links', () => {
-    const r = planRequestSchema.safeParse({ ...valid, data: { ...data, skill: 'Next.js y Node.js' } })
-    expect(r.success).toBe(true)
-  })
+  it.each(['Next.js y Node.js', 'ASP.NET Core', 'Socket.io', 'Vue.app', 'Aprender inglés.Me gustó'])(
+    'accepts technical words and text with dots that are not links: %s',
+    skill => {
+      expect(planRequestSchema.safeParse({ ...valid, data: { ...data, skill } }).success).toBe(true)
+    }
+  )
+
+  it.each(['evil.shop/login', 'bit.do/x', 'visita ganador.com', 'entra a premio.co ya', 'ftp://x'])(
+    'rejects link-like text: %s',
+    skill => {
+      expect(planRequestSchema.safeParse({ ...valid, data: { ...data, skill } }).success).toBe(false)
+    }
+  )
 })
 
 describe('isHoneypotFilled', () => {

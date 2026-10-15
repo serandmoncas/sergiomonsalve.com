@@ -2,12 +2,11 @@ import { NextResponse } from 'next/server'
 import es from '@/messages/es.json'
 import en from '@/messages/en.json'
 import { buildPlan, type PlanCopy } from '@/lib/mapa/plan'
-import { planRequestSchema, isHoneypotFilled } from '@/lib/mapa/schema'
-import { markPlanSent, upsertSubscriber } from '@/lib/mapa/subscribers'
+import { LINK_MESSAGE, planRequestSchema, isHoneypotFilled } from '@/lib/mapa/schema'
+import { claimPlanSend, recordNewsletterConsent, releasePlanSend } from '@/lib/mapa/subscribers'
 import { sendPlanEmail, subscribeNewsletterContact } from '@/lib/resend'
 
 const SITE_URL = 'https://www.sergiomonsalve.com'
-const RESEND_COOLDOWN_MS = 10 * 60_000
 const PLAN_COPY: Record<'es' | 'en', PlanCopy> = { es: es.mapa.plan, en: en.mapa.plan }
 
 export async function POST(request: Request) {
@@ -22,22 +21,22 @@ export async function POST(request: Request) {
 
   const parsed = planRequestSchema.safeParse(body)
   if (!parsed.success) {
+    const linkIssue = parsed.error.issues.find(issue => issue.message === LINK_MESSAGE)
+    if (linkIssue) {
+      return NextResponse.json({ error: 'links_not_allowed', field: linkIssue.path.join('.') }, { status: 400 })
+    }
     return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 })
   }
   const { email, name, locale, newsletter, data } = parsed.data
 
-  let unsubscribeToken: string
-  let lastPlanSentAt: Date | null
+  let claim: { unsubscribeToken: string } | null
   try {
-    ;({ unsubscribeToken, lastPlanSentAt } = await upsertSubscriber({ email, name, locale, newsletter }))
+    claim = await claimPlanSend({ email, name, locale })
   } catch (error) {
-    console.error('Subscriber upsert error:', error)
+    console.error('Plan claim error:', error)
     return NextResponse.json({ error: 'save_failed' }, { status: 500 })
   }
-
-  if (lastPlanSentAt && Date.now() - lastPlanSentAt.getTime() < RESEND_COOLDOWN_MS) {
-    return NextResponse.json({ error: 'too_soon' }, { status: 429 })
-  }
+  if (!claim) return NextResponse.json({ error: 'too_soon' }, { status: 429 })
 
   try {
     await sendPlanEmail({
@@ -45,24 +44,24 @@ export async function POST(request: Request) {
       name,
       locale,
       plan: buildPlan(data, PLAN_COPY[locale]),
-      unsubscribeUrl: `${SITE_URL}/${locale}/newsletter/baja?token=${unsubscribeToken}`
+      unsubscribeUrl: `${SITE_URL}/${locale}/newsletter/baja?token=${claim.unsubscribeToken}`
     })
   } catch (error) {
     console.error('Plan email error:', error)
+    try {
+      await releasePlanSend(email)
+    } catch (releaseError) {
+      console.error('Plan release error:', releaseError)
+    }
     return NextResponse.json({ error: 'email_failed' }, { status: 502 })
-  }
-
-  try {
-    await markPlanSent(email)
-  } catch (error) {
-    console.error('Mark plan sent error:', error)
   }
 
   if (newsletter) {
     try {
+      await recordNewsletterConsent(email)
       await subscribeNewsletterContact(email, name)
     } catch (error) {
-      console.error('Newsletter sync error:', error)
+      console.error('Newsletter consent/sync error:', error)
     }
   }
 

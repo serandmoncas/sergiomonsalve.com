@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { upsertSubscriber, unsubscribeByToken, markPlanSent } from '../subscribers'
+import { claimPlanSend, releasePlanSend, recordNewsletterConsent, unsubscribeByToken } from '../subscribers'
 
 type Result = { data: unknown; error: unknown }
 type Call = { table: string; method: string; args: unknown[] }
@@ -10,6 +10,10 @@ const { state } = vi.hoisted(() => ({
 
 vi.mock('@/lib/supabase/server', () => ({
   createAdminClient: () => ({
+    rpc: async (fn: string, args: unknown) => {
+      state.calls.push({ table: fn, method: 'rpc', args: [args] })
+      return state.results.shift() ?? { data: null, error: null }
+    },
     from: (table: string) => {
       const result = state.results.shift() ?? { data: null, error: null }
       const q: Record<string, unknown> = {}
@@ -30,93 +34,65 @@ vi.mock('@/lib/supabase/server', () => ({
 const TOKEN = '6f1c2a5e-8d1b-4c3a-9e2f-0a1b2c3d4e5f'
 const findCall = (method: string) => state.calls.find(c => c.method === method)
 
-describe('upsertSubscriber', () => {
-  beforeEach(() => {
-    state.results = []
-    state.calls = []
+beforeEach(() => {
+  state.results = []
+  state.calls = []
+})
+
+describe('claimPlanSend', () => {
+  it('claims the send slot atomically and returns the unsubscribe token', async () => {
+    state.results = [{ data: [{ unsubscribe_token: TOKEN }], error: null }]
+    const r = await claimPlanSend({ email: 'ana@example.com', name: 'Ana', locale: 'es' })
+    expect(r).toEqual({ unsubscribeToken: TOKEN })
+    const call = findCall('rpc')!
+    expect(call.table).toBe('claim_plan_send')
+    expect(call.args[0]).toEqual({ p_email: 'ana@example.com', p_name: 'Ana', p_locale: 'es' })
   })
 
-  it('inserts a new subscriber with consent when newsletter is true', async () => {
-    state.results = [
-      { data: null, error: null },
-      { data: { unsubscribe_token: TOKEN }, error: null }
-    ]
-    const r = await upsertSubscriber({ email: 'ana@example.com', name: 'Ana', locale: 'es', newsletter: true })
-    expect(r.unsubscribeToken).toBe(TOKEN)
-    const row = findCall('insert')!.args[0] as Record<string, unknown>
-    expect(row).toMatchObject({ email: 'ana@example.com', name: 'Ana', locale: 'es', source: 'mapa', newsletter: true })
-    expect(row.consented_at).toEqual(expect.any(String))
-  })
-
-  it('inserts without consent when newsletter is false', async () => {
-    state.results = [
-      { data: null, error: null },
-      { data: { unsubscribe_token: TOKEN }, error: null }
-    ]
-    await upsertSubscriber({ email: 'ana@example.com', name: '', locale: 'es', newsletter: false })
-    const row = findCall('insert')!.args[0] as Record<string, unknown>
-    expect(row).toMatchObject({ newsletter: false, consented_at: null, name: null })
-  })
-
-  it('reactivates an unsubscribed person who opts in again', async () => {
-    state.results = [
-      { data: { id: 'id-1', unsubscribe_token: TOKEN }, error: null },
-      { data: null, error: null }
-    ]
-    await upsertSubscriber({ email: 'ana@example.com', name: 'Ana', locale: 'en', newsletter: true })
-    const patch = findCall('update')!.args[0] as Record<string, unknown>
-    expect(patch).toMatchObject({ locale: 'en', newsletter: true, status: 'active', unsubscribed_at: null, name: 'Ana' })
-  })
-
-  it('does not touch the subscription of a returning person who does not opt in', async () => {
-    state.results = [
-      { data: { id: 'id-1', unsubscribe_token: TOKEN }, error: null },
-      { data: null, error: null }
-    ]
-    const r = await upsertSubscriber({ email: 'ana@example.com', name: '', locale: 'es', newsletter: false })
-    expect(r.unsubscribeToken).toBe(TOKEN)
-    expect(r.lastPlanSentAt).toBeNull()
-    const patch = findCall('update')!.args[0] as Record<string, unknown>
-    expect(patch).toEqual({ locale: 'es' })
-  })
-
-  it('returns when the last plan was sent to a returning person', async () => {
-    state.results = [
-      { data: { id: 'id-1', unsubscribe_token: TOKEN, last_plan_sent_at: '2026-10-15T10:00:00.000Z' }, error: null },
-      { data: null, error: null }
-    ]
-    const r = await upsertSubscriber({ email: 'ana@example.com', name: '', locale: 'es', newsletter: false })
-    expect(r.lastPlanSentAt).toEqual(new Date('2026-10-15T10:00:00.000Z'))
+  it('returns null when the address is still in its cooldown', async () => {
+    state.results = [{ data: [], error: null }]
+    expect(await claimPlanSend({ email: 'ana@example.com', name: '', locale: 'es' })).toBeNull()
   })
 
   it('throws when Supabase fails', async () => {
     state.results = [{ data: null, error: { message: 'boom' } }]
-    await expect(
-      upsertSubscriber({ email: 'ana@example.com', name: '', locale: 'es', newsletter: false })
-    ).rejects.toThrow('boom')
+    await expect(claimPlanSend({ email: 'ana@example.com', name: '', locale: 'es' })).rejects.toThrow('boom')
+  })
+
+  it('never writes newsletter consent', async () => {
+    state.results = [{ data: [{ unsubscribe_token: TOKEN }], error: null }]
+    await claimPlanSend({ email: 'ana@example.com', name: '', locale: 'es' })
+    expect(JSON.stringify(state.calls)).not.toContain('newsletter')
   })
 })
 
-describe('markPlanSent', () => {
-  beforeEach(() => {
-    state.results = []
-    state.calls = []
-  })
-
-  it('stores the send time for the email', async () => {
-    state.results = [{ data: null, error: null }]
-    await markPlanSent('ana@example.com')
-    expect(findCall('update')!.args[0]).toEqual({ last_plan_sent_at: expect.any(String) })
+describe('releasePlanSend', () => {
+  it('clears the send time so the person can retry', async () => {
+    await releasePlanSend('ana@example.com')
+    expect(findCall('update')!.args[0]).toEqual({ last_plan_sent_at: null })
     expect(findCall('eq')!.args).toEqual(['email', 'ana@example.com'])
   })
 })
 
-describe('unsubscribeByToken', () => {
-  beforeEach(() => {
-    state.results = []
-    state.calls = []
+describe('recordNewsletterConsent', () => {
+  it('activates the subscription with a consent timestamp', async () => {
+    await recordNewsletterConsent('ana@example.com')
+    expect(findCall('update')!.args[0]).toMatchObject({
+      newsletter: true,
+      status: 'active',
+      unsubscribed_at: null,
+      consented_at: expect.any(String)
+    })
+    expect(findCall('eq')!.args).toEqual(['email', 'ana@example.com'])
   })
 
+  it('throws when Supabase fails', async () => {
+    state.results = [{ data: null, error: { message: 'boom' } }]
+    await expect(recordNewsletterConsent('ana@example.com')).rejects.toThrow('boom')
+  })
+})
+
+describe('unsubscribeByToken', () => {
   it('returns null for a malformed token without querying', async () => {
     expect(await unsubscribeByToken('abc')).toBeNull()
     expect(state.calls).toHaveLength(0)

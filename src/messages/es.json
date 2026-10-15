@@ -337,7 +337,8 @@
       "submit": "Enviarme el plan",
       "sending": "Enviando…",
       "success": "Listo. Revisa tu correo en un minuto (y la carpeta de spam).",
-      "error": "No pude enviar el plan. Revisa que no haya enlaces en los campos e intenta de nuevo.",
+      "error": "No pude enviar el plan. Intenta de nuevo en un momento.",
+      "noLinks": "Quita los enlaces o direcciones web de los campos de la plantilla para poder enviarte el plan.",
       "tooSoon": "Ya te envié un plan a este correo hace unos minutos. Revisa tu bandeja o intenta en 10 minutos."
     },
     "author": "Plantilla del Método MAPA de Sergio Monsalve, profesor de la Universidad EAFIT desde hace 15 años e ingeniero de IA.",

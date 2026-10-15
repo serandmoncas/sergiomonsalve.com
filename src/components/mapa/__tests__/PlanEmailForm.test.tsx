@@ -51,6 +51,12 @@ describe('PlanEmailForm', () => {
     expect(screen.getByLabelText('email.email')).toHaveValue('ana@example.com')
   })
 
+  it('explains that links are not allowed on that 400', async () => {
+    vi.mocked(fetch).mockResolvedValue(new Response(JSON.stringify({ error: 'links_not_allowed', field: 'data.skill' }), { status: 400 }))
+    await submit()
+    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent('email.noLinks'))
+  })
+
   it('explains the cooldown on 429', async () => {
     vi.mocked(fetch).mockResolvedValue(new Response('{}', { status: 429 }))
     await submit()
