@@ -42,10 +42,10 @@
     "duration": "duración"
   },
   "meta": {
-    "heroTitle": "Sergio Monsalve — AI Software Engineer",
+    "heroTitle": "Sergio Monsalve — AI Software Engineer y profesor",
     "heroDescription": "Ingeniero de sistemas con más de 13 años de experiencia construyendo soluciones con Python, IA y ciencias de datos. Disponible para freelance y posiciones full-time.",
     "aboutTitle": "Sobre mí",
-    "aboutDescription": "Experiencia, stack técnico y CV de Sergio Monsalve, AI Software Engineer especializado en Python, LLMs y arquitecturas de datos.",
+    "aboutDescription": "Sergio Monsalve: AI Software Engineer y profesor de la Universidad EAFIT desde hace 15 años. Experiencia, stack técnico, formación para equipos y CV.",
     "contactTitle": "Contacto",
     "contactDescription": "Hablemos de tu proyecto. Disponible para freelance, full-time y colaboraciones en Python, IA y desarrollo de software.",
     "blogTitle": "Blog",
@@ -55,13 +55,16 @@
     "recipesTitle": "Recetas",
     "recipesDescription": "Recetas de cocina de Sergio Monsalve — vegetarianas, con hongos y de temporada.",
     "bibliotecaTitle": "Biblioteca",
-    "bibliotecaDescription": "Los libros y audiolibros que Sergio Monsalve está leyendo y estudiando."
+    "bibliotecaDescription": "Los libros y audiolibros que Sergio Monsalve está leyendo y estudiando.",
+    "formacionTitle": "Formación",
+    "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA."
   },
   "nav": {
     "about": "Sobre mí",
     "blog": "Blog",
     "portfolio": "Portfolio",
     "recipes": "Recetas",
+    "formacion": "Formación",
     "cursos": "Cursos",
     "biblioteca": "Biblioteca",
     "aprender": "Aprender a aprender",
@@ -90,7 +93,7 @@
     "personalLabel": "// más allá del código",
     "beyondTheCodeLink": "Leer más sobre quién soy",
     "songosorhongoLabel": "Songosorhongo — cocina basada en hongos",
-    "location": "📍 Santa Elena, Antioquia",
+    "location": "📍 Guarne, Antioquia",
     "downloadCv": "⬇ Descargar CV",
     "experienceTitle": "// experiencia",
     "educationTitle": "// educación"
@@ -147,6 +150,81 @@
       "archived": "archivado"
     }
   },
+  "formacion": {
+      "comment": "// formación · Método MAPA",
+      "title": "Aprender rápido es la habilidad que decide quién se adapta a la IA.",
+      "lede": "Llevo 15 años como profesor en la Universidad EAFIT y 13 construyendo software e IA. Uno los dos oficios en Sprints de Aprendizaje para equipos y cohortes en vivo para profesionales, con un método probado en el aula y en producción.",
+      "credentials": {
+        "items": [
+          "15 años como profesor en EAFIT",
+          "Semilleros de investigación desde 2004",
+          "MSc en Ingeniería · Educación para la Ingeniería",
+          "AI Software Engineer · ex Globant"
+        ]
+      },
+      "method": {
+        "label": "// el método",
+        "title": "Método MAPA",
+        "desc": "Cuatro pasos para aprender cualquier habilidad en semanas, no meses. Combina principios de ultralearning, educación experiencial y la IA como tutor.",
+        "steps": [
+          {
+            "letter": "M",
+            "title": "Mapear",
+            "text": "Descomponer la habilidad y encontrar el 20% que da el 80% del resultado."
+          },
+          {
+            "letter": "A",
+            "title": "Aplicar",
+            "text": "Practicar desde el día 1 en un proyecto real, no en teoría."
+          },
+          {
+            "letter": "P",
+            "title": "Practicar lo difícil",
+            "text": "Ejercicios aislados sobre el punto débil y recuperación activa para no olvidar."
+          },
+          {
+            "letter": "A",
+            "title": "Ajustar",
+            "text": "Feedback rápido, con la IA como tutor, e iterar cada semana."
+          }
+        ]
+      },
+      "offers": {
+        "label": "// cómo trabajamos",
+        "title": "Dos formas de aprender conmigo",
+        "items": [
+          {
+            "audience": "Para empresas",
+            "title": "Sprints de Aprendizaje",
+            "text": "Programas remotos de 4 semanas para que tu equipo pase de la teoría a usar una habilidad nueva en su trabajo real, incluida la adopción de IA.",
+            "bullets": [
+              "Diagnóstico y mapa de habilidades del equipo",
+              "Sesiones en vivo facilitadas y retos sobre casos reales de tu empresa",
+              "Talleres puntuales de 90 minutos a medio día",
+              "Propuesta a la medida según tamaño y objetivos"
+            ]
+          },
+          {
+            "audience": "Para profesionales",
+            "title": "Cohortes en vivo",
+            "text": "Grupos pequeños que aprenden una habilidad en 4 a 6 semanas con el Método MAPA, acompañamiento y comunidad.",
+            "bullets": [
+              "Plan de aprendizaje personal",
+              "Sesiones en vivo y retos semanales",
+              "La IA como tutor, con prompts y rutinas probadas",
+              "Próxima cohorte: escríbeme para entrar a la lista de espera"
+            ]
+          }
+        ]
+      },
+      "cta": {
+        "label": "// hablemos",
+        "title": "¿Quieres un Sprint para tu equipo o un cupo en la próxima cohorte?",
+        "contact": "Escríbeme →",
+        "whatsapp": "WhatsApp →",
+        "whatsappText": "Hola Sergio, vi tu página de formación y me interesa saber más sobre los Sprints de Aprendizaje."
+      }
+    },
   "cursos": {
     "comment": "// cursos",
     "title": "Cursos",

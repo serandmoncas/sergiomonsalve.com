@@ -1,9 +1,9 @@
 export const aboutContent = {
   es: {
     eyebrow: '// sergio.monsalve · sobre mí',
-    headline: ['Construyo software ', 'con datos', ', IA y un poco de hongos.'],
-    roles: ['AI Software Engineer', 'Santa Elena, Antioquia 🇨🇴', '13 años en código · 7 en datos'],
-    lede: 'Ingeniero de sistemas convertido en traductor entre datos y decisiones. Me gustan los problemas que se ven imposibles a primera vista, las cocinas con humo y los bosques de niebla. Trabajo mejor cuando hay un equipo pequeño, un objetivo claro y café cerca.',
+    headline: ['Construyo software y ', 'enseño a aprender', ', con IA y un poco de hongos.'],
+    roles: ['AI Software Engineer · Profesor EAFIT', 'Guarne, Antioquia 🇨🇴', '13 años en código · 15 enseñando'],
+    lede: 'Ingeniero de sistemas convertido en traductor entre datos y decisiones, y profesor desde hace 15 años. Me gustan los problemas que se ven imposibles a primera vista, las cocinas con humo y los bosques de niebla. Trabajo mejor cuando hay un equipo pequeño, un objetivo claro y café cerca.',
     stackGroups: [
       { label: 'core · producción', chips: ['Python', 'FastAPI', 'Django', 'PostgreSQL', 'Dagster', 'Next.js', 'TypeScript', 'Supabase'] },
       { label: 'ai / llms', chips: ['LangChain', 'OpenAI', 'RAG', 'Embeddings', 'Vector DBs', 'Claude Code', 'Agent building', 'Tool-calling'] },
@@ -14,11 +14,25 @@ export const aboutContent = {
     learning: { label: 'aprendiendo · 2026', chips: ['Rust', 'Eval / observabilidad LLM', 'Diseño de agentes'] },
     experienceLabel: '// experiencia',
     experienceTitle: 'Lo que he construido.',
-    experienceDesc: 'Cuatro paradas que resumen el pivote de analista → ingeniero → IA. La línea es más limpia en retrospectiva que en el momento.',
+    experienceDesc: 'Dos oficios en paralelo: enseñar y construir. La ruta de ingeniería va de analista → ingeniero → IA, y es más limpia en retrospectiva que en el momento.',
+    eduMscFocus: 'Énfasis en Educación para la Ingeniería y Cómputo Científico',
+    ctaFormacion: 'Formación →',
     jobs: [
       {
-        period: 'Nov 2022 → Abr 2025',
+        period: '2011 → hoy',
         current: true,
+        role: 'Profesor',
+        org: 'Universidad EAFIT · pregrado y educación continua',
+        bullets: [
+          'Desde **2004 acompañando semilleros de investigación**; profesor formal desde 2011.',
+          'Cursos de **pregrado y educación continua** para estudiantes y profesionales.',
+          'Diseño de experiencias de **educación experiencial**: aprender haciendo, con proyectos reales.',
+        ],
+        chips: ['Educación experiencial', 'Facilitación', 'Semilleros', 'Educación continua'],
+      },
+      {
+        period: 'Nov 2022 → Abr 2025',
+        current: false,
         role: 'Senior Python Developer',
         org: 'Globant · clientes enterprise (US/EU)',
         bullets: [
@@ -76,6 +90,7 @@ export const aboutContent = {
     ],
     nowTitle: 'Ahora /now',
     nowItems: [
+      { period: 'Oct 2026', name: 'Lanzando Sprints de Aprendizaje · Método MAPA', where: 'formación para equipos y profesionales' },
       { period: 'Mayo 2026', name: 'Tesis sobre evaluación de agentes LLM', where: '+ experimentos con orquestación local' },
       { period: 'en curso', name: 'Songosorhongo · cocina con hongos', where: 'probando recetas con cultivos propios' },
       { period: 'recurrente', name: 'Parapente en Antioquia', where: 'cuando el viento coopera' },
@@ -97,8 +112,8 @@ export const aboutContent = {
       },
       {
         glyph: '📍  territorio',
-        title: 'Santa Elena',
-        text: 'Vivo en la montaña, a 30 minutos de Medellín. Trabajo remoto, niebla y silvestres. Es donde escribo mejor código.',
+        title: 'Guarne',
+        text: 'Vivo en Guarne, en el oriente antioqueño, cerca de Medellín. Trabajo remoto, montaña y silvestres. Es donde escribo mejor código.',
         link: null,
       },
     ],
@@ -108,15 +123,15 @@ export const aboutContent = {
     parapenteSource: '— ensayo: más allá del código · 2026',
     parapenteLink: 'Leer ensayo completo →',
     ctaLabel: '// trabajemos',
-    ctaTitle: ['¿Tienes un problema con datos, IA o ', 'backend con olor a producción', '? Hablemos.'],
+    ctaTitle: ['¿Tienes un problema con datos o IA, o un equipo que necesita ', 'aprender más rápido', '? Hablemos.'],
     ctaWhatsApp: 'WhatsApp →',
     ctaGitHub: 'GitHub →',
   },
   en: {
     eyebrow: '// sergio.monsalve · about',
-    headline: ['I build software ', 'with data', ', AI, and a bit of mushrooms.'],
-    roles: ['AI Software Engineer', 'Santa Elena, Antioquia 🇨🇴', '13 years coding · 7 in data'],
-    lede: 'Systems engineer turned translator between data and decisions. I like problems that look impossible at first glance, smoky kitchens, and foggy forests. I work best with a small team, a clear goal, and coffee nearby.',
+    headline: ['I build software and ', 'teach people to learn', ', with AI and a bit of mushrooms.'],
+    roles: ['AI Software Engineer · EAFIT Professor', 'Guarne, Antioquia 🇨🇴', '13 years coding · 15 teaching'],
+    lede: 'Systems engineer turned translator between data and decisions, and a professor for 15 years. I like problems that look impossible at first glance, smoky kitchens, and foggy forests. I work best with a small team, a clear goal, and coffee nearby.',
     stackGroups: [
       { label: 'core · production', chips: ['Python', 'FastAPI', 'Django', 'PostgreSQL', 'Dagster', 'Next.js', 'TypeScript', 'Supabase'] },
       { label: 'ai / llms', chips: ['LangChain', 'OpenAI', 'RAG', 'Embeddings', 'Vector DBs', 'Claude Code', 'Agent building', 'Tool-calling'] },
@@ -127,11 +142,25 @@ export const aboutContent = {
     learning: { label: 'learning · 2026', chips: ['Rust', 'LLM eval / observability', 'Agent design'] },
     experienceLabel: '// experience',
     experienceTitle: "What I've built.",
-    experienceDesc: 'Four stops that trace the pivot from analyst → engineer → AI. The line looks cleaner in hindsight than it felt at the time.',
+    experienceDesc: 'Two crafts in parallel: teaching and building. The engineering path runs analyst → engineer → AI, and looks cleaner in hindsight than it felt at the time.',
+    eduMscFocus: 'Focus: Engineering Education and Scientific Computing',
+    ctaFormacion: 'Training →',
     jobs: [
       {
-        period: 'Nov 2022 → Apr 2025',
+        period: '2011 → now',
         current: true,
+        role: 'Professor',
+        org: 'Universidad EAFIT · undergraduate & continuing education',
+        bullets: [
+          'Mentoring **research groups (semilleros) since 2004**; formally teaching since 2011.',
+          '**Undergraduate and continuing education** courses for students and professionals.',
+          'Designing **experiential learning**: learning by doing, with real projects.',
+        ],
+        chips: ['Experiential learning', 'Facilitation', 'Research groups', 'Continuing education'],
+      },
+      {
+        period: 'Nov 2022 → Apr 2025',
+        current: false,
         role: 'Senior Python Developer',
         org: 'Globant · enterprise clients (US/EU)',
         bullets: [
@@ -187,6 +216,7 @@ export const aboutContent = {
     ],
     nowTitle: 'Now /now',
     nowItems: [
+      { period: 'Oct 2026', name: 'Launching Learning Sprints · MAPA Method', where: 'training for teams and professionals' },
       { period: 'May 2026', name: 'Thesis on LLM agent evaluation', where: '+ local orchestration experiments' },
       { period: 'ongoing', name: 'Songosorhongo · mushroom cooking', where: 'testing recipes with home-grown fungi' },
       { period: 'recurring', name: 'Paragliding in Antioquia', where: 'when the wind cooperates' },
@@ -208,8 +238,8 @@ export const aboutContent = {
       },
       {
         glyph: '📍  territory',
-        title: 'Santa Elena',
-        text: "I live in the mountains, 30 minutes from Medellín. Remote work, fog, and wild mushrooms. It's where I write my best code.",
+        title: 'Guarne',
+        text: "I live in Guarne, in eastern Antioquia, near Medellín. Remote work, mountains, and wild mushrooms. It's where I write my best code.",
         link: null,
       },
     ],
@@ -219,7 +249,7 @@ export const aboutContent = {
     parapenteSource: '— essay: beyond the code · 2026',
     parapenteLink: 'Read full essay →',
     ctaLabel: '// let\'s work',
-    ctaTitle: ['Got a problem with data, AI, or ', 'backend that smells like production', '? Let\'s talk.'],
+    ctaTitle: ['Got a data or AI problem, or a team that needs to ', 'learn faster', '? Let\'s talk.'],
     ctaWhatsApp: 'WhatsApp →',
     ctaGitHub: 'GitHub →',
   },

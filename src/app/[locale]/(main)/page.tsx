@@ -28,7 +28,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Sergio Monsalve',
-  jobTitle: 'AI Software Engineer',
+  jobTitle: ['AI Software Engineer', 'Professor at Universidad EAFIT'],
   url: 'https://sergiomonsalve.com',
   sameAs: [
     'https://github.com/serandmoncas',

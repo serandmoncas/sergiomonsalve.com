@@ -179,6 +179,7 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
                     <span className="font-mono text-xs bg-accent text-background px-1.5 py-0.5 rounded-sm">cursando</span>
                   </div>
                   <p className="text-sm font-semibold text-text">MSc Engineering (candidate)</p>
+                  <p className="text-xs text-text-secondary">{c.eduMscFocus}</p>
                   <p className="text-xs text-text-muted italic">Universidad EAFIT</p>
                 </div>
                 <div>
@@ -318,6 +319,12 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
                   className="inline-flex items-center gap-2 bg-text text-background font-mono text-xs font-bold px-4 py-2.5 rounded-sm hover:bg-accent transition-colors"
                 >
                   Contacto →
+                </Link>
+                <Link
+                  href="/formacion"
+                  className="font-mono text-xs border border-accent text-accent px-4 py-2.5 rounded-sm hover:bg-accent hover:text-background transition-colors"
+                >
+                  {c.ctaFormacion}
                 </Link>
                 <a href="https://wa.me/573508025988" target="_blank" rel="noopener noreferrer"
                   className="font-mono text-xs border border-border text-text-secondary px-4 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors">

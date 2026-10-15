@@ -42,10 +42,10 @@
     "duration": "duration"
   },
   "meta": {
-    "heroTitle": "Sergio Monsalve — AI Software Engineer",
+    "heroTitle": "Sergio Monsalve — AI Software Engineer and professor",
     "heroDescription": "Systems engineer with 13+ years building solutions with Python, AI, and data science. Available for freelance and full-time positions.",
     "aboutTitle": "About",
-    "aboutDescription": "Experience, tech stack, and CV of Sergio Monsalve, AI Software Engineer specializing in Python, LLMs, and data architectures.",
+    "aboutDescription": "Sergio Monsalve: AI Software Engineer and professor at Universidad EAFIT for 15 years. Experience, tech stack, team training, and CV.",
     "contactTitle": "Contact",
     "contactDescription": "Let's talk about your project. Available for freelance, full-time, and collaborations in Python, AI, and software development.",
     "blogTitle": "Blog",
@@ -55,13 +55,16 @@
     "recipesTitle": "Recipes",
     "recipesDescription": "Recipes by Sergio Monsalve — vegetarian, mushroom-forward, and seasonal.",
     "bibliotecaTitle": "Library",
-    "bibliotecaDescription": "Books and audiobooks Sergio Monsalve is reading and studying."
+    "bibliotecaDescription": "Books and audiobooks Sergio Monsalve is reading and studying.",
+    "formacionTitle": "Training",
+    "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer."
   },
   "nav": {
     "about": "About",
     "blog": "Blog",
     "portfolio": "Portfolio",
     "recipes": "Recipes",
+    "formacion": "Training",
     "cursos": "Courses",
     "biblioteca": "Library",
     "aprender": "Learning to learn",
@@ -90,7 +93,7 @@
     "personalLabel": "// beyond the code",
     "beyondTheCodeLink": "Read more about who I am",
     "songosorhongoLabel": "Songosorhongo — mushroom-based cuisine",
-    "location": "📍 Santa Elena, Antioquia",
+    "location": "📍 Guarne, Antioquia",
     "downloadCv": "⬇ Download CV",
     "experienceTitle": "// experience",
     "educationTitle": "// education"
@@ -147,6 +150,81 @@
       "archived": "archived"
     }
   },
+  "formacion": {
+      "comment": "// training · MAPA Method",
+      "title": "Learning fast is the skill that decides who adapts to AI.",
+      "lede": "I've been a professor at Universidad EAFIT for 15 years and building software and AI for 13. I bring both crafts together in Learning Sprints for teams and live cohorts for professionals, with a method tested in the classroom and in production.",
+      "credentials": {
+        "items": [
+          "15 years teaching at EAFIT",
+          "Research group mentor since 2004",
+          "MSc Engineering · Engineering Education",
+          "AI Software Engineer · ex Globant"
+        ]
+      },
+      "method": {
+        "label": "// the method",
+        "title": "The MAPA Method",
+        "desc": "Four steps to learn any skill in weeks, not months. It combines ultralearning principles, experiential learning, and AI as a tutor.",
+        "steps": [
+          {
+            "letter": "M",
+            "title": "Map",
+            "text": "Break the skill down and find the 20% that delivers 80% of the result."
+          },
+          {
+            "letter": "A",
+            "title": "Apply",
+            "text": "Practice from day one on a real project, not in theory."
+          },
+          {
+            "letter": "P",
+            "title": "Practice the hard parts",
+            "text": "Isolated drills on weak spots and active recall so it sticks."
+          },
+          {
+            "letter": "A",
+            "title": "Adjust",
+            "text": "Fast feedback, with AI as a tutor, iterating every week."
+          }
+        ]
+      },
+      "offers": {
+        "label": "// how we work",
+        "title": "Two ways to learn with me",
+        "items": [
+          {
+            "audience": "For companies",
+            "title": "Learning Sprints",
+            "text": "Four-week remote programs that take your team from theory to using a new skill in their real work, including AI adoption.",
+            "bullets": [
+              "Team skills diagnosis and map",
+              "Facilitated live sessions and challenges built on your company's real cases",
+              "Standalone workshops from 90 minutes to half a day",
+              "Tailored proposal based on team size and goals"
+            ]
+          },
+          {
+            "audience": "For professionals",
+            "title": "Live cohorts",
+            "text": "Small groups that learn a skill in 4 to 6 weeks with the MAPA Method, guidance, and community.",
+            "bullets": [
+              "Personal learning plan",
+              "Live sessions and weekly challenges",
+              "AI as a tutor, with tested prompts and routines",
+              "Next cohort: message me to join the waitlist"
+            ]
+          }
+        ]
+      },
+      "cta": {
+        "label": "// let's talk",
+        "title": "Want a Sprint for your team or a seat in the next cohort?",
+        "contact": "Write to me →",
+        "whatsapp": "WhatsApp →",
+        "whatsappText": "Hi Sergio, I saw your training page and I'd like to know more about the Learning Sprints."
+      }
+    },
   "cursos": {
     "comment": "// courses",
     "title": "Courses",
