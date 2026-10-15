@@ -42,6 +42,8 @@
     "duration": "duración"
   },
   "meta": {
+    "lineaAprendizajeTitle": "El aprendizaje en el tiempo",
+    "lineaAprendizajeDescription": "Cronología interactiva de las teorías del aprendizaje, de William James a Piaget, Vygotsky, Skinner y Bruner, generada con Claude a partir de Wikipedia y revisada a mano.",
     "heroTitle": "Sergio Monsalve — AI Software Engineer y profesor",
     "heroDescription": "Ingeniero de sistemas con más de 13 años de experiencia construyendo soluciones con Python, IA y ciencias de datos. Disponible para freelance y posiciones full-time.",
     "aboutTitle": "Sobre mí",
@@ -63,6 +65,13 @@
     "formacionTitle": "Formación",
     "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA."
   },
+  "lineaAprendizaje": {
+    "comment": "// aprender a aprender",
+    "title": "El aprendizaje en el tiempo",
+    "lede": "De William James a Piaget, Vygotsky, Skinner y Bruner. Cronología generada con Claude a partir de Wikipedia (Psicología educativa y Teorías del aprendizaje), con la cita de cada hecho, y revisada a mano.",
+    "fullscreen": "Abrir a pantalla completa",
+    "iframeTitle": "Visor histórico: cronología del aprendizaje"
+  },
   "nav": {
     "about": "Sobre mí",
     "blog": "Blog",
@@ -73,6 +82,7 @@
     "biblioteca": "Biblioteca",
     "aprender": "Aprender a aprender",
     "aprenderHref": "/aprender-a-aprender.html",
+    "lineaAprendizaje": "El aprendizaje en el tiempo",
     "dinero": "Libros del dinero",
     "dineroHref": "/libros-del-dinero.html",
     "guestbook": "Firmas",

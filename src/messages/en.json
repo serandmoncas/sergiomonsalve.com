@@ -42,6 +42,8 @@
     "duration": "duration"
   },
   "meta": {
+    "lineaAprendizajeTitle": "Learning through time",
+    "lineaAprendizajeDescription": "An interactive timeline of learning theories, from William James to Piaget, Vygotsky, Skinner and Bruner, generated with Claude from Spanish Wikipedia and reviewed by hand.",
     "heroTitle": "Sergio Monsalve — AI Software Engineer and professor",
     "heroDescription": "Systems engineer with 13+ years building solutions with Python, AI, and data science. Available for freelance and full-time positions.",
     "aboutTitle": "About",
@@ -63,6 +65,13 @@
     "formacionTitle": "Training",
     "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer."
   },
+  "lineaAprendizaje": {
+    "comment": "// learning to learn",
+    "title": "Learning through time",
+    "lede": "From William James to Piaget, Vygotsky, Skinner and Bruner. A timeline generated with Claude from Spanish Wikipedia, with the source quote for every event, and reviewed by hand. The viewer itself is in Spanish.",
+    "fullscreen": "Open full screen",
+    "iframeTitle": "History viewer: a timeline of learning"
+  },
   "nav": {
     "about": "About",
     "blog": "Blog",
@@ -73,6 +82,7 @@
     "biblioteca": "Library",
     "aprender": "Learning to learn",
     "aprenderHref": "/learning-to-learn.html",
+    "lineaAprendizaje": "Learning through time",
     "dinero": "Books on money",
     "dineroHref": "/books-on-money.html",
     "guestbook": "Guestbook",
