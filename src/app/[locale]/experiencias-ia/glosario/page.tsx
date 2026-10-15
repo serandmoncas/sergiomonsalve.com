@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { GLOSARIO, CATEGORIAS, ORDEN_CATEGORIAS, getTerminosPorCategoria } from '@/lib/experiencias-ia/glosario'
-import TerminoRow from '@/components/experiencias-ia/TerminoRow'
+import { GLOSARIO } from '@/lib/experiencias-ia/glosario'
+import GlosarioBuscador from '@/components/experiencias-ia/GlosarioBuscador'
 
 export const metadata: Metadata = {
   title: 'Glosario — Experiencias IA',
@@ -11,16 +11,7 @@ export default function GlosarioIndexPage() {
     <div>
       <p className="eyebrow">{GLOSARIO.length} términos</p>
       <h1>Glosario</h1>
-      {ORDEN_CATEGORIAS.map(categoria => (
-        <div key={categoria}>
-          <h2 style={{ marginTop: 40 }}>{CATEGORIAS[categoria]}</h2>
-          <div className="ses-list">
-            {getTerminosPorCategoria(categoria).map(termino => (
-              <TerminoRow key={termino.slug} termino={termino} />
-            ))}
-          </div>
-        </div>
-      ))}
+      <GlosarioBuscador terminos={GLOSARIO} />
     </div>
   )
 }
