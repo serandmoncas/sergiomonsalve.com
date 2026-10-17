@@ -9,6 +9,7 @@ type Tool = { title: string; text: string }
 export default function CarpinteriaContent() {
   const t = useTranslations('carpinteria')
   const facts = t.raw('facts') as string[]
+  const expressPoints = t.raw('express.points') as string[]
   const sessions = t.raw('course.sessions') as Session[]
   const tools = t.raw('tools.items') as Tool[]
   const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t('cta.whatsappText'))}`
@@ -29,6 +30,21 @@ export default function CarpinteriaContent() {
           ))}
         </ul>
       </header>
+
+      <section className="space-y-8">
+        <div className="space-y-2">
+          <p className="font-mono text-xs text-text-muted uppercase tracking-widest">{t('express.label')}</p>
+          <h2 className="text-2xl font-bold text-text">{t('express.title')}</h2>
+          <p className="max-w-2xl text-sm text-text-secondary leading-relaxed">{t('express.desc')}</p>
+        </div>
+        <ul className="grid gap-4 sm:grid-cols-2">
+          {expressPoints.map(point => (
+            <li key={point} className="text-sm text-text-secondary leading-relaxed pl-4 relative before:content-['→'] before:absolute before:left-0 before:text-accent">
+              {point}
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="space-y-8">
         <div className="space-y-2">

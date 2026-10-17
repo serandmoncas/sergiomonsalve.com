@@ -65,7 +65,7 @@
     "formacionTitle": "Training",
     "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer.",
     "carpinteriaTitle": "CarpinterIA · Melamine furniture course",
-    "carpinteriaDescription": "A hands-on melamine carpentry course in Guarne, Colombia: in 4 sessions you design, order the cuts for and assemble your own modular furniture. With an open-source cut-list calculator."
+    "carpinteriaDescription": "Melamine carpentry course in Guarne, Colombia: a one-day express to build your first toolbox, or 4 sessions to start your own project. With an open-source cut-list calculator."
   },
   "lineaAprendizaje": {
     "comment": "// learning to learn",
@@ -747,38 +747,49 @@
   "carpinteria": {
     "comment": "// carpinter-ia",
     "title": "CarpinterIA: learn to build your own melamine furniture",
-    "lede": "A hands-on course in Guarne, Antioquia, Colombia. In 4 sessions you design a modular piece of furniture, order it cut with edge banding included, and assemble it yourself. You take it home at the end.",
+    "lede": "A hands-on course in Guarne, Antioquia, Colombia, in two formats: one day to start from scratch, or 4 sessions to kick off a real project for your home. The pieces are cut to order with edge banding and you assemble them yourself.",
     "facts": [
-      "4 sessions of 4 hours",
-      "One session every 2 weeks",
+      "1-day express",
+      "4-session full course",
       "Groups of 4 to 6",
       "15 mm melamine",
       "Guarne, Colombia"
     ],
+    "express": {
+      "label": "Express course · 1 day",
+      "title": "Your first toolbox",
+      "desc": "For people who have never built furniture. In one day you learn to measure, drill and assemble square, and you take home a small toolbox you made yourself.",
+      "points": [
+        "For complete beginners",
+        "About 5 hours, with breaks",
+        "Pieces arrive pre-cut: no saw on day one",
+        "You take the toolbox home"
+      ]
+    },
     "course": {
-      "label": "The course",
-      "title": "From idea to finished furniture",
-      "desc": "The base project is a nightstand with one door and one drawer. Every session ends with something concrete built.",
+      "label": "Full course · 4 sessions",
+      "title": "Your own project, one part at a time",
+      "desc": "You pick a project for your home: a closet, a nightstand, or a piece for the living room, dining room, kitchen, bedroom or bathroom. Each session is a small project that is part of the big one, and you finish the rest at home with the same technique.",
       "sessions": [
         {
           "number": "01",
-          "title": "Tools, measuring and cutting",
-          "text": "You safely use the drill, jigsaw and circular saw, and build a simple MDF box."
+          "title": "Tools and a simple carcass",
+          "text": "You safely use the drill, jigsaw and circular saw, and build a simple MDF box: the carcass of every piece of furniture."
         },
         {
           "number": "02",
-          "title": "Design, cut list and order",
-          "text": "You design your piece and send the cut list: sizes, quantities and which edges get banding."
+          "title": "Practice module and order",
+          "text": "You build a module with a shelf, design your project and send its cut list with the edges that get banding."
         },
         {
           "number": "03",
-          "title": "Drilling and assembly",
-          "text": "You drill with a jig, join with confirmat screws and leave the carcass assembled, square and with its back on."
+          "title": "Your project's first module",
+          "text": "You drill with a jig, join with confirmat screws and leave your first module assembled, square and with its back on."
         },
         {
           "number": "04",
-          "title": "Doors, drawers and delivery",
-          "text": "You install hinges and drawer slides, adjust the fronts and take your furniture home."
+          "title": "Doors, drawers and a plan",
+          "text": "You fit hinges and drawer slides to that module and leave with a plan to build the remaining modules at home."
         }
       ]
     },
@@ -804,7 +815,7 @@
     },
     "cta": {
       "label": "// sign up",
-      "title": "Want a seat in the next group?",
+      "title": "Want a seat in the express or the full course?",
       "whatsapp": "Message me on WhatsApp →",
       "whatsappText": "Hi Sergio, I saw the CarpinterIA page and I'd like to know more about the melamine course."
     }
