@@ -2,6 +2,8 @@ import { useTranslations } from 'next-intl'
 
 const WHATSAPP_NUMBER = '573508025988'
 const REPO_URL = 'https://github.com/serandmoncas/CarpinterIA'
+// Apunta a main para que siempre baje la versión más reciente de la guía.
+const GUIDE_URL = `${REPO_URL}/raw/main/guia/guia-del-curso.pdf`
 
 type Session = { number: string; title: string; text: string }
 type Tool = { title: string; text: string }
@@ -77,14 +79,22 @@ export default function CarpinteriaContent() {
             </article>
           ))}
         </div>
-        <a
-          href={REPO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block font-mono text-xs border border-accent text-accent px-4 py-2.5 rounded-sm hover:bg-accent hover:text-background transition-colors"
-        >
-          {t('tools.repo')}
-        </a>
+        <div className="flex flex-wrap items-center gap-4">
+          <a
+            href={GUIDE_URL}
+            className="inline-block bg-accent text-background text-xs font-bold px-5 py-2.5 rounded-sm hover:opacity-90 transition-opacity"
+          >
+            {t('tools.guide')}
+          </a>
+          <a
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block font-mono text-xs border border-accent text-accent px-4 py-2.5 rounded-sm hover:bg-accent hover:text-background transition-colors"
+          >
+            {t('tools.repo')}
+          </a>
+        </div>
       </section>
 
       <section className="border-t border-border pt-12 space-y-6">

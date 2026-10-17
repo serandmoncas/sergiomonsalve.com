@@ -59,6 +59,14 @@ describe('CarpinteriaContent', () => {
     expect(repo).toHaveAttribute('target', '_blank')
   })
 
+  it('links to the course guide PDF', () => {
+    render(<CarpinteriaContent />)
+    expect(screen.getByRole('link', { name: 'tools.guide' })).toHaveAttribute(
+      'href',
+      'https://github.com/serandmoncas/CarpinterIA/raw/main/guia/guia-del-curso.pdf',
+    )
+  })
+
   it('offers WhatsApp to sign up', () => {
     render(<CarpinteriaContent />)
     expect(screen.getByRole('link', { name: 'cta.whatsapp' }).getAttribute('href')).toMatch(/^https:\/\/wa\.me\/573508025988\?text=/)
