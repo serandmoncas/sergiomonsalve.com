@@ -65,7 +65,7 @@
     "formacionTitle": "Formación",
     "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA.",
     "carpinteriaTitle": "CarpinterIA · Curso de melamina",
-    "carpinteriaDescription": "Curso práctico de carpintería en melamina en Guarne: en 4 sesiones diseñas, mandas a cortar y armas tu propio mueble modular. Con calculadora de despiece abierta."
+    "carpinteriaDescription": "Curso de carpintería en melamina en Guarne: un express de un día para armar tu primera caja de herramientas, o 4 sesiones para empezar tu propio proyecto. Con calculadora de despiece abierta."
   },
   "lineaAprendizaje": {
     "comment": "// aprender a aprender",
@@ -747,38 +747,49 @@
   "carpinteria": {
     "comment": "// carpinter-ia",
     "title": "CarpinterIA: aprende a hacer tus propios muebles en melamina",
-    "lede": "Un curso práctico en Guarne, Antioquia. En 4 sesiones diseñas un mueble modular, lo mandas a cortar con tapacanto incluido y lo armas tú mismo. Al final te lo llevas a tu casa.",
+    "lede": "Un curso práctico en Guarne, Antioquia, en dos formatos: un día para empezar desde cero, o 4 sesiones para arrancar un proyecto de verdad para tu casa. Las piezas se mandan a cortar con tapacanto y las armas tú mismo.",
     "facts": [
-      "4 sesiones de 4 horas",
-      "Una sesión cada 15 días",
+      "Express de 1 día",
+      "Completo de 4 sesiones",
       "Grupos de 4 a 6 personas",
       "Melamina de 15 mm",
       "Guarne, Antioquia"
     ],
+    "express": {
+      "label": "Curso express · 1 día",
+      "title": "Tu primera caja de herramientas",
+      "desc": "Para quien nunca ha hecho un mueble. En un día aprendes a medir, perforar y ensamblar a escuadra, y te llevas una caja de herramientas pequeña hecha por ti.",
+      "points": [
+        "Para gente sin experiencia",
+        "Unas 5 horas, con pausas",
+        "Las piezas llegan cortadas: nada de sierra el primer día",
+        "Te llevas la caja a tu casa"
+      ]
+    },
     "course": {
-      "label": "El curso",
-      "title": "De la idea al mueble terminado",
-      "desc": "El proyecto base es un nochero con una puerta y un cajón. Cada sesión termina con algo concreto hecho.",
+      "label": "Curso completo · 4 sesiones",
+      "title": "Tu propio proyecto, por partes",
+      "desc": "Escoges un proyecto para tu casa: un closet, un nochero o un mueble para la sala, el comedor, la cocina, la habitación o el baño. Cada sesión es un proyecto pequeño que hace parte del grande, y lo que falta lo terminas en casa con la misma técnica.",
       "sessions": [
         {
           "number": "01",
-          "title": "Herramientas, medición y cortes",
-          "text": "Usas con seguridad el taladro, la caladora y la circular, y armas una caja simple en MDF."
+          "title": "Herramientas y un cuerpo simple",
+          "text": "Usas con seguridad el taladro, la caladora y la circular, y armas en MDF una caja simple: el cuerpo de todo mueble."
         },
         {
           "number": "02",
-          "title": "Diseño, despiece y pedido",
-          "text": "Diseñas tu mueble y envías la lista de corte: medidas, cantidades y qué cantos llevan tapacanto."
+          "title": "Módulo de práctica y pedido",
+          "text": "Armas un módulo con entrepaño, diseñas tu proyecto y envías su lista de corte con los cantos que llevan tapacanto."
         },
         {
           "number": "03",
-          "title": "Perforación y ensamble",
-          "text": "Perforas con plantilla, unes con confirmat y dejas el cuerpo armado, a escuadra y con el fondo puesto."
+          "title": "El primer módulo de tu proyecto",
+          "text": "Perforas con plantilla, unes con confirmat y dejas tu primer módulo armado, a escuadra y con el fondo puesto."
         },
         {
           "number": "04",
-          "title": "Puertas, cajones y entrega",
-          "text": "Instalas bisagras y correderas, ajustas los frentes y te llevas el mueble a tu casa."
+          "title": "Puertas, cajones y plan",
+          "text": "Le pones bisagras y correderas a ese módulo y sales con el plan para armar en casa los módulos que faltan."
         }
       ]
     },
@@ -804,7 +815,7 @@
     },
     "cta": {
       "label": "// inscripciones",
-      "title": "¿Quieres un cupo en el próximo grupo?",
+      "title": "¿Quieres un cupo en el express o en el curso completo?",
       "whatsapp": "Escríbeme por WhatsApp →",
       "whatsappText": "Hola Sergio, vi la página de CarpinterIA y quiero saber más del curso de melamina."
     }

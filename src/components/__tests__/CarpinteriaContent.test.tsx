@@ -4,6 +4,7 @@ import CarpinteriaContent from '../CarpinteriaContent'
 
 const messages: Record<string, unknown> = {
   facts: ['4 sesiones de 4 horas', 'Melamina de 15 mm'],
+  'express.points': ['Para gente sin experiencia', 'Te la llevas a tu casa'],
   'course.sessions': [
     { number: '01', title: 'Herramientas, medición y cortes', text: 's1' },
     { number: '02', title: 'Diseño, despiece y pedido', text: 's2' },
@@ -35,6 +36,13 @@ describe('CarpinteriaContent', () => {
       'Perforación y ensamble',
       'Puertas, cajones y entrega',
     ])
+  })
+
+  it('renders the express course before the full course', () => {
+    render(<CarpinteriaContent />)
+    expect(screen.getByText('Para gente sin experiencia')).toBeInTheDocument()
+    const titles = screen.getAllByRole('heading', { level: 2 }).map(h => h.textContent)
+    expect(titles.indexOf('express.title')).toBeLessThan(titles.indexOf('course.title'))
   })
 
   it('renders the three tools', () => {
