@@ -63,7 +63,9 @@
     "privacyTitle": "Tratamiento de datos",
     "propuestaTitle": "Propuesta",
     "formacionTitle": "Formación",
-    "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA."
+    "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA.",
+    "carpinteriaTitle": "CarpinterIA · Curso de melamina",
+    "carpinteriaDescription": "Curso práctico de carpintería en melamina en Guarne: en 4 sesiones diseñas, mandas a cortar y armas tu propio mueble modular. Con calculadora de despiece abierta."
   },
   "lineaAprendizaje": {
     "comment": "// aprender a aprender",
@@ -79,6 +81,7 @@
     "recipes": "Recetas",
     "formacion": "Formación",
     "cursos": "Cursos",
+    "carpinteria": "CarpinterIA",
     "biblioteca": "Biblioteca",
     "aprender": "Aprender a aprender",
     "aprenderHref": "/aprender-a-aprender.html",
@@ -740,5 +743,70 @@
     },
     "dominios": { "producto-web": "producto web", "hongos-iot": "hongos e IoT", "educacion": "educación", "agentes": "agentes", "experimentos": "experimentos" },
     "ramas": { "fundamentos": "fundamentos", "backend": "backend", "web": "web", "datos-ml": "datos y ML", "iot": "IoT", "infra": "infra", "agentes": "agentes", "educacion": "educación", "escritura": "escritura" }
+  },
+  "carpinteria": {
+    "comment": "// carpinter-ia",
+    "title": "CarpinterIA: aprende a hacer tus propios muebles en melamina",
+    "lede": "Un curso práctico en Guarne, Antioquia. En 4 sesiones diseñas un mueble modular, lo mandas a cortar con tapacanto incluido y lo armas tú mismo. Al final te lo llevas a tu casa.",
+    "facts": [
+      "4 sesiones de 4 horas",
+      "Una sesión cada 15 días",
+      "Grupos de 4 a 6 personas",
+      "Melamina de 15 mm",
+      "Guarne, Antioquia"
+    ],
+    "course": {
+      "label": "El curso",
+      "title": "De la idea al mueble terminado",
+      "desc": "El proyecto base es un nochero con una puerta y un cajón. Cada sesión termina con algo concreto hecho.",
+      "sessions": [
+        {
+          "number": "01",
+          "title": "Herramientas, medición y cortes",
+          "text": "Usas con seguridad el taladro, la caladora y la circular, y armas una caja simple en MDF."
+        },
+        {
+          "number": "02",
+          "title": "Diseño, despiece y pedido",
+          "text": "Diseñas tu mueble y envías la lista de corte: medidas, cantidades y qué cantos llevan tapacanto."
+        },
+        {
+          "number": "03",
+          "title": "Perforación y ensamble",
+          "text": "Perforas con plantilla, unes con confirmat y dejas el cuerpo armado, a escuadra y con el fondo puesto."
+        },
+        {
+          "number": "04",
+          "title": "Puertas, cajones y entrega",
+          "text": "Instalas bisagras y correderas, ajustas los frentes y te llevas el mueble a tu casa."
+        }
+      ]
+    },
+    "tools": {
+      "label": "Las herramientas",
+      "title": "La parte de IA: despieces sin errores",
+      "desc": "Las medidas de un mueble en melamina dependen del espesor del tablero y de las holguras. Escribí herramientas que hacen esas cuentas para que nadie tenga que hacerlas a mano.",
+      "items": [
+        {
+          "title": "Calculadora de despiece",
+          "text": "Con el ancho, el fondo, el alto, el número de cajones y el tipo de puerta, genera la lista de corte completa."
+        },
+        {
+          "title": "Hoja de pedido",
+          "text": "Convierte la lista de corte en una hoja imprimible para el aserrío, con el área de cada material y los metros de tapacanto para cotizar."
+        },
+        {
+          "title": "Página de holguras",
+          "text": "Las holguras de puertas, cajones y fondos, generadas con los mismos números que usa la calculadora."
+        }
+      ],
+      "repo": "Ver el código en GitHub →"
+    },
+    "cta": {
+      "label": "// inscripciones",
+      "title": "¿Quieres un cupo en el próximo grupo?",
+      "whatsapp": "Escríbeme por WhatsApp →",
+      "whatsappText": "Hola Sergio, vi la página de CarpinterIA y quiero saber más del curso de melamina."
+    }
   }
 }
