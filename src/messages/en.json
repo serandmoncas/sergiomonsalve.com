@@ -63,7 +63,9 @@
     "privacyTitle": "Data policy",
     "propuestaTitle": "Proposal",
     "formacionTitle": "Training",
-    "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer."
+    "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer.",
+    "carpinteriaTitle": "CarpinterIA · Melamine furniture course",
+    "carpinteriaDescription": "A hands-on melamine carpentry course in Guarne, Colombia: in 4 sessions you design, order the cuts for and assemble your own modular furniture. With an open-source cut-list calculator."
   },
   "lineaAprendizaje": {
     "comment": "// learning to learn",
@@ -79,6 +81,7 @@
     "recipes": "Recipes",
     "formacion": "Training",
     "cursos": "Courses",
+    "carpinteria": "CarpinterIA",
     "biblioteca": "Library",
     "aprender": "Learning to learn",
     "aprenderHref": "/learning-to-learn.html",
@@ -740,5 +743,70 @@
     },
     "dominios": { "producto-web": "web product", "hongos-iot": "mushrooms & IoT", "educacion": "education", "agentes": "agents", "experimentos": "experiments" },
     "ramas": { "fundamentos": "foundations", "backend": "backend", "web": "web", "datos-ml": "data & ML", "iot": "IoT", "infra": "infra", "agentes": "agents", "educacion": "education", "escritura": "writing" }
+  },
+  "carpinteria": {
+    "comment": "// carpinter-ia",
+    "title": "CarpinterIA: learn to build your own melamine furniture",
+    "lede": "A hands-on course in Guarne, Antioquia, Colombia. In 4 sessions you design a modular piece of furniture, order it cut with edge banding included, and assemble it yourself. You take it home at the end.",
+    "facts": [
+      "4 sessions of 4 hours",
+      "One session every 2 weeks",
+      "Groups of 4 to 6",
+      "15 mm melamine",
+      "Guarne, Colombia"
+    ],
+    "course": {
+      "label": "The course",
+      "title": "From idea to finished furniture",
+      "desc": "The base project is a nightstand with one door and one drawer. Every session ends with something concrete built.",
+      "sessions": [
+        {
+          "number": "01",
+          "title": "Tools, measuring and cutting",
+          "text": "You safely use the drill, jigsaw and circular saw, and build a simple MDF box."
+        },
+        {
+          "number": "02",
+          "title": "Design, cut list and order",
+          "text": "You design your piece and send the cut list: sizes, quantities and which edges get banding."
+        },
+        {
+          "number": "03",
+          "title": "Drilling and assembly",
+          "text": "You drill with a jig, join with confirmat screws and leave the carcass assembled, square and with its back on."
+        },
+        {
+          "number": "04",
+          "title": "Doors, drawers and delivery",
+          "text": "You install hinges and drawer slides, adjust the fronts and take your furniture home."
+        }
+      ]
+    },
+    "tools": {
+      "label": "The tools",
+      "title": "The AI part: error-free cut lists",
+      "desc": "Melamine furniture sizes depend on the board thickness and the clearances. I wrote tools that do the math so nobody has to do it by hand.",
+      "items": [
+        {
+          "title": "Cut-list calculator",
+          "text": "From width, depth, height, number of drawers and door type, it generates the full cut list."
+        },
+        {
+          "title": "Order sheet",
+          "text": "Turns the cut list into a printable sheet for the cutting shop, with the area of each material and the meters of edge banding for quoting."
+        },
+        {
+          "title": "Clearances page",
+          "text": "Door, drawer and back-panel clearances, generated from the same numbers the calculator uses."
+        }
+      ],
+      "repo": "See the code on GitHub →"
+    },
+    "cta": {
+      "label": "// sign up",
+      "title": "Want a seat in the next group?",
+      "whatsapp": "Message me on WhatsApp →",
+      "whatsappText": "Hi Sergio, I saw the CarpinterIA page and I'd like to know more about the melamine course."
+    }
   }
 }

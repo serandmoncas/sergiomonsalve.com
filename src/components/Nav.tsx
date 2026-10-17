@@ -20,6 +20,7 @@ export default async function Nav() {
     { titulo: t('grupoAprender'), items: [
       { href: '/formacion', label: t('formacion') },
       { href: '/cursos', label: t('cursos') },
+      { href: '/carpinteria', label: t('carpinteria') },
       { href: '/biblioteca', label: t('biblioteca') },
       { href: t('aprenderHref'), label: t('aprender'), estatico: true },
       { href: '/aprendizaje-en-el-tiempo', label: t('lineaAprendizaje') },
@@ -36,8 +37,8 @@ export default async function Nav() {
       <Link href="/" className="font-mono text-sm font-bold text-accent">
         SM
       </Link>
-      {/* Computador (≥ lg): el menú completo en una fila. Mide ~880 px, por eso no se muestra antes de lg. */}
-      <div className="hidden lg:flex items-center gap-6">
+      {/* Computador (≥ xl): el menú completo en una fila. Mide ~1130 px, por eso no se muestra antes de xl. */}
+      <div className="hidden xl:flex items-center gap-6">
         <Link href="/blog" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('blog')}
         </Link>
@@ -52,6 +53,9 @@ export default async function Nav() {
         </Link>
         <Link href="/cursos" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('cursos')}
+        </Link>
+        <Link href="/carpinteria" className="text-xs text-text-secondary hover:text-text transition-colors">
+          {t('carpinteria')}
         </Link>
         <Link href="/biblioteca" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('biblioteca')}
@@ -76,7 +80,7 @@ export default async function Nav() {
         <UserMenu isLoggedIn={!!user} />
       </div>
       {/* Celular y tablet: idioma, sesión y el botón ☰ */}
-      <div className="flex lg:hidden items-center gap-4">
+      <div className="flex xl:hidden items-center gap-4">
         <LocaleSwitcher />
         <UserMenu isLoggedIn={!!user} />
         <MenuMovil grupos={grupos} textos={{ abrir: t('menuAbrir'), cerrar: t('menuCerrar') }} />
