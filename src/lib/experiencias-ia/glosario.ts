@@ -47,7 +47,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Prompt engineering',
     definicion: 'Un turno.',
     categoria: 'fundamentos',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
     ejemplo:
       "Cambiar 'resume esto' por 'resume esto en 3 viñetas, tono neutro, máximo 50 palabras' es prompt engineering: mejorar la instrucción de un solo turno.",
     referencia: {
@@ -61,7 +61,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Context engineering',
     definicion: 'Una sesión.',
     categoria: 'fundamentos',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
     ejemplo:
       'Decidir qué documentos, historial de conversación y resultados de herramientas caben en la ventana de contexto de un agente antes de que responda — no es una instrucción, es diseñar todo el entorno informativo de la tarea.',
     referencia: {
@@ -76,7 +76,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Trabajo continuo: horas y cientos de decisiones, con herramientas, validación y restricciones arquitectónicas.',
     categoria: 'fundamentos',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
     ejemplo:
       'Un agente borra un archivo por error una vez; en vez de solo corregirlo, se agrega una regla permanente al harness (por ejemplo, un hook que bloquea `rm -rf` sin confirmación) para que ese error se vuelva estructuralmente imposible.',
     referencia: {
@@ -91,7 +91,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Cada error del agente se convierte en un arreglo permanente del entorno; el sistema se realimenta y mejora a sí mismo.',
     categoria: 'fundamentos',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
   },
   {
     slug: 'cinco-primitivas',
@@ -99,7 +99,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Sistema de archivos, ejecución de código, sandbox controlado, memoria persistente y gestión de contexto.',
     categoria: 'fundamentos',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
   },
   {
     slug: 'rag',
@@ -135,7 +135,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Unidades modulares de comportamiento o conocimiento que se le enseñan a un agente para una tarea específica.',
     categoria: 'fundamentos',
-    sesionOrigen: 2,
+    sesionOrigen: 3,
     ejemplo:
       "Una skill de 'generar factura' le enseña al agente el formato exacto, los campos obligatorios y el tono de las facturas de una empresa específica, para no repetir esas instrucciones cada vez.",
   },
@@ -145,7 +145,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Skill de Anthropic para construir otras skills; camino para profesionalizar el uso de IA en vez de improvisar cada vez.',
     categoria: 'fundamentos',
-    sesionOrigen: 4,
+    sesionOrigen: 5,
     referencia: {
       titulo: 'Anthropic — Extend Claude with skills (documentación oficial)',
       url: 'https://code.claude.com/docs/en/skills',
@@ -157,7 +157,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Agentes',
     definicion: 'Sistemas que usan un modelo para decidir y ejecutar acciones de forma autónoma, no solo responder texto.',
     categoria: 'fundamentos',
-    sesionOrigen: 8,
+    sesionOrigen: 11,
   },
 
   // ---------- Contexto y memoria ----------
@@ -166,7 +166,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Gestión de contexto',
     definicion: 'Administrar qué información cabe y permanece relevante dentro de la ventana de contexto de un modelo.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 2,
+    sesionOrigen: 3,
     ejemplo:
       'Decidir si un historial completo de chat cabe en la ventana de contexto o si hay que resumirlo antes de la siguiente pregunta.',
   },
@@ -175,7 +175,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Memoria persistente',
     definicion: 'Información que un agente conserva entre sesiones, más allá de una sola conversación.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 5,
+    sesionOrigen: 6,
   },
   {
     slug: 'revelacion-progresiva',
@@ -198,7 +198,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Obsidian',
     definicion: 'Herramienta de notas enlazadas usada por varios del grupo como base de un "segundo cerebro".',
     categoria: 'contexto-memoria',
-    sesionOrigen: 2,
+    sesionOrigen: 3,
   },
   {
     slug: 'segundo-cerebro',
@@ -219,7 +219,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Proyecto tipo asistente personal que integra calendario, correo, WhatsApp y notas; limitado hoy por falta de memoria persistente real.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 5,
+    sesionOrigen: 6,
   },
   {
     slug: 'mempalas',
@@ -227,7 +227,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Herramienta de memoria institucional basada en la técnica de palacios de memoria, aplicada a bases de datos no estructuradas.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 3,
+    sesionOrigen: 4,
     ejemplo:
       'Asociar cada proceso interno de una oficina con un lugar imaginario de un edificio conocido, para recordar el orden de los pasos sin necesidad de un manual escrito.',
     referencia: {
@@ -242,7 +242,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Saturación por exceso de información, concepto de Alfons Cornellá que el grupo adoptó para nombrar la fatiga de estar al día con IA.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 2,
+    sesionOrigen: 3,
   },
   {
     slug: 'encapsulamiento',
@@ -261,7 +261,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Puertas de diseño que obligan a un acto deliberado antes de avanzar; lo que realmente frena el sesgo de automatización, no la fuerza de voluntad.',
     categoria: 'seguridad-control',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
     ejemplo:
       'Exigir que un plan de implementación sea aprobado explícitamente antes de que el agente toque código — ese paso extra es la fricción que evita que el sesgo de automatización apruebe algo mal sin revisar.',
   },
@@ -271,7 +271,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Enfoque de interacción crítica y adversarial con los modelos, para no aceptar sus respuestas sin cuestionarlas.',
     categoria: 'seguridad-control',
-    sesionOrigen: 6,
+    sesionOrigen: 7,
     ejemplo:
       'En vez de aceptar la primera respuesta de un modelo, pedirle explícitamente que argumente el caso contrario, para exponer los puntos débiles del razonamiento original.',
   },
@@ -280,7 +280,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Seguridad en código generado',
     definicion: 'Disciplina de no confiar ciegamente en código producido por IA sin auditoría técnica antes de producción.',
     categoria: 'seguridad-control',
-    sesionOrigen: 6,
+    sesionOrigen: 7,
   },
   {
     slug: 'huellas-de-modelos',
@@ -301,7 +301,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Revisión técnica deliberada de código generado antes de llevarlo a producción, en vez de asumir que "compila" significa "está bien".',
     categoria: 'seguridad-control',
-    sesionOrigen: 6,
+    sesionOrigen: 7,
   },
   {
     slug: 'supervision-humana',
@@ -328,7 +328,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Debate fundacional del grupo sobre los riesgos de confiar en respuestas incorrectas generadas con total seguridad, especialmente en derecho y medicina.',
     categoria: 'seguridad-control',
-    sesionOrigen: 1,
+    sesionOrigen: 2,
   },
   {
     slug: 'gsd',
@@ -344,7 +344,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Loop Engineering',
     definicion: 'Complemento del harness engineering enfocado en los ciclos de retroalimentación del desarrollo con agentes.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
     ejemplo:
       'Un agente de codificación que revisa su propio diff, corre los tests, y si fallan vuelve a intentar antes de reportar terminado — el ciclo completo, no solo la respuesta inicial, es lo que se diseña.',
     referencia: {
@@ -373,7 +373,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Dividir un proyecto en tareas discretas y rastreables para mantener control sobre el avance, en vez de avanzar sin estructura.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 3,
+    sesionOrigen: 4,
   },
   {
     slug: 'pruebas-automatizadas',
@@ -393,7 +393,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'OpenRouter',
     definicion: 'Servicio para gestionar de forma centralizada múltiples llaves de API de distintos proveedores de modelos.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
     ejemplo:
       'En vez de tener una cuenta y una llave de API distinta para cada proveedor de modelos, OpenRouter centraliza el acceso bajo una sola llave y una sola factura.',
     referencia: {
@@ -407,21 +407,21 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Modelos locales',
     definicion: 'Modelos ejecutados en hardware propio en vez de la nube, por costo, privacidad o independencia de proveedor.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 8,
+    sesionOrigen: 11,
   },
   {
     slug: 'metaaprendizaje',
     termino: 'Metaaprendizaje',
     definicion: 'Usar la IA como mentor para aprender a aprender más rápido, no solo para resolver una tarea puntual.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 8,
+    sesionOrigen: 11,
   },
   {
     slug: 'icp',
     termino: 'ICP (perfil de cliente ideal)',
     definicion: 'Definición del cliente ideal usada para calificar leads generados o evaluados con LLMs.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 5,
+    sesionOrigen: 6,
     ejemplo:
       "Definir que el cliente ideal de un taller mecánico es 'dueño de flota de más de 5 vehículos en Medellín' para que un LLM califique leads entrantes contra ese perfil, en vez de tratarlos todos igual.",
   },
@@ -431,7 +431,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Modelo de operación del grupo: presentaciones cortas, repositorio compartido, sin tareas obligatorias ni estructura académica rígida.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 4,
+    sesionOrigen: 5,
   },
   {
     slug: 'agilismo-en-la-era-de-la-ia',
@@ -445,7 +445,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Hook',
     definicion: 'Regla que se ejecuta siempre ante un evento (antes de usar una herramienta, al enviar un prompt). Determinista, a diferencia de un skill.',
     categoria: 'seguridad-control',
-    sesionOrigen: 14,
+    sesionOrigen: 17,
   },
   {
     slug: 'status-line',
@@ -464,7 +464,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Ley del mínimo token',
     definicion: 'Observación del grupo: el modelo lee solo lo que cree suficiente de un archivo largo.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 14,
+    sesionOrigen: 17,
   },
   {
     slug: 'maximo-local',
@@ -477,14 +477,14 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Superpowers',
     definicion: 'Conjunto de skills que guía el ciclo completo: lluvia de ideas, especificación, implementación y pruebas.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 14,
+    sesionOrigen: 17,
   },
   {
     slug: 'omnirouter-llm-router',
     termino: 'OmniRouter / LLM Router',
     definicion: 'Enrutadores locales que reparten pedidos entre proveedores según costo o complejidad.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 11,
+    sesionOrigen: 14,
   },
   {
     slug: 'hermes-agent',
@@ -515,49 +515,49 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'SDR',
     definicion: 'Radio definida por software: un dispositivo USB y un programa reciben señales de radio.',
     categoria: 'fundamentos',
-    sesionOrigen: 13,
+    sesionOrigen: 16,
   },
   {
     slug: 'paradoja-de-jevons',
     termino: 'Paradoja de Jevons',
     definicion: 'Si producir software se abarata, se demanda más software, no menos.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 12,
+    sesionOrigen: 15,
   },
   {
     slug: 'software-desechable',
     termino: 'Software desechable',
     definicion: 'Predicción de Jorge: aplicaciones hechas al instante para una tarea y luego descartadas.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 12,
+    sesionOrigen: 15,
   },
   {
     slug: 'arqueologia-de-codigo',
     termino: 'Arqueología de código',
     definicion: 'Entender un sistema heredado sin documentación con ayuda de IA.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 10,
+    sesionOrigen: 13,
   },
   {
     slug: 'esteganografia',
     termino: 'Esteganografía',
     definicion: 'Ocultar información dentro de otra; base de las marcas de agua en texto generado.',
     categoria: 'seguridad-control',
-    sesionOrigen: 10,
+    sesionOrigen: 13,
   },
   {
     slug: 'informacion-asimetrica',
     termino: 'Información asimétrica',
     definicion: 'Razón de ser de las certificaciones: demostrarle a un tercero lo que uno sabe.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 10,
+    sesionOrigen: 13,
   },
   {
     slug: 'aula-invertida',
     termino: 'Aula invertida',
     definicion: 'Los estudiantes revisan el material antes y la clase se dedica a resolver problemas.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 17,
+    sesionOrigen: 20,
   },
   // ---------- Ampliación a 200 términos (octubre 2026) ----------
   {
@@ -601,7 +601,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Pesos abiertos (open weights)',
     definicion: 'Modelos cuyos parámetros se pueden descargar y ejecutar en hardware propio, aunque no siempre se publiquen los datos ni el código de entrenamiento.',
     categoria: 'fundamentos',
-    sesionOrigen: 9,
+    sesionOrigen: 12,
   },
   {
     slug: 'preentrenamiento',
@@ -704,14 +704,14 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Claude Code',
     definicion: 'Agente de programación de Anthropic que trabaja en la terminal: lee el repositorio, edita archivos y ejecuta comandos.',
     categoria: 'fundamentos',
-    sesionOrigen: 12,
+    sesionOrigen: 15,
   },
   {
     slug: 'cowork',
     termino: 'Cowork',
     definicion: 'Herramienta de Anthropic que lleva el modelo de trabajo de Claude Code a tareas de conocimiento, no solo de programación.',
     categoria: 'fundamentos',
-    sesionOrigen: 12,
+    sesionOrigen: 15,
   },
   {
     slug: 'subagente',
@@ -724,7 +724,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Orquestador de agentes',
     definicion: 'Herramienta que coordina varios agentes: reparte tareas, junta resultados y decide el siguiente paso.',
     categoria: 'fundamentos',
-    sesionOrigen: 16,
+    sesionOrigen: 19,
   },
   {
     slug: 'sistema-multiagente',
@@ -773,7 +773,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Ingeniero de avance',
     definicion: 'Rol que se sienta con el cliente para implementar asistentes de IA sobre sus problemas reales (forward deployed engineer).',
     categoria: 'fundamentos',
-    sesionOrigen: 8,
+    sesionOrigen: 11,
   },
   {
     slug: 'vibe-coding',
@@ -840,7 +840,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'CLAUDE.md',
     definicion: 'Archivo en la raíz del proyecto con las reglas y el contexto que Claude Code lee al empezar cada sesión. Una de las capas editables del harness.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 14,
+    sesionOrigen: 17,
   },
   {
     slug: 'proyectos-de-claude',
@@ -883,14 +883,14 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Contexto compartido',
     definicion: 'Que todo un equipo trabaje con la misma información de fondo —reglas, decisiones, documentos— al usar IA.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 5,
+    sesionOrigen: 6,
   },
   {
     slug: 'limpieza-de-contexto',
     termino: 'Limpieza de contexto',
     definicion: 'Cerrar o limpiar la sesión antes de que el contexto se llene; Jorge recomienda hacerlo hacia el 25–30 %.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 10,
+    sesionOrigen: 13,
   },
   {
     slug: 'degradacion-de-contexto',
@@ -915,21 +915,21 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'NotebookLM',
     definicion: 'Herramienta de Google para conversar con un conjunto de documentos propios. El grupo la recomendó para leer papers.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 13,
+    sesionOrigen: 16,
   },
   {
     slug: 'spec-como-fuente-de-verdad',
     termino: 'Spec como fuente de verdad',
     definicion: 'Escribir primero la especificación y que el código la siga, en vez de que el código sea la única documentación.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
   },
   {
     slug: 'commit-frecuente',
     termino: 'Commit frecuente',
     definicion: 'Guardar el avance en git cada pocos minutos para poder volver atrás cuando el agente se equivoca.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 10,
+    sesionOrigen: 13,
   },
   {
     slug: 'llms-txt',
@@ -948,7 +948,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Memoria institucional',
     definicion: 'El conocimiento acumulado de una organización —decisiones, casos, aprendizajes— guardado para que no se pierda cuando la gente cambia.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 3,
+    sesionOrigen: 4,
   },
   {
     slug: 'resumen-recursivo',
@@ -973,14 +973,14 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Traspaso de contexto por repositorio',
     definicion: 'Guardar el estado de una sesión en el repositorio para retomarla desde otra máquina.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 17,
+    sesionOrigen: 20,
   },
   {
     slug: 'comunicacion-entre-sesiones',
     termino: 'Comunicación entre sesiones',
     definicion: 'Hacer que varias sesiones de un agente intercambien información entre sí en lugar de trabajar aisladas.',
     categoria: 'contexto-memoria',
-    sesionOrigen: 16,
+    sesionOrigen: 19,
   },
   {
     slug: 'ventana-deslizante',
@@ -1059,7 +1059,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Puerta de aprobación',
     definicion: 'Punto obligado donde el agente se detiene y espera un sí humano, por ejemplo antes de tocar código o de borrar algo.',
     categoria: 'seguridad-control',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
   },
   {
     slug: 'guardarrailes',
@@ -1078,7 +1078,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Sesgo de automatización',
     definicion: 'Tendencia a confiar de más en lo que produce una máquina y dejar de revisarlo. La voluntad sola no lo frena; la fricción sí.',
     categoria: 'seguridad-control',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
   },
   {
     slug: 'fuga-de-datos',
@@ -1151,7 +1151,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Marcas de agua en texto IA',
     definicion: 'Señales estadísticas escondidas en el texto generado para poder detectar después que lo escribió un modelo.',
     categoria: 'seguridad-control',
-    sesionOrigen: 10,
+    sesionOrigen: 13,
   },
   {
     slug: 'deepfake',
@@ -1212,7 +1212,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Condición de parada',
     definicion: 'Regla explícita de cuándo un agente debe detenerse: tarea cumplida, límite de intentos o de costo, o señal de error.',
     categoria: 'seguridad-control',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
   },
   {
     slug: 'lista-de-permitidos',
@@ -1261,7 +1261,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Benchmark',
     definicion: 'Prueba estandarizada para comparar modelos. Jorge armó el suyo: 19 modelos abiertos, 55 problemas, 11 lenguajes.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 9,
+    sesionOrigen: 12,
   },
   {
     slug: 'llm-como-juez',
@@ -1322,7 +1322,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Enrutamiento de modelos',
     definicion: 'Mandar cada pedido al modelo más adecuado según costo, velocidad o dificultad.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 11,
+    sesionOrigen: 14,
   },
   {
     slug: 'cuantizacion',
@@ -1341,14 +1341,14 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Modo plan',
     definicion: 'Pedirle al agente que proponga un plan y esperar aprobación antes de que toque el código.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
   },
   {
     slug: 'criterios-de-aceptacion-binarios',
     termino: 'Criterios de aceptación binarios',
     definicion: 'Condiciones de terminado que se cumplen o no se cumplen, sin zonas grises, para que el agente sepa cuándo acabó.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 7,
+    sesionOrigen: 9,
   },
   {
     slug: 'deuda-tecnica',
@@ -1361,35 +1361,35 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Refactorización',
     definicion: 'Reorganizar código sin cambiar lo que hace, para que sea más claro y fácil de mantener.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 3,
+    sesionOrigen: 4,
   },
   {
     slug: 'fomo',
     termino: 'FOMO',
     definicion: 'Miedo a quedarse atrás con cada novedad de IA. Para el grupo, compartir experiencias es la mejor defensa.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 16,
+    sesionOrigen: 19,
   },
   {
     slug: 'certificacion-claude-architect',
     termino: 'Certificación de arquitecto de Anthropic',
     definicion: 'Certificación oficial sobre diseño de soluciones con Claude. Torres aprobó Architect Foundations.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 11,
+    sesionOrigen: 14,
   },
   {
     slug: 'miniproyecto-comparativo',
     termino: 'Miniproyecto comparativo',
     definicion: 'Idea del grupo: que todos resuelvan el mismo ejercicio, cada uno con su harness, y comparar resultados.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 12,
+    sesionOrigen: 15,
   },
   {
     slug: 'mismo-harness-distinto-modelo',
     termino: 'Mismo harness, distinto modelo',
     definicion: 'Experimento propuesto por Torres: dejar fijo el harness y cambiar solo el modelo para ver cuánto aporta cada uno.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 13,
+    sesionOrigen: 16,
   },
   {
     slug: 'limite-de-gasto',
@@ -1420,28 +1420,28 @@ export const GLOSARIO: TerminoGlosario[] = [
     termino: 'Gamificación',
     definicion: 'Usar mecánicas de juego —puntos, niveles, retos— para motivar el aprendizaje o el uso de una aplicación.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 17,
+    sesionOrigen: 20,
   },
   {
     slug: 'voz-sintetica',
     termino: 'Voz sintética',
     definicion: 'Voz generada por IA a partir de texto. Diego la usa para narrar su podcast de astronomía.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 17,
+    sesionOrigen: 20,
   },
   {
     slug: 'burbuja-de-inversion-en-ia',
     termino: 'Burbuja de inversión en IA',
     definicion: 'Debate sobre si el dinero que entra a la IA supera el valor que realmente produce, y qué pasaría si se corrige.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 15,
+    sesionOrigen: 18,
   },
   {
     slug: 'donacion-de-tokens',
     termino: 'Donación de tokens',
     definicion: 'Iniciativa de aportar capacidad de cómputo de IA a causas como problemas matemáticos abiertos.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 14,
+    sesionOrigen: 17,
   },
   {
     slug: 'ultralearning',
@@ -1449,7 +1449,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Aprender algo difícil con retos intensivos y autodirigidos, como aprender mandarín o ciencias de la computación en un año.',
     categoria: 'fundamentos',
-    sesionOrigen: 18,
+    sesionOrigen: 21,
   },
   {
     slug: 'control-remoto-claude-code',
@@ -1457,7 +1457,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Seguir y guiar una sesión de Claude Code desde otro dispositivo. Juan Pablo lo usa para que el desarrollo avance mientras está en reuniones.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 18,
+    sesionOrigen: 21,
   },
   {
     slug: 'ingenieria-inversa-de-aplicaciones',
@@ -1465,7 +1465,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Pedirle a un agente que analice una aplicación o un repositorio existente para entender sus casos de uso y reconstruirla a la medida. Ejemplo: el skill Reverse Engineer Anything.',
     categoria: 'operacion-evaluacion',
-    sesionOrigen: 18,
+    sesionOrigen: 21,
   },
   {
     slug: 'hiperpersonalizacion',
@@ -1473,7 +1473,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion:
       'Adaptar una aplicación o una ruta de aprendizaje a una sola persona, algo que la automatización con IA hace viable.',
     categoria: 'fundamentos',
-    sesionOrigen: 19,
+    sesionOrigen: 22,
   },
 ]
 

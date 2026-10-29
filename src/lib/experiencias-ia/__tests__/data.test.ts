@@ -19,8 +19,8 @@ import {
 
 describe('getSesion', () => {
   it('returns the session matching n', () => {
-    expect(getSesion(7)?.titulo).toBe('Harness Engineering')
-    expect(getSesion(17)?.titulo).toBe('Nuevo formato y caras nuevas')
+    expect(getSesion(9)?.titulo).toBe('Harness Engineering')
+    expect(getSesion(20)?.titulo).toBe('Nuevo formato y caras nuevas')
   })
 
   it('returns undefined for a non-existent session number', () => {
