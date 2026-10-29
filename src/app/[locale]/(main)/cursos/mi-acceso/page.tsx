@@ -27,7 +27,7 @@ export default async function MiAccesoPage({
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
-      <p className="font-mono text-xs text-accent mb-2">// cursos</p>
+      <p className="font-mono text-xs text-accent mb-2">{'//'} cursos</p>
       <h1 className="text-2xl font-extrabold text-text mb-2">{t('mi_acceso')}</h1>
       <p className="font-mono text-xs text-text-muted mb-10">{name}</p>
 

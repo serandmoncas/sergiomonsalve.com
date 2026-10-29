@@ -43,7 +43,7 @@ export default function RecipeList({ recipes, locale }: { recipes: RecipeMeta[];
       )}
 
       {filtered.length === 0 ? (
-        <p className="font-mono text-xs text-text-muted">// {t('empty')}</p>
+        <p className="font-mono text-xs text-text-muted">{'//'} {t('empty')}</p>
       ) : (
         <div className="space-y-4">
           {filtered.map(recipe => (

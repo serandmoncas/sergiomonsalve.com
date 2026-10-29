@@ -29,7 +29,7 @@ export default async function CommentList({
 
   return (
     <div className="mt-12">
-      <p className="font-mono text-xs text-accent mb-6">// {t('listTitle')} ({comments.length})</p>
+      <p className="font-mono text-xs text-accent mb-6">{'//'} {t('listTitle')} ({comments.length})</p>
       <div className="space-y-6">
         {(comments as Comment[]).map(c => (
           <div key={c.id} className="border-l-2 border-border pl-4">

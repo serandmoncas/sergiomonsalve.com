@@ -65,7 +65,7 @@ export default function BookList({ books, locale, isOwner }: { books: UnifiedBoo
       </div>
 
       {filtered.length === 0 ? (
-        <p className="font-mono text-xs text-text-muted">// {t('empty')}</p>
+        <p className="font-mono text-xs text-text-muted">{'//'} {t('empty')}</p>
       ) : (
         <div className="space-y-3">
           {filtered.map(book => (

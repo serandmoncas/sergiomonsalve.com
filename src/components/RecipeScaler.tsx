@@ -51,7 +51,7 @@ export default function RecipeScaler({
 
       {ingredients.length > 0 && (
         <div className="border border-border rounded-sm p-5 mb-10 bg-surface">
-          <p className="font-mono text-xs text-accent mb-3">// {ingredientsLabel}</p>
+          <p className="font-mono text-xs text-accent mb-3">{'//'} {ingredientsLabel}</p>
           <ul className="space-y-1.5">
             {ingredients.map((item, i) => (
               <li key={i} className="text-xs text-text-secondary flex gap-2">

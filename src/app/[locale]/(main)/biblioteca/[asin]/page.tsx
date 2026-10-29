@@ -90,7 +90,7 @@ export default async function BookPage({
 
       {book.highlights.length > 0 && (
         <div className="mb-8">
-          <p className="font-mono text-xs text-accent mb-4">// {t('highlights')}</p>
+          <p className="font-mono text-xs text-accent mb-4">{'//'} {t('highlights')}</p>
           <div className="space-y-4">
             {book.highlights.map((quote, i) => (
               <blockquote

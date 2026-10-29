@@ -50,7 +50,7 @@ export default function UserMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
 
       {open && (
         <div className="absolute right-0 top-6 w-44 bg-background border border-border rounded-sm shadow-lg z-50 py-2">
-          <p className="font-mono text-[10px] text-accent px-3 py-1 mb-1">// modo editor</p>
+          <p className="font-mono text-[10px] text-accent px-3 py-1 mb-1">{'//'} modo editor</p>
           <Link
             href="/admin"
             onClick={() => setOpen(false)}

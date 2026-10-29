@@ -24,12 +24,12 @@ export default function CommentForm({ postSlug }: { postSlug: string }) {
   }
 
   if (status === 'success') {
-    return <p className="font-mono text-xs text-accent mt-8">// {t('success')}</p>
+    return <p className="font-mono text-xs text-accent mt-8">{'//'} {t('success')}</p>
   }
 
   return (
     <form onSubmit={handleSubmit} className="mt-10 space-y-4">
-      <p className="font-mono text-xs text-accent mb-4">// {t('title')}</p>
+      <p className="font-mono text-xs text-accent mb-4">{'//'} {t('title')}</p>
 
       {/* Honeypot — hidden from real users */}
       <input
@@ -79,7 +79,7 @@ export default function CommentForm({ postSlug }: { postSlug: string }) {
       </div>
 
       {status === 'error' && (
-        <p className="font-mono text-xs text-red-400">// {t('error')}</p>
+        <p className="font-mono text-xs text-red-400">{'//'} {t('error')}</p>
       )}
 
       <button
