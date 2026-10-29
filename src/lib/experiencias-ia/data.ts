@@ -321,7 +321,7 @@ export const SESIONES: EntradaSesion[] = [
     asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'José Luis', 'Juan David Pineda'],
     enlaces: [],
   },
-  { fecha: '2026-08-12', fechaLarga: '12 de agosto de 2026', estado: 'sin-registro', nota: 'Sin quórum' },
+  { fecha: '2026-08-12', fechaLarga: '12 de agosto de 2026', estado: 'sin-registro', nota: 'Sin quórum: conversación entre Sergio y Jorge' },
   {
     n: 10,
     fecha: '2026-08-19',
