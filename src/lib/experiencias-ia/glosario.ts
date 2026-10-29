@@ -1443,6 +1443,38 @@ export const GLOSARIO: TerminoGlosario[] = [
     categoria: 'operacion-evaluacion',
     sesionOrigen: 14,
   },
+  {
+    slug: 'ultralearning',
+    termino: 'Ultralearning (aprendizaje extremo)',
+    definicion:
+      'Aprender algo difícil con retos intensivos y autodirigidos, como aprender mandarín o ciencias de la computación en un año.',
+    categoria: 'fundamentos',
+    sesionOrigen: 18,
+  },
+  {
+    slug: 'control-remoto-claude-code',
+    termino: 'Control remoto de Claude Code',
+    definicion:
+      'Seguir y guiar una sesión de Claude Code desde otro dispositivo. Juan Pablo lo usa para que el desarrollo avance mientras está en reuniones.',
+    categoria: 'operacion-evaluacion',
+    sesionOrigen: 18,
+  },
+  {
+    slug: 'ingenieria-inversa-de-aplicaciones',
+    termino: 'Ingeniería inversa de aplicaciones',
+    definicion:
+      'Pedirle a un agente que analice una aplicación o un repositorio existente para entender sus casos de uso y reconstruirla a la medida. Ejemplo: el skill Reverse Engineer Anything.',
+    categoria: 'operacion-evaluacion',
+    sesionOrigen: 18,
+  },
+  {
+    slug: 'hiperpersonalizacion',
+    termino: 'Hiperpersonalización',
+    definicion:
+      'Adaptar una aplicación o una ruta de aprendizaje a una sola persona, algo que la automatización con IA hace viable.',
+    categoria: 'fundamentos',
+    sesionOrigen: 19,
+  },
 ]
 
 export function getTerminosPorCategoria(categoria: CategoriaGlosario): TerminoGlosario[] {
