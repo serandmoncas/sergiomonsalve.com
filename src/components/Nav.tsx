@@ -13,6 +13,7 @@ export default async function Nav() {
   // Las mismas opciones, agrupadas, para el menú del celular y la tablet.
   const grupos: GrupoMenu[] = [
     { items: [
+      { href: '/biografia', label: t('biografia') },
       { href: '/blog', label: t('blog') },
       { href: '/portfolio', label: t('portfolio') },
       { href: '/recipes', label: t('recipes') },
@@ -39,6 +40,9 @@ export default async function Nav() {
       </Link>
       {/* Computador (≥ xl): el menú completo en una fila. Mide ~1130 px, por eso no se muestra antes de xl. */}
       <div className="hidden xl:flex items-center gap-6">
+        <Link href="/biografia" className="text-xs text-text-secondary hover:text-text transition-colors">
+          {t('biografia')}
+        </Link>
         <Link href="/blog" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('blog')}
         </Link>
