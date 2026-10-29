@@ -36,7 +36,7 @@ Si un miércoles no hay sesión, se agrega en `MIERCOLES_SIN_SESION` en `src/lib
 
 ### Depende de otras personas
 - [ ] **Consentimientos:** pedir a cada integrante que apruebe o escriba su texto para Quiénes somos, y a cada autor su permiso para la ficha del Taller. Los mensajes están redactados (fuera del repo, por privacidad). Al recibir un sí: `consentimiento: true` + `texto`, o `publicar: true`.
-- [ ] Confirmar el apellido de Javier ("Javier C. Álvarez" o "Javier Correa").
+- [x] Apellido de Javier confirmado: **Javier Correa Álvarez** (21 oct).
 - [ ] Confirmar si hubo sesión el 29 jul y el 30 sep.
 - [ ] Verificar los nombres dudosos de la transcripción: el clasificador "Jeff"/"JEP" y los orquestadores Orca y Herder.
 

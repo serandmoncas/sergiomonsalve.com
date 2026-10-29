@@ -545,11 +545,11 @@ export const SESIONES: EntradaSesion[] = [
       'Santiago',
       'Alejandra Santamaría',
       'Carlos Mario Espíndola',
-      'Javier C. Álvarez',
+      'Javier Correa Álvarez',
       'Sebastián Calle',
     ],
     enlaces: [],
-    nuevos: ['Carlos Mario Espíndola', 'Javier C. Álvarez', 'Sebastián Calle'],
+    nuevos: ['Carlos Mario Espíndola', 'Javier Correa Álvarez', 'Sebastián Calle'],
   },
   {
     n: 21,
@@ -573,7 +573,7 @@ export const SESIONES: EntradaSesion[] = [
       'Santiago',
       'Alejandra Santamaría',
       'Carlos Mario Espíndola',
-      'Javier C. Álvarez',
+      'Javier Correa Álvarez',
     ],
     enlaces: [],
   },
@@ -590,7 +590,7 @@ export const SESIONES: EntradaSesion[] = [
       'Javier: con la IA, las revistas científicas exigen más rigor y datos mejor curados.',
       'Alejandra propuso agendar ponencias y transmitir por YouTube; Jorge señaló que lo que mostramos son demos frente al software empresarial.',
     ],
-    asistentes: ['Sergio', 'Jorge', 'Juan Pablo', 'Torres', 'Alejandra Santamaría', 'Javier C. Álvarez'],
+    asistentes: ['Sergio', 'Jorge', 'Juan Pablo', 'Torres', 'Alejandra Santamaría', 'Javier Correa Álvarez'],
     enlaces: [],
   },
 ]
@@ -636,7 +636,7 @@ export const TEMAS: Tema[] = [
   },
   {
     tema: 'Modelos de lenguaje para proteínas y detección de patógenos',
-    propone: 'Javier C. Álvarez',
+    propone: 'Javier Correa Álvarez',
     surgio: '2026-10-14',
     estado: 'propuesto',
   },
@@ -816,7 +816,7 @@ export const PERSONAS: Persona[] = [
     consentimiento: false,
   },
   {
-    nombre: 'Javier C. Álvarez',
+    nombre: 'Javier Correa Álvarez',
     desde: '2026-10-14',
     texto:
       'Biólogo, profesor e investigador en bioinformática en EAFIT desde hace 13 años. Trabaja con modelos de lenguaje para proteínas.',
