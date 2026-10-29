@@ -51,7 +51,7 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
       <section className="border-b border-border py-10">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 items-start">
-            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">// quién soy</p>
+            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">{'//'} quién soy</p>
             <p className="text-xl md:text-2xl leading-relaxed text-text max-w-2xl">
               {c.lede.split('traductor entre datos y decisiones').length > 1
                 ? <>
@@ -75,7 +75,7 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
       <section className="border-b border-border py-10">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 items-start">
-            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">// stack</p>
+            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">{'//'} stack</p>
             <div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 mb-8">
                 {c.stackGroups.map(group => (
@@ -169,7 +169,7 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
       <section className="border-b border-border py-16">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-[180px_1fr_1fr] gap-8 md:gap-10">
-            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">// también</p>
+            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">{'//'} también</p>
             <div>
               <h2 className="text-xl font-bold text-text mb-5">{eduTitle}</h2>
               <div className="space-y-4">

@@ -61,7 +61,7 @@ export default async function AdminOverviewPage() {
 
       <div className="border-t border-border pt-8">
         <p className="font-mono text-[10px] text-text-muted uppercase tracking-widest mb-4">
-          // acceso rápido
+          {'//'} acceso rápido
         </p>
         <div className="flex flex-wrap gap-3">
           <Link

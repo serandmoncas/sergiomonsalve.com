@@ -27,7 +27,7 @@ export default function CursosLoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
-        <p className="font-mono text-xs text-accent mb-2">// cursos</p>
+        <p className="font-mono text-xs text-accent mb-2">{'//'} cursos</p>
         <h1 className="text-2xl font-extrabold text-text mb-8">{t('login')}</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

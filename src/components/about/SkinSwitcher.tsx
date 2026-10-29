@@ -23,7 +23,7 @@ export default function SkinSwitcher({
       style={{ transition: 'background-color 240ms ease, border-color 240ms ease, color 240ms ease' }}
     >
       <span className="hidden sm:inline-block min-w-[58px] text-text-muted">
-        // {skin}
+        {'//'} {skin}
       </span>
       <div className="flex gap-1.5">
         {SKINS.map(s => (

@@ -18,7 +18,7 @@ export default function OgImage() {
       }}
     >
       <div style={{ color: '#555555', fontFamily: 'monospace', fontSize: 20, marginBottom: 24 }}>
-        // AI Software Engineer
+        {'//'} AI Software Engineer
       </div>
       <div style={{ color: '#ffffff', fontFamily: 'sans-serif', fontSize: 80, fontWeight: 800, lineHeight: 1.05, marginBottom: 32 }}>
         Sergio{'\n'}Monsalve

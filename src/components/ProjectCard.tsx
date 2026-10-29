@@ -32,7 +32,7 @@ export default function ProjectCard({
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-mono text-xs text-text-muted">// {project.slug}</span>
+            <span className="font-mono text-xs text-text-muted">{'//'} {project.slug}</span>
           </div>
         )}
         <span className="absolute top-2 right-2 font-mono text-xs bg-background/80 px-2 py-0.5 rounded-sm text-text-muted border border-border">

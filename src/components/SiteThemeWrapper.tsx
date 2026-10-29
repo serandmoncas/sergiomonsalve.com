@@ -1,27 +1,47 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useSyncExternalStore } from 'react'
 import SkinSwitcher, { type SkinId } from './about/SkinSwitcher'
 
 const STORAGE_KEY = 'sm-skin'
 const VALID_SKINS: SkinId[] = ['crema', 'bosque', 'terminal']
 const DEFAULT_SKIN: SkinId = 'crema'
 
-export default function SiteThemeWrapper({ children }: { children: React.ReactNode }) {
-  const [skin, setSkin] = useState<SkinId>(DEFAULT_SKIN)
+// Same-tab writes don't fire the 'storage' event, so notify subscribers manually.
+const listeners = new Set<() => void>()
+// Fallback for when localStorage is unavailable (e.g. blocked storage).
+let memorySkin: SkinId = DEFAULT_SKIN
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY) as SkinId | null
-      if (saved && VALID_SKINS.includes(saved)) setSkin(saved)
-    } catch {}
-  }, [])
+function subscribe(listener: () => void) {
+  listeners.add(listener)
+  window.addEventListener('storage', listener)
+  return () => {
+    listeners.delete(listener)
+    window.removeEventListener('storage', listener)
+  }
+}
+
+function getSnapshot(): SkinId {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY) as SkinId | null
+    if (saved && VALID_SKINS.includes(saved)) return saved
+  } catch {}
+  return memorySkin
+}
+
+function getServerSnapshot(): SkinId {
+  return DEFAULT_SKIN
+}
+
+export default function SiteThemeWrapper({ children }: { children: React.ReactNode }) {
+  const skin = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
   function handleChange(newSkin: SkinId) {
-    setSkin(newSkin)
+    memorySkin = newSkin
     try {
       localStorage.setItem(STORAGE_KEY, newSkin)
     } catch {}
+    listeners.forEach(l => l())
   }
 
   return (
