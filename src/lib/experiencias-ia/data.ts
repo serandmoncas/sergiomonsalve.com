@@ -84,7 +84,7 @@ export const GRUPO: Grupo = {
   lema: 'Un caballo desbocado necesita riendas, no menos fuerza.',
   cadencia: 'Miércoles, 7:30 – 8:30 p.m. (GMT-5)',
   lugar: 'Medellín, Colombia — remoto',
-  desde: '4 de junio de 2026',
+  desde: '2 de junio de 2026',
   descripcion:
     'Empezó como un grupo de estudio y terminó siendo un círculo de apoyo técnico. Profesionales de desarrollo, datos, finanzas, biología, logística, educación y dirección tecnológica que se juntan una vez por semana a contar qué probaron, qué se les rompió y qué aprendieron con inteligencia artificial. Sin tareas obligatorias. Sin entregables. Con mucha conversación.',
   principioMadre: 'Aquí ningún compromiso es obligatorio. Venimos a contar experiencias.',
@@ -123,8 +123,25 @@ export const MIERCOLES_SIN_SESION: Array<{ fecha: string; nota: string }> = []
 export const SESIONES: EntradaSesion[] = [
   {
     n: 1,
-    fecha: '2026-06-04',
-    fechaLarga: '4 de junio de 2026',
+    fecha: '2026-06-02',
+    fechaLarga: '2 de junio de 2026',
+    titulo: 'Arranque: quiénes somos y qué esperamos',
+    gancho: 'Primera ronda de presentaciones y primera regla: reunirse cada semana.',
+    hallazgos: [
+      'Jorge describió la IA como una «navaja suiza social» para resolver problemas del día a día.',
+      'Diego se definió como «humano en el bucle»: preservar el pensamiento humano frente a la automatización.',
+      'Carlos Eduardo advirtió sobre la «calidad aparente» de lo que genera la IA y pidió cultivar el cuestionamiento.',
+      'Sergio propuso el primer reto: que cada uno construya su página personal con IA y cuente cómo lo hizo.',
+      'Se acordó reunirse cada semana, los miércoles a las 7:30 p. m.',
+    ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'Daniel', 'Carlos Eduardo Monsalve', 'Martín Aguilar'],
+    enlaces: [],
+  },
+  {
+    n: 2,
+    fecha: '2026-06-03',
+    fechaLarga: '3 de junio de 2026',
+    asistentes: ['Sergio', 'Jorge', 'Cristina Aristizábal'],
     titulo: 'Utilidad, dependencia y ética',
     encargado: 'Sergio Monsalve',
     gancho:
@@ -142,7 +159,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 2,
+    n: 3,
     fecha: '2026-06-09',
     fechaLarga: '9 de junio de 2026',
     titulo: 'Logística, saturación y automatización de flujos',
@@ -159,7 +176,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 3,
+    n: 4,
     fecha: '2026-06-10',
     fechaLarga: '10 de junio de 2026',
     titulo: 'Arquitectura, MemPalas y el rol del programador',
@@ -180,7 +197,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 4,
+    n: 5,
     fecha: '2026-06-24',
     fechaLarga: '24 de junio de 2026',
     titulo: 'Consolidación de la comunidad de práctica',
@@ -196,9 +213,10 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 5,
-    fecha: '2026-06-30',
-    fechaLarga: '30 de junio – 2 de julio de 2026',
+    n: 6,
+    fecha: '2026-07-01',
+    fechaLarga: '1 de julio de 2026',
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Daniel', 'Nicolás Montoya', 'Jorge González', 'Pablo Álvarez', 'Andrés Pérez'],
     titulo: 'Jarvis, contexto compartido y el futuro de los dashboards',
     encargado: 'Sergio Monsalve',
     gancho:
@@ -213,7 +231,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 6,
+    n: 7,
     fecha: '2026-07-08',
     fechaLarga: '8 de julio de 2026',
     titulo: 'Identidad del grupo y seguridad en código generado',
@@ -232,7 +250,23 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 7,
+    n: 8,
+    fecha: '2026-07-14',
+    fechaLarga: '14 de julio de 2026',
+    titulo: 'Antesala del harness',
+    gancho: 'Sergio presentó el harness engineering y una lista de 40 términos para tener un lenguaje común.',
+    hallazgos: [
+      'José Luis Montoya, profesor de ingeniería de sistemas, se presentó al grupo.',
+      'Jorge aplica el harness de forma empírica y ve el desarrollo con IA como un oficio artesanal y estocástico.',
+      'Jorge comparó escribir código con el ábaco: aunque se automatice, sigue siendo ejercicio mental.',
+      'José Luis propuso explicar conceptos con videos cortos en vez de documentos largos.',
+    ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'José Luis', 'Daniel'],
+    enlaces: [],
+    nuevos: ['José Luis Montoya Pareja'],
+  },
+  {
+    n: 9,
     fecha: '2026-07-15',
     fechaLarga: '15 de julio de 2026',
     titulo: 'Harness Engineering',
@@ -285,10 +319,25 @@ export const SESIONES: EntradaSesion[] = [
       { titulo: 'Repositorio de aprendizaje del grupo', nota: 'Cinco módulos, dos proyectos', url: '' },
       { titulo: 'OpenRouter', nota: 'Gestión centralizada de múltiples llaves de API', url: '' },
     ],
-    nuevos: ['Rafael David Rincón Bermúdez', 'Alejandra Santamaría', 'José Luis Montoya Pareja'],
+    nuevos: ['Rafael David Rincón Bermúdez', 'Alejandra Santamaría'],
   },
   {
-    n: 8,
+    n: 10,
+    fecha: '2026-07-21',
+    fechaLarga: '21 de julio de 2026',
+    titulo: 'Forward engineers y agentes de bolsillo',
+    gancho: 'Torres explicó el forward engineer: una sola persona que va del requisito al despliegue.',
+    hallazgos: [
+      'Torres propuso un agente personal accesible por WhatsApp, basado en Hermes.',
+      'Debate de seguridad: aislar a los agentes, por ejemplo en una Raspberry Pi, para proteger datos privados.',
+      'Jorge: los modelos grandes no corren en hardware doméstico; para experimentar están Ollama o LM Studio.',
+      'Sergio propuso con Torres un curso preparatorio para la certificación de Anthropic.',
+    ],
+    asistentes: ['Sergio', 'Torres', 'Jorge'],
+    enlaces: [],
+  },
+  {
+    n: 11,
     fecha: '2026-07-22',
     fechaLarga: '22 de julio de 2026',
     titulo: 'Agentes en local, infraestructura y democratización',
@@ -307,7 +356,7 @@ export const SESIONES: EntradaSesion[] = [
   // ---------- Actualización 29 jul – 14 oct 2026 ----------
   { fecha: '2026-07-29', fechaLarga: '29 de julio de 2026', estado: 'sin-registro' },
   {
-    n: 9,
+    n: 12,
     fecha: '2026-08-05',
     fechaLarga: '5 de agosto de 2026',
     titulo: '19 modelos, 11 lenguajes',
@@ -323,7 +372,7 @@ export const SESIONES: EntradaSesion[] = [
   },
   { fecha: '2026-08-12', fechaLarga: '12 de agosto de 2026', estado: 'sin-registro', nota: 'Sin quórum: conversación entre Sergio y Jorge' },
   {
-    n: 10,
+    n: 13,
     fecha: '2026-08-19',
     fechaLarga: '19 de agosto de 2026',
     titulo: 'Hacer frente a estudiar',
@@ -337,7 +386,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 11,
+    n: 14,
     fecha: '2026-08-26',
     fechaLarga: '26 de agosto de 2026',
     titulo: 'Routers, cápsulas y 22 proyectos',
@@ -361,7 +410,7 @@ export const SESIONES: EntradaSesion[] = [
     nuevos: ['Santiago Osorio'],
   },
   {
-    n: 12,
+    n: 15,
     fecha: '2026-09-02',
     fechaLarga: '2 de septiembre de 2026',
     titulo: 'Software desechable',
@@ -375,7 +424,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 13,
+    n: 16,
     fecha: '2026-09-09',
     fechaLarga: '9 de septiembre de 2026',
     titulo: '¿Papers o experiencias?',
@@ -389,7 +438,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 14,
+    n: 17,
     fecha: '2026-09-16',
     fechaLarga: '16 de septiembre de 2026',
     titulo: 'Hooks, skills y la silla de cada uno',
@@ -404,7 +453,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 15,
+    n: 18,
     fecha: '2026-09-23',
     fechaLarga: '23 de septiembre de 2026',
     titulo: 'La primera app define el patrón',
@@ -419,7 +468,7 @@ export const SESIONES: EntradaSesion[] = [
   },
   { fecha: '2026-09-30', fechaLarga: '30 de septiembre de 2026', estado: 'sin-registro' },
   {
-    n: 16,
+    n: 19,
     fecha: '2026-10-07',
     fechaLarga: '7 de octubre de 2026',
     titulo: 'Retrospectiva: ¿nos sigue sirviendo?',
@@ -435,7 +484,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 17,
+    n: 20,
     fecha: '2026-10-14',
     fechaLarga: '14 de octubre de 2026',
     titulo: 'Nuevo formato y caras nuevas',
@@ -465,7 +514,7 @@ export const SESIONES: EntradaSesion[] = [
     nuevos: ['Carlos Mario Espíndola', 'Javier C. Álvarez', 'Sebastián Calle'],
   },
   {
-    n: 18,
+    n: 21,
     fecha: '2026-10-21',
     fechaLarga: '21 de octubre de 2026',
     titulo: 'Agentes que trabajan de noche',
@@ -491,7 +540,7 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
-    n: 19,
+    n: 22,
     fecha: '2026-10-28',
     fechaLarga: '28 de octubre de 2026',
     titulo: '¿Hacia dónde va el grupo?',
@@ -690,16 +739,16 @@ export const TEMAS_FUERA: Array<{ tema: string; nota: string }> = [
 // Cada integrante aparece solo con consentimiento: true y el texto que
 // él o ella misma apruebe. Los `texto` de abajo son borradores por aprobar.
 export const PERSONAS: Persona[] = [
-  { nombre: 'Sergio Monsalve', desde: '2026-06-04', texto: '', consentimiento: false },
-  { nombre: 'Jorge Johnson', desde: '2026-06-04', texto: '', consentimiento: false },
-  { nombre: 'Juan David Torres', desde: '2026-06-04', texto: '', consentimiento: false },
-  { nombre: 'Diego Fernando Robledo', desde: '2026-06-04', texto: '', consentimiento: false },
-  { nombre: 'Daniel Moreno Agudelo', desde: '2026-06-04', texto: '', consentimiento: false },
-  { nombre: 'Juan Pablo Duque Ochoa', desde: '2026-06-04', texto: '', consentimiento: false },
-  { nombre: 'Cristina Aristizábal Johnson', desde: '2026-06-04', texto: '', consentimiento: false },
-  { nombre: 'Carlos Eduardo Monsalve', desde: '2026-06-04', texto: '', consentimiento: false },
-  { nombre: 'Juan David Pineda Cárdenas', desde: '2026-06-04', texto: '', consentimiento: false },
-  { nombre: 'Martín Gonzalo Aguilar', desde: '2026-06-04', texto: '', consentimiento: false },
+  { nombre: 'Sergio Monsalve', desde: '2026-06-02', texto: '', consentimiento: false },
+  { nombre: 'Jorge Johnson', desde: '2026-06-02', texto: '', consentimiento: false },
+  { nombre: 'Juan David Torres', desde: '2026-06-02', texto: '', consentimiento: false },
+  { nombre: 'Diego Fernando Robledo', desde: '2026-06-02', texto: '', consentimiento: false },
+  { nombre: 'Daniel Moreno Agudelo', desde: '2026-06-02', texto: '', consentimiento: false },
+  { nombre: 'Juan Pablo Duque Ochoa', desde: '2026-06-02', texto: '', consentimiento: false },
+  { nombre: 'Cristina Aristizábal Johnson', desde: '2026-06-03', texto: '', consentimiento: false },
+  { nombre: 'Carlos Eduardo Monsalve', desde: '2026-06-02', texto: '', consentimiento: false },
+  { nombre: 'Juan David Pineda Cárdenas', desde: '2026-06-02', texto: '', consentimiento: false },
+  { nombre: 'Martín Gonzalo Aguilar', desde: '2026-06-02', texto: '', consentimiento: false },
   { nombre: 'Pablo Álvarez', desde: '2026-06-09', texto: '', consentimiento: false },
   { nombre: 'Nicolás Montoya', desde: '2026-06-09', texto: '', consentimiento: false },
   { nombre: 'Jorge González', desde: '2026-06-09', texto: '', consentimiento: false },
@@ -713,7 +762,7 @@ export const PERSONAS: Persona[] = [
       'Ingeniera biológica, docente, construye una plataforma de matemáticas por competencias.',
     consentimiento: false,
   },
-  { nombre: 'José Luis Montoya Pareja', desde: '2026-07-15', texto: '', consentimiento: false },
+  { nombre: 'José Luis Montoya Pareja', desde: '2026-07-14', texto: '', consentimiento: false },
   {
     nombre: 'Santiago Osorio',
     desde: '2026-08-26',
