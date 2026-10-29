@@ -297,6 +297,12 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
               >
                 {c.parapenteLink}
               </Link>
+              <Link
+                href="/biografia"
+                className="font-mono text-xs text-text-secondary border border-border px-4 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors inline-block ml-3"
+              >
+                {c.biografiaLink}
+              </Link>
             </div>
           </div>
         </div>
