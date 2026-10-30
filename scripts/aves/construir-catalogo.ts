@@ -19,6 +19,7 @@ import {
   rankingDesdeFacetas,
   regionesDesdeDepartamentos,
 } from '../../src/lib/aves/gbif'
+import { parsearAmenazas } from '../../src/lib/aves/amenaza'
 import type { Catalogo, EspecieBase } from '../../src/lib/aves/tipos'
 
 const API = 'https://api.gbif.org/v1'
@@ -63,7 +64,14 @@ function leerNombresColombia(): Record<string, string> {
   return fs.existsSync(archivo) ? JSON.parse(fs.readFileSync(archivo, 'utf-8')) : {}
 }
 
+// Especies amenazadas según la Resolución 0126 de 2024 (MADS), dataset CC0 en SiB Colombia
+function leerAmenazas(): Map<string, 'CR' | 'EN' | 'VU'> {
+  const archivo = path.join(RAIZ, 'fuentes/res-0126-2024-aves.csv')
+  return fs.existsSync(archivo) ? parsearAmenazas(fs.readFileSync(archivo, 'utf-8')) : new Map()
+}
+
 async function main() {
+  const amenazas = leerAmenazas()
   const nombresColombia = leerNombresColombia()
   const topColombia = await facetas('country=CO', 'speciesKey', TOTAL)
   const rankingColombia = rankingDesdeFacetas(topColombia)
@@ -99,7 +107,7 @@ async function main() {
     puestoLatam: rankingLatam.get(d.key) ?? null,
     regiones: regionesDesdeDepartamentos(d.departamentos),
     meses: mesesDesdeFacetas(d.meses),
-    amenaza: null,
+    amenaza: amenazas.get(d.especie.canonicalName.toLowerCase()) ?? null,
   }))
 
   const catalogo: Catalogo = { consultado: new Date().toISOString().slice(0, 10), especies }
