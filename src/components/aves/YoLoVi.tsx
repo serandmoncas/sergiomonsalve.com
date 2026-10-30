@@ -1,36 +1,60 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 import { useTranslations } from 'next-intl'
 
 const CLAVE = 'aves:vistas'
 
-function leerVistas(): number[] {
+// Si localStorage falla (navegación privada, almacenamiento bloqueado) la lista vive en memoria
+let memoria: string | null = null
+const oyentes = new Set<() => void>()
+
+function leer(): string {
+  if (memoria !== null) return memoria
   try {
-    return JSON.parse(localStorage.getItem(CLAVE) ?? '[]')
+    return localStorage.getItem(CLAVE) ?? '[]'
+  } catch {
+    return '[]'
+  }
+}
+
+function escribir(valor: string) {
+  try {
+    localStorage.setItem(CLAVE, valor)
+    memoria = null
+  } catch {
+    memoria = valor
+  }
+  oyentes.forEach(avisar => avisar())
+}
+
+function suscribir(avisar: () => void) {
+  oyentes.add(avisar)
+  window.addEventListener('storage', avisar)
+  return () => {
+    oyentes.delete(avisar)
+    window.removeEventListener('storage', avisar)
+  }
+}
+
+function parsear(valor: string): number[] {
+  try {
+    const lista = JSON.parse(valor)
+    return Array.isArray(lista) ? lista : []
   } catch {
     return []
   }
 }
 
-// Lista de vida del visitante, solo en su navegador. Si localStorage falla, funciona en memoria.
+// Lista de vida del visitante, solo en su navegador
 export default function YoLoVi({ speciesKey }: { speciesKey: number }) {
   const t = useTranslations('aves')
-  const [visto, setVisto] = useState(false)
-
-  useEffect(() => {
-    setVisto(leerVistas().includes(speciesKey))
-  }, [speciesKey])
+  const vistas = parsear(useSyncExternalStore(suscribir, leer, () => '[]'))
+  const visto = vistas.includes(speciesKey)
 
   const alternar = () => {
-    const nuevo = !visto
-    setVisto(nuevo)
-    try {
-      const vistas = leerVistas().filter(k => k !== speciesKey)
-      localStorage.setItem(CLAVE, JSON.stringify(nuevo ? [...vistas, speciesKey] : vistas))
-    } catch {
-      // navegación privada o almacenamiento bloqueado: queda solo en memoria
-    }
+    const resto = vistas.filter(k => k !== speciesKey)
+    escribir(JSON.stringify(visto ? resto : [...resto, speciesKey]))
   }
 
   return (
