@@ -51,3 +51,6 @@ next-env.d.ts
 
 # Brainstorming y planes (superpowers)
 .superpowers/
+
+# Kits locales de generación de ilustraciones
+content/aves/kits/
