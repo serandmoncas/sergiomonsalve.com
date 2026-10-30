@@ -863,6 +863,7 @@
     "sinResultados": "Ninguna especie coincide con esos filtros.",
     "limpiarFiltros": "Limpiar filtros",
     "ilustracionEnCamino": "Ilustración en camino",
+    "variante": {"adulto": "Adulto", "macho": "Macho", "hembra": "Hembra", "juvenil": "Juvenil"},
     "atribucion": "Datos de ocurrencia: GBIF.org (consultado {fecha}), registros CC BY 4.0 y CC0, incluye eBird Observation Dataset (Cornell Lab of Ornithology). Amenaza: Resolución 0126 de 2024, Ministerio de Ambiente (CC0).",
     "volver": "Guía de aves",
     "puestoColombia": "#{n} en Colombia",

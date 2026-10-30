@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { getEspecie, getFechaConsulta, getSlugs } from '@/lib/aves/catalogo'
-import SiluetaPendiente from '@/components/aves/SiluetaPendiente'
+import SelectorVariante from '@/components/aves/SelectorVariante'
 import ComparadorTamano from '@/components/aves/ComparadorTamano'
 import MapaRegiones from '@/components/aves/MapaRegiones'
 import MesesPresencia from '@/components/aves/MesesPresencia'
@@ -60,7 +60,7 @@ export default async function FichaAvePage({
 
       <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-8 items-start">
         <div className="aspect-square border border-border rounded-sm overflow-hidden">
-          <SiluetaPendiente nombre={especie.nombreEs} texto={t('ilustracionEnCamino')} />
+          <SelectorVariante especie={especie} />
         </div>
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text mb-2">{nombrePrincipal}</h1>

@@ -863,6 +863,7 @@
     "sinResultados": "No species match those filters.",
     "limpiarFiltros": "Clear filters",
     "ilustracionEnCamino": "Illustration coming",
+    "variante": {"adulto": "Adult", "macho": "Male", "hembra": "Female", "juvenil": "Juvenile"},
     "atribucion": "Occurrence data: GBIF.org (accessed {fecha}), CC BY 4.0 and CC0 records, including the eBird Observation Dataset (Cornell Lab of Ornithology). Threat status: Resolution 0126 of 2024, Colombian Ministry of Environment (CC0).",
     "volver": "Bird guide",
     "puestoColombia": "#{n} in Colombia",

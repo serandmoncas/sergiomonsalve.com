@@ -1,10 +1,9 @@
-import { useLocale, useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import type { Especie } from '@/lib/aves/tipos'
-import SiluetaPendiente from './SiluetaPendiente'
+import IlustracionAve from './IlustracionAve'
 
 export default function TarjetaAve({ especie }: { especie: Especie }) {
-  const t = useTranslations('aves')
   const nombre = useLocale() === 'en' ? especie.nombreEn : especie.nombreEs
   return (
     <Link
@@ -12,7 +11,7 @@ export default function TarjetaAve({ especie }: { especie: Especie }) {
       className="group block border border-border rounded-sm overflow-hidden hover:border-accent transition-colors"
     >
       <div className="aspect-square">
-        <SiluetaPendiente nombre={nombre} texto={t('ilustracionEnCamino')} />
+        <IlustracionAve especie={especie} tamano={512} />
       </div>
       <div className="p-3">
         <p className="font-mono text-[10px] text-text-muted mb-1">#{especie.puestoColombia}</p>
