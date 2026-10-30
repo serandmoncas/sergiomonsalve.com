@@ -1,0 +1,42 @@
+---
+title: ExpIA
+description: A dashboard for learning and teaching AI — 62 concepts and tools on a timeline, with their dependencies, learning paths, voices to follow by topic, and a weekly radar that an agent proposes as a PR.
+date: "2026-10-17"
+role: Creator
+stack: [Next.js, TypeScript, Tailwind CSS, shadcn/ui, React Flow, Zod, Claude API, GitHub Actions, Vitest, Playwright]
+github: https://github.com/serandmoncas/ExpIA
+demo: "https://expia-self.vercel.app"
+links: []
+status: active
+featured: false
+image: /portfolio/expia.jpg
+---
+
+## The problem
+
+AI changes every week, and people who want to learn it don't know where to start: which concept you need before another, which tool is a fad and which one is here to stay. And those of us who teach it face very different audiences — developers, business people, students — who need the same idea explained in different ways.
+
+## The solution
+
+**ExpIA** organizes AI concepts and tools as a navigable graph:
+
+- **Timeline and exploration** — 62 nodes sorted by date, with filters for category, type, audience, level, status, license, and pricing. Any filtered view can be shared by URL.
+- **A page for each node** — its prerequisites in learning order, what builds on it, what it's for and how it's used, with one technical explanation and one for non-technical readers. A toggle in the top bar switches the whole site between the two audiences.
+- **Map** — the full dependency graph.
+- **Learning paths** — four curated paths (fundamentals, building with LLMs, AI for your business, building an agent), review questions, and progress saved in the browser.
+- **Voices** — 30 people to follow, by topic and social network.
+- **Weekly radar** — what's gaining momentum, with a new report every week.
+
+## Technical decisions
+
+**Content lives in files, not a database.** Each concept is an `.mdx` file with frontmatter validated by Zod. Tests fail with the exact file and field when there's a missing dependency, a cycle in the graph, an unknown category, or a missing section. A learning path also fails if a step appears before its prerequisites.
+
+**AI proposes, a person decides.** Every Friday, a GitHub Actions workflow reads the sources and the voices' feeds, asks Claude to pick what matters, and opens a PR with the report and the proposed catalog changes. Nothing is published until someone reviews and merges it; if the tests fail, the PR opens as a draft.
+
+**Split into subprojects.** Catalog, voices, trends, and teaching mode each have their own spec and plan. The catalog left extension points ready for what comes next: personal and team radar, accounts, and courses.
+
+## Results
+
+- 62 nodes (36 concepts and techniques, 24 tools and models), 30 voices, and 4 curated paths, plus a generated path for every node.
+- The radar has already published its first weekly reports as reviewed PRs.
+- Unit tests for the logic and content integrity, and end-to-end Playwright tests for the learning paths and the radar.

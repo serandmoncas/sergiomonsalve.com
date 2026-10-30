@@ -43,6 +43,7 @@ export default async function PortfolioPage({
           locale={locale}
           labels={{
             viewCase: t('viewCase'),
+            visitSite: t('visitSite'),
             status: {
               active: t('status.active'),
               archived: t('status.archived'),

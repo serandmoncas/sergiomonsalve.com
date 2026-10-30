@@ -60,6 +60,7 @@ const projects: ProjectMeta[] = [
 
 const labels = {
   viewCase: 'Ver caso →',
+  visitSite: 'Visitar sitio ↗',
   status: { active: 'activo', archived: 'archivado' },
   filterAll: 'Todos',
   filterLabel: '// filtrar por stack',
