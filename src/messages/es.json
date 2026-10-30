@@ -861,6 +861,56 @@
     "sinResultados": "Ninguna especie coincide con esos filtros.",
     "limpiarFiltros": "Limpiar filtros",
     "ilustracionEnCamino": "Ilustración en camino",
-    "atribucion": "Datos de ocurrencia: GBIF.org (consultado {fecha}), registros CC BY 4.0 y CC0, incluye eBird Observation Dataset (Cornell Lab of Ornithology). Amenaza: Resolución 0126 de 2024, Ministerio de Ambiente (CC0)."
+    "atribucion": "Datos de ocurrencia: GBIF.org (consultado {fecha}), registros CC BY 4.0 y CC0, incluye eBird Observation Dataset (Cornell Lab of Ornithology). Amenaza: Resolución 0126 de 2024, Ministerio de Ambiente (CC0).",
+    "volver": "Guía de aves",
+    "puestoColombia": "#{n} en Colombia",
+    "puestoLatam": "#{n} en Latinoamérica",
+    "fueraTop": "Fuera del top 4.000 de Latinoamérica",
+    "familiaLabel": "Familia",
+    "seccionIdentificacion": "Tamaño y dónde vive",
+    "seccionDistribucion": "Dónde se ve en Colombia",
+    "seccionTemporada": "Registros por mes",
+    "seccionConservacion": "Conservación",
+    "altitud": "Altitud: {min}–{max} m",
+    "endemica": "Endémica de Colombia",
+    "residencia": {
+      "residente": "Residente todo el año",
+      "migratoria-boreal": "Migratoria desde Norteamérica",
+      "migratoria-austral": "Migratoria desde el sur del continente"
+    },
+    "amenaza": {
+      "CR": "En peligro crítico (CR)",
+      "EN": "En peligro (EN)",
+      "VU": "Vulnerable (VU)"
+    },
+    "sinAmenaza": "No está en la lista oficial de especies amenazadas de Colombia.",
+    "escucharCanto": "Escuchar su canto en xeno-canto ↗",
+    "yoLoVi": "Yo lo vi",
+    "yoLoViMarcado": "✓ Lo vi",
+    "referenciaMirla": "comparada con una mirla (25 cm)",
+    "referenciaPaloma": "comparada con una paloma (33 cm)",
+    "mapaAlt": "Mapa esquemático de las regiones de Colombia",
+    "region": {
+      "andina": "Andina",
+      "caribe": "Caribe",
+      "pacifica": "Pacífica",
+      "orinoquia": "Orinoquía",
+      "amazonia": "Amazonía",
+      "insular": "Insular"
+    },
+    "meses": {
+      "0": "Enero",
+      "1": "Febrero",
+      "2": "Marzo",
+      "3": "Abril",
+      "4": "Mayo",
+      "5": "Junio",
+      "6": "Julio",
+      "7": "Agosto",
+      "8": "Septiembre",
+      "9": "Octubre",
+      "10": "Noviembre",
+      "11": "Diciembre"
+    }
   }
 }

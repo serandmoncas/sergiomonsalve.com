@@ -16,6 +16,7 @@ import {
   asignarSlugs,
   elegirNombre,
   mesesDesdeFacetas,
+  mesesRelativos,
   rankingDesdeFacetas,
   regionesDesdeDepartamentos,
 } from '../../src/lib/aves/gbif'
@@ -72,6 +73,7 @@ function leerAmenazas(): Map<string, 'CR' | 'EN' | 'VU'> {
 
 async function main() {
   const amenazas = leerAmenazas()
+  const mesesTotales = mesesDesdeFacetas(await facetas('country=CO', 'month', 12))
   const nombresColombia = leerNombresColombia()
   const topColombia = await facetas('country=CO', 'speciesKey', TOTAL)
   const rankingColombia = rankingDesdeFacetas(topColombia)
@@ -106,7 +108,7 @@ async function main() {
     registrosColombia: d.count,
     puestoLatam: rankingLatam.get(d.key) ?? null,
     regiones: regionesDesdeDepartamentos(d.departamentos),
-    meses: mesesDesdeFacetas(d.meses),
+    meses: mesesRelativos(mesesDesdeFacetas(d.meses), mesesTotales),
     amenaza: amenazas.get(d.especie.canonicalName.toLowerCase()) ?? null,
   }))
 

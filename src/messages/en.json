@@ -861,6 +861,56 @@
     "sinResultados": "No species match those filters.",
     "limpiarFiltros": "Clear filters",
     "ilustracionEnCamino": "Illustration coming",
-    "atribucion": "Occurrence data: GBIF.org (accessed {fecha}), CC BY 4.0 and CC0 records, including the eBird Observation Dataset (Cornell Lab of Ornithology). Threat status: Resolution 0126 of 2024, Colombian Ministry of Environment (CC0)."
+    "atribucion": "Occurrence data: GBIF.org (accessed {fecha}), CC BY 4.0 and CC0 records, including the eBird Observation Dataset (Cornell Lab of Ornithology). Threat status: Resolution 0126 of 2024, Colombian Ministry of Environment (CC0).",
+    "volver": "Bird guide",
+    "puestoColombia": "#{n} in Colombia",
+    "puestoLatam": "#{n} in Latin America",
+    "fueraTop": "Outside Latin America's top 4,000",
+    "familiaLabel": "Family",
+    "seccionIdentificacion": "Size and where it lives",
+    "seccionDistribucion": "Where it's seen in Colombia",
+    "seccionTemporada": "Records by month",
+    "seccionConservacion": "Conservation",
+    "altitud": "Elevation: {min}–{max} m",
+    "endemica": "Endemic to Colombia",
+    "residencia": {
+      "residente": "Year-round resident",
+      "migratoria-boreal": "Migrant from North America",
+      "migratoria-austral": "Migrant from southern South America"
+    },
+    "amenaza": {
+      "CR": "Critically endangered (CR)",
+      "EN": "Endangered (EN)",
+      "VU": "Vulnerable (VU)"
+    },
+    "sinAmenaza": "Not on Colombia's official list of threatened species.",
+    "escucharCanto": "Listen to its song on xeno-canto ↗",
+    "yoLoVi": "I saw it",
+    "yoLoViMarcado": "✓ Seen",
+    "referenciaMirla": "compared with a thrush (25 cm)",
+    "referenciaPaloma": "compared with a pigeon (33 cm)",
+    "mapaAlt": "Schematic map of Colombia's regions",
+    "region": {
+      "andina": "Andes",
+      "caribe": "Caribbean",
+      "pacifica": "Pacific",
+      "orinoquia": "Orinoquía (Llanos)",
+      "amazonia": "Amazon",
+      "insular": "Islands"
+    },
+    "meses": {
+      "0": "January",
+      "1": "February",
+      "2": "March",
+      "3": "April",
+      "4": "May",
+      "5": "June",
+      "6": "July",
+      "7": "August",
+      "8": "September",
+      "9": "October",
+      "10": "November",
+      "11": "December"
+    }
   }
 }

@@ -18,7 +18,7 @@ export type EspecieBase = {
   registrosColombia: number
   puestoLatam: number | null // null = fuera del top 4000 de Latinoamérica
   regiones: Region[] // de más a menos registros
-  meses: number[] // 12 conteos, enero primero
+  meses: number[] // 12 valores 0–100 de presencia relativa al esfuerzo del mes, enero primero
   amenaza: Amenaza
 }
 

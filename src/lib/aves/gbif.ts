@@ -105,13 +105,21 @@ export function asignarSlugs(items: { speciesKey: number; base: string }[]): Map
   return slugs
 }
 
+// Una región cuenta si tiene al menos este porcentaje de los registros: unos pocos registros
+// raros o de piedemonte no deben pintar una región donde el ave casi no está.
+const UMBRAL_REGION = 0.05
+
 export function regionesDesdeDepartamentos(conteos: Faceta[]): Region[] {
   const total = new Map<Region, number>()
   for (const { name, count } of conteos) {
     const region = REGION_NORMALIZADA.get(normalizarDepartamento(name))
     if (region) total.set(region, (total.get(region) ?? 0) + count)
   }
-  return [...total.entries()].sort((a, b) => b[1] - a[1]).map(([region]) => region)
+  const suma = [...total.values()].reduce((a, b) => a + b, 0)
+  return [...total.entries()]
+    .filter(([, n]) => n >= suma * UMBRAL_REGION)
+    .sort((a, b) => b[1] - a[1])
+    .map(([region]) => region)
 }
 
 export function mesesDesdeFacetas(conteos: Faceta[]): number[] {
@@ -121,4 +129,12 @@ export function mesesDesdeFacetas(conteos: Faceta[]): number[] {
     if (mes >= 1 && mes <= 12) meses[mes - 1] += count
   }
   return meses
+}
+
+// Registros de la especie divididos por el total de registros de aves de cada mes (esfuerzo de
+// observación), escalados a 0–100. Sin esto, el Global Big Day de mayo sale como pico en todas.
+export function mesesRelativos(especie: number[], totales: number[]): number[] {
+  const tasas = especie.map((n, i) => (totales[i] > 0 ? n / totales[i] : 0))
+  const maximo = Math.max(...tasas)
+  return tasas.map(t => (maximo > 0 ? Math.round((t / maximo) * 100) : 0))
 }

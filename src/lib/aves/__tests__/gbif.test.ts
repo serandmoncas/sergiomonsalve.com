@@ -8,6 +8,7 @@ import {
   asignarSlugs,
   regionesDesdeDepartamentos,
   mesesDesdeFacetas,
+  mesesRelativos,
 } from '../gbif'
 
 describe('constantes', () => {
@@ -88,6 +89,15 @@ describe('regionesDesdeDepartamentos', () => {
     expect(regiones).toEqual(['andina', 'orinoquia'])
   })
 
+  it('descarta regiones con menos del 5 % de los registros', () => {
+    const regiones = regionesDesdeDepartamentos([
+      { name: 'Antioquia', count: 960 },
+      { name: 'Meta', count: 30 },
+      { name: 'Chocó', count: 10 },
+    ])
+    expect(regiones).toEqual(['andina'])
+  })
+
   it('reconoce las variantes de nombre que trae GBIF', () => {
     const regiones = regionesDesdeDepartamentos([
       { name: 'Choco', count: 9 },
@@ -106,5 +116,24 @@ describe('mesesDesdeFacetas', () => {
     expect(meses).toHaveLength(12)
     expect(meses[4]).toBe(3)
     expect(meses.filter(m => m === 0)).toHaveLength(11)
+  })
+})
+
+describe('mesesRelativos', () => {
+  it('divide por el esfuerzo de cada mes para que un Big Day no cree un pico falso', () => {
+    const especie = [10, 10, 10, 10, 50, 10, 10, 10, 10, 10, 10, 10]
+    const totales = [100, 100, 100, 100, 500, 100, 100, 100, 100, 100, 100, 100]
+    expect(new Set(mesesRelativos(especie, totales)).size).toBe(1)
+  })
+
+  it('escala a 0–100 con el mes más alto en 100', () => {
+    const r = mesesRelativos([0, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0], new Array(12).fill(100))
+    expect(r[2]).toBe(100)
+    expect(r[1]).toBe(50)
+    expect(r[0]).toBe(0)
+  })
+
+  it('un mes sin registros totales vale 0', () => {
+    expect(mesesRelativos(new Array(12).fill(1), [0, ...new Array(11).fill(10)])[0]).toBe(0)
   })
 })
