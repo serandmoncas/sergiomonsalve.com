@@ -33,6 +33,21 @@ export type Atributos = {
   endemica: boolean
 }
 
-export type Especie = EspecieBase & { atributos: Atributos | null }
+export type Variante = 'adulto' | 'macho' | 'hembra' | 'juvenil'
+export type EstadoIlustracion = 'generada' | 'marcada' | 'revisada-auto' | 'aprobada' | 'rechazada'
+export type Referencia = { url: string; licencia: string; fuente: string }
+
+// Una ilustración por especie y variante, en content/aves/ilustraciones.json
+export type Ilustracion = {
+  variante: Variante
+  estado: EstadoIlustracion
+  archivo: string // nombre base en public/aves, p. ej. "azulejo-comun--adulto"
+  referencias: Referencia[] // fotos usadas como referencia, por trazabilidad
+  nota: string // motivo de marcada o rechazada
+  actualizado: string // AAAA-MM-DD
+}
+
+// ilustraciones: solo las aprobadas, en ORDEN_VARIANTES
+export type Especie = EspecieBase & { atributos: Atributos | null; ilustraciones: Ilustracion[] }
 
 export type Catalogo = { consultado: string; especies: EspecieBase[] }

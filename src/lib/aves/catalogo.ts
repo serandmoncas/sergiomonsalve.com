@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { aprobadas, leerRegistro } from './ilustraciones'
 import type { Atributos, Catalogo, Especie } from './tipos'
 
 const raizPorDefecto = path.join(process.cwd(), 'content/aves')
@@ -21,8 +22,13 @@ function leerAtributos(raiz: string): Map<number, Atributos> {
 
 export function getEspecies(raiz = raizPorDefecto): Especie[] {
   const atributos = leerAtributos(raiz)
+  const ilustraciones = leerRegistro(raiz)
   return leerCatalogo(raiz)
-    .especies.map(e => ({ ...e, atributos: atributos.get(e.speciesKey) ?? null }))
+    .especies.map(e => ({
+      ...e,
+      atributos: atributos.get(e.speciesKey) ?? null,
+      ilustraciones: aprobadas(ilustraciones[e.speciesKey] ?? []),
+    }))
     .sort((a, b) => a.puestoColombia - b.puestoColombia)
 }
 

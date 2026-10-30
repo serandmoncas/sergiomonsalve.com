@@ -10,6 +10,7 @@ export function especie(slug: string, extra: Partial<Especie>, atributos: Partia
       tamanoCm: 18, claseTamano: 'mirla', colores: ['azul'], habitats: ['bosque'],
       altitudM: [0, 1000], residencia: 'residente', endemica: false, ...atributos,
     },
+    ilustraciones: [],
     ...extra,
   }
 }

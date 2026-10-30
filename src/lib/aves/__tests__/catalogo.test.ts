@@ -25,6 +25,15 @@ describe('catálogo de aves', () => {
     expect(getSlugs(raiz)).toHaveLength(3)
   })
 
+  it('une solo las ilustraciones aprobadas', () => {
+    const ilustraciones = getEspecie('tirano-tropical', raiz)?.ilustraciones
+    expect(ilustraciones?.map(i => i.variante)).toEqual(['adulto'])
+  })
+
+  it('una especie sin ilustraciones tiene lista vacía', () => {
+    expect(getEspecie('gallinazo-negro', raiz)?.ilustraciones).toEqual([])
+  })
+
   it('expone la fecha de consulta de los datos', () => {
     expect(getFechaConsulta(raiz)).toBe('2026-10-29')
   })
