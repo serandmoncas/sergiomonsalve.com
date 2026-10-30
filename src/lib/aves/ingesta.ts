@@ -2,7 +2,10 @@ import type { Variante } from './tipos'
 
 const VARIANTES: Variante[] = ['adulto', 'macho', 'hembra', 'juvenil']
 const EXTENSIONES = ['png', 'jpg', 'jpeg', 'webp']
-export const LADO_MINIMO = 2048
+// La web necesita 1024 px; imprimir necesita 2048 (las de menos se amplían antes de imprimir).
+// El modelo gratuito de AI Studio entrega 1200×896.
+export const LADO_MINIMO_WEB = 1024
+export const LADO_MINIMO_IMPRESION = 2048
 
 // "<slug>--<variante>.<ext>", p. ej. "azulejo-comun--adulto.png"
 export function parsearNombreArchivo(
@@ -25,7 +28,11 @@ export function parsearNombreArchivo(
 }
 
 export function validarDimensiones(ancho: number, alto: number): string | null {
-  return Math.max(ancho, alto) >= LADO_MINIMO
+  return Math.max(ancho, alto) >= LADO_MINIMO_WEB
     ? null
-    : `la imagen mide ${ancho}×${alto} px; el lado largo debe tener al menos ${LADO_MINIMO} px`
+    : `la imagen mide ${ancho}×${alto} px; el lado largo debe tener al menos ${LADO_MINIMO_WEB} px`
+}
+
+export function aptaParaImpresion(ancho: number, alto: number): boolean {
+  return Math.max(ancho, alto) >= LADO_MINIMO_IMPRESION
 }

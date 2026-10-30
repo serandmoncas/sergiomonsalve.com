@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parsearNombreArchivo, validarDimensiones } from '../ingesta'
+import { parsearNombreArchivo, validarDimensiones, aptaParaImpresion } from '../ingesta'
 
 const slugs = new Set(['azulejo-comun', 'canario-coronado'])
 
@@ -33,12 +33,19 @@ describe('parsearNombreArchivo', () => {
 })
 
 describe('validarDimensiones', () => {
-  it('acepta un lado largo de 2048 px', () => {
-    expect(validarDimensiones(2048, 1536)).toBeNull()
-    expect(validarDimensiones(1536, 2048)).toBeNull()
+  it('acepta para la web un lado largo de 1024 px o más', () => {
+    expect(validarDimensiones(1200, 896)).toBeNull()
+    expect(validarDimensiones(768, 1024)).toBeNull()
   })
 
-  it('rechaza imágenes pequeñas y lo explica', () => {
-    expect(validarDimensiones(1024, 768)).toContain('2048')
+  it('rechaza imágenes de menos de 1024 px y lo explica', () => {
+    expect(validarDimensiones(800, 600)).toContain('1024')
+  })
+})
+
+describe('aptaParaImpresion', () => {
+  it('exige 2048 px de lado largo', () => {
+    expect(aptaParaImpresion(2048, 1536)).toBe(true)
+    expect(aptaParaImpresion(1200, 896)).toBe(false)
   })
 })

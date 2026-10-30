@@ -45,6 +45,7 @@ export type Ilustracion = {
   referencias: Referencia[] // fotos usadas como referencia, por trazabilidad
   nota: string // motivo de marcada o rechazada
   actualizado: string // AAAA-MM-DD
+  original?: { ancho: number; alto: number; impresion: boolean } // tamaño del original; impresion = lado largo ≥ 2048 px
 }
 
 // ilustraciones: solo las aprobadas, en ORDEN_VARIANTES

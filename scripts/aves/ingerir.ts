@@ -4,9 +4,9 @@
  * Usage:
  *   npx tsx scripts/aves/ingerir.ts ~/Downloads/aves-lote [--sin-copia]
  *
- * Cada archivo debe llamarse <slug>--<variante>.png (o .jpg/.webp) y medir al menos 2048 px de lado
- * largo. Por cada uno: recorta el blanco sobrante, escribe public/aves/<archivo>-1024.webp y -512.webp,
- * copia el original a "lajobiteka:Guia de aves/originales/" con rclone (los originales no van al
+ * Cada archivo debe llamarse <slug>--<variante>.png (o .jpg/.webp) y medir al menos 1024 px de lado
+ * largo (2048 para imprimir; se registra cuáles lo cumplen). Por cada uno: recorta el blanco
+ * sobrante, escribe public/aves/<archivo>-1024.webp y -512.webp, copia el original a "lajobiteka:Guia de aves/originales/" con rclone (los originales no van al
  * repo) y lo registra como "generada" en content/aves/ilustraciones.json.
  * --sin-copia omite rclone (solo para pruebas locales).
  */
@@ -17,7 +17,7 @@ import { execFileSync } from 'child_process'
 import sharp from 'sharp'
 import { getEspecies } from '../../src/lib/aves/catalogo'
 import { guardarRegistro, leerRegistro, registrarGenerada } from '../../src/lib/aves/ilustraciones'
-import { parsearNombreArchivo, validarDimensiones } from '../../src/lib/aves/ingesta'
+import { aptaParaImpresion, parsearNombreArchivo, validarDimensiones } from '../../src/lib/aves/ingesta'
 import type { Referencia } from '../../src/lib/aves/tipos'
 
 const RAIZ = path.join(process.cwd(), 'content/aves')
@@ -75,7 +75,8 @@ async function main() {
 
       const especie = porSlug.get(slug)!
       const referencias = leerReferencias(especie.familia)[archivo] ?? []
-      registro = registrarGenerada(registro, especie.speciesKey, { variante, archivo, referencias }, hoy)
+      const original = { ancho: width, alto: height, impresion: aptaParaImpresion(width, height) }
+      registro = registrarGenerada(registro, especie.speciesKey, { variante, archivo, referencias, original }, hoy)
       ingeridas++
     } catch (err) {
       rechazos.push(`${nombre}: ${err instanceof Error ? err.message : String(err)}`)
