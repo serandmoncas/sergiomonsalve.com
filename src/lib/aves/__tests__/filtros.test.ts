@@ -1,19 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { buscar, filtrarEspecies, agruparPorFamilia, FILTROS_VACIOS } from '../filtros'
-import type { Atributos, Especie } from '../tipos'
-
-function especie(slug: string, extra: Partial<Especie>, atributos: Partial<Atributos> | null = {}): Especie {
-  return {
-    speciesKey: slug.length, slug, cientifico: slug, nombreEs: slug, nombreEn: slug,
-    familia: 'Thraupidae', orden: 'Passeriformes', puestoColombia: 1, registrosColombia: 1,
-    puestoLatam: 1, regiones: ['andina'], meses: new Array(12).fill(0), amenaza: null,
-    atributos: atributos && {
-      tamanoCm: 18, claseTamano: 'mirla', colores: ['azul'], habitats: ['bosque'],
-      altitudM: [0, 1000], residencia: 'residente', endemica: false, ...atributos,
-    },
-    ...extra,
-  }
-}
+import { especie } from './especie-de-prueba'
 
 const azulejo = especie('azulejo', { nombreEs: 'Tángara azuleja', puestoColombia: 2 }, { colores: ['azul', 'gris'], habitats: ['ciudad'] })
 const barranquero = especie('barranquero', { nombreEs: 'Barranquero', cientifico: 'Momotus momota', familia: 'Momotidae', puestoColombia: 30 }, { tamanoCm: 42, claseTamano: 'gallinazo', colores: ['verde', 'azul'] })

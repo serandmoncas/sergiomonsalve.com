@@ -65,7 +65,9 @@
     "formacionTitle": "Training",
     "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer.",
     "carpinteriaTitle": "CarpinterIA · Melamine furniture course",
-    "carpinteriaDescription": "Melamine carpentry course in Guarne, Colombia: a one-day express to build your first toolbox, or 4 sessions to start your own project. With an open-source cut-list calculator."
+    "carpinteriaDescription": "Melamine carpentry course in Guarne, Colombia: a one-day express to build your first toolbox, or 4 sessions to start your own project. With an open-source cut-list calculator.",
+    "avesTitle": "Colombian bird guide",
+    "avesDescription": "The 500 most common birds in Colombia: search by name, size, color and habitat, with their rank in Colombia and Latin America."
   },
   "lineaAprendizaje": {
     "comment": "// learning to learn",
@@ -821,5 +823,44 @@
       "whatsapp": "Message me on WhatsApp →",
       "whatsappText": "Hi Sergio, I saw the CarpinterIA page and I'd like to know more about the melamine course."
     }
+  },
+  "aves": {
+    "titulo": "Colombian bird guide",
+    "subtitulo": "The 500 most common birds in Colombia, ranked by how often they are recorded. Illustrations are arriving family by family.",
+    "buscarPlaceholder": "Search: tanager, Thraupis, azulejo...",
+    "queViste": "What bird did you see?",
+    "tamanoLabel": "Size",
+    "colorLabel": "Color",
+    "dondeLabel": "Where",
+    "tamano": {
+      "colibri": "Hummingbird",
+      "mirla": "Thrush",
+      "paloma": "Pigeon",
+      "gallinazo": "Vulture"
+    },
+    "color": {
+      "azul": "Blue",
+      "rojo": "Red",
+      "amarillo": "Yellow",
+      "verde": "Green",
+      "negro": "Black",
+      "cafe": "Brown",
+      "blanco": "White",
+      "gris": "Gray"
+    },
+    "habitat": {
+      "ciudad": "Town",
+      "bosque": "Forest",
+      "agua": "Water",
+      "paramo": "Páramo",
+      "campo": "Open country"
+    },
+    "resultados": "{n} species",
+    "vistaGaleria": "Gallery",
+    "vistaFamilia": "Group by family",
+    "sinResultados": "No species match those filters.",
+    "limpiarFiltros": "Clear filters",
+    "ilustracionEnCamino": "Illustration coming",
+    "atribucion": "Occurrence data: GBIF.org (accessed {fecha}), CC BY 4.0 and CC0 records, including the eBird Observation Dataset (Cornell Lab of Ornithology). Threat status: Resolution 0126 of 2024, Colombian Ministry of Environment (CC0)."
   }
 }

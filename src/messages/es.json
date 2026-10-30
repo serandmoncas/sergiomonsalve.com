@@ -65,7 +65,9 @@
     "formacionTitle": "Formación",
     "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA.",
     "carpinteriaTitle": "CarpinterIA · Curso de melamina",
-    "carpinteriaDescription": "Curso de carpintería en melamina en Guarne: un express de un día para armar tu primera caja de herramientas, o 4 sesiones para empezar tu propio proyecto. Con calculadora de despiece abierta."
+    "carpinteriaDescription": "Curso de carpintería en melamina en Guarne: un express de un día para armar tu primera caja de herramientas, o 4 sesiones para empezar tu propio proyecto. Con calculadora de despiece abierta.",
+    "avesTitle": "Guía de aves de Colombia",
+    "avesDescription": "Las 500 aves más comunes de Colombia: búscalas por nombre, tamaño, color y hábitat, con su puesto en Colombia y en Latinoamérica."
   },
   "lineaAprendizaje": {
     "comment": "// aprender a aprender",
@@ -821,5 +823,44 @@
       "whatsapp": "Escríbeme por WhatsApp →",
       "whatsappText": "Hola Sergio, vi la página de CarpinterIA y quiero saber más del curso de melamina."
     }
+  },
+  "aves": {
+    "titulo": "Guía de aves de Colombia",
+    "subtitulo": "Las 500 aves más comunes de Colombia, ordenadas por cuántas veces se registran. Las ilustraciones van llegando por familias.",
+    "buscarPlaceholder": "Buscar: azulejo, Thraupis, tanager...",
+    "queViste": "¿Qué ave viste?",
+    "tamanoLabel": "Tamaño",
+    "colorLabel": "Color",
+    "dondeLabel": "Dónde",
+    "tamano": {
+      "colibri": "Colibrí",
+      "mirla": "Mirla",
+      "paloma": "Paloma",
+      "gallinazo": "Gallinazo"
+    },
+    "color": {
+      "azul": "Azul",
+      "rojo": "Rojo",
+      "amarillo": "Amarillo",
+      "verde": "Verde",
+      "negro": "Negro",
+      "cafe": "Café",
+      "blanco": "Blanco",
+      "gris": "Gris"
+    },
+    "habitat": {
+      "ciudad": "Ciudad",
+      "bosque": "Bosque",
+      "agua": "Agua",
+      "paramo": "Páramo",
+      "campo": "Campo"
+    },
+    "resultados": "{n} especies",
+    "vistaGaleria": "Galería",
+    "vistaFamilia": "Agrupar por familia",
+    "sinResultados": "Ninguna especie coincide con esos filtros.",
+    "limpiarFiltros": "Limpiar filtros",
+    "ilustracionEnCamino": "Ilustración en camino",
+    "atribucion": "Datos de ocurrencia: GBIF.org (consultado {fecha}), registros CC BY 4.0 y CC0, incluye eBird Observation Dataset (Cornell Lab of Ornithology). Amenaza: Resolución 0126 de 2024, Ministerio de Ambiente (CC0)."
   }
 }
