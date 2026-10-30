@@ -13,7 +13,9 @@ import fs from 'fs'
 import path from 'path'
 import {
   PAISES_LATAM,
+  SINONIMOS,
   asignarSlugs,
+  fusionarSinonimos,
   elegirNombre,
   mesesDesdeFacetas,
   mesesRelativos,
@@ -75,20 +77,25 @@ async function main() {
   const amenazas = leerAmenazas()
   const mesesTotales = mesesDesdeFacetas(await facetas('country=CO', 'month', 12))
   const nombresColombia = leerNombresColombia()
-  const topColombia = await facetas('country=CO', 'speciesKey', TOTAL)
+  // Se piden de más porque al fusionar sinónimos algunas salen del top
+  const topColombia = fusionarSinonimos(await facetas('country=CO', 'speciesKey', TOTAL + 20)).slice(0, TOTAL)
   const rankingColombia = rankingDesdeFacetas(topColombia)
   const paises = PAISES_LATAM.map(c => `country=${c}`).join('&')
-  const rankingLatam = rankingDesdeFacetas(await facetas(paises, 'speciesKey', 4000))
+  const rankingLatam = rankingDesdeFacetas(fusionarSinonimos(await facetas(paises, 'speciesKey', 4000)))
 
   const detalles = await enLotes(topColombia, async ({ name, count }) => {
     const key = Number(name)
+    // La especie y sus sinónimos, para que regiones y meses incluyan todos sus registros
+    const claves = [key, ...Object.keys(SINONIMOS).filter(k => SINONIMOS[Number(k)] === key)]
+      .map(k => `speciesKey=${k}`)
+      .join('&')
     const [especie, vernaculos, departamentos, meses] = await Promise.all([
       getJson<{ canonicalName: string; family: string; order: string }>(`${API}/species/${key}`),
       getJson<{ results: { language: string; vernacularName: string; source?: string }[] }>(
         `${API}/species/${key}/vernacularNames?limit=300`
       ),
-      facetas(`country=CO&speciesKey=${key}`, 'stateProvince', 100),
-      facetas(`country=CO&speciesKey=${key}`, 'month', 12),
+      facetas(`country=CO&${claves}`, 'stateProvince', 100),
+      facetas(`country=CO&${claves}`, 'month', 12),
     ])
     const nombreEn = elegirNombre(vernaculos.results, 'eng') ?? especie.canonicalName
     const nombreEs = nombresColombia[key] ?? elegirNombre(vernaculos.results, 'spa') ?? nombreEn

@@ -9,6 +9,7 @@ import {
   regionesDesdeDepartamentos,
   mesesDesdeFacetas,
   mesesRelativos,
+  fusionarSinonimos,
 } from '../gbif'
 
 describe('constantes', () => {
@@ -135,5 +136,23 @@ describe('mesesRelativos', () => {
 
   it('un mes sin registros totales vale 0', () => {
     expect(mesesRelativos(new Array(12).fill(1), [0, ...new Array(11).fill(10)])[0]).toBe(0)
+  })
+})
+
+describe('fusionarSinonimos', () => {
+  it('suma los registros del sinónimo a la especie aceptada y lo quita', () => {
+    const r = fusionarSinonimos(
+      [{ name: '1', count: 100 }, { name: '2', count: 50 }, { name: '3', count: 30 }],
+      { 3: 2 },
+    )
+    expect(r).toEqual([{ name: '1', count: 100 }, { name: '2', count: 80 }])
+  })
+
+  it('reordena si la suma cambia el puesto', () => {
+    const r = fusionarSinonimos(
+      [{ name: '1', count: 100 }, { name: '2', count: 50 }, { name: '3', count: 60 }],
+      { 3: 2 },
+    )
+    expect(r.map(c => c.name)).toEqual(['2', '1'])
   })
 })

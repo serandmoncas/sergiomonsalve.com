@@ -138,3 +138,18 @@ export function mesesRelativos(especie: number[], totales: number[]): number[] {
   const maximo = Math.max(...tasas)
   return tasas.map(t => (maximo > 0 ? Math.round((t / maximo) * 100) : 0))
 }
+
+// Especies que GBIF separa pero que en Colombia son la misma ave (sinónimo → especie aceptada).
+// Troglodytes aedon: registros colombianos con la taxonomía antigua de T. musculus.
+export const SINONIMOS: Record<number, number> = {
+  5231459: 8346347,
+}
+
+export function fusionarSinonimos(conteos: Faceta[], sinonimos: Record<number, number> = SINONIMOS): Faceta[] {
+  const total = new Map<string, number>()
+  for (const { name, count } of conteos) {
+    const destino = String(sinonimos[Number(name)] ?? name)
+    total.set(destino, (total.get(destino) ?? 0) + count)
+  }
+  return [...total.entries()].map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count)
+}

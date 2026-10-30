@@ -109,26 +109,26 @@
       "familia": "Troglodytidae",
       "orden": "Passeriformes",
       "puestoColombia": 4,
-      "registrosColombia": 226724,
+      "registrosColombia": 236511,
       "puestoLatam": 4,
       "regiones": [
         "andina",
-        "orinoquia",
-        "caribe"
+        "caribe",
+        "orinoquia"
       ],
       "meses": [
-        76,
-        73,
         77,
-        89,
-        100,
-        99,
+        72,
+        76,
         92,
-        93,
-        99,
+        100,
+        98,
+        91,
+        92,
+        98,
         97,
         84,
-        87
+        85
       ],
       "amenaza": null
     },
@@ -1368,7 +1368,7 @@
       "familia": "Cracidae",
       "orden": "Galliformes",
       "puestoColombia": 44,
-      "registrosColombia": 80810,
+      "registrosColombia": 80816,
       "puestoLatam": 382,
       "regiones": [
         "andina"
@@ -1899,7 +1899,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 61,
       "registrosColombia": 59696,
-      "puestoLatam": 513,
+      "puestoLatam": 512,
       "regiones": [
         "andina",
         "caribe"
@@ -1929,7 +1929,7 @@
       "familia": "Columbidae",
       "orden": "Columbiformes",
       "puestoColombia": 62,
-      "registrosColombia": 58724,
+      "registrosColombia": 58726,
       "puestoLatam": 13,
       "regiones": [
         "andina",
@@ -2503,7 +2503,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 80,
       "registrosColombia": 48247,
-      "puestoLatam": 507,
+      "puestoLatam": 506,
       "regiones": [
         "andina",
         "caribe"
@@ -3222,7 +3222,7 @@
       "orden": "Piciformes",
       "puestoColombia": 103,
       "registrosColombia": 39837,
-      "puestoLatam": 555,
+      "puestoLatam": 554,
       "regiones": [
         "andina",
         "orinoquia",
@@ -3441,7 +3441,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 110,
       "registrosColombia": 38136,
-      "puestoLatam": 557,
+      "puestoLatam": 556,
       "regiones": [
         "andina",
         "caribe"
@@ -3601,7 +3601,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 115,
       "registrosColombia": 36660,
-      "puestoLatam": 562,
+      "puestoLatam": 561,
       "regiones": [
         "andina"
       ],
@@ -3727,8 +3727,8 @@
       "familia": "Troglodytidae",
       "orden": "Passeriformes",
       "puestoColombia": 119,
-      "registrosColombia": 35428,
-      "puestoLatam": 684,
+      "registrosColombia": 35432,
+      "puestoLatam": 683,
       "regiones": [
         "andina"
       ],
@@ -3758,7 +3758,7 @@
       "orden": "Piciformes",
       "puestoColombia": 120,
       "registrosColombia": 35123,
-      "puestoLatam": 702,
+      "puestoLatam": 701,
       "regiones": [
         "andina",
         "caribe"
@@ -3789,7 +3789,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 121,
       "registrosColombia": 34356,
-      "puestoLatam": 839,
+      "puestoLatam": 838,
       "regiones": [
         "andina"
       ],
@@ -3914,7 +3914,7 @@
       "orden": "Psittaciformes",
       "puestoColombia": 125,
       "registrosColombia": 33680,
-      "puestoLatam": 520,
+      "puestoLatam": 519,
       "regiones": [
         "andina"
       ],
@@ -4009,7 +4009,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 128,
       "registrosColombia": 33489,
-      "puestoLatam": 582,
+      "puestoLatam": 581,
       "regiones": [
         "andina",
         "caribe"
@@ -4168,7 +4168,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 133,
       "registrosColombia": 32488,
-      "puestoLatam": 605,
+      "puestoLatam": 604,
       "regiones": [
         "andina",
         "caribe"
@@ -4230,7 +4230,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 135,
       "registrosColombia": 31664,
-      "puestoLatam": 606,
+      "puestoLatam": 605,
       "regiones": [
         "andina",
         "caribe"
@@ -4323,7 +4323,7 @@
       "orden": "Galliformes",
       "puestoColombia": 138,
       "registrosColombia": 31322,
-      "puestoLatam": 727,
+      "puestoLatam": 726,
       "regiones": [
         "andina",
         "caribe"
@@ -4384,7 +4384,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 140,
       "registrosColombia": 31021,
-      "puestoLatam": 738,
+      "puestoLatam": 737,
       "regiones": [
         "andina"
       ],
@@ -4414,7 +4414,7 @@
       "orden": "Psittaciformes",
       "puestoColombia": 141,
       "registrosColombia": 31016,
-      "puestoLatam": 667,
+      "puestoLatam": 666,
       "regiones": [
         "andina",
         "caribe"
@@ -4635,7 +4635,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 148,
       "registrosColombia": 30050,
-      "puestoLatam": 538,
+      "puestoLatam": 537,
       "regiones": [
         "andina"
       ],
@@ -4665,7 +4665,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 149,
       "registrosColombia": 30032,
-      "puestoLatam": 508,
+      "puestoLatam": 507,
       "regiones": [
         "andina",
         "caribe"
@@ -4759,7 +4759,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 152,
       "registrosColombia": 28996,
-      "puestoLatam": 586,
+      "puestoLatam": 585,
       "regiones": [
         "andina",
         "caribe"
@@ -4883,7 +4883,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 156,
       "registrosColombia": 27949,
-      "puestoLatam": 531,
+      "puestoLatam": 530,
       "regiones": [
         "andina"
       ],
@@ -4943,7 +4943,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 158,
       "registrosColombia": 27816,
-      "puestoLatam": 528,
+      "puestoLatam": 527,
       "regiones": [
         "andina"
       ],
@@ -4973,7 +4973,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 159,
       "registrosColombia": 27804,
-      "puestoLatam": 536,
+      "puestoLatam": 535,
       "regiones": [
         "andina"
       ],
@@ -5101,7 +5101,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 163,
       "registrosColombia": 27461,
-      "puestoLatam": 623,
+      "puestoLatam": 622,
       "regiones": [
         "andina",
         "caribe",
@@ -5199,7 +5199,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 166,
       "registrosColombia": 26815,
-      "puestoLatam": 566,
+      "puestoLatam": 565,
       "regiones": [
         "andina"
       ],
@@ -5262,7 +5262,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 168,
       "registrosColombia": 26325,
-      "puestoLatam": 524,
+      "puestoLatam": 523,
       "regiones": [
         "andina",
         "caribe"
@@ -5325,7 +5325,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 170,
       "registrosColombia": 25802,
-      "puestoLatam": 552,
+      "puestoLatam": 551,
       "regiones": [
         "andina"
       ],
@@ -5355,7 +5355,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 171,
       "registrosColombia": 25780,
-      "puestoLatam": 847,
+      "puestoLatam": 846,
       "regiones": [
         "andina",
         "orinoquia",
@@ -5451,7 +5451,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 174,
       "registrosColombia": 25368,
-      "puestoLatam": 627,
+      "puestoLatam": 626,
       "regiones": [
         "andina"
       ],
@@ -5480,8 +5480,8 @@
       "familia": "Ramphastidae",
       "orden": "Piciformes",
       "puestoColombia": 175,
-      "registrosColombia": 25196,
-      "puestoLatam": 686,
+      "registrosColombia": 25200,
+      "puestoLatam": 685,
       "regiones": [
         "andina"
       ],
@@ -5542,7 +5542,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 177,
       "registrosColombia": 24583,
-      "puestoLatam": 516,
+      "puestoLatam": 515,
       "regiones": [
         "andina",
         "caribe"
@@ -5573,7 +5573,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 178,
       "registrosColombia": 24550,
-      "puestoLatam": 661,
+      "puestoLatam": 660,
       "regiones": [
         "andina",
         "orinoquia",
@@ -5605,7 +5605,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 179,
       "registrosColombia": 24463,
-      "puestoLatam": 938,
+      "puestoLatam": 937,
       "regiones": [
         "andina"
       ],
@@ -5699,7 +5699,7 @@
       "familia": "Pandionidae",
       "orden": "Accipitriformes",
       "puestoColombia": 182,
-      "registrosColombia": 23749,
+      "registrosColombia": 23750,
       "puestoLatam": 106,
       "regiones": [
         "andina",
@@ -5960,7 +5960,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 190,
       "registrosColombia": 23172,
-      "puestoLatam": 693,
+      "puestoLatam": 692,
       "regiones": [
         "andina"
       ],
@@ -5989,7 +5989,7 @@
       "familia": "Columbidae",
       "orden": "Columbiformes",
       "puestoColombia": 191,
-      "registrosColombia": 22968,
+      "registrosColombia": 22974,
       "puestoLatam": 199,
       "regiones": [
         "caribe",
@@ -6021,7 +6021,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 192,
       "registrosColombia": 22728,
-      "puestoLatam": 754,
+      "puestoLatam": 753,
       "regiones": [
         "andina"
       ],
@@ -6180,7 +6180,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 197,
       "registrosColombia": 22343,
-      "puestoLatam": 690,
+      "puestoLatam": 689,
       "regiones": [
         "andina"
       ],
@@ -6274,7 +6274,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 200,
       "registrosColombia": 22037,
-      "puestoLatam": 758,
+      "puestoLatam": 757,
       "regiones": [
         "andina"
       ],
@@ -6304,7 +6304,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 201,
       "registrosColombia": 21964,
-      "puestoLatam": 660,
+      "puestoLatam": 659,
       "regiones": [
         "orinoquia",
         "andina"
@@ -6368,7 +6368,7 @@
       "orden": "Galliformes",
       "puestoColombia": 203,
       "registrosColombia": 21507,
-      "puestoLatam": 967,
+      "puestoLatam": 966,
       "regiones": [
         "andina",
         "caribe",
@@ -6400,7 +6400,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 204,
       "registrosColombia": 21488,
-      "puestoLatam": 913,
+      "puestoLatam": 912,
       "regiones": [
         "andina"
       ],
@@ -6463,7 +6463,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 206,
       "registrosColombia": 21396,
-      "puestoLatam": 873,
+      "puestoLatam": 872,
       "regiones": [
         "andina"
       ],
@@ -6525,7 +6525,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 208,
       "registrosColombia": 21240,
-      "puestoLatam": 1051,
+      "puestoLatam": 1050,
       "regiones": [
         "andina",
         "caribe"
@@ -6555,8 +6555,8 @@
       "familia": "Trochilidae",
       "orden": "Apodiformes",
       "puestoColombia": 209,
-      "registrosColombia": 21098,
-      "puestoLatam": 512,
+      "registrosColombia": 21100,
+      "puestoLatam": 511,
       "regiones": [
         "andina",
         "caribe"
@@ -6618,7 +6618,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 211,
       "registrosColombia": 21036,
-      "puestoLatam": 604,
+      "puestoLatam": 603,
       "regiones": [
         "andina"
       ],
@@ -6680,7 +6680,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 213,
       "registrosColombia": 20714,
-      "puestoLatam": 957,
+      "puestoLatam": 956,
       "regiones": [
         "andina"
       ],
@@ -6772,7 +6772,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 216,
       "registrosColombia": 20449,
-      "puestoLatam": 931,
+      "puestoLatam": 930,
       "regiones": [
         "andina",
         "caribe"
@@ -6868,7 +6868,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 219,
       "registrosColombia": 20058,
-      "puestoLatam": 521,
+      "puestoLatam": 520,
       "regiones": [
         "andina",
         "orinoquia"
@@ -6931,7 +6931,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 221,
       "registrosColombia": 19871,
-      "puestoLatam": 588,
+      "puestoLatam": 587,
       "regiones": [
         "andina",
         "caribe",
@@ -6963,7 +6963,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 222,
       "registrosColombia": 19414,
-      "puestoLatam": 965,
+      "puestoLatam": 964,
       "regiones": [
         "caribe",
         "orinoquia",
@@ -7060,7 +7060,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 225,
       "registrosColombia": 18751,
-      "puestoLatam": 807,
+      "puestoLatam": 806,
       "regiones": [
         "andina"
       ],
@@ -7184,7 +7184,7 @@
       "orden": "Piciformes",
       "puestoColombia": 229,
       "registrosColombia": 18178,
-      "puestoLatam": 514,
+      "puestoLatam": 513,
       "regiones": [
         "andina"
       ],
@@ -7214,7 +7214,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 230,
       "registrosColombia": 18154,
-      "puestoLatam": 651,
+      "puestoLatam": 650,
       "regiones": [
         "andina"
       ],
@@ -7244,7 +7244,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 231,
       "registrosColombia": 18121,
-      "puestoLatam": 1034,
+      "puestoLatam": 1033,
       "regiones": [
         "andina",
         "caribe"
@@ -7307,7 +7307,7 @@
       "orden": "Piciformes",
       "puestoColombia": 233,
       "registrosColombia": 17996,
-      "puestoLatam": 741,
+      "puestoLatam": 740,
       "regiones": [
         "andina"
       ],
@@ -7337,7 +7337,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 234,
       "registrosColombia": 17990,
-      "puestoLatam": 792,
+      "puestoLatam": 791,
       "regiones": [
         "andina",
         "caribe"
@@ -7367,8 +7367,8 @@
       "familia": "Trogonidae",
       "orden": "Trogoniformes",
       "puestoColombia": 235,
-      "registrosColombia": 17927,
-      "puestoLatam": 704,
+      "registrosColombia": 17931,
+      "puestoLatam": 703,
       "regiones": [
         "andina",
         "caribe"
@@ -7464,7 +7464,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 238,
       "registrosColombia": 17592,
-      "puestoLatam": 764,
+      "puestoLatam": 763,
       "regiones": [
         "andina",
         "pacifica"
@@ -7495,7 +7495,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 239,
       "registrosColombia": 17582,
-      "puestoLatam": 658,
+      "puestoLatam": 657,
       "regiones": [
         "andina"
       ],
@@ -7525,7 +7525,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 240,
       "registrosColombia": 17556,
-      "puestoLatam": 953,
+      "puestoLatam": 952,
       "regiones": [
         "andina",
         "caribe"
@@ -7556,7 +7556,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 241,
       "registrosColombia": 17480,
-      "puestoLatam": 1099,
+      "puestoLatam": 1098,
       "regiones": [
         "andina"
       ],
@@ -7713,7 +7713,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 246,
       "registrosColombia": 16692,
-      "puestoLatam": 973,
+      "puestoLatam": 972,
       "regiones": [
         "andina"
       ],
@@ -7870,7 +7870,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 251,
       "registrosColombia": 16338,
-      "puestoLatam": 883,
+      "puestoLatam": 882,
       "regiones": [
         "andina",
         "caribe",
@@ -7902,7 +7902,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 252,
       "registrosColombia": 16262,
-      "puestoLatam": 1318,
+      "puestoLatam": 1317,
       "regiones": [
         "andina"
       ],
@@ -7932,7 +7932,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 253,
       "registrosColombia": 16191,
-      "puestoLatam": 1340,
+      "puestoLatam": 1339,
       "regiones": [
         "andina"
       ],
@@ -8058,7 +8058,7 @@
       "orden": "Piciformes",
       "puestoColombia": 257,
       "registrosColombia": 15835,
-      "puestoLatam": 908,
+      "puestoLatam": 907,
       "regiones": [
         "andina"
       ],
@@ -8184,7 +8184,7 @@
       "orden": "Piciformes",
       "puestoColombia": 261,
       "registrosColombia": 15529,
-      "puestoLatam": 1305,
+      "puestoLatam": 1304,
       "regiones": [
         "caribe",
         "andina"
@@ -8215,7 +8215,7 @@
       "orden": "Nyctibiiformes",
       "puestoColombia": 262,
       "registrosColombia": 15425,
-      "puestoLatam": 519,
+      "puestoLatam": 518,
       "regiones": [
         "andina",
         "orinoquia",
@@ -8279,7 +8279,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 264,
       "registrosColombia": 15330,
-      "puestoLatam": 836,
+      "puestoLatam": 835,
       "regiones": [
         "andina",
         "caribe"
@@ -8375,7 +8375,7 @@
       "orden": "Galliformes",
       "puestoColombia": 267,
       "registrosColombia": 15280,
-      "puestoLatam": 830,
+      "puestoLatam": 829,
       "regiones": [
         "andina"
       ],
@@ -8438,7 +8438,7 @@
       "orden": "Piciformes",
       "puestoColombia": 269,
       "registrosColombia": 15247,
-      "puestoLatam": 1418,
+      "puestoLatam": 1417,
       "regiones": [
         "andina"
       ],
@@ -8468,7 +8468,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 270,
       "registrosColombia": 15162,
-      "puestoLatam": 634,
+      "puestoLatam": 633,
       "regiones": [
         "andina"
       ],
@@ -8498,7 +8498,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 271,
       "registrosColombia": 15145,
-      "puestoLatam": 1083,
+      "puestoLatam": 1082,
       "regiones": [
         "andina",
         "caribe"
@@ -8529,7 +8529,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 272,
       "registrosColombia": 15133,
-      "puestoLatam": 554,
+      "puestoLatam": 553,
       "regiones": [
         "andina",
         "caribe"
@@ -8590,7 +8590,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 274,
       "registrosColombia": 14994,
-      "puestoLatam": 691,
+      "puestoLatam": 690,
       "regiones": [
         "andina",
         "amazonia",
@@ -8654,7 +8654,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 276,
       "registrosColombia": 14918,
-      "puestoLatam": 753,
+      "puestoLatam": 752,
       "regiones": [
         "andina",
         "orinoquia",
@@ -8678,37 +8678,6 @@
       "amenaza": null
     },
     {
-      "speciesKey": 2476063,
-      "slug": "esmeralda-piquirroja",
-      "cientifico": "Chlorostilbon gibsoni",
-      "nombreEs": "Esmeralda piquirroja",
-      "nombreEn": "Red-billed Emerald",
-      "familia": "Trochilidae",
-      "orden": "Apodiformes",
-      "puestoColombia": 277,
-      "registrosColombia": 14894,
-      "puestoLatam": 1346,
-      "regiones": [
-        "andina",
-        "caribe"
-      ],
-      "meses": [
-        96,
-        91,
-        96,
-        92,
-        90,
-        85,
-        88,
-        100,
-        93,
-        100,
-        86,
-        94
-      ],
-      "amenaza": null
-    },
-    {
       "speciesKey": 2496081,
       "slug": "caminera-frentigris",
       "cientifico": "Leptotila rufaxilla",
@@ -8716,8 +8685,8 @@
       "nombreEn": "Grey-fronted Dove",
       "familia": "Columbidae",
       "orden": "Columbiformes",
-      "puestoColombia": 278,
-      "registrosColombia": 14889,
+      "puestoColombia": 277,
+      "registrosColombia": 14899,
       "puestoLatam": 472,
       "regiones": [
         "orinoquia",
@@ -8740,6 +8709,37 @@
       "amenaza": null
     },
     {
+      "speciesKey": 2476063,
+      "slug": "esmeralda-piquirroja",
+      "cientifico": "Chlorostilbon gibsoni",
+      "nombreEs": "Esmeralda piquirroja",
+      "nombreEn": "Red-billed Emerald",
+      "familia": "Trochilidae",
+      "orden": "Apodiformes",
+      "puestoColombia": 278,
+      "registrosColombia": 14894,
+      "puestoLatam": 1345,
+      "regiones": [
+        "andina",
+        "caribe"
+      ],
+      "meses": [
+        96,
+        91,
+        96,
+        92,
+        90,
+        85,
+        88,
+        100,
+        93,
+        100,
+        86,
+        94
+      ],
+      "amenaza": null
+    },
+    {
       "speciesKey": 2491445,
       "slug": "gorrion-montes-nuquipalido",
       "cientifico": "Atlapetes pallidinucha",
@@ -8749,7 +8749,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 279,
       "registrosColombia": 14843,
-      "puestoLatam": 1212,
+      "puestoLatam": 1211,
       "regiones": [
         "andina"
       ],
@@ -8779,7 +8779,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 280,
       "registrosColombia": 14798,
-      "puestoLatam": 871,
+      "puestoLatam": 870,
       "regiones": [
         "andina",
         "pacifica"
@@ -8904,7 +8904,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 284,
       "registrosColombia": 14623,
-      "puestoLatam": 773,
+      "puestoLatam": 772,
       "regiones": [
         "amazonia",
         "andina",
@@ -8968,7 +8968,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 286,
       "registrosColombia": 14579,
-      "puestoLatam": 1442,
+      "puestoLatam": 1441,
       "regiones": [
         "andina",
         "pacifica"
@@ -8999,7 +8999,7 @@
       "orden": "Psittaciformes",
       "puestoColombia": 287,
       "registrosColombia": 14570,
-      "puestoLatam": 592,
+      "puestoLatam": 591,
       "regiones": [
         "amazonia",
         "orinoquia"
@@ -9030,7 +9030,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 288,
       "registrosColombia": 14508,
-      "puestoLatam": 1026,
+      "puestoLatam": 1025,
       "regiones": [
         "andina"
       ],
@@ -9191,7 +9191,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 293,
       "registrosColombia": 13850,
-      "puestoLatam": 1483,
+      "puestoLatam": 1482,
       "regiones": [
         "andina"
       ],
@@ -9221,7 +9221,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 294,
       "registrosColombia": 13826,
-      "puestoLatam": 1339,
+      "puestoLatam": 1338,
       "regiones": [
         "andina",
         "pacifica"
@@ -9252,7 +9252,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 295,
       "registrosColombia": 13808,
-      "puestoLatam": 1350,
+      "puestoLatam": 1349,
       "regiones": [
         "caribe",
         "andina"
@@ -9283,7 +9283,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 296,
       "registrosColombia": 13797,
-      "puestoLatam": 730,
+      "puestoLatam": 729,
       "regiones": [
         "andina",
         "amazonia",
@@ -9316,7 +9316,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 297,
       "registrosColombia": 13792,
-      "puestoLatam": 737,
+      "puestoLatam": 736,
       "regiones": [
         "andina",
         "caribe"
@@ -9436,6 +9436,37 @@
       "amenaza": null
     },
     {
+      "speciesKey": 2488222,
+      "slug": "tangara-goliplateada",
+      "cientifico": "Tangara icterocephala",
+      "nombreEs": "Tangara goliplateada",
+      "nombreEn": "Silver-throated Tanager",
+      "familia": "Thraupidae",
+      "orden": "Passeriformes",
+      "puestoColombia": 301,
+      "registrosColombia": 13637,
+      "puestoLatam": 227,
+      "regiones": [
+        "andina",
+        "pacifica"
+      ],
+      "meses": [
+        100,
+        98,
+        86,
+        66,
+        54,
+        85,
+        89,
+        98,
+        80,
+        58,
+        79,
+        92
+      ],
+      "amenaza": null
+    },
+    {
       "speciesKey": 2474337,
       "slug": "carrao",
       "cientifico": "Aramus guarauna",
@@ -9443,7 +9474,7 @@
       "nombreEn": "Limpkin",
       "familia": "Aramidae",
       "orden": "Gruiformes",
-      "puestoColombia": 301,
+      "puestoColombia": 302,
       "registrosColombia": 13636,
       "puestoLatam": 176,
       "regiones": [
@@ -9469,37 +9500,6 @@
       "amenaza": null
     },
     {
-      "speciesKey": 2488222,
-      "slug": "tangara-goliplateada",
-      "cientifico": "Tangara icterocephala",
-      "nombreEs": "Tangara goliplateada",
-      "nombreEn": "Silver-throated Tanager",
-      "familia": "Thraupidae",
-      "orden": "Passeriformes",
-      "puestoColombia": 302,
-      "registrosColombia": 13635,
-      "puestoLatam": 227,
-      "regiones": [
-        "andina",
-        "pacifica"
-      ],
-      "meses": [
-        100,
-        98,
-        86,
-        66,
-        54,
-        85,
-        89,
-        98,
-        80,
-        58,
-        79,
-        92
-      ],
-      "amenaza": null
-    },
-    {
       "speciesKey": 2495314,
       "slug": "paloma-plomiza",
       "cientifico": "Patagioenas plumbea",
@@ -9508,7 +9508,7 @@
       "familia": "Columbidae",
       "orden": "Columbiformes",
       "puestoColombia": 303,
-      "registrosColombia": 13611,
+      "registrosColombia": 13619,
       "puestoLatam": 349,
       "regiones": [
         "andina",
@@ -9541,7 +9541,7 @@
       "familia": "Trogonidae",
       "orden": "Trogoniformes",
       "puestoColombia": 304,
-      "registrosColombia": 13541,
+      "registrosColombia": 13543,
       "puestoLatam": 289,
       "regiones": [
         "andina",
@@ -9573,7 +9573,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 305,
       "registrosColombia": 13533,
-      "puestoLatam": 895,
+      "puestoLatam": 894,
       "regiones": [
         "caribe",
         "andina"
@@ -9603,8 +9603,8 @@
       "familia": "Trogonidae",
       "orden": "Trogoniformes",
       "puestoColombia": 306,
-      "registrosColombia": 13404,
-      "puestoLatam": 734,
+      "registrosColombia": 13406,
+      "puestoLatam": 733,
       "regiones": [
         "andina",
         "pacifica"
@@ -9635,7 +9635,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 307,
       "registrosColombia": 13350,
-      "puestoLatam": 530,
+      "puestoLatam": 529,
       "regiones": [
         "andina",
         "caribe",
@@ -9667,7 +9667,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 308,
       "registrosColombia": 13297,
-      "puestoLatam": 1169,
+      "puestoLatam": 1168,
       "regiones": [
         "andina",
         "caribe"
@@ -9728,7 +9728,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 310,
       "registrosColombia": 13068,
-      "puestoLatam": 736,
+      "puestoLatam": 735,
       "regiones": [
         "andina"
       ],
@@ -9758,7 +9758,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 311,
       "registrosColombia": 13064,
-      "puestoLatam": 1171,
+      "puestoLatam": 1170,
       "regiones": [
         "andina"
       ],
@@ -9788,7 +9788,7 @@
       "orden": "Psittaciformes",
       "puestoColombia": 312,
       "registrosColombia": 13021,
-      "puestoLatam": 1085,
+      "puestoLatam": 1084,
       "regiones": [
         "andina",
         "caribe"
@@ -9819,7 +9819,7 @@
       "orden": "Galliformes",
       "puestoColombia": 313,
       "registrosColombia": 13010,
-      "puestoLatam": 1533,
+      "puestoLatam": 1532,
       "regiones": [
         "andina"
       ],
@@ -9880,7 +9880,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 315,
       "registrosColombia": 13005,
-      "puestoLatam": 832,
+      "puestoLatam": 831,
       "regiones": [
         "andina"
       ],
@@ -9941,7 +9941,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 317,
       "registrosColombia": 12743,
-      "puestoLatam": 797,
+      "puestoLatam": 796,
       "regiones": [
         "andina"
       ],
@@ -9971,7 +9971,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 318,
       "registrosColombia": 12692,
-      "puestoLatam": 532,
+      "puestoLatam": 531,
       "regiones": [
         "caribe",
         "orinoquia",
@@ -10004,7 +10004,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 319,
       "registrosColombia": 12657,
-      "puestoLatam": 1048,
+      "puestoLatam": 1047,
       "regiones": [
         "andina"
       ],
@@ -10034,7 +10034,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 320,
       "registrosColombia": 12619,
-      "puestoLatam": 998,
+      "puestoLatam": 997,
       "regiones": [
         "andina",
         "pacifica"
@@ -10065,7 +10065,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 321,
       "registrosColombia": 12595,
-      "puestoLatam": 649,
+      "puestoLatam": 648,
       "regiones": [
         "caribe",
         "andina"
@@ -10096,7 +10096,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 322,
       "registrosColombia": 12529,
-      "puestoLatam": 698,
+      "puestoLatam": 697,
       "regiones": [
         "andina",
         "pacifica",
@@ -10127,8 +10127,8 @@
       "familia": "Opisthocomidae",
       "orden": "Opisthocomiformes",
       "puestoColombia": 323,
-      "registrosColombia": 12518,
-      "puestoLatam": 643,
+      "registrosColombia": 12522,
+      "puestoLatam": 642,
       "regiones": [
         "orinoquia",
         "amazonia"
@@ -10190,7 +10190,7 @@
       "orden": "Coraciiformes",
       "puestoColombia": 325,
       "registrosColombia": 12508,
-      "puestoLatam": 866,
+      "puestoLatam": 865,
       "regiones": [
         "caribe",
         "andina"
@@ -10221,7 +10221,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 326,
       "registrosColombia": 12370,
-      "puestoLatam": 560,
+      "puestoLatam": 559,
       "regiones": [
         "orinoquia",
         "andina",
@@ -10254,7 +10254,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 327,
       "registrosColombia": 12358,
-      "puestoLatam": 1573,
+      "puestoLatam": 1572,
       "regiones": [
         "andina"
       ],
@@ -10283,8 +10283,8 @@
       "familia": "Thamnophilidae",
       "orden": "Passeriformes",
       "puestoColombia": 328,
-      "registrosColombia": 12289,
-      "puestoLatam": 1185,
+      "registrosColombia": 12291,
+      "puestoLatam": 1184,
       "regiones": [
         "caribe",
         "andina"
@@ -10381,7 +10381,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 331,
       "registrosColombia": 12214,
-      "puestoLatam": 772,
+      "puestoLatam": 771,
       "regiones": [
         "andina",
         "pacifica"
@@ -10444,7 +10444,7 @@
       "orden": "Piciformes",
       "puestoColombia": 333,
       "registrosColombia": 12196,
-      "puestoLatam": 1551,
+      "puestoLatam": 1550,
       "regiones": [
         "andina"
       ],
@@ -10504,7 +10504,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 335,
       "registrosColombia": 12006,
-      "puestoLatam": 597,
+      "puestoLatam": 596,
       "regiones": [
         "andina",
         "pacifica"
@@ -10535,7 +10535,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 336,
       "registrosColombia": 11989,
-      "puestoLatam": 1594,
+      "puestoLatam": 1593,
       "regiones": [
         "andina"
       ],
@@ -10565,7 +10565,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 337,
       "registrosColombia": 11888,
-      "puestoLatam": 629,
+      "puestoLatam": 628,
       "regiones": [
         "andina",
         "pacifica"
@@ -10596,7 +10596,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 338,
       "registrosColombia": 11785,
-      "puestoLatam": 577,
+      "puestoLatam": 576,
       "regiones": [
         "amazonia",
         "orinoquia",
@@ -10661,7 +10661,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 340,
       "registrosColombia": 11748,
-      "puestoLatam": 1379,
+      "puestoLatam": 1378,
       "regiones": [
         "andina"
       ],
@@ -10691,7 +10691,7 @@
       "orden": "Piciformes",
       "puestoColombia": 341,
       "registrosColombia": 11634,
-      "puestoLatam": 673,
+      "puestoLatam": 672,
       "regiones": [
         "amazonia",
         "orinoquia"
@@ -10722,7 +10722,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 342,
       "registrosColombia": 11628,
-      "puestoLatam": 1411,
+      "puestoLatam": 1410,
       "regiones": [
         "andina",
         "caribe",
@@ -10754,7 +10754,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 343,
       "registrosColombia": 11610,
-      "puestoLatam": 1089,
+      "puestoLatam": 1088,
       "regiones": [
         "andina"
       ],
@@ -10784,7 +10784,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 344,
       "registrosColombia": 11573,
-      "puestoLatam": 994,
+      "puestoLatam": 993,
       "regiones": [
         "andina"
       ],
@@ -10845,7 +10845,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 346,
       "registrosColombia": 11421,
-      "puestoLatam": 999,
+      "puestoLatam": 998,
       "regiones": [
         "andina"
       ],
@@ -10875,7 +10875,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 347,
       "registrosColombia": 11324,
-      "puestoLatam": 1187,
+      "puestoLatam": 1186,
       "regiones": [
         "andina"
       ],
@@ -10937,7 +10937,7 @@
       "orden": "Piciformes",
       "puestoColombia": 349,
       "registrosColombia": 11257,
-      "puestoLatam": 1549,
+      "puestoLatam": 1548,
       "regiones": [
         "andina"
       ],
@@ -11030,7 +11030,7 @@
       "orden": "Tinamiformes",
       "puestoColombia": 352,
       "registrosColombia": 11135,
-      "puestoLatam": 851,
+      "puestoLatam": 850,
       "regiones": [
         "orinoquia",
         "amazonia"
@@ -11126,7 +11126,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 355,
       "registrosColombia": 11081,
-      "puestoLatam": 1059,
+      "puestoLatam": 1058,
       "regiones": [
         "andina",
         "pacifica"
@@ -11157,7 +11157,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 356,
       "registrosColombia": 11005,
-      "puestoLatam": 1042,
+      "puestoLatam": 1041,
       "regiones": [
         "andina"
       ],
@@ -11282,7 +11282,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 360,
       "registrosColombia": 10850,
-      "puestoLatam": 1233,
+      "puestoLatam": 1232,
       "regiones": [
         "orinoquia",
         "amazonia",
@@ -11378,7 +11378,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 363,
       "registrosColombia": 10786,
-      "puestoLatam": 1679,
+      "puestoLatam": 1678,
       "regiones": [
         "caribe"
       ],
@@ -11440,7 +11440,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 365,
       "registrosColombia": 10764,
-      "puestoLatam": 1235,
+      "puestoLatam": 1234,
       "regiones": [
         "andina"
       ],
@@ -11470,7 +11470,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 366,
       "registrosColombia": 10660,
-      "puestoLatam": 710,
+      "puestoLatam": 709,
       "regiones": [
         "andina",
         "caribe",
@@ -11502,7 +11502,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 367,
       "registrosColombia": 10607,
-      "puestoLatam": 1218,
+      "puestoLatam": 1217,
       "regiones": [
         "andina"
       ],
@@ -11532,7 +11532,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 368,
       "registrosColombia": 10589,
-      "puestoLatam": 901,
+      "puestoLatam": 900,
       "regiones": [
         "andina",
         "caribe",
@@ -11597,7 +11597,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 370,
       "registrosColombia": 10524,
-      "puestoLatam": 662,
+      "puestoLatam": 661,
       "regiones": [
         "andina"
       ],
@@ -11627,7 +11627,7 @@
       "orden": "Columbiformes",
       "puestoColombia": 371,
       "registrosColombia": 10439,
-      "puestoLatam": 799,
+      "puestoLatam": 798,
       "regiones": [
         "orinoquia",
         "andina",
@@ -11660,7 +11660,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 372,
       "registrosColombia": 10401,
-      "puestoLatam": 1071,
+      "puestoLatam": 1070,
       "regiones": [
         "andina",
         "amazonia",
@@ -11694,7 +11694,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 373,
       "registrosColombia": 10339,
-      "puestoLatam": 1719,
+      "puestoLatam": 1718,
       "regiones": [
         "andina"
       ],
@@ -11724,7 +11724,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 374,
       "registrosColombia": 10331,
-      "puestoLatam": 1270,
+      "puestoLatam": 1269,
       "regiones": [
         "andina",
         "caribe"
@@ -11755,7 +11755,7 @@
       "orden": "Coraciiformes",
       "puestoColombia": 375,
       "registrosColombia": 10318,
-      "puestoLatam": 675,
+      "puestoLatam": 674,
       "regiones": [
         "orinoquia",
         "amazonia",
@@ -11882,7 +11882,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 379,
       "registrosColombia": 10246,
-      "puestoLatam": 1451,
+      "puestoLatam": 1450,
       "regiones": [
         "andina",
         "amazonia",
@@ -11914,7 +11914,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 380,
       "registrosColombia": 10212,
-      "puestoLatam": 897,
+      "puestoLatam": 896,
       "regiones": [
         "andina"
       ],
@@ -11944,7 +11944,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 381,
       "registrosColombia": 10183,
-      "puestoLatam": 1367,
+      "puestoLatam": 1366,
       "regiones": [
         "caribe",
         "orinoquia",
@@ -11976,7 +11976,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 382,
       "registrosColombia": 10167,
-      "puestoLatam": 782,
+      "puestoLatam": 781,
       "regiones": [
         "andina",
         "orinoquia",
@@ -12040,7 +12040,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 384,
       "registrosColombia": 10114,
-      "puestoLatam": 1164,
+      "puestoLatam": 1163,
       "regiones": [
         "andina"
       ],
@@ -12070,7 +12070,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 385,
       "registrosColombia": 10089,
-      "puestoLatam": 1039,
+      "puestoLatam": 1038,
       "regiones": [
         "andina",
         "pacifica"
@@ -12101,7 +12101,7 @@
       "orden": "Psittaciformes",
       "puestoColombia": 386,
       "registrosColombia": 10088,
-      "puestoLatam": 743,
+      "puestoLatam": 742,
       "regiones": [
         "orinoquia",
         "amazonia"
@@ -12132,7 +12132,7 @@
       "orden": "Piciformes",
       "puestoColombia": 387,
       "registrosColombia": 10062,
-      "puestoLatam": 1333,
+      "puestoLatam": 1332,
       "regiones": [
         "orinoquia",
         "caribe",
@@ -12164,8 +12164,8 @@
       "familia": "Thamnophilidae",
       "orden": "Passeriformes",
       "puestoColombia": 388,
-      "registrosColombia": 10051,
-      "puestoLatam": 1139,
+      "registrosColombia": 10052,
+      "puestoLatam": 1138,
       "regiones": [
         "andina",
         "caribe",
@@ -12197,7 +12197,7 @@
       "orden": "Pelecaniformes",
       "puestoColombia": 389,
       "registrosColombia": 10021,
-      "puestoLatam": 1239,
+      "puestoLatam": 1238,
       "regiones": [
         "orinoquia",
         "caribe",
@@ -12229,7 +12229,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 390,
       "registrosColombia": 9992,
-      "puestoLatam": 1118,
+      "puestoLatam": 1117,
       "regiones": [
         "andina"
       ],
@@ -12259,7 +12259,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 391,
       "registrosColombia": 9915,
-      "puestoLatam": 1542,
+      "puestoLatam": 1541,
       "regiones": [
         "andina",
         "caribe"
@@ -12290,7 +12290,7 @@
       "orden": "Passeriformes",
       "puestoColombia": 392,
       "registrosColombia": 9901,
-      "puestoLatam": 692,
+      "puestoLatam": 691,
       "regiones": [
         "orinoquia",
         "andina"
@@ -12354,7 +12354,7 @@
       "orden": "Apodiformes",
       "puestoColombia": 394,
       "registrosColombia": 9842,
-      "puestoLatam": 1552,
+      "puestoLatam": 1551,
       "regiones": [
         "andina"
       ],
@@ -12383,7 +12383,7 @@
       "familia": "Anatidae",
       "orden": "Anseriformes",
       "puestoColombia": 395,
-      "registrosColombia": 9792,
+      "registrosColombia": 9794,
       "puestoLatam": 373,
       "regiones": [
         "orinoquia",
@@ -12407,37 +12407,6 @@
       "amenaza": null
     },
     {
-      "speciesKey": 5231459,
-      "slug": "cucarachero-comun-5231459",
-      "cientifico": "Troglodytes aedon",
-      "nombreEs": "Cucarachero común",
-      "nombreEn": "House Wren",
-      "familia": "Troglodytidae",
-      "orden": "Passeriformes",
-      "puestoColombia": 396,
-      "registrosColombia": 9787,
-      "puestoLatam": 505,
-      "regiones": [
-        "andina",
-        "caribe"
-      ],
-      "meses": [
-        69,
-        28,
-        34,
-        100,
-        57,
-        43,
-        38,
-        40,
-        43,
-        56,
-        47,
-        28
-      ],
-      "amenaza": null
-    },
-    {
       "speciesKey": 2481721,
       "slug": "patiamarillo-menor",
       "cientifico": "Tringa flavipes",
@@ -12445,7 +12414,7 @@
       "nombreEn": "Lesser Yellowlegs",
       "familia": "Scolopacidae",
       "orden": "Charadriiformes",
-      "puestoColombia": 397,
+      "puestoColombia": 396,
       "registrosColombia": 9766,
       "puestoLatam": 197,
       "regiones": [
@@ -12477,7 +12446,7 @@
       "nombreEn": "Chestnut-backed Antbird",
       "familia": "Thamnophilidae",
       "orden": "Passeriformes",
-      "puestoColombia": 398,
+      "puestoColombia": 397,
       "registrosColombia": 9742,
       "puestoLatam": 318,
       "regiones": [
@@ -12508,7 +12477,7 @@
       "nombreEn": "Brown-crested Flycatcher",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 399,
+      "puestoColombia": 398,
       "registrosColombia": 9726,
       "puestoLatam": 217,
       "regiones": [
@@ -12540,7 +12509,7 @@
       "nombreEn": "Bat Falcon",
       "familia": "Falconidae",
       "orden": "Falconiformes",
-      "puestoColombia": 400,
+      "puestoColombia": 399,
       "registrosColombia": 9643,
       "puestoLatam": 341,
       "regiones": [
@@ -12573,7 +12542,7 @@
       "nombreEn": "Muscovy Duck",
       "familia": "Anatidae",
       "orden": "Anseriformes",
-      "puestoColombia": 401,
+      "puestoColombia": 400,
       "registrosColombia": 9643,
       "puestoLatam": 229,
       "regiones": [
@@ -12606,9 +12575,9 @@
       "nombreEn": "Shining-green Hummingbird",
       "familia": "Trochilidae",
       "orden": "Apodiformes",
-      "puestoColombia": 402,
+      "puestoColombia": 401,
       "registrosColombia": 9623,
-      "puestoLatam": 1613,
+      "puestoLatam": 1612,
       "regiones": [
         "andina",
         "caribe"
@@ -12637,9 +12606,9 @@
       "nombreEn": "Golden-collared Manakin",
       "familia": "Pipridae",
       "orden": "Passeriformes",
-      "puestoColombia": 403,
-      "registrosColombia": 9609,
-      "puestoLatam": 896,
+      "puestoColombia": 402,
+      "registrosColombia": 9611,
+      "puestoLatam": 895,
       "regiones": [
         "andina",
         "pacifica",
@@ -12669,9 +12638,9 @@
       "nombreEn": "Dusky Antbird",
       "familia": "Thamnophilidae",
       "orden": "Passeriformes",
-      "puestoColombia": 404,
+      "puestoColombia": 403,
       "registrosColombia": 9567,
-      "puestoLatam": 571,
+      "puestoLatam": 570,
       "regiones": [
         "andina",
         "orinoquia",
@@ -12701,9 +12670,9 @@
       "nombreEn": "Andean Duck",
       "familia": "Anatidae",
       "orden": "Anseriformes",
-      "puestoColombia": 405,
+      "puestoColombia": 404,
       "registrosColombia": 9562,
-      "puestoLatam": 791,
+      "puestoLatam": 790,
       "regiones": [
         "andina"
       ],
@@ -12731,7 +12700,7 @@
       "nombreEn": "White Ibis",
       "familia": "Threskiornithidae",
       "orden": "Pelecaniformes",
-      "puestoColombia": 406,
+      "puestoColombia": 405,
       "registrosColombia": 9561,
       "puestoLatam": 170,
       "regiones": [
@@ -12762,9 +12731,9 @@
       "nombreEn": "Fawn-breasted Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 407,
+      "puestoColombia": 406,
       "registrosColombia": 9551,
-      "puestoLatam": 705,
+      "puestoLatam": 704,
       "regiones": [
         "andina"
       ],
@@ -12792,9 +12761,9 @@
       "nombreEn": "Chestnut-winged Chachalaca",
       "familia": "Cracidae",
       "orden": "Galliformes",
-      "puestoColombia": 408,
+      "puestoColombia": 407,
       "registrosColombia": 9500,
-      "puestoLatam": 1775,
+      "puestoLatam": 1774,
       "regiones": [
         "caribe",
         "andina"
@@ -12823,7 +12792,7 @@
       "nombreEn": "Short-crested Flycatcher",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 409,
+      "puestoColombia": 408,
       "registrosColombia": 9461,
       "puestoLatam": 315,
       "regiones": [
@@ -12854,9 +12823,9 @@
       "nombreEn": "White-tailed hawk",
       "familia": "Accipitridae",
       "orden": "Accipitriformes",
-      "puestoColombia": 410,
+      "puestoColombia": 409,
       "registrosColombia": 9437,
-      "puestoLatam": 642,
+      "puestoLatam": 641,
       "regiones": [
         "andina",
         "orinoquia",
@@ -12886,9 +12855,9 @@
       "nombreEn": "Red-rumped Woodpecker",
       "familia": "Picidae",
       "orden": "Piciformes",
-      "puestoColombia": 411,
+      "puestoColombia": 410,
       "registrosColombia": 9427,
-      "puestoLatam": 1285,
+      "puestoLatam": 1284,
       "regiones": [
         "andina",
         "caribe"
@@ -12917,9 +12886,9 @@
       "nombreEn": "Cinereous Becard",
       "familia": "Cotingidae",
       "orden": "Passeriformes",
-      "puestoColombia": 412,
+      "puestoColombia": 411,
       "registrosColombia": 9426,
-      "puestoLatam": 1504,
+      "puestoLatam": 1503,
       "regiones": [
         "andina",
         "caribe",
@@ -12949,9 +12918,9 @@
       "nombreEn": "Short-tailed swift",
       "familia": "Apodidae",
       "orden": "Apodiformes",
-      "puestoColombia": 413,
-      "registrosColombia": 9361,
-      "puestoLatam": 633,
+      "puestoColombia": 412,
+      "registrosColombia": 9367,
+      "puestoLatam": 632,
       "regiones": [
         "amazonia",
         "orinoquia",
@@ -12982,9 +12951,9 @@
       "nombreEn": "Golden-naped Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 414,
+      "puestoColombia": 413,
       "registrosColombia": 9352,
-      "puestoLatam": 800,
+      "puestoLatam": 799,
       "regiones": [
         "andina"
       ],
@@ -13012,7 +12981,7 @@
       "nombreEn": "Band-backed Wren",
       "familia": "Troglodytidae",
       "orden": "Passeriformes",
-      "puestoColombia": 415,
+      "puestoColombia": 414,
       "registrosColombia": 9338,
       "puestoLatam": 352,
       "regiones": [
@@ -13043,9 +13012,9 @@
       "nombreEn": "Barred Becard",
       "familia": "Cotingidae",
       "orden": "Passeriformes",
-      "puestoColombia": 416,
+      "puestoColombia": 415,
       "registrosColombia": 9296,
-      "puestoLatam": 984,
+      "puestoLatam": 983,
       "regiones": [
         "andina"
       ],
@@ -13073,9 +13042,9 @@
       "nombreEn": "Sedge Wren",
       "familia": "Troglodytidae",
       "orden": "Passeriformes",
-      "puestoColombia": 417,
+      "puestoColombia": 416,
       "registrosColombia": 9291,
-      "puestoLatam": 603,
+      "puestoLatam": 602,
       "regiones": [
         "andina"
       ],
@@ -13103,9 +13072,9 @@
       "nombreEn": "Thick-billed Seed-Finch",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 418,
+      "puestoColombia": 417,
       "registrosColombia": 9271,
-      "puestoLatam": 635,
+      "puestoLatam": 634,
       "regiones": [
         "andina",
         "caribe",
@@ -13135,7 +13104,7 @@
       "nombreEn": "Chestnut-headed Oropendola",
       "familia": "Icteridae",
       "orden": "Passeriformes",
-      "puestoColombia": 419,
+      "puestoColombia": 418,
       "registrosColombia": 9247,
       "puestoLatam": 371,
       "regiones": [
@@ -13166,7 +13135,7 @@
       "nombreEn": "Orange-billed Sparrow",
       "familia": "Passerellidae",
       "orden": "Passeriformes",
-      "puestoColombia": 420,
+      "puestoColombia": 419,
       "registrosColombia": 9246,
       "puestoLatam": 275,
       "regiones": [
@@ -13197,7 +13166,7 @@
       "nombreEn": "Short-tailed hawk",
       "familia": "Accipitridae",
       "orden": "Accipitriformes",
-      "puestoColombia": 421,
+      "puestoColombia": 420,
       "registrosColombia": 9227,
       "puestoLatam": 285,
       "regiones": [
@@ -13228,9 +13197,9 @@
       "nombreEn": "Strong-billed Woodcreeper",
       "familia": "Furnariidae",
       "orden": "Passeriformes",
-      "puestoColombia": 422,
+      "puestoColombia": 421,
       "registrosColombia": 9211,
-      "puestoLatam": 928,
+      "puestoLatam": 927,
       "regiones": [
         "andina",
         "caribe"
@@ -13259,9 +13228,9 @@
       "nombreEn": "Glistening-green Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 423,
+      "puestoColombia": 422,
       "registrosColombia": 9192,
-      "puestoLatam": 1439,
+      "puestoLatam": 1438,
       "regiones": [
         "andina",
         "pacifica"
@@ -13290,9 +13259,9 @@
       "nombreEn": "Southern Mountain Cacique",
       "familia": "Icteridae",
       "orden": "Passeriformes",
-      "puestoColombia": 424,
+      "puestoColombia": 423,
       "registrosColombia": 9139,
-      "puestoLatam": 1247,
+      "puestoLatam": 1246,
       "regiones": [
         "andina"
       ],
@@ -13320,9 +13289,9 @@
       "nombreEn": "Purplish-mantled Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 425,
+      "puestoColombia": 424,
       "registrosColombia": 9137,
-      "puestoLatam": 1791,
+      "puestoLatam": 1790,
       "regiones": [
         "andina",
         "pacifica"
@@ -13351,9 +13320,9 @@
       "nombreEn": "Glossy-black Thrush",
       "familia": "Turdidae",
       "orden": "Passeriformes",
-      "puestoColombia": 426,
+      "puestoColombia": 425,
       "registrosColombia": 9132,
-      "puestoLatam": 956,
+      "puestoLatam": 955,
       "regiones": [
         "andina",
         "caribe"
@@ -13382,9 +13351,9 @@
       "nombreEn": "Rufous-throated Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 427,
+      "puestoColombia": 426,
       "registrosColombia": 9051,
-      "puestoLatam": 1302,
+      "puestoLatam": 1301,
       "regiones": [
         "andina",
         "pacifica"
@@ -13413,9 +13382,9 @@
       "nombreEn": "Orange-crowned Oriole",
       "familia": "Icteridae",
       "orden": "Passeriformes",
-      "puestoColombia": 428,
+      "puestoColombia": 427,
       "registrosColombia": 9047,
-      "puestoLatam": 1525,
+      "puestoLatam": 1524,
       "regiones": [
         "andina",
         "caribe",
@@ -13445,7 +13414,7 @@
       "nombreEn": "Mealy Amazon",
       "familia": "Psittacidae",
       "orden": "Psittaciformes",
-      "puestoColombia": 429,
+      "puestoColombia": 428,
       "registrosColombia": 8982,
       "puestoLatam": 273,
       "regiones": [
@@ -13479,9 +13448,9 @@
       "nombreEn": "Rufous-rumped Tapaculo",
       "familia": "Rhinocryptidae",
       "orden": "Passeriformes",
-      "puestoColombia": 430,
-      "registrosColombia": 8831,
-      "puestoLatam": 1841,
+      "puestoColombia": 429,
+      "registrosColombia": 8835,
+      "puestoLatam": 1840,
       "regiones": [
         "andina"
       ],
@@ -13509,9 +13478,9 @@
       "nombreEn": "Black-crowned Tityra",
       "familia": "Cotingidae",
       "orden": "Passeriformes",
-      "puestoColombia": 431,
+      "puestoColombia": 430,
       "registrosColombia": 8824,
-      "puestoLatam": 550,
+      "puestoLatam": 549,
       "regiones": [
         "andina",
         "orinoquia",
@@ -13542,7 +13511,7 @@
       "nombreEn": "Gray kingbird",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 432,
+      "puestoColombia": 431,
       "registrosColombia": 8810,
       "puestoLatam": 187,
       "regiones": [
@@ -13573,9 +13542,9 @@
       "nombreEn": "Horned Screamer",
       "familia": "Anhimidae",
       "orden": "Anseriformes",
-      "puestoColombia": 433,
-      "registrosColombia": 8741,
-      "puestoLatam": 924,
+      "puestoColombia": 432,
+      "registrosColombia": 8743,
+      "puestoLatam": 923,
       "regiones": [
         "amazonia",
         "orinoquia",
@@ -13605,9 +13574,9 @@
       "nombreEn": "Tawny-crested Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 434,
+      "puestoColombia": 433,
       "registrosColombia": 8726,
-      "puestoLatam": 933,
+      "puestoLatam": 932,
       "regiones": [
         "andina",
         "pacifica"
@@ -13636,9 +13605,9 @@
       "nombreEn": "Northern Chestnut-breasted Wren",
       "familia": "Troglodytidae",
       "orden": "Passeriformes",
-      "puestoColombia": 435,
+      "puestoColombia": 434,
       "registrosColombia": 8633,
-      "puestoLatam": 1838,
+      "puestoLatam": 1837,
       "regiones": [
         "andina",
         "pacifica"
@@ -13667,8 +13636,8 @@
       "nombreEn": "Scarlet Macaw",
       "familia": "Psittacidae",
       "orden": "Psittaciformes",
-      "puestoColombia": 436,
-      "registrosColombia": 8527,
+      "puestoColombia": 435,
+      "registrosColombia": 8531,
       "puestoLatam": 238,
       "regiones": [
         "amazonia",
@@ -13700,9 +13669,9 @@
       "nombreEn": "White-whiskered Hermit",
       "familia": "Trochilidae",
       "orden": "Apodiformes",
-      "puestoColombia": 437,
+      "puestoColombia": 436,
       "registrosColombia": 8519,
-      "puestoLatam": 784,
+      "puestoLatam": 783,
       "regiones": [
         "andina",
         "pacifica"
@@ -13731,9 +13700,9 @@
       "nombreEn": "Parker's antbird",
       "familia": "Thamnophilidae",
       "orden": "Passeriformes",
-      "puestoColombia": 438,
+      "puestoColombia": 437,
       "registrosColombia": 8476,
-      "puestoLatam": 1879,
+      "puestoLatam": 1878,
       "regiones": [
         "andina"
       ],
@@ -13761,9 +13730,9 @@
       "nombreEn": "Turquoise Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 439,
-      "registrosColombia": 8457,
-      "puestoLatam": 840,
+      "puestoColombia": 438,
+      "registrosColombia": 8459,
+      "puestoLatam": 839,
       "regiones": [
         "amazonia",
         "orinoquia"
@@ -13792,7 +13761,7 @@
       "nombreEn": "Wood stork",
       "familia": "Ciconiidae",
       "orden": "Ciconiiformes",
-      "puestoColombia": 440,
+      "puestoColombia": 439,
       "registrosColombia": 8423,
       "puestoLatam": 183,
       "regiones": [
@@ -13824,9 +13793,9 @@
       "nombreEn": "Band-tailed Guan",
       "familia": "Cracidae",
       "orden": "Galliformes",
-      "puestoColombia": 441,
+      "puestoColombia": 440,
       "registrosColombia": 8417,
-      "puestoLatam": 1713,
+      "puestoLatam": 1712,
       "regiones": [
         "caribe",
         "andina",
@@ -13856,9 +13825,9 @@
       "nombreEn": "Yellow-throated Bush Tanager",
       "familia": "Passerellidae",
       "orden": "Passeriformes",
-      "puestoColombia": 442,
+      "puestoColombia": 441,
       "registrosColombia": 8404,
-      "puestoLatam": 885,
+      "puestoLatam": 884,
       "regiones": [
         "andina",
         "amazonia"
@@ -13887,9 +13856,9 @@
       "nombreEn": "Olive-sided flycatcher",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 443,
+      "puestoColombia": 442,
       "registrosColombia": 8371,
-      "puestoLatam": 747,
+      "puestoLatam": 746,
       "regiones": [
         "andina",
         "caribe",
@@ -13919,9 +13888,9 @@
       "nombreEn": "Black-collared Hawk",
       "familia": "Accipitridae",
       "orden": "Accipitriformes",
-      "puestoColombia": 444,
+      "puestoColombia": 443,
       "registrosColombia": 8362,
-      "puestoLatam": 628,
+      "puestoLatam": 627,
       "regiones": [
         "caribe",
         "amazonia",
@@ -13952,9 +13921,9 @@
       "nombreEn": "Golden-rumped Euphonia",
       "familia": "Fringillidae",
       "orden": "Passeriformes",
-      "puestoColombia": 445,
+      "puestoColombia": 444,
       "registrosColombia": 8244,
-      "puestoLatam": 1086,
+      "puestoLatam": 1085,
       "regiones": [
         "andina"
       ],
@@ -13982,9 +13951,9 @@
       "nombreEn": "Black-tailed Tityra",
       "familia": "Cotingidae",
       "orden": "Passeriformes",
-      "puestoColombia": 446,
+      "puestoColombia": 445,
       "registrosColombia": 8212,
-      "puestoLatam": 915,
+      "puestoLatam": 914,
       "regiones": [
         "amazonia",
         "orinoquia",
@@ -14014,9 +13983,9 @@
       "nombreEn": "Black Hawk-Eagle",
       "familia": "Accipitridae",
       "orden": "Accipitriformes",
-      "puestoColombia": 447,
-      "registrosColombia": 8182,
-      "puestoLatam": 620,
+      "puestoColombia": 446,
+      "registrosColombia": 8183,
+      "puestoLatam": 619,
       "regiones": [
         "andina",
         "caribe"
@@ -14045,9 +14014,9 @@
       "nombreEn": "Magpie Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 448,
-      "registrosColombia": 8177,
-      "puestoLatam": 593,
+      "puestoColombia": 447,
+      "registrosColombia": 8178,
+      "puestoLatam": 592,
       "regiones": [
         "amazonia",
         "andina",
@@ -14077,7 +14046,7 @@
       "nombreEn": "Black-fronted Nunbird",
       "familia": "Bucconidae",
       "orden": "Piciformes",
-      "puestoColombia": 449,
+      "puestoColombia": 448,
       "registrosColombia": 8156,
       "puestoLatam": 444,
       "regiones": [
@@ -14108,7 +14077,7 @@
       "nombreEn": "Blue-and-yellow Macaw",
       "familia": "Psittacidae",
       "orden": "Psittaciformes",
-      "puestoColombia": 450,
+      "puestoColombia": 449,
       "registrosColombia": 8117,
       "puestoLatam": 280,
       "regiones": [
@@ -14140,9 +14109,9 @@
       "nombreEn": "Chestnut-bellied Seed-Finch",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 451,
+      "puestoColombia": 450,
       "registrosColombia": 8112,
-      "puestoLatam": 828,
+      "puestoLatam": 827,
       "regiones": [
         "amazonia",
         "orinoquia",
@@ -14172,9 +14141,9 @@
       "nombreEn": "Trinidad Euphonia",
       "familia": "Fringillidae",
       "orden": "Passeriformes",
-      "puestoColombia": 452,
+      "puestoColombia": 451,
       "registrosColombia": 8104,
-      "puestoLatam": 1147,
+      "puestoLatam": 1146,
       "regiones": [
         "caribe"
       ],
@@ -14202,9 +14171,9 @@
       "nombreEn": "Undulated Tinamou",
       "familia": "Tinamidae",
       "orden": "Tinamiformes",
-      "puestoColombia": 453,
+      "puestoColombia": 452,
       "registrosColombia": 8059,
-      "puestoLatam": 533,
+      "puestoLatam": 532,
       "regiones": [
         "amazonia",
         "orinoquia"
@@ -14233,9 +14202,9 @@
       "nombreEn": "Multicolored Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 454,
+      "puestoColombia": 453,
       "registrosColombia": 8047,
-      "puestoLatam": 1921,
+      "puestoLatam": 1920,
       "regiones": [
         "andina"
       ],
@@ -14263,9 +14232,9 @@
       "nombreEn": "White-tailed Hillstar",
       "familia": "Trochilidae",
       "orden": "Apodiformes",
-      "puestoColombia": 455,
+      "puestoColombia": 454,
       "registrosColombia": 8043,
-      "puestoLatam": 1752,
+      "puestoLatam": 1751,
       "regiones": [
         "andina",
         "pacifica"
@@ -14294,9 +14263,9 @@
       "nombreEn": "Rufous-crowned Tody-Flycatcher",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 456,
+      "puestoColombia": 455,
       "registrosColombia": 8029,
-      "puestoLatam": 1545,
+      "puestoLatam": 1544,
       "regiones": [
         "andina"
       ],
@@ -14324,9 +14293,9 @@
       "nombreEn": "Buff-breasted Mountain Tanager",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 457,
+      "puestoColombia": 456,
       "registrosColombia": 8015,
-      "puestoLatam": 1515,
+      "puestoLatam": 1514,
       "regiones": [
         "andina",
         "caribe"
@@ -14355,9 +14324,9 @@
       "nombreEn": "Red-crested Cotinga",
       "familia": "Cotingidae",
       "orden": "Passeriformes",
-      "puestoColombia": 458,
+      "puestoColombia": 457,
       "registrosColombia": 7987,
-      "puestoLatam": 1115,
+      "puestoLatam": 1114,
       "regiones": [
         "andina",
         "caribe"
@@ -14386,9 +14355,9 @@
       "nombreEn": "Sharpe's Wren",
       "familia": "Troglodytidae",
       "orden": "Passeriformes",
-      "puestoColombia": 459,
+      "puestoColombia": 458,
       "registrosColombia": 7979,
-      "puestoLatam": 1539,
+      "puestoLatam": 1538,
       "regiones": [
         "andina",
         "pacifica"
@@ -14417,9 +14386,9 @@
       "nombreEn": "Golden-winged Manakin",
       "familia": "Pipridae",
       "orden": "Passeriformes",
-      "puestoColombia": 460,
+      "puestoColombia": 459,
       "registrosColombia": 7970,
-      "puestoLatam": 1443,
+      "puestoLatam": 1442,
       "regiones": [
         "andina",
         "pacifica"
@@ -14448,9 +14417,9 @@
       "nombreEn": "Rufous-breasted Flycatcher",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 461,
+      "puestoColombia": 460,
       "registrosColombia": 7952,
-      "puestoLatam": 1588,
+      "puestoLatam": 1587,
       "regiones": [
         "andina"
       ],
@@ -14478,7 +14447,7 @@
       "nombreEn": "Grey-lined Hawk",
       "familia": "Accipitridae",
       "orden": "Accipitriformes",
-      "puestoColombia": 462,
+      "puestoColombia": 461,
       "registrosColombia": 7936,
       "puestoLatam": 142,
       "regiones": [
@@ -14511,9 +14480,9 @@
       "nombreEn": "Green-tailed Trainbearer",
       "familia": "Trochilidae",
       "orden": "Apodiformes",
-      "puestoColombia": 463,
+      "puestoColombia": 462,
       "registrosColombia": 7903,
-      "puestoLatam": 1214,
+      "puestoLatam": 1213,
       "regiones": [
         "andina",
         "amazonia"
@@ -14542,9 +14511,9 @@
       "nombreEn": "Brown Inca",
       "familia": "Trochilidae",
       "orden": "Apodiformes",
-      "puestoColombia": 464,
+      "puestoColombia": 463,
       "registrosColombia": 7842,
-      "puestoLatam": 1027,
+      "puestoLatam": 1026,
       "regiones": [
         "andina",
         "pacifica"
@@ -14573,9 +14542,9 @@
       "nombreEn": "Olive-striped Flycatcher",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 465,
+      "puestoColombia": 464,
       "registrosColombia": 7828,
-      "puestoLatam": 1196,
+      "puestoLatam": 1195,
       "regiones": [
         "andina",
         "caribe"
@@ -14604,9 +14573,9 @@
       "nombreEn": "Narino Tapaculo",
       "familia": "Rhinocryptidae",
       "orden": "Passeriformes",
-      "puestoColombia": 466,
-      "registrosColombia": 7800,
-      "puestoLatam": 1557,
+      "puestoColombia": 465,
+      "registrosColombia": 7809,
+      "puestoLatam": 1556,
       "regiones": [
         "andina",
         "pacifica"
@@ -14635,7 +14604,7 @@
       "nombreEn": "Long-billed Gnatwren",
       "familia": "Polioptilidae",
       "orden": "Passeriformes",
-      "puestoColombia": 467,
+      "puestoColombia": 466,
       "registrosColombia": 7691,
       "puestoLatam": 317,
       "regiones": [
@@ -14667,9 +14636,9 @@
       "nombreEn": "Choco Brush Finch",
       "familia": "Passerellidae",
       "orden": "Passeriformes",
-      "puestoColombia": 468,
+      "puestoColombia": 467,
       "registrosColombia": 7657,
-      "puestoLatam": 1205,
+      "puestoLatam": 1204,
       "regiones": [
         "andina",
         "pacifica"
@@ -14698,9 +14667,9 @@
       "nombreEn": "Military Macaw",
       "familia": "Psittacidae",
       "orden": "Psittaciformes",
-      "puestoColombia": 469,
+      "puestoColombia": 468,
       "registrosColombia": 7636,
-      "puestoLatam": 1277,
+      "puestoLatam": 1276,
       "regiones": [
         "andina",
         "caribe"
@@ -14729,9 +14698,9 @@
       "nombreEn": "Stripe-backed Wren",
       "familia": "Troglodytidae",
       "orden": "Passeriformes",
-      "puestoColombia": 470,
+      "puestoColombia": 469,
       "registrosColombia": 7632,
-      "puestoLatam": 1209,
+      "puestoLatam": 1208,
       "regiones": [
         "caribe",
         "orinoquia"
@@ -14760,9 +14729,9 @@
       "nombreEn": "Forest Elaenia",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 471,
+      "puestoColombia": 470,
       "registrosColombia": 7596,
-      "puestoLatam": 670,
+      "puestoLatam": 669,
       "regiones": [
         "orinoquia",
         "andina",
@@ -14793,9 +14762,9 @@
       "nombreEn": "Toucan Barbet",
       "familia": "Semnornithidae",
       "orden": "Piciformes",
-      "puestoColombia": 472,
+      "puestoColombia": 471,
       "registrosColombia": 7595,
-      "puestoLatam": 1112,
+      "puestoLatam": 1111,
       "regiones": [
         "andina",
         "pacifica"
@@ -14824,9 +14793,9 @@
       "nombreEn": "Longuemare's Sunangel",
       "familia": "Trochilidae",
       "orden": "Apodiformes",
-      "puestoColombia": 473,
+      "puestoColombia": 472,
       "registrosColombia": 7459,
-      "puestoLatam": 1960,
+      "puestoLatam": 1959,
       "regiones": [
         "andina",
         "caribe"
@@ -14855,9 +14824,9 @@
       "nombreEn": "Streak-throated Bush Tyrant",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 474,
+      "puestoColombia": 473,
       "registrosColombia": 7416,
-      "puestoLatam": 1282,
+      "puestoLatam": 1281,
       "regiones": [
         "andina",
         "caribe"
@@ -14886,9 +14855,9 @@
       "nombreEn": "Plumbeous Sierra Finch",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 475,
+      "puestoColombia": 474,
       "registrosColombia": 7406,
-      "puestoLatam": 752,
+      "puestoLatam": 751,
       "regiones": [
         "andina"
       ],
@@ -14916,9 +14885,9 @@
       "nombreEn": "Swallow-wing Puffbird",
       "familia": "Bucconidae",
       "orden": "Piciformes",
-      "puestoColombia": 476,
+      "puestoColombia": 475,
       "registrosColombia": 7402,
-      "puestoLatam": 701,
+      "puestoLatam": 700,
       "regiones": [
         "amazonia",
         "orinoquia"
@@ -14947,7 +14916,7 @@
       "nombreEn": "King Vulture",
       "familia": "Cathartidae",
       "orden": "Accipitriformes",
-      "puestoColombia": 477,
+      "puestoColombia": 476,
       "registrosColombia": 7370,
       "puestoLatam": 476,
       "regiones": [
@@ -14981,9 +14950,9 @@
       "nombreEn": "Dull-colored Grassquit",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 478,
+      "puestoColombia": 477,
       "registrosColombia": 7367,
-      "puestoLatam": 1257,
+      "puestoLatam": 1256,
       "regiones": [
         "andina",
         "caribe"
@@ -15012,9 +14981,9 @@
       "nombreEn": "Red-ruffed Fruitcrow",
       "familia": "Cotingidae",
       "orden": "Passeriformes",
-      "puestoColombia": 479,
+      "puestoColombia": 478,
       "registrosColombia": 7356,
-      "puestoLatam": 1301,
+      "puestoLatam": 1300,
       "regiones": [
         "andina"
       ],
@@ -15042,7 +15011,7 @@
       "nombreEn": "Scarlet-rumped Cacique",
       "familia": "Icteridae",
       "orden": "Passeriformes",
-      "puestoColombia": 480,
+      "puestoColombia": 479,
       "registrosColombia": 7354,
       "puestoLatam": 458,
       "regiones": [
@@ -15074,9 +15043,9 @@
       "nombreEn": "Purple-throated Fruitcrow",
       "familia": "Cotingidae",
       "orden": "Passeriformes",
-      "puestoColombia": 481,
+      "puestoColombia": 480,
       "registrosColombia": 7335,
-      "puestoLatam": 680,
+      "puestoLatam": 679,
       "regiones": [
         "andina",
         "amazonia",
@@ -15107,9 +15076,9 @@
       "nombreEn": "Black-capped Hemispingus",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 482,
+      "puestoColombia": 481,
       "registrosColombia": 7335,
-      "puestoLatam": 1524,
+      "puestoLatam": 1523,
       "regiones": [
         "andina"
       ],
@@ -15137,9 +15106,9 @@
       "nombreEn": "Velvet-fronted Euphonia",
       "familia": "Fringillidae",
       "orden": "Passeriformes",
-      "puestoColombia": 483,
-      "registrosColombia": 7325,
-      "puestoLatam": 1995,
+      "puestoColombia": 482,
+      "registrosColombia": 7326,
+      "puestoLatam": 1994,
       "regiones": [
         "andina"
       ],
@@ -15167,9 +15136,9 @@
       "nombreEn": "Spotted Barbtail",
       "familia": "Furnariidae",
       "orden": "Passeriformes",
-      "puestoColombia": 484,
+      "puestoColombia": 483,
       "registrosColombia": 7277,
-      "puestoLatam": 862,
+      "puestoLatam": 861,
       "regiones": [
         "andina",
         "caribe"
@@ -15198,9 +15167,9 @@
       "nombreEn": "Rufous Spinetail",
       "familia": "Furnariidae",
       "orden": "Passeriformes",
-      "puestoColombia": 485,
+      "puestoColombia": 484,
       "registrosColombia": 7265,
-      "puestoLatam": 1452,
+      "puestoLatam": 1451,
       "regiones": [
         "andina",
         "caribe"
@@ -15229,9 +15198,9 @@
       "nombreEn": "Green-fronted Lancebill",
       "familia": "Trochilidae",
       "orden": "Apodiformes",
-      "puestoColombia": 486,
+      "puestoColombia": 485,
       "registrosColombia": 7244,
-      "puestoLatam": 1224,
+      "puestoLatam": 1223,
       "regiones": [
         "andina",
         "amazonia"
@@ -15260,9 +15229,9 @@
       "nombreEn": "Lance-tailed Manakin",
       "familia": "Pipridae",
       "orden": "Passeriformes",
-      "puestoColombia": 487,
+      "puestoColombia": 486,
       "registrosColombia": 7240,
-      "puestoLatam": 1068,
+      "puestoLatam": 1067,
       "regiones": [
         "caribe",
         "andina"
@@ -15291,9 +15260,9 @@
       "nombreEn": "Yellow-tufted Dacnis",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 488,
+      "puestoColombia": 487,
       "registrosColombia": 7195,
-      "puestoLatam": 1528,
+      "puestoLatam": 1527,
       "regiones": [
         "andina"
       ],
@@ -15321,7 +15290,7 @@
       "nombreEn": "Black-chested Buzzard-Eagle",
       "familia": "Accipitridae",
       "orden": "Accipitriformes",
-      "puestoColombia": 489,
+      "puestoColombia": 488,
       "registrosColombia": 7166,
       "puestoLatam": 446,
       "regiones": [
@@ -15351,9 +15320,9 @@
       "nombreEn": "Gray-rumped Swift",
       "familia": "Apodidae",
       "orden": "Apodiformes",
-      "puestoColombia": 490,
-      "registrosColombia": 7157,
-      "puestoLatam": 559,
+      "puestoColombia": 489,
+      "registrosColombia": 7159,
+      "puestoLatam": 558,
       "regiones": [
         "andina",
         "amazonia",
@@ -15384,7 +15353,7 @@
       "nombreEn": "Black Skimmer",
       "familia": "Laridae",
       "orden": "Charadriiformes",
-      "puestoColombia": 491,
+      "puestoColombia": 490,
       "registrosColombia": 7109,
       "puestoLatam": 387,
       "regiones": [
@@ -15417,9 +15386,9 @@
       "nombreEn": "Capped Conebill",
       "familia": "Thraupidae",
       "orden": "Passeriformes",
-      "puestoColombia": 492,
+      "puestoColombia": 491,
       "registrosColombia": 7102,
-      "puestoLatam": 1292,
+      "puestoLatam": 1291,
       "regiones": [
         "andina"
       ],
@@ -15440,36 +15409,6 @@
       "amenaza": null
     },
     {
-      "speciesKey": 2482544,
-      "slug": "urraca-collareja",
-      "cientifico": "Cyanolyca armillata",
-      "nombreEs": "Urraca collareja",
-      "nombreEn": "Black-collared Jay",
-      "familia": "Corvidae",
-      "orden": "Passeriformes",
-      "puestoColombia": 493,
-      "registrosColombia": 7093,
-      "puestoLatam": 1969,
-      "regiones": [
-        "andina"
-      ],
-      "meses": [
-        76,
-        82,
-        75,
-        78,
-        86,
-        100,
-        96,
-        98,
-        81,
-        67,
-        80,
-        77
-      ],
-      "amenaza": null
-    },
-    {
       "speciesKey": 2487964,
       "slug": "eufonia-gorgipurpura",
       "cientifico": "Euphonia chlorotica",
@@ -15477,8 +15416,8 @@
       "nombreEn": "Purple-throated Euphonia",
       "familia": "Fringillidae",
       "orden": "Passeriformes",
-      "puestoColombia": 494,
-      "registrosColombia": 7093,
+      "puestoColombia": 492,
+      "registrosColombia": 7094,
       "puestoLatam": 169,
       "regiones": [
         "orinoquia",
@@ -15501,6 +15440,36 @@
       "amenaza": null
     },
     {
+      "speciesKey": 2482544,
+      "slug": "urraca-collareja",
+      "cientifico": "Cyanolyca armillata",
+      "nombreEs": "Urraca collareja",
+      "nombreEn": "Black-collared Jay",
+      "familia": "Corvidae",
+      "orden": "Passeriformes",
+      "puestoColombia": 493,
+      "registrosColombia": 7093,
+      "puestoLatam": 1968,
+      "regiones": [
+        "andina"
+      ],
+      "meses": [
+        76,
+        82,
+        75,
+        78,
+        86,
+        100,
+        96,
+        98,
+        81,
+        67,
+        80,
+        77
+      ],
+      "amenaza": null
+    },
+    {
       "speciesKey": 2475270,
       "slug": "barranquero-rufo",
       "cientifico": "Baryphthengus martii",
@@ -15508,7 +15477,7 @@
       "nombreEn": "Rufous Motmot",
       "familia": "Momotidae",
       "orden": "Coraciiformes",
-      "puestoColombia": 495,
+      "puestoColombia": 494,
       "registrosColombia": 7091,
       "puestoLatam": 399,
       "regiones": [
@@ -15539,9 +15508,9 @@
       "nombreEn": "Yellow-legged Thrush",
       "familia": "Turdidae",
       "orden": "Passeriformes",
-      "puestoColombia": 496,
+      "puestoColombia": 495,
       "registrosColombia": 7088,
-      "puestoLatam": 711,
+      "puestoLatam": 710,
       "regiones": [
         "caribe",
         "andina"
@@ -15570,9 +15539,9 @@
       "nombreEn": "Golden-plumed Parakeet",
       "familia": "Psittacidae",
       "orden": "Psittaciformes",
-      "puestoColombia": 497,
+      "puestoColombia": 496,
       "registrosColombia": 7067,
-      "puestoLatam": 1833,
+      "puestoLatam": 1832,
       "regiones": [
         "andina"
       ],
@@ -15600,9 +15569,9 @@
       "nombreEn": "Black-tailed Trainbearer",
       "familia": "Trochilidae",
       "orden": "Apodiformes",
-      "puestoColombia": 498,
-      "registrosColombia": 7049,
-      "puestoLatam": 855,
+      "puestoColombia": 497,
+      "registrosColombia": 7051,
+      "puestoLatam": 854,
       "regiones": [
         "andina"
       ],
@@ -15630,7 +15599,7 @@
       "nombreEn": "Green-crowned Brilliant",
       "familia": "Trochilidae",
       "orden": "Apodiformes",
-      "puestoColombia": 499,
+      "puestoColombia": 498,
       "registrosColombia": 7041,
       "puestoLatam": 425,
       "regiones": [
@@ -15660,7 +15629,7 @@
       "nombreEn": "Great Crested Flycatcher",
       "familia": "Tyrannidae",
       "orden": "Passeriformes",
-      "puestoColombia": 500,
+      "puestoColombia": 499,
       "registrosColombia": 7033,
       "puestoLatam": 493,
       "regiones": [
@@ -15680,6 +15649,38 @@
         58,
         100,
         93
+      ],
+      "amenaza": null
+    },
+    {
+      "speciesKey": 2482044,
+      "slug": "zambullidor-chico",
+      "cientifico": "Tachybaptus dominicus",
+      "nombreEs": "Zambullidor chico",
+      "nombreEn": "Least grebe",
+      "familia": "Podicipedidae",
+      "orden": "Podicipediformes",
+      "puestoColombia": 500,
+      "registrosColombia": 7012,
+      "puestoLatam": 357,
+      "regiones": [
+        "andina",
+        "caribe",
+        "orinoquia"
+      ],
+      "meses": [
+        86,
+        100,
+        83,
+        78,
+        75,
+        80,
+        92,
+        93,
+        93,
+        88,
+        86,
+        84
       ],
       "amenaza": null
     }

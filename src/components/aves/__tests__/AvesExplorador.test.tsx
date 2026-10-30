@@ -3,7 +3,8 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import AvesExplorador from '../AvesExplorador'
 import { especie } from '@/lib/aves/__tests__/especie-de-prueba'
 
-vi.mock('next-intl', () => ({ useTranslations: () => (key: string) => key }))
+const idioma = vi.hoisted(() => ({ actual: 'es' }))
+vi.mock('next-intl', () => ({ useTranslations: () => (key: string) => key, useLocale: () => idioma.actual }))
 vi.mock('@/i18n/navigation', () => ({
   Link: ({ href, children }: { href: string; children: React.ReactNode }) => <a href={href}>{children}</a>,
 }))
@@ -18,6 +19,14 @@ const especies = [
 const tarjetas = () => screen.getAllByRole('link')
 
 describe('AvesExplorador', () => {
+  it('en inglés muestra el nombre en inglés en las tarjetas', () => {
+    idioma.actual = 'en'
+    render(<AvesExplorador especies={[especie('x', { nombreEs: 'Sirirí común', nombreEn: 'Tropical Kingbird' })]} />)
+    idioma.actual = 'es'
+    expect(screen.getByText('Tropical Kingbird')).toBeInTheDocument()
+    expect(screen.queryByText('Sirirí común')).not.toBeInTheDocument()
+  })
+
   it('muestra una tarjeta por especie', () => {
     render(<AvesExplorador especies={especies} />)
     expect(tarjetas()).toHaveLength(4)
