@@ -48,3 +48,6 @@ next-env.d.ts
 
 # autorretrato IA: cachés, revisiones y citas privadas
 /.ia-autorretrato/
+
+# Brainstorming y planes (superpowers)
+.superpowers/
