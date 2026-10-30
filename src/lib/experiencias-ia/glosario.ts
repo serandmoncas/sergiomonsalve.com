@@ -381,7 +381,7 @@ export const GLOSARIO: TerminoGlosario[] = [
     definicion: 'Suite de tests que valida que el código generado por IA realmente funciona, no solo que "se ve bien".',
     categoria: 'operacion-evaluacion',
     ejemplo:
-      '9.350 pruebas automatizadas (como las de Jorge Johnson en su proyecto Catalejo) permiten confirmar que un cambio generado por IA no rompió nada, sin tener que revisar manualmente cada línea.',
+      'Miles de pruebas automatizadas permiten confirmar que un cambio generado por IA no rompió nada, sin tener que revisar manualmente cada línea.',
     referencia: {
       titulo: 'Kent Beck — Test-Driven Development: By Example',
       url: 'https://www.goodreads.com/book/show/6408726',

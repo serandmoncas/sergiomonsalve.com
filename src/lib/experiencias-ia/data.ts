@@ -431,7 +431,7 @@ export const SESIONES: EntradaSesion[] = [
     gancho: 'Torres aprobó la certificación Architect Foundations y demostró OpenRouter y OmniRouter.',
     hallazgos: [
       'Sergio mostró sus cápsulas de cultivo automatizadas (ESP32, MQTT, Home Assistant, app móvil).',
-      'Jorge presentó su catálogo de 22 proyectos en punk, incluida una CPU de 16 bits simulada.',
+      'Un integrante mostró un catálogo de 22 proyectos hechos en un lenguaje de programación propio, incluida una CPU de 16 bits simulada.',
       'Diego diseña cohetes con OpenRocket.',
     ],
     asistentes: [
@@ -559,7 +559,7 @@ export const SESIONES: EntradaSesion[] = [
     gancho: 'Diego y Jorge dejan a los agentes trabajando solos toda la noche; Juan Pablo preguntó cómo.',
     hallazgos: [
       'Diego pidió publicar su primer plugin en el marketplace de Anthropic.',
-      'Bellaco, el motor de ajedrez evolutivo de Jorge, lleva dos meses de CPU continua y ya venció a 21 motores del mercado.',
+      'Un motor de ajedrez evolutivo hecho por un integrante lleva dos meses de CPU continua y ya venció a 21 motores del mercado.',
       'Diego convirtió un error repetido de Claude en una regla dura: «ocho veces he fallado porque no lo aplico».',
       'Javier mostró modelos de lenguaje de proteínas para detectar patógenos en alimentos (proyecto con la UE y 14 instituciones).',
       'Juan Pablo usa el control remoto de Claude Code para seguir desarrollando su app de Garmin mientras está en reuniones.',
