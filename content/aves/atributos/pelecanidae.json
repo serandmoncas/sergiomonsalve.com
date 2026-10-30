@@ -1,0 +1,20 @@
+{
+  "5229158": {
+    "tamanoCm": 125,
+    "claseTamano": "gallinazo",
+    "colores": [
+      "cafe",
+      "gris",
+      "blanco"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      50
+    ],
+    "residencia": "residente",
+    "endemica": false
+  }
+}

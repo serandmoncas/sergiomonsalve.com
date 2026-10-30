@@ -1,0 +1,37 @@
+{
+ "5228112": {
+  "tamanoCm": 21,
+  "claseTamano": "mirla",
+  "colores": [
+   "cafe",
+   "blanco",
+   "negro"
+  ],
+  "habitats": [
+   "campo"
+  ],
+  "altitudM": [
+   0,
+   3000
+  ],
+  "residencia": "residente",
+  "endemica": false
+ },
+ "5228067": {
+  "tamanoCm": 26,
+  "claseTamano": "paloma",
+  "colores": [
+   "cafe",
+   "gris"
+  ],
+  "habitats": [
+   "bosque"
+  ],
+  "altitudM": [
+   1600,
+   2700
+  ],
+  "residencia": "residente",
+  "endemica": true
+ }
+}

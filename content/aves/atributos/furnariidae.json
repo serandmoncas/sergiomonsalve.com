@@ -1,0 +1,323 @@
+{
+  "9492770": {
+    "tamanoCm": 17,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "gris"
+    ],
+    "habitats": [
+      "bosque",
+      "campo"
+    ],
+    "altitudM": [
+      900,
+      3200
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2484936": {
+    "tamanoCm": 16,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "gris"
+    ],
+    "habitats": [
+      "campo",
+      "bosque"
+    ],
+    "altitudM": [
+      0,
+      2600
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "5230154": {
+    "tamanoCm": 21,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "blanco"
+    ],
+    "habitats": [
+      "bosque",
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      900
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2486044": {
+    "tamanoCm": 19,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque",
+      "ciudad"
+    ],
+    "altitudM": [
+      0,
+      1700
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2486011": {
+    "tamanoCm": 19,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      1500,
+      3000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2485336": {
+    "tamanoCm": 15,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "rojo"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      700,
+      2300
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2485023": {
+    "tamanoCm": 16,
+    "claseTamano": "mirla",
+    "colores": [
+      "gris",
+      "cafe"
+    ],
+    "habitats": [
+      "bosque",
+      "campo"
+    ],
+    "altitudM": [
+      0,
+      2000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "5230198": {
+    "tamanoCm": 23,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      0,
+      1200
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2485682": {
+    "tamanoCm": 17,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      900,
+      2500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "5230207": {
+    "tamanoCm": 12,
+    "claseTamano": "colibri",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      300,
+      2600
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2485950": {
+    "tamanoCm": 21,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      0,
+      2000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "6100757": {
+    "tamanoCm": 17,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "blanco"
+    ],
+    "habitats": [
+      "campo",
+      "ciudad",
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      1000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2485341": {
+    "tamanoCm": 14,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      0,
+      1800
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2485847": {
+    "tamanoCm": 15,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "blanco"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      1800,
+      3500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2484994": {
+    "tamanoCm": 18,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "gris"
+    ],
+    "habitats": [
+      "bosque",
+      "campo"
+    ],
+    "altitudM": [
+      2200,
+      3200
+    ],
+    "residencia": "residente",
+    "endemica": true
+  },
+  "2486060": {
+    "tamanoCm": 14,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "blanco"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      1000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2485461": {
+    "tamanoCm": 30,
+    "claseTamano": "paloma",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      0,
+      3000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2485279": {
+    "tamanoCm": 14,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      900,
+      3000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2484927": {
+    "tamanoCm": 17,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      2200,
+      3500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  }
+}
