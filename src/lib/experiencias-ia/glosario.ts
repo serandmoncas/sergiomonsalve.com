@@ -1259,7 +1259,7 @@ export const GLOSARIO: TerminoGlosario[] = [
   {
     slug: 'benchmark',
     termino: 'Benchmark',
-    definicion: 'Prueba estandarizada para comparar modelos. Jorge armó el suyo: 19 modelos abiertos, 55 problemas, 11 lenguajes.',
+    definicion: 'Prueba estandarizada para comparar modelos. En el grupo se armó uno propio: 19 modelos abiertos, 55 problemas, 11 lenguajes.',
     categoria: 'operacion-evaluacion',
     sesionOrigen: 12,
   },
