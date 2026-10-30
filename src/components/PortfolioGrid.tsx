@@ -6,6 +6,7 @@ import type { ProjectMeta } from '@/lib/portfolio'
 
 type Labels = {
   viewCase: string
+  visitSite: string
   status: { active: string; archived: string }
   filterAll: string
   filterLabel: string
@@ -78,7 +79,7 @@ export default function PortfolioGrid({
             key={project.slug}
             project={project}
             locale={locale}
-            labels={{ viewCase: labels.viewCase, status: labels.status }}
+            labels={{ viewCase: labels.viewCase, visitSite: labels.visitSite, status: labels.status }}
           />
         ))}
       </div>

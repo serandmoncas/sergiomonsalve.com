@@ -4,6 +4,7 @@ import type { ProjectMeta } from '@/lib/portfolio'
 
 type Labels = {
   viewCase: string
+  visitSite: string
   status: { active: string; archived: string }
 }
 
@@ -17,11 +18,7 @@ export default function ProjectCard({
   labels: Labels
 }) {
   return (
-    <Link
-      href={`/portfolio/${project.slug}`}
-      locale={locale as 'es' | 'en'}
-      className="block border border-border hover:border-accent transition-colors rounded-sm group overflow-hidden"
-    >
+    <div className="relative border border-border hover:border-accent transition-colors rounded-sm group overflow-hidden">
       <div className="relative aspect-video bg-surface">
         {project.image ? (
           <Image
@@ -41,7 +38,14 @@ export default function ProjectCard({
       </div>
       <div className="p-5">
         <h2 className="text-sm font-bold text-text group-hover:text-accent transition-colors mb-1">
-          {project.title}
+          {/* El pseudo-elemento estira el enlace sobre toda la tarjeta */}
+          <Link
+            href={`/portfolio/${project.slug}`}
+            locale={locale as 'es' | 'en'}
+            className="after:absolute after:inset-0"
+          >
+            {project.title}
+          </Link>
         </h2>
         <p className="text-xs text-text-secondary leading-relaxed mb-3">
           {project.description}
@@ -56,10 +60,22 @@ export default function ProjectCard({
             </span>
           ))}
         </div>
-        <span className="font-mono text-xs text-accent group-hover:underline">
-          {labels.viewCase}
-        </span>
+        <div className="flex items-center justify-between gap-4">
+          <span className="font-mono text-xs text-accent group-hover:underline">
+            {labels.viewCase}
+          </span>
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative z-10 font-mono text-xs text-text-secondary border border-border hover:border-accent hover:text-accent transition-colors px-2 py-0.5 rounded-sm"
+            >
+              {labels.visitSite}
+            </a>
+          )}
+        </div>
       </div>
-    </Link>
+    </div>
   )
 }
