@@ -431,7 +431,7 @@ export const SESIONES: EntradaSesion[] = [
     gancho: 'Torres aprobó la certificación Architect Foundations y demostró OpenRouter y OmniRouter.',
     hallazgos: [
       'Sergio mostró sus cápsulas de cultivo automatizadas (ESP32, MQTT, Home Assistant, app móvil).',
-      'Jorge presentó su catálogo de 22 proyectos en punk, incluida una CPU de 16 bits simulada.',
+      'Un integrante mostró un catálogo de 22 proyectos hechos en un lenguaje de programación propio, incluida una CPU de 16 bits simulada.',
       'Diego diseña cohetes con OpenRocket.',
     ],
     asistentes: [
@@ -559,7 +559,7 @@ export const SESIONES: EntradaSesion[] = [
     gancho: 'Diego y Jorge dejan a los agentes trabajando solos toda la noche; Juan Pablo preguntó cómo.',
     hallazgos: [
       'Diego pidió publicar su primer plugin en el marketplace de Anthropic.',
-      'Bellaco, el motor de ajedrez evolutivo de Jorge, lleva dos meses de CPU continua y ya venció a 21 motores del mercado.',
+      'Un motor de ajedrez evolutivo hecho por un integrante lleva dos meses de CPU continua y ya venció a 21 motores del mercado.',
       'Diego convirtió un error repetido de Claude en una regla dura: «ocho veces he fallado porque no lo aplico».',
       'Javier mostró modelos de lenguaje de proteínas para detectar patógenos en alimentos (proyecto con la UE y 14 instituciones).',
       'Juan Pablo usa el control remoto de Claude Code para seguir desarrollando su app de Garmin mientras está en reuniones.',
@@ -775,7 +775,8 @@ export const TEMAS_FUERA: Array<{ tema: string; nota: string }> = [
 
 // Los perfiles generados a partir de transcripciones se retiraron.
 // Cada integrante aparece solo con consentimiento: true y el texto que
-// él o ella misma apruebe. Los `texto` de abajo son borradores por aprobar.
+// él o ella misma apruebe. El repo es público: los borradores no se guardan
+// aquí, así que `texto` queda vacío hasta tener el texto aprobado.
 export const PERSONAS: Persona[] = [
   { nombre: 'Sergio Monsalve', desde: '2026-06-02', texto: '', consentimiento: false },
   { nombre: 'Jorge Johnson', desde: '2026-06-02', texto: '', consentimiento: false },
@@ -793,106 +794,16 @@ export const PERSONAS: Persona[] = [
   { nombre: 'Andrés Pérez', desde: '2026-06-10', texto: '', consentimiento: false },
   { nombre: 'Juan Francisco Cardona McCormick', desde: '2026-07-08', texto: '', consentimiento: false },
   { nombre: 'Rafael David Rincón Bermúdez', desde: '2026-07-15', texto: '', consentimiento: false },
-  {
-    nombre: 'Alejandra Santamaría',
-    desde: '2026-07-15',
-    texto:
-      'Ingeniera biológica, docente, construye una plataforma de matemáticas por competencias.',
-    consentimiento: false,
-  },
+  { nombre: 'Alejandra Santamaría', desde: '2026-07-15', texto: '', consentimiento: false },
   { nombre: 'José Luis Montoya Pareja', desde: '2026-07-14', texto: '', consentimiento: false },
-  {
-    nombre: 'Santiago Osorio',
-    desde: '2026-08-26',
-    texto:
-      'Ingeniero de sistemas de EAFIT. Infraestructura, nube y soporte en su propia empresa, junto con Juan Pablo Duque.',
-    consentimiento: false,
-  },
-  {
-    nombre: 'Carlos Mario Espíndola Roa',
-    desde: '2026-10-14',
-    texto:
-      'Ingeniero ambiental y administrador de empresas. Prepara un proyecto de educación digital y un taller para padres sobre tecnología e IA. Hace doblaje de voz.',
-    consentimiento: false,
-  },
-  {
-    nombre: 'Javier Correa Álvarez',
-    desde: '2026-10-14',
-    texto:
-      'Biólogo, profesor e investigador en bioinformática en EAFIT desde hace 13 años. Trabaja con modelos de lenguaje para proteínas.',
-    consentimiento: false,
-  },
+  { nombre: 'Santiago Osorio', desde: '2026-08-26', texto: '', consentimiento: false },
+  { nombre: 'Carlos Mario Espíndola Roa', desde: '2026-10-14', texto: '', consentimiento: false },
+  { nombre: 'Javier Correa Álvarez', desde: '2026-10-14', texto: '', consentimiento: false },
   { nombre: 'Sebastián Calle', desde: '2026-10-14', texto: '', consentimiento: false },
 ]
 
-// Vista "Taller": cada ficha se publica solo con permiso de su autor. Sin enlaces de descarga.
-export const TALLER: ProyectoTaller[] = [
-  {
-    autor: 'Jorge Johnson',
-    proyecto: 'punk y Metal Toy',
-    descripcion: 'Lenguajes de programación propios hechos con IA; punk genera C y compila con GCC/Clang.',
-    publicar: false,
-  },
-  {
-    autor: 'Jorge Johnson',
-    proyecto: 'Air Glob',
-    descripcion:
-      'Globo terráqueo con capas: satélites, aviones, cables submarinos, sismos, placas tectónicas, gases, naufragios.',
-    publicar: false,
-  },
-  {
-    autor: 'Jorge Johnson',
-    proyecto: 'Catalejo',
-    descripcion: 'Software de astronomía y navegación espacial con cálculo de n cuerpos.',
-    publicar: false,
-  },
-  {
-    autor: 'Jorge Johnson',
-    proyecto: 'Chispa',
-    descripcion:
-      'Simulador de electrónica en protoboard; incluye una CPU de 16 bits que corre programas en un ensamblador propio.',
-    publicar: false,
-  },
-  {
-    autor: 'Jorge Johnson',
-    proyecto: 'Bellaco, Caldo, Topo 3D, Glotis, Ronquera, Sopencos, Brasa',
-    descripcion:
-      'Ajedrez evolutivo; simulación de vida planetaria; vuelo 3D sobre el terreno; modulador de voz; consola de podcast; juego de palabras multijugador por Bluetooth; grabador de ESP32.',
-    publicar: false,
-  },
-  {
-    autor: 'Diego Robledo',
-    proyecto: 'Simulador de cohetes y «Cielo contado»',
-    descripcion:
-      'Lanzamiento simulado de varios cohetes con atmósfera; podcast de astronomía narrado con voz sintética (Eleven Labs).',
-    publicar: false,
-  },
-  {
-    autor: 'Sergio Monsalve',
-    proyecto: 'Cápsulas de cultivo, New Old School, Curioso',
-    descripcion:
-      'Cápsulas de hongos automatizadas con app móvil; colegio virtual open source; espacio de intervenciones cortas con Jorge.',
-    publicar: false,
-  },
-  {
-    autor: 'Juan Pablo Duque',
-    proyecto: 'App de guitarra y carátula Garmin',
-    descripcion: 'Diapasón interactivo con escalas, modos y acordes (React Native/Expo); carátula de reloj en Monkey C.',
-    publicar: false,
-  },
-  {
-    autor: 'Alejandra Santamaría',
-    proyecto: 'Matemáticas para la vida',
-    descripcion: 'App gamificada con diagnóstico por competencias para grados 10 y 11.',
-    publicar: false,
-  },
-  {
-    autor: 'Juan David Torres',
-    proyecto: 'Experimentos de enrutamiento',
-    descripcion: 'OpenRouter, OmniRouter local y LLM Router para bajar costos de modelos.',
-    publicar: false,
-  },
-]
+// Vista "Taller": una ficha entra aquí solo cuando su autor da permiso. Sin enlaces de descarga.
+export const TALLER: ProyectoTaller[] = []
 
 // ---------- Helpers ----------
 

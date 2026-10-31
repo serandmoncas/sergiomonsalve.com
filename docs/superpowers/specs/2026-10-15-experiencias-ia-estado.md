@@ -41,7 +41,7 @@ Si un miércoles no hay sesión, se agrega en `MIERCOLES_SIN_SESION` en `src/lib
 - [ ] Verificar los nombres dudosos de la transcripción: el clasificador "Jeff"/"JEP" y los orquestadores Orca y Herder.
 
 ### Puede hacerlo Claude
-- [ ] **Privacidad del repo (aplazado por Sergio).** El repo es público y conserva datos que la página ya no muestra: perfiles generados a partir de transcripciones en los anexos y el plan de julio, y borradores y fichas sin permiso en `data.ts`. Opciones: (A) quitarlos del código, (B) reescribir el historial, (C) volver el repo privado. Recomendación: A + C.
+- [ ] **Privacidad del repo.** (A) hecho el 2026-10-29: se quitaron del código las fichas de integrantes de los anexos y el plan de julio, los borradores de `texto` y las fichas del Taller sin permiso; la skill `nueva-sesion` ya no guarda borradores en el repo. Falta (C): volver el repo privado en GitHub, porque el historial de git conserva esos datos.
 - [ ] Referencias externas verificadas para los términos más importantes del glosario (la spec exige verificar cada URL antes de citarla).
 
 ### Próxima sesión del grupo

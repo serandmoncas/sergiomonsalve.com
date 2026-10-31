@@ -38,7 +38,7 @@ Muéstrale a Sergio una propuesta con esta forma exacta, y espera su aprobación
    - `nuevos`: quienes se presentaron por primera vez.
    - `enlaces: []` salvo que se compartiera un enlace en la sesión.
 2. **Temas** — solo propuestas de tema para el grupo. `propone` es quien formuló la idea en sus palabras; si alguien la atribuye a otro ("la idea de Torres"), anota ambos en las dudas.
-3. **Personas** — cada persona nueva entra con `consentimiento: false` y un `texto` borrador tomado solo de lo que dijo de sí misma.
+3. **Personas** — cada persona nueva entra con `texto: ''` y `consentimiento: false`. El borrador de su texto, tomado solo de lo que dijo de sí misma, va únicamente en la propuesta a Sergio: el repo es público y los borradores no se guardan en él.
 4. **Glosario** — solo conceptos que no existan ya (busca por slug y por nombre), con `sesionOrigen: n`.
 5. **Dudas** — todo lo que no pudiste resolver con la transcripción.
 
@@ -52,6 +52,7 @@ Muéstrale a Sergio una propuesta con esta forma exacta, y espera su aprobación
 | Nombre de herramienta dudoso ("Jeff o JEP") | Describirla sin nombre y anotarla en dudas |
 | Dos nombres que podrían ser la misma persona | No duplicar: preguntar |
 | `consentimiento: true` o `publicar: true` | Solo con un sí explícito de esa persona, que Sergio confirme |
+| Proyecto mostrado en sesión sin permiso del autor | Fuera de `TALLER`: proponlo a Sergio para que pida permiso; entra solo con `publicar: true` |
 
 ## Paso 3 — Al aprobar
 
