@@ -590,7 +590,15 @@ export const SESIONES: EntradaSesion[] = [
       'Javier: con la IA, las revistas científicas exigen más rigor y datos mejor curados.',
       'Alejandra propuso agendar ponencias y transmitir por YouTube; Jorge señaló que lo que mostramos son demos frente al software empresarial.',
     ],
-    asistentes: ['Sergio', 'Jorge', 'Juan Pablo', 'Torres', 'Alejandra Santamaría', 'Javier Correa Álvarez'],
+    asistentes: [
+      'Sergio',
+      'Jorge',
+      'Juan Pablo',
+      'Torres',
+      'Alejandra Santamaría',
+      'Javier Correa Álvarez',
+      'Verónica Vélez',
+    ],
     enlaces: [],
   },
 ]
