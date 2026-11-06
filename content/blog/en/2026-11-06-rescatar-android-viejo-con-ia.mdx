@@ -1,0 +1,85 @@
+---
+title: "Rescuing an old Android with an AI agent: diagnosis, backup and cleanup in one afternoon"
+date: "2026-11-06"
+description: "I plugged a forgotten Redmi Note 7 into my Mac and asked Claude Code to diagnose it. The result: 1.7 GB backed up and verified, 54 fewer apps, a plan for Android 17, and a list of needs a lot of people keep in a drawer."
+tags: ["ai", "android", "claude", "recycling", "tutorial"]
+---
+
+I had a 2019 Redmi Note 7 sitting in a drawer. Like most old phones, it was unused, but it still held photos, voice recordings and logged-in sessions for accounts I barely remembered. One morning I plugged it into my Mac and wrote Claude Code a single sentence: *"I have an old Android I'd like to rescue. Can I connect it and have you help me diagnose it and see if I can use it?"*
+
+This post is about what happened over the next few hours. I'm sharing it as an example of what you can do with an agent in the terminal and, above all, as a list of needs that aren't only mine.
+
+A disclaimer, as always: **this post is co-authored.** Claude drafted it from the session, and I reviewed it and decided what gets published.
+
+## The tool: adb
+
+Everything went through `adb` (Android Debug Bridge), Android's official tool for talking to a phone over USB. It's neither new nor secret, but using it means knowing dozens of commands and reading cryptic output. That's what I delegated: I described what I wanted, and the agent wrote, ran and interpreted the commands.
+
+The only thing I had to do on the phone was turn on **USB debugging**. On Xiaomi it's hidden: you tap "MIUI version" seven times and then look under "Additional settings". The agent recognized from the USB identifier that it was a Xiaomi with a Snapdragon 660 before I mentioned the brand, and gave me instructions for that specific skin.
+
+## The diagnosis
+
+Once the phone was authorized, a single block of read-only commands gave this picture:
+
+| Area | Result |
+|---|---|
+| Battery | 85–95% health (3,413–3,969 of 4,000 mAh) |
+| Storage | 19 of 50 GB used |
+| RAM | 4 GB, maxed out and swapping |
+| Processor | Load of 17.9: saturated |
+| **Security** | **Android 9, last patch January 2020** |
+| Accounts | Signed in to 7 services, including social networks and banks |
+
+The interesting part wasn't the table, it was the interpretation. A load of 17.9 looked like a dying processor, but the agent checked the processes and found the cause: the Play Store was updating two years of apps at once, while Instagram, Messenger and Facebook woke up at the same time. It wasn't the hardware. The battery, which I'd written off, was fine. The serious problem was something else: **almost seven years without security patches, with banking apps installed.**
+
+## The backup: what's worth keeping and what isn't
+
+Shared storage held 8.3 GB. The obvious question was "how big is the backup?", and the useful answer was a different one: **what's worth keeping is 1.7 GB.**
+
+- **Yes:** 33 photos and 2 videos from 2019–2020, 9 voice recordings, a few PDF books and screenshots.
+- **No:** 3.2 GB of Spotify, YouTube and Audible cache (DRM-protected, useless outside the app), 929 MB of downloaded Domestika courses and 2.3 GB of game data that downloads again.
+
+The copy was made with `adb pull -a`, which keeps the original dates. Then every file was checked with its **md5 hash, comparing phone and Mac**: 72 of 72 identical. Only after that did anything get deleted from the phone. Counting files isn't enough. The hash is what catches a video that got cut off by a loose cable.
+
+## The cleanup
+
+I asked the agent to list the 68 installed apps and group them with a recommendation. It didn't uninstall anything until I confirmed each group:
+
+- **Security risk:** banks, loans and social networks signed in on an unpatched Android.
+- **Obsolete:** Inbox and Hangouts, which Google already shut down, plus MIUI filler.
+- **Dead weight:** Call of Duty alone took 2 GB.
+- **Depends on use:** music, reading, and the infrared remote, which this phone does have.
+
+In the end 26 of 68 apps remained. On top of that, 12 system apps that can't be removed from Settings went away: MIUI's ads, telemetry, and **three hidden Facebook services that kept running even though Facebook was no longer installed**. Used storage dropped from 40% to 24%, and processor load from 17.9 to around 6.
+
+There was an honest mistake along the way. The animations couldn't be sped up over `adb`, because MIUI requires a second debugging permission. The script printed "✅ 0.5x" even though the change had failed. We fixed it so it reads the value back from the phone after writing it and only reports success if it's true. It's a small lesson that applies to any automation: **check the result, don't assume it.**
+
+## The wall: a blank Play Store
+
+Then I wanted to install an app and update WhatsApp, which was stuck on a 2020 version. The Play Store opened blank. The agent took a screenshot of the phone to see what I was seeing, checked the system log and found the cause: that morning the Play Store had updated itself to the 2026 version, but **Google Play Services was still on the February 2020 one**. That combination doesn't work.
+
+At that point I decided to stop fighting an Android 9. The agent looked up which community ROMs are still active for this model and compared three. The recommendation was **crDroid 13, with Android 17**: it's on the official list and has an October 2026 build. The path goes through unlocking the bootloader with Xiaomi's tool, which imposes a seven-day wait and requires a SIM with mobile data. I didn't have a SIM, so the project is on pause, with two calendar events and every step written down.
+
+## The needs I found
+
+What interests me most about this session isn't my phone. It's that every step is a need a lot of people have, and almost nobody solves:
+
+1. **"I don't know what's wrong with it."** People throw away phones that only needed a few processes closed or a new battery, and keep using others that are a risk. A readable, one-command diagnosis is already a service.
+2. **"I don't know what to keep."** Of 8.3 GB, 1.7 were worth it. Telling photos apart from DRM caches isn't obvious to anyone who doesn't know what `Android/obb` is.
+3. **"I don't know if the backup worked."** Hash verification should be the standard, not an extra.
+4. **"I don't know which sessions I left open."** A forgotten phone with a banking app and seven open accounts is a security problem nobody sees.
+5. **"I'm scared to wipe it."** Before resetting, you have to sign out of Google and Xiaomi, or anti-theft protection locks the phone. Almost nobody knows until it happens to them.
+6. **"It works, but it doesn't get updates anymore."** That's what community ROMs are for, but the path (bootloader, firmware, recovery) is intimidating. Step-by-step guidance is worth a lot there.
+7. **"What can I use it for?"** A phone with 90% battery and an infrared blaster works as a security camera, a remote control or a sensor for a grow setup. Reusing it beats throwing it away.
+
+They all have the same shape: the technical knowledge exists and is public, but it's scattered across forums, commands and hidden menus. An agent gathers it and turns it into decisions a person can actually make: "do I delete this?", "do I uninstall this group?", "Android 17, or leave it as is?".
+
+## What I did and what the AI did
+
+I wrote a dozen short messages: "check it", "go ahead with 1", "A, B and C", "leave it". The agent ran about 40 commands, read screenshots, researched ROMs, created two calendar events and drafted this post. I made every decision that couldn't be undone: what to delete, what to uninstall and which path to take. Whenever something was irreversible, the agent stopped to ask.
+
+It's the same pattern as always: **delegate the execution, keep the judgment.** The difference is that this time there was no code involved, just an old phone in a drawer.
+
+Once I get the SIM and the phone is running Android 17, I'll tell you how it ended.
+
+If you'd like to learn to work like this with agents, that's what I do in my [courses](/en/cursos).
