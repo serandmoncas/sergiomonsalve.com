@@ -614,12 +614,31 @@ export const SESIONES: EntradaSesion[] = [
     enlaces: [],
   },
   {
+    n: 23,
+    fecha: '2026-11-04',
+    fechaLarga: '4 de noviembre de 2026',
+    titulo: '¿Es elitista la IA?',
+    gancho: 'Jorge construyó una baliza Morse en una noche con Claude Code y luego hizo la pregunta incómoda: ¿es elitista la IA?',
+    hallazgos: [
+      'Jorge armó con Claude Code una baliza Morse con un ESP32 y una pantalla OLED, y terminó una app aparte, «Baliza», solo para enviar mensajes y ajustar la velocidad.',
+      'Jorge creó «Token Bike», un destilador para analizar su consumo de tokens (caché, contexto por vuelta, tokens semanales); Diego hace un análisis parecido cada semana para ajustar su harness.',
+      'Jorge preguntó si suscripciones de 100 a 200 dólares hacen elitista la IA; Juan Pablo especuló con un ingreso básico universal pagado en tokens y Sergio respondió que ninguna tecnología nueva ha llegado igual a todos.',
+      'Jorge y Sergio contaron el formato de un grupo nuevo: intervenciones cortas de unos 3 minutos para contar algo que uno aprendió; Sergio lo conectó con la Open Source School, una escuela abierta donde cada quien da su clase.',
+      'Juan Pablo terminó el primer ciclo de su app de guitarra y entró a la prueba cerrada de Play Store; Jorge: una app publicada en la tienda es mejor portafolio que un repositorio en GitHub.',
+    ],
+    asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'Alejandra Santamaría', 'Carlos Mario Espíndola'],
+    enlaces: [],
+  },
+  {
     fecha: '2026-11-11',
     fechaLarga: '11 de noviembre de 2026',
     estado: 'pendiente',
     agenda: [
-      'Sesiones de retroalimentación sobre los proyectos de cada uno',
       'Lo no técnico: cómo le hablamos a la máquina (enojarse, dar las gracias, tono)',
+      '¿Es elitista la IA? Costo y acceso a las herramientas',
+      'Grupo de intervenciones cortas (3 minutos) para contar algo que uno aprendió',
+      'Open Source School: una escuela abierta donde cada quien da su clase',
+      'Espacios temáticos en otros días de la semana (negocio, estudio, avances de proyectos)',
       'Reto: app de identificación de hongos',
       'Serie piloto limitada con miniponencias e invitados',
       'Agenda de ponencias y transmisión por YouTube',
@@ -629,6 +648,36 @@ export const SESIONES: EntradaSesion[] = [
 
 export const TEMAS: Tema[] = [
   // ---------- Propuestos entre agosto y octubre ----------
+  {
+    tema: '¿Es elitista la IA? Costo y acceso a las herramientas',
+    propone: 'Jorge Johnson',
+    surgio: '2026-11-04',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Grupo de intervenciones cortas (3 minutos) para contar algo que uno aprendió',
+    propone: 'Jorge Johnson',
+    surgio: '2026-11-04',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Open Source School: una escuela abierta donde cada quien da su clase',
+    propone: 'Sergio Monsalve',
+    surgio: '2026-11-04',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Espacios temáticos en otros días de la semana (negocio, estudio, avances de proyectos)',
+    propone: 'Carlos Mario Espíndola Roa',
+    surgio: '2026-11-04',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'App que lea Morse por destellos con la cámara del celular, de montaña a montaña',
+    propone: 'Sergio Monsalve',
+    surgio: '2026-11-04',
+    estado: 'propuesto',
+  },
   {
     tema: 'Lo no técnico: cómo le hablamos a la máquina (enojarse, dar las gracias, tono)',
     propone: 'Jorge Johnson',
