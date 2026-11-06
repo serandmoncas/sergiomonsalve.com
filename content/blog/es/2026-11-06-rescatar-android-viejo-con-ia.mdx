@@ -1,0 +1,85 @@
+---
+title: "Rescatar un Android viejo con un agente de IA: diagnóstico, respaldo y limpieza en una tarde"
+date: "2026-11-06"
+description: "Conecté un Redmi Note 7 olvidado a mi Mac y le pedí a Claude Code que lo diagnosticara. Salieron 1,7 GB respaldados y verificados, 54 apps menos, un plan para Android 17 y una lista de necesidades que mucha gente tiene en un cajón."
+tags: ["ia", "android", "claude", "reciclaje", "tutorial"]
+---
+
+Tenía un Redmi Note 7 de 2019 guardado en un cajón. Como casi todos los teléfonos viejos, ahí estaba: sin uso, pero con fotos, grabaciones y sesiones abiertas de cuentas que ya ni recordaba. Una mañana lo conecté al Mac y le escribí a Claude Code una sola frase: *"tengo un android viejo que quisiera rescatar, ¿será que lo puedo conectar y me ayudas a hacer un diagnóstico y ver si lo puedo usar?"*
+
+Este post cuenta lo que pasó en las horas siguientes. Lo comparto como ejemplo de lo que se puede hacer con un agente en la terminal y, sobre todo, como una lista de necesidades que no son solo mías.
+
+Una aclaración, como siempre: **este post es coautoría.** Claude redactó el borrador a partir de la sesión y yo lo revisé y decidí qué se publica.
+
+## La herramienta: adb
+
+Todo pasó por `adb` (Android Debug Bridge), la herramienta oficial de Android para hablar con un teléfono por USB. No es nueva ni secreta, pero usarla exige saber decenas de comandos y leer salidas crípticas. Eso fue lo que delegué: yo describía lo que quería y el agente escribía, corría e interpretaba los comandos.
+
+Lo único que tuve que hacer en el teléfono fue activar la **depuración USB**. En Xiaomi está escondida: hay que tocar siete veces "Versión de MIUI" y después buscar en "Ajustes adicionales". El agente detectó por el identificador USB que era un Xiaomi con Snapdragon 660 antes de que yo le dijera la marca, y me dio las instrucciones para esa capa de personalización concreta.
+
+## El diagnóstico
+
+Con el teléfono autorizado, un solo bloque de comandos, todos de solo lectura, dio esta foto:
+
+| Área | Resultado |
+|---|---|
+| Batería | 85–95 % de salud (3.413–3.969 mAh de 4.000) |
+| Almacenamiento | 19 GB usados de 50 |
+| RAM | 4 GB, al límite y usando swap |
+| Procesador | Carga de 17,9: saturado |
+| **Seguridad** | **Android 9, último parche de enero de 2020** |
+| Cuentas | Sesión abierta en 7 servicios, entre ellos redes sociales y bancos |
+
+Lo interesante no fue la tabla, sino la interpretación. La carga de 17,9 parecía un procesador agonizando, pero el agente miró los procesos y encontró la causa: la Play Store estaba actualizando dos años de apps de golpe, y a la vez despertaban Instagram, Messenger y Facebook. No era el hardware. La batería, que era lo que yo daba por perdido, estaba bien. Lo grave era otra cosa: **casi siete años sin parches de seguridad, con apps bancarias instaladas.**
+
+## El respaldo: lo que vale la pena y lo que no
+
+El almacenamiento compartido pesaba 8,3 GB. La pregunta obvia era "¿cuánto ocupa la copia?", y la respuesta útil era otra: **lo que vale la pena son 1,7 GB.**
+
+- **Sí:** 33 fotos y 2 videos de 2019–2020, 9 grabaciones de voz, algunos libros en PDF y capturas.
+- **No:** 3,2 GB de caché de Spotify, YouTube y Audible (con DRM, no funcionan fuera de la app), 929 MB de cursos de Domestika descargados y 2,3 GB de datos de juegos que se vuelven a descargar.
+
+La copia se hizo con `adb pull -a`, que conserva las fechas originales. Después, cada archivo se verificó con su **huella md5 comparando teléfono y Mac**: 72 de 72 idénticos. Solo entonces se borró del teléfono. Contar archivos no basta. La huella es lo que detecta un video que llegó cortado por un cable flojo.
+
+## La limpieza
+
+Le pedí al agente la lista de las 68 apps instaladas y que las agrupara con una recomendación. No desinstaló nada sin que yo confirmara grupo por grupo:
+
+- **Riesgo de seguridad:** bancos, préstamos y redes sociales con sesión abierta en un Android sin parches.
+- **Obsoletas:** Inbox y Hangouts, que Google ya cerró, más relleno de MIUI.
+- **Peso muerto:** Call of Duty ocupaba 2 GB él solo.
+- **Depende del uso:** música, lectura y el control remoto infrarrojo, que este teléfono sí tiene.
+
+Al final quedaron 26 apps de 68. Además se quitaron 12 apps del sistema que no se pueden borrar desde Ajustes: los anuncios de MIUI, la telemetría y **tres servicios ocultos de Facebook que seguían corriendo aunque Facebook ya no estaba instalado**. El espacio usado bajó del 40 % al 24 %, y la carga del procesador, de 17,9 a unos 6.
+
+Hubo un error honesto en el camino. Las animaciones no se pudieron acelerar por `adb`, porque MIUI exige un segundo permiso de depuración. El script decía "✅ 0.5x" aunque el cambio había fallado. Lo corregimos para que vuelva a leer el valor del teléfono después de escribirlo y solo diga que funcionó si es verdad. Es una lección pequeña que aplica a cualquier automatización: **comprobar el resultado, no suponerlo.**
+
+## El muro: la Play Store en blanco
+
+Después quise instalar una app y actualizar WhatsApp, que se había quedado en una versión de 2020. La Play Store abría en blanco. El agente le tomó una captura a la pantalla del teléfono para ver lo mismo que yo, revisó el registro del sistema y encontró la causa: esa mañana la Play Store se había actualizado sola a la versión de 2026, pero **Google Play Services seguía en la de febrero de 2020**. Esa combinación no funciona.
+
+En ese punto decidí no pelear más con un Android 9. El agente buscó qué ROMs comunitarias siguen activas para este modelo y comparó tres. La recomendación fue **crDroid 13, con Android 17**: está en la lista oficial y tiene una versión de octubre de 2026. El camino pasa por desbloquear el bootloader con la herramienta de Xiaomi, que impone una espera de siete días y pide una SIM con datos móviles. Yo no tenía SIM, así que el proyecto quedó en pausa con dos eventos en el calendario y todos los pasos anotados.
+
+## Las necesidades que encontré
+
+Lo que más me interesa de esta sesión no es mi teléfono. Es que cada paso es una necesidad que tiene mucha gente, y casi nadie la resuelve:
+
+1. **"No sé qué tiene."** La gente tira teléfonos que solo necesitaban cerrar procesos o cambiar la batería, y sigue usando otros que son un riesgo. Un diagnóstico legible, de un solo comando, ya es un servicio.
+2. **"No sé qué guardar."** De 8,3 GB, 1,7 valían la pena. Distinguir fotos de cachés con DRM no es obvio para nadie que no sepa qué es `Android/obb`.
+3. **"No sé si la copia quedó bien."** La verificación con huellas debería ser el estándar, no un extra.
+4. **"No sé qué sesiones dejé abiertas."** Un teléfono olvidado con la app del banco y siete cuentas abiertas es un problema de seguridad que nadie ve.
+5. **"Me da miedo borrarlo."** Antes de restablecerlo hay que cerrar sesión en Google y Xiaomi, o el teléfono queda bloqueado por la protección antirrobo. Casi nadie lo sabe hasta que le pasa.
+6. **"Funciona, pero ya no le llegan actualizaciones."** Para eso existen las ROMs comunitarias, pero el camino (bootloader, firmware, recovery) asusta. Ahí un acompañamiento paso a paso vale mucho.
+7. **"¿Para qué lo uso?"** Un teléfono con 90 % de batería y emisor infrarrojo sirve de cámara de vigilancia, de control remoto o de sensor para un cultivo. Reutilizarlo es mejor que tirarlo.
+
+Todas tienen la misma forma: el conocimiento técnico existe y es público, pero está repartido en foros, comandos y menús escondidos. Un agente lo junta y lo traduce a decisiones que una persona sí puede tomar: "¿borro esto?", "¿desinstalo este grupo?", "¿Android 17 o lo dejo así?".
+
+## Lo que hice yo y lo que hizo la IA
+
+Escribí una docena de mensajes cortos: "revisa", "adelante con 1", "A, B y C", "déjala". El agente corrió unos 40 comandos, leyó capturas de pantalla, buscó ROMs, creó dos eventos de calendario y redactó este borrador. Yo decidí todo lo que no tenía vuelta atrás: qué borrar, qué desinstalar y qué camino seguir. Cada vez que algo era irreversible, el agente se detuvo a preguntar.
+
+Es el mismo patrón de siempre: **delegar la ejecución y quedarse con el criterio.** La diferencia es que esta vez no hubo código de por medio, sino un teléfono viejo en un cajón.
+
+Cuando consiga la SIM y el teléfono tenga Android 17, cuento cómo terminó.
+
+Si te interesa aprender a trabajar así con agentes, eso es lo que hago en los [cursos](/es/cursos).
