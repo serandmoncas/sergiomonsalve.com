@@ -1,0 +1,153 @@
+---
+title: "La vigilancia virtual ahorra, pero no llega: lo que encontré investigando la seguridad con IA en Colombia"
+date: "2026-11-06"
+description: "Investigué tecnología, evidencia, regulación, costos y negocio de la vigilancia privada sin guardas presenciales en Colombia. La IA detecta y verifica, pero alguien tiene que llegar."
+tags: ["investigacion", "seguridad", "ia", "colombia", "iot"]
+---
+
+Llevo un tiempo buscando aplicaciones que pueda construir con inteligencia artificial, y quería que juntaran varias de mis pasiones y hobbies con algunas necesidades nuevas. Así llegué a una pregunta concreta: ¿puedo hacer mis propias cámaras de seguridad con componentes electrónicos que yo mismo consiga? Buscando, encontré que el ESP32, con distintos tipos de cámaras y otros sensores, me podía servir para eso.
+
+Esa pregunta pequeña me llevó a una más grande. En Colombia, quitar el guarda de la portería se volvió una conversación de asamblea. Un puesto de vigilancia 24 horas cuesta hoy cerca de $19,6 millones al mes, y del otro lado aparecen ofertas de "portería virtual", cámaras con IA y centrales remotas por una fracción de eso. Quise saber qué hay detrás de esas ofertas: qué tecnología es real, qué dice la evidencia, qué permite la ley, cuánto cuesta de verdad y si hay un negocio ahí.
+
+Este post resume esa investigación. Antes de seguir, dos aclaraciones.
+
+**Cómo la hice.** Trabajé con Claude Code como coordinador de cinco líneas de investigación en paralelo: tecnología, evidencia de eficacia, regulación colombiana, mercado y negocio, e implementación por tipo de sitio. Cada línea dejó notas con sus fuentes y una síntesis las cruzó en un informe. Yo definí el alcance (vigilancia privada, foco en Colombia y Antioquia), revisé el resultado y decidí qué se publica.
+
+**Es coautoría.** Claude escribió el borrador a partir de ese informe y yo lo edité. Tampoco es asesoría legal ni una recomendación de proveedores. Al final hay una sección de límites que vale la pena leer antes de usar cualquier cifra.
+
+## Lo que se compra no es una cámara
+
+"Guardia virtual" es un término comercial. No tiene definición normativa. Lo que se vende en realidad es una cadena:
+
+1. **Detectar:** cámaras y sensores en el sitio.
+2. **Filtrar:** una IA que descarta sombras, animales y lluvia.
+3. **Verificar:** un operador remoto que mira el video.
+4. **Disuadir:** voz por parlante, luz o sirena.
+5. **Llegar:** alguien que se presenta físicamente.
+
+La tecnología cubre muy bien los cuatro primeros eslabones. El quinto no lo cubre ninguna cámara: hay que contratarlo u organizarlo aparte, con una reacción motorizada, la policía o los vecinos. Esa es la idea que más se repite en toda la investigación.
+
+En Colombia hay además una confusión que sale cara: portería no es vigilancia. Un blog del propio sector admite que la portería virtual controla quién entra, pero no vigila el interior, no detecta a alguien que salta la cerca y no atiende una emergencia médica ([Appmosfera](https://appmosfera.com/blog/alternativas-vigilancia-tradicional-conjuntos-residenciales)). Hay proveedores que lo declaran sin rodeos: su producto no es vigilancia ([Portea](https://www.portea.com.co/blog/porteria-remota-conjuntos-residenciales-colombia/)).
+
+## Qué tan madura está la tecnología
+
+El cambio de 2025-2026 es que los modelos de visión y lenguaje llegaron a las cámaras y a los grabadores. Hikvision y Dahua ya los incorporan, y Verkada dice hacer 95% de la inferencia en la cámara ([Memoori](https://memoori.com/video-surveillance-market-leaders-2026/)). Lo que llaman IA "agéntica" automatiza pasos acotados: priorizar alertas, describir lo que pasa, redactar el caso, avisar por voz. No encontré ningún producto que decida la respuesta física sin reglas fijadas por una persona, ni pruebas independientes de estos modelos.
+
+Esta clasificación es mía, a partir de la evidencia revisada:
+
+| Tecnología | Madurez | Por qué |
+|---|---|---|
+| Cámaras IP con analítica en el dispositivo | Madura | Muchos fabricantes, ecosistemas abiertos, precios bajos |
+| Filtro de falsas alarmas con IA en la central | Madura, pero sin medir | Integrado desde 2020-2022; las reducciones de 90-95% las reporta el vendedor |
+| Radar y cámaras térmicas perimetrales | Madura | Productos de catálogo, útiles en sitios grandes |
+| Búsqueda en lenguaje natural y voz autónoma | Emergente | Se vende sin métricas públicas |
+| Drones en estación | Emergente | Hardware serio, pero caro y con reglas de vuelo exigentes |
+| Robots de patrulla | Nicho | Knightscope tuvo 7% de margen bruto en el segundo trimestre de 2026 |
+| Reemplazo total del guarda por IA | Promesa | No encontré ningún estudio que lo sustente |
+
+Un dato técnico decide casi todo en sitios con mala conectividad: no hay que transmitir video continuo. Una cámara a 2 Mbps consume unos 648 GB al mes. Si solo se envían clips y alertas, un sitio puede pasar de casi 3 TB a unos 8 GB mensuales, según el ejemplo de un vendedor ([Spot AI](https://www.spot.ai/blog/solar-cellular-security-trailer-guide)). Por eso la analítica en el borde importa tanto en una finca.
+
+## Lo que dice la evidencia (y lo que no)
+
+**No existe ningún estudio independiente que compare el monitoreo remoto con un guarda en un sitio privado.** Esa es la conclusión más importante y la menos citada. Casi todas las cifras de eficacia y ahorro que circulan vienen de vendedores o de gremios.
+
+Lo que sí hay es evidencia sobre cámaras, sobre todo públicas:
+
+- El metaanálisis de referencia (Piza, Welsh, Farrington y Thomas, 2019) concluye que el CCTV reduce el delito de forma significativa pero modesta, más en parqueaderos y delitos contra el patrimonio, más con monitoreo activo, y recomienda no usarlo como única medida ([OJP](https://www.ojp.gov/ncjrs/virtual-library/abstracts/cctv-surveillance-crime-prevention-40-year-systematic-review-meta)). La cifra de 13% que se suele citar viene de prensa sectorial que resume el estudio.
+- En Medellín, cámaras públicas instaladas de forma casi aleatoria redujeron delitos por disuasión, sin desplazarlos a otras zonas ([Maastricht](https://cris.maastrichtuniversity.nl/en/publications/the-deterrent-effect-of-surveillance-cameras-on-crime/)).
+- En Bogotá, una evaluación de la propia Secretaría de Seguridad sobre 2.378 cámaras encontró 4% de reducción, debilitada con el tiempo. Las cámaras crecieron 1.203% en cuatro años sin más personal de monitoreo ([SSCJ](https://sistemas002.sdp.gov.co/sites/default/files/impacto_videovigilancia_en_bogota.pdf)).
+- En Newark se probó lo contrario: a las cámaras les sumaron un operador y dos patrulleros dedicados, y bajaron la violencia y el desorden ([CEBCP](https://cebcp.org/evidence-based-policing/the-matrix/micro-places/micro-places-piza-et-al-2015/)).
+
+La lectura que hago de Bogotá y Newark juntos: la evidencia no castiga a la cámara, castiga los eslabones que faltan. Más cámaras sin nadie que mire ni nadie que llegue rinden poco.
+
+El guarda tampoco sale tan bien parado como dice el gremio. En un ensayo en 41 estaciones de tren inglesas, los guardas desarmados no lograron un efecto estadísticamente significativo en el conjunto de delitos ([PLOS ONE](https://pmc.ncbi.nlm.nih.gov/articles/PMC5718484/)). Ninguna de las dos opciones tiene efectos enormes.
+
+Donde la evidencia es más clara es en la verificación. En Estados Unidos, entre 94% y 98% de las llamadas a la policía por alarma son falsas, y exigir verificación visual antes de despachar redujo esas llamadas cerca de 90% ([POP Center](https://popcenter.asu.edu/sites/default/files/problems/PDFs/false_alarms_2nded.pdf)). Ojo: eso mide llamadas, no delitos prevenidos, y son datos de 1998-2006. Lo que no encontré es una medición independiente de cuánto reduce la IA las falsas alarmas perimetrales.
+
+## Cómo falla
+
+El guarda falla de forma local: se duerme, rota, puede ser sobornado. La plataforma falla de forma correlacionada, y eso cambia el riesgo:
+
+- **Señal y energía.** En Los Ángeles, bandas usaron inhibidores de Wi-Fi y cortes de luz antes de entrar a casas ([Tom's Hardware](https://www.tomshardware.com/networking/lapd-warn-residents-after-spate-of-wi-fi-jammer-cloaked-burglaries-police-share-a-security-check-list)).
+- **La nube.** La FTC alega que un atacante accedió a más de 150.000 cámaras en vivo de Verkada; la empresa sostiene que fueron muchas menos ([FTC](https://www.ftc.gov/node/86202)).
+- **Equipos sin actualizar.** Más de 80.000 cámaras Hikvision seguían sin parche frente a una falla crítica en 2022 ([SecurityWeek](https://www.securityweek.com/over-80000-unpatched-hikvision-cameras-exposed-takeover)).
+- **La IA que acusa.** Rite Aid usó reconocimiento facial con miles de falsos positivos; empleados llegaron a requisar a una niña de 11 años, y la FTC le prohibió esa tecnología por cinco años ([CBS News](https://www.cbsnews.com/news/ai-rite-aid-customers-falsely-identified-as-shoplifters-ftc)). El daño vino de actuar contra personas por una alerta sin verificar.
+
+Lo crítico, otra vez, es a quién llega la alerta y qué pasa después.
+
+## Lo que dice la ley en Colombia
+
+Esto es un panorama, no asesoría. Las normas las leímos en compilaciones de terceros porque el sitio de Supervigilancia no abrió, y hay puntos que solo puede resolver un abogado del sector.
+
+**La IA no es una modalidad nueva: es un medio tecnológico dentro de la vigilancia licenciada.** El Decreto Ley 356 de 1994 ya incluye centrales de monitoreo, circuitos cerrados y controles perimetrales dentro de la empresa de vigilancia sin armas. Esa licencia exige, entre otras cosas, un capital de 500 SMLMV (unos $875 millones) y una póliza de 400 SMLMV ([Decreto 356](https://normativa.colpensiones.gov.co/colpensiones/compilacion/docs/decreto_0356_1994.htm)). Y quien contrata con una empresa sin licencia también puede ser multado.
+
+La frontera práctica entre vender tecnología y prestar vigilancia parece ser quién recibe y atiende la señal. Si un tercero monitorea tus cámaras, lo más probable es que necesite licencia. Si solo vende o instala equipos, o vende software de analítica, la norma no es clara y encontré fuentes que se contradicen. Tampoco hallé ningún concepto de Supervigilancia sobre IA o portería remota sin operador.
+
+**Los datos personales son el otro frente.** Según la guía de la SIC, quien contrata la vigilancia es responsable de los datos y la empresa es encargada: contratar a un tercero no te libera. Hay que poner aviso visible y guardar las imágenes solo el tiempo necesario. Los famosos 30 días son práctica comercial, no norma ([Guía SIC](https://sigi.sic.gov.co/SIGI/files/mod_documentos/documentos/GA03-P01/soportes/Anexo%20Gu%C3%9Da%20protecci%C2%BEn%20de%20datos%20personales%20en%20sistemas%20de%20videovigilancia%20%20SIC.pdf)). El reconocimiento facial es dato sensible: la SIC ya le ordenó a un conjunto de Bogotá no condicionar el ingreso a la biometría y ofrecer alternativas como tarjetas o códigos ([SIC](https://sedeelectronica.sic.gov.co/comunicado/la-superintendencia-de-industria-y-comercio-ordena-un-conjunto-residencial-habilitar-mecanismos-de-ingreso-que-no-impliquen-el-tratamiento)).
+
+De ahí saco una consecuencia de diseño que me parece el mayor riesgo oculto de cualquier producto de IA en este sector: detectar "persona" o "vehículo" es mucho menos delicado que identificar a alguien, y usar las imágenes de los clientes para entrenar modelos es una finalidad distinta que necesitaría autorización expresa.
+
+## Cuánto cuesta
+
+Desde el 15 de julio de 2026 la tarifa mínima de un puesto 24 horas es 10,21 SMLMV, unos $17,9 millones antes de administración, y subirá en 2027 ([Copropiedades](https://copropiedades.com.co/tarifas-minimas-2026/)). Con administración queda en $19-19,7 millones al mes. Del otro lado, la referencia de portería remota que circula en prensa es de $4-8 millones al mes por conjunto, una cifra débil que parece venir de una sola fuente ([El Colombiano](https://www.elcolombiano.com/negocios/vigilantes-unidades-residenciales-automatizacion-salario-minimo-2026-AH34336024)). Mientras no haya cotizaciones reales, yo la tomaría entre $4 y $10 millones.
+
+Con eso armamos un modelo de costo total. Ojo: es elaboración propia, mezcla precios públicos dispersos con supuestos, y no incluye las pérdidas por robos, que es justo el dato que podría cambiar la decisión.
+
+| Escenario | Inversión | Mensual año 1 | 3 años | 5 años |
+|---|---:|---:|---:|---:|
+| Puesto humano 24 h | $0 | $19,6 M | $764 M | $1.380 M |
+| Conjunto de 120 apartamentos, híbrido (guarda de día, central de noche) | $62 M | $13,3 M | $591 M | $1.031 M |
+| Conjunto de 120 apartamentos, solo remoto | $48-84 M | $4-8 M | $208-402 M | $343-667 M |
+| Bodega vacía de noche, con monitoreo y reacción | $30-60 M | $2-4,5 M | $111-241 M | $180-394 M |
+| Finca con 4G | ≈$7 M | $0,11 M | $13 M | $19 M |
+| Finca con internet satelital y solar | ≈$22 M | $0,3 M | $39 M | $56 M |
+
+El remoto total parece ahorrar muchísimo, pero no compara funciones equivalentes: le faltan la reacción física, la recepción de paquetes, la atención de emergencias y el costo de salir del contrato anterior. El híbrido ahorra entre 15% y 25%, menos de lo que uno esperaría.
+
+## Dónde encaja y dónde no
+
+**La bodega vacía de noche es el mejor caso.** Coincide con lo que respalda la evidencia: protege patrimonio, de noche no hay actividad legítima, y cualquier persona detectada es alarma. El operador recibe pocos eventos y cada uno significa algo.
+
+**El conjunto residencial es donde está la presión y donde está el riesgo.** Brasil, el mercado más maduro de la región con más de 14.000 condominios con portería remota, ya documentó lo que sale mal: portones que fallan, cortes de luz de más de 12 horas, operadores que abren sin verificar. Un condominio que empezó 100% remoto terminó, después de dos asambleas, con un portero de noche ([SíndicoNet](https://www.sindiconet.com.br/informese/portaria-remota-portaria-presencial-manutencao-portaria-virtual)). Retirar la noche es lo más tentador porque es la franja más cara, pero también es cuando las fallas más pesan. El híbrido es la opción prudente.
+
+**La finca cambia la pregunta.** Casi ninguna paga un guarda de $19,6 millones, y la tecnología no reemplaza al mayordomo que además la trabaja. Aquí la reacción es comunitaria: una sirena que oigan los vecinos, radios, WhatsApp y la línea 123. En el Suroeste antioqueño, el programa Finca Más Segura instaló botones de pánico y sirenas en 73 fincas ([Blu Radio](https://www.bluradio.com/blu360/antioquia/en-73-fincas-del-suroeste-de-antioquia-instalaran-equipos-tecnologicos-para-mejorar-seguridad)). Ninguna de estas iniciativas tiene evaluación independiente. Y algo que no se negocia: nunca se le pide al mayordomo ni a los vecinos que enfrenten a un intruso.
+
+## Si vas a contratar
+
+Antes de hablar de precio, estas preguntas separan rápido a los serios:
+
+- ¿Quién presta qué? ¿La empresa que monitorea tiene licencia vigente en Supervigilancia, con certificado de no sanciones ([Alcaldía de Bogotá](https://bogota.gov.co/mi-ciudad/seguridad/como-verificar-si-la-empresa-de-seguridad-cumple-los-requisitos))?
+- ¿Quién llega, en cuánto tiempo y con qué cobertura? Pide el tiempo promedio y el del peor 10% de los casos, por escrito.
+- ¿Cuántos sitios atiende un operador por turno? ¿Cuántas falsas alarmas por cámara y por noche tienen en un sitio parecido?
+- ¿Qué pasa si se cae su central o tu internet? ¿Dónde se guardan las imágenes, quién las ve y quién es dueño de las contraseñas?
+- ¿Te dan tres clientes activos y uno que se haya ido?
+
+Y en el contrato: equipos abiertos (ONVIF/RTSP) para poder cambiar de proveedor, prohibición de usar tus imágenes para entrenar modelos, y nada de excluir responsabilidad por "fallas de internet" si no hay enlace de respaldo.
+
+Lo más valioso es un piloto de 60 a 90 días **sin retirar al guarda**: unas semanas de línea base, luego el sistema operando en paralelo, una prueba apagando internet y energía, y una intrusión autorizada (avisada a la policía) para medir de verdad cuánto tarda cada eslabón, incluida la llegada. Con un criterio de reversa escrito antes de empezar. Un conjunto o una empresa que haga esto tendrá datos que hoy ni el regulador ni el gremio han publicado.
+
+## ¿Hay negocio?
+
+Sí, pero regional y de margen fino. El sector de vigilancia privada en Colombia reportó $21,1 billones en ingresos en 2024, con un margen neto cercano a 2,9% ([Supervigilancia](https://www.supervigilancia.gov.co/web/content/5723?unique=cfe6eda37e52e97be9b76ddc58db0903714f5a33&download=true)). Supervigilancia no publica los medios tecnológicos como categoría, así que el segmento virtual no tiene medición. Con supuestos propios, estimamos el mercado residencial direccionable en el orden de USD 50 millones al año. Es un orden de magnitud, no una cifra.
+
+La economía de una central se resume en una sola variable: cuántos sitios atiende cada operador. Con un precio de $5 millones por sitio, pasar de 10 a 40 sitios por puesto de operador lleva el margen bruto de 34% a 61% en nuestro modelo. Ahí es donde la IA aporta valor económico: filtrar ruido para que una persona pueda atender más sitios, no reemplazar a esa persona. Ese dato, sitios por operador, no lo publica nadie.
+
+Si yo entrara a este mercado sin licencia, me aliaría con una central licenciada y empezaría por sitios vacíos de noche, no por conjuntos. Es una tesis, no un plan validado: antes de invertir haría cotizaciones reales como cliente, hablaría con operadores de central y elevaría una consulta formal a Supervigilancia.
+
+## Por qué me importa: GuardIA
+
+Aquí vuelvo a la pregunta con la que empecé. Esas cámaras con ESP32 son GuardIA, que estoy empezando a construir: un sistema de videovigilancia doméstica autoalojado: cámaras de bajo costo con ESP32 en el borde, una Raspberry Pi como centro, detección de objetos con IA local y alertas al celular. Nada sale de la casa ni depende de la nube de un fabricante.
+
+La investigación me confirmó dos cosas y me corrigió una. Confirmó que mantener el video en local tiene sentido: los incidentes más graves que encontré vienen de la nube y de equipos sin actualizar. Y confirmó que la analítica en el borde es lo que hace viable un sitio con poca conectividad. Lo que me corrigió es que una cámara que detecta bien no basta: el sistema tiene que pensar en quién recibe la alerta, cómo la verifica y qué pasa después. Eso entra al backlog.
+
+## Límites de esta investigación
+
+- Casi todas las cifras de desempeño y ahorro vienen de vendedores o gremios interesados.
+- Las normas se leyeron en compilaciones de terceros; hay que cotejar el texto literal de los artículos clave.
+- No verifiqué la licencia de ningún proveedor, y por eso este post no nombra ni recomienda proveedores colombianos.
+- Los presupuestos son estimados propios y necesitan visita técnica y cotizaciones.
+- Quedaron con poca fuente el control de acceso, la analítica de audio, las condiciones de trabajo de los operadores de central y la posición de las aseguradoras.
+
+Si trabajas en seguridad, administras un conjunto o tienes datos que contradigan algo de esto, me encantaría leerte en los comentarios.
+
+Y si te interesa aprender a investigar así, con agentes, con método y sin soltar el criterio, eso es lo que enseño en los [cursos](/es/cursos).
