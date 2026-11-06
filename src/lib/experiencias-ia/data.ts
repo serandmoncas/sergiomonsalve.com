@@ -39,7 +39,19 @@ export type SinRegistro = {
   nota?: string
 }
 
-export type EntradaSesion = Sesion | SinRegistro
+/**
+ * Encuentro que aún no ocurre. La agenda solo lista temas que ya están en
+ * TEMAS (el test lo verifica): no se inventan temas para la agenda.
+ * Cuando haya transcripción, se reemplaza por la Sesion documentada.
+ */
+export type Pendiente = {
+  fecha: string
+  fechaLarga: string
+  estado: 'pendiente'
+  agenda: string[]
+}
+
+export type EntradaSesion = Sesion | SinRegistro | Pendiente
 
 /** Propuestas voluntarias: nadie es "responsable", alguien "propone". */
 export type Tema = {
@@ -601,6 +613,18 @@ export const SESIONES: EntradaSesion[] = [
     ],
     enlaces: [],
   },
+  {
+    fecha: '2026-11-11',
+    fechaLarga: '11 de noviembre de 2026',
+    estado: 'pendiente',
+    agenda: [
+      'Sesiones de retroalimentación sobre los proyectos de cada uno',
+      'Lo no técnico: cómo le hablamos a la máquina (enojarse, dar las gracias, tono)',
+      'Reto: app de identificación de hongos',
+      'Serie piloto limitada con miniponencias e invitados',
+      'Agenda de ponencias y transmisión por YouTube',
+    ],
+  },
 ]
 
 export const TEMAS: Tema[] = [
@@ -936,9 +960,13 @@ export function esSinRegistro(entrada: EntradaSesion): entrada is SinRegistro {
   return 'estado' in entrada && entrada.estado === 'sin-registro'
 }
 
+export function esPendiente(entrada: EntradaSesion): entrada is Pendiente {
+  return 'estado' in entrada && entrada.estado === 'pendiente'
+}
+
 /** Solo las sesiones documentadas (con número y página propia). */
 export function getSesionesDocumentadas(): Sesion[] {
-  return SESIONES.filter((entrada): entrada is Sesion => !esSinRegistro(entrada))
+  return SESIONES.filter((entrada): entrada is Sesion => !('estado' in entrada))
 }
 
 /** Todas las entradas de la bitácora, la más reciente primero. */
