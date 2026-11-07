@@ -1,0 +1,187 @@
+{
+  "2487998": {
+    "tamanoCm": 11,
+    "claseTamano": "colibri",
+    "colores": [
+      "amarillo",
+      "azul"
+    ],
+    "habitats": [
+      "ciudad",
+      "bosque",
+      "campo"
+    ],
+    "altitudM": [
+      0,
+      2000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "5231647": {
+    "tamanoCm": 10,
+    "claseTamano": "colibri",
+    "colores": [
+      "amarillo",
+      "negro"
+    ],
+    "habitats": [
+      "campo",
+      "ciudad"
+    ],
+    "altitudM": [
+      0,
+      3000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2488011": {
+    "tamanoCm": 11,
+    "claseTamano": "colibri",
+    "colores": [
+      "amarillo",
+      "azul"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      0,
+      2500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "7341772": {
+    "tamanoCm": 10,
+    "claseTamano": "colibri",
+    "colores": [
+      "amarillo",
+      "verde",
+      "negro"
+    ],
+    "habitats": [
+      "paramo",
+      "campo",
+      "bosque"
+    ],
+    "altitudM": [
+      2000,
+      3800
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2488315": {
+    "tamanoCm": 11,
+    "claseTamano": "colibri",
+    "colores": [
+      "verde",
+      "azul",
+      "amarillo"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      700,
+      2600
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "7341765": {
+    "tamanoCm": 11,
+    "claseTamano": "colibri",
+    "colores": [
+      "negro",
+      "amarillo"
+    ],
+    "habitats": [
+      "bosque",
+      "campo"
+    ],
+    "altitudM": [
+      1300,
+      3000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2488023": {
+    "tamanoCm": 11,
+    "claseTamano": "colibri",
+    "colores": [
+      "azul",
+      "amarillo",
+      "negro"
+    ],
+    "habitats": [
+      "bosque",
+      "ciudad"
+    ],
+    "altitudM": [
+      1000,
+      2800
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2487963": {
+    "tamanoCm": 9.5,
+    "claseTamano": "colibri",
+    "colores": [
+      "amarillo",
+      "azul"
+    ],
+    "habitats": [
+      "bosque",
+      "ciudad",
+      "campo"
+    ],
+    "altitudM": [
+      0,
+      1000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2487974": {
+    "tamanoCm": 10,
+    "claseTamano": "colibri",
+    "colores": [
+      "amarillo",
+      "negro",
+      "azul"
+    ],
+    "habitats": [
+      "bosque",
+      "ciudad"
+    ],
+    "altitudM": [
+      0,
+      1500
+    ],
+    "residencia": "residente",
+    "endemica": true
+  },
+  "2487964": {
+    "tamanoCm": 9.5,
+    "claseTamano": "colibri",
+    "colores": [
+      "amarillo",
+      "azul"
+    ],
+    "habitats": [
+      "bosque",
+      "campo"
+    ],
+    "altitudM": [
+      0,
+      1000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  }
+}

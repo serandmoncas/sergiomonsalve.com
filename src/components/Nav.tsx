@@ -23,6 +23,7 @@ export default async function Nav() {
       { href: '/cursos', label: t('cursos') },
       { href: '/carpinteria', label: t('carpinteria') },
       { href: '/biblioteca', label: t('biblioteca') },
+      { href: '/aves', label: t('aves') },
       { href: t('aprenderHref'), label: t('aprender'), estatico: true },
       { href: '/aprendizaje-en-el-tiempo', label: t('lineaAprendizaje') },
       { href: t('dineroHref'), label: t('dinero'), estatico: true },
@@ -38,8 +39,8 @@ export default async function Nav() {
       <Link href="/" className="font-mono text-sm font-bold text-accent">
         SM
       </Link>
-      {/* Computador (≥ xl): el menú completo en una fila. Mide ~1130 px, por eso no se muestra antes de xl. */}
-      <div className="hidden xl:flex items-center gap-6">
+      {/* Computador (≥ 2xl): el menú completo en una fila. Mide ~1300 px, por eso no se muestra antes de 2xl. */}
+      <div className="hidden 2xl:flex items-center gap-6">
         <Link href="/biografia" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('biografia')}
         </Link>
@@ -64,6 +65,9 @@ export default async function Nav() {
         <Link href="/biblioteca" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('biblioteca')}
         </Link>
+        <Link href="/aves" className="text-xs text-text-secondary hover:text-text transition-colors">
+          {t('aves')}
+        </Link>
         {/* Página estática en public/: va con <a> porque no pasa por las rutas con idioma */}
         <a href={t('aprenderHref')} className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('aprender')}
@@ -84,7 +88,7 @@ export default async function Nav() {
         <UserMenu isLoggedIn={!!user} />
       </div>
       {/* Celular y tablet: idioma, sesión y el botón ☰ */}
-      <div className="flex xl:hidden items-center gap-4">
+      <div className="flex 2xl:hidden items-center gap-4">
         <LocaleSwitcher />
         <UserMenu isLoggedIn={!!user} />
         <MenuMovil grupos={grupos} textos={{ abrir: t('menuAbrir'), cerrar: t('menuCerrar') }} />

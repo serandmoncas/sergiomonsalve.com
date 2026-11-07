@@ -1,0 +1,72 @@
+{
+  "5229213": {
+    "tamanoCm": 38,
+    "claseTamano": "paloma",
+    "colores": [
+      "blanco",
+      "gris",
+      "negro"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "6065844": {
+    "tamanoCm": 40,
+    "claseTamano": "gallinazo",
+    "colores": [
+      "gris",
+      "blanco",
+      "negro"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      200
+    ],
+    "residencia": "migratoria-boreal",
+    "endemica": false
+  },
+  "5789281": {
+    "tamanoCm": 48,
+    "claseTamano": "gallinazo",
+    "colores": [
+      "blanco",
+      "gris"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      50
+    ],
+    "residencia": "migratoria-boreal",
+    "endemica": false
+  },
+  "2481209": {
+    "tamanoCm": 45,
+    "claseTamano": "gallinazo",
+    "colores": [
+      "negro",
+      "blanco"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  }
+}
