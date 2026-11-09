@@ -2,6 +2,12 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { aboutContent, type AboutLocale } from './content'
 
+const CV_BASE_URL = 'https://orlniujfwolyinsuezcu.supabase.co/storage/v1/object/public/assets'
+const CV_FILES = [
+  { language: 'Español', file: 'cv-sergio-monsalve-es.pdf' },
+  { language: 'English', file: 'cv-sergio-monsalve.pdf' },
+]
+
 function bold(text: string) {
   const parts = text.split(/\*\*(.+?)\*\*/g)
   return parts.map((part, i) =>
@@ -98,15 +104,18 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
                 </div>
               </div>
               <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://orlniujfwolyinsuezcu.supabase.co/storage/v1/object/public/assets/cv-sergio-monsalve.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download
-                  className="inline-flex items-center gap-2 bg-text text-background font-mono text-xs font-bold px-4 py-2.5 rounded-sm hover:bg-accent transition-colors"
-                >
-                  {downloadCvLabel}
-                </a>
+                {CV_FILES.map(cv => (
+                  <a
+                    key={cv.file}
+                    href={`${CV_BASE_URL}/${cv.file}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    className="inline-flex items-center gap-2 bg-text text-background font-mono text-xs font-bold px-4 py-2.5 rounded-sm hover:bg-accent transition-colors"
+                  >
+                    {downloadCvLabel} · {cv.language}
+                  </a>
+                ))}
                 <Link
                   href="/portfolio"
                   className="inline-flex items-center gap-2 border border-border font-mono text-xs text-text-secondary px-4 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors"
