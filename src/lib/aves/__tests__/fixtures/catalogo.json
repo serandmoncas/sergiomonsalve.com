@@ -1,0 +1,23 @@
+{
+  "consultado": "2026-10-29",
+  "especies": [
+    {
+      "speciesKey": 2481942, "slug": "gallinazo-negro", "cientifico": "Coragyps atratus",
+      "nombreEs": "Gallinazo negro", "nombreEn": "Black Vulture", "familia": "Cathartidae", "orden": "Cathartiformes",
+      "puestoColombia": 3, "registrosColombia": 307211, "puestoLatam": 1,
+      "regiones": ["andina", "caribe"], "meses": [1,1,1,1,1,1,1,1,1,1,1,1], "amenaza": null
+    },
+    {
+      "speciesKey": 5229662, "slug": "tirano-tropical", "cientifico": "Tyrannus melancholicus",
+      "nombreEs": "Tirano tropical", "nombreEn": "Tropical Kingbird", "familia": "Tyrannidae", "orden": "Passeriformes",
+      "puestoColombia": 1, "registrosColombia": 332065, "puestoLatam": 3,
+      "regiones": ["andina"], "meses": [1,1,1,1,9,1,1,1,1,1,1,1], "amenaza": null
+    },
+    {
+      "speciesKey": 2488602, "slug": "tangara-azuleja", "cientifico": "Thraupis episcopus",
+      "nombreEs": "Tángara azuleja", "nombreEn": "Blue-gray Tanager", "familia": "Thraupidae", "orden": "Passeriformes",
+      "puestoColombia": 2, "registrosColombia": 308424, "puestoLatam": null,
+      "regiones": ["andina", "amazonia"], "meses": [0,0,0,0,0,0,0,0,0,0,0,0], "amenaza": null
+    }
+  ]
+}

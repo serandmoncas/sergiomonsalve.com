@@ -1,0 +1,20 @@
+{
+  "2496811": {
+    "tamanoCm": 36,
+    "claseTamano": "paloma",
+    "colores": [
+      "gris",
+      "cafe"
+    ],
+    "habitats": [
+      "bosque",
+      "campo"
+    ],
+    "altitudM": [
+      0,
+      2000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  }
+}

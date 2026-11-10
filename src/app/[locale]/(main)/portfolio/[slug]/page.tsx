@@ -35,6 +35,10 @@ export default async function ProjectPage({
   if (!project) notFound()
 
   const t = await getTranslations({ locale, namespace: 'portfolio' })
+  // Evita repetir enlaces que ya salen como GitHub o demo
+  const extraLinks = (project.links ?? []).filter(
+    link => link.url !== project.github && link.url !== project.demo
+  )
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-16">
@@ -88,7 +92,7 @@ export default async function ProjectPage({
             </div>
           )}
 
-          {(project.github || project.demo || (project.links ?? []).length > 0) && (
+          {(project.github || project.demo || extraLinks.length > 0) && (
             <div>
               <p className="font-mono text-xs text-text-muted mb-3">{t('links')}</p>
               <div className="flex flex-col gap-2">
@@ -112,7 +116,7 @@ export default async function ProjectPage({
                     {t('demo')} ↗
                   </a>
                 )}
-                {(project.links ?? []).map(link => (
+                {extraLinks.map(link => (
                   <a
                     key={link.url}
                     href={link.url}

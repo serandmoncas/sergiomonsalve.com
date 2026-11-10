@@ -1,0 +1,6 @@
+{
+  "5229662": {
+    "tamanoCm": 21, "claseTamano": "mirla", "colores": ["amarillo", "gris"], "habitats": ["ciudad", "campo"],
+    "altitudM": [0, 2600], "residencia": "residente", "endemica": false
+  }
+}
