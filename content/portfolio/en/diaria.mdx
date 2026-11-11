@@ -1,0 +1,47 @@
+---
+title: DiarIA
+description: My own linked-notes app built around the daily journal — plain Markdown compatible with Obsidian, a pure TypeScript core and an AI-assisted development method based on specs, TDD and adversarial review.
+date: "2026-10-28"
+role: Creator
+stack: [TypeScript, pnpm, Vitest, Node.js, Tauri (coming), Claude Code]
+github: ""
+demo: ""
+links: []
+status: active
+featured: true
+image: ""
+---
+
+## The problem
+
+For years I've kept my journal in Obsidian with a very specific routine: I open today's note, link the people and projects I talked with, and in each of their notes I write a section headed with the date. It works, but every step is manual: finding the section, creating it, ticking off tasks, remembering which day something was discussed. And Obsidian is a closed box I can't shape.
+
+## The solution
+
+**DiarIA** is my own linked-notes app that runs that cycle for me, on the same Markdown folder. It can live side by side with Obsidian: it invents no format and doesn't change what I don't touch.
+
+The core already covers the whole journaling cycle:
+- which notes are days and how to move between them;
+- which note each `[[…]]` link points to, with the same rules as Obsidian;
+- who mentions each note and on which day (backlinks);
+- where today's `# [[date]]` section goes in each person's note;
+- ticking tasks with a done date, in the Tasks plugin format;
+- filling in the daily template without executing any code.
+
+## Technical decisions
+
+**A pure TypeScript core.** The core never touches the disk or the UI: it reads and writes through a minimal interface, so the same code can run on the Mac, on the phone and on the web.
+
+**Byte for byte.** Opening and saving a note without editing doesn't write the file: no line ending, encoding or modification date changes. When I edit, only what I wrote changes. Neither Obsidian nor Git sees phantom changes.
+
+**Clean room.** Obsidian is closed software: its behaviour is studied only from public documentation and observation, never by reading its code.
+
+**Privacy by design.** It's a personal journal: no real note ever enters the repository. Tests use made-up notes, an automatic guard blocks real names on every commit, and checks against a copy of my real vault print only counts.
+
+## How it's built
+
+Every feature follows the same cycle with Claude Code: a spec with acceptance criteria that I approve, tests written first (TDD), verification against a copy of my real vault, and an **adversarial review** by a different agent that tries to break the code. Those reviews have caught real bugs the tests missed, and each one gets its own test before it's fixed.
+
+## Status
+
+The core is nearly complete; next comes the first desktop app, built with Tauri. Then the phone, sync through a private Git repository, and the web.
