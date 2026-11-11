@@ -1,0 +1,43 @@
+---
+title: AI Educational Video
+description: Pilot that turns the readings of a graduate course in law and cybersecurity into AI-generated explainer videos, built from scenes that can be updated one by one when the law changes.
+date: "2026-11-10"
+role: Pipeline design and production
+stack: [Claude, Gemini, Text-to-speech, Python, FFmpeg, Moodle H5P]
+github: ""
+demo: ""
+links: []
+status: active
+featured: false
+image: ""
+---
+
+## The problem
+
+A graduate professor in law and cybersecurity runs a Moodle course built on long legal texts. To keep them from feeling heavy, she explains them live every week. She wanted each reading to also come with an explainer video, using a sober character instead of her own image, with fluent narration. The tools she had tried stumbled or misread the text.
+
+There is an extra challenge: in law, the rules change. A video that has to be re-recorded from scratch every time a new law comes out isn't sustainable.
+
+## The solution
+
+A **scene-based, modular** production pipeline:
+
+1. The reading becomes a **scene-by-scene script**. Each scene has its narration, its kind of visual (concept map, legal citation, animation or avatar) and **the regulation it depends on**.
+2. The professor reviews the script for legal accuracy before anything is produced.
+3. Each scene gets **its own audio and its own visual**.
+4. An automated edit joins the scenes, adds music and subtitles, and renders the video.
+5. In Moodle, the video sits inside an H5P *Interactive Video* activity with questions along the way.
+
+When a regulation changes, you filter the scenes that depend on it, regenerate only those and re-render.
+
+## Decisions
+
+**Measure before promising.** The pilot logs the minutes and cost of every stage. The deliverable isn't just the video: it also answers how many hours and how much money each one takes, and whether the professor can keep it up herself or should delegate it.
+
+**Neutral look.** The typical AI aesthetic ages fast. A sober, modular design lets you swap tools without remaking the content.
+
+**Data under control.** Course material is processed only with paid accounts or through the API, never in free tools that train on user data.
+
+## Status
+
+Pilot in progress: a first video of about 10 minutes.
