@@ -1,0 +1,111 @@
+---
+title: "Un año de proyectos con IA: 45 repositorios, 75 días de código y cuatro obsesiones"
+date: "2026-11-11"
+description: "Revisé mis cuentas de GitHub y los registros de mi agente de IA para hacer el inventario de 2026. Salieron hongos con sensores, cursos, herramientas propias y trabajos para clientes. Esto es lo que se hizo, cuánto pesó cada cosa y lo que aprendí del patrón."
+tags: ["ia", "proyectos", "retrospectiva", "claude", "iot", "educacion"]
+---
+
+Antes de cerrar el año quise hacer algo que me gusta hacer mucho: **contar.** No lo que planeé ni lo que recuerdo, sino lo que quedó registrado. Le pedí a Claude Code que revisara mis tres cuentas de GitHub, las carpetas de proyectos de mi computador y sus propios registros de sesiones, y que me devolviera la lista con fechas y una medida de cuánto se trabajó en cada cosa.
+
+El resultado me sorprendió un poco:
+
+| | 2026 |
+|---|---|
+| Repositorios con actividad | ~45 |
+| Commits | 1.776 |
+| Días con al menos un commit | 75 |
+| Tareas nocturnas ejecutadas por un agente | 52 |
+| Mes más activo | mayo (451 commits) |
+| Mes más callado | septiembre (0) |
+
+Como siempre, una aclaración: **este post es coautoría.** Claude hizo el inventario y redactó el borrador, y yo lo revisé y decidí qué se cuenta. Varios proyectos son de clientes o personales, así que aparecen descritos por lo que hacen y sin nombres.
+
+## Cómo medimos "cuánto se trabajó"
+
+La medida que usamos son los **días activos**, es decir, los días con al menos un commit. Las líneas de código engañan: un sitio con muchas imágenes "pesa" un millón de líneas, y una base de datos de vocabulario, casi otro tanto. Los commits también engañan un poco, porque en un sprint con IA salen cincuenta en una tarde.
+
+Dos límites honestos:
+
+- Los registros del agente solo llegan a mediados de octubre, porque las sesiones viejas se borran. Antes de esa fecha, todo sale de git.
+- Hay trabajo que no deja commits: conversaciones, planes de negocio, investigación. Ese aparece al final, sin números.
+
+## 1. Hongos, sensores y cultivo controlado
+
+**≈ 85 días activos. El tema del año.**
+
+Empezó en febrero con un controlador para cultivar hongos: un ESP32 que maneja temperatura, humedad, CO₂, luz y riego según el perfil de cada especie. Para agosto ya era un **sistema completo**: firmware, una API con base de datos y una app móvil para ver las cápsulas desde el celular. Sumando sus cuatro repositorios, es el proyecto más grande del año: unos 24 días de trabajo.
+
+Alrededor del controlador crecieron otras piezas:
+
+- **Una marca de hongos gourmet con trazabilidad IoT**: su concepto de cápsulas de bajo costo y su sitio web, que con 16 días activos fue el segundo repositorio con más trabajo del año.
+- **El sitio web y un curso de cultivo de orellanas** para un emprendimiento de hongos.
+- **Un sistema de control por etapas** (clonación, vegetativo, floración) con fertirriego y trazabilidad.
+- **Un proyecto de mosca soldado negra**, el insecto que convierte residuos orgánicos en proteína y abono. Empezó en noviembre con un corpus de literatura y un manual de usuario, para un primer cultivo piloto.
+- **El plan de una marca propia de hongos**: diagnóstico, modelo de negocio, plan de mercadeo y hoja de ruta de 90 días. Lo trabajó casi todo un agente durante la noche (más abajo explico cómo).
+
+Lo que aprendí: el hardware es lento y la IA no lo acelera tanto como al software. Donde más ayudó fue en lo que rodea al aparato: la app, la API, la documentación y los perfiles de cada especie.
+
+## 2. Educación: cursos, currículos y un colegio
+
+**≈ 25 días activos repartidos en muchos proyectos pequeños.**
+
+Este grupo trabaja a ráfagas. Casi todos son sprints de dos a cuatro días con decenas de commits:
+
+- **Un colegio virtual open source** que enseña primero lo que la vida práctica exige y casi ningún colegio enseña. Tuvo 89 commits en cuatro días de octubre.
+- **Un curso de robótica**: cada estudiante arma un carrito con ESP32-CAM, video en vivo y control desde el celular. El curso y la app de control tienen repositorios separados.
+- **Un curso de carpintería en melamina** en cuatro sesiones: cada persona diseña su mueble, lo manda a cortar y lo arma.
+- **Un currículo para aprender *harness engineering***, la disciplina de diseñar todo lo que rodea a un modelo de lenguaje: contexto, herramientas, memoria y verificación.
+- **Un recorrido de estudio de una especialización en IA** y una guía de **educación STEM y cultura maker**.
+- **Una plantilla para que cualquiera publique su página personal** en menos de una hora.
+- **Un cuadernillo de avistamiento de aves** para niños, con 102 especies, hecho con dos colaboradoras.
+- **Un curso de IA gratuito para personas jubiladas** y un piloto de video para un curso universitario, los dos recién empezados.
+
+Lo que aprendí: con IA, armar el material de un curso dejó de ser el cuello de botella. El cuello de botella ahora es **probarlo con personas reales**, y eso no se hace en cuatro días.
+
+## 3. Herramientas propias: aprender y trabajar con IA
+
+**≈ 25 días activos, casi todos de octubre en adelante.**
+
+Este grupo nació de una pregunta: *¿qué herramientas me gustaría tener a mí?*
+
+- **Mi propia app de notas**, al estilo de Obsidian. Ya va por la primera fase de tickets especificados, implementados y revisados.
+- **Un turno nocturno.** Es un programa que, mientras duermo, toma de mis notas las tareas que dejé marcadas con 🌙 y se las da a un agente para que avance sin supervisión: investigaciones, borradores, especificaciones. Lleva 52 tareas. Por la mañana reviso y decido qué sirve.
+- **Fichas de estudio con repaso espaciado**, ahora también como app instalable en Android.
+- **Una app para aprender mandarín** (vocabulario por frecuencia, tonos y caracteres) y otra para **practicar caligrafía con IA**.
+- **Un "segundo cerebro"** armado a partir de las transcripciones de mis reuniones, una herramienta de **meta-aprendizaje** y un **asistente personal en WhatsApp**, "el Jarvis paisa".
+- Con menos código y más método: aprender **italiano con recetas como lecciones** y estudiar un método de razonamiento paso a paso.
+
+Lo que aprendí: el turno nocturno cambió mi forma de trabajar más que cualquier otra herramienta. Ya no pienso "¿tengo tiempo para esto?", sino "¿esto lo puede adelantar alguien esta noche?".
+
+## 4. Clientes, pruebas técnicas y productos para otros
+
+**≈ 15 días activos, en sprints intensos.**
+
+- **Una plataforma SaaS para coaches financieros**: clientes, sesiones y seguimiento de metas. Tuvo 75 commits en cuatro días.
+- **Una app de alertas de riesgo hidrometeorológico** para que cualquier persona reciba en el celular los avisos de su territorio. Tuvo 91 commits en una semana.
+- **Una prueba técnica de nivel senior** para un sistema de logística terrestre y marítima, con todos los puntos opcionales resueltos.
+- **Un CRM con cotizaciones asistidas por IA** para una empresa de tecnología en Centroamérica, que empezó esta semana.
+- **Un MVP con una startup** en marzo, y sitios web para un estudio de arte y un proyecto cultural.
+- **Un sistema de videovigilancia doméstica autoalojado**: nada sale de la casa. De ahí salió la [serie sobre vigilancia con IA](/es/blog/2026-11-06-vigilancia-virtual-ia-colombia) del blog.
+
+## 5. Este sitio
+
+**25 días activos y 341 commits. Fue el repositorio con más actividad del año.**
+
+Es el proyecto que más días tocó, porque es donde todo lo demás termina: el portafolio, el blog, los cursos, las recetas. Aquí se publicaron la serie de vigilancia, el autorretrato hecho con IA, el rescate de un Android viejo y ahora este inventario.
+
+## Lo que no deja commits
+
+Hubo trabajo real que git no ve: el plan de piloto para una empresa agrícola, una guía de meliponicultura (abejas sin aguijón), la liofilización de hongos, una investigación sobre la resistencia histórica al cambio tecnológico y varias conversaciones que terminaron en proyectos. Una parte la avanzó el turno nocturno. Otra salió de sesiones que empezaron con un "hola, ¿cómo vas?".
+
+## El patrón
+
+Cuando vi todo junto, encontré tres cosas:
+
+1. **Tengo dos ritmos.** Unos pocos proyectos de largo aliento que retomo durante meses (los hongos, este sitio, la comunidad de IA) y muchos sprints de dos a cuatro días que producen algo usable y quedan quietos. Ninguno de los dos es mejor, pero conviene saber cuál es cuál antes de empezar.
+2. **El año se movió por etapas.** Hasta agosto, el hardware y los hongos. Entre julio y octubre, la educación. Desde octubre, herramientas propias con IA. Cada etapa usó lo que dejó la anterior.
+3. **La IA cambió qué es caro.** Escribir código, documentación y material de curso ya no es lo caro. Lo caro es decidir qué vale la pena, probarlo con personas y sostenerlo en el tiempo. Septiembre, con cero commits, me lo recordó: el código se detiene cuando la vida se mueve, y está bien.
+
+Para 2027 me llevo una regla sencilla: **menos proyectos nuevos, más proyectos terminados y probados con alguien.** Ya veremos qué dice el inventario del próximo año.
+
+Si te interesa trabajar así, con agentes, con método y sin perder el criterio, eso es lo que enseño en los [cursos](/es/cursos).
