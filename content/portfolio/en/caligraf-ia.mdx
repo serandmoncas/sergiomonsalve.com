@@ -1,0 +1,40 @@
+---
+title: Caligraf IA
+description: An app for practicing calligraphy with AI help — printable practice sheets built from real fonts and a photo-based correction loop with Claude. Just getting started, beginning by measuring whether the AI corrects well before building the app.
+date: "2026-11-06"
+role: Product, specification and development
+stack: [Next.js, TypeScript, Claude API, Zod, Vitest, Claude Code]
+github: ""
+demo: ""
+links: []
+status: active
+featured: false
+image: ""
+---
+
+## The problem
+
+Practicing calligraphy on your own has two gaps: getting practice sheets in the style you want, and knowing what you're doing wrong without a teacher beside you. The idea came up in the Experiencias IA study group, when a fellow member said they wanted to get back into calligraphy.
+
+## The solution
+
+Caligraf IA combines two things:
+
+- **Printable practice sheets (PDF)** in eye-catching pen styles —italic, blackletter, copperplate— plus brush lettering. Anyone can generate them.
+- **A photo correction loop:** you practice on paper, take a photo, and the AI returns at most three concrete observations (letter, aspect, explanation), something that's going well, and the letters to reinforce in the next sheet.
+
+It's free and open, but AI correction requires an access request that an admin can approve or revoke, with an adjustable weekly cap to keep costs in check.
+
+## Technical decisions
+
+**The AI never draws letters.** Sheets are built from real, openly licensed fonts and vector guides; the AI only decides what to practice. A model that invents strokes teaches badly; a well-made font doesn't.
+
+**Measure before building.** Before building the app, the first plan is a precision test: 15 to 20 real photos per style, analyzed by Claude and graded by a calligrapher as correct, wrong or invented. A style only ships with correction if the AI gets at least 80% of observations right and invents fewer than 5%; otherwise it ships with practice sheets only.
+
+**Structured output and AI honesty.** The analysis uses the Claude API with output validated by a Zod schema: it first decides whether the photo is legible (if not, it asks for another one instead of inventing defects), and the three-observation cap is enforced in code, not just in the prompt. Photos are normalized before sending (EXIF orientation, max size, white background for transparent PNGs).
+
+**Spec-driven development with agents.** Spec via brainstorming, a test-first (TDD) plan, and a final whole-branch review, all with Claude Code.
+
+## Results
+
+Just getting started. The spec is approved and the first plan —the precision-test tool— is implemented with 42 automated tests: it analyzes the photos, produces a report for the calligrapher, and summarizes per style whether correction is reliable. The next step is running it on real photos; the app's plans (practice sheets, accounts and access, and in-app correction) depend on those results.

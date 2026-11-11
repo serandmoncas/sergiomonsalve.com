@@ -1,0 +1,40 @@
+---
+title: Caligraf IA
+description: App para practicar caligrafía con ayuda de IA — planas imprimibles con fuentes reales y un ciclo de corrección por foto con Claude. En arranque, empezando por medir si la IA corrige bien antes de construir la app.
+date: "2026-11-06"
+role: Producto, especificación y desarrollo
+stack: [Next.js, TypeScript, Claude API, Zod, Vitest, Claude Code]
+github: ""
+demo: ""
+links: []
+status: active
+featured: false
+image: ""
+---
+
+## El problema
+
+Practicar caligrafía por tu cuenta tiene dos huecos: conseguir planas de práctica del estilo que quieres y saber qué estás haciendo mal sin un maestro al lado. La idea nació en el grupo de estudio Experiencias IA, cuando un compañero contó que quería volver a la caligrafía.
+
+## La solución
+
+Caligraf IA combina dos cosas:
+
+- **Planas imprimibles (PDF)** de estilos llamativos para pluma —itálica, gótica, copperplate— y lettering con pincel. Cualquiera puede generarlas.
+- **Un ciclo de corrección por foto:** practicas en papel, le tomas una foto y la IA te devuelve como máximo tres observaciones concretas (letra, aspecto, explicación), algo que va bien y las letras a reforzar en la siguiente plana.
+
+Es gratis y abierto, pero la corrección con IA requiere una solicitud de uso que un administrador aprueba o revoca, con un tope semanal ajustable para controlar el costo.
+
+## Decisiones técnicas
+
+**La IA nunca dibuja letras.** Las planas se construyen con fuentes reales de licencia libre y guías vectoriales; la IA solo decide qué practicar. Un modelo que inventa trazos enseña mal; una fuente bien hecha no.
+
+**Medir antes de construir.** Antes de hacer la app, el primer plan es una prueba de precisión: 15 a 20 fotos reales por estilo, analizadas por Claude y calificadas por un calígrafo como acertada, equivocada o inventada. Un estilo solo sale con corrección si la IA acierta en al menos 80% de las observaciones e inventa en menos de 5%; si no, sale solo con planas.
+
+**Salida estructurada y honestidad de la IA.** El análisis usa la API de Claude con salida validada por un esquema Zod: primero decide si la foto es legible (si no, pide otra en vez de inventar defectos), y el tope de tres observaciones se aplica en el código, no solo en el prompt. Las fotos se normalizan antes de enviarse (orientación EXIF, tamaño máximo, fondo blanco para PNG transparentes).
+
+**Desarrollo spec-driven con agentes.** Especificación por brainstorming, plan con pruebas primero (TDD) y revisión final del branch completo, todo con Claude Code.
+
+## Resultados
+
+Proyecto en arranque. La especificación está aprobada y el primer plan —la herramienta de prueba de precisión— está implementado con 42 pruebas automatizadas: analiza las fotos, genera un informe para el calígrafo y resume por estilo si la corrección es confiable. El siguiente paso es correrla con fotos reales; de esos resultados dependen los planes de la app (planas, cuentas y acceso, y la corrección dentro de la app).
