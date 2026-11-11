@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Video 9:16 · El camino hacia atrás</title>
+<style>
+  :root { --bg: #0f0f0f; --accent: #00ff88; --text: #ffffff; --sec: #9a9a9a; --muted: #555555; }
+  html, body { margin: 0; background: var(--bg); }
+  body { width: 1080px; height: 1920px; overflow: hidden; color: var(--text);
+         font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .mono { font-family: "SF Mono", Menlo, Monaco, monospace; }
+  #marca { position: absolute; top: 96px; left: 80px; font-size: 30px; color: var(--accent); letter-spacing: .04em; }
+  #titulo { position: absolute; top: 146px; left: 80px; right: 80px; font-size: 76px; font-weight: 700; line-height: 1.05; }
+  #fase { position: absolute; top: 262px; left: 80px; font-size: 40px; color: var(--sec); }
+  #anio { position: absolute; top: 300px; left: 72px; font-size: 230px; line-height: 1; color: var(--accent); font-weight: 600; }
+  #grafo { position: absolute; top: 600px; left: 0; width: 1080px; height: 608px; }
+  #lista-titulo { position: absolute; top: 1300px; left: 80px; font-size: 34px; color: var(--sec); }
+  #lista { position: absolute; top: 1360px; left: 80px; right: 80px; height: 400px; overflow: hidden; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 14px 14px; }
+  .item { font-size: 38px; line-height: 1.2; padding: 10px 18px; border: 2px solid var(--accent); border-radius: 999px; }
+  .item.declarado { border-style: solid; color: var(--text); border-color: var(--sec); }
+  .item.inferido { border-style: dashed; border-color: var(--muted); color: var(--sec); }
+  .item.chico { font-size: 28px; padding: 6px 13px; border-width: 2px; }
+  #pie { position: absolute; bottom: 70px; left: 80px; right: 80px; font-size: 30px; line-height: 1.35; color: var(--sec); }
+  #pie b { color: var(--text); font-weight: 600; }
+  #leyenda { position: absolute; top: 1222px; left: 80px; font-size: 26px; color: var(--sec); }
+</style>
+</head>
+<body>
+  <div id="marca" class="mono"></div>
+  <div id="titulo"></div>
+  <div id="fase"></div>
+  <div id="anio" class="mono"></div>
+  <svg id="grafo" viewBox="0 0 960 540" aria-hidden="true"></svg>
+  <div id="lista-titulo"></div>
+  <div id="lista"></div>
+  <div id="leyenda"></div>
+  <div id="pie"></div>
+<!-- datos.js y escena.js los genera generar-video.ts en .ia-autorretrato/video/ -->
+<script src="datos.js"></script>
+<script src="escena.js"></script>
+<script>
+  const { crearEscena, render, W, H } = Escena;
+  const UI = window.UI;
+  document.documentElement.lang = UI.lang;
+  document.getElementById('marca').textContent = UI.marca;
+  document.getElementById('titulo').textContent = UI.titulo;
+  document.getElementById('leyenda').textContent = UI.leyenda;
+  const pie = document.getElementById('pie'); pie.textContent = UI.pie + ' · '; const b = document.createElement('b'); b.textContent = 'sergiomonsalve.com'; pie.appendChild(b);
+  const escena = crearEscena(window.CAMINO, 50);
+  const porId = new Map(escena.nodos.map(n => [n.id, n]));
+  const RAMAS = ['fundamentos', 'backend', 'web', 'datos-ml', 'iot', 'infra', 'agentes', 'educacion', 'escritura'];
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.getElementById('grafo');
+  const el = (tag, attrs, padre = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); padre.appendChild(e); return e; };
+
+  // Estructura fija: etiquetas de rama, aristas y nodos. Cada cuadro solo cambia opacidades.
+  RAMAS.forEach((r, i) => {
+    const t = el('text', { x: 6, y: ((i + 0.5) / RAMAS.length) * H + 6, 'font-size': 20, fill: '#666' });
+    t.textContent = UI.ramas[r] || r;
+  });
+  const aristas = escena.aristas.map(a => {
+    const de = porId.get(a.de), ha = porId.get(a.a);
+    return { a, l: el('line', { x1: de.x * W, y1: de.y * H, x2: ha.x * W, y2: ha.y * H, stroke: '#7a7a7a', 'stroke-width': 1.4 }) };
+  });
+  const nodos = escena.nodos.map(n => {
+    const g = el('g', {});
+    el('circle', {
+      cx: n.x * W, cy: n.y * H, r: n.hoy ? 9 : 6.5,
+      fill: n.evidencia === 'github' ? '#00ff88' : '#0f0f0f',
+      stroke: n.evidencia === 'inferido' ? '#777' : '#00ff88',
+      'stroke-width': 2.2, 'stroke-dasharray': n.evidencia === 'inferido' ? '3 3' : null,
+    }, g);
+    return { n, g };
+  });
+
+  const fase = document.getElementById('fase');
+  const anio = document.getElementById('anio');
+  const listaTitulo = document.getElementById('lista-titulo');
+  const lista = document.getElementById('lista');
+  let ultimaLista = '';
+
+  function pintarLista(titulo, items) {
+    const clave = titulo + '|' + items.map(n => n.id).join(',');
+    if (clave === ultimaLista) return;
+    ultimaLista = clave;
+    listaTitulo.textContent = titulo;
+    lista.textContent = '';
+    const chico = items.length > 8;
+    for (const n of items) {
+      const d = document.createElement('div');
+      d.className = 'item ' + n.evidencia + (chico ? ' chico' : '');
+      d.textContent = UI.lang === 'en' ? n.etiquetaEn : n.etiqueta;
+      lista.appendChild(d);
+    }
+  }
+
+  // Lista del año: lo que se encendió en ese año (o lo último que se encendió, para no dejar huecos).
+  let ultimoAnioConItems = null;
+  window.dibujar = function (t) {
+    const c = render(escena, t);
+    for (const { n, g } of nodos) g.setAttribute('opacity', c.opacidad[n.id] ?? 0);
+    for (const { a, l } of aristas) {
+      const o = Math.min(c.opacidad[a.de] ?? 0, c.opacidad[a.a] ?? 0);
+      l.setAttribute('stroke-opacity', (0.45 * o).toFixed(3));
+    }
+    fase.textContent = c.fase === 'raices' ? '' : (UI.fases[c.fase] || c.fase);
+    anio.textContent = c.fase === 'raices' ? UI.raices : (c.anio ?? '');
+    anio.style.fontSize = c.fase === 'raices' ? '170px' : '230px';
+
+    if (c.fase === 'presente') {
+      pintarLista(UI.hoy, escena.nodos.filter(n => n.hoy));
+    } else if (c.fase === 'raices') {
+      pintarLista(UI.sinFecha, escena.nodos.filter(n => n.anio === null && !n.hoy));
+    } else {
+      const delAnio = escena.nodos.filter(n => n.anio === c.anio && !n.hoy);
+      if (delAnio.length) ultimoAnioConItems = c.anio;
+      const año = delAnio.length ? c.anio : ultimoAnioConItems;
+      const items = escena.nodos.filter(n => n.anio === año && !n.hoy);
+      if (c.fase === 'avanzar' && t >= escena.duracion - 0.01) pintarLista(UI.final, escena.nodos.filter(n => n.hoy));
+      else pintarLista(año ? UI.aprendidoEn + ' ' + año : '', items);
+    }
+  };
+  window.estado = t => { const c = render(escena, t); return { anio: c.anio, fase: c.fase }; };
+  window.DURACION = escena.duracion;
+  window.dibujar(0);
+</script>
+</body>
+</html>
