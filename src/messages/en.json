@@ -63,7 +63,11 @@
     "privacyTitle": "Data policy",
     "propuestaTitle": "Proposal",
     "formacionTitle": "Training",
-    "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer."
+    "formacionDescription": "Learning Sprints for teams and live cohorts with the MAPA Method. Learn any skill in weeks with an EAFIT professor and AI engineer.",
+    "carpinteriaTitle": "CarpinterIA · Melamine furniture course",
+    "carpinteriaDescription": "Melamine carpentry course in Guarne, Colombia: a one-day express to build your first toolbox, or 4 sessions to start your own project. With an open-source cut-list calculator.",
+    "avesTitle": "Colombian bird guide",
+    "avesDescription": "The 500 most common birds in Colombia: search by name, size, color and habitat, with their rank in Colombia and Latin America."
   },
   "lineaAprendizaje": {
     "comment": "// learning to learn",
@@ -74,12 +78,15 @@
   },
   "nav": {
     "about": "About",
+    "biografia": "Biography",
     "blog": "Blog",
     "portfolio": "Portfolio",
     "recipes": "Recipes",
     "formacion": "Training",
     "cursos": "Courses",
+    "carpinteria": "CarpinterIA",
     "biblioteca": "Library",
+    "aves": "Birds",
     "aprender": "Learning to learn",
     "aprenderHref": "/learning-to-learn.html",
     "lineaAprendizaje": "Learning through time",
@@ -163,6 +170,7 @@
     "github": "GitHub",
     "demo": "Live demo",
     "viewCase": "View case →",
+    "visitSite": "Visit site ↗",
     "backToPortfolio": "← Portfolio",
     "empty": "coming soon",
     "status": {
@@ -740,5 +748,172 @@
     },
     "dominios": { "producto-web": "web product", "hongos-iot": "mushrooms & IoT", "educacion": "education", "agentes": "agents", "experimentos": "experiments" },
     "ramas": { "fundamentos": "foundations", "backend": "backend", "web": "web", "datos-ml": "data & ML", "iot": "IoT", "infra": "infra", "agentes": "agents", "educacion": "education", "escritura": "writing" }
+  },
+  "carpinteria": {
+    "comment": "// carpinter-ia",
+    "title": "CarpinterIA: learn to build your own melamine furniture",
+    "lede": "A hands-on course in Guarne, Antioquia, Colombia, in two formats: one day to start from scratch, or 4 sessions to kick off a real project for your home. The pieces are cut to order with edge banding and you assemble them yourself.",
+    "facts": [
+      "1-day express",
+      "4-session full course",
+      "Groups of 4 to 6",
+      "15 mm melamine",
+      "Guarne, Colombia"
+    ],
+    "express": {
+      "label": "Express course · 1 day",
+      "title": "Your first toolbox",
+      "desc": "For people who have never built furniture. In one day you learn to measure, drill and assemble square, and you take home a small toolbox you made yourself.",
+      "points": [
+        "For complete beginners",
+        "About 5 hours, with breaks",
+        "Pieces arrive pre-cut: no saw on day one",
+        "You take the toolbox home"
+      ]
+    },
+    "course": {
+      "label": "Full course · 4 sessions",
+      "title": "Your own project, one part at a time",
+      "desc": "You pick a project for your home: a closet, a nightstand, or a piece for the living room, dining room, kitchen, bedroom or bathroom. Each session is a small project that is part of the big one, and you finish the rest at home with the same technique.",
+      "sessions": [
+        {
+          "number": "01",
+          "title": "Tools and a simple carcass",
+          "text": "You safely use the drill, jigsaw and circular saw, and build a simple MDF box: the carcass of every piece of furniture."
+        },
+        {
+          "number": "02",
+          "title": "Practice module and order",
+          "text": "You build a module with a shelf, design your project and send its cut list with the edges that get banding."
+        },
+        {
+          "number": "03",
+          "title": "Your project's first module",
+          "text": "You drill with a jig, join with confirmat screws and leave your first module assembled, square and with its back on."
+        },
+        {
+          "number": "04",
+          "title": "Doors, drawers and a plan",
+          "text": "You fit hinges and drawer slides to that module and leave with a plan to build the remaining modules at home."
+        }
+      ]
+    },
+    "tools": {
+      "label": "The tools",
+      "title": "The AI part: error-free cut lists",
+      "desc": "Melamine furniture sizes depend on the board thickness and the clearances. I wrote tools that do the math so nobody has to do it by hand.",
+      "items": [
+        {
+          "title": "Cut-list calculator",
+          "text": "From width, depth, height, number of drawers and door type, it generates the full cut list."
+        },
+        {
+          "title": "Order sheet",
+          "text": "Turns the cut list into a printable sheet for the cutting shop, with the area of each material and the meters of edge banding for quoting."
+        },
+        {
+          "title": "Clearances page",
+          "text": "Door, drawer and back-panel clearances, generated from the same numbers the calculator uses."
+        }
+      ],
+      "repo": "See the code on GitHub →",
+      "guide": "Download the course guide (PDF, in Spanish) ↓"
+    },
+    "cta": {
+      "label": "// sign up",
+      "title": "Want a seat in the express or the full course?",
+      "whatsapp": "Message me on WhatsApp →",
+      "whatsappText": "Hi Sergio, I saw the CarpinterIA page and I'd like to know more about the melamine course."
+    }
+  },
+  "aves": {
+    "titulo": "Colombian bird guide",
+    "subtitulo": "The 500 most common birds in Colombia, ranked by how often they are recorded. Illustrations are arriving family by family.",
+    "buscarPlaceholder": "Search: tanager, Thraupis, azulejo...",
+    "queViste": "What bird did you see?",
+    "tamanoLabel": "Size",
+    "colorLabel": "Color",
+    "dondeLabel": "Where",
+    "tamano": {
+      "colibri": "Hummingbird",
+      "mirla": "Thrush",
+      "paloma": "Pigeon",
+      "gallinazo": "Vulture"
+    },
+    "color": {
+      "azul": "Blue",
+      "rojo": "Red",
+      "amarillo": "Yellow",
+      "verde": "Green",
+      "negro": "Black",
+      "cafe": "Brown",
+      "blanco": "White",
+      "gris": "Gray"
+    },
+    "habitat": {
+      "ciudad": "Town",
+      "bosque": "Forest",
+      "agua": "Water",
+      "paramo": "Páramo",
+      "campo": "Open country"
+    },
+    "resultados": "{n} species",
+    "vistaGaleria": "Gallery",
+    "vistaFamilia": "Group by family",
+    "sinResultados": "No species match those filters.",
+    "limpiarFiltros": "Clear filters",
+    "ilustracionEnCamino": "Illustration coming",
+    "variante": {"adulto": "Adult", "macho": "Male", "hembra": "Female", "juvenil": "Juvenile"},
+    "atribucion": "Occurrence data: GBIF.org (accessed {fecha}), CC BY 4.0 and CC0 records, including the eBird Observation Dataset (Cornell Lab of Ornithology). Threat status: Resolution 0126 of 2024, Colombian Ministry of Environment (CC0).",
+    "volver": "Bird guide",
+    "puestoColombia": "#{n} in Colombia",
+    "puestoLatam": "#{n} in Latin America",
+    "fueraTop": "Outside Latin America's top 4,000",
+    "familiaLabel": "Family",
+    "seccionIdentificacion": "Size and where it lives",
+    "seccionDistribucion": "Where it's seen in Colombia",
+    "seccionTemporada": "Records by month",
+    "seccionConservacion": "Conservation",
+    "altitud": "Elevation: {min}–{max} m",
+    "endemica": "Endemic to Colombia",
+    "residencia": {
+      "residente": "Year-round resident",
+      "migratoria-boreal": "Migrant from North America",
+      "migratoria-austral": "Migrant from southern South America"
+    },
+    "amenaza": {
+      "CR": "Critically endangered (CR)",
+      "EN": "Endangered (EN)",
+      "VU": "Vulnerable (VU)"
+    },
+    "sinAmenaza": "Not on Colombia's official list of threatened species.",
+    "escucharCanto": "Listen to its song on xeno-canto ↗",
+    "yoLoVi": "I saw it",
+    "yoLoViMarcado": "✓ Seen",
+    "referenciaMirla": "compared with a thrush (25 cm)",
+    "referenciaPaloma": "compared with a pigeon (33 cm)",
+    "mapaAlt": "Schematic map of Colombia's regions",
+    "region": {
+      "andina": "Andes",
+      "caribe": "Caribbean",
+      "pacifica": "Pacific",
+      "orinoquia": "Orinoquía (Llanos)",
+      "amazonia": "Amazon",
+      "insular": "Islands"
+    },
+    "meses": {
+      "0": "January",
+      "1": "February",
+      "2": "March",
+      "3": "April",
+      "4": "May",
+      "5": "June",
+      "6": "July",
+      "7": "August",
+      "8": "September",
+      "9": "October",
+      "10": "November",
+      "11": "December"
+    }
   }
 }

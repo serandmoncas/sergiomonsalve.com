@@ -1,0 +1,56 @@
+{
+  "2475466": {
+    "tamanoCm": 40,
+    "claseTamano": "gallinazo",
+    "colores": [
+      "azul",
+      "cafe",
+      "blanco"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      2600
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2475482": {
+    "tamanoCm": 29,
+    "claseTamano": "paloma",
+    "colores": [
+      "verde",
+      "blanco",
+      "cafe"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      1000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2475486": {
+    "tamanoCm": 19,
+    "claseTamano": "mirla",
+    "colores": [
+      "verde",
+      "blanco",
+      "cafe"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      2000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  }
+}

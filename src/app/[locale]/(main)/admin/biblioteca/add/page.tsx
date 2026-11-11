@@ -102,7 +102,7 @@ export default function AddBookPage() {
         ← Biblioteca
       </Link>
       <h1 className="text-xl font-bold text-text mb-1">Agregar libro</h1>
-      <p className="font-mono text-xs text-text-muted mb-8">// busca y selecciona, o llena el formulario</p>
+      <p className="font-mono text-xs text-text-muted mb-8">{'//'} busca y selecciona, o llena el formulario</p>
 
       <div className="mb-6 relative">
         <input
@@ -113,7 +113,7 @@ export default function AddBookPage() {
           className="w-full font-mono text-xs bg-surface border border-border rounded-sm px-3 py-2 text-text placeholder:text-text-muted focus:outline-none focus:border-accent"
         />
         {searching && (
-          <p className="font-mono text-xs text-text-muted mt-2">// buscando...</p>
+          <p className="font-mono text-xs text-text-muted mt-2">{'//'} buscando...</p>
         )}
         {results.length > 0 && (
           <div className="mt-2 border border-border rounded-sm bg-surface divide-y divide-border">

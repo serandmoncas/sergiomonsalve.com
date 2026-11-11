@@ -26,11 +26,11 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
-        <p className="font-mono text-xs text-accent mb-2">// admin</p>
+        <p className="font-mono text-xs text-accent mb-2">{'//'} admin</p>
         <h1 className="text-2xl font-extrabold text-text mb-8">Login</h1>
 
         {status === 'sent' ? (
-          <p className="font-mono text-xs text-accent">// check your email for the magic link</p>
+          <p className="font-mono text-xs text-accent">{'//'} check your email for the magic link</p>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -45,7 +45,7 @@ export default function AdminLoginPage() {
               />
             </div>
             {status === 'error' && (
-              <p className="font-mono text-xs text-red-400">// something went wrong</p>
+              <p className="font-mono text-xs text-red-400">{'//'} something went wrong</p>
             )}
             <button
               type="submit"

@@ -24,6 +24,7 @@ const mockProject: ProjectMeta = {
   stack: ['TypeScript', 'Python'],
   github: 'https://github.com/serandmoncas/slogs',
   demo: '',
+  links: [],
   status: 'active',
   featured: true,
   image: '/portfolio/slogs.png',
@@ -31,6 +32,7 @@ const mockProject: ProjectMeta = {
 
 const labels = {
   viewCase: 'Ver caso →',
+  visitSite: 'Visitar sitio ↗',
   status: { active: 'activo', archived: 'archivado' },
 }
 
@@ -64,5 +66,24 @@ describe('ProjectCard', () => {
   it('renders the status badge', () => {
     render(<ProjectCard project={mockProject} locale="es" labels={labels} />)
     expect(screen.getByText('activo')).toBeInTheDocument()
+  })
+
+  it('does not render a visit link when the project has no demo', () => {
+    render(<ProjectCard project={mockProject} locale="es" labels={labels} />)
+    expect(screen.queryByText('Visitar sitio ↗')).not.toBeInTheDocument()
+  })
+
+  it('renders an external visit link when the project has a demo', () => {
+    render(
+      <ProjectCard
+        project={{ ...mockProject, demo: 'https://slogs.example.com' }}
+        locale="es"
+        labels={labels}
+      />
+    )
+    const visit = screen.getByRole('link', { name: 'Visitar sitio ↗' })
+    expect(visit).toHaveAttribute('href', 'https://slogs.example.com')
+    expect(visit).toHaveAttribute('target', '_blank')
+    expect(visit).toHaveAttribute('rel', 'noopener noreferrer')
   })
 })

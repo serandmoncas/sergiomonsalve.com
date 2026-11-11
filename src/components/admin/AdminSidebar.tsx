@@ -25,7 +25,7 @@ export default function AdminSidebar() {
   return (
     <aside className="w-full lg:w-48 flex-shrink-0 flex flex-col gap-1">
       <p className="font-mono text-[10px] text-text-muted uppercase tracking-widest mb-3 px-2">
-        // admin panel
+        {'//'} admin panel
       </p>
       {NAV.map(({ href, label, icon }) => {
         const active = href === '/admin'

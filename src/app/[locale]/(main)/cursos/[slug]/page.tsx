@@ -107,7 +107,7 @@ export default async function CourseDetailPage({
         </div>
 
         <div className="md:w-72">
-          <p className="font-mono text-xs text-accent mb-4">// contenido</p>
+          <p className="font-mono text-xs text-accent mb-4">{'//'} contenido</p>
           {modules.map((mod, idx) => (
             <div key={mod.id} className="mb-4">
               <p className="font-mono text-xs text-text font-semibold mb-1">

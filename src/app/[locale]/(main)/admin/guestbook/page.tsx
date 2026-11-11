@@ -17,13 +17,14 @@ export default function AdminGuestbookPage() {
   const [entries, setEntries] = useState<Entry[]>([])
   const [loading, setLoading] = useState(true)
 
-  async function load() {
-    const res = await fetch('/api/admin/guestbook')
-    if (res.ok) setEntries(await res.json())
-    setLoading(false)
-  }
-
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    async function load() {
+      const res = await fetch('/api/admin/guestbook')
+      if (res.ok) setEntries(await res.json())
+      setLoading(false)
+    }
+    load()
+  }, [])
 
   async function setApproved(id: string, approved: boolean) {
     await fetch(`/api/admin/guestbook/${id}`, {
@@ -39,12 +40,12 @@ export default function AdminGuestbookPage() {
     setEntries(prev => prev.filter(e => e.id !== id))
   }
 
-  if (loading) return <p className="font-mono text-xs text-text-muted">// cargando...</p>
+  if (loading) return <p className="font-mono text-xs text-text-muted">{'//'} cargando...</p>
 
   return (
     <div>
       <h1 className="text-xl font-bold text-text mb-1">Firmas</h1>
-      <p className="font-mono text-xs text-text-muted mb-8">// libro de firmas</p>
+      <p className="font-mono text-xs text-text-muted mb-8">{'//'} libro de firmas</p>
 
       {entries.length === 0 && (
         <p className="font-mono text-xs text-text-muted">No hay entradas.</p>

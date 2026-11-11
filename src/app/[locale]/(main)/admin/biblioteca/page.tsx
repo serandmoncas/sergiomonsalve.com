@@ -38,15 +38,16 @@ export default function AdminBibliotecaPage() {
   const [saved, setSaved] = useState<string | null>(null)
   const [search, setSearch] = useState('')
 
-  async function fetchBooks() {
-    const res = await fetch('/api/admin/biblioteca')
-    if (res.status === 401) { router.push('/admin/login'); return }
-    const data = await res.json()
-    setBooks(data.books ?? [])
-    setLoading(false)
-  }
-
-  useEffect(() => { fetchBooks() }, [])
+  useEffect(() => {
+    async function fetchBooks() {
+      const res = await fetch('/api/admin/biblioteca')
+      if (res.status === 401) { router.push('/admin/login'); return }
+      const data = await res.json()
+      setBooks(data.books ?? [])
+      setLoading(false)
+    }
+    fetchBooks()
+  }, [router])
 
   async function update(bookId: string, source: 'audible' | 'manual', patch: { visible?: boolean; status?: BookStatus }) {
     const prev = books.find(b => b.id === bookId)
@@ -93,11 +94,11 @@ export default function AdminBibliotecaPage() {
         </Link>
       </div>
       <p className="font-mono text-xs text-text-muted mb-8">
-        // {books.length} libros · {hiddenCount} ocultos
+        {'//'} {books.length} libros · {hiddenCount} ocultos
       </p>
 
       {loading ? (
-        <p className="font-mono text-xs text-text-muted">// cargando...</p>
+        <p className="font-mono text-xs text-text-muted">{'//'} cargando...</p>
       ) : (
         <>
           <input
@@ -120,7 +121,7 @@ export default function AdminBibliotecaPage() {
               />
             ))}
             {filtered.length === 0 && (
-              <p className="font-mono text-xs text-text-muted">// sin resultados</p>
+              <p className="font-mono text-xs text-text-muted">{'//'} sin resultados</p>
             )}
           </div>
         </>

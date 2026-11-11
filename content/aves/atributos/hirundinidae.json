@@ -1,0 +1,131 @@
+{
+  "2489208": {
+    "tamanoCm": 12,
+    "claseTamano": "colibri",
+    "colores": [
+      "azul",
+      "blanco"
+    ],
+    "habitats": [
+      "ciudad",
+      "campo",
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      3500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2489203": {
+    "tamanoCm": 13,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "gris"
+    ],
+    "habitats": [
+      "agua",
+      "campo"
+    ],
+    "altitudM": [
+      0,
+      2000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2489177": {
+    "tamanoCm": 13.5,
+    "claseTamano": "mirla",
+    "colores": [
+      "gris",
+      "cafe"
+    ],
+    "habitats": [
+      "paramo",
+      "campo"
+    ],
+    "altitudM": [
+      2400,
+      4000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2489133": {
+    "tamanoCm": 18,
+    "claseTamano": "mirla",
+    "colores": [
+      "azul",
+      "gris",
+      "blanco"
+    ],
+    "habitats": [
+      "ciudad",
+      "agua",
+      "campo"
+    ],
+    "altitudM": [
+      0,
+      2000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "5230759": {
+    "tamanoCm": 13.5,
+    "claseTamano": "mirla",
+    "colores": [
+      "verde",
+      "blanco"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      800
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "9515886": {
+    "tamanoCm": 17,
+    "claseTamano": "mirla",
+    "colores": [
+      "azul",
+      "cafe"
+    ],
+    "habitats": [
+      "agua",
+      "campo",
+      "ciudad"
+    ],
+    "altitudM": [
+      0,
+      3000
+    ],
+    "residencia": "migratoria-boreal",
+    "endemica": false
+  },
+  "2489136": {
+    "tamanoCm": 17,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "blanco"
+    ],
+    "habitats": [
+      "agua",
+      "campo"
+    ],
+    "altitudM": [
+      0,
+      1000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  }
+}

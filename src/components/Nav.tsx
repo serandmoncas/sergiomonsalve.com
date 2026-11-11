@@ -13,6 +13,7 @@ export default async function Nav() {
   // Las mismas opciones, agrupadas, para el menú del celular y la tablet.
   const grupos: GrupoMenu[] = [
     { items: [
+      { href: '/biografia', label: t('biografia') },
       { href: '/blog', label: t('blog') },
       { href: '/portfolio', label: t('portfolio') },
       { href: '/recipes', label: t('recipes') },
@@ -20,7 +21,9 @@ export default async function Nav() {
     { titulo: t('grupoAprender'), items: [
       { href: '/formacion', label: t('formacion') },
       { href: '/cursos', label: t('cursos') },
+      { href: '/carpinteria', label: t('carpinteria') },
       { href: '/biblioteca', label: t('biblioteca') },
+      { href: '/aves', label: t('aves') },
       { href: t('aprenderHref'), label: t('aprender'), estatico: true },
       { href: '/aprendizaje-en-el-tiempo', label: t('lineaAprendizaje') },
       { href: t('dineroHref'), label: t('dinero'), estatico: true },
@@ -36,8 +39,11 @@ export default async function Nav() {
       <Link href="/" className="font-mono text-sm font-bold text-accent">
         SM
       </Link>
-      {/* Computador (≥ lg): el menú completo en una fila. Mide ~880 px, por eso no se muestra antes de lg. */}
-      <div className="hidden lg:flex items-center gap-6">
+      {/* Computador (≥ 2xl): el menú completo en una fila. Mide ~1300 px, por eso no se muestra antes de 2xl. */}
+      <div className="hidden 2xl:flex items-center gap-6">
+        <Link href="/biografia" className="text-xs text-text-secondary hover:text-text transition-colors">
+          {t('biografia')}
+        </Link>
         <Link href="/blog" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('blog')}
         </Link>
@@ -53,8 +59,14 @@ export default async function Nav() {
         <Link href="/cursos" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('cursos')}
         </Link>
+        <Link href="/carpinteria" className="text-xs text-text-secondary hover:text-text transition-colors">
+          {t('carpinteria')}
+        </Link>
         <Link href="/biblioteca" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('biblioteca')}
+        </Link>
+        <Link href="/aves" className="text-xs text-text-secondary hover:text-text transition-colors">
+          {t('aves')}
         </Link>
         {/* Página estática en public/: va con <a> porque no pasa por las rutas con idioma */}
         <a href={t('aprenderHref')} className="text-xs text-text-secondary hover:text-text transition-colors">
@@ -76,7 +88,7 @@ export default async function Nav() {
         <UserMenu isLoggedIn={!!user} />
       </div>
       {/* Celular y tablet: idioma, sesión y el botón ☰ */}
-      <div className="flex lg:hidden items-center gap-4">
+      <div className="flex 2xl:hidden items-center gap-4">
         <LocaleSwitcher />
         <UserMenu isLoggedIn={!!user} />
         <MenuMovil grupos={grupos} textos={{ abrir: t('menuAbrir'), cerrar: t('menuCerrar') }} />

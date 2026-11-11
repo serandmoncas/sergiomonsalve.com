@@ -459,6 +459,25 @@
   font-weight: 500;
 }
 
+/* Próximo encuentro (pendiente) */
+.experiencias-ia .ses-row.pendiente {
+  border-left: 4px solid var(--cuero);
+  background: var(--papel-2);
+}
+
+.experiencias-ia .ses-row.pendiente:hover {
+  background: var(--papel-2);
+}
+
+.experiencias-ia .ses-agenda {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.experiencias-ia .ses-agenda li {
+  margin-bottom: 2px;
+}
+
 /* Detalle de sesión: hallazgos y detalle largo */
 .experiencias-ia .gancho {
   font-size: clamp(18px, 2.4vw, 21px);

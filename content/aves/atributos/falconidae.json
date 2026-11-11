@@ -1,0 +1,80 @@
+{
+  "2480989": {
+    "tamanoCm": 55,
+    "claseTamano": "gallinazo",
+    "colores": [
+      "negro",
+      "blanco"
+    ],
+    "habitats": [
+      "campo",
+      "agua",
+      "ciudad"
+    ],
+    "altitudM": [
+      0,
+      3000
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "9685907": {
+    "tamanoCm": 25,
+    "claseTamano": "mirla",
+    "colores": [
+      "cafe",
+      "gris",
+      "blanco"
+    ],
+    "habitats": [
+      "campo",
+      "ciudad",
+      "paramo"
+    ],
+    "altitudM": [
+      0,
+      3500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2481071": {
+    "tamanoCm": 50,
+    "claseTamano": "gallinazo",
+    "colores": [
+      "blanco",
+      "cafe",
+      "negro"
+    ],
+    "habitats": [
+      "bosque",
+      "campo"
+    ],
+    "altitudM": [
+      0,
+      1800
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "2481033": {
+    "tamanoCm": 25,
+    "claseTamano": "mirla",
+    "colores": [
+      "negro",
+      "cafe",
+      "blanco"
+    ],
+    "habitats": [
+      "bosque",
+      "campo",
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      1600
+    ],
+    "residencia": "residente",
+    "endemica": false
+  }
+}

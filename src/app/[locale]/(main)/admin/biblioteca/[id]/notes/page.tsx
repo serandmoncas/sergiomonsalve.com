@@ -58,7 +58,7 @@ export default function BookNotesPage() {
     setNotes(n => ({ ...n, highlights: n.highlights.filter((_, idx) => idx !== i) }))
   }
 
-  if (loading) return <p className="font-mono text-xs text-text-muted">// cargando...</p>
+  if (loading) return <p className="font-mono text-xs text-text-muted">{'//'} cargando...</p>
 
   return (
     <div>
@@ -70,7 +70,7 @@ export default function BookNotesPage() {
       </Link>
 
       <h1 className="text-xl font-bold text-text mb-1">Notas</h1>
-      <p className="font-mono text-xs text-text-muted mb-8 truncate">// {bookTitle}</p>
+      <p className="font-mono text-xs text-text-muted mb-8 truncate">{'//'} {bookTitle}</p>
 
       <section className="mb-8">
         <p className="font-mono text-[10px] text-text-muted uppercase tracking-widest mb-3">Rating</p>
@@ -110,7 +110,7 @@ export default function BookNotesPage() {
             </div>
           ))}
           {notes.highlights.length === 0 && (
-            <p className="font-mono text-xs text-text-muted">// sin highlights</p>
+            <p className="font-mono text-xs text-text-muted">{'//'} sin highlights</p>
           )}
         </div>
         <div className="flex gap-2">
@@ -161,7 +161,7 @@ export default function BookNotesPage() {
           <div className="mdx-prose min-h-[10rem] border border-border rounded-sm p-4 bg-surface">
             {notes.review_md
               ? <ReactMarkdown>{notes.review_md}</ReactMarkdown>
-              : <p className="font-mono text-xs text-text-muted">// sin contenido</p>
+              : <p className="font-mono text-xs text-text-muted">{'//'} sin contenido</p>
             }
           </div>
         )}

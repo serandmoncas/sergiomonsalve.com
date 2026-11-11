@@ -2,6 +2,12 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { aboutContent, type AboutLocale } from './content'
 
+const CV_BASE_URL = 'https://orlniujfwolyinsuezcu.supabase.co/storage/v1/object/public/assets'
+const CV_FILES = [
+  { language: 'Español', file: 'cv-sergio-monsalve-es.pdf' },
+  { language: 'English', file: 'cv-sergio-monsalve.pdf' },
+]
+
 function bold(text: string) {
   const parts = text.split(/\*\*(.+?)\*\*/g)
   return parts.map((part, i) =>
@@ -51,7 +57,7 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
       <section className="border-b border-border py-10">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 items-start">
-            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">// quién soy</p>
+            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">{'//'} quién soy</p>
             <p className="text-xl md:text-2xl leading-relaxed text-text max-w-2xl">
               {c.lede.split('traductor entre datos y decisiones').length > 1
                 ? <>
@@ -75,7 +81,7 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
       <section className="border-b border-border py-10">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 items-start">
-            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">// stack</p>
+            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">{'//'} stack</p>
             <div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 mb-8">
                 {c.stackGroups.map(group => (
@@ -98,15 +104,18 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
                 </div>
               </div>
               <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://orlniujfwolyinsuezcu.supabase.co/storage/v1/object/public/assets/cv-sergio-monsalve.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download
-                  className="inline-flex items-center gap-2 bg-text text-background font-mono text-xs font-bold px-4 py-2.5 rounded-sm hover:bg-accent transition-colors"
-                >
-                  {downloadCvLabel}
-                </a>
+                {CV_FILES.map(cv => (
+                  <a
+                    key={cv.file}
+                    href={`${CV_BASE_URL}/${cv.file}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    className="inline-flex items-center gap-2 bg-text text-background font-mono text-xs font-bold px-4 py-2.5 rounded-sm hover:bg-accent transition-colors"
+                  >
+                    {downloadCvLabel} · {cv.language}
+                  </a>
+                ))}
                 <Link
                   href="/portfolio"
                   className="inline-flex items-center gap-2 border border-border font-mono text-xs text-text-secondary px-4 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors"
@@ -169,7 +178,7 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
       <section className="border-b border-border py-16">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-[180px_1fr_1fr] gap-8 md:gap-10">
-            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">// también</p>
+            <p className="font-mono text-xs text-text-muted uppercase tracking-widest pt-1">{'//'} también</p>
             <div>
               <h2 className="text-xl font-bold text-text mb-5">{eduTitle}</h2>
               <div className="space-y-4">
@@ -296,6 +305,12 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
                 className="font-mono text-xs text-text-secondary border border-border px-4 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors inline-block"
               >
                 {c.parapenteLink}
+              </Link>
+              <Link
+                href="/biografia"
+                className="font-mono text-xs text-text-secondary border border-border px-4 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors inline-block ml-3"
+              >
+                {c.biografiaLink}
               </Link>
             </div>
           </div>

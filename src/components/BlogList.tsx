@@ -43,7 +43,7 @@ export default function BlogList({ posts, locale }: { posts: PostMeta[]; locale:
       )}
 
       {filtered.length === 0 ? (
-        <p className="font-mono text-xs text-text-muted">// {t('empty')}</p>
+        <p className="font-mono text-xs text-text-muted">{'//'} {t('empty')}</p>
       ) : (
         <div className="space-y-4">
           {filtered.map(post => (

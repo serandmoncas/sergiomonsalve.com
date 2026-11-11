@@ -63,7 +63,11 @@
     "privacyTitle": "Tratamiento de datos",
     "propuestaTitle": "Propuesta",
     "formacionTitle": "Formación",
-    "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA."
+    "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA.",
+    "carpinteriaTitle": "CarpinterIA · Curso de melamina",
+    "carpinteriaDescription": "Curso de carpintería en melamina en Guarne: un express de un día para armar tu primera caja de herramientas, o 4 sesiones para empezar tu propio proyecto. Con calculadora de despiece abierta.",
+    "avesTitle": "Guía de aves de Colombia",
+    "avesDescription": "Las 500 aves más comunes de Colombia: búscalas por nombre, tamaño, color y hábitat, con su puesto en Colombia y en Latinoamérica."
   },
   "lineaAprendizaje": {
     "comment": "// aprender a aprender",
@@ -74,12 +78,15 @@
   },
   "nav": {
     "about": "Sobre mí",
+    "biografia": "Biografía",
     "blog": "Blog",
     "portfolio": "Portfolio",
     "recipes": "Recetas",
     "formacion": "Formación",
     "cursos": "Cursos",
+    "carpinteria": "CarpinterIA",
     "biblioteca": "Biblioteca",
+    "aves": "Aves",
     "aprender": "Aprender a aprender",
     "aprenderHref": "/aprender-a-aprender.html",
     "lineaAprendizaje": "El aprendizaje en el tiempo",
@@ -163,6 +170,7 @@
     "github": "GitHub",
     "demo": "Demo en vivo",
     "viewCase": "Ver caso →",
+    "visitSite": "Visitar sitio ↗",
     "backToPortfolio": "← Portfolio",
     "empty": "próximamente",
     "status": {
@@ -740,5 +748,172 @@
     },
     "dominios": { "producto-web": "producto web", "hongos-iot": "hongos e IoT", "educacion": "educación", "agentes": "agentes", "experimentos": "experimentos" },
     "ramas": { "fundamentos": "fundamentos", "backend": "backend", "web": "web", "datos-ml": "datos y ML", "iot": "IoT", "infra": "infra", "agentes": "agentes", "educacion": "educación", "escritura": "escritura" }
+  },
+  "carpinteria": {
+    "comment": "// carpinter-ia",
+    "title": "CarpinterIA: aprende a hacer tus propios muebles en melamina",
+    "lede": "Un curso práctico en Guarne, Antioquia, en dos formatos: un día para empezar desde cero, o 4 sesiones para arrancar un proyecto de verdad para tu casa. Las piezas se mandan a cortar con tapacanto y las armas tú mismo.",
+    "facts": [
+      "Express de 1 día",
+      "Completo de 4 sesiones",
+      "Grupos de 4 a 6 personas",
+      "Melamina de 15 mm",
+      "Guarne, Antioquia"
+    ],
+    "express": {
+      "label": "Curso express · 1 día",
+      "title": "Tu primera caja de herramientas",
+      "desc": "Para quien nunca ha hecho un mueble. En un día aprendes a medir, perforar y ensamblar a escuadra, y te llevas una caja de herramientas pequeña hecha por ti.",
+      "points": [
+        "Para gente sin experiencia",
+        "Unas 5 horas, con pausas",
+        "Las piezas llegan cortadas: nada de sierra el primer día",
+        "Te llevas la caja a tu casa"
+      ]
+    },
+    "course": {
+      "label": "Curso completo · 4 sesiones",
+      "title": "Tu propio proyecto, por partes",
+      "desc": "Escoges un proyecto para tu casa: un closet, un nochero o un mueble para la sala, el comedor, la cocina, la habitación o el baño. Cada sesión es un proyecto pequeño que hace parte del grande, y lo que falta lo terminas en casa con la misma técnica.",
+      "sessions": [
+        {
+          "number": "01",
+          "title": "Herramientas y un cuerpo simple",
+          "text": "Usas con seguridad el taladro, la caladora y la circular, y armas en MDF una caja simple: el cuerpo de todo mueble."
+        },
+        {
+          "number": "02",
+          "title": "Módulo de práctica y pedido",
+          "text": "Armas un módulo con entrepaño, diseñas tu proyecto y envías su lista de corte con los cantos que llevan tapacanto."
+        },
+        {
+          "number": "03",
+          "title": "El primer módulo de tu proyecto",
+          "text": "Perforas con plantilla, unes con confirmat y dejas tu primer módulo armado, a escuadra y con el fondo puesto."
+        },
+        {
+          "number": "04",
+          "title": "Puertas, cajones y plan",
+          "text": "Le pones bisagras y correderas a ese módulo y sales con el plan para armar en casa los módulos que faltan."
+        }
+      ]
+    },
+    "tools": {
+      "label": "Las herramientas",
+      "title": "La parte de IA: despieces sin errores",
+      "desc": "Las medidas de un mueble en melamina dependen del espesor del tablero y de las holguras. Escribí herramientas que hacen esas cuentas para que nadie tenga que hacerlas a mano.",
+      "items": [
+        {
+          "title": "Calculadora de despiece",
+          "text": "Con el ancho, el fondo, el alto, el número de cajones y el tipo de puerta, genera la lista de corte completa."
+        },
+        {
+          "title": "Hoja de pedido",
+          "text": "Convierte la lista de corte en una hoja imprimible para el aserrío, con el área de cada material y los metros de tapacanto para cotizar."
+        },
+        {
+          "title": "Página de holguras",
+          "text": "Las holguras de puertas, cajones y fondos, generadas con los mismos números que usa la calculadora."
+        }
+      ],
+      "repo": "Ver el código en GitHub →",
+      "guide": "Descargar la guía del curso (PDF) ↓"
+    },
+    "cta": {
+      "label": "// inscripciones",
+      "title": "¿Quieres un cupo en el express o en el curso completo?",
+      "whatsapp": "Escríbeme por WhatsApp →",
+      "whatsappText": "Hola Sergio, vi la página de CarpinterIA y quiero saber más del curso de melamina."
+    }
+  },
+  "aves": {
+    "titulo": "Guía de aves de Colombia",
+    "subtitulo": "Las 500 aves más comunes de Colombia, ordenadas por cuántas veces se registran. Las ilustraciones van llegando por familias.",
+    "buscarPlaceholder": "Buscar: azulejo, Thraupis, tanager...",
+    "queViste": "¿Qué ave viste?",
+    "tamanoLabel": "Tamaño",
+    "colorLabel": "Color",
+    "dondeLabel": "Dónde",
+    "tamano": {
+      "colibri": "Colibrí",
+      "mirla": "Mirla",
+      "paloma": "Paloma",
+      "gallinazo": "Gallinazo"
+    },
+    "color": {
+      "azul": "Azul",
+      "rojo": "Rojo",
+      "amarillo": "Amarillo",
+      "verde": "Verde",
+      "negro": "Negro",
+      "cafe": "Café",
+      "blanco": "Blanco",
+      "gris": "Gris"
+    },
+    "habitat": {
+      "ciudad": "Ciudad",
+      "bosque": "Bosque",
+      "agua": "Agua",
+      "paramo": "Páramo",
+      "campo": "Campo"
+    },
+    "resultados": "{n} especies",
+    "vistaGaleria": "Galería",
+    "vistaFamilia": "Agrupar por familia",
+    "sinResultados": "Ninguna especie coincide con esos filtros.",
+    "limpiarFiltros": "Limpiar filtros",
+    "ilustracionEnCamino": "Ilustración en camino",
+    "variante": {"adulto": "Adulto", "macho": "Macho", "hembra": "Hembra", "juvenil": "Juvenil"},
+    "atribucion": "Datos de ocurrencia: GBIF.org (consultado {fecha}), registros CC BY 4.0 y CC0, incluye eBird Observation Dataset (Cornell Lab of Ornithology). Amenaza: Resolución 0126 de 2024, Ministerio de Ambiente (CC0).",
+    "volver": "Guía de aves",
+    "puestoColombia": "#{n} en Colombia",
+    "puestoLatam": "#{n} en Latinoamérica",
+    "fueraTop": "Fuera del top 4.000 de Latinoamérica",
+    "familiaLabel": "Familia",
+    "seccionIdentificacion": "Tamaño y dónde vive",
+    "seccionDistribucion": "Dónde se ve en Colombia",
+    "seccionTemporada": "Registros por mes",
+    "seccionConservacion": "Conservación",
+    "altitud": "Altitud: {min}–{max} m",
+    "endemica": "Endémica de Colombia",
+    "residencia": {
+      "residente": "Residente todo el año",
+      "migratoria-boreal": "Migratoria desde Norteamérica",
+      "migratoria-austral": "Migratoria desde el sur del continente"
+    },
+    "amenaza": {
+      "CR": "En peligro crítico (CR)",
+      "EN": "En peligro (EN)",
+      "VU": "Vulnerable (VU)"
+    },
+    "sinAmenaza": "No está en la lista oficial de especies amenazadas de Colombia.",
+    "escucharCanto": "Escuchar su canto en xeno-canto ↗",
+    "yoLoVi": "Yo lo vi",
+    "yoLoViMarcado": "✓ Lo vi",
+    "referenciaMirla": "comparada con una mirla (25 cm)",
+    "referenciaPaloma": "comparada con una paloma (33 cm)",
+    "mapaAlt": "Mapa esquemático de las regiones de Colombia",
+    "region": {
+      "andina": "Andina",
+      "caribe": "Caribe",
+      "pacifica": "Pacífica",
+      "orinoquia": "Orinoquía",
+      "amazonia": "Amazonía",
+      "insular": "Insular"
+    },
+    "meses": {
+      "0": "Enero",
+      "1": "Febrero",
+      "2": "Marzo",
+      "3": "Abril",
+      "4": "Mayo",
+      "5": "Junio",
+      "6": "Julio",
+      "7": "Agosto",
+      "8": "Septiembre",
+      "9": "Octubre",
+      "10": "Noviembre",
+      "11": "Diciembre"
+    }
   }
 }

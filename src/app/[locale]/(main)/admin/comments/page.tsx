@@ -19,19 +19,18 @@ export default function AdminCommentsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchComments()
-  }, [])
-
-  async function fetchComments() {
-    const res = await fetch('/api/admin/comments')
-    if (res.status === 401) {
-      router.push('/admin/login')
-      return
+    async function fetchComments() {
+      const res = await fetch('/api/admin/comments')
+      if (res.status === 401) {
+        router.push('/admin/login')
+        return
+      }
+      const data = await res.json()
+      setComments(data.comments ?? [])
+      setLoading(false)
     }
-    const data = await res.json()
-    setComments(data.comments ?? [])
-    setLoading(false)
-  }
+    fetchComments()
+  }, [router])
 
   async function approve(id: string) {
     await fetch(`/api/admin/comments/${id}`, { method: 'PATCH' })
@@ -50,21 +49,21 @@ export default function AdminCommentsPage() {
   return (
     <div>
       <h1 className="text-xl font-bold text-text mb-1">Comentarios</h1>
-      <p className="font-mono text-xs text-text-muted mb-8">// entradas de blog</p>
+      <p className="font-mono text-xs text-text-muted mb-8">{'//'} entradas de blog</p>
 
       {loading ? (
-        <p className="font-mono text-xs text-text-muted">// cargando...</p>
+        <p className="font-mono text-xs text-text-muted">{'//'} cargando...</p>
       ) : (
         <>
           <section className="mb-10">
-            <p className="font-mono text-xs text-accent mb-4">// pendientes ({pending.length})</p>
+            <p className="font-mono text-xs text-accent mb-4">{'//'} pendientes ({pending.length})</p>
             {pending.length === 0
-              ? <p className="font-mono text-xs text-text-muted">// sin pendientes</p>
+              ? <p className="font-mono text-xs text-text-muted">{'//'} sin pendientes</p>
               : <div className="space-y-3">{pending.map(c => <CommentRow key={c.id} comment={c} onApprove={approve} onDelete={remove} />)}</div>
             }
           </section>
           <section>
-            <p className="font-mono text-xs text-text-muted mb-4">// aprobados ({approved.length})</p>
+            <p className="font-mono text-xs text-text-muted mb-4">{'//'} aprobados ({approved.length})</p>
             {approved.length > 0 && (
               <div className="space-y-3">{approved.map(c => <CommentRow key={c.id} comment={c} onDelete={remove} />)}</div>
             )}
