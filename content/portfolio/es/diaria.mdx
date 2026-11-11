@@ -1,0 +1,47 @@
+---
+title: DiarIA
+description: Mi propia app de notas enlazadas centrada en el diario — Markdown plano compatible con Obsidian, núcleo en TypeScript puro y una metodología de desarrollo con IA basada en specs, TDD y revisión adversarial.
+date: "2026-10-28"
+role: Creador
+stack: [TypeScript, pnpm, Vitest, Node.js, Tauri (próximamente), Claude Code]
+github: ""
+demo: ""
+links: []
+status: active
+featured: true
+image: ""
+---
+
+## El problema
+
+Llevo años escribiendo mi diario en Obsidian con una rutina muy concreta: abro la nota del día, enlazo a las personas y proyectos con los que hablé y, en la nota de cada una, escribo una sección con la fecha. Funciona, pero cada paso es manual: buscar la sección, crearla, mover tareas, recordar en qué día se habló de qué. Y Obsidian es una caja cerrada a la que no le puedo dar forma.
+
+## La solución
+
+**DiarIA** es una app propia de notas enlazadas que hace ese ciclo por mí, sobre la misma carpeta de Markdown. Puede convivir con Obsidian: no inventa formato y no cambia lo que no toco.
+
+El núcleo ya resuelve el ciclo completo del diario:
+- qué notas son días y cómo moverse entre ellos;
+- a qué nota apunta cada enlace `[[…]]`, con las mismas reglas que Obsidian;
+- quién menciona cada nota y en qué día (backlinks);
+- dónde va la sección `# [[fecha]]` del día en la nota de cada persona;
+- marcar tareas con la fecha de hecho, en el formato del plugin Tasks;
+- rellenar la plantilla del día sin ejecutar código.
+
+## Decisiones técnicas
+
+**Núcleo puro en TypeScript.** El núcleo no toca el disco ni la interfaz: lee y escribe a través de una interfaz mínima. Así el mismo código podrá correr en el Mac, el celular y la web.
+
+**Byte a byte.** Abrir y guardar una nota sin editarla no escribe el archivo: no cambia ni un salto de línea, ni la codificación, ni la fecha de modificación. Al editar, sólo cambia lo que escribí. Así ni Obsidian ni Git ven cambios fantasma.
+
+**Sala limpia.** Obsidian es software cerrado: su comportamiento se estudia sólo desde la documentación pública y desde lo que se observa, nunca leyendo su código.
+
+**Privacidad por diseño.** Es un diario personal: ninguna nota real entra al repositorio. Los tests usan notas inventadas, una guarda automática bloquea nombres reales en cada commit, y las pruebas contra una copia de mi bóveda real sólo imprimen conteos.
+
+## Cómo se construye
+
+Cada función sigue el mismo ciclo con Claude Code: una spec con criterios de aceptación que yo apruebo, tests escritos primero (TDD), verificación contra una copia de mi bóveda real y una **revisión adversarial** hecha por un agente distinto que intenta romper el código. Esas revisiones han encontrado fallos reales que los tests no veían, y cada uno entra con su test antes de corregirse.
+
+## Estado
+
+El núcleo está casi completo y sigue la primera app de escritorio, con Tauri. Después vendrán el celular, la sincronización con un repositorio Git privado y la web.
