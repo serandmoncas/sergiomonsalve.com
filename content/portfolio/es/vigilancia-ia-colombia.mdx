@@ -1,0 +1,41 @@
+---
+title: Vigilancia con IA en Colombia
+description: Investigación en dos partes sobre la vigilancia privada asistida por IA, sensores y dispositivos en Colombia — tecnología, evidencia, regulación, costos y hacia dónde va el negocio —, hecha con agentes de IA en paralelo y publicada como serie en el blog.
+date: "2026-11-10"
+role: Investigador
+stack: [Claude Code, Agentes de IA en paralelo, Investigación documental, MDX]
+github: ""
+demo: ""
+links:
+  - label: "Parte 1: La vigilancia virtual ahorra, pero no llega"
+    url: "/es/blog/2026-11-06-vigilancia-virtual-ia-colombia"
+  - label: "Parte 2: La IA no va a reemplazar al vigilante"
+    url: "/es/blog/2026-11-10-futuro-vigilancia-ia-colombia"
+status: active
+featured: false
+image: ""
+---
+
+## El problema
+
+En Colombia, quitar el guarda de la portería se volvió una conversación de asamblea. Un puesto de vigilancia 24 horas cuesta cerca de $19,6 millones al mes, y del otro lado aparecen ofertas de portería virtual, cámaras con IA y centrales remotas por una fracción de eso. Casi toda la información disponible viene de quienes venden esas soluciones.
+
+Empecé por una pregunta personal: si podía construir mis propias cámaras de seguridad con un ESP32. Esa pregunta me llevó a una más grande sobre qué hay de real en la vigilancia con IA y hacia dónde va el sector.
+
+## La investigación
+
+La hice en dos rondas, cada una coordinada con Claude Code como varias líneas de investigación en paralelo, con notas por fuente y un informe que las cruza:
+
+- **Parte 1, para quien compra seguridad** — cinco líneas: tecnología, evidencia de eficacia, regulación colombiana, mercado y negocio, e implementación por tipo de sitio. Conclusión: la IA detecta y verifica, pero alguien tiene que llegar.
+- **Parte 2, para quien dirige una empresa de vigilancia** — cuatro líneas: trayectoria internacional, transformación de empresas tradicionales, motores del cambio en Colombia de 2026 a 2030 y nuevos modelos de negocio. Conclusión: la IA no reemplaza al vigilante; reemplaza a la empresa que solo vende horas.
+
+## Decisiones de método
+
+- **Separar la evidencia del marketing.** Cada cifra se marca según su origen: estudio independiente, empresa, proveedor o estimación propia.
+- **Decir lo que no se sabe.** Cada parte cierra con sus límites: no existe ningún estudio independiente que compare el monitoreo remoto con un guarda en un sitio privado.
+- **Sin nombrar ni juzgar proveedores colombianos**, y sin presentarlo como asesoría legal.
+- **Coautoría declarada.** Claude escribió los borradores a partir de los informes; yo definí el alcance, revisé y edité.
+
+## Lo que sigue
+
+La investigación alimenta el diseño de **GuardIA**, mi sistema de videovigilancia doméstica autoalojado con cámaras ESP32 y detección local. Su lección principal para ese proyecto: una cámara que detecta bien no basta; el sistema tiene que pensar en quién recibe la alerta, cómo la verifica y qué pasa después.

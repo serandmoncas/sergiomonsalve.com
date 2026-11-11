@@ -1,0 +1,41 @@
+---
+title: AI-assisted Security in Colombia
+description: Two-part research on private security assisted by AI, sensors and devices in Colombia — technology, evidence, regulation, costs and where the business is heading —, done with parallel AI agents and published as a blog series.
+date: "2026-11-10"
+role: Researcher
+stack: [Claude Code, Parallel AI agents, Desk research, MDX]
+github: ""
+demo: ""
+links:
+  - label: "Part 1: Virtual guarding saves money, but it doesn't show up"
+    url: "/en/blog/2026-11-06-vigilancia-virtual-ia-colombia"
+  - label: "Part 2: AI won't replace the security guard"
+    url: "/en/blog/2026-11-10-futuro-vigilancia-ia-colombia"
+status: active
+featured: false
+image: ""
+---
+
+## The problem
+
+In Colombia, removing the guard from the front gate has become a topic at residents' assemblies. A 24-hour security post costs about COP 19.6 million a month, and on the other side there are offers of virtual concierge, AI cameras and remote monitoring centers for a fraction of that. Almost all the available information comes from the people selling those solutions.
+
+I started with a personal question: whether I could build my own security cameras with an ESP32. That question led to a bigger one about what's real in AI-assisted security and where the sector is heading.
+
+## The research
+
+I did it in two rounds, each coordinated with Claude Code as several parallel lines of research, with per-source notes and a report that cross-checks them:
+
+- **Part 1, for people who buy security** — five lines: technology, evidence of effectiveness, Colombian regulation, market and business, and implementation by site type. Conclusion: AI detects and verifies, but someone still has to show up.
+- **Part 2, for people who run a security company** — four lines: international trajectory, transformation of traditional companies, drivers of change in Colombia from 2026 to 2030, and new business models. Conclusion: AI won't replace the guard; it will replace the company that only sells guard hours.
+
+## Method decisions
+
+- **Separate evidence from marketing.** Every figure is tagged by origin: independent study, company, vendor or our own estimate.
+- **Say what isn't known.** Each part ends with its limits: there is no independent study comparing remote monitoring with an on-site guard at a private site.
+- **No naming or judging Colombian vendors**, and not presented as legal advice.
+- **Declared co-authorship.** Claude wrote the drafts from the reports; I set the scope, reviewed and edited.
+
+## What's next
+
+The research feeds the design of **GuardIA**, my self-hosted home video surveillance system with ESP32 cameras and local detection. Its main lesson for that project: a camera that detects well isn't enough; the system has to account for who receives the alert, how it gets verified and what happens next.
