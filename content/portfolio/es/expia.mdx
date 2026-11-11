@@ -1,0 +1,42 @@
+---
+title: ExpIA
+description: Dashboard para aprender y enseñar IA — 62 conceptos y herramientas en una línea de tiempo, con sus dependencias, rutas de aprendizaje, referentes por tema y un radar semanal que un agente propone como PR.
+date: "2026-10-17"
+role: Creador
+stack: [Next.js, TypeScript, Tailwind CSS, shadcn/ui, React Flow, Zod, Claude API, GitHub Actions, Vitest, Playwright]
+github: https://github.com/serandmoncas/ExpIA
+demo: "https://expia-self.vercel.app"
+links: []
+status: active
+featured: false
+image: /portfolio/expia.jpg
+---
+
+## El problema
+
+La IA cambia cada semana y quien quiere aprenderla no sabe por dónde empezar: qué concepto hay que entender antes de otro, qué herramienta es una moda y cuál llegó para quedarse. Además, quienes la enseñamos tenemos públicos muy distintos —desarrolladores, gente de negocio, estudiantes— que necesitan la misma idea explicada de formas distintas.
+
+## La solución
+
+**ExpIA** organiza los conceptos y herramientas de IA como un grafo navegable:
+
+- **Línea de tiempo y exploración** — 62 nodos ordenados por fecha, con filtros por categoría, tipo, audiencia, nivel, estado, licencia y precio. La vista filtrada se comparte por URL.
+- **Ficha de cada nodo** — sus prerrequisitos en orden de aprendizaje, qué se apoya en él, para qué sirve y cómo se usa, con una explicación técnica y otra para no técnicos. Un selector en la barra cambia toda la página entre las dos audiencias.
+- **Mapa** — el grafo completo de dependencias.
+- **Rutas de aprendizaje** — cuatro rutas curadas (fundamentos, construir con LLMs, IA para tu negocio, construir un agente), preguntas de repaso y progreso guardado en el navegador.
+- **Referentes** — 30 voces para seguir por tema y red social.
+- **Radar semanal** — qué está tomando fuerza, con un informe nuevo cada semana.
+
+## Decisiones técnicas
+
+**El contenido vive en archivos, no en una base de datos.** Cada concepto es un `.mdx` con frontmatter validado por Zod. Las pruebas fallan con el archivo y el campo exactos si hay una dependencia que no existe, un ciclo en el grafo, una categoría desconocida o una sección faltante. Una ruta de aprendizaje tampoco pasa si un paso aparece antes de sus prerrequisitos.
+
+**La IA propone, una persona decide.** Cada viernes, un workflow de GitHub Actions lee las fuentes y los feeds de los referentes, le pide a Claude que elija lo relevante y abre un PR con el informe y los cambios propuestos al catálogo. Nada se publica hasta que alguien lo revisa y lo fusiona; si las pruebas fallan, el PR se abre como borrador.
+
+**Proyecto dividido en subproyectos.** Catálogo, referentes, tendencias y modo enseñanza tienen cada uno su especificación y su plan. El catálogo dejó preparados los puntos de extensión para lo que viene: radar personal y de equipo, cuentas y cursos.
+
+## Resultados
+
+- 62 nodos (36 conceptos y técnicas, 24 herramientas y modelos), 30 referentes y 4 rutas curadas, además de una ruta generada para cada nodo.
+- El radar ya publicó sus primeros informes semanales como PRs revisados.
+- Pruebas unitarias para la lógica y la integridad del contenido, y pruebas de punta a punta con Playwright para las rutas y el radar.
