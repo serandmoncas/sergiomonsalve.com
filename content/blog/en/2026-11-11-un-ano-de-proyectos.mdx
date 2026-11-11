@@ -1,0 +1,111 @@
+---
+title: "A year of projects with AI: 45 repositories, 75 days of code and four obsessions"
+date: "2026-11-11"
+description: "I went through my GitHub accounts and my AI agent's session logs to take stock of 2026. Out came mushrooms with sensors, courses, my own tools and client work. Here's what got done, how much weight each thing carried, and what I learned from the pattern."
+tags: ["ai", "projects", "retrospective", "claude", "iot", "education"]
+---
+
+Before closing the year I wanted to do something I really enjoy: **counting.** Not what I planned or what I remember, but what actually got recorded. I asked Claude Code to go through my three GitHub accounts, the project folders on my computer and its own session logs, and to hand me back the list with dates and a measure of how much work went into each thing.
+
+The result surprised me a little:
+
+| | 2026 |
+|---|---|
+| Repositories with activity | ~45 |
+| Commits | 1,776 |
+| Days with at least one commit | 75 |
+| Overnight tasks run by an agent | 52 |
+| Busiest month | May (451 commits) |
+| Quietest month | September (0) |
+
+As always, a disclaimer: **this post is co-authored.** Claude took the inventory and wrote the draft, and I reviewed it and decided what gets told. Several projects belong to clients or are personal, so they're described by what they do, without names.
+
+## How we measured "how much work"
+
+The measure we used is **active days**: days with at least one commit. Lines of code are misleading. A site full of images "weighs" a million lines, and a vocabulary database almost as much. Commits are a bit misleading too, because an AI-assisted sprint can produce fifty in an afternoon.
+
+Two honest limits:
+
+- The agent's logs only go back to mid-October, because older sessions get deleted. Before that date, everything comes from git.
+- Some work leaves no commits: conversations, business plans, research. That shows up at the end, without numbers.
+
+## 1. Mushrooms, sensors and controlled growing
+
+**≈ 85 active days. The theme of the year.**
+
+It started in February with a mushroom-growing controller: an ESP32 that manages temperature, humidity, CO₂, light and irrigation according to each species' profile. By August it was a **complete system**: firmware, an API with a database and a mobile app to check the grow chambers from your phone. Adding up its four repositories, it's the biggest project of the year: about 24 days of work.
+
+Other pieces grew around the controller:
+
+- **A gourmet mushroom brand with IoT traceability**: its concept of low-cost grow chambers and its website, which with 16 active days was the second most-worked repository of the year.
+- **The website and an oyster mushroom growing course** for a mushroom business.
+- **A stage-based growing control system** (cloning, vegetative, flowering) with fertigation and traceability.
+- **A black soldier fly project**: the insect that turns organic waste into protein and fertilizer. It started in November with a literature corpus and a user manual, for a first pilot farm.
+- **The plan for my own mushroom brand**: diagnosis, business model, marketing plan and a 90-day roadmap. An agent worked through most of it overnight (more on that below).
+
+What I learned: hardware is slow, and AI doesn't speed it up nearly as much as it speeds up software. Where it helped most was everything around the device: the app, the API, the documentation and the species profiles.
+
+## 2. Education: courses, curricula and a school
+
+**≈ 25 active days spread across many small projects.**
+
+This group works in bursts. Almost all are two- to four-day sprints with dozens of commits:
+
+- **An open source virtual school** that first teaches what practical life demands and almost no school teaches. It had 89 commits in four days in October.
+- **A robotics course**: each student builds a car with an ESP32-CAM, live video and phone control. The course and the control app have separate repositories.
+- **A melamine carpentry course** in four sessions: each person designs their own piece of furniture, has it cut and assembles it.
+- **A curriculum for learning *harness engineering***: the discipline of designing everything around a language model, from context and tools to memory and verification.
+- **A study path through an AI specialization** and a guide to **STEM education and maker culture**.
+- **A template so anyone can publish their personal page** in under an hour.
+- **A bird-watching booklet** for kids, with 102 species, made with two collaborators.
+- **A free AI course for retirees** and a video pilot for a university course, both just getting started.
+
+What I learned: with AI, building course material is no longer the bottleneck. The bottleneck now is **testing it with real people**, and that can't be done in four days.
+
+## 3. My own tools: learning and working with AI
+
+**≈ 25 active days, almost all from October on.**
+
+This group came from one question: *what tools would I like to have?*
+
+- **My own note-taking app**, Obsidian-style. Its first phase is well along, with tickets specified, implemented and reviewed.
+- **A night shift.** It's a program that, while I sleep, picks up the tasks I marked with 🌙 in my notes and hands them to an agent to move forward unsupervised: research, drafts, specs. It has run 52 tasks so far. In the morning I review and decide what's useful.
+- **Spaced-repetition study cards**, now also as an installable Android app.
+- **An app for learning Mandarin** (frequency-based vocabulary, tones and characters) and another for **practicing calligraphy with AI**.
+- **A "second brain"** built from my meeting transcripts, a **meta-learning** tool and a **personal assistant on WhatsApp**, "the paisa Jarvis".
+- With less code and more method: learning **Italian with recipes as lessons** and studying a step-by-step reasoning method.
+
+What I learned: the night shift changed how I work more than any other tool. I no longer think "do I have time for this?" but "can someone move this forward tonight?".
+
+## 4. Clients, technical tests and products for others
+
+**≈ 15 active days, in intense sprints.**
+
+- **A SaaS platform for financial coaches**: clients, sessions and goal tracking. It had 75 commits in four days.
+- **A hydrometeorological risk alert app** so anyone can get warnings for their area on their phone. It had 91 commits in one week.
+- **A senior-level technical test** for a land and sea logistics system, with every optional item completed.
+- **A CRM with AI-assisted quotes** for a tech company in Central America, started this week.
+- **An MVP with a startup** in March, and websites for an art studio and a cultural project.
+- **A self-hosted home video surveillance system**: nothing leaves the house. It's where the blog's [series on AI surveillance](/en/blog/2026-11-06-vigilancia-virtual-ia-colombia) came from.
+
+## 5. This site
+
+**25 active days and 341 commits. The most active repository of the year.**
+
+It's the project that got touched on the most days, because it's where everything else ends up: the portfolio, the blog, the courses, the recipes. This is where the surveillance series, the AI-made self-portrait, the rescue of an old Android and now this inventory were published.
+
+## What doesn't leave commits
+
+There was real work git can't see: a pilot proposal for an agricultural company, a guide to meliponiculture (stingless bees), freeze-drying mushrooms, research on the historical resistance to technological change, and several conversations that turned into projects. The night shift moved part of it forward. Another part came out of sessions that started with a "hi, how's it going?".
+
+## The pattern
+
+When I saw it all together, I found three things:
+
+1. **I have two rhythms.** A few long-haul projects I come back to for months (the mushrooms, this site, the AI community) and many two- to four-day sprints that produce something usable and then sit still. Neither is better, but it's worth knowing which is which before starting.
+2. **The year moved in stages.** Until August, hardware and mushrooms. Between July and October, education. From October on, my own AI tools. Each stage used what the previous one left behind.
+3. **AI changed what's expensive.** Writing code, documentation and course material is no longer the expensive part. The expensive part is deciding what's worth it, testing it with people and keeping it going over time. September, with zero commits, reminded me of that: code stops when life moves, and that's fine.
+
+For 2027 I'm taking one simple rule: **fewer new projects, more projects finished and tested with someone.** We'll see what next year's inventory says.
+
+If you're interested in working this way, with agents, with method and without losing judgment, that's what I teach in the [courses](/en/cursos).
