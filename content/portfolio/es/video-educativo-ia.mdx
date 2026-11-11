@@ -1,0 +1,43 @@
+---
+title: Video educativo con IA
+description: Piloto para convertir los textos de un curso de posgrado en derecho y ciberseguridad en videos explicativos generados con IA, con escenas que se pueden actualizar por separado cuando cambia la norma.
+date: "2026-11-10"
+role: Diseño del flujo y producción
+stack: [Claude, Gemini, Síntesis de voz, Python, FFmpeg, Moodle H5P]
+github: ""
+demo: ""
+links: []
+status: active
+featured: false
+image: ""
+---
+
+## El problema
+
+Una docente de maestría en derecho y ciberseguridad tiene un curso virtual en Moodle hecho de textos normativos largos. Para que no se vuelvan pesados, cada semana los explica en vivo. Quería que cada texto tuviera también un video que lo explicara, con un personaje sobrio en vez de su imagen y una narración fluida. Las herramientas que había probado se trababan o cometían errores al leer.
+
+Hay una dificultad extra: en derecho la norma cambia. Un video que hay que regrabar entero cada vez que sale una ley nueva no se puede sostener.
+
+## La solución
+
+Un flujo de producción **modular por escenas**:
+
+1. El texto se convierte en un **guion por escenas**. Cada escena tiene su narración, su tipo de visual (mapa conceptual, cita normativa, animación o avatar) y **la norma de la que depende**.
+2. La docente revisa la exactitud jurídica del guion antes de producir nada.
+3. Cada escena genera **su propio audio y su propio visual**.
+4. Un montaje automático une las escenas, agrega música y subtítulos y produce el video.
+5. En Moodle, el video va dentro de una actividad H5P *Interactive Video* con preguntas a lo largo del video.
+
+Cuando cambia una norma, se filtran las escenas que dependen de ella, se regeneran solo esas y se vuelve a montar.
+
+## Decisiones
+
+**Medir antes de prometer.** El piloto registra en una bitácora los minutos y el costo de cada etapa. El entregable no es solo el video: también responde cuántas horas y cuánto dinero cuesta cada uno, y si la docente lo puede sostener o conviene delegarlo.
+
+**Estética neutra.** La estética típica de la IA envejece rápido. Un diseño sobrio y modular permite cambiar de herramienta sin rehacer el contenido.
+
+**Datos bajo control.** El material del curso solo se procesa con cuentas pagas o por API, nunca en herramientas gratuitas que usen los datos para entrenar.
+
+## Estado
+
+Piloto en curso: un primer video de unos 10 minutos.
