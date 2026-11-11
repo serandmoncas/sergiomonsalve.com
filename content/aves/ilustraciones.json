@@ -1,0 +1,43 @@
+{
+  "2488602": [
+    {
+      "variante": "adulto",
+      "archivo": "azulejo-comun--adulto",
+      "referencias": [
+        {
+          "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605137440/original.jpg",
+          "licencia": "http://creativecommons.org/licenses/by-nc/4.0/",
+          "fuente": "iNaturalist research-grade observations"
+        },
+        {
+          "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605645368/original.jpg",
+          "licencia": "http://creativecommons.org/licenses/by-nc/4.0/",
+          "fuente": "iNaturalist research-grade observations"
+        },
+        {
+          "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605148044/original.jpg",
+          "licencia": "http://creativecommons.org/licenses/by-nc/4.0/",
+          "fuente": "iNaturalist research-grade observations"
+        },
+        {
+          "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605726600/original.jpg",
+          "licencia": "http://creativecommons.org/licenses/by-nc/4.0/",
+          "fuente": "iNaturalist research-grade observations"
+        },
+        {
+          "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610012647/original.jpg",
+          "licencia": "http://creativecommons.org/licenses/by/4.0/",
+          "fuente": "iNaturalist research-grade observations"
+        }
+      ],
+      "original": {
+        "ancho": 1200,
+        "alto": 896,
+        "impresion": false
+      },
+      "estado": "revisada-auto",
+      "nota": "",
+      "actualizado": "2026-10-30"
+    }
+  ]
+}

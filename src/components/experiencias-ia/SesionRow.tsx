@@ -1,7 +1,25 @@
 import { Link } from '@/i18n/navigation'
-import { esSinRegistro, type EntradaSesion } from '@/lib/experiencias-ia/data'
+import { esPendiente, esSinRegistro, type EntradaSesion } from '@/lib/experiencias-ia/data'
 
 export default function SesionRow({ sesion }: { sesion: EntradaSesion }) {
+  if (esPendiente(sesion)) {
+    return (
+      <div className="ses-row pendiente">
+        <span className="ses-num">··</span>
+        <span>
+          <span className="ses-t">Próximo encuentro · pendiente</span>
+          <span className="ses-d">Temas por tratar:</span>
+          <ul className="ses-agenda">
+            {sesion.agenda.map(tema => (
+              <li key={tema}>{tema}</li>
+            ))}
+          </ul>
+        </span>
+        <span className="ses-f">{sesion.fechaLarga}</span>
+      </div>
+    )
+  }
+
   if (esSinRegistro(sesion)) {
     return (
       <div className="ses-row sin-registro">

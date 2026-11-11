@@ -1,0 +1,153 @@
+---
+title: "Virtual guarding saves money, but it doesn't show up: what I found researching AI security in Colombia"
+date: "2026-11-06"
+description: "I researched the technology, evidence, regulation, costs and business of private security without on-site guards in Colombia. AI detects and verifies, but someone still has to show up."
+tags: ["research", "security", "ai", "colombia", "iot"]
+---
+
+For a while now I've been looking for things I can build with artificial intelligence, and I wanted them to bring together several of my passions and hobbies with some new needs. That led me to a concrete question: can I make my own security cameras from electronic components I can get myself? Searching around, I found that the ESP32, with different kinds of cameras and other sensors, could do the job.
+
+That small question led me to a bigger one. In Colombia, removing the guard from the front gate has become a topic for building assemblies. A 24-hour guard post now costs about COP 19.6 million a month (roughly USD 6,100), and on the other side there are offers of "virtual concierge", AI cameras and remote monitoring centers for a fraction of that. I wanted to know what is behind those offers: which technology is real, what the evidence says, what the law allows, what it actually costs, and whether there is a business in it.
+
+This post summarizes that research. Two notes before we start.
+
+**How I did it.** I used Claude Code to coordinate five research tracks in parallel: technology, evidence of effectiveness, Colombian regulation, market and business, and implementation by type of site. Each track left notes with its sources, and a synthesis step merged them into a report. I set the scope (private security, focused on Colombia and Antioquia), reviewed the result and decided what gets published.
+
+**It's co-authored.** Claude wrote the draft from that report and I edited it. It is not legal advice or a vendor recommendation either. There is a limitations section at the end that is worth reading before you use any number.
+
+## What you're buying isn't a camera
+
+"Virtual guard" is a marketing term. It has no legal definition. What is actually sold is a chain:
+
+1. **Detect:** cameras and sensors on site.
+2. **Filter:** an AI that discards shadows, animals and rain.
+3. **Verify:** a remote operator who looks at the video.
+4. **Deter:** a voice over a speaker, lights or a siren.
+5. **Show up:** someone who physically arrives.
+
+Technology covers the first four links very well. No camera covers the fifth: it has to be hired or organized separately, through a mobile response team, the police or the neighbors. That is the idea that comes up again and again across the whole research.
+
+In Colombia there is also an expensive confusion: a concierge is not a guard. A blog from the industry itself admits that virtual concierge controls who comes in, but does not watch the inside, does not detect someone climbing the fence, and does not handle a medical emergency ([Appmosfera](https://appmosfera.com/blog/alternativas-vigilancia-tradicional-conjuntos-residenciales)). Some vendors say it plainly: their product is not security guarding ([Portea](https://www.portea.com.co/blog/porteria-remota-conjuntos-residenciales-colombia/)).
+
+## How mature the technology is
+
+The change in 2025-2026 is that vision-language models reached cameras and recorders. Hikvision and Dahua already ship them, and Verkada says it runs 95% of inference on the camera ([Memoori](https://memoori.com/video-surveillance-market-leaders-2026/)). What gets called "agentic" AI automates narrow steps: prioritizing alerts, describing what is happening, drafting the case, warning by voice. I found no product that decides the physical response without rules set by a person, and no independent tests of these models.
+
+This classification is mine, based on the evidence reviewed:
+
+| Technology | Maturity | Why |
+|---|---|---|
+| IP cameras with on-device analytics | Mature | Many vendors, open ecosystems, low prices |
+| AI false-alarm filtering at the monitoring center | Mature, but unmeasured | Integrated since 2020-2022; the 90-95% reductions are vendor-reported |
+| Perimeter radar and thermal cameras | Mature | Catalog products, useful on large sites |
+| Natural-language search and autonomous voice | Emerging | Sold without public metrics |
+| Drone-in-a-box | Emerging | Serious hardware, but expensive and with demanding flight rules |
+| Patrol robots | Niche | Knightscope had a 7% gross margin in Q2 2026 |
+| Full replacement of guards by AI | Promise | I found no study that supports it |
+
+One technical fact decides almost everything on sites with poor connectivity: don't stream continuous video. A camera at 2 Mbps uses about 648 GB a month. If only clips and alerts are sent, a site can go from almost 3 TB to about 8 GB a month, according to one vendor's example ([Spot AI](https://www.spot.ai/blog/solar-cellular-security-trailer-guide)). That is why edge analytics matters so much on a rural farm.
+
+## What the evidence says (and what it doesn't)
+
+**There is no independent study comparing remote monitoring with an on-site guard at a private site.** That is the most important finding and the least quoted one. Almost every effectiveness and savings figure in circulation comes from vendors or industry associations.
+
+What does exist is evidence on cameras, mostly public ones:
+
+- The reference meta-analysis (Piza, Welsh, Farrington and Thomas, 2019) concludes that CCTV reduces crime significantly but modestly, more in parking lots and for property crime, more with active monitoring, and recommends not using it as the only measure ([OJP](https://www.ojp.gov/ncjrs/virtual-library/abstracts/cctv-surveillance-crime-prevention-40-year-systematic-review-meta)). The 13% figure that usually gets quoted comes from trade press summarizing the study.
+- In Medellín, public cameras installed in a nearly random way reduced crime through deterrence, without displacing it elsewhere ([Maastricht](https://cris.maastrichtuniversity.nl/en/publications/the-deterrent-effect-of-surveillance-cameras-on-crime/)).
+- In Bogotá, an evaluation by the city's own Security Department of 2,378 cameras found a 4% reduction that weakened over time. Cameras grew 1,203% in four years with no more monitoring staff ([SSCJ](https://sistemas002.sdp.gov.co/sites/default/files/impacto_videovigilancia_en_bogota.pdf)).
+- Newark tested the opposite: cameras plus one dedicated operator and two patrol officers, and violence and disorder went down ([CEBCP](https://cebcp.org/evidence-based-policing/the-matrix/micro-places/micro-places-piza-et-al-2015/)).
+
+My reading of Bogotá and Newark together: the evidence doesn't punish the camera, it punishes the missing links. More cameras with nobody watching and nobody showing up deliver little.
+
+Guards don't come out as well as the industry claims, either. In a trial at 41 English train stations, unarmed guards did not achieve a statistically significant effect on overall crime ([PLOS ONE](https://pmc.ncbi.nlm.nih.gov/articles/PMC5718484/)). Neither option has large effects.
+
+Where the evidence is clearest is verification. In the United States, between 94% and 98% of alarm calls to the police are false, and requiring visual verification before dispatch cut those calls by about 90% ([POP Center](https://popcenter.asu.edu/sites/default/files/problems/PDFs/false_alarms_2nded.pdf)). Careful: that measures calls, not crimes prevented, and the data is from 1998-2006. What I didn't find is an independent measurement of how much AI reduces perimeter false alarms.
+
+## How it fails
+
+A guard fails locally: falls asleep, rotates out, can be bribed. A platform fails in a correlated way, and that changes the risk:
+
+- **Signal and power.** In Los Angeles, burglary crews used Wi-Fi jammers and power cuts before breaking into homes ([Tom's Hardware](https://www.tomshardware.com/networking/lapd-warn-residents-after-spate-of-wi-fi-jammer-cloaked-burglaries-police-share-a-security-check-list)).
+- **The cloud.** The FTC alleges that an attacker accessed more than 150,000 live Verkada cameras; the company says it was far fewer ([FTC](https://www.ftc.gov/node/86202)).
+- **Unpatched devices.** More than 80,000 Hikvision cameras were still unpatched against a critical flaw in 2022 ([SecurityWeek](https://www.securityweek.com/over-80000-unpatched-hikvision-cameras-exposed-takeover)).
+- **AI that accuses.** Rite Aid used facial recognition with thousands of false positives; employees went as far as searching an 11-year-old girl, and the FTC banned the retailer from using the technology for five years ([CBS News](https://www.cbsnews.com/news/ai-rite-aid-customers-falsely-identified-as-shoplifters-ftc)). The harm came from acting against people on an unverified alert.
+
+What matters, again, is who gets the alert and what happens next.
+
+## What Colombian law says
+
+This is an overview, not legal advice. We read the regulations through third-party compilations because the regulator's website did not load, and some points can only be settled by a lawyer who specializes in the sector.
+
+**AI is not a new legal category: it is a technological means within licensed security services.** Decree-Law 356 of 1994 already includes monitoring centers, CCTV and perimeter controls under the unarmed security company license. That license requires, among other things, paid-in capital of 500 monthly minimum wages (about COP 875 million) and an insurance policy of 400 ([Decree 356](https://normativa.colpensiones.gov.co/colpensiones/compilacion/docs/decreto_0356_1994.htm)). Whoever hires an unlicensed company can be fined too.
+
+The practical line between selling technology and providing security seems to be who receives and acts on the signal. If a third party monitors your cameras, it most likely needs a license. If it only sells or installs equipment, or sells analytics software, the rule is unclear and I found sources that contradict each other. I also found no opinion from the regulator, the Superintendencia de Vigilancia, on AI or remote concierge without an operator.
+
+**Personal data is the other front.** According to the data protection authority's (SIC) guide, whoever hires the service is the data controller and the security company is the processor: hiring a third party doesn't free you of responsibility. You need a visible notice, and images should be kept only as long as necessary. The famous 30 days are a commercial practice, not a rule ([SIC guide](https://sigi.sic.gov.co/SIGI/files/mod_documentos/documentos/GA03-P01/soportes/Anexo%20Gu%C3%9Da%20protecci%C2%BEn%20de%20datos%20personales%20en%20sistemas%20de%20videovigilancia%20%20SIC.pdf)). Facial recognition is sensitive data: the SIC has already ordered a residential complex in Bogotá not to make entry conditional on biometrics and to offer alternatives such as cards or codes ([SIC](https://sedeelectronica.sic.gov.co/comunicado/la-superintendencia-de-industria-y-comercio-ordena-un-conjunto-residencial-habilitar-mecanismos-de-ingreso-que-no-impliquen-el-tratamiento)).
+
+From this I draw a design consequence that I think is the biggest hidden risk for any AI product in this sector: detecting "person" or "vehicle" is far less sensitive than identifying someone, and using customers' footage to train models is a different purpose that would need explicit authorization.
+
+## What it costs
+
+Since July 15, 2026, the minimum rate for a 24-hour post is 10.21 monthly minimum wages, about COP 17.9 million before administration fees, and it goes up again in 2027 ([Copropiedades](https://copropiedades.com.co/tarifas-minimas-2026/)). With administration it lands at COP 19-19.7 million a month. On the other side, the remote concierge figure in the press is COP 4-8 million a month per complex, a weak number that seems to come from a single source ([El Colombiano](https://www.elcolombiano.com/negocios/vigilantes-unidades-residenciales-automatizacion-salario-minimo-2026-AH34336024)). Until there are real quotes, I would assume COP 4 to 10 million.
+
+With that we built a total cost model. Careful: it is our own estimate, it mixes scattered public prices with assumptions, and it leaves out theft losses, which is exactly the number that could change the decision. Figures in Colombian pesos (COP 1 million ≈ USD 314).
+
+| Scenario | Upfront | Monthly, year 1 | 3 years | 5 years |
+|---|---:|---:|---:|---:|
+| 24-hour human post | $0 | $19.6 M | $764 M | $1,380 M |
+| 120-unit complex, hybrid (guard by day, remote center at night) | $62 M | $13.3 M | $591 M | $1,031 M |
+| 120-unit complex, remote only | $48-84 M | $4-8 M | $208-402 M | $343-667 M |
+| Warehouse empty at night, with monitoring and response | $30-60 M | $2-4.5 M | $111-241 M | $180-394 M |
+| Farm with 4G | ≈$7 M | $0.11 M | $13 M | $19 M |
+| Farm with satellite internet and solar | ≈$22 M | $0.3 M | $39 M | $56 M |
+
+Remote-only looks like huge savings, but it doesn't compare equivalent functions: it lacks physical response, package handling, emergency care and the cost of exiting the previous contract. The hybrid saves between 15% and 25%, less than you'd expect.
+
+## Where it fits and where it doesn't
+
+**A warehouse that is empty at night is the best case.** It matches what the evidence supports: it protects property, there is no legitimate activity at night, and anyone detected is an alarm. The operator gets few events and each one means something.
+
+**The residential complex is where the pressure is, and where the risk is.** Brazil, the most mature market in the region with more than 14,000 condominiums on remote concierge, has already documented what goes wrong: gates that fail, power cuts of more than 12 hours, operators who open without verifying. One condominium that started 100% remote ended up, after two assemblies, with a night doorman ([SíndicoNet](https://www.sindiconet.com.br/informese/portaria-remota-portaria-presencial-manutencao-portaria-virtual)). Removing the night shift is the most tempting move because it's the most expensive one, but night is also when failures weigh the most. Hybrid is the prudent option.
+
+**A farm changes the question.** Almost none pays for a COP 19.6 million guard, and technology doesn't replace the caretaker who also works the land. Here the response is communal: a siren the neighbors can hear, radios, WhatsApp and the 123 emergency line. In southwestern Antioquia, the Finca Más Segura program installed panic buttons and sirens on 73 farms ([Blu Radio](https://www.bluradio.com/blu360/antioquia/en-73-fincas-del-suroeste-de-antioquia-instalaran-equipos-tecnologicos-para-mejorar-seguridad)). None of these initiatives has an independent evaluation. And one non-negotiable: never ask the caretaker or the neighbors to confront an intruder.
+
+## If you're going to hire
+
+Before talking price, these questions quickly separate the serious providers:
+
+- Who provides what? Does the monitoring company hold a current license from the Superintendencia de Vigilancia, with a certificate of no sanctions ([Bogotá city hall](https://bogota.gov.co/mi-ciudad/seguridad/como-verificar-si-la-empresa-de-seguridad-cumple-los-requisitos))?
+- Who shows up, how fast, and where do they cover? Ask in writing for the average time and the time for the worst 10% of cases.
+- How many sites does one operator handle per shift? How many false alarms per camera per night do they see at a similar site?
+- What happens if their center or your internet goes down? Where is the footage stored, who sees it, and who owns the passwords?
+- Will they give you three current clients and one who left?
+
+And in the contract: open equipment (ONVIF/RTSP) so you can switch providers, a ban on using your footage to train models, and no blanket exclusion for "internet failures" without a backup link.
+
+The most valuable step is a 60 to 90 day pilot **without removing the guard**: a few weeks of baseline, then the system running in parallel, a test cutting internet and power, and an authorized intrusion (with the police notified) to measure how long each link really takes, including arrival. With a rollback criterion written before you start. A complex or company that does this will have data that neither the regulator nor the industry has published.
+
+## Is there a business?
+
+Yes, but regional and thin-margin. Colombia's private security sector reported COP 21.1 trillion (about USD 6.6 billion) in revenue in 2024, with a net margin close to 2.9% ([Supervigilancia](https://www.supervigilancia.gov.co/web/content/5723?unique=cfe6eda37e52e97be9b76ddc58db0903714f5a33&download=true)). The regulator doesn't break out technological services as a category, so the virtual segment has no measurement. Using our own assumptions, we estimate the addressable residential market at around USD 50 million a year. It's an order of magnitude, not a figure.
+
+The economics of a monitoring center come down to one variable: how many sites each operator handles. At COP 5 million per site, going from 10 to 40 sites per operator seat takes gross margin from 34% to 61% in our model. That is where AI adds economic value: filtering noise so one person can handle more sites, not replacing that person. Nobody publishes that number, sites per operator.
+
+If I entered this market without a license, I would partner with a licensed monitoring center and start with sites that are empty at night, not residential complexes. It's a thesis, not a validated plan: before investing I'd get real quotes as a customer, talk to monitoring operators and file a formal query with the regulator.
+
+## Why it matters to me: GuardIA
+
+This brings me back to the question I started with. Those ESP32 cameras are GuardIA, which I'm starting to build: a self-hosted home video surveillance system: low-cost ESP32 cameras at the edge, a Raspberry Pi as the hub, local AI object detection and alerts to the phone. Nothing leaves the house or depends on a manufacturer's cloud.
+
+The research confirmed two things and corrected one. It confirmed that keeping video local makes sense: the most serious incidents I found come from the cloud and from unpatched devices. And it confirmed that edge analytics is what makes a low-connectivity site viable. What it corrected is that a camera that detects well isn't enough: the system has to account for who gets the alert, how it gets verified and what happens next. That goes into the backlog.
+
+## Limitations of this research
+
+- Almost all performance and savings figures come from vendors or interested industry groups.
+- Regulations were read through third-party compilations; the literal text of key articles should be checked.
+- I did not verify any provider's license, which is why this post doesn't name or recommend Colombian providers.
+- The budgets are our own estimates and need a site visit and real quotes.
+- Access control, audio analytics, working conditions of monitoring operators and insurers' positions were left with thin sourcing.
+
+If you work in security, manage a residential complex or have data that contradicts any of this, I'd love to hear from you in the comments.
+
+And if you want to learn to research like this, with agents, with method and without giving up your judgment, that's what I teach in my [courses](/en/cursos).

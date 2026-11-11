@@ -1,0 +1,20 @@
+{
+ "5228236": {
+  "tamanoCm": 23,
+  "claseTamano": "mirla",
+  "colores": [
+   "verde",
+   "cafe",
+   "blanco"
+  ],
+  "habitats": [
+   "bosque"
+  ],
+  "altitudM": [
+   0,
+   1300
+  ],
+  "residencia": "residente",
+  "endemica": false
+ }
+}

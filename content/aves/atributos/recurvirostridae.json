@@ -1,0 +1,19 @@
+{
+ "5229128": {
+  "tamanoCm": 38,
+  "claseTamano": "paloma",
+  "colores": [
+   "negro",
+   "blanco"
+  ],
+  "habitats": [
+   "agua"
+  ],
+  "altitudM": [
+   0,
+   2600
+  ],
+  "residencia": "residente",
+  "endemica": false
+ }
+}

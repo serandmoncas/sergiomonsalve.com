@@ -65,7 +65,9 @@
     "formacionTitle": "Formación",
     "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA.",
     "carpinteriaTitle": "CarpinterIA · Curso de melamina",
-    "carpinteriaDescription": "Curso de carpintería en melamina en Guarne: un express de un día para armar tu primera caja de herramientas, o 4 sesiones para empezar tu propio proyecto. Con calculadora de despiece abierta."
+    "carpinteriaDescription": "Curso de carpintería en melamina en Guarne: un express de un día para armar tu primera caja de herramientas, o 4 sesiones para empezar tu propio proyecto. Con calculadora de despiece abierta.",
+    "avesTitle": "Guía de aves de Colombia",
+    "avesDescription": "Las 500 aves más comunes de Colombia: búscalas por nombre, tamaño, color y hábitat, con su puesto en Colombia y en Latinoamérica."
   },
   "lineaAprendizaje": {
     "comment": "// aprender a aprender",
@@ -84,6 +86,7 @@
     "cursos": "Cursos",
     "carpinteria": "CarpinterIA",
     "biblioteca": "Biblioteca",
+    "aves": "Aves",
     "aprender": "Aprender a aprender",
     "aprenderHref": "/aprender-a-aprender.html",
     "lineaAprendizaje": "El aprendizaje en el tiempo",
@@ -821,6 +824,96 @@
       "title": "¿Quieres un cupo en el express o en el curso completo?",
       "whatsapp": "Escríbeme por WhatsApp →",
       "whatsappText": "Hola Sergio, vi la página de CarpinterIA y quiero saber más del curso de melamina."
+    }
+  },
+  "aves": {
+    "titulo": "Guía de aves de Colombia",
+    "subtitulo": "Las 500 aves más comunes de Colombia, ordenadas por cuántas veces se registran. Las ilustraciones van llegando por familias.",
+    "buscarPlaceholder": "Buscar: azulejo, Thraupis, tanager...",
+    "queViste": "¿Qué ave viste?",
+    "tamanoLabel": "Tamaño",
+    "colorLabel": "Color",
+    "dondeLabel": "Dónde",
+    "tamano": {
+      "colibri": "Colibrí",
+      "mirla": "Mirla",
+      "paloma": "Paloma",
+      "gallinazo": "Gallinazo"
+    },
+    "color": {
+      "azul": "Azul",
+      "rojo": "Rojo",
+      "amarillo": "Amarillo",
+      "verde": "Verde",
+      "negro": "Negro",
+      "cafe": "Café",
+      "blanco": "Blanco",
+      "gris": "Gris"
+    },
+    "habitat": {
+      "ciudad": "Ciudad",
+      "bosque": "Bosque",
+      "agua": "Agua",
+      "paramo": "Páramo",
+      "campo": "Campo"
+    },
+    "resultados": "{n} especies",
+    "vistaGaleria": "Galería",
+    "vistaFamilia": "Agrupar por familia",
+    "sinResultados": "Ninguna especie coincide con esos filtros.",
+    "limpiarFiltros": "Limpiar filtros",
+    "ilustracionEnCamino": "Ilustración en camino",
+    "variante": {"adulto": "Adulto", "macho": "Macho", "hembra": "Hembra", "juvenil": "Juvenil"},
+    "atribucion": "Datos de ocurrencia: GBIF.org (consultado {fecha}), registros CC BY 4.0 y CC0, incluye eBird Observation Dataset (Cornell Lab of Ornithology). Amenaza: Resolución 0126 de 2024, Ministerio de Ambiente (CC0).",
+    "volver": "Guía de aves",
+    "puestoColombia": "#{n} en Colombia",
+    "puestoLatam": "#{n} en Latinoamérica",
+    "fueraTop": "Fuera del top 4.000 de Latinoamérica",
+    "familiaLabel": "Familia",
+    "seccionIdentificacion": "Tamaño y dónde vive",
+    "seccionDistribucion": "Dónde se ve en Colombia",
+    "seccionTemporada": "Registros por mes",
+    "seccionConservacion": "Conservación",
+    "altitud": "Altitud: {min}–{max} m",
+    "endemica": "Endémica de Colombia",
+    "residencia": {
+      "residente": "Residente todo el año",
+      "migratoria-boreal": "Migratoria desde Norteamérica",
+      "migratoria-austral": "Migratoria desde el sur del continente"
+    },
+    "amenaza": {
+      "CR": "En peligro crítico (CR)",
+      "EN": "En peligro (EN)",
+      "VU": "Vulnerable (VU)"
+    },
+    "sinAmenaza": "No está en la lista oficial de especies amenazadas de Colombia.",
+    "escucharCanto": "Escuchar su canto en xeno-canto ↗",
+    "yoLoVi": "Yo lo vi",
+    "yoLoViMarcado": "✓ Lo vi",
+    "referenciaMirla": "comparada con una mirla (25 cm)",
+    "referenciaPaloma": "comparada con una paloma (33 cm)",
+    "mapaAlt": "Mapa esquemático de las regiones de Colombia",
+    "region": {
+      "andina": "Andina",
+      "caribe": "Caribe",
+      "pacifica": "Pacífica",
+      "orinoquia": "Orinoquía",
+      "amazonia": "Amazonía",
+      "insular": "Insular"
+    },
+    "meses": {
+      "0": "Enero",
+      "1": "Febrero",
+      "2": "Marzo",
+      "3": "Abril",
+      "4": "Mayo",
+      "5": "Junio",
+      "6": "Julio",
+      "7": "Agosto",
+      "8": "Septiembre",
+      "9": "Octubre",
+      "10": "Noviembre",
+      "11": "Diciembre"
     }
   }
 }

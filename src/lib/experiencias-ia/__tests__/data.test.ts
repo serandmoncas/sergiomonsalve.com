@@ -5,6 +5,7 @@ import {
   PERSONAS,
   TALLER,
   MIERCOLES_SIN_SESION,
+  esPendiente,
   esSinRegistro,
   getSesion,
   getSesionesDocumentadas,
@@ -59,6 +60,19 @@ describe('getBitacora', () => {
   it('marks 29 jul, 12 ago and 30 sep as sin registro', () => {
     const sinRegistro = getBitacora().filter(esSinRegistro).map(e => e.fecha)
     expect(sinRegistro.sort()).toEqual(['2026-07-29', '2026-08-12', '2026-09-30'])
+  })
+
+  it('pending meetings only list topics that exist in TEMAS', () => {
+    const temas = new Set(TEMAS.map(t => t.tema))
+    for (const pendiente of getBitacora().filter(esPendiente)) {
+      expect(pendiente.agenda.length).toBeGreaterThan(0)
+      for (const tema of pendiente.agenda) expect(temas).toContain(tema)
+    }
+  })
+
+  it('pending meetings are not documented sessions', () => {
+    const fechas = new Set(getSesionesDocumentadas().map(s => s.fecha))
+    for (const pendiente of getBitacora().filter(esPendiente)) expect(fechas.has(pendiente.fecha)).toBe(false)
   })
 })
 

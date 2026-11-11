@@ -1475,6 +1475,24 @@ export const GLOSARIO: TerminoGlosario[] = [
     categoria: 'fundamentos',
     sesionOrigen: 22,
   },
+  {
+    slug: 'contexto-por-vuelta',
+    termino: 'Contexto por vuelta',
+    definicion:
+      'Cantidad de tokens de contexto que el agente envía al modelo en cada turno de una sesión; crece a medida que la conversación se alarga.',
+    categoria: 'contexto-memoria',
+    sesionOrigen: 23,
+  },
+  {
+    slug: 'analisis-de-consumo-de-tokens',
+    termino: 'Análisis de consumo de tokens',
+    definicion:
+      'Revisar los registros de las sesiones (tokens semanales, caché leída y escrita, contexto por vuelta) para ver dónde se gastan los tokens y qué hábitos corregir.',
+    categoria: 'operacion-evaluacion',
+    sesionOrigen: 23,
+    ejemplo:
+      'Jorge armó «Token Bike», un destilador que marca en rojo y verde las tendencias de su consumo entre una semana y otra.',
+  },
 ]
 
 export function getTerminosPorCategoria(categoria: CategoriaGlosario): TerminoGlosario[] {

@@ -1,0 +1,19 @@
+{
+  "2480726": {
+    "tamanoCm": 56,
+    "claseTamano": "gallinazo",
+    "colores": [
+      "cafe",
+      "blanco"
+    ],
+    "habitats": [
+      "agua"
+    ],
+    "altitudM": [
+      0,
+      3500
+    ],
+    "residencia": "migratoria-boreal",
+    "endemica": false
+  }
+}

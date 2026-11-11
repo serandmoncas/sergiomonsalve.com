@@ -1,0 +1,40 @@
+{
+  "2487583": {
+    "tamanoCm": 11,
+    "claseTamano": "colibri",
+    "colores": [
+      "gris",
+      "blanco",
+      "negro"
+    ],
+    "habitats": [
+      "bosque",
+      "campo",
+      "ciudad"
+    ],
+    "altitudM": [
+      0,
+      1500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  },
+  "9393917": {
+    "tamanoCm": 12.5,
+    "claseTamano": "colibri",
+    "colores": [
+      "cafe",
+      "blanco",
+      "gris"
+    ],
+    "habitats": [
+      "bosque"
+    ],
+    "altitudM": [
+      0,
+      1500
+    ],
+    "residencia": "residente",
+    "endemica": false
+  }
+}
