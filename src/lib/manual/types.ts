@@ -24,3 +24,31 @@ export type Nota = {
 export type ParseResult =
   | { ok: true; nota: Nota }
   | { ok: false; slug: string; error: string }
+
+// Una entrada del índice numerado del manual.
+export type Entrada = {
+  n: number
+  titulo: string
+  puerta?: string
+  confianza: string
+  nota?: string // slug de la nota, si ya existe
+  recorrido?: string // slug del recorrido, si la entrada abre uno
+}
+
+export type Indice = { secciones: { id: string; titulo: string; entradas: Entrada[] }[] }
+
+// `pasos` son los destinos crudos de los wikilinks, en orden.
+export type Recorrido = {
+  slug: string
+  nombre: string
+  paraQuien?: string
+  resultado?: string
+  pasos: string[]
+}
+
+export type Resolver = (raw: string) => { tipo: 'nota' | 'recorrido'; slug: string } | null
+
+export type Grafo = {
+  nodes: { id: string; titulo: string; existe: boolean }[]
+  links: { source: string; target: string }[]
+}
