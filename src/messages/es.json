@@ -915,5 +915,22 @@
       "10": "Noviembre",
       "11": "Diciembre"
     }
+  },
+  "manual": {
+    "sinAcceso": "No tienes acceso a este manual. Si crees que deberías, pídeselo a Sergio.",
+    "noDisponible": "El manual no está disponible en esta vista previa.",
+    "fallo": "No pude traer el manual ahora. Intenta en unos minutos.",
+    "entrar": {
+      "titulo": "Entrar al manual",
+      "email": "Tu correo",
+      "enviar": "Enviarme el enlace",
+      "enviando": "Enviando...",
+      "enviado": "Si tienes acceso, te llegó un enlace a tu correo.",
+      "error": "Algo salió mal. Intenta de nuevo."
+    },
+    "nav": {
+      "mapa": "Mapa",
+      "grafo": "Grafo"
+    }
   }
 }
