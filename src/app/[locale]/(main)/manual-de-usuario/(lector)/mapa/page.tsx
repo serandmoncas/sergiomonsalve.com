@@ -28,7 +28,7 @@ export default async function MapaPage() {
   const res = await getManualForReader()
   if (!res.ok) return avisoManual(res)
   const t = await getTranslations('manual')
-  const { indice } = res.manual
+  const { indice, notas, recorridos } = res.manual
 
   return (
     <div className="max-w-[68ch] mx-auto px-6 py-12">
@@ -38,7 +38,9 @@ export default async function MapaPage() {
           <h2 className="font-mono text-xs text-accent mb-3">{s.titulo}</h2>
           <ul className="space-y-2">
             {s.entradas.map((e) => {
-              const href = e.nota ? notaHref(e.nota) : e.recorrido ? recorridoHref(e.recorrido) : null
+              // Solo se enlaza lo que existe; el resto se ve apagado.
+              const href = e.nota && notas.has(e.nota) ? notaHref(e.nota)
+                : e.recorrido && recorridos.has(e.recorrido) ? recorridoHref(e.recorrido) : null
               return (
                 <li key={e.n}>
                   {href ? (

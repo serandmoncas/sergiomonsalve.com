@@ -12,6 +12,13 @@ export function NotaMeta({ nota }: { nota: Nota }) {
       <p>
         {t('estado')}: <span className="text-text">{nota.estado}</span> · {t('confianza')}: <span className="text-text">{nota.confianza}</span>
       </p>
+      {nota.terminos.length > 0 && (
+        <ul data-terminos className="flex flex-wrap gap-2">
+          {nota.terminos.map((x) => (
+            <li key={x} className="border border-border px-2 py-0.5 rounded-sm">{x}</li>
+          ))}
+        </ul>
+      )}
       {ia.length > 0 && (
         <ul className="space-y-1">
           {ia.map((c) => (

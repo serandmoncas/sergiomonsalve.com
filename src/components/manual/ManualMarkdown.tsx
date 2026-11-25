@@ -15,15 +15,47 @@ const ESQ_VERIFICAR = 'verificar:'
 
 const sinCorchetes = (s: string) => s.replace(/[[\]]/g, '')
 
-/** `[[x|alias]]` y `[VERIFICAR: x]` pasan a links con esquema interno. */
-function preprocesar(md: string): string {
+// encodeURIComponent deja pasar ( ) ! ' *, que romperían el destino del link.
+const codificar = (s: string) => encodeURIComponent(s).replace(/[!'()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)
+
+// Un destino escrito a mano puede traer % inválidos: en ese caso queda crudo.
+function decodificar(s: string): string {
+  try {
+    return decodeURIComponent(s)
+  } catch {
+    return s
+  }
+}
+
+const marcaVerificar = (detalle: string) => `[por verificar](${ESQ_VERIFICAR}${codificar(detalle.trim())})`
+
+// Código en bloque o en línea: no se reescribe. Excepción: un código en línea
+// que es solo una marca `[VERIFICAR…]` pasa a ser la marca.
+const CODIGO = /(^(?:```|~~~)[\s\S]*?(?:\n(?:```|~~~)[^\n]*(?=\n|$)|(?![\s\S])))|(`+)([^`\n]+?)\2(?!`)/gm
+const SOLO_VERIFICAR = /^\[VERIFICAR[:\s]*([^\]\n]*)\]$/
+
+function reescribirTexto(md: string): string {
   return md
     .replace(WIKILINK, (_m, raw: string) => {
       const destino = wikiTarget(raw)
       const alias = raw.includes('|') ? raw.slice(raw.indexOf('|') + 1).trim() : destino
-      return `[${sinCorchetes(alias || destino)}](${ESQ_MANUAL}${encodeURIComponent(destino)})`
+      return `[${sinCorchetes(alias || destino)}](${ESQ_MANUAL}${codificar(destino)})`
     })
-    .replace(VERIFICAR, (_m, detalle: string) => `[por verificar](${ESQ_VERIFICAR}${encodeURIComponent(detalle.trim())})`)
+    .replace(VERIFICAR, (_m, detalle: string) => marcaVerificar(detalle))
+}
+
+/** `[[x|alias]]` y `[VERIFICAR: x]` pasan a links con esquema interno, fuera del código. */
+function preprocesar(md: string): string {
+  let salida = ''
+  let ultimo = 0
+  for (const m of md.matchAll(CODIGO)) {
+    const i = m.index ?? 0
+    salida += reescribirTexto(md.slice(ultimo, i))
+    const marca = m[3] !== undefined ? SOLO_VERIFICAR.exec(m[3].trim()) : null
+    salida += marca ? marcaVerificar(marca[1]) : m[0]
+    ultimo = i + m[0].length
+  }
+  return salida + reescribirTexto(md.slice(ultimo))
 }
 
 // Deja pasar solo nuestros esquemas; el resto sigue la sanitización por defecto.
@@ -49,13 +81,13 @@ export function ManualMarkdown({
           a({ href, children }) {
             if (href?.startsWith(ESQ_VERIFICAR)) {
               return (
-                <mark data-verificar title={decodeURIComponent(href.slice(ESQ_VERIFICAR.length))}>
+                <mark data-verificar title={decodificar(href.slice(ESQ_VERIFICAR.length))}>
                   {children}
                 </mark>
               )
             }
             if (href?.startsWith(ESQ_MANUAL)) {
-              const r = resolve(decodeURIComponent(href.slice(ESQ_MANUAL.length)))
+              const r = resolve(decodificar(href.slice(ESQ_MANUAL.length)))
               if (!r) return <span data-por-escribir className="text-text-muted italic">{children}</span>
               const destino = r.tipo === 'nota' ? notaHref(r.slug, recorrido) : recorridoHref(r.slug)
               return <Link href={destino}>{children}</Link>

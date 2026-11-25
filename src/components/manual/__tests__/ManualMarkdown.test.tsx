@@ -64,4 +64,37 @@ describe('ManualMarkdown', () => {
     render(<ManualMarkdown md="[[Nota de prueba]]" resolve={resolve} recorrido="ruta-de-prueba" />)
     expect(screen.getByText('Nota de prueba').closest('a')).toHaveAttribute('href', '/manual-de-usuario/n/nota-de-prueba?r=ruta-de-prueba')
   })
+  it('VERIFICAR dentro de código en línea pasa a mark', () => {
+    const { container } = render(<ManualMarkdown md={'Lorem `[VERIFICAR: x, y]` ipsum'} resolve={resolve} />)
+    expect(container.querySelector('mark[data-verificar]')).toHaveAttribute('title', 'x, y')
+    expect(container.querySelector('code')).toBeNull()
+  })
+  it('código en línea con wikilink queda literal', () => {
+    const { container } = render(<ManualMarkdown md={'`const a = [[Nota de prueba]]`'} resolve={resolve} />)
+    expect(container.querySelector('code')).toHaveTextContent('const a = [[Nota de prueba]]')
+    expect(container.querySelector('a')).toBeNull()
+  })
+  it('bloque de código queda literal', () => {
+    const { container } = render(<ManualMarkdown md={'```\n[[Nota de prueba]]\n[VERIFICAR: z]\n```'} resolve={resolve} />)
+    expect(container.querySelector('pre')).toHaveTextContent('[[Nota de prueba]]')
+    expect(container.querySelector('pre')).toHaveTextContent('[VERIFICAR: z]')
+    expect(container.querySelector('mark')).toBeNull()
+  })
+  it('paréntesis en VERIFICAR no rompen el link', () => {
+    const { container } = render(<ManualMarkdown md={'a [VERIFICAR: 1) dato] b [VERIFICAR: dato (ver] c'} resolve={resolve} />)
+    const ms = container.querySelectorAll('mark[data-verificar]')
+    expect(ms).toHaveLength(2)
+    expect(ms[0]).toHaveAttribute('title', '1) dato')
+    expect(ms[1]).toHaveAttribute('title', 'dato (ver')
+  })
+  it('paréntesis en destino de wikilink', () => {
+    const r: Resolver = (x) => (x === 'Nota (rara)' ? { tipo: 'nota', slug: 'rara' } : null)
+    render(<ManualMarkdown md="[[Nota (rara)|ver]]" resolve={r} />)
+    expect(screen.getByText('ver').closest('a')).toHaveAttribute('href', '/manual-de-usuario/n/rara')
+  })
+  it('% inválido en manual: / verificar: no rompe', () => {
+    const { container } = render(<ManualMarkdown md={'[x](manual:%E0) [y](verificar:%E0)'} resolve={resolve} />)
+    expect(container.querySelector('span[data-por-escribir]')).toHaveTextContent('x')
+    expect(container.querySelector('mark[data-verificar]')).toHaveAttribute('title', '%E0')
+  })
 })

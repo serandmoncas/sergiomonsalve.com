@@ -14,9 +14,11 @@ const manual = {
     { n: 1, titulo: 'Con nota', confianza: 'alta', nota: 'con-nota' },
     { n: 2, titulo: 'Con ruta', confianza: 'alta', recorrido: 'ruta' },
     { n: 3, titulo: 'Sin nada', confianza: 'alta' },
+    { n: 5, titulo: 'Nota ausente', confianza: 'alta', nota: 'no-existe' },
     { n: 4, titulo: 'Momento', puerta: 'Puerta de prueba', confianza: 'alta', nota: 'momento' },
   ] }] },
-  notas: new Map(),
+  notas: new Map([['con-nota', {}], ['momento', {}]]),
+  recorridos: new Map([['ruta', {}]]),
 }
 
 describe('mapa', () => {
@@ -35,6 +37,7 @@ describe('mapa', () => {
     expect(screen.getByText('Con ruta').closest('a')).toHaveAttribute('href', '/manual-de-usuario/r/ruta')
     expect(screen.getByText('Sin nada').closest('a')).toBeNull()
     expect(container.querySelector('[data-apagada]')).toHaveTextContent('Sin nada')
+    expect(screen.getByText('Nota ausente').closest('a')).toBeNull()
     const mom = screen.getByText('Puerta de prueba').closest('a')!
     expect(mom).toHaveAttribute('href', '/manual-de-usuario/n/momento')
     expect(mom.textContent!.indexOf('Puerta de prueba')).toBeLessThan(mom.textContent!.indexOf('Momento'))

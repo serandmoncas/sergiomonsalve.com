@@ -960,8 +960,9 @@
       "copiarEnlace": "Copiar enlace",
       "copiado": "Enlace copiado",
       "editar": "Editar en GitHub",
-      "capaTodos": "Para todos",
-      "capaOtros": "Para otros",
+      "capaTodos": "Lo que nos pasa a todos",
+      "capaOtros": "Cómo lo han vivido y pensado otros",
+      "desdeAqui": "Desde aquí — {voz}",
       "tituloGenerico": "Manual de usuario"
     },
     "recorrido": {
