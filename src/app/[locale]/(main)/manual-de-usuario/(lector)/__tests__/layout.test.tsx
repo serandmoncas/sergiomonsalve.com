@@ -8,6 +8,8 @@ vi.mock('@/i18n/navigation', () => ({
   Link: ({ href, children }: { href: string; children: React.ReactNode }) => <a href={href}>{children}</a>,
 }))
 
+vi.mock('@/components/manual/OcultarSergio', () => ({ OcultarSergio: () => <button>ocultar</button> }))
+
 import LectorLayout from '../layout'
 
 async function renderLayout() {

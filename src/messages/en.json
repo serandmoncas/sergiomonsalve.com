@@ -931,6 +931,46 @@
     "nav": {
       "mapa": "Mapa",
       "grafo": "Grafo"
+    },
+    "sobreFallback": "Un manual de usuario para entender cómo trabajo con IA. Es privado y por invitación.",
+    "portada": {
+      "titulo": "Manual de usuario",
+      "entrar": "Entrar",
+      "pedirAcceso": "Pedir acceso"
+    },
+    "desdeAqui": {
+      "ocultar": "Ocultar \"Desde aquí\"",
+      "mostrar": "Mostrar \"Desde aquí\""
+    },
+    "mapa": {
+      "titulo": "Mapa del manual",
+      "porEscribir": "por escribir"
+    },
+    "nota": {
+      "estado": "Estado",
+      "confianza": "Confianza",
+      "ia": {
+        "todos": "IA en la capa para todos",
+        "otros": "IA en la capa para otros",
+        "desde_aqui": "IA en la capa desde aquí"
+      },
+      "fuentes": "Fuentes",
+      "llevar": "Para llevarte",
+      "backlinks": "Enlazan aquí",
+      "copiarEnlace": "Copiar enlace",
+      "copiado": "Enlace copiado",
+      "editar": "Editar en GitHub",
+      "capaTodos": "Para todos",
+      "capaOtros": "Para otros",
+      "tituloGenerico": "Manual de usuario"
+    },
+    "recorrido": {
+      "paso": "Paso {n} de {total}",
+      "anterior": "← Anterior",
+      "siguiente": "Siguiente →",
+      "paraQuien": "Para quién",
+      "resultado": "Resultado",
+      "porEscribir": "por escribir"
     }
   }
 }

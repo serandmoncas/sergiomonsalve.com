@@ -201,3 +201,8 @@ body {
     }
   }
 }
+
+/* Manual de usuario: OcultarSergio esconde las capas "desde aquí". */
+[data-ocultar-desde-aqui] [data-desde-aqui] {
+  display: none;
+}
