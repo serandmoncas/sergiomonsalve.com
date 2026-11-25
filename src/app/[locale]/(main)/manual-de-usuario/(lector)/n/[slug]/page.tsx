@@ -9,6 +9,8 @@ import { NotaMeta } from '@/components/manual/NotaMeta'
 import { BarraRecorrido } from '@/components/manual/BarraRecorrido'
 import { CopiarEnlace } from '@/components/manual/CopiarEnlace'
 import { Comentarios } from '@/components/manual/Comentarios'
+import { Grafo } from '@/components/manual/Grafo'
+import { vecindario } from '@/lib/manual/graph'
 import { getManualForReader } from '@/lib/manual/lector'
 import { notaHref } from '@/lib/manual/paths'
 
@@ -46,6 +48,8 @@ export default async function NotaPage({ params, searchParams }: Props) {
   const t = await getTranslations('manual')
   const { resolve } = manual
   const rotulo = 'font-mono text-xs text-accent mb-2'
+  // Vecindario de un salto, calculado aquí: al cliente solo llegan ids, títulos y enlaces.
+  const vecinos = vecindario(manual.grafo, slug)
 
   return (
     <article className="max-w-[68ch] mx-auto px-6 py-12">
@@ -88,6 +92,13 @@ export default async function NotaPage({ params, searchParams }: Props) {
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {vecinos.nodes.length > 1 && (
+        <section className="my-8">
+          <p className={rotulo}>{t('grafo.vecindario')}</p>
+          <Grafo grafo={vecinos} actual={slug} compacto />
         </section>
       )}
 

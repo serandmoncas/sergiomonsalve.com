@@ -11,7 +11,7 @@ vi.mock('@/lib/manual/manual', () => ({ getManual }))
 vi.mock('next/navigation', () => ({ notFound }))
 vi.mock('next-intl', () => ({ useTranslations: () => (k: string, v?: Record<string, unknown>) => (v ? `${k}:${JSON.stringify(v)}` : k) }))
 vi.mock('next-intl/server', () => ({ getTranslations: async () => (k: string) => `T:${k}` }))
-vi.mock('@/i18n/navigation', () => ({ Link: ({ href, children }: { href: string; children: React.ReactNode }) => <a href={href}>{children}</a> }))
+vi.mock('@/i18n/navigation', () => ({ Link: ({ href, children, ...r }: React.ComponentProps<'a'>) => <a href={href} {...r}>{children}</a> }))
 
 import NotaPage, { generateMetadata } from '../page'
 
@@ -28,6 +28,14 @@ const manual = {
   recorridos: new Map([['ruta', rec]]),
   resolve: (r: string) => ({ tipo: 'nota', slug: r }),
   backlinks: { 'nota-de-prueba': ['otra'] },
+  grafo: {
+    nodes: [
+      { id: 'nota-de-prueba', titulo: 'Título de prueba', existe: true },
+      { id: 'otra', titulo: 'Otra nota', existe: true },
+      { id: 'lejana', titulo: 'Nota lejana', existe: true },
+    ],
+    links: [{ source: 'otra', target: 'nota-de-prueba' }, { source: 'otra', target: 'lejana' }],
+  },
 }
 const params = (slug: string) => Promise.resolve({ slug })
 const sp = (o: Record<string, string> = {}) => Promise.resolve(o)
@@ -47,9 +55,16 @@ describe('nota', () => {
     render(await NotaPage({ params: params('nota-de-prueba'), searchParams: sp() }))
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Título de prueba')
     for (const t of ['Lorem entrada', 'Lorem para todos', 'Lorem otros', 'Lorem llevar', 'Lorem aqui']) expect(screen.getByText(t)).toBeInTheDocument()
-    expect(screen.getByText('Otra nota').closest('a')).toHaveAttribute('href', '/manual-de-usuario/n/otra')
+    expect(screen.getAllByText('Otra nota').some((e) => e.closest('a')?.getAttribute('href') === '/manual-de-usuario/n/otra')).toBe(true)
     expect(screen.getByText('nota.copiarEnlace')).toBeInTheDocument()
     expect(screen.queryByText('T:nota.editar')).toBeNull()
+  })
+  it('monta el grafo compacto solo con el vecindario de un salto', async () => {
+    getManualForReader.mockResolvedValue({ ok: true, manual, reader: { isAdmin: false } })
+    const { container } = render(await NotaPage({ params: params('nota-de-prueba'), searchParams: sp() }))
+    expect(container.querySelector('[data-compacto]')).not.toBeNull()
+    expect(container.querySelector('svg a[aria-label="Otra nota"]')).not.toBeNull()
+    expect(container.querySelector('svg a[aria-label="Nota lejana"]')).toBeNull()
   })
   it('admin ve Editar en GitHub', async () => {
     getManualForReader.mockResolvedValue({ ok: true, manual, reader: { isAdmin: true } })

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildGrafo, makeResolver } from '../graph'
+import { buildGrafo, makeResolver, vecindario } from '../graph'
 import type { Nota, Recorrido } from '../types'
 
 const nota = (slug: string, titulo: string, enlacesRaw: string[] = []): Nota => ({
@@ -57,5 +57,32 @@ describe('buildGrafo', () => {
     const ns = [nota('a', 'A', ['a', 'b', 'B']), nota('b', 'B')]
     const { grafo } = buildGrafo(ns, makeResolver(ns, []))
     expect(grafo.links).toEqual([{ source: 'a', target: 'b' }])
+  })
+})
+
+describe('vecindario', () => {
+  const grafo = {
+    nodes: [
+      { id: 'a', titulo: 'A', existe: true },
+      { id: 'b', titulo: 'B', existe: true },
+      { id: 'c', titulo: 'C', existe: true },
+      { id: 'd', titulo: 'D', existe: true },
+      { id: 'x:f', titulo: 'F', existe: false },
+    ],
+    links: [
+      { source: 'a', target: 'b' },
+      { source: 'c', target: 'a' },
+      { source: 'a', target: 'x:f' },
+      { source: 'b', target: 'd' },
+    ],
+  }
+  it('trae la nota, sus vecinos de un salto y solo los enlaces entre ellos', () => {
+    const v = vecindario(grafo, 'a')
+    expect(v.nodes.map((n) => n.id).sort()).toEqual(['a', 'b', 'c', 'x:f'])
+    expect(v.links).toHaveLength(3)
+    expect(v.links.some((l) => l.target === 'd')).toBe(false)
+  })
+  it('slug desconocido: grafo vacío', () => {
+    expect(vecindario(grafo, 'zzz')).toEqual({ nodes: [], links: [] })
   })
 })

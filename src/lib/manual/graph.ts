@@ -66,3 +66,17 @@ export function buildGrafo(
   const huerfanas = notas.filter((n) => !conectadas.has(n.slug)).map((n) => n.slug)
   return { grafo: { nodes, links }, backlinks, huerfanas }
 }
+
+/** Vecindario de un salto: la nota, sus vecinos (entrantes o salientes) y los enlaces entre ellos. */
+export function vecindario(grafo: Grafo, slug: string): Grafo {
+  if (!grafo.nodes.some((n) => n.id === slug)) return { nodes: [], links: [] }
+  const ids = new Set([slug])
+  for (const l of grafo.links) {
+    if (l.source === slug) ids.add(l.target)
+    if (l.target === slug) ids.add(l.source)
+  }
+  return {
+    nodes: grafo.nodes.filter((n) => ids.has(n.id)),
+    links: grafo.links.filter((l) => ids.has(l.source) && ids.has(l.target)),
+  }
+}

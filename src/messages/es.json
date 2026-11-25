@@ -942,6 +942,11 @@
       "ocultar": "Ocultar \"Desde aquí\"",
       "mostrar": "Mostrar \"Desde aquí\""
     },
+    "grafo": {
+      "titulo": "Grafo de notas del manual",
+      "vacio": "Aún no hay notas para mostrar.",
+      "vecindario": "Notas conectadas"
+    },
     "mapa": {
       "titulo": "Mapa del manual",
       "porEscribir": "por escribir"
