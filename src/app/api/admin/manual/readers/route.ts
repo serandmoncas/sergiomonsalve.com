@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { requireAdmin } from '@/lib/auth/admin'
 import { normalizeEmail } from '@/lib/manual/access'
 import { createAdminClient } from '@/lib/supabase/server'
+import { sendManualInvitation } from '@/lib/resend'
 
 const inviteSchema = z.object({
   email: z.string().transform(normalizeEmail).pipe(z.string().email()),
@@ -37,20 +38,28 @@ export async function POST(request: Request) {
     .upsert({ email, name, note: note || null }, { onConflict: 'email' })
   if (upsertError) return NextResponse.json({ error: 'Failed to save' }, { status: 500 })
 
-  const origin = new URL(request.url).origin
-  const { error } = await admin.auth.admin.inviteUserByEmail(email, {
-    redirectTo: `${origin}/auth/callback?next=/es/manual-de-usuario/mapa`,
-  })
-  if (!error) return NextResponse.json({ invited: true })
-
-  // Ya tiene cuenta: no se reenvía; entra por /entrar.
-  const e = error as { message?: string; code?: string }
-  if (e.code === 'email_exists' || /already (been )?registered/i.test(e.message ?? '')) {
-    return NextResponse.json({ invited: false, existed: true })
+  // Cuenta de Supabase: si ya existe, está bien. La invitación va por nuestro correo,
+  // no por inviteUserByEmail (sus enlaces implícitos no los maneja /auth/callback).
+  const { error: cuentaError } = await admin.auth.admin.createUser({ email, email_confirm: true })
+  let existed = false
+  if (cuentaError) {
+    const e = cuentaError as { message?: string; code?: string }
+    if (e.code === 'email_exists' || /already (been )?registered/i.test(e.message ?? '')) {
+      existed = true
+    } else {
+      // El lector queda guardado; se puede reintentar.
+      console.error('[manual] fallo al crear la cuenta:', e.message)
+      return NextResponse.json({ invited: false, error: 'cuenta' })
+    }
   }
-  // El lector queda guardado y puede entrar por /entrar.
-  console.error('[manual] fallo al invitar:', e.message)
-  return NextResponse.json({ invited: false, error: 'invite' })
+
+  try {
+    await sendManualInvitation({ to: email, name })
+  } catch (e) {
+    console.error('[manual] fallo al enviar la invitación:', e instanceof Error ? e.message : e)
+    return NextResponse.json({ invited: false, error: 'correo' })
+  }
+  return NextResponse.json({ invited: true, existed })
 }
 
 export async function DELETE(request: Request) {

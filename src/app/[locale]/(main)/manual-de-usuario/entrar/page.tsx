@@ -9,7 +9,9 @@ import { MANUAL_ES_BASE } from '@/lib/manual/paths'
 
 function Formulario() {
   const t = useTranslations('manual.entrar')
-  const next = useSearchParams().get('next')
+  const params = useSearchParams()
+  const next = params.get('next')
+  const enlaceVencido = params.get('error') === 'enlace'
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'sent' | 'error'>('idle')
 
@@ -42,6 +44,7 @@ function Formulario() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {enlaceVencido && <p className="font-mono text-xs text-text-muted">{t('enlace')}</p>}
       <div>
         <label htmlFor="manual-email" className="font-mono text-xs text-text-muted block mb-1">{t('email')}</label>
         <input

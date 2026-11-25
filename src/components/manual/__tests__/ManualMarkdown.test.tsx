@@ -97,4 +97,9 @@ describe('ManualMarkdown', () => {
     expect(container.querySelector('span[data-por-escribir]')).toHaveTextContent('x')
     expect(container.querySelector('mark[data-verificar]')).toHaveAttribute('title', '%E0')
   })
+  it('una imagen con esquema manual: no lo salta: usa la sanitización por defecto', () => {
+    const { container } = render(<ManualMarkdown md={'![alt](manual:Nota%20de%20prueba)'} resolve={resolve} />)
+    const img = container.querySelector('img')
+    expect(img?.getAttribute('src') ?? '').not.toContain('manual:')
+  })
 })

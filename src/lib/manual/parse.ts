@@ -95,8 +95,9 @@ export function parseNota(slug: string, raw: string): ParseResult {
         if (h[1] === '#') {
           if (h1 === null) { h1 = h[2].trim(); continue }
         } else {
-          actual = seccionDe(h[2])
-          continue
+          const s = seccionDe(h[2])
+          // H2 desconocido: se conserva con su contenido en la sección vigente.
+          if (s !== 'otra') { actual = s; continue }
         }
       }
     }

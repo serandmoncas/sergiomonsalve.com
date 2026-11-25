@@ -138,3 +138,25 @@ describe('normKey', () => {
     expect(normKey('Cómo  Lo-Hacemos')).toBe('como-lo-hacemos')
   })
 })
+
+describe('H2 desconocido', () => {
+  const base = (cuerpo: string) => `---\ntitulo: Prueba\n---\n\n${cuerpo}\n`
+
+  it('conserva el encabezado y su contenido dentro de la sección vigente', () => {
+    const r = parseNota('x', base('# Prueba\n\n## Lo que nos pasa a todos\n\nTexto uno.\n\n## Apartado inventado\n\nTexto dos.'))
+    expect(r.ok).toBe(true)
+    if (!r.ok) return
+    expect(r.nota.capas.todos).toContain('Texto uno.')
+    expect(r.nota.capas.todos).toContain('## Apartado inventado')
+    expect(r.nota.capas.todos).toContain('Texto dos.')
+  })
+
+  it('antes de cualquier sección conocida va a la entrada', () => {
+    const r = parseNota('x', base('# Prueba\n\n## Apartado inventado\n\nTexto suelto.\n\n## Para llevarte\n\nLlevar.'))
+    expect(r.ok).toBe(true)
+    if (!r.ok) return
+    expect(r.nota.entrada).toContain('## Apartado inventado')
+    expect(r.nota.entrada).toContain('Texto suelto.')
+    expect(r.nota.llevar).toBe('Llevar.')
+  })
+})

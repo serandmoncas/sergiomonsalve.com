@@ -51,4 +51,13 @@ describe('entrar', () => {
     await enviar()
     expect(await screen.findByText('T:error')).toBeInTheDocument()
   })
+  it('error=enlace muestra el aviso amable', () => {
+    search.value = 'error=enlace'
+    render(<EntrarPage />)
+    expect(screen.getByText('T:enlace')).toBeInTheDocument()
+  })
+  it('sin error=enlace no muestra el aviso', () => {
+    render(<EntrarPage />)
+    expect(screen.queryByText('T:enlace')).toBeNull()
+  })
 })

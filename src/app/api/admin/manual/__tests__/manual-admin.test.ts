@@ -1,10 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-const { getUser, adminClient, inviteUserByEmail, revalidateTag } = vi.hoisted(() => ({
+const { getUser, adminClient, createUser, revalidateTag, sendManualInvitation } = vi.hoisted(() => ({
   getUser: vi.fn(),
   adminClient: vi.fn(),
-  inviteUserByEmail: vi.fn(),
+  createUser: vi.fn(),
   revalidateTag: vi.fn(),
+  sendManualInvitation: vi.fn(),
 }))
 
 vi.mock('@/lib/supabase/server', () => ({
@@ -12,6 +13,7 @@ vi.mock('@/lib/supabase/server', () => ({
   createAdminClient: adminClient,
 }))
 vi.mock('next/cache', () => ({ revalidateTag }))
+vi.mock('@/lib/resend', () => ({ sendManualInvitation }))
 
 import { GET as readersGET, POST as readersPOST, DELETE as readersDELETE } from '../readers/route'
 import { GET as commentsGET } from '../comments/route'
@@ -59,24 +61,24 @@ describe('rutas /api/admin/manual', () => {
     beforeEach(() => {
       asAdmin()
       upsert = vi.fn().mockResolvedValue({ error: null })
-      inviteUserByEmail.mockResolvedValue({ error: null })
+      createUser.mockResolvedValue({ error: null })
+      sendManualInvitation.mockResolvedValue(undefined)
       adminClient.mockReturnValue({
         from: vi.fn(() => ({ upsert })),
-        auth: { admin: { inviteUserByEmail } },
+        auth: { admin: { createUser } },
       })
     })
 
-    it('normaliza el correo, guarda y envía la invitación con el origen de la petición', async () => {
+    it('guarda normalizado, crea la cuenta y envía el correo propio con enlace fijo', async () => {
       const res = await readersPOST(post({ email: ' Ana@Mail.com ', name: ' Ana ', note: 'amiga' }))
       expect(res.status).toBe(200)
-      expect(await res.json()).toEqual({ invited: true })
+      expect(await res.json()).toEqual({ invited: true, existed: false })
       expect(upsert).toHaveBeenCalledWith(
         { email: 'ana@mail.com', name: 'Ana', note: 'amiga' },
         { onConflict: 'email' },
       )
-      expect(inviteUserByEmail).toHaveBeenCalledWith('ana@mail.com', {
-        redirectTo: 'https://sitio.test/auth/callback?next=/es/manual-de-usuario/mapa',
-      })
+      expect(createUser).toHaveBeenCalledWith({ email: 'ana@mail.com', email_confirm: true })
+      expect(sendManualInvitation).toHaveBeenCalledWith({ to: 'ana@mail.com', name: 'Ana' })
     })
 
     it('400 sin name', async () => {
@@ -90,21 +92,31 @@ describe('rutas /api/admin/manual', () => {
       expect(res.status).toBe(400)
     })
 
-    it('si ya está registrado responde existed:true sin error', async () => {
-      inviteUserByEmail.mockResolvedValue({
+    it('si la cuenta ya existe igual envía el correo y responde existed:true', async () => {
+      createUser.mockResolvedValue({
         error: { message: 'A user with this email address has already been registered', code: 'email_exists' },
       })
       const res = await readersPOST(post({ email: 'a@b.com', name: 'A' }))
       expect(res.status).toBe(200)
-      expect(await res.json()).toEqual({ invited: false, existed: true })
+      expect(await res.json()).toEqual({ invited: true, existed: true })
+      expect(sendManualInvitation).toHaveBeenCalledWith({ to: 'a@b.com', name: 'A' })
     })
 
-    it('otro error de invitación responde 200 con error:invite y deja el lector', async () => {
-      inviteUserByEmail.mockResolvedValue({ error: { message: 'smtp caído' } })
+    it('otro error de createUser responde error:cuenta, sin correo, y deja el lector', async () => {
+      createUser.mockResolvedValue({ error: { message: 'db caída' } })
       const res = await readersPOST(post({ email: 'a@b.com', name: 'A' }))
       expect(res.status).toBe(200)
-      expect(await res.json()).toEqual({ invited: false, error: 'invite' })
+      expect(await res.json()).toEqual({ invited: false, error: 'cuenta' })
+      expect(sendManualInvitation).not.toHaveBeenCalled()
       expect(upsert).toHaveBeenCalled()
+      expect(console.error).toHaveBeenCalled()
+    })
+
+    it('si falla el correo responde error:correo', async () => {
+      sendManualInvitation.mockRejectedValue(new Error('resend caído'))
+      const res = await readersPOST(post({ email: 'a@b.com', name: 'A' }))
+      expect(res.status).toBe(200)
+      expect(await res.json()).toEqual({ invited: false, error: 'correo' })
       expect(console.error).toHaveBeenCalled()
     })
 
@@ -112,7 +124,8 @@ describe('rutas /api/admin/manual', () => {
       upsert.mockResolvedValue({ error: { message: 'x' } })
       const res = await readersPOST(post({ email: 'a@b.com', name: 'A' }))
       expect(res.status).toBe(500)
-      expect(inviteUserByEmail).not.toHaveBeenCalled()
+      expect(createUser).not.toHaveBeenCalled()
+      expect(sendManualInvitation).not.toHaveBeenCalled()
     })
   })
 

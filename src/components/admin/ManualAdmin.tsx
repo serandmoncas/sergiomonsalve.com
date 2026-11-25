@@ -72,9 +72,13 @@ export default function ManualAdmin({ contenido }: { contenido: Contenido }) {
         return
       }
       const data = await res.json()
-      if (data.invited) setAviso('Invitación enviada.')
-      else if (data.existed) setAviso('Ya tenía cuenta: puede entrar por /entrar.')
-      else setAviso('Lector guardado, pero no se pudo enviar la invitación. Puede entrar por /entrar.')
+      if (data.invited) {
+        setAviso(data.existed ? 'Invitación enviada (ya tenía cuenta).' : 'Invitación enviada.')
+      } else if (data.error === 'cuenta') {
+        setAviso('Lector guardado, pero no se pudo crear su cuenta. Vuelve a invitarlo.')
+      } else {
+        setAviso('Lector guardado, pero no se pudo enviar el correo. Vuelve a invitarlo.')
+      }
       setEmail('')
       setName('')
       setNote('')

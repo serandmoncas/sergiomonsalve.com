@@ -15,5 +15,9 @@ export async function GET(request: Request) {
     }
   }
 
+  // Quien viene del manual vuelve a su propia puerta, no al login del admin.
+  if (next.startsWith('/es/manual-de-usuario')) {
+    return NextResponse.redirect(`${origin}/es/manual-de-usuario/entrar?error=enlace`)
+  }
   return NextResponse.redirect(`${origin}/es/admin/login?error=auth`)
 }

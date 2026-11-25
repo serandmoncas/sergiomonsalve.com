@@ -21,11 +21,12 @@ export async function getReader(): Promise<Reader | null> {
   }
 
   // La tabla solo se lee con service role (RLS sin políticas).
-  const { data } = await createAdminClient()
+  const { data, error } = await createAdminClient()
     .from('manual_readers')
     .select('name')
     .eq('email', email)
     .maybeSingle()
+  if (error) console.error('[manual] no se pudo consultar manual_readers:', error.message)
   if (!data) return null
 
   return { userId: user.id, email, name: data.name, isAdmin: false }

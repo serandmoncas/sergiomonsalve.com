@@ -104,6 +104,23 @@ describe('manual', () => {
     expect(r.manual.indice).toBeNull()
   })
 
+  it('sobre.md con frontmatter roto no tumba el manual', async () => {
+    vi.stubGlobal(
+      'fetch',
+      montar(['notas/a.md', 'sobre.md'], {
+        'notas/a.md': nota('A'),
+        'sobre.md': '---\n: [roto\n---\ncuerpo',
+      }),
+    )
+    const r = await getManual()
+    expect(r.ok).toBe(true)
+    if (!r.ok) return
+    expect(r.manual.sobre).toBeNull()
+    expect([...r.manual.notas.keys()]).toEqual(['a'])
+    expect(r.manual.rotas.map((x) => x.slug)).toEqual(['sobre.md'])
+    expect(console.error).toHaveBeenCalled()
+  })
+
   it('indice.yml presente con fetch 500: fallo', async () => {
     vi.stubGlobal('fetch', montar(['indice.yml'], {}, { indice: 500 }))
     const r = await getManual()

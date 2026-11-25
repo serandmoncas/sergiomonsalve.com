@@ -927,7 +927,8 @@
       "enviar": "Enviarme el enlace",
       "enviando": "Enviando...",
       "enviado": "Si tienes acceso, te llegó un enlace a tu correo.",
-      "error": "Algo salió mal. Intenta de nuevo."
+      "error": "Algo salió mal. Intenta de nuevo.",
+      "enlace": "El enlace venció o se abrió en otro dispositivo. Pide uno nuevo aquí."
     },
     "nav": {
       "mapa": "Mapa",

@@ -81,4 +81,20 @@ describe('ManualAdmin', () => {
     render(<ManualAdmin contenido={{ ok: false }} />)
     expect(await screen.findByText(/no disponible/)).toBeInTheDocument()
   })
+
+  it.each([
+    [{ invited: true, existed: false }, 'Invitación enviada.'],
+    [{ invited: true, existed: true }, 'ya tenía cuenta'],
+    [{ invited: false, error: 'cuenta' }, 'no se pudo crear su cuenta'],
+    [{ invited: false, error: 'correo' }, 'no se pudo enviar el correo'],
+  ])('mensaje para la respuesta %j', async (respuesta, texto) => {
+    vi.stubGlobal('fetch', vi.fn((url: string, init?: RequestInit) =>
+      init?.method === 'POST' ? Promise.resolve(ok(respuesta)) : listas()(url, init)))
+    render(<ManualAdmin contenido={contenido} />)
+    await screen.findByText('Quitar')
+    fireEvent.change(screen.getByLabelText('Correo'), { target: { value: 'b@mail.com' } })
+    fireEvent.change(screen.getByLabelText('Nombre'), { target: { value: 'Bea' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Invitar' }))
+    expect(await screen.findByRole('status')).toHaveTextContent(texto)
+  })
 })

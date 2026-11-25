@@ -40,7 +40,15 @@ function ensamblar(files: RepoFiles): Manual {
     }
   }
 
-  const sobre = files.sobre === null ? null : matter(files.sobre).content
+  let sobre: string | null = null
+  if (files.sobre !== null) {
+    try {
+      sobre = matter(files.sobre, {}).content
+    } catch (e) {
+      console.error(`[manual] sobre.md no parsea: ${msg(e)}`)
+      rotas.push({ slug: 'sobre.md', error: msg(e) })
+    }
+  }
 
   const resolve = makeResolver([...notas.values()], [...recorridos.values()])
   const { grafo, backlinks, huerfanas } = buildGrafo([...notas.values()], resolve)

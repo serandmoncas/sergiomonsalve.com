@@ -59,8 +59,11 @@ function preprocesar(md: string): string {
 }
 
 // Deja pasar solo nuestros esquemas; el resto sigue la sanitización por defecto.
-const urlTransform = (url: string) =>
-  url.startsWith(ESQ_MANUAL) || url.startsWith(ESQ_VERIFICAR) ? url : defaultUrlTransform(url)
+// Solo los links (href); las imágenes siempre usan la sanitización por defecto.
+const urlTransform = (url: string, key: string) =>
+  key === 'href' && (url.startsWith(ESQ_MANUAL) || url.startsWith(ESQ_VERIFICAR))
+    ? url
+    : defaultUrlTransform(url)
 
 export function ManualMarkdown({
   md,

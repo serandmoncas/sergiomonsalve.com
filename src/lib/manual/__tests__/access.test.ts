@@ -42,6 +42,15 @@ describe('getReader', () => {
     expect(await getReader()).toBeNull()
   })
 
+  it('si la consulta de lectores falla: registra el error y devuelve null', async () => {
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    getUser.mockResolvedValue({ data: { user: { id: 'u1', email: 'x@y.co' } } })
+    maybeSingle.mockResolvedValue({ data: null, error: { message: 'db caída' } })
+    expect(await getReader()).toBeNull()
+    expect(spy).toHaveBeenCalled()
+    spy.mockRestore()
+  })
+
   it('devuelve el lector invitado, consultando con el correo normalizado', async () => {
     getUser.mockResolvedValue({ data: { user: { id: 'u1', email: ' Ana@Mail.COM ' } } })
     maybeSingle.mockResolvedValue({ data: { name: 'Ana' } })
