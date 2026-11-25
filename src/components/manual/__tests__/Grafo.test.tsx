@@ -52,9 +52,15 @@ describe('Grafo', () => {
   it('SVG con role img y lista oculta de notas existentes para teclado y lectores', () => {
     const { container } = render(<Grafo grafo={grafo} />)
     expect(container.querySelector('svg')).toHaveAttribute('role', 'img')
-    const lista = container.querySelector('ul.sr-only')!
+    const lista = container.querySelector('ul')!
     const items = Array.from(lista.querySelectorAll('a'))
     expect(items.map((a) => a.getAttribute('href'))).toEqual(['/manual-de-usuario/n/uno', '/manual-de-usuario/n/dos'])
+    // El ul no recorta: cada enlace se oculta solo y se revela al enfocarlo.
+    expect(lista.className).not.toContain('sr-only')
+    for (const a of items) {
+      expect(a.className).toContain('sr-only')
+      expect(a.className).toContain('focus:not-sr-only')
+    }
   })
   it('marca el nodo actual', () => {
     const { container } = render(<Grafo grafo={grafo} actual="dos" />)
@@ -75,9 +81,10 @@ describe('Grafo', () => {
     const { container } = render(<Grafo grafo={grafo} actual="uno" />)
     expect(container.querySelector('[data-actual]')!.closest('g')!.getAttribute('class')).toContain('touch-none')
   })
-  it('las posiciones quedan dentro del recuadro', () => {
+  it('las posiciones quedan dentro del recuadro, también con una nota suelta', () => {
     vi.stubGlobal('matchMedia', () => ({ matches: true }))
-    const { container } = render(<Grafo grafo={grafo} />)
+    const suelto = { ...grafo, nodes: [...grafo.nodes, { id: 'suelta', titulo: 'Nota suelta', existe: true }] }
+    const { container } = render(<Grafo grafo={suelto} />)
     container.querySelectorAll('svg circle').forEach((c) => {
       const x = Number(c.getAttribute('cx')); const y = Number(c.getAttribute('cy'))
       expect(x).toBeGreaterThanOrEqual(0); expect(x).toBeLessThanOrEqual(600)

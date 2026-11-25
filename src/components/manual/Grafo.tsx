@@ -180,10 +180,10 @@ export function Grafo({ grafo, actual, compacto = false }: { grafo: GrafoData; a
         })}
       </svg>
       {/* Lista equivalente para teclado y lectores de pantalla. */}
-      <ul className="sr-only">
+      <ul>
         {existentes.map((n) => (
           <li key={n.id}>
-            <Link href={notaHref(n.id)} prefetch={false} className="focus:not-sr-only focus:absolute focus:bg-surface focus:text-accent focus:px-2 focus:py-1">{n.titulo}</Link>
+            <Link href={notaHref(n.id)} prefetch={false} className="sr-only focus:not-sr-only focus:absolute focus:bg-surface focus:text-accent focus:px-2 focus:py-1">{n.titulo}</Link>
           </li>
         ))}
       </ul>
