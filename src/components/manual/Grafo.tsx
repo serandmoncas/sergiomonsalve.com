@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { forceCenter, forceLink, forceManyBody, forceSimulation, type Simulation } from 'd3-force'
+import { forceCenter, forceLink, forceManyBody, forceSimulation, forceX, forceY, type Simulation } from 'd3-force'
 import { Link } from '@/i18n/navigation'
 import { notaHref } from '@/lib/manual/paths'
 import type { Grafo as GrafoData } from '@/lib/manual/types'
@@ -32,6 +32,8 @@ export function Grafo({ grafo, actual, compacto = false }: { grafo: GrafoData; a
   const svgRef = useRef<SVGSVGElement>(null)
   const simRef = useRef<Simulation<NodoSim, undefined> | null>(null)
   const nodosRef = useRef<NodoSim[]>([])
+  const fotoRef = useRef<() => void>(() => {})
+  const sinMovimientoRef = useRef(false)
   const arrastre = useRef<{ id: string; movio: boolean } | null>(null)
 
   useEffect(() => {
@@ -43,9 +45,15 @@ export function Grafo({ grafo, actual, compacto = false }: { grafo: GrafoData; a
       .force('link', forceLink<NodoSim, { source: string; target: string }>(enlaces).id((d) => d.id).distance(compacto ? 70 : 90))
       .force('charge', forceManyBody().strength(compacto ? -120 : -180))
       .force('center', forceCenter(ANCHO / 2, alto / 2))
+      // Atraen suavemente al centro para que las notas sueltas no salgan del recuadro.
+      .force('x', forceX(ANCHO / 2).strength(0.05))
+      .force('y', forceY(alto / 2).strength(0.05))
     simRef.current = sim
     const sinMovimiento = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const foto = () => setPuntos(nodos.map((n) => ({ id: n.id, x: n.x, y: n.y })))
+    sinMovimientoRef.current = sinMovimiento
+    const limitar = (v: number, max: number) => Math.min(Math.max(v, R_ACTUAL), max - R_ACTUAL)
+    const foto = () => setPuntos(nodos.map((n) => ({ id: n.id, x: limitar(n.x, ANCHO), y: limitar(n.y, alto) })))
+    fotoRef.current = foto
     if (sinMovimiento) {
       // Sin animar: se corre todo y se dibuja el estado final.
       sim.stop()
@@ -71,7 +79,8 @@ export function Grafo({ grafo, actual, compacto = false }: { grafo: GrafoData; a
   const onDown = (e: React.PointerEvent<SVGGElement>, id: string) => {
     arrastre.current = { id, movio: false }
     e.currentTarget.setPointerCapture?.(e.pointerId)
-    simRef.current?.alphaTarget(0.3).restart()
+    // Con reduced-motion no se reinicia la simulación animada.
+    if (!sinMovimientoRef.current) simRef.current?.alphaTarget(0.3).restart()
   }
   const onMove = (e: React.PointerEvent) => {
     const a = arrastre.current
@@ -82,6 +91,10 @@ export function Grafo({ grafo, actual, compacto = false }: { grafo: GrafoData; a
     const c = coords(e)
     nodo.fx = c.x
     nodo.fy = c.y
+    if (sinMovimientoRef.current) {
+      simRef.current?.tick()
+      fotoRef.current()
+    }
   }
   const onUp = () => {
     const a = arrastre.current
@@ -105,7 +118,7 @@ export function Grafo({ grafo, actual, compacto = false }: { grafo: GrafoData; a
         role="img"
         aria-label={t('grafo.titulo')}
         viewBox={`0 0 ${ANCHO} ${alto}`}
-        className="w-full h-auto touch-none select-none"
+        className="w-full h-auto select-none"
         onPointerMove={onMove}
         onPointerUp={onUp}
         onPointerCancel={onUp}
@@ -147,10 +160,12 @@ export function Grafo({ grafo, actual, compacto = false }: { grafo: GrafoData; a
             />
           )
           return (
-            <g key={n.id} onPointerDown={esActual ? (e) => onDown(e, n.id) : undefined} className={esActual ? 'cursor-grab' : undefined}>
+            <g key={n.id} onPointerDown={esActual ? (e) => onDown(e, n.id) : undefined} className={esActual ? 'cursor-grab touch-none' : undefined}>
               <Link
                 href={notaHref(n.id)}
                 aria-label={n.titulo}
+                prefetch={false}
+                tabIndex={-1}
                 aria-current={esActual ? 'page' : undefined}
                 onClick={(e: React.MouseEvent) => {
                   if (arrastre.current?.movio) e.preventDefault()
@@ -168,7 +183,7 @@ export function Grafo({ grafo, actual, compacto = false }: { grafo: GrafoData; a
       <ul className="sr-only">
         {existentes.map((n) => (
           <li key={n.id}>
-            <Link href={notaHref(n.id)}>{n.titulo}</Link>
+            <Link href={notaHref(n.id)} prefetch={false} className="focus:not-sr-only focus:absolute focus:bg-surface focus:text-accent focus:px-2 focus:py-1">{n.titulo}</Link>
           </li>
         ))}
       </ul>

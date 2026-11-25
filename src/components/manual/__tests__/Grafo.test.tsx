@@ -1,10 +1,25 @@
-import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
 
+const { stop } = vi.hoisted(() => ({ stop: vi.fn() }))
+vi.mock('d3-force', async (orig) => {
+  const real = await orig<typeof import('d3-force')>()
+  return {
+    ...real,
+    forceSimulation: ((...a: Parameters<typeof real.forceSimulation>) => {
+      const sim = real.forceSimulation(...a)
+      const o = sim.stop.bind(sim)
+      sim.stop = () => { stop(); return o() }
+      return sim
+    }) as typeof real.forceSimulation,
+  }
+})
 vi.mock('next-intl', () => ({ useTranslations: () => (k: string) => `T:${k}` }))
 vi.mock('@/i18n/navigation', () => ({ Link: ({ href, children, ...r }: React.ComponentProps<'a'>) => <a href={href} {...r}>{children}</a> }))
 
 import { Grafo } from '../Grafo'
+
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals() })
 
 const grafo = {
   nodes: [
@@ -50,5 +65,42 @@ describe('Grafo', () => {
   it('modo compacto cambia el alto', () => {
     const { container } = render(<Grafo grafo={grafo} compacto />)
     expect(container.querySelector('[data-compacto]')).not.toBeNull()
+  })
+  it('los enlaces del SVG salen del orden de tabulación; la lista oculta es el camino de teclado', () => {
+    const { container } = render(<Grafo grafo={grafo} />)
+    container.querySelectorAll('svg a').forEach((a) => expect(a).toHaveAttribute('tabindex', '-1'))
+    expect(container.querySelector('svg')!.getAttribute('class')).not.toContain('touch-none')
+  })
+  it('el nodo actual lleva touch-none, no el SVG entero', () => {
+    const { container } = render(<Grafo grafo={grafo} actual="uno" />)
+    expect(container.querySelector('[data-actual]')!.closest('g')!.getAttribute('class')).toContain('touch-none')
+  })
+  it('las posiciones quedan dentro del recuadro', () => {
+    vi.stubGlobal('matchMedia', () => ({ matches: true }))
+    const { container } = render(<Grafo grafo={grafo} />)
+    container.querySelectorAll('svg circle').forEach((c) => {
+      const x = Number(c.getAttribute('cx')); const y = Number(c.getAttribute('cy'))
+      expect(x).toBeGreaterThanOrEqual(0); expect(x).toBeLessThanOrEqual(600)
+      expect(y).toBeGreaterThanOrEqual(0); expect(y).toBeLessThanOrEqual(460)
+    })
+  })
+  it('reduced-motion: no anima (sin listener de tick) y el arrastre mueve el nodo con tick()', () => {
+    vi.stubGlobal('matchMedia', () => ({ matches: true }))
+    const { container } = render(<Grafo grafo={grafo} actual="uno" />)
+    const circulo = () => container.querySelector('[data-actual]')!
+    const antes = circulo().getAttribute('cx')
+    const g = circulo().closest('g')!
+    const svg = container.querySelector('svg')!
+    svg.getBoundingClientRect = () => ({ left: 0, top: 0, width: 600, height: 460 }) as DOMRect
+    fireEvent.pointerDown(g, { pointerId: 1, clientX: 0, clientY: 0 })
+    fireEvent.pointerMove(svg, { pointerId: 1, clientX: 40, clientY: 40 })
+    expect(circulo().getAttribute('cx')).not.toBe(antes)
+    fireEvent.pointerUp(svg)
+  })
+  it('al desmontar se detiene la simulación', () => {
+    const { unmount } = render(<Grafo grafo={grafo} />)
+    stop.mockClear()
+    unmount()
+    expect(stop).toHaveBeenCalled()
   })
 })
