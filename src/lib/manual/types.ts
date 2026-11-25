@@ -52,3 +52,17 @@ export type Grafo = {
   nodes: { id: string; titulo: string; existe: boolean }[]
   links: { source: string; target: string }[]
 }
+
+export type ManualError = { tipo: 'no-configurado' } | { tipo: 'fallo'; detalle: string }
+
+export type Manual = {
+  notas: Map<string, Nota>
+  rotas: { slug: string; error: string }[]
+  indice: Indice | null
+  recorridos: Map<string, Recorrido>
+  resolve: Resolver
+  grafo: Grafo
+  backlinks: Record<string, string[]>
+  huerfanas: string[]
+  sobre: string | null
+}
