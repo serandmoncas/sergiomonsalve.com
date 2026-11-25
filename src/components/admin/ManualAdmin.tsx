@@ -30,17 +30,26 @@ export default function ManualAdmin({ contenido }: { contenido: Contenido }) {
   const [enviando, setEnviando] = useState(false)
 
   const cargar = useCallback(async () => {
-    const [r, c] = await Promise.all([
-      fetch('/api/admin/manual/readers'),
-      fetch('/api/admin/manual/comments'),
-    ])
-    if (r.status === 401 || c.status === 401) {
-      router.push('/admin/login')
-      return
+    try {
+      const [r, c] = await Promise.all([
+        fetch('/api/admin/manual/readers'),
+        fetch('/api/admin/manual/comments'),
+      ])
+      if (r.status === 401 || c.status === 401) {
+        router.push('/admin/login')
+        return
+      }
+      if (!r.ok || !c.ok) {
+        setAviso('No se pudo cargar la lista de lectores o comentarios.')
+      } else {
+        setReaders((await r.json()).readers ?? [])
+        setComments((await c.json()).comments ?? [])
+      }
+    } catch {
+      setAviso('No se pudo cargar la lista de lectores o comentarios.')
+    } finally {
+      setLoading(false)
     }
-    setReaders(r.ok ? (await r.json()).readers ?? [] : [])
-    setComments(c.ok ? (await c.json()).comments ?? [] : [])
-    setLoading(false)
   }, [router])
 
   useEffect(() => {
@@ -52,41 +61,60 @@ export default function ManualAdmin({ contenido }: { contenido: Contenido }) {
     e.preventDefault()
     setEnviando(true)
     setAviso('')
-    const res = await fetch('/api/admin/manual/readers', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, name, note: note || undefined }),
-    })
-    setEnviando(false)
-    if (!res.ok) {
-      setAviso('Revisa el correo y el nombre (1 a 80 caracteres).')
-      return
+    try {
+      const res = await fetch('/api/admin/manual/readers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name, note: note || undefined }),
+      })
+      if (!res.ok) {
+        setAviso('Revisa el correo y el nombre (1 a 80 caracteres).')
+        return
+      }
+      const data = await res.json()
+      if (data.invited) setAviso('Invitación enviada.')
+      else if (data.existed) setAviso('Ya tenía cuenta: puede entrar por /entrar.')
+      else setAviso('Lector guardado, pero no se pudo enviar la invitación. Puede entrar por /entrar.')
+      setEmail('')
+      setName('')
+      setNote('')
+      await cargar()
+    } catch {
+      setAviso('Error de red: no se pudo invitar.')
+    } finally {
+      setEnviando(false)
     }
-    const data = await res.json()
-    if (data.invited) setAviso('Invitación enviada.')
-    else if (data.existed) setAviso('Ya tenía cuenta: puede entrar por /entrar.')
-    else setAviso('Lector guardado, pero no se pudo enviar la invitación. Puede entrar por /entrar.')
-    setEmail('')
-    setName('')
-    setNote('')
-    await cargar()
   }
 
   async function quitarLector(correo: string) {
     if (!confirm(`¿Quitar a ${correo}?`)) return
-    await fetch(`/api/admin/manual/readers?email=${encodeURIComponent(correo)}`, { method: 'DELETE' })
-    setReaders(rs => rs.filter(r => r.email !== correo))
+    try {
+      const res = await fetch(`/api/admin/manual/readers?email=${encodeURIComponent(correo)}`, { method: 'DELETE' })
+      if (!res.ok) throw new Error('delete')
+      setReaders(rs => rs.filter(r => r.email !== correo))
+    } catch {
+      setAviso(`No se pudo quitar a ${correo}. Sigue con acceso.`)
+    }
   }
 
   async function borrarComentario(id: string) {
-    await fetch(`/api/admin/manual/comments/${id}`, { method: 'DELETE' })
-    setComments(cs => cs.filter(c => c.id !== id))
+    try {
+      const res = await fetch(`/api/admin/manual/comments/${id}`, { method: 'DELETE' })
+      if (!res.ok) throw new Error('delete')
+      setComments(cs => cs.filter(c => c.id !== id))
+    } catch {
+      setAviso('No se pudo borrar el comentario.')
+    }
   }
 
   async function refrescar() {
-    const res = await fetch('/api/admin/manual/refresh', { method: 'POST' })
-    setAviso(res.ok ? 'Contenido refrescado.' : 'No se pudo refrescar.')
-    if (res.ok) router.refresh()
+    try {
+      const res = await fetch('/api/admin/manual/refresh', { method: 'POST' })
+      setAviso(res.ok ? 'Contenido refrescado.' : 'No se pudo refrescar.')
+      if (res.ok) router.refresh()
+    } catch {
+      setAviso('Error de red: no se pudo refrescar.')
+    }
   }
 
   const input =
