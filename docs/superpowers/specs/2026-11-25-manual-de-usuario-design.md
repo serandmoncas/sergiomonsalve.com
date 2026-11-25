@@ -199,3 +199,44 @@ plantillas nuevas de Resend si no hace falta).
 3. Agregar la URL de redirección del manual en Supabase → Auth → URL
    Configuration, si hace falta.
 4. Aprobar el merge a `main`, que publica el sitio.
+
+## Decisiones tras la revisión del constructor (2026-11-25, decisiones de Claude)
+
+1. **Autor de un comentario:** `manual_readers` agrega `name text not null`, que
+   Sergio escribe al invitar, y `manual_comments` guarda `author_name`. Los
+   lectores solo ven el nombre. **El correo nunca se muestra a otros lectores.**
+   Para el admin se toma el nombre de `ADMIN_NAME` (por defecto "Sergio").
+2. **Recorrido:** se lee una nota por paso.
+   - `/r/<recorrido>` es la página del recorrido: título, para quién, resultado
+     y los pasos numerados. Los pasos sin nota aparecen apagados como "por
+     escribir".
+   - Para entrar a una nota desde el recorrido se usa
+     `/n/<slug>?r=<recorrido>`. La nota muestra una barra de contexto ("Paso 2
+     de 8 · Lo que todos vivimos") con anterior y siguiente, que **saltan los
+     pasos sin nota**. Los comentarios siguen siendo por nota.
+3. **Destinos de wikilinks:** se resuelven primero contra notas (por archivo y
+   luego por `titulo`) y después contra recorridos (por slug y luego por
+   nombre).
+   - Los enlaces a recorridos se ven como enlaces y no cuentan como backlinks.
+   - `terminos` se muestran como etiquetas de texto, sin enlace, hasta que exista
+     el glosario.
+   - Un wikilink que no resuelve se muestra como texto apagado.
+4. **Grafo:** nodos encendidos para las notas existentes y nodos apagados ("por
+   escribir") para los destinos de wikilinks que no resuelven. Los recorridos,
+   los términos y las entradas de `indice.yml` sin nota quedan fuera. Una nota
+   es **huérfana** si nadie la enlaza y ella no enlaza a nadie, sin contar
+   `relacionados` hacia recorridos.
+5. **Portada pública:** el texto vive en el repo privado como `sobre.md`, sin
+   frontmatter obligatorio, y lo redacta Claude con la marca `ia: redactora`
+   para que Sergio lo revise. Es contenido público a propósito y se trae con el
+   token y caché. Si no existe, se usa un texto mínimo en `es.json`. "Pedir
+   acceso" enlaza al formulario de contacto existente (`/contact`) con el asunto
+   prellenado si el formulario lo permite.
+6. **Aviso de comentarios:** cada comentario nuevo de un lector que no sea admin
+   envía un correo de texto plano a `CONTACT_EMAIL` usando la configuración de
+   Resend que ya existe. Si el envío falla, se registra en el log y el
+   comentario se guarda igual.
+7. **Previews:** `MANUAL_GITHUB_TOKEN` se configura **solo en Production**. En
+   Preview el manual muestra "No disponible en esta vista previa", así las
+   previews no leen notas reales ni escriben en la BD de producción. Para probar,
+   se usa local con `.env.local`.
