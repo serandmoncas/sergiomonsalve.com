@@ -965,6 +965,16 @@
       "desdeAqui": "Desde aquí — {voz}",
       "tituloGenerico": "Manual de usuario"
     },
+    "comentarios": {
+      "titulo": "Comentarios",
+      "vacio": "Aún no hay comentarios.",
+      "placeholder": "Escribe un comentario",
+      "enviar": "Comentar",
+      "enviando": "Enviando...",
+      "errorCargar": "No pude cargar los comentarios.",
+      "errorEnviar": "No pude enviar tu comentario. Intenta de nuevo.",
+      "tu": "tú"
+    },
     "recorrido": {
       "paso": "Paso {n} de {total}",
       "anterior": "← Anterior",

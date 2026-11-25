@@ -61,6 +61,29 @@ export async function sendCommentNotification(data: CommentNotificationData) {
   if (error) throw new Error(error.message)
 }
 
+export type ManualCommentNotificationData = {
+  note_slug: string
+  author_name: string
+  body: string
+}
+
+export async function sendManualCommentNotification(data: ManualCommentNotificationData) {
+  const to = requireOwnerEmail()
+  const resend = new Resend(process.env.RESEND_API_KEY!)
+  const { error } = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: `Comentario en el manual: ${data.note_slug}`,
+    text: [
+      `De: ${data.author_name}`,
+      `Nota: https://sergiomonsalve.com/es/manual-de-usuario/n/${data.note_slug}`,
+      '',
+      data.body
+    ].join('\n')
+  })
+  if (error) throw new Error(error.message)
+}
+
 export type PlanEmailData = {
   to: string
   name: string

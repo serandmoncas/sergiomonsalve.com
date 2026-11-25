@@ -8,6 +8,7 @@ import { CapaDesdeAqui } from '@/components/manual/CapaDesdeAqui'
 import { NotaMeta } from '@/components/manual/NotaMeta'
 import { BarraRecorrido } from '@/components/manual/BarraRecorrido'
 import { CopiarEnlace } from '@/components/manual/CopiarEnlace'
+import { Comentarios } from '@/components/manual/Comentarios'
 import { getManualForReader } from '@/lib/manual/lector'
 import { notaHref } from '@/lib/manual/paths'
 
@@ -98,6 +99,8 @@ export default async function NotaPage({ params, searchParams }: Props) {
           </a>
         )}
       </div>
+
+      <Comentarios slug={slug} />
     </article>
   )
 }
