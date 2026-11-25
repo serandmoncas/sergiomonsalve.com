@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
+import { requireAdmin } from '@/lib/auth/admin'
 import { z } from 'zod'
-import { createClient, createAdminClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 
 const schema = z.object({
   title: z.string().min(1),
@@ -12,15 +13,9 @@ const schema = z.object({
   published_year: z.number().int().min(1000).max(2100).optional(),
 })
 
-async function requireAdmin() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  return user
-}
-
 export async function POST(request: Request) {
-  const user = await requireAdmin()
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const auth = await requireAdmin()
+  if (auth instanceof NextResponse) return auth
 
   let body: unknown
   try { body = await request.json() } catch {

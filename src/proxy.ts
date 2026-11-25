@@ -2,6 +2,7 @@ import createMiddleware from 'next-intl/middleware'
 import { createServerClient } from '@supabase/ssr'
 import { type NextRequest, NextResponse } from 'next/server'
 import { routing } from './i18n/routing'
+import { isAdminEmail } from './lib/auth/admin'
 
 const handleI18nRouting = createMiddleware(routing)
 
@@ -44,6 +45,13 @@ export async function proxy(request: NextRequest) {
         ? `/${locale}/admin/login`
         : `/${locale}/cursos/login`
       return NextResponse.redirect(new URL(loginPath, request.url))
+    }
+
+    // /admin/* (salvo el login) es solo para correos de ADMIN_EMAILS; los
+    // lectores invitados y estudiantes con sesión vuelven al inicio.
+    if (isAdminPath && !isAdminEmail(user.email)) {
+      const locale = pathname.split('/')[1] ?? 'es'
+      return NextResponse.redirect(new URL(`/${locale}`, request.url))
     }
 
     return supabaseResponse
