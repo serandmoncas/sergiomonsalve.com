@@ -124,7 +124,7 @@ export function parseNota(slug: string, raw: string): ParseResult {
 
   // Enlaces: cuerpo completo (incluida "Relacionado" y callouts) + frontmatter.
   const enlaces = [
-    ...wikilinks(raw.slice(raw.length - body.length)),
+    ...wikilinks(body),
     ...strList(data.relacionados).flatMap((r) => {
       const l = wikilinks(r)
       return l.length ? l : [wikiTarget(r)].filter(Boolean)
