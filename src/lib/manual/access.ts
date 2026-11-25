@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { createClient, createAdminClient } from '@/lib/supabase/server'
 import { isAdminEmail } from '@/lib/auth/admin'
 
@@ -29,3 +30,6 @@ export async function getReader(): Promise<Reader | null> {
 
   return { userId: user.id, email, name: data.name, isAdmin: false }
 }
+
+/** Igual que getReader, pero una sola consulta por petición (cache de React). */
+export const requireReader = cache(async (): Promise<Reader | null> => getReader())

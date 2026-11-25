@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
-import { getReader } from '@/lib/manual/access'
-import { getManual } from '@/lib/manual/manual'
+import { getManualForReader } from '@/lib/manual/lector'
 import { mapaHref, grafoHref } from '@/lib/manual/paths'
 
 function Aviso({ texto }: { texto: string }) {
@@ -12,16 +11,13 @@ function Aviso({ texto }: { texto: string }) {
   )
 }
 
-// Guarda de lector: sin sesión válida no se toca el manual.
+// Guarda de lector. Las páginas también deben usar getManualForReader.
 export default async function LectorLayout({ children }: { children: React.ReactNode }) {
   const t = await getTranslations('manual')
 
-  const reader = await getReader()
-  if (!reader) return <Aviso texto={t('sinAcceso')} />
-
-  // Solo para decidir si hay manual; las páginas lo vuelven a pedir (cache()).
-  const res = await getManual()
+  const res = await getManualForReader()
   if (!res.ok) {
+    if (res.motivo === 'sin-acceso') return <Aviso texto={t('sinAcceso')} />
     if (res.error.tipo === 'no-configurado') return <Aviso texto={t('noDisponible')} />
     // El detalle nunca se muestra al lector.
     console.error(`[manual] fallo en la guarda: ${res.error.detalle}`)

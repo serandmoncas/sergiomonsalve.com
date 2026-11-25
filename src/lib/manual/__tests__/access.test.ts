@@ -13,7 +13,7 @@ vi.mock('@/lib/supabase/server', () => ({
   createAdminClient: vi.fn(() => ({ from })),
 }))
 
-import { normalizeEmail, getReader } from '../access'
+import { normalizeEmail, getReader, requireReader } from '../access'
 
 describe('normalizeEmail', () => {
   it('recorta y pasa a minúsculas', () => {
@@ -55,5 +55,12 @@ describe('getReader', () => {
     getUser.mockResolvedValue({ data: { user: { id: 'u2', email: 'Sergio@example.com' } } })
     expect(await getReader()).toMatchObject({ name: 'Sergio', isAdmin: true })
     expect(from).not.toHaveBeenCalled()
+  })
+})
+
+describe('requireReader', () => {
+  it('devuelve null sin usuario', async () => {
+    getUser.mockResolvedValue({ data: { user: null } })
+    expect(await requireReader()).toBeNull()
   })
 })

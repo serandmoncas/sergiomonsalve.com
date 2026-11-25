@@ -17,16 +17,23 @@ function Formulario() {
     e.preventDefault()
     setStatus('loading')
     const destino = safeNext(next, `${MANUAL_ES_BASE}/mapa`)
-    const { error } = await createClient().auth.signInWithOtp({
-      email,
-      options: {
-        shouldCreateUser: false,
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(destino)}`,
-      },
-    })
-    // Que el correo no tenga cuenta no se revela: igual se responde "enviado".
-    // Solo un fallo real de red/servicio muestra el error genérico.
-    setStatus(error && error.status !== 400 && error.status !== 422 ? 'error' : 'sent')
+    try {
+      const { error } = await createClient().auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: false,
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(destino)}`,
+        },
+      })
+      // Siempre "enviado": cualquier diferencia revelaría quién está invitado.
+      if (error && error.status !== 400 && error.status !== 422) {
+        console.error(`[manual] signInWithOtp: ${error.status ?? ''} ${error.message ?? ''}`)
+      }
+      setStatus('sent')
+    } catch {
+      // Sin respuesta alguna (red caída): único caso con error visible.
+      setStatus('error')
+    }
   }
 
   if (status === 'sent') {
