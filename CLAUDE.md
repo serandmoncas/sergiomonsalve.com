@@ -66,6 +66,8 @@ Lib functions in `src/lib/posts.ts` and `src/lib/recipes.ts`. MDX rendered via `
 ## Supabase auth setup (required in dashboard)
 
 Add these redirect URLs at supabase.com → Authentication → URL Configuration:
-- `https://sergiomonsalve.com/auth/callback`
-- `http://localhost:3000/auth/callback`
+- `https://sergiomonsalve.com/auth/callback**`
+- `http://localhost:3000/auth/callback**`
+
+El `**` final es obligatorio: sin él Supabase descarta el `?next=…` y el enlace mágico cae en `/es/admin/login?error=auth` (verificado 2026-11-25).
 
