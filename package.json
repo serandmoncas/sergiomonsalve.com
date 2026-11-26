@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test": "vitest",
     "test:run": "vitest run",
+    "curso-ia:confirmar": "npx --yes tsx scripts/curso-ia-confirmar.ts",
     "guarda": "node scripts/guarda-diario.mjs",
     "hooks": "git config core.hooksPath .githooks"
   },

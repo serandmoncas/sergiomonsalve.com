@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import FormacionContent from '@/components/FormacionContent'
 
+// El banner del curso en vivo se oculta solo al cierre de inscripciones: se regenera cada hora.
+export const revalidate = 3600
+
 export async function generateMetadata({
   params
 }: {

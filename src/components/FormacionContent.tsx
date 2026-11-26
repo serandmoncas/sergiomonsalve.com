@@ -1,7 +1,9 @@
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import CursoIaBanner from '@/components/curso-ia/CursoIaBanner'
+import { WHATSAPP } from '@/lib/contact'
 
-const WHATSAPP_NUMBER = '573508025988'
+const WHATSAPP_NUMBER = WHATSAPP.number
 
 type Step = { letter: string; title: string; text: string }
 type Offer = { audience: string; title: string; text: string; bullets: string[] }
@@ -29,6 +31,8 @@ export default function FormacionContent() {
           ))}
         </ul>
       </header>
+
+      <CursoIaBanner now={new Date()} />
 
       <section className="space-y-8">
         <div className="space-y-2">

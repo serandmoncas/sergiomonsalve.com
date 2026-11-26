@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { claimPlanSend, releasePlanSend, recordNewsletterConsent, unsubscribeByToken } from '../subscribers'
+import { claimPlanSend, releasePlanSend, recordNewsletterConsent, recordCourseNewsletter, unsubscribeByToken } from '../subscribers'
 
 type Result = { data: unknown; error: unknown }
 type Call = { table: string; method: string; args: unknown[] }
@@ -109,5 +109,32 @@ describe('unsubscribeByToken', () => {
   it('returns null when the token does not exist', async () => {
     state.results = [{ data: null, error: null }]
     expect(await unsubscribeByToken(TOKEN)).toBeNull()
+  })
+})
+
+describe('recordCourseNewsletter', () => {
+  it('inserts a new subscriber with source curso-ia and consent', async () => {
+    await recordCourseNewsletter('ana@example.com', 'Ana')
+    expect(findCall('insert')!.args[0]).toMatchObject({
+      email: 'ana@example.com',
+      name: 'Ana',
+      source: 'curso-ia',
+      newsletter: true,
+      status: 'active'
+    })
+    expect(findCall('update')).toBeUndefined()
+  })
+
+  it('keeps the original source when the email already exists', async () => {
+    state.results = [{ data: null, error: { code: '23505', message: 'duplicate' } }]
+    await recordCourseNewsletter('ana@example.com', 'Ana')
+    const update = findCall('update')!.args[0] as Record<string, unknown>
+    expect(update).toMatchObject({ newsletter: true, status: 'active' })
+    expect(update).not.toHaveProperty('source')
+  })
+
+  it('throws on other errors', async () => {
+    state.results = [{ data: null, error: { code: 'XX000', message: 'boom' } }]
+    await expect(recordCourseNewsletter('ana@example.com', 'Ana')).rejects.toThrow('boom')
   })
 })

@@ -165,3 +165,24 @@ export async function unsubscribeNewsletterContact(email: string) {
   const { error } = await resend.contacts.update({ email, unsubscribed: true })
   if (error) throw new Error(error.message)
 }
+
+export async function sendCourseEmail(to: string, msg: { subject: string; text: string; html: string }) {
+  const replyTo = ownerEmail()
+  const resend = new Resend(process.env.RESEND_API_KEY!)
+  const { error } = await resend.emails.send({
+    from: FROM,
+    to,
+    ...(replyTo ? { replyTo } : {}),
+    subject: msg.subject,
+    text: msg.text,
+    html: msg.html
+  })
+  if (error) throw new Error(error.message)
+}
+
+export async function sendCourseOwnerNotice(msg: { subject: string; text: string }) {
+  const to = requireOwnerEmail()
+  const resend = new Resend(process.env.RESEND_API_KEY!)
+  const { error } = await resend.emails.send({ from: FROM, to, subject: msg.subject, text: msg.text })
+  if (error) throw new Error(error.message)
+}

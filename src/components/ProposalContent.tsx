@@ -1,7 +1,8 @@
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import { WHATSAPP } from '@/lib/contact'
 
-const WHATSAPP_NUMBER = '573508025988'
+const WHATSAPP_NUMBER = WHATSAPP.number
 
 type Step = { letter: string; title: string; text: string }
 type AgendaItem = { time: string; title: string; text: string }

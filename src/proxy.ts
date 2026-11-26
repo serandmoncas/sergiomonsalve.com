@@ -58,6 +58,13 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(url, 307)
   }
 
+  // El curso de IA en vivo es solo en español.
+  if (/^\/en\/curso-ia\/?$/.test(pathname)) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/es/curso-ia'
+    return NextResponse.redirect(url, 307)
+  }
+
   const isManualProtected = MANUAL_PROTECTED.test(pathname)
   const isAdminPath = /^\/(es|en)\/admin/.test(pathname)
   const isLoginPath = /^\/(es|en)\/admin\/login/.test(pathname)

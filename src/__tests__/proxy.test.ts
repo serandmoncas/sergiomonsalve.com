@@ -28,6 +28,12 @@ describe('proxy', () => {
     getAal.mockReset()
   })
 
+  it('/en/curso-ia redirige 307 a /es/curso-ia', async () => {
+    const res = await proxy(req('/en/curso-ia'))
+    expect(res.status).toBe(307)
+    expect(new URL(res.headers.get('location')!).pathname).toBe('/es/curso-ia')
+  })
+
   it('/en/manual-de-usuario/n/x redirige 307 a /es conservando ruta y query', async () => {
     const res = await proxy(req('/en/manual-de-usuario/n/x?r=y'))
     expect(res.status).toBe(307)
