@@ -116,6 +116,14 @@ describe('acciones del objetivo (DI-087)', () => {
     expect(ultimo().mensaje).not.toContain('Huerta')
   })
 
+  it('un nombre con (Contactado 2026-01-01) y saltos de línea no crea eventos ni líneas', async () => {
+    const lineasAntes = CONTACTOS.split('\n').length
+    await ejecutarAccion(id, { tipo: 'contacto', nombre: 'Falso (Contactado 2026-01-01)\n- [ ] Inyectada', canal: 'a\r\nb' }, HOY)
+    expect(archivo()).not.toContain('2026-01-01')
+    expect(archivo()).not.toMatch(/^- \[ \] Inyectada/m)
+    expect(archivo().split('\n').length).toBe(lineasAntes + 1)
+  })
+
   it('mover deja la tarjeta en la columna con el evento y un mensaje sin nombres', async () => {
     const r = await ejecutarAccion(id, { tipo: 'mover', texto: 'Vivero Inventado', a: 'Respondió' }, HOY)
     expect(r).toEqual({ ok: true })
