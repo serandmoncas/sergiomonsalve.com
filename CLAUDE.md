@@ -77,13 +77,13 @@ El `**` final es obligatorio: sin él Supabase descarta el `?next=…` y el enla
 
 Registrar dos autenticadores (celular y Mac) desde `/admin/diario` → "Registrar otro autenticador". Si se pierden los dos, borrar el factor en Supabase → Authentication → Users → el usuario → MFA factors; el siguiente ingreso pide registrar uno nuevo.
 
-## Diario (DiarIA web, DI-084)
+## Diario (DiarIA web, DI-084 y DI-087)
 
-Lee el repo **privado** `serandmoncas/diaria-notas` desde GitHub, solo lectura.
-- `DIARIA_GITHUB_TOKEN` (solo Production; fine-grained, solo lectura de contenidos y metadatos de `diaria-notas`, con vencimiento). Sin token el diario dice "Diario no disponible." (las previews no tienen token a propósito).
+Lee el repo **privado** `serandmoncas/diaria-notas` desde GitHub. Desde DI-087 escribe **solo** el archivo de contactos de un objetivo activo (`Tablero/Objetivos/<nombre> - contactos.md`).
+- `DIARIA_GITHUB_TOKEN` (solo Production; fine-grained sobre `diaria-notas`: Contents **read and write**, Metadata read-only, con vencimiento). Sin token el diario dice "Diario no disponible." (las previews no tienen token a propósito).
 - `src/lib/diaria/`: **copia generada** del núcleo de DiarIA (`pnpm -C ~/Code/DiarIA copiar-nucleo <este repo>`; `--comprobar` detecta ediciones a mano). No se edita aquí; ESLint la ignora.
-- `src/lib/diario/`: `github.ts` (único lugar que lee el token, solo GET), `tarball.ts` + `memoria.ts` (bóveda en memoria: notas y `Tablero/` con contenido, el resto solo el nombre), `boveda.ts` (`obtenerBoveda`: tarball al arrancar, sha cada ≤10 s, `compare` + blobs para lo cambiado, privacidad cada 10 min), `acceso.ts` (`leerDiario`: **la única forma en que una página lee el diario**; exige aal2 en cada pedido porque los layouts no se re-ejecutan al navegar).
-- Páginas en `admin/diario/(protegido)/`: Hoy, `calendario?mes=YYYY-MM`, `nota?ruta=…`. "Hoy" es la fecha de Bogotá.
+- `src/lib/diario/`: `github.ts` (único lugar que lee el token; escribe solo con `guardarArchivo`, autor `DiarIA web` y marca `DiarIA-accion: objetivo`), `tarball.ts` + `memoria.ts` (bóveda en memoria: notas y `Tablero/` con contenido, el resto solo el nombre), `boveda.ts` (`obtenerBoveda`: tarball al arrancar, sha cada ≤10 s, `compare` + blobs para lo cambiado, privacidad cada 10 min), `acceso.ts` (`leerDiario`: **la única forma en que una página lee el diario**; exige aal2 en cada pedido porque los layouts no se re-ejecutan al navegar).
+- Páginas en `admin/diario/(protegido)/`: Hoy, `calendario?mes=YYYY-MM`, `nota?n=…`, `objetivo`. "Hoy" es la fecha de Bogotá.
 - Privacidad: `npm run guarda` (pre-commit vía `npm run hooks`) revisa las rutas del diario contra la denylist de DiarIA (`~/.config/diaria/denylist.txt`, fuera del repo). Pruebas solo con bóvedas sintéticas.
 - CA-1: con el tablero de prueba corriendo, `COMPARAR_CLON=~/Documents/diaria-notas COMPARAR_SPIKE=http://127.0.0.1:4322 npx vitest run scripts/diario/comparar-hoy.test.ts` (imprime solo conteos). Las URLs de notas usan un id opaco (`?n=`), nunca el nombre.
-
+- Objetivo (DI-087): `objetivo.ts` (`objetivosActivos`, `ejecutarAccion`: lee, aplica con el núcleo y guarda con el `sha`; si cambió, relee y repite hasta 3 veces; deshacer usa el historial del archivo) y `POST /api/admin/diario/objetivo` (aal2, mismo `Origin`). El tablero de prueba ya no escribe el objetivo; el espejo de DiarIA guarda copias `(conflicto …)` si choca en `Tablero/`.
