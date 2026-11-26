@@ -25,6 +25,7 @@ Next.js 16.2.4 App Router with `src/` directory layout. All routes are nested un
 
 **Middleware:** `src/proxy.ts` (Next.js 16 uses `proxy.ts` + exports `proxy` function, not `middleware`). Composes two concerns:
 - **Auth guard:** checks Supabase session on `[locale]/admin/*` paths (except `/admin/login`) and on `/es/manual-de-usuario/{mapa,n,r,grafo}` (portada y `/entrar` son públicas; `/en/...` redirige a `/es/...`) — redirects to login if unauthenticated. `/admin` also requires the email to be in `ADMIN_EMAILS` (`isAdminEmail` in `src/lib/auth/admin.ts`, also checked in `/api/admin/*`)
+- **Diario (DI-083):** `/[locale]/admin/diario/*` además exige segundo factor (TOTP de Supabase, nivel `aal2`); sin él, redirige a `/[locale]/admin/diario/segundo-factor?next=…` (registra el autenticador o pide el código; `destinoDiario` limita `next` al diario). Las respuestas llevan `CABECERAS_DIARIO` (`private, no-store`, `noindex, nofollow`). Toda página del diario va dentro del grupo `admin/diario/(protegido)/`, cuyo layout exige `aal2` en el servidor (el proxy no corre en rutas con punto); solo `segundo-factor` queda fuera. El proxy compara la ruta decodificada (`/es/%61dmin/...` no se salta nada).
 - **Locale routing:** all other paths go through next-intl's `createMiddleware`
 
 **Database:** Supabase (`orlniujfwolyinsuezcu`, us-west-2). Tables:
@@ -42,6 +43,7 @@ Server-side queries use `createAdminClient()` from `src/lib/supabase/server.ts` 
 - `GET /api/admin/comments` — all comments for admin (admin-gated via `ADMIN_EMAILS`)
 - `PATCH /api/admin/comments/[id]` — approve a comment (admin-gated via `ADMIN_EMAILS`)
 - `DELETE /api/admin/comments/[id]` — delete a comment (admin-gated via `ADMIN_EMAILS`)
+- `GET /api/admin/diario/estado` — prueba del diario. Todo `/api/admin/diario/*` usa `requireAdminAal2`: responde 404 sin cuerpo si no hay sesión de admin en `aal2` (o si Supabase falla).
 
 **Manual de Usuario (privado, por invitación):** el contenido vive en el repo privado `serandmoncas/manual-de-usuario` y se lee con la API de GitHub; este sitio solo lo muestra.
 - Env vars: `MANUAL_GITHUB_TOKEN` (solo Production; fine-grained, solo lectura sobre ese repo), `ADMIN_EMAILS`, `ADMIN_NAME`. Sin token, la página dice "No disponible…".
@@ -71,3 +73,6 @@ Add these redirect URLs at supabase.com → Authentication → URL Configuration
 
 El `**` final es obligatorio: sin él Supabase descarta el `?next=…` y el enlace mágico cae en `/es/admin/login?error=auth` (verificado 2026-11-25).
 
+## Segundo factor del diario: recuperación
+
+Registrar dos autenticadores (celular y Mac) desde `/admin/diario` → "Registrar otro autenticador". Si se pierden los dos, borrar el factor en Supabase → Authentication → Users → el usuario → MFA factors; el siguiente ingreso pide registrar uno nuevo.
