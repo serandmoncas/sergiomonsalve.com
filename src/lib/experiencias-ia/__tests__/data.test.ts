@@ -57,9 +57,9 @@ describe('getBitacora', () => {
     expect(fechas[0]).toBe([...SESIONES].map(e => e.fecha).sort().at(-1))
   })
 
-  it('marks 29 jul, 12 ago and 30 sep as sin registro', () => {
+  it('marks 29 jul, 12 ago, 30 sep, 11 nov and 18 nov as sin registro', () => {
     const sinRegistro = getBitacora().filter(esSinRegistro).map(e => e.fecha)
-    expect(sinRegistro.sort()).toEqual(['2026-07-29', '2026-08-12', '2026-09-30'])
+    expect(sinRegistro.sort()).toEqual(['2026-07-29', '2026-08-12', '2026-09-30', '2026-11-11', '2026-11-18'])
   })
 
   it('pending meetings only list topics that exist in TEMAS', () => {
