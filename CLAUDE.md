@@ -25,7 +25,7 @@ Next.js 16.2.4 App Router with `src/` directory layout. All routes are nested un
 
 **Middleware:** `src/proxy.ts` (Next.js 16 uses `proxy.ts` + exports `proxy` function, not `middleware`). Composes two concerns:
 - **Auth guard:** checks Supabase session on `[locale]/admin/*` paths (except `/admin/login`) and on `/es/manual-de-usuario/{mapa,n,r,grafo}` (portada y `/entrar` son públicas; `/en/...` redirige a `/es/...`) — redirects to login if unauthenticated. `/admin` also requires the email to be in `ADMIN_EMAILS` (`isAdminEmail` in `src/lib/auth/admin.ts`, also checked in `/api/admin/*`)
-- **Diario (DI-083):** `/[locale]/admin/diario/*` además exige segundo factor (TOTP de Supabase, nivel `aal2`); sin él, redirige a `/[locale]/admin/diario/segundo-factor?next=…` (registra el autenticador o pide el código; `destinoDiario` limita `next` al diario). Las respuestas llevan `CABECERAS_DIARIO` (`private, no-store`, `noindex, nofollow`). La página `/admin/diario` vuelve a comprobar con `requireAdminAal2`.
+- **Diario (DI-083):** `/[locale]/admin/diario/*` además exige segundo factor (TOTP de Supabase, nivel `aal2`); sin él, redirige a `/[locale]/admin/diario/segundo-factor?next=…` (registra el autenticador o pide el código; `destinoDiario` limita `next` al diario). Las respuestas llevan `CABECERAS_DIARIO` (`private, no-store`, `noindex, nofollow`). Toda página del diario va dentro del grupo `admin/diario/(protegido)/`, cuyo layout exige `aal2` en el servidor (el proxy no corre en rutas con punto); solo `segundo-factor` queda fuera. El proxy compara la ruta decodificada (`/es/%61dmin/...` no se salta nada).
 - **Locale routing:** all other paths go through next-intl's `createMiddleware`
 
 **Database:** Supabase (`orlniujfwolyinsuezcu`, us-west-2). Tables:
