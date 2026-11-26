@@ -3,6 +3,7 @@ import { createServerClient } from '@supabase/ssr'
 import { type NextRequest, NextResponse } from 'next/server'
 import { routing } from './i18n/routing'
 import { isAdminEmail } from './lib/auth/admin'
+import { CABECERAS_DIARIO } from './lib/auth/cabeceras-diario'
 
 const handleI18nRouting = createMiddleware(routing)
 
@@ -13,6 +14,22 @@ const STUDENT_PROTECTED = [
 
 // Rutas del manual que exigen sesión; la portada y entrar son libres.
 const MANUAL_PROTECTED = /^\/es\/manual-de-usuario\/(mapa|r|n|grafo)(\/|$)/
+
+// El diario (DI-083) pide además segundo factor (aal2), salvo la página donde
+// se registra o se escribe el código.
+const DIARIO = /^\/(es|en)\/admin\/diario(\/|$)/
+const SEGUNDO_FACTOR = /^\/(es|en)\/admin\/diario\/segundo-factor(\/|$)/
+
+async function tieneAal2(
+  supabase: ReturnType<typeof createServerClient>,
+): Promise<boolean> {
+  try {
+    const { data, error } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+    return !error && data?.currentLevel === 'aal2'
+  } catch {
+    return false
+  }
+}
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -71,6 +88,20 @@ export async function proxy(request: NextRequest) {
     if (isAdminPath && !isAdminEmail(user.email)) {
       const locale = pathname.split('/')[1] ?? 'es'
       return NextResponse.redirect(new URL(`/${locale}`, request.url))
+    }
+
+    if (DIARIO.test(pathname)) {
+      if (!SEGUNDO_FACTOR.test(pathname) && !(await tieneAal2(supabase))) {
+        const locale = pathname.split('/')[1]
+        const url = new URL(`/${locale}/admin/diario/segundo-factor`, request.url)
+        url.searchParams.set('next', pathname + request.nextUrl.search)
+        const res = NextResponse.redirect(url)
+        // Conserva las cookies que Supabase haya renovado en getUser().
+        supabaseResponse.cookies.getAll().forEach(c => res.cookies.set(c))
+        for (const [k, v] of Object.entries(CABECERAS_DIARIO)) res.headers.set(k, v)
+        return res
+      }
+      for (const [k, v] of Object.entries(CABECERAS_DIARIO)) supabaseResponse.headers.set(k, v)
     }
 
     return supabaseResponse
