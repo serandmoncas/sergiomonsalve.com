@@ -68,10 +68,14 @@ Lib functions in `src/lib/posts.ts` and `src/lib/recipes.ts`. MDX rendered via `
 ## Supabase auth setup (required in dashboard)
 
 Add these redirect URLs at supabase.com → Authentication → URL Configuration:
+- `https://www.sergiomonsalve.com/auth/callback**`
 - `https://sergiomonsalve.com/auth/callback**`
 - `http://localhost:3000/auth/callback**`
 
 El `**` final es obligatorio: sin él Supabase descarta el `?next=…` y el enlace mágico cae en `/es/admin/login?error=auth` (verificado 2026-11-25).
+La versión con `www` también: el dominio sin `www` redirige a `www`, y la página `entrar` arma el enlace con `window.location.origin`. Si falta, Supabase manda el enlace a la Site URL y nadie queda con sesión (verificado 2026-11-26).
+
+Los correos de Auth (enlace mágico) salen por **SMTP propio con Resend** (`smtp.resend.com:465`, usuario `resend`, remitente `noreply@sergiomonsalve.com`), configurado en Authentication → Emails → SMTP Settings. El SMTP gratuito de Supabase no entregaba a los invitados (2026-11-26).
 
 ## Segundo factor del diario: recuperación
 
