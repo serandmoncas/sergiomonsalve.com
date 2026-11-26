@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "guarda": "node scripts/guarda-diario.mjs",
+    "hooks": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",
