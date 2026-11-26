@@ -189,7 +189,7 @@
         "items": [
           "15 years teaching at EAFIT",
           "Research group mentor since 2004",
-          "MSc Engineering · Engineering Education",
+          "MSc candidate, Engineering · Engineering Education",
           "AI Software Engineer · ex Globant"
         ]
       },
@@ -513,7 +513,7 @@
     "teacher": {
       "label": "Quién lo dicta",
       "title": "Sergio Monsalve",
-      "bio": "Fui profesor en EAFIT, tengo una maestría con énfasis en educación en ingeniería y trabajo como ingeniero de inteligencia artificial. Uso la IA todos los días para aprender cosas nuevas, del mandarín a los hongos, y quiero que tú también le pierdas el miedo."
+      "bio": "Fui profesor en EAFIT, soy candidato a magíster en ingeniería con énfasis en educación y trabajo como ingeniero de inteligencia artificial. Uso la IA todos los días para aprender cosas nuevas, del mandarín a los hongos, y quiero que tú también le pierdas el miedo."
     },
     "signup": {
       "label": "Inscripción",
@@ -785,7 +785,7 @@
       "items": [
         "15 years as a professor at Universidad EAFIT, in undergraduate and continuing education",
         "Mentoring research groups since 2004",
-        "MSc in Engineering with a focus on Engineering Education and Scientific Computing",
+        "MSc candidate in Engineering with a focus on Engineering Education and Scientific Computing",
         "AI Software Engineer: built AI systems for US and European clients at Globant"
       ]
     },
