@@ -30,4 +30,9 @@ describe('programa del curso: hilo del asistente personal', () => {
     expect(faq?.a).toContain('Google Meet')
     expect(confirmedEmail('Ana').text).toContain('Google Meet')
   })
+
+  it('la bio del curso no nombra la universidad', () => {
+    expect(c.teacher.bio).not.toMatch(/EAFIT/)
+    expect(c.teacher.bio).toMatch(/docente/)
+  })
 })
