@@ -12,7 +12,7 @@ import {
 } from '@/lib/diaria'
 import * as github from './github'
 import { MemoriaFS, guardaContenido, type Cambios } from './memoria'
-import { leerTarball } from './tarball'
+import { idNota } from './urls'
 
 export type Boveda = {
   sha: string
@@ -22,6 +22,8 @@ export type Boveda = {
   diarias: Diarias
   historial: Historial
   rutinas: string | null
+  /** id opaco de URL → ruta de la nota. */
+  porId: ReadonlyMap<string, string>
 }
 export type ResultadoBoveda = { ok: true; boveda: Boveda } | { ok: false; motivo: string }
 
@@ -68,12 +70,25 @@ export async function armarBoveda(fs: MemoriaFS, sha: string): Promise<Boveda> {
     diarias,
     historial: crearHistorial(diarias),
     rutinas: leerTexto(fs, 'Tablero/Rutinas.md'),
+    porId: new Map(indice.notas.map(r => [idNota(r), r])),
   }
 }
 
+/**
+ * Los cambios de `base` a `head`, o null si hay que recargar el tarball: si
+ * compare falla (historia reescrita), si no es un avance limpio (diverged) o si
+ * es demasiado grande para venir completo.
+ */
 async function cambiosDesde(base: string, head: string): Promise<Cambios | null> {
-  const { files } = await github.comparar(base, head)
-  if (!files || files.length >= MAX_COMPARE) return null
+  let cmp: Awaited<ReturnType<typeof github.comparar>>
+  try {
+    cmp = await github.comparar(base, head)
+  } catch (e) {
+    if (e instanceof github.ErrorGithub && e.codigo === 'tiempo') throw e
+    return null
+  }
+  const { status, files } = cmp
+  if (status !== 'ahead' || !files || files.length >= MAX_COMPARE) return null
   const cambios: Cambios = { quitar: [], poner: new Map(), otros: [] }
   for (const f of files) {
     if (f.status === 'removed') {
@@ -101,13 +116,7 @@ async function actualizar(): Promise<ResultadoBoveda> {
     const cambios = actual ? await cambiosDesde(actual.sha, sha) : null
     let fs: MemoriaFS
     if (actual && cambios) fs = actual.fs.aplicar(cambios)
-    else {
-      try {
-        fs = await leerTarball(await github.tarball(sha))
-      } catch (e) {
-        throw e instanceof github.ErrorGithub ? e : new github.ErrorGithub('tarball')
-      }
-    }
+    else fs = await github.tarball(sha)
     actual = await armarBoveda(fs, sha)
   }
   ultimoSha = ahora

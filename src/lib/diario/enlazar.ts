@@ -6,9 +6,8 @@ const escapar = (t: string) => t.replace(/[\\[\]()*_`<>!~]/g, c => `\\${c}`)
 
 const visible = (e: Enlace) => e.alias ?? (e.seccion ? `${e.destino}#${e.seccion}` : e.destino)
 
-/** URL de nota en la forma <…> de Markdown; los paréntesis van codificados. */
-const destinoMd = (locale: string, ruta: string) =>
-  `<${urlNota(locale, ruta).replace(/\(/g, '%28').replace(/\)/g, '%29')}>`
+/** URL de nota en la forma <…> de Markdown (el id es hexadecimal). */
+const destinoMd = (locale: string, ruta: string) => `<${urlNota(locale, ruta)}>`
 
 /**
  * Convierte los `[[enlaces]]` de una nota en enlaces Markdown hacia la web

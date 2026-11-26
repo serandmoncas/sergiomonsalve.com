@@ -26,7 +26,11 @@ function responder(url: string): Response {
   const t = url.match(/\/tarball\/(\w+)$/)
   if (t) return new Response(null, { status: 599, statusText: `tarball:${t[1]}` })
   const c = url.match(/\/compare\/(\w+)\.\.\.(\w+)$/)
-  if (c) return Response.json(gh.compare[`${c[1]}...${c[2]}`] ?? {})
+  if (c) {
+    const cmp = gh.compare[`${c[1]}...${c[2]}`]
+    if (cmp === undefined) return new Response('no', { status: 404 })
+    return Response.json({ status: 'ahead', ...cmp })
+  }
   const b = url.match(/\/git\/blobs\/(\w+)$/)
   if (b) return new Response(gh.blobs[b[1]])
   return new Response('?', { status: 404 })
@@ -145,6 +149,27 @@ describe('obtenerBoveda', () => {
     expect(gh.llamadas.some(l => l.url.includes('/git/blobs/'))).toBe(false)
   })
 
+  it('compare que falla (historia reescrita) → recarga el tarball', async () => {
+    await ok()
+    gh.sha = 'b2'
+    gh.arboles.b2 = gh.arboles.a1.slice(1)
+    vi.setSystemTime(new Date('2026-11-26T12:00:20Z'))
+    const b = await ok()
+    expect(b.sha).toBe('b2')
+    expect(tarballs()).toBe(2)
+    expect([...b.diarias.keys()]).toEqual(['2026-11-25'])
+  })
+
+  it('compare con status diverged → recarga el tarball', async () => {
+    await ok()
+    gh.sha = 'b2'
+    gh.arboles.b2 = gh.arboles.a1
+    gh.compare['a1...b2'] = { status: 'diverged', files: [] } as never
+    vi.setSystemTime(new Date('2026-11-26T12:00:20Z'))
+    expect((await ok()).sha).toBe('b2')
+    expect(tarballs()).toBe(2)
+  })
+
   it('pedidos simultáneos en frío → un solo tarball', async () => {
     const [a, b] = await Promise.all([obtenerBoveda(), obtenerBoveda()])
     expect(a.ok && b.ok).toBe(true)
@@ -186,5 +211,20 @@ describe('obtenerBoveda', () => {
     const r = await obtenerBoveda()
     expect(r).toEqual({ ok: false, motivo: 'red' })
     expect(JSON.stringify(errores.mock.calls)).not.toContain(TOKEN)
+  })
+
+  it('GitHub colgado → no disponible por tiempo, y no cuelga los pedidos siguientes', async () => {
+    vi.useRealTimers()
+    vi.useFakeTimers({ toFake: ['Date', 'setTimeout', 'clearTimeout'] })
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+    vi.stubGlobal('fetch', vi.fn((_u: string, init?: RequestInit) => new Promise((_r, rechazar) => {
+      init?.signal?.addEventListener('abort', () => rechazar(new DOMException('abort', 'AbortError')))
+    })))
+    const p = obtenerBoveda()
+    await vi.advanceTimersByTimeAsync(11_000)
+    expect(await p).toEqual({ ok: false, motivo: 'tiempo' })
+    const q = obtenerBoveda()
+    await vi.advanceTimersByTimeAsync(11_000)
+    expect(await q).toEqual({ ok: false, motivo: 'tiempo' })
   })
 })

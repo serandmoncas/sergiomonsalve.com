@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { bovedaDePrueba, NOTAS_DE_PRUEBA } from '@/lib/diario/__tests__/ayudantes'
+import { urlNota } from '@/lib/diario/urls'
 
 const { leerDiario } = vi.hoisted(() => ({ leerDiario: vi.fn() }))
 vi.mock('@/lib/diario/acceso', () => ({ leerDiario }))
@@ -26,7 +27,7 @@ describe('Calendario', () => {
   it('los días con nota enlazan a su nota; los demás no', async () => {
     render(await CalendarioPage(props()))
     expect(screen.getByRole('link', { name: /^25/ }).getAttribute('href'))
-      .toBe('/es/admin/diario/nota?ruta=' + encodeURIComponent('Diario/2026-11-25.md'))
+      .toBe(urlNota('es', 'Diario/2026-11-25.md'))
     expect(screen.queryByRole('link', { name: /^23/ })).toBeNull()
     expect(screen.getByText('23')).toBeInTheDocument()
   })

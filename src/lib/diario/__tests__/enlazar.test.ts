@@ -2,11 +2,12 @@ import { describe, it, expect, beforeAll, vi } from 'vitest'
 
 vi.mock('server-only', () => ({}))
 import { enlazar } from '../enlazar'
+import { urlNota } from '../urls'
 import { bovedaDePrueba, CABECERA } from './ayudantes'
 import type { Resolutor } from '@/lib/diaria'
 
 let r: Resolutor
-const url = (ruta: string) => `</es/admin/diario/nota?ruta=${encodeURIComponent(ruta).replace(/\(/g, '%28').replace(/\)/g, '%29')}>`
+const url = (ruta: string) => `<${urlNota('es', ruta)}>`
 
 beforeAll(async () => {
   const b = await bovedaDePrueba({

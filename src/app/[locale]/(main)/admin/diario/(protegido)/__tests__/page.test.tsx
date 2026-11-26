@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, within } from '@testing-library/react'
 import { bovedaDePrueba, NOTAS_DE_PRUEBA } from '@/lib/diario/__tests__/ayudantes'
 import { vistaHoy } from '@/lib/diaria'
+import { urlNota } from '@/lib/diario/urls'
 
 const { leerDiario } = vi.hoisted(() => ({ leerDiario: vi.fn() }))
 vi.mock('@/lib/diario/acceso', () => ({ leerDiario }))
@@ -41,7 +42,8 @@ describe('Hoy (admin/diario)', () => {
     leerDiario.mockResolvedValue({ ok: true, boveda: await bovedaDePrueba(NOTAS_DE_PRUEBA) })
     render(await DiarioPage(params()))
     const enlace = screen.getByText('Llamar a [[Ana Prueba]]').closest('a')!
-    expect(enlace.getAttribute('href')).toBe('/es/admin/diario/nota?ruta=' + encodeURIComponent('Diario/2026-11-25.md'))
+    expect(enlace.getAttribute('href')).toBe(urlNota('es', 'Diario/2026-11-25.md'))
+    expect(enlace.getAttribute('href')).not.toContain('Diario')
   })
 
   it('sin bóveda dice "Diario no disponible." sin el motivo', async () => {

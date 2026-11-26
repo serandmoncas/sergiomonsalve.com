@@ -47,6 +47,13 @@ describe('NotaMarkdown', () => {
     expect(a.getAttribute('target')).toBe('_blank')
   })
 
+  it('una imagen Markdown externa no se carga: se muestra como texto', () => {
+    const c = pintar('![pixel](https://rastreo.example/p.gif?u=1)')
+    expect(c.querySelector('img')).toBeNull()
+    expect(c.textContent).toContain('imagen: pixel')
+    expect(c.innerHTML).not.toContain('rastreo.example')
+  })
+
   it('un bloque dataview se ve como código', () => {
     const c = pintar('```dataview\nTABLE x\n```')
     expect(c.querySelector('pre code')!.textContent).toContain('TABLE x')

@@ -3,6 +3,10 @@ import Markdown, { type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
 const componentes: Components = {
+  // Una imagen nunca se carga: abrir una nota no debe contactar a nadie.
+  img({ alt }) {
+    return <span className="adjunto font-mono text-xs text-text-secondary">{`imagen: ${alt ?? ''}`}</span>
+  },
   a({ href, children }) {
     if (href === '#roto')
       return <span className="roto text-text-muted line-through decoration-dotted" title="Nota que no existe">{children}</span>

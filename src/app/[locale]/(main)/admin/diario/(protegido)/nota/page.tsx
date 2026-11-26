@@ -12,18 +12,19 @@ const titulo = (ruta: string) => ruta.split('/').pop()!.replace(/\.md$/i, '')
 
 export default async function NotaPage({ params, searchParams }: {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ ruta?: string | string[] }>
+  searchParams: Promise<{ n?: string | string[] }>
 }) {
   const r = await leerDiario()
   const { locale } = await params
   const idioma = locale === 'en' ? 'en' : 'es'
-  const { ruta } = await searchParams
+  const { n } = await searchParams
   if (!r.ok) return <NoDisponible />
 
   const b = r.boveda
   const nav = <NavDiario locale={idioma} notaHoy={b.diarias.get(fechaBogota(new Date()))?.ruta} />
-  // Solo rutas que el índice conoce como nota: nada de "../", absolutas ni adjuntos.
-  const datos = typeof ruta === 'string' && b.indice.notas.includes(ruta) ? b.fs.leer(ruta) : null
+  // Solo ids de notas del índice: nada de rutas, "../" ni adjuntos.
+  const ruta = typeof n === 'string' ? b.porId.get(n) : undefined
+  const datos = ruta ? b.fs.leer(ruta) : null
   let texto: string | null = null
   if (datos) {
     try {

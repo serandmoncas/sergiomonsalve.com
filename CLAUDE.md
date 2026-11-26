@@ -85,5 +85,5 @@ Lee el repo **privado** `serandmoncas/diaria-notas` desde GitHub, solo lectura.
 - `src/lib/diario/`: `github.ts` (único lugar que lee el token, solo GET), `tarball.ts` + `memoria.ts` (bóveda en memoria: notas y `Tablero/` con contenido, el resto solo el nombre), `boveda.ts` (`obtenerBoveda`: tarball al arrancar, sha cada ≤10 s, `compare` + blobs para lo cambiado, privacidad cada 10 min), `acceso.ts` (`leerDiario`: **la única forma en que una página lee el diario**; exige aal2 en cada pedido porque los layouts no se re-ejecutan al navegar).
 - Páginas en `admin/diario/(protegido)/`: Hoy, `calendario?mes=YYYY-MM`, `nota?ruta=…`. "Hoy" es la fecha de Bogotá.
 - Privacidad: `npm run guarda` (pre-commit vía `npm run hooks`) revisa las rutas del diario contra la denylist de DiarIA (`~/.config/diaria/denylist.txt`, fuera del repo). Pruebas solo con bóvedas sintéticas.
-- CA-1: `COMPARAR_CLON=~/Documents/diaria-notas COMPARAR_DIARIA=~/Code/DiarIA npx vitest run scripts/diario/comparar-hoy.test.ts` (imprime solo conteos).
+- CA-1: con el tablero de prueba corriendo, `COMPARAR_CLON=~/Documents/diaria-notas COMPARAR_SPIKE=http://127.0.0.1:4322 npx vitest run scripts/diario/comparar-hoy.test.ts` (imprime solo conteos). Las URLs de notas usan un id opaco (`?n=`), nunca el nombre.
 
