@@ -1,0 +1,3 @@
+#!/bin/sh
+# Guarda de privacidad del código del diario (DI-084).
+npm run --silent guarda
