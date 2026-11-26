@@ -71,14 +71,18 @@ export async function markEmailSent(email: string): Promise<void> {
 
 // null si la tabla no existe o Supabase falla: la página se muestra sin contador.
 export async function countConfirmed(): Promise<number | null> {
-  const supabase = createAdminClient()
-  const { count, error } = await supabase
-    .from('course_registrations')
-    .select('id', { count: 'exact', head: true })
-    .eq('cohort', COHORTE.slug)
-    .eq('status', 'confirmed')
-  if (error) return null
-  return count ?? 0
+  try {
+    const supabase = createAdminClient()
+    const { count, error } = await supabase
+      .from('course_registrations')
+      .select('id', { count: 'exact', head: true })
+      .eq('cohort', COHORTE.slug)
+      .eq('status', 'confirmed')
+    if (error || typeof count !== 'number') return null
+    return count
+  } catch {
+    return null
+  }
 }
 
 export async function confirmFromWaitlist(email: string): Promise<{ name: string } | null> {

@@ -62,6 +62,8 @@
     "mapaDescription": "Plantilla gratuita del Método MAPA: convierte cualquier habilidad en un plan de 30 días en 20 minutos.",
     "privacyTitle": "Tratamiento de datos",
     "propuestaTitle": "Propuesta",
+    "cursoIaTitle": "Curso gratuito de IA en vivo",
+    "cursoIaDescription": "4 clases en vivo para empezar con IA sin pagar nada: 9, 10, 14 y 15 de diciembre. Cupo de 20 personas.",
     "formacionTitle": "Formación",
     "formacionDescription": "Sprints de Aprendizaje para equipos y cohortes en vivo con el Método MAPA. Aprende cualquier habilidad en semanas con un profesor de EAFIT e ingeniero de IA.",
     "carpinteriaTitle": "CarpinterIA · Curso de melamina",
@@ -454,6 +456,131 @@
       "mapPrompt": "Actúa como un experto en {skill} y como profesor.\nMi meta en 30 días: {outcome}.\nTengo {hours} horas por semana.\n\n1. Descompón la habilidad en 10 a 15 piezas concretas (conceptos, procedimientos y herramientas).\n2. Marca las 3 piezas que más acercan a mi meta y explica por qué.\n3. Dime qué puedo ignorar por ahora sin afectar el resultado.",
       "tutorPrompt": "Eres mi tutor de {skill}. Mi meta: {outcome}.\nCada vez que te escriba, hazme 3 preguntas de memoria sobre {topics},\nuna a la vez y sin darme la respuesta. Después de cada respuesta, corrígeme,\ndime qué error de razonamiento cometí y propónme un ejercicio corto para practicar ese punto.",
       "tutorTopicsFallback": "lo que estoy aprendiendo"
+    }
+  },
+  "cursoIa": {
+    "comment": "// curso gratuito · en vivo · diciembre 2026",
+    "title": "Empieza con IA sin pagar nada",
+    "lede": "En 4 clases en vivo pasas de no saber por dónde empezar a tener tu propia página publicada con IA, sin pagar nada y sin instalar nada.",
+    "chips": [
+      "Gratis",
+      "En vivo por videollamada",
+      "Sin instalar nada",
+      "Cupo de 20 personas"
+    ],
+    "cuposLeft": "Quedan {left} de {capacity} cupos",
+    "cuposFull": "Cupos llenos: inscríbete en la lista de espera",
+    "cuposClosed": "Este grupo ya empezó",
+    "ctaTop": "Quiero mi cupo",
+    "videoTitle": "Video de invitación al curso",
+    "program": {
+      "label": "Programa",
+      "title": "4 clases, de 7:00 a 8:30 p. m. (hora de Colombia)",
+      "youLeave": "Sales con",
+      "sessions": {
+        "s1": {
+          "day": "Miércoles 9 de diciembre",
+          "title": "Tu primera conversación útil, y segura",
+          "outcome": "Un problema tuyo resuelto y tu primera herramienta hecha con IA (una calculadora)."
+        },
+        "s2": {
+          "day": "Jueves 10 de diciembre",
+          "title": "La IA con tus papeles, fotos y voz, y cómo no caer en estafas",
+          "outcome": "Un documento tuyo explicado en palabras sencillas y tu regla de 3 pasos antes de reenviar o pagar."
+        },
+        "s3": {
+          "day": "Lunes 14 de diciembre",
+          "title": "Tu primera página web",
+          "outcome": "Tu propia página creada con IA: tu negocio, tu hoja de vida o tu hobby."
+        },
+        "s4": {
+          "day": "Martes 15 de diciembre",
+          "title": "Publica, comparte y mira hasta dónde llega esto",
+          "outcome": "Un enlace público a tu página para compartir y un plan para seguir aprendiendo."
+        }
+      }
+    },
+    "forWho": {
+      "label": "Para quién es",
+      "title": "Para quien nunca ha usado IA, o la usa poco",
+      "items": [
+        "No necesitas saber de tecnología: empezamos desde cero y nadie se queda atrás (trabajamos en parejas).",
+        "Necesitas un computador con internet. Con celular solo se puede, pero cuesta más.",
+        "Antes de la primera clase creas una cuenta gratuita; te mandamos el paso a paso por correo.",
+        "Aquí no hay preguntas tontas: se vale equivocarse."
+      ]
+    },
+    "teacher": {
+      "label": "Quién lo dicta",
+      "title": "Sergio Monsalve",
+      "bio": "Fui profesor en EAFIT, tengo una maestría con énfasis en educación en ingeniería y trabajo como ingeniero de inteligencia artificial. Uso la IA todos los días para aprender cosas nuevas, del mandarín a los hongos, y quiero que tú también le pierdas el miedo."
+    },
+    "signup": {
+      "label": "Inscripción",
+      "title": "Aparta tu cupo",
+      "desc": "Es gratis. Te llega un correo con las fechas y el paso a paso para crear tu cuenta."
+    },
+    "faq": {
+      "label": "Preguntas frecuentes",
+      "items": [
+        {
+          "q": "¿De verdad es gratis?",
+          "a": "Sí. Las 4 clases son gratis y usamos la versión gratuita de la IA. Al final te cuento sobre un curso pagado en enero, por si quieres seguir, pero no es obligatorio."
+        },
+        {
+          "q": "¿Qué necesito?",
+          "a": "Un computador con internet y un correo. Antes de empezar creas una cuenta gratuita en claude.ai; te mandamos la guía."
+        },
+        {
+          "q": "¿Por dónde es la videollamada?",
+          "a": "El enlace te llega por WhatsApp y por correo 2 días antes de la primera clase."
+        },
+        {
+          "q": "¿Y si no puedo ir a una clase?",
+          "a": "Cada clase termina con algo que puedes hacer en casa, así que puedes ponerte al día. Escríbeme y te cuento qué hicimos."
+        },
+        {
+          "q": "¿Tengo otra pregunta?",
+          "a": "Escríbeme por WhatsApp y te respondo."
+        }
+      ]
+    },
+    "whatsappCta": "Escríbeme por WhatsApp",
+    "form": {
+      "name": "Nombre",
+      "email": "Correo",
+      "whatsapp": "WhatsApp",
+      "whatsappHint": "Por aquí te mando el enlace de la videollamada y los recordatorios.",
+      "device": "¿Desde dónde te vas a conectar?",
+      "deviceComputer": "Computador",
+      "devicePhone": "Solo celular",
+      "ai": "¿Has usado alguna IA?",
+      "aiNever": "Nunca",
+      "aiSometimes": "Alguna vez",
+      "aiOften": "La uso seguido",
+      "goal": "¿Qué te gustaría poder hacer con la IA?",
+      "project": "¿Tienes un negocio, proyecto o hobby que quisieras mostrar en una página? (opcional)",
+      "privacy": "Acepto el tratamiento de mis datos para organizar el curso.",
+      "privacyLink": "Política de privacidad",
+      "newsletter": "Quiero recibir el newsletter de Sergio (puedes darte de baja cuando quieras).",
+      "cta": "Inscribirme gratis",
+      "ctaWaitlist": "Entrar a la lista de espera",
+      "ctaClosed": "Avísame del próximo curso",
+      "sending": "Enviando…",
+      "successConfirmed": "¡Listo! Tienes cupo. Revisa tu correo: ahí están las fechas y el paso a paso para crear tu cuenta.",
+      "successWaitlist": "Quedaste en la lista de espera. Si se libera un cupo, te escribo en orden de llegada.",
+      "successClosed": "Este grupo ya empezó, pero quedaste anotado: te aviso del próximo curso.",
+      "emailFailed": "Si en unos minutos no te llega el correo, escríbeme por",
+      "error": "No pudimos guardar tu inscripción. Inténtalo de nuevo en un momento.",
+      "errorLinks": "Por seguridad, no se permiten enlaces en las respuestas.",
+      "errorWhatsapp": "Revisa tu número de WhatsApp (por ejemplo: 300 123 4567, o con +indicativo si estás fuera de Colombia).",
+      "errorUnavailable": "Las inscripciones no están disponibles en este momento. Escríbeme por"
+    },
+    "formacionBanner": {
+      "label": "Curso gratuito en vivo · diciembre",
+      "title": "Empieza con IA sin pagar nada",
+      "desc": "4 clases en vivo: 9, 10, 14 y 15 de diciembre. Cupo de 20 personas.",
+      "cta": "Ver programa e inscribirme"
     }
   },
   "newsletter": {

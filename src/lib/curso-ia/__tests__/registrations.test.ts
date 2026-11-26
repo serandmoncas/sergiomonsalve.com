@@ -12,7 +12,7 @@ type Result = { data: unknown; error: unknown; count?: number | null }
 type Call = { table: string; method: string; args: unknown[] }
 
 const { state } = vi.hoisted(() => ({
-  state: { results: [] as Result[], calls: [] as Call[] }
+  state: { results: [] as Result[], calls: [] as Call[], throwOnFrom: false }
 }))
 
 vi.mock('@/lib/supabase/server', () => ({
@@ -22,6 +22,7 @@ vi.mock('@/lib/supabase/server', () => ({
       return state.results.shift() ?? { data: null, error: null }
     },
     from: (table: string) => {
+      if (state.throwOnFrom) throw new Error('supabaseUrl is required')
       const result = state.results.shift() ?? { data: null, error: null }
       const q: Record<string, unknown> = {}
       for (const method of ['select', 'insert', 'update', 'eq']) {
@@ -54,6 +55,7 @@ const calls = (method: string) => state.calls.filter(c => c.method === method)
 beforeEach(() => {
   state.results = []
   state.calls = []
+  state.throwOnFrom = false
 })
 
 describe('claimCourseSeat', () => {
@@ -99,6 +101,16 @@ describe('countConfirmed', () => {
     state.results = [{ data: null, error: null, count: 7 }]
     expect(await countConfirmed()).toBe(7)
     expect(calls('eq').map(c => c.args)).toEqual([['cohort', 'ia-diciembre-2026'], ['status', 'confirmed']])
+  })
+
+  it('returns null when Supabase answers without a count (HEAD on a missing table)', async () => {
+    state.results = [{ data: null, error: null, count: null }]
+    expect(await countConfirmed()).toBeNull()
+  })
+
+  it('returns null when the client throws (for example, env vars missing)', async () => {
+    state.throwOnFrom = true
+    expect(await countConfirmed()).toBeNull()
   })
 
   it('returns null when Supabase fails (for example, table missing)', async () => {
