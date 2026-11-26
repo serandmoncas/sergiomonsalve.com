@@ -1,4 +1,4 @@
-// copiado de DiarIA@3803d65e772c — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@e9253e236b58 — no editar; actualizar con pnpm copiar-nucleo
 import { dentro, extraerEnlaces, rangosDeCodigo } from "./enlaces";
 import { fechaDeNota, validarDia } from "./fechas";
 

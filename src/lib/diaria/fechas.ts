@@ -1,4 +1,4 @@
-// copiado de DiarIA@3803d65e772c — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@e9253e236b58 — no editar; actualizar con pnpm copiar-nucleo
 const FECHA = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 /** El día de una nota diaria (`AAAA-MM-DD.md`, en cualquier carpeta), o `null`. */

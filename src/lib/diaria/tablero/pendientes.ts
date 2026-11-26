@@ -1,4 +1,4 @@
-// copiado de DiarIA@3803d65e772c — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@e9253e236b58 — no editar; actualizar con pnpm copiar-nucleo
 /**
  * Identidad de un pendiente entre notas diarias (DI-082, portado del spike
  * vista Hoy): la misma tarea copiada de un día a otro da la misma clave

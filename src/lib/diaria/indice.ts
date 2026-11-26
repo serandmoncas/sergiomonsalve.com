@@ -1,4 +1,4 @@
-// copiado de DiarIA@3803d65e772c — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@e9253e236b58 — no editar; actualizar con pnpm copiar-nucleo
 import type { VaultFS } from "./vault-fs";
 
 /** Qué archivos existen en la bóveda, según DiarIA. */

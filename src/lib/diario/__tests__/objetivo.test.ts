@@ -181,6 +181,23 @@ describe('acciones del objetivo (DI-087)', () => {
     errores.mockRestore()
   })
 
+  it("si GitHub no responde a tiempo al guardar, dice que no se sabe y no reintenta", async () => {
+    gh.fallar = 'tiempo'
+    const errores = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const r = await ejecutarAccion(id, { tipo: 'contacto', nombre: 'X' }, HOY)
+    expect(r).toEqual({ ok: false, estado: 502, error: 'no se sabe si se guardó; recarga antes de repetir' })
+    const { guardarArchivo } = await import('../github')
+    expect(vi.mocked(guardarArchivo)).toHaveBeenCalledTimes(1)
+    errores.mockRestore()
+  })
+
+  it('si anotar la escritura falla después de guardar, igual dice que se guardó', async () => {
+    vi.mocked(anotarEscritura).mockRejectedValueOnce(new Error('memoria'))
+    const r = await ejecutarAccion(id, { tipo: 'contacto', nombre: 'X' }, HOY)
+    expect(r).toEqual({ ok: true })
+    expect(gh.guardados).toBe(1)
+  })
+
   it('tras guardar, anota la escritura con el archivo y el commit nuevo', async () => {
     await ejecutarAccion(id, { tipo: 'contacto', nombre: 'X' }, HOY)
     const [ruta, bytes, commit, padre] = vi.mocked(anotarEscritura).mock.calls[0]

@@ -62,10 +62,32 @@ function registrar(e: unknown) {
   console.error('[diario]', e instanceof github.ErrorGithub ? e.codigo : 'error')
 }
 
+/** Errores del guardado tras los que no se sabe si GitHub hizo el commit. */
+const INCIERTOS = new Set(['tiempo', 'red', 'guardado-incierto'])
+
+class GuardadoIncierto extends Error {}
+
+/**
+ * Guarda y pone al día la memoria. Si el PUT pudo haber llegado (sin
+ * respuesta o con una que no se entiende), no se reintenta: repetir podría
+ * duplicar la tarjeta. Una falla de la memoria no deshace lo guardado.
+ */
 async function guardar(ruta: string, nuevo: string, sha: string, titulo: string) {
-  const r = await github.guardarArchivo(ruta, nuevo, sha, conMarca(titulo))
-  await anotarEscritura(ruta, r.bytes, r.commit, r.padre)
+  let r: Awaited<ReturnType<typeof github.guardarArchivo>>
+  try {
+    r = await github.guardarArchivo(ruta, nuevo, sha, conMarca(titulo))
+  } catch (e) {
+    if (e instanceof github.ErrorGithub && INCIERTOS.has(e.codigo)) {
+      registrar(e)
+      throw new GuardadoIncierto()
+    }
+    throw e
+  }
+  await anotarEscritura(ruta, r.bytes, r.commit, r.padre).catch(() => registrar(new github.ErrorGithub('memoria')))
 }
+
+const INCIERTO = 'no se sabe si se guardó; recarga antes de repetir'
+
 
 /** Lee, aplica y guarda; si el archivo cambió entretanto, relee y repite. */
 async function aplicar(
@@ -82,6 +104,7 @@ async function aplicar(
       return { ok: true }
     } catch (e) {
       if (esShaViejo(e)) continue
+      if (e instanceof GuardadoIncierto) return falla(502, INCIERTO)
       registrar(e)
       return falla(502, 'no se guardó')
     }
@@ -104,6 +127,7 @@ async function deshacer(ruta: string): Promise<ResultadoAccion> {
     return { ok: true }
   } catch (e) {
     if (esShaViejo(e)) return no
+    if (e instanceof GuardadoIncierto) return falla(502, INCIERTO)
     registrar(e)
     return falla(502, 'no se guardó')
   }

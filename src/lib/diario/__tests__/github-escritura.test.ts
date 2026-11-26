@@ -75,6 +75,11 @@ describe('escritura en GitHub (DI-087)', () => {
     await expect(guardarArchivo(RUTA, 'x', 'b1', MENSAJE)).rejects.toEqual(new ErrorGithub(`github-${status}`))
   })
 
+  it('un 2xx sin commit en la respuesta lanza guardado-incierto', async () => {
+    respuesta = () => Response.json({})
+    await expect(guardarArchivo(RUTA, 'x', 'b1', MENSAJE)).rejects.toEqual(new ErrorGithub('guardado-incierto'))
+  })
+
   it('el cuerpo del PUT no lleva el token', async () => {
     respuesta = () => Response.json({ content: { sha: 'b2' }, commit: { sha: 'c2', parents: [{ sha: 'c1' }] } })
     await guardarArchivo(RUTA, 'x', 'b1', MENSAJE)

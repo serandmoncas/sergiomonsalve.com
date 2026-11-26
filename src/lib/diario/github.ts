@@ -145,10 +145,11 @@ export async function guardarArchivo(
   return pedir(
     contenidos(ruta),
     async r => {
-      const j = (await r.json()) as { commit?: { sha?: string; parents?: { sha?: string }[] } }
+      // GitHub ya respondió 2xx: el commit existe aunque la respuesta no se entienda.
+      const j = (await r.json().catch(() => ({}))) as { commit?: { sha?: string; parents?: { sha?: string }[] } }
       const commit = j.commit?.sha
       const padre = j.commit?.parents?.[0]?.sha
-      if (!commit || !padre) throw new ErrorGithub('contenido')
+      if (!commit || !padre) throw new ErrorGithub('guardado-incierto')
       return { commit, padre, bytes }
     },
     {
