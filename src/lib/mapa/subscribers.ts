@@ -50,3 +50,21 @@ export async function unsubscribeByToken(token: string): Promise<{ email: string
   if (error) throw new Error(error.message)
   return data ? { email: data.email } : null
 }
+
+// Newsletter desde el curso en vivo: si el correo es nuevo entra con source 'curso-ia';
+// si ya existía (por ejemplo, de /mapa) conserva su source y solo registra el consentimiento.
+export async function recordCourseNewsletter(email: string, name: string): Promise<void> {
+  const supabase = createAdminClient()
+  const consentedAt = new Date().toISOString()
+  const { error } = await supabase.from('subscribers').insert({
+    email,
+    name: name || null,
+    source: 'curso-ia',
+    newsletter: true,
+    status: 'active',
+    consented_at: consentedAt
+  })
+  if (!error) return
+  if ((error as { code?: string }).code !== '23505') throw new Error(error.message)
+  await recordNewsletterConsent(email)
+}
