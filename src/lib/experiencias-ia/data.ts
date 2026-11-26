@@ -629,8 +629,13 @@ export const SESIONES: EntradaSesion[] = [
     asistentes: ['Sergio', 'Jorge', 'Diego', 'Juan Pablo', 'Alejandra Santamaría', 'Carlos Mario Espíndola'],
     enlaces: [],
   },
-  { fecha: '2026-11-11', fechaLarga: '11 de noviembre de 2026', estado: 'sin-registro', nota: 'No hubo reunión' },
-  { fecha: '2026-11-18', fechaLarga: '18 de noviembre de 2026', estado: 'sin-registro', nota: 'No hubo reunión' },
+  {
+    fecha: '2026-11-11',
+    fechaLarga: '11 de noviembre de 2026',
+    estado: 'sin-registro',
+    nota: 'Sin reunión: el grupo acompañó a Jorge en su presentación sobre radioaficionados',
+  },
+  { fecha: '2026-11-18', fechaLarga: '18 de noviembre de 2026', estado: 'sin-registro', nota: 'Sesión cancelada' },
 ]
 
 export const TEMAS: Tema[] = [
