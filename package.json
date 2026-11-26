@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "curso-ia:confirmar": "npx --yes tsx scripts/curso-ia-confirmar.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",

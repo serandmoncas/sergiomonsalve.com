@@ -66,7 +66,8 @@ describe('registrationSchema', () => {
   })
 
   it('defaults a missing project to an empty string', () => {
-    const { project: _omit, ...rest } = VALID
+    const rest: Partial<typeof VALID> = { ...VALID }
+    delete rest.project
     expect(registrationSchema.parse(rest).project).toBe('')
   })
 

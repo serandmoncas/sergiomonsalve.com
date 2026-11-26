@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import CursoIaBanner from '@/components/curso-ia/CursoIaBanner'
 
 const WHATSAPP_NUMBER = '573508025988'
 
@@ -29,6 +30,8 @@ export default function FormacionContent() {
           ))}
         </ul>
       </header>
+
+      <CursoIaBanner now={new Date()} />
 
       <section className="space-y-8">
         <div className="space-y-2">

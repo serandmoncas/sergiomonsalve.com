@@ -597,7 +597,7 @@
   "privacy": {
     "comment": "// data policy",
     "title": "How I handle your data",
-    "updated": "Last updated: October 15, 2026",
+    "updated": "Last updated: November 26, 2026",
     "sections": [
       {
         "title": "Controller",
@@ -606,6 +606,10 @@
       {
         "title": "What I collect",
         "text": "Your email, your name if you give it, the site language and, if you ask for it, the plan you built in the MAPA template. In the contact form, also your message."
+      },
+      {
+        "title": "Live course registrations",
+        "text": "If you sign up for a live course (for example, the free December AI course), I keep your name, email, WhatsApp and your form answers. I use them to run the course: confirm your seat, send you the video call link and reminders, and tailor the class examples. Only if you tick the box, for the newsletter. I keep them for up to 12 months after the course, or less if you ask me to delete them by replying to the confirmation email or through the contact form."
       },
       {
         "title": "What I use it for",

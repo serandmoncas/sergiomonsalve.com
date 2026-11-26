@@ -32,6 +32,7 @@ Next.js 16.2.4 App Router with `src/` directory layout. All routes are nested un
 - `contact_submissions` — contact form entries
 - `profiles` — admin user role (FK → auth.users)
 - `comments` — blog post comments; `approved=false` by default, admin must approve
+- `course_registrations` — inscripciones a cursos en vivo (migración `009`, **se aplica a mano**). El cupo lo asigna la función `claim_course_seat` con bloqueo por cohorte; las consultas útiles están al final de la migración.
 
 Server-side queries use `createAdminClient()` from `src/lib/supabase/server.ts` (service role, bypasses RLS). Auth-aware server client uses `createClient()` from the same file (cookie-based session). Browser client in `src/lib/supabase/client.ts` is used in client components for auth (magic link).
 
@@ -40,6 +41,7 @@ Server-side queries use `createAdminClient()` from `src/lib/supabase/server.ts` 
 **API routes:**
 - `POST /api/contact` — contact form (Zod-validated, Supabase insert, Resend email)
 - `POST /api/comments` — public comment submission (Zod-validated with honeypot, saves as unapproved)
+- `POST /api/curso-ia/inscripcion` — inscripción al curso en vivo (`/es/curso-ia`). Config de la cohorte (fechas, cupo 20, cierre, WhatsApp, `youtubeId`) en `src/lib/curso-ia/cohorte.ts`. Pasar de lista de espera a confirmado: `npm run curso-ia:confirmar -- <correo>`.
 - `GET /api/admin/comments` — all comments for admin (admin-gated via `ADMIN_EMAILS`)
 - `PATCH /api/admin/comments/[id]` — approve a comment (admin-gated via `ADMIN_EMAILS`)
 - `DELETE /api/admin/comments/[id]` — delete a comment (admin-gated via `ADMIN_EMAILS`)
