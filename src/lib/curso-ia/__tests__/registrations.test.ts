@@ -3,6 +3,7 @@ import {
   claimCourseSeat,
   countConfirmed,
   confirmFromWaitlist,
+  promoteFromWaitlist,
   markEmailSent,
   RegistrationsUnavailable,
   type SeatInput
@@ -142,5 +143,33 @@ describe('confirmFromWaitlist', () => {
   it('returns null when there was no waitlisted row', async () => {
     state.results = [{ data: null, error: null }]
     expect(await confirmFromWaitlist('nadie@mail.com')).toBeNull()
+  })
+})
+
+describe('promoteFromWaitlist', () => {
+  it('refuses when the cohort already has 20 confirmed', async () => {
+    state.results = [{ data: null, error: null, count: 20 }]
+    expect(await promoteFromWaitlist('ana@mail.com')).toEqual({ ok: false, reason: 'full', confirmed: 20 })
+    expect(calls('update')).toHaveLength(0)
+  })
+
+  it('promotes when there is a free seat', async () => {
+    state.results = [{ data: null, error: null, count: 19 }, { data: { name: 'Ana' }, error: null }]
+    expect(await promoteFromWaitlist('ana@mail.com')).toEqual({ ok: true, name: 'Ana' })
+  })
+
+  it('promotes over capacity only with force', async () => {
+    state.results = [{ data: { name: 'Ana' }, error: null }]
+    expect(await promoteFromWaitlist('ana@mail.com', { force: true })).toEqual({ ok: true, name: 'Ana' })
+  })
+
+  it('reports when the email was not on the waitlist', async () => {
+    state.results = [{ data: null, error: null, count: 3 }, { data: null, error: null }]
+    expect(await promoteFromWaitlist('nadie@mail.com')).toEqual({ ok: false, reason: 'not_waitlisted' })
+  })
+
+  it('refuses when the count cannot be read (unknown capacity)', async () => {
+    state.results = [{ data: null, error: { code: '42P01', message: 'missing' }, count: null }]
+    expect(await promoteFromWaitlist('ana@mail.com')).toEqual({ ok: false, reason: 'unknown_count' })
   })
 })

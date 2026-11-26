@@ -98,3 +98,20 @@ export async function confirmFromWaitlist(email: string): Promise<{ name: string
   if (error) throw toError(error)
   return data ? { name: (data as { name: string }).name } : null
 }
+
+export type PromoteResult =
+  | { ok: true; name: string }
+  | { ok: false; reason: 'full'; confirmed: number }
+  | { ok: false; reason: 'not_waitlisted' | 'unknown_count' }
+
+// Para el script de confirmación: no deja pasar de COHORTE.capacity salvo con force
+// (por ejemplo, cuando se libera un cupo y todavía no se marcó a alguien como cancelled).
+export async function promoteFromWaitlist(email: string, opts: { force?: boolean } = {}): Promise<PromoteResult> {
+  if (!opts.force) {
+    const confirmed = await countConfirmed()
+    if (confirmed === null) return { ok: false, reason: 'unknown_count' }
+    if (confirmed >= COHORTE.capacity) return { ok: false, reason: 'full', confirmed }
+  }
+  const row = await confirmFromWaitlist(email)
+  return row ? { ok: true, name: row.name } : { ok: false, reason: 'not_waitlisted' }
+}
