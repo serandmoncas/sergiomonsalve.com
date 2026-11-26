@@ -3,7 +3,7 @@ import { CABECERA, tarball, type Entrada } from './ayudantes'
 
 vi.mock('server-only', () => ({}))
 
-import { obtenerBoveda, reiniciarBoveda } from '../boveda'
+import { anotarEscritura, obtenerBoveda, reiniciarBoveda } from '../boveda'
 
 const TOKEN = 'ghp_TOKEN_DE_PRUEBA_123'
 const API = 'https://api.github.com/repos/serandmoncas/diaria-notas'
@@ -226,5 +226,22 @@ describe('obtenerBoveda', () => {
     const q = obtenerBoveda()
     await vi.advanceTimersByTimeAsync(11_000)
     expect(await q).toEqual({ ok: false, motivo: 'tiempo' })
+  })
+  it('anotarEscritura pone la bóveda en el commit nuevo sin bajar nada (DI-087)', async () => {
+    await obtenerBoveda()
+    const antes = gh.llamadas.length
+    const nuevo = new TextEncoder().encode(CABECERA + '- [ ] Regar el jardín\n- [ ] Llamar a [[Ana Prueba]]\n- [ ] Nueva\n')
+    await anotarEscritura('Diario/2026-11-25.md', nuevo, 'a2', 'a1')
+    const r = await obtenerBoveda()
+    expect(r.ok && r.boveda.sha).toBe('a2')
+    expect(r.ok && r.boveda.diarias.get('2026-11-25')?.texto).toContain('- [ ] Nueva')
+    expect(gh.llamadas.length).toBe(antes)
+  })
+
+  it('anotarEscritura no hace nada si la bóveda no estaba en el commit padre', async () => {
+    await obtenerBoveda()
+    await anotarEscritura('Diario/2026-11-25.md', new Uint8Array([1]), 'a9', 'otro')
+    const r = await obtenerBoveda()
+    expect(r.ok && r.boveda.sha).toBe('a1')
   })
 })
