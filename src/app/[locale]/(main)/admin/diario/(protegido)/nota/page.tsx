@@ -3,6 +3,8 @@ import { leerDiario } from '@/lib/diario/acceso'
 import { fechaBogota } from '@/lib/diario/fecha'
 import NavDiario from '@/components/admin/diario/NavDiario'
 import NoDisponible from '@/components/admin/diario/NoDisponible'
+import NotaMarkdown from '@/components/admin/diario/NotaMarkdown'
+import { enlazar } from '@/lib/diario/enlazar'
 
 export const dynamic = 'force-dynamic'
 
@@ -38,7 +40,7 @@ export default async function NotaPage({ params, searchParams }: {
       {nav}
       <p className="font-mono text-xs text-text-secondary mb-1">{ruta}</p>
       <h1 className="text-2xl font-extrabold text-text mb-6">{titulo(ruta)}</h1>
-      <pre className="whitespace-pre-wrap font-sans text-base text-text">{texto}</pre>
+      <NotaMarkdown markdown={enlazar(texto, ruta, b.resolutor, idioma)} />
     </article>
   )
 }

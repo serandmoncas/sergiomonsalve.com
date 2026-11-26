@@ -21,8 +21,17 @@ describe('Nota', () => {
 
   it('muestra el título y el texto de la nota', async () => {
     render(await NotaPage(props('Personas/Ana Prueba.md')))
-    expect(screen.getByRole('heading', { level: 1, name: 'Ana Prueba' })).toBeInTheDocument()
-    expect(document.body.textContent).toContain('Ana Prueba')
+    // El título de la página es el nombre del archivo; el "# Ana Prueba" de la nota se pinta aparte.
+    const titulos = screen.getAllByRole('heading', { level: 1, name: 'Ana Prueba' })
+    expect(titulos).toHaveLength(2)
+    expect(titulos[0].className).toContain('text-2xl')
+  })
+
+  it('los [[enlaces]] van a su nota y los rotos se marcan', async () => {
+    const { container } = render(await NotaPage(props('Diario/2026-11-25.md')))
+    expect(screen.getByRole('link', { name: 'Ana Prueba' }).getAttribute('href'))
+      .toBe('/es/admin/diario/nota?ruta=' + encodeURIComponent('Personas/Ana Prueba.md'))
+    expect(container.querySelector('input[type=checkbox]:checked')).not.toBeNull()
   })
 
   it.each([undefined, '../x.md', '/Personas/Ana Prueba.md', 'inexistente.md', 'Adjuntos/foto.png', ['a', 'b']])(
