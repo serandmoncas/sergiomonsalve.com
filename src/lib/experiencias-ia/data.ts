@@ -632,18 +632,10 @@ export const SESIONES: EntradaSesion[] = [
   {
     fecha: '2026-11-11',
     fechaLarga: '11 de noviembre de 2026',
-    estado: 'pendiente',
-    agenda: [
-      'Lo no técnico: cómo le hablamos a la máquina (enojarse, dar las gracias, tono)',
-      '¿Es elitista la IA? Costo y acceso a las herramientas',
-      'Grupo de intervenciones cortas (3 minutos) para contar algo que uno aprendió',
-      'Open Source School: una escuela abierta donde cada quien da su clase',
-      'Espacios temáticos en otros días de la semana (negocio, estudio, avances de proyectos)',
-      'Reto: app de identificación de hongos',
-      'Serie piloto limitada con miniponencias e invitados',
-      'Agenda de ponencias y transmisión por YouTube',
-    ],
+    estado: 'sin-registro',
+    nota: 'Sin reunión: el grupo acompañó a Jorge en su presentación sobre radioaficionados',
   },
+  { fecha: '2026-11-18', fechaLarga: '18 de noviembre de 2026', estado: 'sin-registro', nota: 'Sesión cancelada' },
 ]
 
 export const TEMAS: Tema[] = [
