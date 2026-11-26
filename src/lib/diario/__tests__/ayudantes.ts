@@ -27,3 +27,22 @@ export async function tarball(entradas: Entrada[], prefijo = 'serandmoncas-diari
 export const comoStream = (b: Buffer) => Readable.toWeb(Readable.from([b])) as ReadableStream<Uint8Array>
 
 export const texto = (b: Uint8Array) => new TextDecoder().decode(b)
+
+/** Una bóveda sintética armada como en producción, sin GitHub. */
+export async function bovedaDePrueba(notas: Record<string, string>, otros: string[] = [], sha = 'a1') {
+  const { MemoriaFS } = await import('../memoria')
+  const { armarBoveda } = await import('../boveda')
+  const enc = new TextEncoder()
+  const fs = new MemoriaFS(new Map(Object.entries(notas).map(([r, t]) => [r, enc.encode(t)])), otros)
+  return armarBoveda(fs, sha)
+}
+
+export const NOTAS_DE_PRUEBA: Record<string, string> = {
+  'Diario/2026-11-20.md': CABECERA + '- [ ] Revisar [[Proyecto Faro]]\n',
+  'Diario/2026-11-22.md': CABECERA + '- [ ] Revisar [[Proyecto Faro]]\n- [ ] Comprar pan\n',
+  'Diario/2026-11-24.md': CABECERA + '- [ ] Revisar [[Proyecto Faro]]\n- [ ] Comprar pan\n',
+  'Diario/2026-11-25.md': CABECERA + '- [ ] Revisar [[Proyecto Faro]]\n- [ ] Llamar a [[Ana Prueba]]\n- [x] Regar ✅ 2026-11-25\n',
+  'Personas/Ana Prueba.md': CABECERA + '# Ana Prueba\n',
+  'Proyectos/Proyecto Faro.md': CABECERA + '# Proyecto Faro\n',
+  'Tablero/Rutinas.md': CABECERA + '- [ ] Regar 🔁 every day\n',
+}
