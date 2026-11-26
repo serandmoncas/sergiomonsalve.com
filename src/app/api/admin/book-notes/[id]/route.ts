@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
+import { requireAdmin } from '@/lib/auth/admin'
 import { z } from 'zod'
-import { createClient, createAdminClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 
 const putSchema = z.object({
   rating: z.number().int().min(1).max(5).nullable().optional(),
@@ -8,18 +9,12 @@ const putSchema = z.object({
   review_md: z.string().optional(),
 })
 
-async function requireAdmin() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  return user
-}
-
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const user = await requireAdmin()
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const auth = await requireAdmin()
+  if (auth instanceof NextResponse) return auth
 
   const { id } = await params
   const admin = createAdminClient()
@@ -36,8 +31,8 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const user = await requireAdmin()
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const auth = await requireAdmin()
+  if (auth instanceof NextResponse) return auth
 
   const { id } = await params
   let body: unknown

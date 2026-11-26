@@ -87,6 +87,7 @@
     "carpinteria": "CarpinterIA",
     "biblioteca": "Library",
     "aves": "Birds",
+    "manual": "User manual",
     "aprender": "Learning to learn",
     "aprenderHref": "/learning-to-learn.html",
     "lineaAprendizaje": "Learning through time",
@@ -914,6 +915,80 @@
       "9": "October",
       "10": "November",
       "11": "December"
+    }
+  },
+  "manual": {
+    "sinAcceso": "No tienes acceso a este manual. Si crees que deberías, pídeselo a Sergio.",
+    "noDisponible": "El manual no está disponible en esta vista previa.",
+    "fallo": "No pude traer el manual ahora. Intenta en unos minutos.",
+    "entrar": {
+      "titulo": "Entrar al manual",
+      "email": "Tu correo",
+      "enviar": "Enviarme el enlace",
+      "enviando": "Enviando...",
+      "enviado": "Si tienes acceso, te llegó un enlace a tu correo.",
+      "error": "Algo salió mal. Intenta de nuevo.",
+      "enlace": "El enlace venció o se abrió en otro dispositivo. Pide uno nuevo aquí."
+    },
+    "nav": {
+      "mapa": "Mapa",
+      "grafo": "Grafo"
+    },
+    "sobreFallback": "Un manual de usuario para entender cómo trabajo con IA. Es privado y por invitación.",
+    "portada": {
+      "titulo": "Manual de usuario",
+      "entrar": "Entrar",
+      "pedirAcceso": "Pedir acceso"
+    },
+    "desdeAqui": {
+      "ocultar": "Ocultar \"Desde aquí\"",
+      "mostrar": "Mostrar \"Desde aquí\""
+    },
+    "grafo": {
+      "titulo": "Grafo de notas del manual",
+      "vacio": "Aún no hay notas para mostrar.",
+      "vecindario": "Notas conectadas"
+    },
+    "mapa": {
+      "titulo": "Mapa del manual",
+      "porEscribir": "por escribir"
+    },
+    "nota": {
+      "estado": "Estado",
+      "confianza": "Confianza",
+      "ia": {
+        "todos": "IA en la capa para todos",
+        "otros": "IA en la capa para otros",
+        "desde_aqui": "IA en la capa desde aquí"
+      },
+      "fuentes": "Fuentes",
+      "llevar": "Para llevarte",
+      "backlinks": "Enlazan aquí",
+      "copiarEnlace": "Copiar enlace",
+      "copiado": "Enlace copiado",
+      "editar": "Editar en GitHub",
+      "capaTodos": "Lo que nos pasa a todos",
+      "capaOtros": "Cómo lo han vivido y pensado otros",
+      "desdeAqui": "Desde aquí — {voz}",
+      "tituloGenerico": "Manual de usuario"
+    },
+    "comentarios": {
+      "titulo": "Comentarios",
+      "vacio": "Aún no hay comentarios.",
+      "placeholder": "Escribe un comentario",
+      "enviar": "Comentar",
+      "enviando": "Enviando...",
+      "errorCargar": "No pude cargar los comentarios.",
+      "errorEnviar": "No pude enviar tu comentario. Intenta de nuevo.",
+      "tu": "tú"
+    },
+    "recorrido": {
+      "paso": "Paso {n} de {total}",
+      "anterior": "← Anterior",
+      "siguiente": "Siguiente →",
+      "paraQuien": "Para quién",
+      "resultado": "Resultado",
+      "porEscribir": "por escribir"
     }
   }
 }

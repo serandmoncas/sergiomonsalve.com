@@ -24,6 +24,7 @@ export default async function Nav() {
       { href: '/carpinteria', label: t('carpinteria') },
       { href: '/biblioteca', label: t('biblioteca') },
       { href: '/aves', label: t('aves') },
+      { href: '/manual-de-usuario', label: t('manual') },
       { href: t('aprenderHref'), label: t('aprender'), estatico: true },
       { href: '/aprendizaje-en-el-tiempo', label: t('lineaAprendizaje') },
       { href: t('dineroHref'), label: t('dinero'), estatico: true },
@@ -67,6 +68,9 @@ export default async function Nav() {
         </Link>
         <Link href="/aves" className="text-xs text-text-secondary hover:text-text transition-colors">
           {t('aves')}
+        </Link>
+        <Link href="/manual-de-usuario" className="text-xs text-text-secondary hover:text-text transition-colors">
+          {t('manual')}
         </Link>
         {/* Página estática en public/: va con <a> porque no pasa por las rutas con idioma */}
         <a href={t('aprenderHref')} className="text-xs text-text-secondary hover:text-text transition-colors">

@@ -61,6 +61,52 @@ export async function sendCommentNotification(data: CommentNotificationData) {
   if (error) throw new Error(error.message)
 }
 
+// Enlace fijo (no depende del origen de la petición).
+const MANUAL_ENTRAR_URL = 'https://sergiomonsalve.com/es/manual-de-usuario/entrar'
+
+export async function sendManualInvitation({ to, name }: { to: string; name: string }) {
+  const resend = new Resend(process.env.RESEND_API_KEY!)
+  const { error } = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: 'Te invité a mi manual de usuario',
+    text: [
+      `Hola ${name},`,
+      '',
+      'Te invité a leer mi manual de usuario: un texto personal, solo por invitación.',
+      '',
+      'Para entrar, escribe tu correo en esta página y te llegará un enlace de acceso:',
+      MANUAL_ENTRAR_URL,
+      '',
+      'Sergio'
+    ].join('\n')
+  })
+  if (error) throw new Error(error.message)
+}
+
+export type ManualCommentNotificationData = {
+  note_slug: string
+  author_name: string
+  body: string
+}
+
+export async function sendManualCommentNotification(data: ManualCommentNotificationData) {
+  const to = requireOwnerEmail()
+  const resend = new Resend(process.env.RESEND_API_KEY!)
+  const { error } = await resend.emails.send({
+    from: FROM,
+    to,
+    subject: `Comentario en el manual: ${data.note_slug}`,
+    text: [
+      `De: ${data.author_name}`,
+      `Nota: https://sergiomonsalve.com/es/manual-de-usuario/n/${data.note_slug}`,
+      '',
+      data.body
+    ].join('\n')
+  })
+  if (error) throw new Error(error.message)
+}
+
 export type PlanEmailData = {
   to: string
   name: string

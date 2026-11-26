@@ -8,7 +8,7 @@ vi.mock('resend', () => ({
   }
 }))
 
-import { sendContactNotification, sendCommentNotification, sendPlanEmail } from '../resend'
+import { sendContactNotification, sendCommentNotification, sendPlanEmail, sendManualInvitation } from '../resend'
 
 const contact = { name: 'Ana', email: 'ana@example.com', projectType: 'training' as const, message: 'Hola, quiero un taller.' }
 const comment = { post_slug: 'post', author_name: 'Ana', author_email: 'ana@example.com', body: 'Buen artículo' }
@@ -61,5 +61,23 @@ describe('plan email reply-to', () => {
     vi.stubEnv('CONTACT_EMAIL', '""')
     await sendPlanEmail(plan)
     expect(send.mock.calls[0][0]).not.toHaveProperty('replyTo')
+  })
+})
+
+describe('sendManualInvitation', () => {
+  beforeEach(() => send.mockReset().mockResolvedValue({ data: { id: '1' }, error: null }))
+
+  it('envía texto plano con saludo y enlace fijo a /entrar', async () => {
+    await sendManualInvitation({ to: 'ana@example.com', name: 'Ana' })
+    const arg = send.mock.calls[0][0]
+    expect(arg.to).toBe('ana@example.com')
+    expect(arg.text).toContain('Hola Ana')
+    expect(arg.text).toContain('https://sergiomonsalve.com/es/manual-de-usuario/entrar')
+    expect(arg.html).toBeUndefined()
+  })
+
+  it('lanza si Resend devuelve error', async () => {
+    send.mockResolvedValue({ data: null, error: { message: 'API key is invalid' } })
+    await expect(sendManualInvitation({ to: 'a@b.co', name: 'A' })).rejects.toThrow('API key is invalid')
   })
 })
