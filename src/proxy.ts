@@ -31,8 +31,24 @@ async function tieneAal2(
   }
 }
 
+/**
+ * La ruta decodificada, como la ve Next al elegir la página: si no, una ruta
+ * como /es/%61dmin/... se saltaría las comprobaciones. Si la codificación es
+ * inválida, decodifica al menos los caracteres ASCII.
+ */
+function decodificar(ruta: string): string {
+  try {
+    return decodeURIComponent(ruta)
+  } catch {
+    return ruta.replace(/%([0-9A-Fa-f]{2})/g, (m, h: string) => {
+      const c = parseInt(h, 16)
+      return c < 0x80 ? String.fromCharCode(c) : m
+    })
+  }
+}
+
 export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const pathname = decodificar(request.nextUrl.pathname)
 
   // El manual solo existe en español: /en/... redirige a /es/... (307).
   const enManual = pathname.match(/^\/en\/manual-de-usuario(\/.*)?$/)

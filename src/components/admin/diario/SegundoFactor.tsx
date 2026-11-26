@@ -9,6 +9,19 @@ type Registro = { factorId: string; qr: string; secret: string }
 
 const ERROR_CODIGO = 'Código no válido. Intenta otra vez.'
 const ERROR_GENERAL = 'No se pudo continuar. Recarga la página.'
+const ERROR_NOMBRE = 'Ya tienes un autenticador con ese nombre. Usa otro.'
+
+const normal = (n: string) => n.trim().toLowerCase()
+
+/** Un nombre sugerido que no choque con los ya registrados. */
+function nombreLibre(usados: string[]): string {
+  const ocupados = new Set(usados.map(normal))
+  const base = ['Celular', 'Mac']
+  for (const n of base) if (!ocupados.has(normal(n))) return n
+  let i = 3
+  while (ocupados.has(normal(`Autenticador ${i}`))) i++
+  return `Autenticador ${i}`
+}
 
 /** El QR llega como data URL o como SVG crudo, según la versión de Supabase. */
 function qrComoUrl(qr: string): string {
@@ -43,6 +56,7 @@ export default function SegundoFactor({ modo, destino }: { modo: 'entrar' | 'agr
         .map(f => ({ id: f.id, nombre: f.friendly_name || 'Autenticador' }))
       setAutenticadores(verificados)
       setElegido(verificados[0]?.id ?? '')
+      setNombre(nombreLibre(verificados.map(v => v.nombre)))
       setSinVerificar(data.all.filter(f => f.factor_type === 'totp' && f.status === 'unverified').map(f => f.id))
       setFase(modo === 'entrar' && verificados.length > 0 ? 'codigo' : 'nombre')
     }, () => vivo && setFase('fallo'))
@@ -51,6 +65,10 @@ export default function SegundoFactor({ modo, destino }: { modo: 'entrar' | 'agr
 
   async function registrar(e: React.FormEvent) {
     e.preventDefault()
+    if (autenticadores.some(a => normal(a.nombre) === normal(nombre))) {
+      setError(ERROR_NOMBRE)
+      return
+    }
     setOcupado(true)
     setError('')
     try {

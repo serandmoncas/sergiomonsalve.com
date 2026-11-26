@@ -140,6 +140,21 @@ describe('SegundoFactor', () => {
     expect(screen.queryByLabelText('Código de 6 dígitos')).not.toBeInTheDocument()
   })
 
+  it('en modo agregar no propone un nombre que ya existe', async () => {
+    mfa.listFactors.mockResolvedValue(conFactores(factor('f1', 'Celular')))
+    render(<SegundoFactor modo="agregar" destino="/es/admin/diario" />)
+    expect(await screen.findByLabelText('Nombre del autenticador')).toHaveValue('Mac')
+  })
+
+  it('un nombre repetido se avisa con un mensaje claro y sin registrar', async () => {
+    mfa.listFactors.mockResolvedValue(conFactores(factor('f1', 'Celular')))
+    render(<SegundoFactor modo="agregar" destino="/es/admin/diario" />)
+    fireEvent.change(await screen.findByLabelText('Nombre del autenticador'), { target: { value: ' celular ' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Registrar' }))
+    expect(await screen.findByText('Ya tienes un autenticador con ese nombre. Usa otro.')).toBeInTheDocument()
+    expect(mfa.enroll).not.toHaveBeenCalled()
+  })
+
   it('si no puede leer los factores lo dice sin detalles', async () => {
     mfa.listFactors.mockResolvedValue({ data: null, error: { message: 'boom' } })
     render(<SegundoFactor modo="entrar" destino="/es/admin/diario" />)

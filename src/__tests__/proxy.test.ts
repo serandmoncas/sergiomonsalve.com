@@ -64,6 +64,12 @@ describe('proxy', () => {
     expect(new URL(res.headers.get('location')!).pathname).toBe('/es')
   })
 
+  it('/es/%61dmin/comments sin sesión va al login (ruta codificada)', async () => {
+    getUser.mockResolvedValue({ data: { user: null } })
+    const res = await proxy(req('/es/%61dmin/comments'))
+    expect(new URL(res.headers.get('location')!).pathname).toBe('/es/admin/login')
+  })
+
   it('admin con sesión pasa; sin sesión va al login', async () => {
     getUser.mockResolvedValue({ data: { user: { email: 'Sergio@example.com' } } })
     expect((await proxy(req('/es/admin/comments'))).headers.get('location')).toBeNull()
@@ -130,6 +136,20 @@ describe('proxy', () => {
       const res = await proxy(req('/es/admin/diario'))
       expect(res.headers.get('location')).not.toBeNull()
       expect(res.cookies.get('sb-token')?.value).toBe('nuevo')
+    })
+
+    it('una ruta codificada (%64iario) también pide aal2', async () => {
+      getUser.mockResolvedValue(admin)
+      getAal.mockResolvedValue(nivel('aal1'))
+      const loc = destino(await proxy(req('/es/admin/%64iario/x')))
+      expect(loc.pathname).toBe('/es/admin/diario/segundo-factor')
+      expect(loc.searchParams.get('next')).toBe('/es/admin/diario/x')
+    })
+
+    it('una ruta mal codificada no se cuela: va al login', async () => {
+      getUser.mockResolvedValue({ data: { user: null } })
+      const loc = destino(await proxy(req('/es/%61dmin/diario/%E0%A4%A')))
+      expect(loc.pathname).toBe('/es/admin/login')
     })
 
     it('/es/admin/diariox no es el diario', async () => {
