@@ -636,10 +636,50 @@ export const SESIONES: EntradaSesion[] = [
     nota: 'Sin reunión: el grupo acompañó a Jorge en su presentación sobre radioaficionados',
   },
   { fecha: '2026-11-18', fechaLarga: '18 de noviembre de 2026', estado: 'sin-registro', nota: 'Sesión cancelada' },
+  {
+    n: 24,
+    fecha: '2026-11-25',
+    fechaLarga: '25 de noviembre de 2026',
+    titulo: 'El cierre que no cerró',
+    gancho:
+      'Sergio llegó a cerrar el grupo y salió con razones para seguir: encuentro presencial en diciembre y regreso en enero.',
+    hallazgos: [
+      'Diego mostró la «oficina» de Cielo contado: cada escritorio de su barra de estado es un subagente (guion, investigación, audio, arte, publicación) y Rachel, su voz sintética en Eleven Labs, narra los episodios.',
+      'Los QR que Diego hizo para narrar la muestra de pesebres de un museo le dieron, de paso, un tablero de recorridos: qué escenas se oyen, por dónde circula la gente y si llega por QR o por un enlace compartido.',
+      'Juan Pablo publicó su app de guitarra en Play Store, tiene la de iOS en TestFlight sin tener equipos Apple y su carátula Garmin ya funciona en más de 40 relojes; su medida de éxito: «si a mí me gusta y me sirve».',
+      'Costos: Diego y Juan David notaron que con el plan de 20 dólares Claude se vuelve «otra cosa», y Jorge contó de una gran empresa que de día da modelos baratos a sus ingenieros y deja los procesos con modelos finos para la noche.',
+      'Sergio propuso transmitir el grupo en YouTube; Juan David, Jorge y José Luis prefirieron no tocar el espacio privado y hacer algo paralelo (alias, avatares o un video narrado a partir de la conversación).',
+    ],
+    asistentes: [
+      'Sergio',
+      'Jorge',
+      'Diego',
+      'Juan Pablo',
+      'José Luis',
+      'Juan David Pineda',
+      'Javier Correa Álvarez',
+      'Verónica Vélez',
+    ],
+    enlaces: [],
+  },
 ]
 
 export const TEMAS: Tema[] = [
   // ---------- Propuestos entre agosto y octubre ----------
+  {
+    tema: 'Iniciativa pública paralela al grupo (en vivo, con invitados)',
+    propone: 'Sergio Monsalve',
+    surgio: '2026-11-25',
+    nota: 'Separada del grupo privado; Juan David sugirió que sea paralela e inspirada en este.',
+    estado: 'propuesto',
+  },
+  {
+    tema: 'Video narrado generado a partir de la conversación del grupo, sin nombres',
+    propone: 'José Luis Montoya Pareja',
+    surgio: '2026-11-25',
+    nota: 'Podría usar la infraestructura de Cielo contado.',
+    estado: 'propuesto',
+  },
   {
     tema: '¿Es elitista la IA? Costo y acceso a las herramientas',
     propone: 'Jorge Johnson',
@@ -896,6 +936,7 @@ export const PERSONAS: Persona[] = [
     consentimiento: false,
   },
   { nombre: 'Sebastián Calle', desde: '2026-10-14', texto: '', consentimiento: false },
+  { nombre: 'Verónica Vélez Sampedro', desde: '2026-10-28', texto: '', consentimiento: false },
 ]
 
 // Vista "Taller": cada ficha se publica solo con permiso de su autor. Sin enlaces de descarga.
@@ -937,7 +978,7 @@ export const TALLER: ProyectoTaller[] = [
     autor: 'Diego Robledo',
     proyecto: 'Simulador de cohetes y «Cielo contado»',
     descripcion:
-      'Lanzamiento simulado de varios cohetes con atmósfera; podcast de astronomía narrado con voz sintética (Eleven Labs).',
+      'Lanzamiento simulado de varios cohetes con atmósfera; podcast de astronomía narrado con voz sintética (Eleven Labs), producido por una oficina de subagentes; narración por QR de una muestra de pesebres con tablero de recorridos; aviónica de cohete.',
     publicar: false,
   },
   {
@@ -950,7 +991,8 @@ export const TALLER: ProyectoTaller[] = [
   {
     autor: 'Juan Pablo Duque',
     proyecto: 'App de guitarra y carátula Garmin',
-    descripcion: 'Diapasón interactivo con escalas, modos y acordes (React Native/Expo); carátula de reloj en Monkey C.',
+    descripcion:
+      'Diapasón interactivo con escalas, modos y acordes (React Native/Expo), publicado en Play Store y en TestFlight; carátula de reloj en Monkey C para más de 40 relojes Garmin.',
     publicar: false,
   },
   {

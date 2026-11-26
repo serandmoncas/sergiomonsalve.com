@@ -1493,6 +1493,34 @@ export const GLOSARIO: TerminoGlosario[] = [
     ejemplo:
       'Jorge armó «Token Bike», un destilador que marca en rojo y verde las tendencias de su consumo entre una semana y otra.',
   },
+  {
+    slug: 'deuda-cognitiva',
+    termino: 'Deuda cognitiva',
+    definicion:
+      'Lo que se acumula cuando un agente trabaja más rápido de lo que uno alcanza a revisar: al otro día toca ponerse al día con todo lo que hizo.',
+    categoria: 'operacion-evaluacion',
+    sesionOrigen: 24,
+    ejemplo: 'Juan David contó que el turno nocturno le daba más ansiedad, porque al día siguiente tenía que desatrasarse.',
+  },
+  {
+    slug: 'geolocalizacion-en-interiores',
+    termino: 'Geolocalización en interiores',
+    definicion:
+      'Ubicar a una persona dentro de un edificio, donde el GPS no alcanza, triangulando señales de Wi-Fi o con balizas (beacons) Bluetooth.',
+    categoria: 'operacion-evaluacion',
+    sesionOrigen: 24,
+    ejemplo:
+      'Surgió al ver el tablero de recorridos de Diego en un museo; Juan David recordó haberla visto en un museo de historia natural.',
+  },
+  {
+    slug: 'aprendizaje-basado-en-proyectos',
+    termino: 'Aprendizaje basado en proyectos',
+    definicion:
+      'Aprender construyendo algo concreto que a uno le importa, en vez de estudiar primero la teoría por separado.',
+    categoria: 'fundamentos',
+    sesionOrigen: 24,
+    ejemplo: 'Sergio lo usó para describir lo que hace el grupo: ñoños volviendo tangibles sus sueños de infancia con IA.',
+  },
 ]
 
 export function getTerminosPorCategoria(categoria: CategoriaGlosario): TerminoGlosario[] {
