@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Copia generada del núcleo de DiarIA (DI-084): no se edita aquí.
+    "src/lib/diaria/*.ts",
+    "src/lib/diaria/tablero/**",
   ]),
 ]);
 

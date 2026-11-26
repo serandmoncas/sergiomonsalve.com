@@ -9,7 +9,9 @@
     "lint": "eslint",
     "test": "vitest",
     "test:run": "vitest run",
-    "curso-ia:confirmar": "npx --yes tsx scripts/curso-ia-confirmar.ts"
+    "curso-ia:confirmar": "npx --yes tsx scripts/curso-ia-confirmar.ts",
+    "guarda": "node scripts/guarda-diario.mjs",
+    "hooks": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",
@@ -29,6 +31,7 @@
     "remark-gfm": "^4.0.1",
     "resend": "^6.12.2",
     "server-only": "^0.0.1",
+    "tar-stream": "^3.3.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -40,6 +43,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/tar-stream": "^3.1.5",
     "@vitejs/plugin-react": "^6.0.1",
     "dotenv-cli": "^11.0.0",
     "esbuild": "0.28.2",
