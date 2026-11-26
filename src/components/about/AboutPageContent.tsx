@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { aboutContent, type AboutLocale } from './content'
+import { WHATSAPP } from '@/lib/contact'
 
 const CV_BASE_URL = 'https://orlniujfwolyinsuezcu.supabase.co/storage/v1/object/public/assets'
 const CV_FILES = [
@@ -347,7 +348,7 @@ export default function AboutPageContent({ locale, downloadCvLabel, portfolioLab
                 >
                   {c.ctaMapa}
                 </Link>
-                <a href="https://wa.me/573508025988" target="_blank" rel="noopener noreferrer"
+                <a href={WHATSAPP.url} target="_blank" rel="noopener noreferrer"
                   className="font-mono text-xs border border-border text-text-secondary px-4 py-2.5 rounded-sm hover:border-accent hover:text-accent transition-colors">
                   {c.ctaWhatsApp}
                 </a>

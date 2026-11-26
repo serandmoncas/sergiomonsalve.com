@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { PROJECT_TYPES, type ProjectType } from '@/lib/contact-schema'
+import { WHATSAPP } from '@/lib/contact'
 
 export default function ContactForm({ initialType }: { initialType?: ProjectType } = {}) {
   const t = useTranslations('contact')
@@ -123,7 +124,7 @@ export default function ContactForm({ initialType }: { initialType?: ProjectType
           {status === 'loading' ? '...' : t('submit')}
         </button>
         <a
-          href="https://wa.me/573508025988"
+          href={WHATSAPP.url}
           target="_blank"
           rel="noopener noreferrer"
           className="border border-border-active text-accent font-mono text-xs px-4 py-2.5 rounded-sm hover:bg-surface transition-colors"

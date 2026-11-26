@@ -1,3 +1,5 @@
+import { WHATSAPP } from '@/lib/contact'
+
 // Configuración de la cohorte del curso gratuito de IA de diciembre.
 // Es la única fuente de las fechas, el cupo, el cierre y el WhatsApp público.
 
@@ -18,10 +20,7 @@ export const COHORTE = {
   endTime: '20:30',
   // ID del video de invitación en YouTube. null mientras no exista: la página oculta la sección.
   youtubeId: null as string | null,
-  whatsapp: {
-    display: '+57 323 910 5762',
-    url: 'https://wa.me/573239105762'
-  }
+  whatsapp: WHATSAPP
 } as const
 
 export function isClosed(now: Date): boolean {

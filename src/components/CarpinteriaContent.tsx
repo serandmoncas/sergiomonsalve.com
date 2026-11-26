@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl'
+import { WHATSAPP } from '@/lib/contact'
 
-const WHATSAPP_NUMBER = '573508025988'
+const WHATSAPP_NUMBER = WHATSAPP.number
 const REPO_URL = 'https://github.com/serandmoncas/CarpinterIA'
 // Apunta a main para que siempre baje la versión más reciente de la guía.
 const GUIDE_URL = `${REPO_URL}/raw/main/guia/guia-del-curso.pdf`

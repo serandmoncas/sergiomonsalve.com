@@ -69,6 +69,6 @@ describe('CarpinteriaContent', () => {
 
   it('offers WhatsApp to sign up', () => {
     render(<CarpinteriaContent />)
-    expect(screen.getByRole('link', { name: 'cta.whatsapp' }).getAttribute('href')).toMatch(/^https:\/\/wa\.me\/573508025988\?text=/)
+    expect(screen.getByRole('link', { name: 'cta.whatsapp' }).getAttribute('href')).toMatch(/^https:\/\/wa\.me\/573239105762\?text=/)
   })
 })

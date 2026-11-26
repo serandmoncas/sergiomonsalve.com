@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
+import { WHATSAPP } from '@/lib/contact'
 
 export default async function Footer() {
   const t = await getTranslations('footer')
@@ -30,7 +31,7 @@ export default async function Footer() {
             Instagram
           </a>
           <a
-            href="https://wa.me/573508025988"
+            href={WHATSAPP.url}
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-xs text-text-muted hover:text-accent transition-colors"
