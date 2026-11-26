@@ -1,4 +1,4 @@
-// copiado de DiarIA@7b76fe16a8dd — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@3803d65e772c — no editar; actualizar con pnpm copiar-nucleo
 /**
  * Acceso a la bóveda. El núcleo nunca toca el sistema de archivos directamente:
  * cada plataforma (Node, Tauri, navegador) aporta su implementación.

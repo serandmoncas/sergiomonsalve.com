@@ -1,4 +1,4 @@
-// copiado de DiarIA@7b76fe16a8dd — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@3803d65e772c — no editar; actualizar con pnpm copiar-nucleo
 /**
  * Un objetivo con su tablero de contactos (DI-082, portado del spike).
  *
@@ -145,8 +145,9 @@ export function vistaObjetivo(
     columnas: [...columnas].map(([n, c]) => ({
       nombre: n,
       tarjetas: c.tarjetas.map(
-        ({ linea, nombre: nn, persona, eventos: ev }) => ({
+        ({ linea, texto, nombre: nn, persona, eventos: ev }) => ({
           id: linea,
+          texto,
           nombre: nn,
           persona,
           eventos: ev,
@@ -192,20 +193,26 @@ export function agregarContacto(
   return { texto: lineas.join("\n") };
 }
 
-/** Mueve la tarjeta de la línea `id` al final de la columna `a`, con su evento. */
+/**
+ * Mueve la tarjeta cuyo texto es exactamente `texto` al final de la columna
+ * `a`, con su evento. Se busca por texto y no por línea para poder repetir la
+ * acción sobre una versión nueva del archivo (DI-087).
+ */
 export function moverTarjeta(
   contactos: string,
-  b: { id?: number; texto?: string; a?: string },
+  b: { texto?: string; a?: string },
   hoy: string,
 ): Cambio {
   const a = String(b.a) as Columna;
   if (!COLUMNAS.includes(a)) return { error: "columna desconocida" };
   const { lineas, columnas } = leerTablero(contactos);
-  const id = Number(b.id);
-  const actual = lineas[id];
-  // Si el archivo cambió desde que se pintó la vista, no se adivina.
-  if (!actual?.startsWith("- [") || (b.texto && !actual.includes(b.texto)))
-    return { error: "el tablero cambió; recarga" };
+  const iguales = [...columnas.values()]
+    .flatMap((c) => c.tarjetas)
+    .filter((t) => b.texto && t.texto === b.texto);
+  // Si no está o hay dos iguales, no se adivina.
+  if (iguales.length !== 1) return { error: "el tablero cambió; recarga" };
+  const id = iguales[0]!.linea;
+  const actual = lineas[id]!;
   const destino = columnas.get(a);
   if (!destino) return { error: `el tablero no tiene la columna ${a}` };
   lineas.splice(id, 1);

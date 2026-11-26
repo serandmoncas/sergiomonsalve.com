@@ -1,4 +1,4 @@
-// copiado de DiarIA@7b76fe16a8dd — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@3803d65e772c — no editar; actualizar con pnpm copiar-nucleo
 /** Un wikilink tal como está escrito en la nota (ver docs/rea/resolucion-de-enlaces.md). */
 export interface Enlace {
   /** Tal cual, sin recortar; "" = misma nota (`[[#Sección]]`). */

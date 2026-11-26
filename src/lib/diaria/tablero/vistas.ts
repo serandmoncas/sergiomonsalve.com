@@ -1,4 +1,4 @@
-// copiado de DiarIA@7b76fe16a8dd — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@3803d65e772c — no editar; actualizar con pnpm copiar-nucleo
 /**
  * Vistas Hoy, Día y mes del tablero (DI-082, portadas del spike vista Hoy).
  * Devuelven la misma forma JSON que el spike: CA-1 lo comprueba con hashes.
