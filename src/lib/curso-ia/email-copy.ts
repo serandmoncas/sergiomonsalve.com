@@ -5,10 +5,10 @@ import type { RegistrationRequest } from './schema'
 export type EmailMessage = { subject: string; text: string; html: string }
 
 const SESSIONS = [
-  'Clase 1 · miércoles 9 de diciembre: tu primera conversación útil, y segura',
+  'Clase 1 · miércoles 9 de diciembre: tu primera conversación útil y segura, y creas tu Palacio de Memoria (la biografía que le da contexto a la IA)',
   'Clase 2 · jueves 10 de diciembre: la IA con tus papeles, fotos y voz, y cómo no caer en estafas',
-  'Clase 3 · lunes 14 de diciembre: tu primera página web',
-  'Clase 4 · martes 15 de diciembre: publica, comparte y mira hasta dónde llega esto'
+  'Clase 3 · lunes 14 de diciembre: tu asistente personal, que organiza tu día con lo que sabe de ti',
+  'Clase 4 · martes 15 de diciembre: úsalo en tu día a día y mira hasta dónde llega esto'
 ]
 const HOURS = 'Todas de 7:00 a 8:30 p. m. (hora de Colombia), por videollamada.'
 const ACCOUNT_STEPS = [

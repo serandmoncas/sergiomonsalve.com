@@ -461,7 +461,7 @@
   "cursoIa": {
     "comment": "// curso gratuito · en vivo · diciembre 2026",
     "title": "Empieza con IA sin pagar nada",
-    "lede": "En 4 clases en vivo pasas de no saber por dónde empezar a tener tu propia página publicada con IA, sin pagar nada y sin instalar nada.",
+    "lede": "En 4 clases en vivo pasas de no saber por dónde empezar a tener tu propio asistente personal con IA: uno que te conoce y te ayuda con tu día a día. Sin pagar nada y sin instalar nada.",
     "chips": [
       "Gratis",
       "En vivo por videollamada",
@@ -480,23 +480,23 @@
       "sessions": {
         "s1": {
           "day": "Miércoles 9 de diciembre",
-          "title": "Tu primera conversación útil, y segura",
-          "outcome": "Un problema tuyo resuelto y tu primera herramienta hecha con IA (una calculadora)."
+          "title": "Tu primera conversación útil, y segura: creas tu Palacio de Memoria",
+          "outcome": "Tu Palacio de Memoria: una biografía corta que le da contexto a la IA (sabiendo qué sí contar y qué no), y la primera respuesta de una IA que te conoce."
         },
         "s2": {
           "day": "Jueves 10 de diciembre",
           "title": "La IA con tus papeles, fotos y voz, y cómo no caer en estafas",
-          "outcome": "Un documento tuyo explicado en palabras sencillas y tu regla de 3 pasos antes de reenviar o pagar."
+          "outcome": "Un documento tuyo explicado en palabras sencillas, según tu contexto, y tu regla de 3 pasos antes de reenviar o pagar."
         },
         "s3": {
           "day": "Lunes 14 de diciembre",
-          "title": "Tu primera página web",
-          "outcome": "Tu propia página creada con IA: tu negocio, tu hoja de vida o tu hobby."
+          "title": "Tu asistente personal: tu Palacio de Memoria con instrucciones",
+          "outcome": "Un asistente que organiza tu día, tus pendientes y tus decisiones con lo que sabe de ti."
         },
         "s4": {
           "day": "Martes 15 de diciembre",
-          "title": "Publica, comparte y mira hasta dónde llega esto",
-          "outcome": "Un enlace público a tu página para compartir y un plan para seguir aprendiendo."
+          "title": "Úsalo en tu día a día y mira hasta dónde llega esto",
+          "outcome": "Tu rutina diaria con IA y un plan para seguir: verás en vivo un cerebro digital completo."
         }
       }
     },
@@ -506,7 +506,7 @@
       "items": [
         "No necesitas saber de tecnología: empezamos desde cero y nadie se queda atrás (trabajamos en parejas).",
         "Necesitas un computador con internet. Con celular solo se puede, pero cuesta más.",
-        "Antes de la primera clase creas una cuenta gratuita; te mandamos el paso a paso por correo.",
+        "Antes de la primera clase creas una cuenta gratuita; te mandamos el paso a paso por correo. En la clase 1 aprendes qué datos sí darle a la IA y cuáles nunca.",
         "Aquí no hay preguntas tontas: se vale equivocarse."
       ]
     },
@@ -559,7 +559,7 @@
       "aiSometimes": "Alguna vez",
       "aiOften": "La uso seguido",
       "goal": "¿Qué te gustaría poder hacer con la IA?",
-      "project": "¿Tienes un negocio, proyecto o hobby que quisieras mostrar en una página? (opcional)",
+      "project": "¿Qué te gustaría organizar mejor en tu día a día? (opcional)",
       "privacy": "Acepto el tratamiento de mis datos para organizar el curso.",
       "privacyLink": "Política de privacidad",
       "newsletter": "Quiero recibir el newsletter de Sergio (puedes darte de baja cuando quieras).",
