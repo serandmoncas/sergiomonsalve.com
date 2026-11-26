@@ -4,7 +4,7 @@ import { z } from 'zod'
 // Esquemas (https://, ftp://), www., cualquier dominio seguido de una ruta (evil.shop/login) y dominios
 // sueltos con TLD de uso común en spam. Deja pasar nombres técnicos como ASP.NET, Node.js o Socket.io.
 export const LINK_MESSAGE = 'Links are not allowed'
-const LINK =
+export const LINK =
   /(:\/\/|https?:|www\.|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,}\/|\b[a-z0-9-]+\.(?:com|org|co|es|mx|cl|ly|xyz|ru|info|biz|shop|site|top|link|click)\b)/i
 
 const text = (max: number) =>
