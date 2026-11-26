@@ -10,7 +10,7 @@ const SESSIONS = [
   'Clase 3 · lunes 14 de diciembre: tu asistente personal, que organiza tu día con lo que sabe de ti',
   'Clase 4 · martes 15 de diciembre: úsalo en tu día a día y mira hasta dónde llega esto'
 ]
-const HOURS = 'Todas de 7:00 a 8:30 p. m. (hora de Colombia), por videollamada.'
+const HOURS = 'Todas de 7:00 a 8:30 p. m. (hora de Colombia), por Google Meet.'
 const ACCOUNT_STEPS = [
   'Entra a https://claude.ai desde el computador.',
   'Crea tu cuenta gratuita con este mismo correo.',
@@ -49,7 +49,7 @@ export function confirmedEmail(name: string): EmailMessage {
     'Tienes cupo en el curso gratuito de IA de diciembre. Estas son las 4 clases:',
     SESSIONS,
     HOURS,
-    'El enlace de la videollamada te llega por WhatsApp y por correo 2 días antes de la primera clase.',
+    'El enlace de Google Meet te llega por WhatsApp y por correo 2 días antes de la primera clase (videollamada; en el computador no hay que instalar nada).',
     'Antes de empezar, crea tu cuenta gratuita (toma 5 minutos):',
     ACCOUNT_STEPS,
     `Mi WhatsApp: ${COHORTE.whatsapp.display} · ${COHORTE.whatsapp.url}`,

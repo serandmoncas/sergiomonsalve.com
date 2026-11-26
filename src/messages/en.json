@@ -464,7 +464,7 @@
     "lede": "En 4 clases en vivo pasas de no saber por dónde empezar a tener tu propio asistente personal con IA: uno que te conoce y te ayuda con tu día a día. Sin pagar nada y sin instalar nada.",
     "chips": [
       "Gratis",
-      "En vivo por videollamada",
+      "En vivo por Google Meet",
       "Sin instalar nada",
       "Cupo de 20 personas"
     ],
@@ -533,7 +533,7 @@
         },
         {
           "q": "¿Por dónde es la videollamada?",
-          "a": "El enlace te llega por WhatsApp y por correo 2 días antes de la primera clase."
+          "a": "Por Google Meet: no necesitas instalar nada en el computador. El enlace te llega por WhatsApp y por correo 2 días antes de la primera clase."
         },
         {
           "q": "¿Y si no puedo ir a una clase?",

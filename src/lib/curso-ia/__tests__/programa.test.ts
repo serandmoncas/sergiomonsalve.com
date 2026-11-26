@@ -24,4 +24,10 @@ describe('programa del curso: hilo del asistente personal', () => {
     expect(text).toMatch(/asistente personal/)
     expect(text).not.toMatch(/página web/)
   })
+
+  it('dice que las clases son por Google Meet, en la página y en el correo', () => {
+    const faq = c.faq.items.find(i => /videollamada/i.test(i.q))
+    expect(faq?.a).toContain('Google Meet')
+    expect(confirmedEmail('Ana').text).toContain('Google Meet')
+  })
 })
