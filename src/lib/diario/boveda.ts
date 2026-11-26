@@ -124,6 +124,18 @@ async function actualizar(): Promise<ResultadoBoveda> {
 }
 
 /**
+ * Después de que esta instancia guardó un archivo (DI-087): si la bóveda en
+ * memoria estaba en el commit padre, la pone en el commit nuevo con el archivo
+ * cambiado, sin bajar nada. Si no, la próxima mirada al sha la pone al día.
+ */
+export async function anotarEscritura(ruta: string, bytes: Uint8Array, commit: string, padre: string): Promise<void> {
+  if (!actual || actual.sha !== padre) return
+  const fs = actual.fs.aplicar({ quitar: [], poner: new Map([[ruta, bytes]]), otros: [] })
+  actual = await armarBoveda(fs, commit)
+  ultimoSha = Date.now()
+}
+
+/**
  * La bóveda al día (DI-084). Mira el sha como mucho cada 10 s y la privacidad
  * del repo cada 10 min; los pedidos simultáneos comparten una sola
  * actualización. Cualquier fallo da "no disponible" con un motivo corto.

@@ -1,4 +1,4 @@
-// copiado de DiarIA@7b76fe16a8dd — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@e9253e236b58 — no editar; actualizar con pnpm copiar-nucleo
 import { extraerEnlaces, type Enlace } from "./enlaces";
 import { fechaDeNota } from "./fechas";
 import type { Resolutor } from "./resolucion";

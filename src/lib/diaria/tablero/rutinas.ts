@@ -1,4 +1,4 @@
-// copiado de DiarIA@7b76fe16a8dd — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@e9253e236b58 — no editar; actualizar con pnpm copiar-nucleo
 /**
  * `Rutinas.md` (DI-082, portado del spike vista Hoy): una línea por rutina en
  * formato del plugin Tasks, `- [ ] Texto 🔁 every …`, con pausa (🛫) y

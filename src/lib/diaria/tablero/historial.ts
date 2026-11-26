@@ -1,4 +1,4 @@
-// copiado de DiarIA@7b76fe16a8dd — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@e9253e236b58 — no editar; actualizar con pnpm copiar-nucleo
 /**
  * Historia de cada pendiente en las notas diarias y su ritmo (DI-082,
  * portado del spike vista Hoy). Una rutina se completa una y otra vez; un

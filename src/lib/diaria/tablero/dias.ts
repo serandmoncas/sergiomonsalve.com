@@ -1,4 +1,4 @@
-// copiado de DiarIA@7b76fe16a8dd — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@e9253e236b58 — no editar; actualizar con pnpm copiar-nucleo
 /** Fechas `YYYY-MM-DD` en UTC, sin reloj: "hoy" siempre llega como argumento. */
 
 export function sumarDias(dia: string, n: number): string {

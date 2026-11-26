@@ -1,4 +1,4 @@
-// copiado de DiarIA@7b76fe16a8dd — no editar; actualizar con pnpm copiar-nucleo
+// copiado de DiarIA@e9253e236b58 — no editar; actualizar con pnpm copiar-nucleo
 import { dentro, rangosDeCodigo } from "./enlaces";
 import { validarDia } from "./fechas";
 import { finDelFrontmatter } from "./secciones";
